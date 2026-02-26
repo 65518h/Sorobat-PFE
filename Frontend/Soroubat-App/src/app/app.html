@@ -1,0 +1,29 @@
+<div class="dashboard-container">
+  <header>
+    <h1>SOROUBAT - Suivi des Chantiers</h1>
+  </header>
+
+  <table class="job-table">
+    <thead>
+      <tr>
+        <th>Projet</th>
+        <th>Tâche</th>
+        <th>Description</th>
+        <th>Avancement</th>
+      </tr>
+    </thead>
+    <tbody>
+  <tr *ngFor="let task of tasks">
+  <td><strong>{{ task.jobNo }}</strong></td>
+  <td>{{ task.taskNo }}</td>
+  <td>{{ task.description }}</td>
+  <td>
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="task.progressPct || 0"></div>
+      <span>{{ task.progressPct || 0 }}%</span>
+    </div>
+  </td>
+</tr>
+</tbody>
+  </table>
+</div>

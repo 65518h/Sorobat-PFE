@@ -1,0 +1,1783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>e0a8b21a-fa71-4e89-a7f9-ed9bf349b5b7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.61667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.11667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.61667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.31667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.76667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.76667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.91667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.61667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.61667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.16667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.31667cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.31667cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.846cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Camion_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Camion_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Commande_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Commande_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Article_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Article_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Date_Commande_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Date_Commande_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Net_Fournisseur_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Net_Fournisseur_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.15cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Net_Chantier_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Net_Chantier_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.15cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Ecart_Poids_Net_Chantier_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Ecart_Poids_Net_Chantier_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Apres_SC_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Apres_SC_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Aprés_CB_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Aprés_CB_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Ecart_Final_Caption">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Ecart_Final_Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Bottom</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TextBox18">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Magasin__Caption2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Magasin__Caption.Value)</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox46">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Code_Magasin_.Value)</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox46</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Code_Magasin_2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox48">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox48</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox49">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox49</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox50">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox50</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox51">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox52">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox52</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox53">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox53</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox54">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox54</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox55</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox56">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox56</rd:DefaultName>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.423cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Camion_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Camion_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Commande_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Commande_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__N__Article_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__N__Article_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Date_Commande_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Date_Commande_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>d</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Net_Fournisseur_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Net_Fournisseur_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Poids_Net_Fournisseur_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.15cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Net_Chantier_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Net_Chantier_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Poids_Net_Chantier_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.15cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Ecart_Poids_Net_Chantier_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Ecart_Poids_Net_Chantier_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Ecart_Poids_Net_Chantier_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Apres_SC_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Apres_SC_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Poids_Apres_SC_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Poids_Aprés_CB_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Poids_Aprés_CB_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Poids_Aprés_CB_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>0.075cm</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PV_Reception__Ecart_Final_">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!PV_Reception__Ecart_Final_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>=Fields!PV_Reception__Ecart_Final_Format.Value</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>0.075cm</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SUIVI_PV_RECEPTIONCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SUIVI_PV_RECEPTIONCaption.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CurrReport_PAGENOCaption">
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CurrReport_PAGENOCaption.Value</Value>
+                                  <Style>
+                                    <Color>#ff0000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
+                          <Style>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="PV_Reception__Code_Magasin_">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!PV_Reception__Code_Magasin_.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!PV_Reception__Code_Magasin_.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Table1_Details_Group">
+                        <DataElementName>Detail</DataElementName>
+                      </Group>
+                      <TablixMembers>
+                        <TablixMember />
+                      </TablixMembers>
+                      <DataElementName>Detail_Collection</DataElementName>
+                      <DataElementOutput>Output</DataElementOutput>
+                      <KeepTogether>true</KeepTogether>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Left>0.3175cm</Left>
+            <Height>1.869cm</Height>
+            <Width>18.15cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>5.08cm</Height>
+        <Style />
+      </Body>
+      <Width>18.57267cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>1.50233cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="SUIVI_PV_RECEPTIONCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!SUIVI_PV_RECEPTIONCaption.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.23333cm</Top>
+              <Left>0.3175cm</Left>
+              <Height>0.846cm</Height>
+              <Width>7.5cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="ExecutionTimeTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                        <Format>g</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.23333cm</Top>
+              <Left>15.3175cm</Left>
+              <Height>0.423cm</Height>
+              <Width>3.15cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="PageNumberTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.65633cm</Top>
+              <Left>18.0175cm</Left>
+              <Height>0.423cm</Height>
+              <Width>0.45cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="CurrReport_PAGENOCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CurrReport_PAGENOCaption.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.65633cm</Top>
+              <Left>17.2675cm</Left>
+              <Height>0.423cm</Height>
+              <Width>0.75cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="UserIdTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=User!UserID</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.07933cm</Top>
+              <Left>15.2175cm</Left>
+              <Height>0.423cm</Height>
+              <Width>3.25cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21.05cm</PageWidth>
+        <LeftMargin>2.1cm</LeftMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="PV_Reception__Code_Magasin_">
+          <DataField>PV_Reception__Code_Magasin_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Camion_">
+          <DataField>PV_Reception__N__Camion_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Commande_">
+          <DataField>PV_Reception__N__Commande_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Article_">
+          <DataField>PV_Reception__N__Article_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Commande_">
+          <DataField>PV_Reception__Date_Commande_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Fournisseur_">
+          <DataField>PV_Reception__Poids_Net_Fournisseur_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Fournisseur_Format">
+          <DataField>PV_Reception__Poids_Net_Fournisseur_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Chantier_">
+          <DataField>PV_Reception__Poids_Net_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Chantier_Format">
+          <DataField>PV_Reception__Poids_Net_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Poids_Net_Chantier_">
+          <DataField>PV_Reception__Ecart_Poids_Net_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Poids_Net_Chantier_Format">
+          <DataField>PV_Reception__Ecart_Poids_Net_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Apres_SC_">
+          <DataField>PV_Reception__Poids_Apres_SC_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Apres_SC_Format">
+          <DataField>PV_Reception__Poids_Apres_SC_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Aprés_CB_">
+          <DataField>PV_Reception__Poids_Aprés_CB_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Aprés_CB_Format">
+          <DataField>PV_Reception__Poids_Aprés_CB_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Final_">
+          <DataField>PV_Reception__Ecart_Final_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Final_Format">
+          <DataField>PV_Reception__Ecart_Final_Format</DataField>
+        </Field>
+        <Field Name="SUIVI_PV_RECEPTIONCaption">
+          <DataField>SUIVI_PV_RECEPTIONCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Camion_Caption">
+          <DataField>PV_Reception__N__Camion_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Commande_Caption">
+          <DataField>PV_Reception__N__Commande_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Article_Caption">
+          <DataField>PV_Reception__N__Article_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Commande_Caption">
+          <DataField>PV_Reception__Date_Commande_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Fournisseur_Caption">
+          <DataField>PV_Reception__Poids_Net_Fournisseur_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Chantier_Caption">
+          <DataField>PV_Reception__Poids_Net_Chantier_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Poids_Net_Chantier_Caption">
+          <DataField>PV_Reception__Ecart_Poids_Net_Chantier_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Apres_SC_Caption">
+          <DataField>PV_Reception__Poids_Apres_SC_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Aprés_CB_Caption">
+          <DataField>PV_Reception__Poids_Aprés_CB_Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Final_Caption">
+          <DataField>PV_Reception__Ecart_Final_Caption</DataField>
+        </Field>
+        <Field Name="Magasin__Caption">
+          <DataField>Magasin__Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception_N__Sequence">
+          <DataField>PV_Reception_N__Sequence</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

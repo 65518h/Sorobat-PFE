@@ -1,0 +1,2054 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>e23ce773-23e8-41ed-9bbd-a31e7a5a06d1</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!COMPANYNAME.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.60537cm</Top>
+            <Left>0.4572cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.82833cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DEMANDE_DE_CREDITCaption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.81667cm</Top>
+            <Left>5.63975cm</Left>
+            <Height>1.108cm</Height>
+            <Width>10.09883cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Fiche_de_renseignementCaption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>3.10106cm</Top>
+            <Left>6.97325cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.02966cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!FORMAT_TODAY_0_4_.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.60537cm</Top>
+            <Left>15.12242cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.82833cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!USERID.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>4.9705cm</Top>
+            <Left>16.22308cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.72766cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CurrReport_PAGENO.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>4.10267cm</Top>
+            <Left>17.89525cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.0555cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!IDENTITE_DU__OU_DES__CLIENTS_Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>5.64303cm</Top>
+            <Left>0.3302cm</Left>
+            <Height>0.64233cm</Height>
+            <Width>8.00333cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Textcin.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>0.4572cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!valeurCin.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>3.92525cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.82833cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Délivrée_àCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>9.23973cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>...........................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>11.81028cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.05108cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DateCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>15.03775cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.......................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.82837cm</Top>
+            <Left>17.53775cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.627cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nom___prénomCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>8.02908cm</Top>
+            <Left>0.4572cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header__Bill_to_Name_.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>8.02908cm</Top>
+            <Left>5.23758cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.05083cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Date___lieu_de_naissanceCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>9.17181cm</Top>
+            <Left>0.42192cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.78038cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox17">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>...........................................................................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>9.17181cm</Top>
+            <Left>5.2023cm</Left>
+            <Height>0.6cm</Height>
+            <Width>13.295cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox18">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DomicileCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>10.11697cm</Top>
+            <Left>0.42192cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox19">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header__Bill_to_Address_.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>10.11697cm</Top>
+            <Left>2.99248cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.01883cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox20">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ville</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>10.11697cm</Top>
+            <Left>12.72209cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header__Bill_to_City_.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>10.11697cm</Top>
+            <Left>15.27997cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.8495cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox22">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header__Bill_to_Address_2_.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>10.71697cm</Top>
+            <Left>2.99248cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.01883cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ProfessionCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>11.49336cm</Top>
+            <Left>0.42028cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.32152cm</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox24">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>..........................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>11.49336cm</Top>
+            <Left>3.88997cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.30061cm</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox25">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SalaireCaption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>11.49336cm</Top>
+            <Left>10.4728cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.17733cm</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox26">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>..........................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>11.49336cm</Top>
+            <Left>13.82652cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.40878cm</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!MATERIEL_A_ACQUERIR_Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox29</rd:DefaultName>
+            <Top>12.37376cm</Top>
+            <Left>0.42028cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.77567cm</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Line_Description.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox30</rd:DefaultName>
+            <Top>13.19926cm</Top>
+            <Left>0.42028cm</Left>
+            <Height>0.6cm</Height>
+            <Width>18.45967cm</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox31">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CREDIT_Caption.Value</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox31</rd:DefaultName>
+            <Top>14.23753cm</Top>
+            <Left>0.42918cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.78038cm</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox32">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Montant_total_de_la_facture_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>15.12653cm</Top>
+            <Left>0.41863cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox33">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header___Amount_Including_VAT_.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>15.12653cm</Top>
+            <Left>7.54852cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Montant_du_crédit_demandé_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>16.67931cm</Top>
+            <Left>0.41699cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>31</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox35">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sales_Header___Amount_Including_VAT__Control43.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>16.67931cm</Top>
+            <Left>7.54687cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox36">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Durée___modalité_du_crédit_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>17.4557cm</Top>
+            <Left>0.41699cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox37">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PaymentTerms_Description.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>17.4557cm</Top>
+            <Left>7.54687cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox38">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Paiement_à_la_commande_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>15.90292cm</Top>
+            <Left>0.41863cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox39">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RESSOURCES_Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox39</rd:DefaultName>
+            <Top>18.23209cm</Top>
+            <Left>0.41699cm</Left>
+            <Height>0.76934cm</Height>
+            <Width>8.00169cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox40">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!a__Exploitation_Agricole_Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox40</rd:DefaultName>
+            <Top>19.17781cm</Top>
+            <Left>0.83867cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.691cm</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox41">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Grandes_cultures___Superficie_et_nature_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>19.9542cm</Top>
+            <Left>0.83867cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox42">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.........................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>19.9542cm</Top>
+            <Left>8.98784cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>39</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox43">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Arboricultures___Nombre_Age_et_nature_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>20.76336cm</Top>
+            <Left>0.88779cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>40</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox44">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.........................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>20.76336cm</Top>
+            <Left>9.03696cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>41</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox45">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Elevage___Nature_et_nombre_de_sujet_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>23.05725cm</Top>
+            <Left>0.88779cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>42</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox46">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.........................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>23.05725cm</Top>
+            <Left>9.03696cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>43</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox47">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Point_d_eaus___Precier_puits__Réseau_public_etc_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>22.31614cm</Top>
+            <Left>0.88779cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox48">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.........................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>22.31614cm</Top>
+            <Left>9.03696cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox49">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Culture_maraichéres___Superficie_Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>21.53975cm</Top>
+            <Left>0.88779cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox50">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.........................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>21.53975cm</Top>
+            <Left>9.03696cm</Left>
+            <Height>0.6cm</Height>
+            <Width>7.87305cm</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox51">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!b_Autres_Biens__Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox51</rd:DefaultName>
+            <Top>23.88953cm</Top>
+            <Left>0.85251cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.786cm</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>.......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>24.66592cm</Top>
+            <Left>0.80339cm</Left>
+            <Height>1.4255cm</Height>
+            <Width>18.48083cm</Width>
+            <ZIndex>49</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox53">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!c__Revenue_annuel_de_l_exploitation__Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox53</rd:DefaultName>
+            <Top>26.34678cm</Top>
+            <Left>0.83867cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.95161cm</Width>
+            <ZIndex>50</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox54">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>......................................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox53</rd:DefaultName>
+            <Top>26.34678cm</Top>
+            <Left>6.89611cm</Left>
+            <Height>0.6cm</Height>
+            <Width>9.33683cm</Width>
+            <ZIndex>51</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox55">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!d__Autres_Revenues__Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox53</rd:DefaultName>
+            <Top>27.12317cm</Top>
+            <Left>0.80339cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.25167cm</Width>
+            <ZIndex>52</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox56">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>............................................................................................</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox53</rd:DefaultName>
+            <Top>27.12317cm</Top>
+            <Left>6.23145cm</Left>
+            <Height>0.6cm</Height>
+            <Width>10.00149cm</Width>
+            <ZIndex>53</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Rectangle Name="Rectangle2">
+            <KeepTogether>true</KeepTogether>
+            <Top>0.24553cm</Top>
+            <Left>0.2667cm</Left>
+            <Height>4.61913cm</Height>
+            <Width>19.9686cm</Width>
+            <ZIndex>54</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle3">
+            <KeepTogether>true</KeepTogether>
+            <Top>6.6452cm</Top>
+            <Left>0.3302cm</Left>
+            <Height>5.58745cm</Height>
+            <Width>19.9051cm</Width>
+            <ZIndex>55</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle4">
+            <KeepTogether>true</KeepTogether>
+            <Top>14.95637cm</Top>
+            <Left>0.35137cm</Left>
+            <Height>4.22145cm</Height>
+            <Width>19.59938cm</Width>
+            <ZIndex>56</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle5">
+            <KeepTogether>true</KeepTogether>
+            <Top>19.80353cm</Top>
+            <Left>0.30903cm</Left>
+            <Height>8.31906cm</Height>
+            <Width>19.92627cm</Width>
+            <ZIndex>57</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>28.12259cm</Height>
+        <Style />
+      </Body>
+      <Width>20.5867cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_City_">
+          <DataField>Sales_Header__Bill_to_City_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Address_2_">
+          <DataField>Sales_Header__Bill_to_Address_2_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Address_">
+          <DataField>Sales_Header__Bill_to_Address_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Name_">
+          <DataField>Sales_Header__Bill_to_Name_</DataField>
+        </Field>
+        <Field Name="Textcin">
+          <DataField>Textcin</DataField>
+        </Field>
+        <Field Name="valeurCin">
+          <DataField>valeurCin</DataField>
+        </Field>
+        <Field Name="DEMANDE_DE_CREDITCaption">
+          <DataField>DEMANDE_DE_CREDITCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Fiche_de_renseignementCaption">
+          <DataField>Fiche_de_renseignementCaption</DataField>
+        </Field>
+        <Field Name="IDENTITE_DU__OU_DES__CLIENTS_Caption">
+          <DataField>IDENTITE_DU__OU_DES__CLIENTS_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_City_Caption">
+          <DataField>Sales_Header__Bill_to_City_Caption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="DomicileCaption">
+          <DataField>DomicileCaption</DataField>
+        </Field>
+        <Field Name="Nom___prénomCaption">
+          <DataField>Nom___prénomCaption</DataField>
+        </Field>
+        <Field Name="Délivrée_àCaption">
+          <DataField>Délivrée_àCaption</DataField>
+        </Field>
+        <Field Name="Date___lieu_de_naissanceCaption">
+          <DataField>Date___lieu_de_naissanceCaption</DataField>
+        </Field>
+        <Field Name="ProfessionCaption">
+          <DataField>ProfessionCaption</DataField>
+        </Field>
+        <Field Name="SalaireCaption">
+          <DataField>SalaireCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control31">
+          <DataField>EmptyStringCaption_Control31</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control32">
+          <DataField>EmptyStringCaption_Control32</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control34">
+          <DataField>EmptyStringCaption_Control34</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control36">
+          <DataField>EmptyStringCaption_Control36</DataField>
+        </Field>
+        <Field Name="Sales_Header_Document_Type">
+          <DataField>Sales_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Header_No_">
+          <DataField>Sales_Header_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT_">
+          <DataField>Sales_Header___Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT_Format">
+          <DataField>Sales_Header___Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT__Control43">
+          <DataField>Sales_Header___Amount_Including_VAT__Control43</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT__Control43Format">
+          <DataField>Sales_Header___Amount_Including_VAT__Control43Format</DataField>
+        </Field>
+        <Field Name="PaymentTerms_Description">
+          <DataField>PaymentTerms_Description</DataField>
+        </Field>
+        <Field Name="MATERIEL_A_ACQUERIR_Caption">
+          <DataField>MATERIEL_A_ACQUERIR_Caption</DataField>
+        </Field>
+        <Field Name="CREDIT_Caption">
+          <DataField>CREDIT_Caption</DataField>
+        </Field>
+        <Field Name="Montant_du_crédit_demandé_Caption">
+          <DataField>Montant_du_crédit_demandé_Caption</DataField>
+        </Field>
+        <Field Name="Montant_total_de_la_facture_Caption">
+          <DataField>Montant_total_de_la_facture_Caption</DataField>
+        </Field>
+        <Field Name="Paiement_à_la_commande_Caption">
+          <DataField>Paiement_à_la_commande_Caption</DataField>
+        </Field>
+        <Field Name="Durée___modalité_du_crédit_Caption">
+          <DataField>Durée___modalité_du_crédit_Caption</DataField>
+        </Field>
+        <Field Name="RESSOURCES_Caption">
+          <DataField>RESSOURCES_Caption</DataField>
+        </Field>
+        <Field Name="a__Exploitation_Agricole_Caption">
+          <DataField>a__Exploitation_Agricole_Caption</DataField>
+        </Field>
+        <Field Name="Grandes_cultures___Superficie_et_nature_Caption">
+          <DataField>Grandes_cultures___Superficie_et_nature_Caption</DataField>
+        </Field>
+        <Field Name="Elevage___Nature_et_nombre_de_sujet_Caption">
+          <DataField>Elevage___Nature_et_nombre_de_sujet_Caption</DataField>
+        </Field>
+        <Field Name="Point_d_eaus___Precier_puits__Réseau_public_etc_Caption">
+          <DataField>Point_d_eaus___Precier_puits__Réseau_public_etc_Caption</DataField>
+        </Field>
+        <Field Name="Culture_maraichéres___Superficie_Caption">
+          <DataField>Culture_maraichéres___Superficie_Caption</DataField>
+        </Field>
+        <Field Name="Arboricultures___Nombre_Age_et_nature_Caption">
+          <DataField>Arboricultures___Nombre_Age_et_nature_Caption</DataField>
+        </Field>
+        <Field Name="b_Autres_Biens__Caption">
+          <DataField>b_Autres_Biens__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control56">
+          <DataField>EmptyStringCaption_Control56</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control57">
+          <DataField>EmptyStringCaption_Control57</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control58">
+          <DataField>EmptyStringCaption_Control58</DataField>
+        </Field>
+        <Field Name="c__Revenue_annuel_de_l_exploitation__Caption">
+          <DataField>c__Revenue_annuel_de_l_exploitation__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control60">
+          <DataField>EmptyStringCaption_Control60</DataField>
+        </Field>
+        <Field Name="d__Autres_Revenues__Caption">
+          <DataField>d__Autres_Revenues__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control62">
+          <DataField>EmptyStringCaption_Control62</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control63">
+          <DataField>EmptyStringCaption_Control63</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control64">
+          <DataField>EmptyStringCaption_Control64</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control65">
+          <DataField>EmptyStringCaption_Control65</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control66">
+          <DataField>EmptyStringCaption_Control66</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control67">
+          <DataField>EmptyStringCaption_Control67</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_Type">
+          <DataField>Sales_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

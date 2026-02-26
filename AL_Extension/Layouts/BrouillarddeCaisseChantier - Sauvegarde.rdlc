@@ -1,0 +1,1247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>d6b0138c-c338-4b83-8afd-d757a1d6be65</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Payment_Line__No__">
+          <DataField>Payment_Line__No__</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="Payment_Line_Commentaires">
+          <DataField>Payment_Line_Commentaires</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount">
+          <DataField>Payment_Line_Amount</DataField>
+        </Field>
+        <Field Name="Payment_Line_AmountFormat">
+          <DataField>Payment_Line_AmountFormat</DataField>
+        </Field>
+        <Field Name="Cumul">
+          <DataField>Cumul</DataField>
+        </Field>
+        <Field Name="CumulFormat">
+          <DataField>CumulFormat</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_">
+          <DataField>Payment_Line__Due_Date_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Numero_Seq_">
+          <DataField>Payment_Line__Numero_Seq_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Benificiaire">
+          <DataField>Payment_Line_Benificiaire</DataField>
+        </Field>
+        <Field Name="Payment_Line__Motif_Depense_Ex_">
+          <DataField>Payment_Line__Motif_Depense_Ex_</DataField>
+        </Field>
+        <Field Name="Payment_Line__No___Control1000000002">
+          <DataField>Payment_Line__No___Control1000000002</DataField>
+        </Field>
+        <Field Name="Cumul_Control1000000003">
+          <DataField>Cumul_Control1000000003</DataField>
+        </Field>
+        <Field Name="Cumul_Control1000000003Format">
+          <DataField>Cumul_Control1000000003Format</DataField>
+        </Field>
+        <Field Name="Brouillard_de_caisse_n_Caption">
+          <DataField>Brouillard_de_caisse_n_Caption</DataField>
+        </Field>
+        <Field Name="PAGE__Caption">
+          <DataField>PAGE__Caption</DataField>
+        </Field>
+        <Field Name="CompteCaption">
+          <DataField>CompteCaption</DataField>
+        </Field>
+        <Field Name="MontantCaption">
+          <DataField>MontantCaption</DataField>
+        </Field>
+        <Field Name="ObjetCaption">
+          <DataField>ObjetCaption</DataField>
+        </Field>
+        <Field Name="N__Caption">
+          <DataField>N__Caption</DataField>
+        </Field>
+        <Field Name="CumulCaption">
+          <DataField>CumulCaption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="BénèficiaireCaption">
+          <DataField>BénèficiaireCaption</DataField>
+        </Field>
+        <Field Name="Payment_Line__Motif_Depense_Ex_Caption">
+          <DataField>Payment_Line__Motif_Depense_Ex_Caption</DataField>
+        </Field>
+        <Field Name="TOTAL_BROUILLARD_N__Caption">
+          <DataField>TOTAL_BROUILLARD_N__Caption</DataField>
+        </Field>
+        <Field Name="Le_CaissierCaption">
+          <DataField>Le_CaissierCaption</DataField>
+        </Field>
+        <Field Name="Contrôle_de_gestionCaption">
+          <DataField>Contrôle_de_gestionCaption</DataField>
+        </Field>
+        <Field Name="Le_directeur_de_projetCaption">
+          <DataField>Le_directeur_de_projetCaption</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>DataSet</rd:DataSetName>
+        <rd:SchemaPath>Report.xsd</rd:SchemaPath>
+        <rd:TableName>Result</rd:TableName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Invalid</rd:ReportUnitType>
+  <rd:ReportID>463971b7-7f22-460e-91ca-dbd62c7fff7e</rd:ReportID>
+  <Body>
+    <ReportItems>
+      <Textbox Name="Payment_Line__No__">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Payment_Line__No__.Value)</Value>
+                <Style>
+                  <FontSize>16pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.423cm</Top>
+        <Left>9.3cm</Left>
+        <Height>0.846cm</Height>
+        <Width>4.2cm</Width>
+        <Style>
+          <VerticalAlign>Middle</VerticalAlign>
+        </Style>
+      </Textbox>
+      <Textbox Name="Brouillard_de_caisse_n_Caption">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Brouillard_de_caisse_n_Caption.Value)</Value>
+                <Style>
+                  <FontSize>18pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.423cm</Top>
+        <Left>0.75cm</Left>
+        <Height>0.846cm</Height>
+        <Width>8.55cm</Width>
+        <Style>
+          <VerticalAlign>Middle</VerticalAlign>
+        </Style>
+      </Textbox>
+      <Textbox Name="CurrReport_PAGENO">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!CurrReport_PAGENO.Value)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.423cm</Top>
+        <Left>25.5cm</Left>
+        <Height>0.423cm</Height>
+        <Width>1.95cm</Width>
+        <Style>
+          <VerticalAlign>Middle</VerticalAlign>
+        </Style>
+      </Textbox>
+      <Textbox Name="PAGE__Caption">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!PAGE__Caption.Value)</Value>
+                <Style>
+                  <FontSize>7pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.423cm</Top>
+        <Left>24.3cm</Left>
+        <Height>0.423cm</Height>
+        <Width>1.2cm</Width>
+        <Style>
+          <VerticalAlign>Middle</VerticalAlign>
+        </Style>
+      </Textbox>
+      <Textbox Name="CompteCaption">
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!CompteCaption.Value)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <Top>0.423cm</Top>
+        <Left>15cm</Left>
+        <Height>0.423cm</Height>
+        <Width>5.7cm</Width>
+        <Style>
+          <VerticalAlign>Bottom</VerticalAlign>
+        </Style>
+      </Textbox>
+      <Tablix Name="Table1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>1.575cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.85cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>6.3cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>8.55cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.475cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.85cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.55cm</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.423cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="N__Caption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!N__Caption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>0.15cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>1.5cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="DateCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!DateCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>2.1cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>2.4cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line__Motif_Depense_Ex_Caption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Payment_Line__Motif_Depense_Ex_Caption.Value)</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>4.95cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>5.85cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="ObjetCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!ObjetCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>11.25cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>8.1cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="BénèficiaireCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!BénèficiaireCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>19.8cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>1.95cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MontantCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!MontantCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>22.35cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>2.25cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="CumulCaption">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!CumulCaption.Value)</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>25.05cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>2.25cm</Width>
+                      <Style>
+                        <VerticalAlign>Bottom</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.846cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line__Numero_Seq_">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line__Numero_Seq_.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>0.3cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>1.35cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line__Due_Date_">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line__Due_Date_.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <Format>d</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>2.1cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>2.4cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line__Motif_Depense_Ex_">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line__Motif_Depense_Ex_.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>4.95cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>5.85cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line_Commentaires">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line_Commentaires.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>11.25cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>8.1cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line_Benificiaire">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line_Benificiaire.Value</Value>
+                              <Style>
+                                <FontSize>7pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>19.8cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>2.25cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line_Amount">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Payment_Line_Amount.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <Format>=Fields!Payment_Line_AmountFormat.Value</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>22.05cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>2.85cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Cumul">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Cumul.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <Format>=Fields!CumulFormat.Value</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0cm</Top>
+                      <Left>24.9cm</Left>
+                      <Height>0.846cm</Height>
+                      <Width>2.55cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.423cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox1">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox11">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox12">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TOTAL_BROUILLARD_N__Caption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!TOTAL_BROUILLARD_N__Caption.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0.423cm</Top>
+                      <Left>15.15cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>5.1cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox13">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Payment_Line__No___Control1000000002">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Payment_Line__No__.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0.423cm</Top>
+                      <Left>20.25cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>4.2cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Cumul_Control1000000003">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Sum(Fields!Cumul.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>=First(Fields!Cumul_Control1000000003Format.Value)</Format>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>0.423cm</Top>
+                      <Left>24.6cm</Left>
+                      <Height>0.423cm</Height>
+                      <Width>2.7cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>1.692cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox14">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Le_CaissierCaption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Le_CaissierCaption.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>2.115cm</Top>
+                      <Left>0.75cm</Left>
+                      <Height>1.692cm</Height>
+                      <Width>3.45cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Contrôle_de_gestionCaption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Contrôle_de_gestionCaption.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>2.115cm</Top>
+                      <Left>9.3cm</Left>
+                      <Height>1.692cm</Height>
+                      <Width>3.9cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>0.225cm</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox15">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Le_directeur_de_projetCaption">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=First(Fields!Le_directeur_de_projetCaption.Value)</Value>
+                              <Style>
+                                <FontSize>12pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Top>2.115cm</Top>
+                      <Left>19.65cm</Left>
+                      <Height>1.692cm</Height>
+                      <Width>4.35cm</Width>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>0.225cm</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox16">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="TextBox17">
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                        </Paragraph>
+                      </Paragraphs>
+                      <Style>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="Table1_Details_Group">
+                <DataElementName>Detail</DataElementName>
+              </Group>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+              <DataElementName>Detail_Collection</DataElementName>
+              <DataElementOutput>Output</DataElementOutput>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+            <TablixMember>
+              <KeepWithGroup>Before</KeepWithGroup>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>DataSet_Result</DataSetName>
+        <Top>2.115cm</Top>
+        <Height>3.384cm</Height>
+      </Tablix>
+    </ReportItems>
+    <Height>5cm</Height>
+  </Body>
+  <Width>27.45cm</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>28.65cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+  </Page>
+</Report>

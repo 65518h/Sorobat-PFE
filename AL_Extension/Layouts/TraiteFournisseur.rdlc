@@ -1,0 +1,1013 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>fc59dd6d-4f68-4f41-b913-e930b1a105d7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>19.81846cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>11.56794cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle3">
+                          <ReportItems>
+                            <Textbox Name="Textbox1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!CompanyInfo_Name.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Top>0.75406cm</Top>
+                              <Left>0.10848cm</Left>
+                              <Height>0.9683cm</Height>
+                              <Width>5.167cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox2">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Payment_Line__Due_Date_.Value</Value>
+                                      <Style>
+                                        <Format>dd/MM/yy</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>0.43656cm</Top>
+                              <Left>5.96318cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox3">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_1_2_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>1.53045cm</Top>
+                              <Left>5.96318cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>0.80667cm</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox4">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_3_3_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>1.53045cm</Top>
+                              <Left>6.94624cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>0.87017cm</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox5">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Payment_Header___Document_Date_.Value</Value>
+                                      <Style>
+                                        <Format>dd/MM/yy</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>0.43656cm</Top>
+                              <Left>9.44181cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>2.5cm</Width>
+                              <ZIndex>4</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox6">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_6_13_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>1.53045cm</Top>
+                              <Left>8.32937cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>4.10867cm</Width>
+                              <ZIndex>5</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox7">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_19_2_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>1.53045cm</Top>
+                              <Left>12.74381cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>0.80667cm</Width>
+                              <ZIndex>6</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox8">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Frs_Name.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>0.75406cm</Top>
+                              <Left>15.11977cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>4.24096cm</Width>
+                              <ZIndex>7</ZIndex>
+                              <Visibility>
+                                <Hidden>true</Hidden>
+                              </Visibility>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox9">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!FORMAT__TOT_0___Precision_3___Standard_format_0________.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Top>1.49517cm</Top>
+                              <Left>15.11977cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>4.24096cm</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox10">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!designation.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>3.12472cm</Top>
+                              <Left>0.37518cm</Left>
+                              <Height>0.93867cm</Height>
+                              <Width>4.57433cm</Width>
+                              <ZIndex>9</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox11">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Frs_Name.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>3.48455cm</Top>
+                              <Left>6.66957cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>4.57433cm</Width>
+                              <ZIndex>10</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox12">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!FORMAT__TOT_0___Precision_3___Standard_format_0________.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>3.12472cm</Top>
+                              <Left>14.80227cm</Left>
+                              <Height>0.93867cm</Height>
+                              <Width>4.24096cm</Width>
+                              <ZIndex>11</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox13">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!STR____.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>4.09867cm</Top>
+                              <Left>0.69268cm</Left>
+                              <Height>1.04451cm</Height>
+                              <Width>18.11242cm</Width>
+                              <ZIndex>12</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox14">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!CompanyInfo_City.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>5.70127cm</Top>
+                              <Left>1.01018cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>3.008cm</Width>
+                              <ZIndex>13</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox15">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Payment_Header___Document_Date_.Value</Value>
+                                      <Style>
+                                        <Format>dd/MM/yy</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>5.70127cm</Top>
+                              <Left>4.07935cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>3.008cm</Width>
+                              <ZIndex>14</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox16">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Payment_Line__Due_Date_.Value</Value>
+                                      <Style>
+                                        <Format>dd/MM/yy</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>5.70127cm</Top>
+                              <Left>7.4739cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>3.008cm</Width>
+                              <ZIndex>15</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox17">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!CompanyInfo_Name.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>5.70127cm</Top>
+                              <Left>11.32623cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>5.75967cm</Width>
+                              <ZIndex>16</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox18">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Payment_Line__Currency_Code_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>6.4565cm</Top>
+                              <Left>11.83423cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>1.9285cm</Width>
+                              <ZIndex>17</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox19">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_1_2_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>1.32768cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>1.37817cm</Width>
+                              <ZIndex>18</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox20">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_3_3_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>2.99714cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>1.37817cm</Width>
+                              <ZIndex>19</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox21">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_6_13_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>5.15885cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>4.151cm</Width>
+                              <ZIndex>20</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox22">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!COPYSTR_CompBank_RIB_19_2_.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>9.86573cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>0.93367cm</Width>
+                              <ZIndex>21</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox23">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!CompanyInfo_Name_______CompanyInfo_Address_______CompanyInfo__Address_2_.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>11.00814cm</Left>
+                              <Height>2.50501cm</Height>
+                              <Width>3.7065cm</Width>
+                              <ZIndex>22</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox24">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!AdresseB.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>7.69468cm</Top>
+                              <Left>14.82047cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>4.88951cm</Width>
+                              <ZIndex>23</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                            <Textbox Name="Textbox25">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Adresse2B.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox10</rd:DefaultName>
+                              <Top>8.98052cm</Top>
+                              <Left>15.09331cm</Left>
+                              <Height>0.57884cm</Height>
+                              <Width>4.61667cm</Width>
+                              <ZIndex>24</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Payment_Header_No_">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Payment_Header_No_.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Payment_Header_No_.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <Visibility>
+                    <Hidden>=IIF(Fields!FORMAT__TOT_0___Precision_3___Standard_format_0________.Value ="" , True, false)</Hidden>
+                  </Visibility>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Height>11.56794cm</Height>
+            <Width>19.81846cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>12.07065cm</Height>
+        <Style />
+      </Body>
+      <Width>19.81846cm</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Header_No_">
+          <DataField>Payment_Header_No_</DataField>
+        </Field>
+        <Field Name="STR____">
+          <DataField>STR____</DataField>
+        </Field>
+        <Field Name="FORMAT__TOT_0___Precision_3___Standard_format_0________">
+          <DataField>FORMAT__TOT_0___Precision_3___Standard_format_0________</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_">
+          <DataField>Payment_Line__Due_Date_</DataField>
+        </Field>
+        <Field Name="FORMAT__TOT_0___Precision_3___Standard_format_0_________Control1000000011">
+          <DataField>FORMAT__TOT_0___Precision_3___Standard_format_0_________Control1000000011</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name_______CompanyInfo_Address_______CompanyInfo__Address_2_">
+          <DataField>CompanyInfo_Name_______CompanyInfo_Address_______CompanyInfo__Address_2_</DataField>
+        </Field>
+        <Field Name="Frs_Name">
+          <DataField>Frs_Name</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date__Control1000000023">
+          <DataField>Payment_Line__Due_Date__Control1000000023</DataField>
+        </Field>
+        <Field Name="Payment_Header___Document_Date_">
+          <DataField>Payment_Header___Document_Date_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Currency_Code_">
+          <DataField>Payment_Line__Currency_Code_</DataField>
+        </Field>
+        <Field Name="AdresseB">
+          <DataField>AdresseB</DataField>
+        </Field>
+        <Field Name="Frs_Name_Control1000000028">
+          <DataField>Frs_Name_Control1000000028</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="Payment_Header___Document_Date__Control1000000031">
+          <DataField>Payment_Header___Document_Date__Control1000000031</DataField>
+        </Field>
+        <Field Name="designation">
+          <DataField>designation</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_1_2_">
+          <DataField>COPYSTR_CompBank_RIB_1_2_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_6_13_">
+          <DataField>COPYSTR_CompBank_RIB_6_13_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_3_3_">
+          <DataField>COPYSTR_CompBank_RIB_3_3_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_19_2_">
+          <DataField>COPYSTR_CompBank_RIB_19_2_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_6_13__Control1000000003">
+          <DataField>COPYSTR_CompBank_RIB_6_13__Control1000000003</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_19_2__Control1000000006">
+          <DataField>COPYSTR_CompBank_RIB_19_2__Control1000000006</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_3_3__Control1000000008">
+          <DataField>COPYSTR_CompBank_RIB_3_3__Control1000000008</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_1_2__Control1000000013">
+          <DataField>COPYSTR_CompBank_RIB_1_2__Control1000000013</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name_Control1000000002">
+          <DataField>CompanyInfo_Name_Control1000000002</DataField>
+        </Field>
+        <Field Name="Adresse2B">
+          <DataField>Adresse2B</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

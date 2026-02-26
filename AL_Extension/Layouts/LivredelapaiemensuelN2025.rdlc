@@ -1,0 +1,3573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2013-01-01T09:52:38.1716527Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>26b9770d-c743-4320-9a2f-792efdc45057</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.69579cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.61704cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.49061cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.49061cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.5715cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Ventilation par Salarié</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EmployeeCodes_i1_">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i1_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EmployeeCodes_i1_</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EmployeeCodes_i2_">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i2_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EmployeeCodes_i2_</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EmployeeCodes_i3_">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i3_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EmployeeCodes_i3_</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox48">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i4_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox48</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i5_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox55</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox50">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i6_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox50</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox51">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i7_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox52">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i8_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox52</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox53">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i9_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox53</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox68">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i10_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox68</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Rubriques</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox56">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeNames_i1_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox56</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox57">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeNames_i2_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox57</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox58">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeNames_i3_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox58</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox66">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i4_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox66</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox60">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i5_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox60</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox61">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i6_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox61</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox67">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i7_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox67</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox63">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i8_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox63</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox64">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeCodes_i9_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox64</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox69">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!EmployeeNames_i10_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox69</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox70">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>1</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox70</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox83">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Nbre de jours imposable</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox83</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox71">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i1_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox71</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox72">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i2_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox72</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox73">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i3_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox73</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox74">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i4_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox74</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox75">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i5_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox75</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox76">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i6_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox76</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox77">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i7_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox77</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox78">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i8_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox78</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox79">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i8_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox79</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox80">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i10_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox80</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox84">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>100</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox84</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox85">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Salaire de base</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox85</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox86">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Sbase_i1_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox86</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox87">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Sbase_i2_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox87</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox88">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Sbase_i3_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox88</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox89">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Sbase_i4_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox89</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox90">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i5_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox90</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox91">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i6_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox91</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox92">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i7_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox92</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox93">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i8_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox93</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox94">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i9_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox94</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox95">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!VJours_i10_.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox95</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox108">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox108</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox97">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!IndemniteImposable_Description.Value</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox97</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox98">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox98</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox99">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox99</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox100">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox100</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox101">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox101</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox102">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox102</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox103">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox103</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox104">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox104</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox105">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox105</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox106">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox106</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox107">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox107</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>0.3937cm</Top>
+            <Left>1.38853cm</Left>
+            <Height>2.9715cm</Height>
+            <Width>30.29405cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>5.08cm</Height>
+        <Style />
+      </Body>
+      <Width>32.35519cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.37067cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>LIVRE DE PAIE MENSUELLE</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.66887cm</Top>
+              <Left>9.87637cm</Left>
+              <Height>0.6cm</Height>
+              <Width>10.68917cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value EvaluationMode="Constant">Année/Mois:</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>1.30414cm</Top>
+              <Left>10.59603cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.97033cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>0.66887cm</Top>
+              <Left>28.31253cm</Left>
+              <Height>0.6cm</Height>
+              <Width>0.9525cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Page:</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.66887cm</Top>
+              <Left>27.14131cm</Left>
+              <Height>0.6cm</Height>
+              <Width>1.17122cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox29">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Date du jour:</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.22437cm</Top>
+              <Left>1.0922cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.78694cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox30">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Heure</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.89492cm</Top>
+              <Left>0.98637cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.78694cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox31">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Société</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>1.49492cm</Top>
+              <Left>1.0922cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.78694cm</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox32">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!WORKDATE.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <Format>d</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.22437cm</Top>
+              <Left>3.91442cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.78694cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox33">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!TIME.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <Format>T</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>0.85964cm</Top>
+              <Left>3.87914cm</Left>
+              <Height>0.6cm</Height>
+              <Width>2.78694cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox34">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!UPPERCASE_COMPANYNAME_.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox29</rd:DefaultName>
+              <Top>1.49492cm</Top>
+              <Left>3.87914cm</Left>
+              <Height>0.6cm</Height>
+              <Width>4.71311cm</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox11">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!FORMAT_SalaryHeaders_Year_____________FORMAT_SalaryHeaders_Month_.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>1.30414cm</Top>
+              <Left>13.65103cm</Left>
+              <Height>0.6cm</Height>
+              <Width>8.30433cm</Width>
+              <ZIndex>10</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>21cm</PageHeight>
+        <PageWidth>29.7cm</PageWidth>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Initialisation_Number">
+          <DataField>Initialisation_Number</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i1_">
+          <DataField>EmployeeCodes_i1_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i2_">
+          <DataField>EmployeeCodes_i2_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i3_">
+          <DataField>EmployeeCodes_i3_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i4_">
+          <DataField>EmployeeCodes_i4_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i5_">
+          <DataField>EmployeeCodes_i5_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i6_">
+          <DataField>EmployeeCodes_i6_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i7_">
+          <DataField>EmployeeCodes_i7_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i8_">
+          <DataField>EmployeeCodes_i8_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i9_">
+          <DataField>EmployeeCodes_i9_</DataField>
+        </Field>
+        <Field Name="EmployeeCodes_i10_">
+          <DataField>EmployeeCodes_i10_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i2_">
+          <DataField>EmployeeNames_i2_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i3_">
+          <DataField>EmployeeNames_i3_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i4_">
+          <DataField>EmployeeNames_i4_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i5_">
+          <DataField>EmployeeNames_i5_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i6_">
+          <DataField>EmployeeNames_i6_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i7_">
+          <DataField>EmployeeNames_i7_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i8_">
+          <DataField>EmployeeNames_i8_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i9_">
+          <DataField>EmployeeNames_i9_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i10_">
+          <DataField>EmployeeNames_i10_</DataField>
+        </Field>
+        <Field Name="EmployeeNames_i1_">
+          <DataField>EmployeeNames_i1_</DataField>
+        </Field>
+        <Field Name="WORKDATE">
+          <DataField>WORKDATE</DataField>
+        </Field>
+        <Field Name="TIME">
+          <DataField>TIME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="UPPERCASE_COMPANYNAME_">
+          <DataField>UPPERCASE_COMPANYNAME_</DataField>
+        </Field>
+        <Field Name="Année___Mois___">
+          <DataField>Année___Mois___</DataField>
+        </Field>
+        <Field Name="FORMAT_SalaryHeaders_Year_____________FORMAT_SalaryHeaders_Month_">
+          <DataField>FORMAT_SalaryHeaders_Year_____________FORMAT_SalaryHeaders_Month_</DataField>
+        </Field>
+        <Field Name="Ventilation_par_SalariéCaption">
+          <DataField>Ventilation_par_SalariéCaption</DataField>
+        </Field>
+        <Field Name="Date_du_jour_Caption">
+          <DataField>Date_du_jour_Caption</DataField>
+        </Field>
+        <Field Name="Heure_Caption">
+          <DataField>Heure_Caption</DataField>
+        </Field>
+        <Field Name="LIVRE_DE_PAIE_MENSUELCaption">
+          <DataField>LIVRE_DE_PAIE_MENSUELCaption</DataField>
+        </Field>
+        <Field Name="Page_Caption">
+          <DataField>Page_Caption</DataField>
+        </Field>
+        <Field Name="Société_Caption">
+          <DataField>Société_Caption</DataField>
+        </Field>
+        <Field Name="RubriquesCaption">
+          <DataField>RubriquesCaption</DataField>
+        </Field>
+        <Field Name="Employe_Number">
+          <DataField>Employe_Number</DataField>
+        </Field>
+        <Field Name="V1_">
+          <DataField>V1_</DataField>
+        </Field>
+        <Field Name="Nbre_de_jours_imposable_">
+          <DataField>Nbre_de_jours_imposable_</DataField>
+        </Field>
+        <Field Name="VJours_i1_">
+          <DataField>VJours_i1_</DataField>
+        </Field>
+        <Field Name="VJours_i1_Format">
+          <DataField>VJours_i1_Format</DataField>
+        </Field>
+        <Field Name="VJours_i2_">
+          <DataField>VJours_i2_</DataField>
+        </Field>
+        <Field Name="VJours_i2_Format">
+          <DataField>VJours_i2_Format</DataField>
+        </Field>
+        <Field Name="VJours_i3_">
+          <DataField>VJours_i3_</DataField>
+        </Field>
+        <Field Name="VJours_i3_Format">
+          <DataField>VJours_i3_Format</DataField>
+        </Field>
+        <Field Name="VJours_i4_">
+          <DataField>VJours_i4_</DataField>
+        </Field>
+        <Field Name="VJours_i4_Format">
+          <DataField>VJours_i4_Format</DataField>
+        </Field>
+        <Field Name="VJours_i5_">
+          <DataField>VJours_i5_</DataField>
+        </Field>
+        <Field Name="VJours_i5_Format">
+          <DataField>VJours_i5_Format</DataField>
+        </Field>
+        <Field Name="VJours_i6_">
+          <DataField>VJours_i6_</DataField>
+        </Field>
+        <Field Name="VJours_i6_Format">
+          <DataField>VJours_i6_Format</DataField>
+        </Field>
+        <Field Name="VJours_i7_">
+          <DataField>VJours_i7_</DataField>
+        </Field>
+        <Field Name="VJours_i7_Format">
+          <DataField>VJours_i7_Format</DataField>
+        </Field>
+        <Field Name="VJours_i8_">
+          <DataField>VJours_i8_</DataField>
+        </Field>
+        <Field Name="VJours_i8_Format">
+          <DataField>VJours_i8_Format</DataField>
+        </Field>
+        <Field Name="VJours_i9_">
+          <DataField>VJours_i9_</DataField>
+        </Field>
+        <Field Name="VJours_i9_Format">
+          <DataField>VJours_i9_Format</DataField>
+        </Field>
+        <Field Name="VJours_i10_">
+          <DataField>VJours_i10_</DataField>
+        </Field>
+        <Field Name="VJours_i10_Format">
+          <DataField>VJours_i10_Format</DataField>
+        </Field>
+        <Field Name="Jours_Number">
+          <DataField>Jours_Number</DataField>
+        </Field>
+        <Field Name="V100_">
+          <DataField>V100_</DataField>
+        </Field>
+        <Field Name="salaire_de_base_">
+          <DataField>salaire_de_base_</DataField>
+        </Field>
+        <Field Name="Sbase_i1_">
+          <DataField>Sbase_i1_</DataField>
+        </Field>
+        <Field Name="Sbase_i1_Format">
+          <DataField>Sbase_i1_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i2_">
+          <DataField>Sbase_i2_</DataField>
+        </Field>
+        <Field Name="Sbase_i2_Format">
+          <DataField>Sbase_i2_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i3_">
+          <DataField>Sbase_i3_</DataField>
+        </Field>
+        <Field Name="Sbase_i3_Format">
+          <DataField>Sbase_i3_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i4_">
+          <DataField>Sbase_i4_</DataField>
+        </Field>
+        <Field Name="Sbase_i4_Format">
+          <DataField>Sbase_i4_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i5_">
+          <DataField>Sbase_i5_</DataField>
+        </Field>
+        <Field Name="Sbase_i5_Format">
+          <DataField>Sbase_i5_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i6_">
+          <DataField>Sbase_i6_</DataField>
+        </Field>
+        <Field Name="Sbase_i6_Format">
+          <DataField>Sbase_i6_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i7_">
+          <DataField>Sbase_i7_</DataField>
+        </Field>
+        <Field Name="Sbase_i7_Format">
+          <DataField>Sbase_i7_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i8_">
+          <DataField>Sbase_i8_</DataField>
+        </Field>
+        <Field Name="Sbase_i8_Format">
+          <DataField>Sbase_i8_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i9_">
+          <DataField>Sbase_i9_</DataField>
+        </Field>
+        <Field Name="Sbase_i9_Format">
+          <DataField>Sbase_i9_Format</DataField>
+        </Field>
+        <Field Name="Sbase_i10_">
+          <DataField>Sbase_i10_</DataField>
+        </Field>
+        <Field Name="Sbase_i10_Format">
+          <DataField>Sbase_i10_Format</DataField>
+        </Field>
+        <Field Name="SalaireDeBase_Number">
+          <DataField>SalaireDeBase_Number</DataField>
+        </Field>
+        <Field Name="IndemniteImposable_Description">
+          <DataField>IndemniteImposable_Description</DataField>
+        </Field>
+        <Field Name="IndemniteImposable_Code">
+          <DataField>IndemniteImposable_Code</DataField>
+        </Field>
+        <Field Name="IndemImpo_i1_j_">
+          <DataField>IndemImpo_i1_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i1_j_Format">
+          <DataField>IndemImpo_i1_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i2_j_">
+          <DataField>IndemImpo_i2_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i2_j_Format">
+          <DataField>IndemImpo_i2_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i3_j_">
+          <DataField>IndemImpo_i3_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i3_j_Format">
+          <DataField>IndemImpo_i3_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i4_j_">
+          <DataField>IndemImpo_i4_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i4_j_Format">
+          <DataField>IndemImpo_i4_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i5_j_">
+          <DataField>IndemImpo_i5_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i5_j_Format">
+          <DataField>IndemImpo_i5_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i6_j_">
+          <DataField>IndemImpo_i6_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i6_j_Format">
+          <DataField>IndemImpo_i6_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i7_j_">
+          <DataField>IndemImpo_i7_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i7_j_Format">
+          <DataField>IndemImpo_i7_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i8_j_">
+          <DataField>IndemImpo_i8_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i8_j_Format">
+          <DataField>IndemImpo_i8_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i9_j_">
+          <DataField>IndemImpo_i9_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i9_j_Format">
+          <DataField>IndemImpo_i9_j_Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i10_j_">
+          <DataField>IndemImpo_i10_j_</DataField>
+        </Field>
+        <Field Name="IndemImpo_i10_j_Format">
+          <DataField>IndemImpo_i10_j_Format</DataField>
+        </Field>
+        <Field Name="H_Sup_à_15__">
+          <DataField>H_Sup_à_15__</DataField>
+        </Field>
+        <Field Name="HSupp15_i1_">
+          <DataField>HSupp15_i1_</DataField>
+        </Field>
+        <Field Name="HSupp15_i1_Format">
+          <DataField>HSupp15_i1_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i2_">
+          <DataField>HSupp15_i2_</DataField>
+        </Field>
+        <Field Name="HSupp15_i2_Format">
+          <DataField>HSupp15_i2_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i3_">
+          <DataField>HSupp15_i3_</DataField>
+        </Field>
+        <Field Name="HSupp15_i3_Format">
+          <DataField>HSupp15_i3_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i4_">
+          <DataField>HSupp15_i4_</DataField>
+        </Field>
+        <Field Name="HSupp15_i4_Format">
+          <DataField>HSupp15_i4_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i5_">
+          <DataField>HSupp15_i5_</DataField>
+        </Field>
+        <Field Name="HSupp15_i5_Format">
+          <DataField>HSupp15_i5_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i6_">
+          <DataField>HSupp15_i6_</DataField>
+        </Field>
+        <Field Name="HSupp15_i6_Format">
+          <DataField>HSupp15_i6_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i7_">
+          <DataField>HSupp15_i7_</DataField>
+        </Field>
+        <Field Name="HSupp15_i7_Format">
+          <DataField>HSupp15_i7_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i8_">
+          <DataField>HSupp15_i8_</DataField>
+        </Field>
+        <Field Name="HSupp15_i8_Format">
+          <DataField>HSupp15_i8_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i9_">
+          <DataField>HSupp15_i9_</DataField>
+        </Field>
+        <Field Name="HSupp15_i9_Format">
+          <DataField>HSupp15_i9_Format</DataField>
+        </Field>
+        <Field Name="HSupp15_i10_">
+          <DataField>HSupp15_i10_</DataField>
+        </Field>
+        <Field Name="HSupp15_i10_Format">
+          <DataField>HSupp15_i10_Format</DataField>
+        </Field>
+        <Field Name="V205_">
+          <DataField>V205_</DataField>
+        </Field>
+        <Field Name="HeureSupp15__Number">
+          <DataField>HeureSupp15__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_35__">
+          <DataField>H_Sup_à_35__</DataField>
+        </Field>
+        <Field Name="HSupp50_i1_">
+          <DataField>HSupp50_i1_</DataField>
+        </Field>
+        <Field Name="HSupp50_i1_Format">
+          <DataField>HSupp50_i1_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i2_">
+          <DataField>HSupp50_i2_</DataField>
+        </Field>
+        <Field Name="HSupp50_i2_Format">
+          <DataField>HSupp50_i2_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i3_">
+          <DataField>HSupp50_i3_</DataField>
+        </Field>
+        <Field Name="HSupp50_i3_Format">
+          <DataField>HSupp50_i3_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i4_">
+          <DataField>HSupp50_i4_</DataField>
+        </Field>
+        <Field Name="HSupp50_i4_Format">
+          <DataField>HSupp50_i4_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i5_">
+          <DataField>HSupp50_i5_</DataField>
+        </Field>
+        <Field Name="HSupp50_i5_Format">
+          <DataField>HSupp50_i5_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i6_">
+          <DataField>HSupp50_i6_</DataField>
+        </Field>
+        <Field Name="HSupp50_i6_Format">
+          <DataField>HSupp50_i6_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i7_">
+          <DataField>HSupp50_i7_</DataField>
+        </Field>
+        <Field Name="HSupp50_i7_Format">
+          <DataField>HSupp50_i7_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i8_">
+          <DataField>HSupp50_i8_</DataField>
+        </Field>
+        <Field Name="HSupp50_i8_Format">
+          <DataField>HSupp50_i8_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i9_">
+          <DataField>HSupp50_i9_</DataField>
+        </Field>
+        <Field Name="HSupp50_i9_Format">
+          <DataField>HSupp50_i9_Format</DataField>
+        </Field>
+        <Field Name="HSupp50_i10_">
+          <DataField>HSupp50_i10_</DataField>
+        </Field>
+        <Field Name="HSupp50_i10_Format">
+          <DataField>HSupp50_i10_Format</DataField>
+        </Field>
+        <Field Name="V206_">
+          <DataField>V206_</DataField>
+        </Field>
+        <Field Name="HeureSupp35__Number">
+          <DataField>HeureSupp35__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_50__">
+          <DataField>H_Sup_à_50__</DataField>
+        </Field>
+        <Field Name="HSupp75_i1_">
+          <DataField>HSupp75_i1_</DataField>
+        </Field>
+        <Field Name="HSupp75_i1_Format">
+          <DataField>HSupp75_i1_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i2_">
+          <DataField>HSupp75_i2_</DataField>
+        </Field>
+        <Field Name="HSupp75_i2_Format">
+          <DataField>HSupp75_i2_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i3_">
+          <DataField>HSupp75_i3_</DataField>
+        </Field>
+        <Field Name="HSupp75_i3_Format">
+          <DataField>HSupp75_i3_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i4_">
+          <DataField>HSupp75_i4_</DataField>
+        </Field>
+        <Field Name="HSupp75_i4_Format">
+          <DataField>HSupp75_i4_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i5_">
+          <DataField>HSupp75_i5_</DataField>
+        </Field>
+        <Field Name="HSupp75_i5_Format">
+          <DataField>HSupp75_i5_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i6_">
+          <DataField>HSupp75_i6_</DataField>
+        </Field>
+        <Field Name="HSupp75_i6_Format">
+          <DataField>HSupp75_i6_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i7_">
+          <DataField>HSupp75_i7_</DataField>
+        </Field>
+        <Field Name="HSupp75_i7_Format">
+          <DataField>HSupp75_i7_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i8_">
+          <DataField>HSupp75_i8_</DataField>
+        </Field>
+        <Field Name="HSupp75_i8_Format">
+          <DataField>HSupp75_i8_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i9_">
+          <DataField>HSupp75_i9_</DataField>
+        </Field>
+        <Field Name="HSupp75_i9_Format">
+          <DataField>HSupp75_i9_Format</DataField>
+        </Field>
+        <Field Name="HSupp75_i10_">
+          <DataField>HSupp75_i10_</DataField>
+        </Field>
+        <Field Name="HSupp75_i10_Format">
+          <DataField>HSupp75_i10_Format</DataField>
+        </Field>
+        <Field Name="V207_">
+          <DataField>V207_</DataField>
+        </Field>
+        <Field Name="HeureSupp50__Number">
+          <DataField>HeureSupp50__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_60__">
+          <DataField>H_Sup_à_60__</DataField>
+        </Field>
+        <Field Name="HSupp100_i1_">
+          <DataField>HSupp100_i1_</DataField>
+        </Field>
+        <Field Name="HSupp100_i1_Format">
+          <DataField>HSupp100_i1_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i2_">
+          <DataField>HSupp100_i2_</DataField>
+        </Field>
+        <Field Name="HSupp100_i2_Format">
+          <DataField>HSupp100_i2_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i3_">
+          <DataField>HSupp100_i3_</DataField>
+        </Field>
+        <Field Name="HSupp100_i3_Format">
+          <DataField>HSupp100_i3_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i4_">
+          <DataField>HSupp100_i4_</DataField>
+        </Field>
+        <Field Name="HSupp100_i4_Format">
+          <DataField>HSupp100_i4_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i5_">
+          <DataField>HSupp100_i5_</DataField>
+        </Field>
+        <Field Name="HSupp100_i5_Format">
+          <DataField>HSupp100_i5_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i6_">
+          <DataField>HSupp100_i6_</DataField>
+        </Field>
+        <Field Name="HSupp100_i6_Format">
+          <DataField>HSupp100_i6_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i7_">
+          <DataField>HSupp100_i7_</DataField>
+        </Field>
+        <Field Name="HSupp100_i7_Format">
+          <DataField>HSupp100_i7_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i8_">
+          <DataField>HSupp100_i8_</DataField>
+        </Field>
+        <Field Name="HSupp100_i8_Format">
+          <DataField>HSupp100_i8_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i9_">
+          <DataField>HSupp100_i9_</DataField>
+        </Field>
+        <Field Name="HSupp100_i9_Format">
+          <DataField>HSupp100_i9_Format</DataField>
+        </Field>
+        <Field Name="HSupp100_i10_">
+          <DataField>HSupp100_i10_</DataField>
+        </Field>
+        <Field Name="HSupp100_i10_Format">
+          <DataField>HSupp100_i10_Format</DataField>
+        </Field>
+        <Field Name="V8_">
+          <DataField>V8_</DataField>
+        </Field>
+        <Field Name="HeureSupp60__Number">
+          <DataField>HeureSupp60__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_120__">
+          <DataField>H_Sup_à_120__</DataField>
+        </Field>
+        <Field Name="HSupp120_i1_">
+          <DataField>HSupp120_i1_</DataField>
+        </Field>
+        <Field Name="HSupp120_i1_Format">
+          <DataField>HSupp120_i1_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i2_">
+          <DataField>HSupp120_i2_</DataField>
+        </Field>
+        <Field Name="HSupp120_i2_Format">
+          <DataField>HSupp120_i2_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i3_">
+          <DataField>HSupp120_i3_</DataField>
+        </Field>
+        <Field Name="HSupp120_i3_Format">
+          <DataField>HSupp120_i3_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i4_">
+          <DataField>HSupp120_i4_</DataField>
+        </Field>
+        <Field Name="HSupp120_i4_Format">
+          <DataField>HSupp120_i4_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i5_">
+          <DataField>HSupp120_i5_</DataField>
+        </Field>
+        <Field Name="HSupp120_i5_Format">
+          <DataField>HSupp120_i5_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i6_">
+          <DataField>HSupp120_i6_</DataField>
+        </Field>
+        <Field Name="HSupp120_i6_Format">
+          <DataField>HSupp120_i6_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i7_">
+          <DataField>HSupp120_i7_</DataField>
+        </Field>
+        <Field Name="HSupp120_i7_Format">
+          <DataField>HSupp120_i7_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i8_">
+          <DataField>HSupp120_i8_</DataField>
+        </Field>
+        <Field Name="HSupp120_i8_Format">
+          <DataField>HSupp120_i8_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i9_">
+          <DataField>HSupp120_i9_</DataField>
+        </Field>
+        <Field Name="HSupp120_i9_Format">
+          <DataField>HSupp120_i9_Format</DataField>
+        </Field>
+        <Field Name="HSupp120_i10_">
+          <DataField>HSupp120_i10_</DataField>
+        </Field>
+        <Field Name="HSupp120_i10_Format">
+          <DataField>HSupp120_i10_Format</DataField>
+        </Field>
+        <Field Name="V8__Control1000000222">
+          <DataField>V8__Control1000000222</DataField>
+        </Field>
+        <Field Name="HeureSupp120__Number">
+          <DataField>HeureSupp120__Number</DataField>
+        </Field>
+        <Field Name="IUTS_">
+          <DataField>IUTS_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i1_">
+          <DataField>EmployeeValues_i1_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i1_Format">
+          <DataField>EmployeeValues_i1_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i2_">
+          <DataField>EmployeeValues_i2_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i2_Format">
+          <DataField>EmployeeValues_i2_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i3_">
+          <DataField>EmployeeValues_i3_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i3_Format">
+          <DataField>EmployeeValues_i3_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i4_">
+          <DataField>EmployeeValues_i4_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i4_Format">
+          <DataField>EmployeeValues_i4_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i5_">
+          <DataField>EmployeeValues_i5_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i5_Format">
+          <DataField>EmployeeValues_i5_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i6_">
+          <DataField>EmployeeValues_i6_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i6_Format">
+          <DataField>EmployeeValues_i6_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i7_">
+          <DataField>EmployeeValues_i7_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i7_Format">
+          <DataField>EmployeeValues_i7_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i8_">
+          <DataField>EmployeeValues_i8_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i8_Format">
+          <DataField>EmployeeValues_i8_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i9_">
+          <DataField>EmployeeValues_i9_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i9_Format">
+          <DataField>EmployeeValues_i9_Format</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i10_">
+          <DataField>EmployeeValues_i10_</DataField>
+        </Field>
+        <Field Name="EmployeeValues_i10_Format">
+          <DataField>EmployeeValues_i10_Format</DataField>
+        </Field>
+        <Field Name="V500_">
+          <DataField>V500_</DataField>
+        </Field>
+        <Field Name="IUTS_Number">
+          <DataField>IUTS_Number</DataField>
+        </Field>
+        <Field Name="TPA_">
+          <DataField>TPA_</DataField>
+        </Field>
+        <Field Name="VCN_i1_">
+          <DataField>VCN_i1_</DataField>
+        </Field>
+        <Field Name="VCN_i1_Format">
+          <DataField>VCN_i1_Format</DataField>
+        </Field>
+        <Field Name="VCN_i2_">
+          <DataField>VCN_i2_</DataField>
+        </Field>
+        <Field Name="VCN_i2_Format">
+          <DataField>VCN_i2_Format</DataField>
+        </Field>
+        <Field Name="VCN_i3_">
+          <DataField>VCN_i3_</DataField>
+        </Field>
+        <Field Name="VCN_i3_Format">
+          <DataField>VCN_i3_Format</DataField>
+        </Field>
+        <Field Name="VCN_i4_">
+          <DataField>VCN_i4_</DataField>
+        </Field>
+        <Field Name="VCN_i4_Format">
+          <DataField>VCN_i4_Format</DataField>
+        </Field>
+        <Field Name="VCN_i5_">
+          <DataField>VCN_i5_</DataField>
+        </Field>
+        <Field Name="VCN_i5_Format">
+          <DataField>VCN_i5_Format</DataField>
+        </Field>
+        <Field Name="VCN_i6_">
+          <DataField>VCN_i6_</DataField>
+        </Field>
+        <Field Name="VCN_i6_Format">
+          <DataField>VCN_i6_Format</DataField>
+        </Field>
+        <Field Name="VCN_i7_">
+          <DataField>VCN_i7_</DataField>
+        </Field>
+        <Field Name="VCN_i7_Format">
+          <DataField>VCN_i7_Format</DataField>
+        </Field>
+        <Field Name="VCN_i8_">
+          <DataField>VCN_i8_</DataField>
+        </Field>
+        <Field Name="VCN_i8_Format">
+          <DataField>VCN_i8_Format</DataField>
+        </Field>
+        <Field Name="VCN_i9_">
+          <DataField>VCN_i9_</DataField>
+        </Field>
+        <Field Name="VCN_i9_Format">
+          <DataField>VCN_i9_Format</DataField>
+        </Field>
+        <Field Name="VCN_i10_">
+          <DataField>VCN_i10_</DataField>
+        </Field>
+        <Field Name="VCN_i10_Format">
+          <DataField>VCN_i10_Format</DataField>
+        </Field>
+        <Field Name="V503_">
+          <DataField>V503_</DataField>
+        </Field>
+        <Field Name="TPA_Number">
+          <DataField>TPA_Number</DataField>
+        </Field>
+        <Field Name="CNSS_">
+          <DataField>CNSS_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i1_">
+          <DataField>RegimeRetraite_i1_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i1_Format">
+          <DataField>RegimeRetraite_i1_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i2_">
+          <DataField>RegimeRetraite_i2_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i2_Format">
+          <DataField>RegimeRetraite_i2_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i3_">
+          <DataField>RegimeRetraite_i3_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i3_Format">
+          <DataField>RegimeRetraite_i3_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i4_">
+          <DataField>RegimeRetraite_i4_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i4_Format">
+          <DataField>RegimeRetraite_i4_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i5_">
+          <DataField>RegimeRetraite_i5_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i5_Format">
+          <DataField>RegimeRetraite_i5_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i6_">
+          <DataField>RegimeRetraite_i6_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i6_Format">
+          <DataField>RegimeRetraite_i6_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i7_">
+          <DataField>RegimeRetraite_i7_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i7_Format">
+          <DataField>RegimeRetraite_i7_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i8_">
+          <DataField>RegimeRetraite_i8_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i8_Format">
+          <DataField>RegimeRetraite_i8_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i9_">
+          <DataField>RegimeRetraite_i9_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i9_Format">
+          <DataField>RegimeRetraite_i9_Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i10_">
+          <DataField>RegimeRetraite_i10_</DataField>
+        </Field>
+        <Field Name="RegimeRetraite_i10_Format">
+          <DataField>RegimeRetraite_i10_Format</DataField>
+        </Field>
+        <Field Name="V533_">
+          <DataField>V533_</DataField>
+        </Field>
+        <Field Name="CNSS_Number">
+          <DataField>CNSS_Number</DataField>
+        </Field>
+        <Field Name="IndemniteNonImposable_Description">
+          <DataField>IndemniteNonImposable_Description</DataField>
+        </Field>
+        <Field Name="IndemniteNonImposable_Code">
+          <DataField>IndemniteNonImposable_Code</DataField>
+        </Field>
+        <Field Name="IndemImpo_i1_j__Control1000000102">
+          <DataField>IndemImpo_i1_j__Control1000000102</DataField>
+        </Field>
+        <Field Name="IndemImpo_i1_j__Control1000000102Format">
+          <DataField>IndemImpo_i1_j__Control1000000102Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i2_j__Control1000000103">
+          <DataField>IndemImpo_i2_j__Control1000000103</DataField>
+        </Field>
+        <Field Name="IndemImpo_i2_j__Control1000000103Format">
+          <DataField>IndemImpo_i2_j__Control1000000103Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i3_j__Control1000000104">
+          <DataField>IndemImpo_i3_j__Control1000000104</DataField>
+        </Field>
+        <Field Name="IndemImpo_i3_j__Control1000000104Format">
+          <DataField>IndemImpo_i3_j__Control1000000104Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i4_j__Control1000000105">
+          <DataField>IndemImpo_i4_j__Control1000000105</DataField>
+        </Field>
+        <Field Name="IndemImpo_i4_j__Control1000000105Format">
+          <DataField>IndemImpo_i4_j__Control1000000105Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i5_j__Control1000000106">
+          <DataField>IndemImpo_i5_j__Control1000000106</DataField>
+        </Field>
+        <Field Name="IndemImpo_i5_j__Control1000000106Format">
+          <DataField>IndemImpo_i5_j__Control1000000106Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i6_j__Control1000000107">
+          <DataField>IndemImpo_i6_j__Control1000000107</DataField>
+        </Field>
+        <Field Name="IndemImpo_i6_j__Control1000000107Format">
+          <DataField>IndemImpo_i6_j__Control1000000107Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i7_j__Control1000000108">
+          <DataField>IndemImpo_i7_j__Control1000000108</DataField>
+        </Field>
+        <Field Name="IndemImpo_i7_j__Control1000000108Format">
+          <DataField>IndemImpo_i7_j__Control1000000108Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i8_j__Control1000000109">
+          <DataField>IndemImpo_i8_j__Control1000000109</DataField>
+        </Field>
+        <Field Name="IndemImpo_i8_j__Control1000000109Format">
+          <DataField>IndemImpo_i8_j__Control1000000109Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i9_j__Control1000000110">
+          <DataField>IndemImpo_i9_j__Control1000000110</DataField>
+        </Field>
+        <Field Name="IndemImpo_i9_j__Control1000000110Format">
+          <DataField>IndemImpo_i9_j__Control1000000110Format</DataField>
+        </Field>
+        <Field Name="IndemImpo_i10_j__Control1000000111">
+          <DataField>IndemImpo_i10_j__Control1000000111</DataField>
+        </Field>
+        <Field Name="IndemImpo_i10_j__Control1000000111Format">
+          <DataField>IndemImpo_i10_j__Control1000000111Format</DataField>
+        </Field>
+        <Field Name="Avance_Sur_Salaire_">
+          <DataField>Avance_Sur_Salaire_</DataField>
+        </Field>
+        <Field Name="V712_">
+          <DataField>V712_</DataField>
+        </Field>
+        <Field Name="VAvance_i1_">
+          <DataField>VAvance_i1_</DataField>
+        </Field>
+        <Field Name="VAvance_i1_Format">
+          <DataField>VAvance_i1_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i2_">
+          <DataField>VAvance_i2_</DataField>
+        </Field>
+        <Field Name="VAvance_i2_Format">
+          <DataField>VAvance_i2_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i3_">
+          <DataField>VAvance_i3_</DataField>
+        </Field>
+        <Field Name="VAvance_i3_Format">
+          <DataField>VAvance_i3_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i4_">
+          <DataField>VAvance_i4_</DataField>
+        </Field>
+        <Field Name="VAvance_i4_Format">
+          <DataField>VAvance_i4_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i5_">
+          <DataField>VAvance_i5_</DataField>
+        </Field>
+        <Field Name="VAvance_i5_Format">
+          <DataField>VAvance_i5_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i6_">
+          <DataField>VAvance_i6_</DataField>
+        </Field>
+        <Field Name="VAvance_i6_Format">
+          <DataField>VAvance_i6_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i7_">
+          <DataField>VAvance_i7_</DataField>
+        </Field>
+        <Field Name="VAvance_i7_Format">
+          <DataField>VAvance_i7_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i8_">
+          <DataField>VAvance_i8_</DataField>
+        </Field>
+        <Field Name="VAvance_i8_Format">
+          <DataField>VAvance_i8_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i9_">
+          <DataField>VAvance_i9_</DataField>
+        </Field>
+        <Field Name="VAvance_i9_Format">
+          <DataField>VAvance_i9_Format</DataField>
+        </Field>
+        <Field Name="VAvance_i10_">
+          <DataField>VAvance_i10_</DataField>
+        </Field>
+        <Field Name="VAvance_i10_Format">
+          <DataField>VAvance_i10_Format</DataField>
+        </Field>
+        <Field Name="Avance_Number">
+          <DataField>Avance_Number</DataField>
+        </Field>
+        <Field Name="Prêt_">
+          <DataField>Prêt_</DataField>
+        </Field>
+        <Field Name="V713_">
+          <DataField>V713_</DataField>
+        </Field>
+        <Field Name="VPret_i1_">
+          <DataField>VPret_i1_</DataField>
+        </Field>
+        <Field Name="VPret_i1_Format">
+          <DataField>VPret_i1_Format</DataField>
+        </Field>
+        <Field Name="VPret_i2_">
+          <DataField>VPret_i2_</DataField>
+        </Field>
+        <Field Name="VPret_i2_Format">
+          <DataField>VPret_i2_Format</DataField>
+        </Field>
+        <Field Name="VPret_i3_">
+          <DataField>VPret_i3_</DataField>
+        </Field>
+        <Field Name="VPret_i3_Format">
+          <DataField>VPret_i3_Format</DataField>
+        </Field>
+        <Field Name="VPret_i4_">
+          <DataField>VPret_i4_</DataField>
+        </Field>
+        <Field Name="VPret_i4_Format">
+          <DataField>VPret_i4_Format</DataField>
+        </Field>
+        <Field Name="VPret_i5_">
+          <DataField>VPret_i5_</DataField>
+        </Field>
+        <Field Name="VPret_i5_Format">
+          <DataField>VPret_i5_Format</DataField>
+        </Field>
+        <Field Name="VPret_i6_">
+          <DataField>VPret_i6_</DataField>
+        </Field>
+        <Field Name="VPret_i6_Format">
+          <DataField>VPret_i6_Format</DataField>
+        </Field>
+        <Field Name="VPret_i7_">
+          <DataField>VPret_i7_</DataField>
+        </Field>
+        <Field Name="VPret_i7_Format">
+          <DataField>VPret_i7_Format</DataField>
+        </Field>
+        <Field Name="VPret_i8_">
+          <DataField>VPret_i8_</DataField>
+        </Field>
+        <Field Name="VPret_i8_Format">
+          <DataField>VPret_i8_Format</DataField>
+        </Field>
+        <Field Name="VPret_i9_">
+          <DataField>VPret_i9_</DataField>
+        </Field>
+        <Field Name="VPret_i9_Format">
+          <DataField>VPret_i9_Format</DataField>
+        </Field>
+        <Field Name="VPret_i10_">
+          <DataField>VPret_i10_</DataField>
+        </Field>
+        <Field Name="VPret_i10_Format">
+          <DataField>VPret_i10_Format</DataField>
+        </Field>
+        <Field Name="Pret_Number">
+          <DataField>Pret_Number</DataField>
+        </Field>
+        <Field Name="V999_">
+          <DataField>V999_</DataField>
+        </Field>
+        <Field Name="Net_à_Payer_">
+          <DataField>Net_à_Payer_</DataField>
+        </Field>
+        <Field Name="VNET_i1_">
+          <DataField>VNET_i1_</DataField>
+        </Field>
+        <Field Name="VNET_i1_Format">
+          <DataField>VNET_i1_Format</DataField>
+        </Field>
+        <Field Name="VNET_i2_">
+          <DataField>VNET_i2_</DataField>
+        </Field>
+        <Field Name="VNET_i2_Format">
+          <DataField>VNET_i2_Format</DataField>
+        </Field>
+        <Field Name="VNET_i3_">
+          <DataField>VNET_i3_</DataField>
+        </Field>
+        <Field Name="VNET_i3_Format">
+          <DataField>VNET_i3_Format</DataField>
+        </Field>
+        <Field Name="VNET_i4_">
+          <DataField>VNET_i4_</DataField>
+        </Field>
+        <Field Name="VNET_i4_Format">
+          <DataField>VNET_i4_Format</DataField>
+        </Field>
+        <Field Name="VNET_i5_">
+          <DataField>VNET_i5_</DataField>
+        </Field>
+        <Field Name="VNET_i5_Format">
+          <DataField>VNET_i5_Format</DataField>
+        </Field>
+        <Field Name="VNET_i6_">
+          <DataField>VNET_i6_</DataField>
+        </Field>
+        <Field Name="VNET_i6_Format">
+          <DataField>VNET_i6_Format</DataField>
+        </Field>
+        <Field Name="VNET_i7_">
+          <DataField>VNET_i7_</DataField>
+        </Field>
+        <Field Name="VNET_i7_Format">
+          <DataField>VNET_i7_Format</DataField>
+        </Field>
+        <Field Name="VNET_i8_">
+          <DataField>VNET_i8_</DataField>
+        </Field>
+        <Field Name="VNET_i8_Format">
+          <DataField>VNET_i8_Format</DataField>
+        </Field>
+        <Field Name="VNET_i9_">
+          <DataField>VNET_i9_</DataField>
+        </Field>
+        <Field Name="VNET_i9_Format">
+          <DataField>VNET_i9_Format</DataField>
+        </Field>
+        <Field Name="VNET_i10_">
+          <DataField>VNET_i10_</DataField>
+        </Field>
+        <Field Name="VNET_i10_Format">
+          <DataField>VNET_i10_Format</DataField>
+        </Field>
+        <Field Name="SalaireNET_Number">
+          <DataField>SalaireNET_Number</DataField>
+        </Field>
+        <Field Name="VTotJour">
+          <DataField>VTotJour</DataField>
+        </Field>
+        <Field Name="VTotJourFormat">
+          <DataField>VTotJourFormat</DataField>
+        </Field>
+        <Field Name="VTotSBase">
+          <DataField>VTotSBase</DataField>
+        </Field>
+        <Field Name="VTotSBaseFormat">
+          <DataField>VTotSBaseFormat</DataField>
+        </Field>
+        <Field Name="VTotSursalaire">
+          <DataField>VTotSursalaire</DataField>
+        </Field>
+        <Field Name="VTotSursalaireFormat">
+          <DataField>VTotSursalaireFormat</DataField>
+        </Field>
+        <Field Name="VTotHeureSupp">
+          <DataField>VTotHeureSupp</DataField>
+        </Field>
+        <Field Name="VTotHeureSuppFormat">
+          <DataField>VTotHeureSuppFormat</DataField>
+        </Field>
+        <Field Name="VTotITS">
+          <DataField>VTotITS</DataField>
+        </Field>
+        <Field Name="VTotITSFormat">
+          <DataField>VTotITSFormat</DataField>
+        </Field>
+        <Field Name="VTotTPA">
+          <DataField>VTotTPA</DataField>
+        </Field>
+        <Field Name="VTotTPAFormat">
+          <DataField>VTotTPAFormat</DataField>
+        </Field>
+        <Field Name="VTotAvance">
+          <DataField>VTotAvance</DataField>
+        </Field>
+        <Field Name="VTotAvanceFormat">
+          <DataField>VTotAvanceFormat</DataField>
+        </Field>
+        <Field Name="VTotPret">
+          <DataField>VTotPret</DataField>
+        </Field>
+        <Field Name="VTotPretFormat">
+          <DataField>VTotPretFormat</DataField>
+        </Field>
+        <Field Name="VTotRegimeRetraite">
+          <DataField>VTotRegimeRetraite</DataField>
+        </Field>
+        <Field Name="VTotRegimeRetraiteFormat">
+          <DataField>VTotRegimeRetraiteFormat</DataField>
+        </Field>
+        <Field Name="VTotNet">
+          <DataField>VTotNet</DataField>
+        </Field>
+        <Field Name="VTotNetFormat">
+          <DataField>VTotNetFormat</DataField>
+        </Field>
+        <Field Name="VIndemniteNonImposable">
+          <DataField>VIndemniteNonImposable</DataField>
+        </Field>
+        <Field Name="VIndemniteNonImposableFormat">
+          <DataField>VIndemniteNonImposableFormat</DataField>
+        </Field>
+        <Field Name="VIndemniteImposable_VTotSursalaire">
+          <DataField>VIndemniteImposable_VTotSursalaire</DataField>
+        </Field>
+        <Field Name="VIndemniteImposable_VTotSursalaireFormat">
+          <DataField>VIndemniteImposable_VTotSursalaireFormat</DataField>
+        </Field>
+        <Field Name="JoursCaption">
+          <DataField>JoursCaption</DataField>
+        </Field>
+        <Field Name="Salaire_de_BaseCaption">
+          <DataField>Salaire_de_BaseCaption</DataField>
+        </Field>
+        <Field Name="SursalaireCaption">
+          <DataField>SursalaireCaption</DataField>
+        </Field>
+        <Field Name="Heure_SuppCaption">
+          <DataField>Heure_SuppCaption</DataField>
+        </Field>
+        <Field Name="IUTSCaption">
+          <DataField>IUTSCaption</DataField>
+        </Field>
+        <Field Name="TPACaption">
+          <DataField>TPACaption</DataField>
+        </Field>
+        <Field Name="AvanceCaption">
+          <DataField>AvanceCaption</DataField>
+        </Field>
+        <Field Name="PretCaption">
+          <DataField>PretCaption</DataField>
+        </Field>
+        <Field Name="CNSSCaption">
+          <DataField>CNSSCaption</DataField>
+        </Field>
+        <Field Name="NETCaption">
+          <DataField>NETCaption</DataField>
+        </Field>
+        <Field Name="Indemnité_Non_ImposableCaption">
+          <DataField>Indemnité_Non_ImposableCaption</DataField>
+        </Field>
+        <Field Name="Indemnité_ImposableCaption">
+          <DataField>Indemnité_ImposableCaption</DataField>
+        </Field>
+        <Field Name="Total_Number">
+          <DataField>Total_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>63b2259e-6cef-4e47-be40-d93974d240a9</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Payment_Line__Credit_Amount_.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.000</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.355in</Top>
+            <Left>2.705in</Left>
+            <Height>0.3in</Height>
+            <Width>1.625in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!STR.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.655in</Top>
+            <Left>0.18833in</Left>
+            <Height>0.425in</Height>
+            <Width>4.14167in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                 SOROUBAT</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.08in</Top>
+            <Left>0.18833in</Left>
+            <Height>0.225in</Height>
+            <Width>4.14167in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Payment_Line__Nom_Benificiaire_.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.81667in</Top>
+            <Left>0.18833in</Left>
+            <Height>0.3in</Height>
+            <Width>4.14167in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>5.37634cm</Height>
+        <Style />
+      </Body>
+      <Width>17.6657cm</Width>
+      <Page>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Line__Nom_Benificiaire_">
+          <DataField>Payment_Line__Nom_Benificiaire_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Credit_Amount_">
+          <DataField>Payment_Line__Credit_Amount_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Credit_Amount_Format">
+          <DataField>Payment_Line__Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="STR">
+          <DataField>STR</DataField>
+        </Field>
+        <Field Name="SOROUBATCaption">
+          <DataField>SOROUBATCaption</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,1523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>b4fad8e0-56f4-4075-8be1-742069290241</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.24417cm</Top>
+            <Left>0.64875cm</Left>
+            <Height>1.269cm</Height>
+            <Width>17.08058cm</Width>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </RightBorder>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>6.24117cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.44047cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.18007cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.02798cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.99055cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.24153cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.94192cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox26">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!ArticleCaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!QuantitéCaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox28</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox35">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!UnitéCaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox35</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox30">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Prix__HTVACaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox30</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox39">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!RemiseCaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox39</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox37">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!TVACaption.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox37</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.94192cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Purchase_Line_Description_.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox27</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox29">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!Purchase_Line_Quantity.Value, "DataSet_Result")</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox36">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox36</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox40">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox40</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox38">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Top>9.17787cm</Top>
+            <Left>0.60756cm</Left>
+            <Height>1.88384cm</Height>
+            <Width>17.12177cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="SOROUBATCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SOROUBATCaption_Control1000000001.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>25pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.3175cm</Top>
+            <Left>1.22984cm</Left>
+            <Height>0.846cm</Height>
+            <Width>7.05cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Société_de_Routes_et_de_BatimentsCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Société_de_Routes_et_de_BatimentsCaption_Control1000000016.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.3175cm</Top>
+            <Left>11.919cm</Left>
+            <Height>0.846cm</Height>
+            <Width>6.07242cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="DEMANDE_DE_PRIX_No__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DEMANDE_DE_PRIX_No__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.02878cm</Top>
+            <Left>4.84598cm</Left>
+            <Height>0.846cm</Height>
+            <Width>6cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Purchase_Header__No__">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Purchase_Header__No___Control1000000009.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.02878cm</Top>
+            <Left>11.02237cm</Left>
+            <Height>0.846cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Marque__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Marque__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.67428cm</Top>
+            <Left>1.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Megrine_Le__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Megrine_Le__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.40528cm</Top>
+            <Left>13.04142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="TODAY">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TODAY.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>11pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.40528cm</Top>
+            <Left>15.89142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.1cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="A_L_attention_de_la_Société__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!A_L_attention_de_la_Société__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.82828cm</Top>
+            <Left>13.04142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.95cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Purchase_Header__Pay_to_Name_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Purchase_Header__Pay_to_Name__Control1000000035.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.28656cm</Top>
+            <Left>13.04142cm</Left>
+            <Height>1.269cm</Height>
+            <Width>4.95cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="Desing">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Desing.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.25128cm</Top>
+            <Left>4.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.8cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="marque">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!marque.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.67428cm</Top>
+            <Left>4.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.8cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Type__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Type__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.52028cm</Top>
+            <Left>1.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="chassis">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!chassis.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.09728cm</Top>
+            <Left>4.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.8cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Purchase_Header__Generer_A_Partir_DA_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Purchase_Header__Generer_A_Partir_DA_.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.82828cm</Top>
+            <Left>4.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.8cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="type">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!type.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.52028cm</Top>
+            <Left>4.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.8cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Affaire_Suivie_par__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Affaire_Suivie_par__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.40528cm</Top>
+            <Left>1.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.45cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Numero_DA__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Numero_DA__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.82828cm</Top>
+            <Left>1.20031cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Vehicule__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Vehicule__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.25128cm</Top>
+            <Left>1.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="No_Chassis__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!No_Chassis__Caption.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.09728cm</Top>
+            <Left>1.19142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.85cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Nom">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nom.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.40528cm</Top>
+            <Left>4.64142cm</Left>
+            <Height>0.423cm</Height>
+            <Width>4.35cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox41">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Nous_vous_prions_de_bien_vouloir_nous_envoyer_votre_meilleure_offre_de_prix_pour_l_achat_des_articles_suivants__Caption.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>7.68956cm</Top>
+            <Left>0.69003cm</Left>
+            <Height>1.12917cm</Height>
+            <Width>17.0393cm</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>11.2814cm</Height>
+        <Style />
+      </Body>
+      <Width>18.12979cm</Width>
+      <Page>
+        <PageFooter>
+          <Height>6.7458cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox23">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!DataItem1000000020.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox23</rd:DefaultName>
+              <Top>5.15083cm</Top>
+              <Left>0.69003cm</Left>
+              <Height>1.27747cm</Height>
+              <Width>16.34439cm</Width>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox22">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!N_B___Merci_de_nous_répondre_dans_le_plus_bref_delai_Caption.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox22</rd:DefaultName>
+              <Top>1.98164cm</Top>
+              <Left>0.69003cm</Left>
+              <Height>0.6cm</Height>
+              <Width>16.34439cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox24">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Delai_Livraison__Caption.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox24</rd:DefaultName>
+              <Top>0.5964cm</Top>
+              <Left>1.53006cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.31867cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox25">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!EmptyStringCaption.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox25</rd:DefaultName>
+              <Top>0.5964cm</Top>
+              <Left>7.02512cm</Left>
+              <Height>0.6cm</Height>
+              <Width>9.48441cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Bien_cordialement__Le_directeur_d_achat__AYMEN_HACHICHACaption.Value, "DataSet_Result")</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>2.9553cm</Top>
+              <Left>0.69003cm</Left>
+              <Height>1.89117cm</Height>
+              <Width>4.35511cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>20.8cm</PageWidth>
+        <LeftMargin>2.1cm</LeftMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Purchase_Header__No__">
+          <DataField>Purchase_Header__No__</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Pay_to_Name_">
+          <DataField>Purchase_Header__Pay_to_Name_</DataField>
+        </Field>
+        <Field Name="Desing">
+          <DataField>Desing</DataField>
+        </Field>
+        <Field Name="marque">
+          <DataField>marque</DataField>
+        </Field>
+        <Field Name="chassis">
+          <DataField>chassis</DataField>
+        </Field>
+        <Field Name="Nom">
+          <DataField>Nom</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Generer_A_Partir_DA_">
+          <DataField>Purchase_Header__Generer_A_Partir_DA_</DataField>
+        </Field>
+        <Field Name="type">
+          <DataField>type</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Pay_to_Name__Control1000000035">
+          <DataField>Purchase_Header__Pay_to_Name__Control1000000035</DataField>
+        </Field>
+        <Field Name="TODAY_Control1000000005">
+          <DataField>TODAY_Control1000000005</DataField>
+        </Field>
+        <Field Name="Purchase_Header__No___Control1000000009">
+          <DataField>Purchase_Header__No___Control1000000009</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Generer_A_Partir_DA__Control1000000013">
+          <DataField>Purchase_Header__Generer_A_Partir_DA__Control1000000013</DataField>
+        </Field>
+        <Field Name="Desing_Control1000000017">
+          <DataField>Desing_Control1000000017</DataField>
+        </Field>
+        <Field Name="marque_Control1000000022">
+          <DataField>marque_Control1000000022</DataField>
+        </Field>
+        <Field Name="type_Control1000000023">
+          <DataField>type_Control1000000023</DataField>
+        </Field>
+        <Field Name="chassis_Control1000000024">
+          <DataField>chassis_Control1000000024</DataField>
+        </Field>
+        <Field Name="Nom_Control1000000038">
+          <DataField>Nom_Control1000000038</DataField>
+        </Field>
+        <Field Name="Société_de_Routes_et_de_BatimentsCaption">
+          <DataField>Société_de_Routes_et_de_BatimentsCaption</DataField>
+        </Field>
+        <Field Name="Megrine_Le__Caption">
+          <DataField>Megrine_Le__Caption</DataField>
+        </Field>
+        <Field Name="A_L_attention_de_la_Société__Caption">
+          <DataField>A_L_attention_de_la_Société__Caption</DataField>
+        </Field>
+        <Field Name="DEMANDE_DE_PRIX_No__Caption">
+          <DataField>DEMANDE_DE_PRIX_No__Caption</DataField>
+        </Field>
+        <Field Name="SOROUBATCaption">
+          <DataField>SOROUBATCaption</DataField>
+        </Field>
+        <Field Name="FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption">
+          <DataField>FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption</DataField>
+        </Field>
+        <Field Name="Affaire_Suivie_par__Caption">
+          <DataField>Affaire_Suivie_par__Caption</DataField>
+        </Field>
+        <Field Name="Numero_DA__Caption">
+          <DataField>Numero_DA__Caption</DataField>
+        </Field>
+        <Field Name="Vehicule__Caption">
+          <DataField>Vehicule__Caption</DataField>
+        </Field>
+        <Field Name="No_Chassis__Caption">
+          <DataField>No_Chassis__Caption</DataField>
+        </Field>
+        <Field Name="Marque__Caption">
+          <DataField>Marque__Caption</DataField>
+        </Field>
+        <Field Name="Type__Caption">
+          <DataField>Type__Caption</DataField>
+        </Field>
+        <Field Name="FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption_Control1000000006">
+          <DataField>FAX_MESSAGE___NOTRE_FAX_DIRECT___71_429_508Caption_Control1000000006</DataField>
+        </Field>
+        <Field Name="A_L_attention_de_la_Société__Caption_Control1000000007">
+          <DataField>A_L_attention_de_la_Société__Caption_Control1000000007</DataField>
+        </Field>
+        <Field Name="Megrine_Le__Caption_Control1000000008">
+          <DataField>Megrine_Le__Caption_Control1000000008</DataField>
+        </Field>
+        <Field Name="DEMANDE_DE_PRIX_No__Caption_Control1000000019">
+          <DataField>DEMANDE_DE_PRIX_No__Caption_Control1000000019</DataField>
+        </Field>
+        <Field Name="SOROUBATCaption_Control1000000001">
+          <DataField>SOROUBATCaption_Control1000000001</DataField>
+        </Field>
+        <Field Name="Affaire_Suivie_par__Caption_Control1000000002">
+          <DataField>Affaire_Suivie_par__Caption_Control1000000002</DataField>
+        </Field>
+        <Field Name="Numero_DA__Caption_Control1000000003">
+          <DataField>Numero_DA__Caption_Control1000000003</DataField>
+        </Field>
+        <Field Name="Vehicule__Caption_Control1000000004">
+          <DataField>Vehicule__Caption_Control1000000004</DataField>
+        </Field>
+        <Field Name="No_Chassis__Caption_Control1000000025">
+          <DataField>No_Chassis__Caption_Control1000000025</DataField>
+        </Field>
+        <Field Name="Marque__Caption_Control1000000026">
+          <DataField>Marque__Caption_Control1000000026</DataField>
+        </Field>
+        <Field Name="Type__Caption_Control1000000028">
+          <DataField>Type__Caption_Control1000000028</DataField>
+        </Field>
+        <Field Name="Société_de_Routes_et_de_BatimentsCaption_Control1000000016">
+          <DataField>Société_de_Routes_et_de_BatimentsCaption_Control1000000016</DataField>
+        </Field>
+        <Field Name="Purchase_Header_Document_Type">
+          <DataField>Purchase_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Description_">
+          <DataField>Purchase_Line_Description_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Quantity">
+          <DataField>Purchase_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Purchase_Line_QuantityFormat">
+          <DataField>Purchase_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Nous_vous_prions_de_bien_vouloir_nous_envoyer_votre_meilleure_offre_de_prix_pour_l_achat_des_articles_suivants__Caption">
+          <DataField>Nous_vous_prions_de_bien_vouloir_nous_envoyer_votre_meilleure_offre_de_prix_pour_l_achat_des_articles_suivants__Caption</DataField>
+        </Field>
+        <Field Name="ArticleCaption">
+          <DataField>ArticleCaption</DataField>
+        </Field>
+        <Field Name="QuantitéCaption">
+          <DataField>QuantitéCaption</DataField>
+        </Field>
+        <Field Name="UnitéCaption">
+          <DataField>UnitéCaption</DataField>
+        </Field>
+        <Field Name="Prix__HTVACaption">
+          <DataField>Prix__HTVACaption</DataField>
+        </Field>
+        <Field Name="RemiseCaption">
+          <DataField>RemiseCaption</DataField>
+        </Field>
+        <Field Name="TVACaption">
+          <DataField>TVACaption</DataField>
+        </Field>
+        <Field Name="Bien_cordialement__Le_directeur_d_achat__AYMEN_HACHICHACaption">
+          <DataField>Bien_cordialement__Le_directeur_d_achat__AYMEN_HACHICHACaption</DataField>
+        </Field>
+        <Field Name="N_B___Merci_de_nous_répondre_dans_le_plus_bref_delai_Caption">
+          <DataField>N_B___Merci_de_nous_répondre_dans_le_plus_bref_delai_Caption</DataField>
+        </Field>
+        <Field Name="DataItem1000000020">
+          <DataField>DataItem1000000020</DataField>
+        </Field>
+        <Field Name="Delai_Livraison__Caption">
+          <DataField>Delai_Livraison__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_Type">
+          <DataField>Purchase_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_No_">
+          <DataField>Purchase_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Line_No_">
+          <DataField>Purchase_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
