@@ -5,18 +5,31 @@
 
   <table class="job-table">
     <thead>
-      <tr>
-        <th>Projet</th>
-        <th>Tâche</th>
-        <th>Description</th>
-        <th>Avancement</th>
-      </tr>
+    <tr>
+  <th>Projet</th>
+  <th>Tâche</th>
+  <th>Description</th>
+  <th>Début</th>
+  <th>Fin</th>
+  <th>Statut</th>
+  <th>Avancement</th>
+</tr>
     </thead>
     <tbody>
-  <tr *ngFor="let task of tasks">
+<tr *ngFor="let task of tasks">
   <td><strong>{{ task.jobNo }}</strong></td>
   <td>{{ task.taskNo }}</td>
   <td>{{ task.description }}</td>
+  
+  <td>{{ task.dateDebut | date:'dd/MM/yyyy' }}</td>
+  <td>{{ task.dateFin | date:'dd/MM/yyyy' }}</td>
+
+  <td>
+    <span [class]="task.isBlocked ? 'badge-blocked' : 'badge-active'">
+      {{ task.isBlocked ? 'Bloqué' : 'Actif' }}
+    </span>
+  </td>
+
   <td>
     <div class="progress-bar-container">
       <div class="progress-bar" [style.width.%]="task.progressPct || 0"></div>
