@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_2">
+          <DataField>ReportForNavId_2</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="TIME">
+          <DataField>TIME</DataField>
+        </Field>
+        <Field Name="AnnéeCaption">
+          <DataField>AnnéeCaption</DataField>
+        </Field>
+        <Field Name="TODAY_0_4">
+          <DataField>TODAY_0_4</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Mois">
+          <DataField>Mois</DataField>
+        </Field>
+        <Field Name="Annee">
+          <DataField>Annee</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure60">
+          <DataField>EtatMensuellePaieHeure60</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure60Format">
+          <DataField>EtatMensuellePaieHeure60Format</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure120">
+          <DataField>EtatMensuellePaieHeure120</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure120Format">
+          <DataField>EtatMensuellePaieHeure120Format</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure50">
+          <DataField>EtatMensuellePaieHeure50</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure50Format">
+          <DataField>EtatMensuellePaieHeure50Format</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure35">
+          <DataField>EtatMensuellePaieHeure35</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure35Format">
+          <DataField>EtatMensuellePaieHeure35Format</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure15">
+          <DataField>EtatMensuellePaieHeure15</DataField>
+        </Field>
+        <Field Name="EtatMensuellePaieHeure15Format">
+          <DataField>EtatMensuellePaieHeure15Format</DataField>
+        </Field>
+        <Field Name="Heure">
+          <DataField>Heure</DataField>
+        </Field>
+        <Field Name="HeureFormat">
+          <DataField>HeureFormat</DataField>
+        </Field>
+        <Field Name="RecGemploye_Basissalary">
+          <DataField>RecGemploye_Basissalary</DataField>
+        </Field>
+        <Field Name="RecGemploye_BasissalaryFormat">
+          <DataField>RecGemploye_BasissalaryFormat</DataField>
+        </Field>
+        <Field Name="HM">
+          <DataField>HM</DataField>
+        </Field>
+        <Field Name="RecGemployeFirstName__RecGemployeLastName">
+          <DataField>RecGemployeFirstName__RecGemployeLastName</DataField>
+        </Field>
+        <Field Name="RecGemployeDepartementSalarie">
+          <DataField>RecGemployeDepartementSalarie</DataField>
+        </Field>
+        <Field Name="Matricule">
+          <DataField>Matricule</DataField>
+        </Field>
+        <Field Name="NBHrure">
+          <DataField>NBHrure</DataField>
+        </Field>
+        <Field Name="NBHrureFormat">
+          <DataField>NBHrureFormat</DataField>
+        </Field>
+        <Field Name="MoisCaption">
+          <DataField>MoisCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

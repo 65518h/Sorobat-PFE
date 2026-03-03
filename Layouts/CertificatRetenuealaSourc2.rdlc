@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Header_No_">
+          <DataField>Payment_Header_No_</DataField>
+        </Field>
+        <Field Name="PaymentH_No_">
+          <DataField>PaymentH_No_</DataField>
+        </Field>
+        <Field Name="InfoSoc_Name">
+          <DataField>InfoSoc_Name</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="InfoSoc_Activite">
+          <DataField>InfoSoc_Activite</DataField>
+        </Field>
+        <Field Name="InfoSoc_Address________InfoSoc__Address_2____InfoSoc__Post_Code________InfoSoc_City">
+          <DataField>InfoSoc_Address________InfoSoc__Address_2____InfoSoc__Post_Code________InfoSoc_City</DataField>
+        </Field>
+        <Field Name="InfoSoc__VAT_Registration_No__">
+          <DataField>InfoSoc__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="TextGMnt">
+          <DataField>TextGMnt</DataField>
+        </Field>
+        <Field Name="Vend_Name">
+          <DataField>Vend_Name</DataField>
+        </Field>
+        <Field Name="Vend_Activité">
+          <DataField>Vend_Activité</DataField>
+        </Field>
+        <Field Name="Vend_Address">
+          <DataField>Vend_Address</DataField>
+        </Field>
+        <Field Name="Vend__VAT_Registration_No__">
+          <DataField>Vend__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="Vend_Activité_Control1000000037">
+          <DataField>Vend_Activité_Control1000000037</DataField>
+        </Field>
+        <Field Name="Payment_Line__Montant_Retenue_">
+          <DataField>Payment_Line__Montant_Retenue_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Montant_Retenue_Format">
+          <DataField>Payment_Line__Montant_Retenue_Format</DataField>
+        </Field>
+        <Field Name="DIRECTION_DES_GENERALE_DES_IMPOTSCaption">
+          <DataField>DIRECTION_DES_GENERALE_DES_IMPOTSCaption</DataField>
+        </Field>
+        <Field Name="A_OUAGA_LE_Caption">
+          <DataField>A_OUAGA_LE_Caption</DataField>
+        </Field>
+        <Field Name="A________________________________________LE_________________________________________Caption">
+          <DataField>A________________________________________LE_________________________________________Caption</DataField>
+        </Field>
+        <Field Name="RECETTE_DES_IMPOTSCaption">
+          <DataField>RECETTE_DES_IMPOTSCaption</DataField>
+        </Field>
+        <Field Name="CACHETS_DU_SERVICECaption">
+          <DataField>CACHETS_DU_SERVICECaption</DataField>
+        </Field>
+        <Field Name="ATTESTATION_INDIVIDUELLE_DE_RETENUE_A_LA_SOURCE_SUR_LES_Caption">
+          <DataField>ATTESTATION_INDIVIDUELLE_DE_RETENUE_A_LA_SOURCE_SUR_LES_Caption</DataField>
+        </Field>
+        <Field Name="SOMMES_VERSEES_AUX_PRESTATAIRES_ETABLISCaption">
+          <DataField>SOMMES_VERSEES_AUX_PRESTATAIRES_ETABLISCaption</DataField>
+        </Field>
+        <Field Name="AU_BURKINA_FASOCaption">
+          <DataField>AU_BURKINA_FASOCaption</DataField>
+        </Field>
+        <Field Name="Article_84_quinquets_du_code_des_impots_Caption">
+          <DataField>Article_84_quinquets_du_code_des_impots_Caption</DataField>
+        </Field>
+        <Field Name="CADRE_RESEVE_AU_REDEVABLECaption">
+          <DataField>CADRE_RESEVE_AU_REDEVABLECaption</DataField>
+        </Field>
+        <Field Name="Le_soussignéCaption">
+          <DataField>Le_soussignéCaption</DataField>
+        </Field>
+        <Field Name="Nom_et_prénom_ou_raison_socialeCaption">
+          <DataField>Nom_et_prénom_ou_raison_socialeCaption</DataField>
+        </Field>
+        <Field Name="Activité_ou_ProfessionCaption">
+          <DataField>Activité_ou_ProfessionCaption</DataField>
+        </Field>
+        <Field Name="Adresse_Géographique_et_postaleCaption">
+          <DataField>Adresse_Géographique_et_postaleCaption</DataField>
+        </Field>
+        <Field Name="N_IFUCaption">
+          <DataField>N_IFUCaption</DataField>
+        </Field>
+        <Field Name="Certifie_avoir_retenu_à_la_sourceCaption">
+          <DataField>Certifie_avoir_retenu_à_la_sourceCaption</DataField>
+        </Field>
+        <Field Name="Sur_les_sommes_versées_à__Caption">
+          <DataField>Sur_les_sommes_versées_à__Caption</DataField>
+        </Field>
+        <Field Name="Nom_et_prénom_ou_raison_socialeCaption_Control1000000016">
+          <DataField>Nom_et_prénom_ou_raison_socialeCaption_Control1000000016</DataField>
+        </Field>
+        <Field Name="Activité_ou_ProfessionCaption_Control1000000017">
+          <DataField>Activité_ou_ProfessionCaption_Control1000000017</DataField>
+        </Field>
+        <Field Name="Adresse_Géographique_et_postaleCaption_Control1000000018">
+          <DataField>Adresse_Géographique_et_postaleCaption_Control1000000018</DataField>
+        </Field>
+        <Field Name="N_IFUCaption_Control1000000020">
+          <DataField>N_IFUCaption_Control1000000020</DataField>
+        </Field>
+        <Field Name="Nature_des_prestations_fourniesCaption">
+          <DataField>Nature_des_prestations_fourniesCaption</DataField>
+        </Field>
+        <Field Name="Cachet__signature_et_nom_du_signataireCaption">
+          <DataField>Cachet__signature_et_nom_du_signataireCaption</DataField>
+        </Field>
+        <Field Name="CADRE_RESEVE_A_L_ADMINISTRATIONCaption">
+          <DataField>CADRE_RESEVE_A_L_ADMINISTRATIONCaption</DataField>
+        </Field>
+        <Field Name="DataItem1000000038">
+          <DataField>DataItem1000000038</DataField>
+        </Field>
+        <Field Name="DataItem1000000039">
+          <DataField>DataItem1000000039</DataField>
+        </Field>
+        <Field Name="Quittance_N_Caption">
+          <DataField>Quittance_N_Caption</DataField>
+        </Field>
+        <Field Name="La_somme_en_lettre_et_en_chiffre_Caption">
+          <DataField>La_somme_en_lettre_et_en_chiffre_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000046">
+          <DataField>EmptyStringCaption_Control1000000046</DataField>
+        </Field>
+        <Field Name="DataItem1000000050">
+          <DataField>DataItem1000000050</DataField>
+        </Field>
+        <Field Name="Cachet__signature_et_nom_du_signataire_Caption">
+          <DataField>Cachet__signature_et_nom_du_signataire_Caption</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

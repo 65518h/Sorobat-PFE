@@ -1,0 +1,286 @@
+<div class="project-detail-container" *ngIf="project">
+  <!-- En-tête avec navigation et actions -->
+  <div class="header">
+    <div class="header-left">
+      <button mat-icon-button (click)="goBack()" class="back-button" matTooltip="Retour à la liste">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="title-section">
+        <h1>{{ project.name }}</h1>
+        <div class="project-meta">
+          <span class="project-number">
+            <mat-icon>tag</mat-icon>
+            {{ project.number }}
+          </span>
+          <span class="project-status" [ngClass]="getStatusClass(project.status)">
+            <mat-icon>{{ getStatusIcon(project.status) }}</mat-icon>
+            {{ project.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="editProject()" matTooltip="Modifier le projet">
+        <mat-icon>edit</mat-icon>
+        Modifier
+      </button>
+      <button mat-raised-button color="accent" (click)="addTask()" matTooltip="Ajouter une tâche">
+        <mat-icon>add_task</mat-icon>
+        Ajouter tâche
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteProject()" matTooltip="Supprimer le projet">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Cartes de statistiques rapides -->
+  <div class="stats-grid">
+    <mat-card class="stat-card" *ngIf="tasks">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ tasks.length }}</div>
+          <div class="stat-label">Total tâches</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="tasks">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getCompletedTasksCount() }}</div>
+          <div class="stat-label">Terminées</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="tasks">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>pending</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getInProgressTasksCount() }}</div>
+          <div class="stat-label">En cours</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" *ngIf="tasks">
+      <mat-card-content>
+        <div class="stat-icon">
+          <mat-icon>warning</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getOverdueTasksCount() }}</div>
+          <div class="stat-label">En retard</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Informations générales -->
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>info</mat-icon>
+        Informations générales
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Description</span>
+          <span class="value">{{ project.description }}</span>
+        </div>
+        
+        <div class="info-item">
+          <span class="label">Client</span>
+          <span class="value">
+            <mat-icon class="info-icon">business</mat-icon>
+            {{ project.customerName }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Responsable</span>
+          <span class="value">
+            <mat-icon class="info-icon">person</mat-icon>
+            {{ project.responsible }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Période</span>
+          <span class="value date-range">
+            <mat-icon class="info-icon">event</mat-icon>
+            {{ project.startDate | date:'dd/MM/yyyy' }}
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+            {{ project.endDate | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+
+        <div class="info-item full-width">
+          <span class="label">Avancement global</span>
+          <div class="progress-section">
+            <div class="progress-bar-container">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="project.progress"
+                [color]="getProgressColor(project.progress)">
+              </mat-progress-bar>
+              <div class="progress-markers">
+                <span class="marker" *ngFor="let marker of [25,50,75]" 
+                      [style.left.%]="marker" 
+                      [class.active]="project.progress >= marker">
+                  {{ marker }}%
+                </span>
+              </div>
+            </div>
+            <div class="progress-info">
+              <span class="progress-percentage">{{ project.progress }}%</span>
+              <span class="progress-text">complété</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Budget</span>
+          <span class="value">
+            <mat-icon class="info-icon">attach_money</mat-icon>
+            {{ project.budget || 'Non défini' }}
+          </span>
+        </div>
+
+        <div class="info-item">
+          <span class="label">Localisation</span>
+          <span class="value">
+            <mat-icon class="info-icon">location_on</mat-icon>
+            {{ project.location || 'Non spécifiée' }}
+          </span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Timeline des tâches -->
+  <mat-card class="timeline-card" *ngIf="tasks && tasks.length > 0">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>timeline</mat-icon>
+        Chronologie des tâches
+      </mat-card-title>
+      <mat-card-subtitle>Vue d'ensemble de l'avancement</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let task of tasks | slice:0:5">
+          <div class="timeline-marker" [ngClass]="getTimelineMarkerClass(task)"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span class="timeline-title">{{ task.taskNo }} - {{ task.description }}</span>
+              <span class="timeline-status" [ngClass]="getTaskStatusClass(task)">
+                {{ getTaskStatusText(task) }}
+              </span>
+            </div>
+            <div class="timeline-progress">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="task.progressPct"
+                [color]="getProgressColor(task.progressPct)">
+              </mat-progress-bar>
+              <span class="timeline-percentage">{{ task.progressPct }}%</span>
+            </div>
+            <div class="timeline-meta">
+              <span>
+                <mat-icon>person</mat-icon>
+                {{ task.responsible || 'Non assigné' }}
+              </span>
+              <span>
+                <mat-icon>event</mat-icon>
+                {{ task.dateFin | date:'dd/MM/yyyy' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="view-all" *ngIf="tasks.length > 5">
+        <button mat-button color="primary" (click)="viewAllTasks()">
+          Voir toutes les {{ tasks.length }} tâches
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Liste complète des tâches -->
+  <mat-card class="tasks-card" *ngIf="tasks && tasks.length > 0">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>list</mat-icon>
+        Liste des tâches
+      </mat-card-title>
+      <mat-card-subtitle>{{ tasks.length }} tâche(s) au total</mat-card-subtitle>
+      <div class="card-actions">
+        <button mat-icon-button matTooltip="Exporter les tâches" (click)="exportTasks()">
+          <mat-icon>download</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Actualiser" (click)="loadProjectDetails(project.id)">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Barre de recherche pour les tâches -->
+      <mat-form-field appearance="outline" class="task-search">
+        <mat-label>Rechercher une tâche</mat-label>
+        <input matInput (keyup)="applyTaskFilter($event)" placeholder="Description, responsable...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <app-task-list 
+        [tasks]="filteredTasks" 
+        [projectId]="project.id"
+        (taskUpdated)="loadProjectDetails(project.id)">
+      </app-task-list>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Message si pas de tâches -->
+  <mat-card class="empty-state" *ngIf="tasks && tasks.length === 0">
+    <mat-card-content>
+      <mat-icon class="empty-icon">assignment</mat-icon>
+      <h3>Aucune tâche pour ce projet</h3>
+      <p>Commencez par ajouter une première tâche</p>
+      <button mat-raised-button color="primary" (click)="addTask()">
+        <mat-icon>add_task</mat-icon>
+        Ajouter une tâche
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Loading state -->
+<div class="loading-state" *ngIf="isLoading">
+  <mat-spinner diameter="60"></mat-spinner>
+  <p>Chargement du projet...</p>
+</div>
+
+<!-- Message si projet non trouvé -->
+<div class="not-found" *ngIf="!project && !isLoading">
+  <mat-icon class="not-found-icon">error_outline</mat-icon>
+  <h2>Projet non trouvé</h2>
+  <p>Le projet que vous recherchez n'existe pas ou a été supprimé.</p>
+  <button mat-raised-button color="primary" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Retour à la liste
+  </button>
+</div>

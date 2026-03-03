@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="PV_Reception__N__Commande_">
+          <DataField>PV_Reception__N__Commande_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Article_">
+          <DataField>PV_Reception__N__Article_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Commande_">
+          <DataField>PV_Reception__Date_Commande_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Reception_Enregistré_">
+          <DataField>PV_Reception__N__Reception_Enregistré_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Affaire_">
+          <DataField>PV_Reception__N__Affaire_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Lieu_De_Chargement_">
+          <DataField>PV_Reception__Lieu_De_Chargement_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__BL_Fournisseur_">
+          <DataField>PV_Reception__N__BL_Fournisseur_</DataField>
+        </Field>
+        <Field Name="PV_Reception__N__Camion_">
+          <DataField>PV_Reception__N__Camion_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Heure_depart_Chatier_">
+          <DataField>PV_Reception__Date_Heure_depart_Chatier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Heure_Chargement_Frs_">
+          <DataField>PV_Reception__Date_Heure_Chargement_Frs_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Date_Heure_Retour_Chantier_">
+          <DataField>PV_Reception__Date_Heure_Retour_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Tare_Chez_Fournisseur_">
+          <DataField>PV_Reception__Tare_Chez_Fournisseur_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Tare_Chez_Fournisseur_Format">
+          <DataField>PV_Reception__Tare_Chez_Fournisseur_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Brut_Fournisseur_">
+          <DataField>PV_Reception__Poids_Brut_Fournisseur_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Brut_Fournisseur_Format">
+          <DataField>PV_Reception__Poids_Brut_Fournisseur_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Fournisseur_">
+          <DataField>PV_Reception__Poids_Net_Fournisseur_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Fournisseur_Format">
+          <DataField>PV_Reception__Poids_Net_Fournisseur_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Tare_Chantier_">
+          <DataField>PV_Reception__Tare_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Tare_Chantier_Format">
+          <DataField>PV_Reception__Tare_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Brut_Chantier_">
+          <DataField>PV_Reception__Poids_Brut_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Brut_Chantier_Format">
+          <DataField>PV_Reception__Poids_Brut_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Chantier_">
+          <DataField>PV_Reception__Poids_Net_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Net_Chantier_Format">
+          <DataField>PV_Reception__Poids_Net_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Poids_Net_Chantier_">
+          <DataField>PV_Reception__Ecart_Poids_Net_Chantier_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Poids_Net_Chantier_Format">
+          <DataField>PV_Reception__Ecart_Poids_Net_Chantier_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Apres_SC_">
+          <DataField>PV_Reception__Poids_Apres_SC_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Apres_SC_Format">
+          <DataField>PV_Reception__Poids_Apres_SC_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_SC_">
+          <DataField>PV_Reception__Quantité_SC_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_SC_Format">
+          <DataField>PV_Reception__Quantité_SC_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Aprés_CB_">
+          <DataField>PV_Reception__Poids_Aprés_CB_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Poids_Aprés_CB_Format">
+          <DataField>PV_Reception__Poids_Aprés_CB_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_CB_">
+          <DataField>PV_Reception__Quantité_CB_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_CB_Format">
+          <DataField>PV_Reception__Quantité_CB_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_SC__Control1000000128">
+          <DataField>PV_Reception__Quantité_SC__Control1000000128</DataField>
+        </Field>
+        <Field Name="PV_Reception__Quantité_SC__Control1000000128Format">
+          <DataField>PV_Reception__Quantité_SC__Control1000000128Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Final_">
+          <DataField>PV_Reception__Ecart_Final_</DataField>
+        </Field>
+        <Field Name="PV_Reception__Ecart_Final_Format">
+          <DataField>PV_Reception__Ecart_Final_Format</DataField>
+        </Field>
+        <Field Name="PV_Reception__Designation_Article_">
+          <DataField>PV_Reception__Designation_Article_</DataField>
+        </Field>
+        <Field Name="RAPPORT_DE_RECEPTION_DU_Caption">
+          <DataField>RAPPORT_DE_RECEPTION_DU_Caption</DataField>
+        </Field>
+        <Field Name="Destination__Caption">
+          <DataField>Destination__Caption</DataField>
+        </Field>
+        <Field Name="COMMANDECaption">
+          <DataField>COMMANDECaption</DataField>
+        </Field>
+        <Field Name="N__Commande__Caption">
+          <DataField>N__Commande__Caption</DataField>
+        </Field>
+        <Field Name="Référence_Produit___Caption">
+          <DataField>Référence_Produit___Caption</DataField>
+        </Field>
+        <Field Name="Date__Commande__Caption">
+          <DataField>Date__Commande__Caption</DataField>
+        </Field>
+        <Field Name="Lieu_de_chargement___Caption">
+          <DataField>Lieu_de_chargement___Caption</DataField>
+        </Field>
+        <Field Name="BON_DE_LIVRAISON_Caption">
+          <DataField>BON_DE_LIVRAISON_Caption</DataField>
+        </Field>
+        <Field Name="N__du_Bon__Caption">
+          <DataField>N__du_Bon__Caption</DataField>
+        </Field>
+        <Field Name="Date_eu_Heure_de_départ_ChantierCaption">
+          <DataField>Date_eu_Heure_de_départ_ChantierCaption</DataField>
+        </Field>
+        <Field Name="N__du_Camion__Caption">
+          <DataField>N__du_Camion__Caption</DataField>
+        </Field>
+        <Field Name="Date_eu_Heure_de_chargement_SCACaption">
+          <DataField>Date_eu_Heure_de_chargement_SCACaption</DataField>
+        </Field>
+        <Field Name="Date_eu_Heure_de_retour_ChantierCaption">
+          <DataField>Date_eu_Heure_de_retour_ChantierCaption</DataField>
+        </Field>
+        <Field Name="TareCaption">
+          <DataField>TareCaption</DataField>
+        </Field>
+        <Field Name="CHARGEMENT_Caption">
+          <DataField>CHARGEMENT_Caption</DataField>
+        </Field>
+        <Field Name="Poids_BrutCaption">
+          <DataField>Poids_BrutCaption</DataField>
+        </Field>
+        <Field Name="Poids_Net_ChargéCaption">
+          <DataField>Poids_Net_ChargéCaption</DataField>
+        </Field>
+        <Field Name="Poids_BrutCaption_Control1000000032">
+          <DataField>Poids_BrutCaption_Control1000000032</DataField>
+        </Field>
+        <Field Name="Poids_Net_ReçuCaption">
+          <DataField>Poids_Net_ReçuCaption</DataField>
+        </Field>
+        <Field Name="RECEPTION_CHANTIER_Caption">
+          <DataField>RECEPTION_CHANTIER_Caption</DataField>
+        </Field>
+        <Field Name="TareCaption_Control1000000035">
+          <DataField>TareCaption_Control1000000035</DataField>
+        </Field>
+        <Field Name="Ecart_Poids_NetsCaption">
+          <DataField>Ecart_Poids_NetsCaption</DataField>
+        </Field>
+        <Field Name="Poids_Aprés_SC_Caption">
+          <DataField>Poids_Aprés_SC_Caption</DataField>
+        </Field>
+        <Field Name="Qté_SC_Caption">
+          <DataField>Qté_SC_Caption</DataField>
+        </Field>
+        <Field Name="Poids_Aprés_CB_Caption">
+          <DataField>Poids_Aprés_CB_Caption</DataField>
+        </Field>
+        <Field Name="Qté_CB_Caption">
+          <DataField>Qté_CB_Caption</DataField>
+        </Field>
+        <Field Name="Qté_Totale_DépotéeCaption">
+          <DataField>Qté_Totale_DépotéeCaption</DataField>
+        </Field>
+        <Field Name="Ecart__Qté_Dépotée___Qté_Réelle_reçue_Caption">
+          <DataField>Ecart__Qté_Dépotée___Qté_Réelle_reçue_Caption</DataField>
+        </Field>
+        <Field Name="REMARQUE__Caption">
+          <DataField>REMARQUE__Caption</DataField>
+        </Field>
+        <Field Name="Nom_et_Prénom_Caption">
+          <DataField>Nom_et_Prénom_Caption</DataField>
+        </Field>
+        <Field Name="Fonction_Caption">
+          <DataField>Fonction_Caption</DataField>
+        </Field>
+        <Field Name="Organisme_Caption">
+          <DataField>Organisme_Caption</DataField>
+        </Field>
+        <Field Name="Signature_Caption">
+          <DataField>Signature_Caption</DataField>
+        </Field>
+        <Field Name="V1Caption">
+          <DataField>V1Caption</DataField>
+        </Field>
+        <Field Name="V2Caption">
+          <DataField>V2Caption</DataField>
+        </Field>
+        <Field Name="V3Caption">
+          <DataField>V3Caption</DataField>
+        </Field>
+        <Field Name="V4Caption">
+          <DataField>V4Caption</DataField>
+        </Field>
+        <Field Name="V5Caption">
+          <DataField>V5Caption</DataField>
+        </Field>
+        <Field Name="BN__Caption">
+          <DataField>BN__Caption</DataField>
+        </Field>
+        <Field Name="Toud_les_poids_sont_exprimés_en_KgCaption">
+          <DataField>Toud_les_poids_sont_exprimés_en_KgCaption</DataField>
+        </Field>
+        <Field Name="Le_Directeur_MateriélCaption">
+          <DataField>Le_Directeur_MateriélCaption</DataField>
+        </Field>
+        <Field Name="Le_Directeur_de_ProjetCaption">
+          <DataField>Le_Directeur_de_ProjetCaption</DataField>
+        </Field>
+        <Field Name="Personnes_ConcernéesCaption">
+          <DataField>Personnes_ConcernéesCaption</DataField>
+        </Field>
+        <Field Name="Reception_N____Caption">
+          <DataField>Reception_N____Caption</DataField>
+        </Field>
+        <Field Name="PV_Reception_N__Sequence">
+          <DataField>PV_Reception_N__Sequence</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

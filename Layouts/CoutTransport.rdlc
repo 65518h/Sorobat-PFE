@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Journee">
+          <DataField>Ligne_Rendement_Vehicule_Journee</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Vehicule">
+          <DataField>Ligne_Rendement_Vehicule_Vehicule</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Volume">
+          <DataField>Ligne_Rendement_Vehicule_Volume</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_VolumeFormat">
+          <DataField>Ligne_Rendement_Vehicule_VolumeFormat</DataField>
+        </Field>
+        <Field Name="Item2_Description">
+          <DataField>Item2_Description</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Destination">
+          <DataField>Ligne_Rendement_Vehicule_Destination</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Provenance">
+          <DataField>Ligne_Rendement_Vehicule_Provenance</DataField>
+        </Field>
+        <Field Name="CoutKm">
+          <DataField>CoutKm</DataField>
+        </Field>
+        <Field Name="CoutKmFormat">
+          <DataField>CoutKmFormat</DataField>
+        </Field>
+        <Field Name="Total">
+          <DataField>Total</DataField>
+        </Field>
+        <Field Name="TotalFormat">
+          <DataField>TotalFormat</DataField>
+        </Field>
+        <Field Name="ABS_CPR_">
+          <DataField>ABS_CPR_</DataField>
+        </Field>
+        <Field Name="ABS_CPR_Format">
+          <DataField>ABS_CPR_Format</DataField>
+        </Field>
+        <Field Name="CoutTotGasoil">
+          <DataField>CoutTotGasoil</DataField>
+        </Field>
+        <Field Name="CoutTotGasoilFormat">
+          <DataField>CoutTotGasoilFormat</DataField>
+        </Field>
+        <Field Name="AMMJ_MSJ">
+          <DataField>AMMJ_MSJ</DataField>
+        </Field>
+        <Field Name="AMMJ_MSJFormat">
+          <DataField>AMMJ_MSJFormat</DataField>
+        </Field>
+        <Field Name="CoutTotalM3">
+          <DataField>CoutTotalM3</DataField>
+        </Field>
+        <Field Name="CoutTotalM3Format">
+          <DataField>CoutTotalM3Format</DataField>
+        </Field>
+        <Field Name="NbrVoyage">
+          <DataField>NbrVoyage</DataField>
+        </Field>
+        <Field Name="CoutVoyage">
+          <DataField>CoutVoyage</DataField>
+        </Field>
+        <Field Name="CoutVoyageFormat">
+          <DataField>CoutVoyageFormat</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule__Distance_Parcourus_">
+          <DataField>Ligne_Rendement_Vehicule__Distance_Parcourus_</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule__Distance_Parcourus_Format">
+          <DataField>Ligne_Rendement_Vehicule__Distance_Parcourus_Format</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_VehiculeCaption">
+          <DataField>Ligne_Rendement_VehiculeCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Cout_TransportCaption">
+          <DataField>Cout_TransportCaption</DataField>
+        </Field>
+        <Field Name="ProvenanceCaption">
+          <DataField>ProvenanceCaption</DataField>
+        </Field>
+        <Field Name="DestinationCaption">
+          <DataField>DestinationCaption</DataField>
+        </Field>
+        <Field Name="ProduitCaption">
+          <DataField>ProduitCaption</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="VolumeCaption">
+          <DataField>VolumeCaption</DataField>
+        </Field>
+        <Field Name="Cout___KMCaption">
+          <DataField>Cout___KMCaption</DataField>
+        </Field>
+        <Field Name="AMJ___MSCaption">
+          <DataField>AMJ___MSCaption</DataField>
+        </Field>
+        <Field Name="GasoilCaption">
+          <DataField>GasoilCaption</DataField>
+        </Field>
+        <Field Name="PRCaption">
+          <DataField>PRCaption</DataField>
+        </Field>
+        <Field Name="Cout_M3Caption">
+          <DataField>Cout_M3Caption</DataField>
+        </Field>
+        <Field Name="Nbr_VoyageCaption">
+          <DataField>Nbr_VoyageCaption</DataField>
+        </Field>
+        <Field Name="Cout_TotalCaption">
+          <DataField>Cout_TotalCaption</DataField>
+        </Field>
+        <Field Name="DistanceCaption">
+          <DataField>DistanceCaption</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Heure">
+          <DataField>Ligne_Rendement_Vehicule_Heure</DataField>
+        </Field>
+        <Field Name="Ligne_Rendement_Vehicule_Produit">
+          <DataField>Ligne_Rendement_Vehicule_Produit</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,1331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="VTotJour">
+          <DataField>VTotJour</DataField>
+        </Field>
+        <Field Name="VTotJourFormat">
+          <DataField>VTotJourFormat</DataField>
+        </Field>
+        <Field Name="VTotSBase">
+          <DataField>VTotSBase</DataField>
+        </Field>
+        <Field Name="VTotSBaseFormat">
+          <DataField>VTotSBaseFormat</DataField>
+        </Field>
+        <Field Name="VTotSursalaire">
+          <DataField>VTotSursalaire</DataField>
+        </Field>
+        <Field Name="VTotSursalaireFormat">
+          <DataField>VTotSursalaireFormat</DataField>
+        </Field>
+        <Field Name="VTotHeureSupp">
+          <DataField>VTotHeureSupp</DataField>
+        </Field>
+        <Field Name="VTotHeureSuppFormat">
+          <DataField>VTotHeureSuppFormat</DataField>
+        </Field>
+        <Field Name="VTotITS">
+          <DataField>VTotITS</DataField>
+        </Field>
+        <Field Name="VTotITSFormat">
+          <DataField>VTotITSFormat</DataField>
+        </Field>
+        <Field Name="VTotTPA">
+          <DataField>VTotTPA</DataField>
+        </Field>
+        <Field Name="VTotTPAFormat">
+          <DataField>VTotTPAFormat</DataField>
+        </Field>
+        <Field Name="VTotAvance">
+          <DataField>VTotAvance</DataField>
+        </Field>
+        <Field Name="VTotAvanceFormat">
+          <DataField>VTotAvanceFormat</DataField>
+        </Field>
+        <Field Name="VTotPret">
+          <DataField>VTotPret</DataField>
+        </Field>
+        <Field Name="VTotPretFormat">
+          <DataField>VTotPretFormat</DataField>
+        </Field>
+        <Field Name="VTotRegimeRetraite">
+          <DataField>VTotRegimeRetraite</DataField>
+        </Field>
+        <Field Name="VTotRegimeRetraiteFormat">
+          <DataField>VTotRegimeRetraiteFormat</DataField>
+        </Field>
+        <Field Name="VTotNet">
+          <DataField>VTotNet</DataField>
+        </Field>
+        <Field Name="VTotNetFormat">
+          <DataField>VTotNetFormat</DataField>
+        </Field>
+        <Field Name="VIndemniteNonImposable">
+          <DataField>VIndemniteNonImposable</DataField>
+        </Field>
+        <Field Name="VIndemniteNonImposableFormat">
+          <DataField>VIndemniteNonImposableFormat</DataField>
+        </Field>
+        <Field Name="VIndemniteImposable_VTotSursalaire">
+          <DataField>VIndemniteImposable_VTotSursalaire</DataField>
+        </Field>
+        <Field Name="VIndemniteImposable_VTotSursalaireFormat">
+          <DataField>VIndemniteImposable_VTotSursalaireFormat</DataField>
+        </Field>
+        <Field Name="JoursCaption">
+          <DataField>JoursCaption</DataField>
+        </Field>
+        <Field Name="Salaire_de_BaseCaption">
+          <DataField>Salaire_de_BaseCaption</DataField>
+        </Field>
+        <Field Name="SursalaireCaption">
+          <DataField>SursalaireCaption</DataField>
+        </Field>
+        <Field Name="Heure_SuppCaption">
+          <DataField>Heure_SuppCaption</DataField>
+        </Field>
+        <Field Name="IUTSCaption">
+          <DataField>IUTSCaption</DataField>
+        </Field>
+        <Field Name="TPACaption">
+          <DataField>TPACaption</DataField>
+        </Field>
+        <Field Name="AvanceCaption">
+          <DataField>AvanceCaption</DataField>
+        </Field>
+        <Field Name="PretCaption">
+          <DataField>PretCaption</DataField>
+        </Field>
+        <Field Name="CNSSCaption">
+          <DataField>CNSSCaption</DataField>
+        </Field>
+        <Field Name="NETCaption">
+          <DataField>NETCaption</DataField>
+        </Field>
+        <Field Name="Indemnité_Non_ImposableCaption">
+          <DataField>Indemnité_Non_ImposableCaption</DataField>
+        </Field>
+        <Field Name="Indemnité_ImposableCaption">
+          <DataField>Indemnité_ImposableCaption</DataField>
+        </Field>
+        <Field Name="Initialisation_Number">
+          <DataField>Initialisation_Number</DataField>
+        </Field>
+        <Field Name="GroupingNumber">
+          <DataField>GroupingNumber</DataField>
+        </Field>
+        <Field Name="GroupingNumber2">
+          <DataField>GroupingNumber2</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi1">
+          <DataField>EmployeeCodesi1</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi2">
+          <DataField>EmployeeCodesi2</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi3">
+          <DataField>EmployeeCodesi3</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi4">
+          <DataField>EmployeeCodesi4</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi5">
+          <DataField>EmployeeCodesi5</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi6">
+          <DataField>EmployeeCodesi6</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi7">
+          <DataField>EmployeeCodesi7</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi8">
+          <DataField>EmployeeCodesi8</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi9">
+          <DataField>EmployeeCodesi9</DataField>
+        </Field>
+        <Field Name="EmployeeCodesi10">
+          <DataField>EmployeeCodesi10</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi2">
+          <DataField>EmployeeNamesi2</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi3">
+          <DataField>EmployeeNamesi3</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi4">
+          <DataField>EmployeeNamesi4</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi5">
+          <DataField>EmployeeNamesi5</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi6">
+          <DataField>EmployeeNamesi6</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi7">
+          <DataField>EmployeeNamesi7</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi8">
+          <DataField>EmployeeNamesi8</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi9">
+          <DataField>EmployeeNamesi9</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi10">
+          <DataField>EmployeeNamesi10</DataField>
+        </Field>
+        <Field Name="EmployeeNamesi1">
+          <DataField>EmployeeNamesi1</DataField>
+        </Field>
+        <Field Name="WORKDATE">
+          <DataField>WORKDATE</DataField>
+        </Field>
+        <Field Name="TIME">
+          <DataField>TIME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="UPPERCASE_COMPANYNAME">
+          <DataField>UPPERCASE_COMPANYNAME</DataField>
+        </Field>
+        <Field Name="Année___Mois___">
+          <DataField>Année___Mois___</DataField>
+        </Field>
+        <Field Name="Anne_Mois_">
+          <DataField>Anne_Mois_</DataField>
+        </Field>
+        <Field Name="SalaryHeadersYear____FORMAT_SalaryHeadersMonth">
+          <DataField>SalaryHeadersYear____FORMAT_SalaryHeadersMonth</DataField>
+        </Field>
+        <Field Name="Ventilation_par_SalariéCaption">
+          <DataField>Ventilation_par_SalariéCaption</DataField>
+        </Field>
+        <Field Name="Date_du_jour_Caption">
+          <DataField>Date_du_jour_Caption</DataField>
+        </Field>
+        <Field Name="Heure_Caption">
+          <DataField>Heure_Caption</DataField>
+        </Field>
+        <Field Name="LIVRE_DE_PAIE_MENSUELCaption">
+          <DataField>LIVRE_DE_PAIE_MENSUELCaption</DataField>
+        </Field>
+        <Field Name="Page_Caption">
+          <DataField>Page_Caption</DataField>
+        </Field>
+        <Field Name="Société_Caption">
+          <DataField>Société_Caption</DataField>
+        </Field>
+        <Field Name="RubriquesCaption">
+          <DataField>RubriquesCaption</DataField>
+        </Field>
+        <Field Name="Employe_Number">
+          <DataField>Employe_Number</DataField>
+        </Field>
+        <Field Name="V1_">
+          <DataField>V1_</DataField>
+        </Field>
+        <Field Name="Nbre_de_jours_imposable_">
+          <DataField>Nbre_de_jours_imposable_</DataField>
+        </Field>
+        <Field Name="VJoursi1">
+          <DataField>VJoursi1</DataField>
+        </Field>
+        <Field Name="VJoursi1Format">
+          <DataField>VJoursi1Format</DataField>
+        </Field>
+        <Field Name="VJoursi2">
+          <DataField>VJoursi2</DataField>
+        </Field>
+        <Field Name="VJoursi2Format">
+          <DataField>VJoursi2Format</DataField>
+        </Field>
+        <Field Name="VJoursi3">
+          <DataField>VJoursi3</DataField>
+        </Field>
+        <Field Name="VJoursi3Format">
+          <DataField>VJoursi3Format</DataField>
+        </Field>
+        <Field Name="VJoursi4">
+          <DataField>VJoursi4</DataField>
+        </Field>
+        <Field Name="VJoursi4Format">
+          <DataField>VJoursi4Format</DataField>
+        </Field>
+        <Field Name="VJoursi5">
+          <DataField>VJoursi5</DataField>
+        </Field>
+        <Field Name="VJoursi5Format">
+          <DataField>VJoursi5Format</DataField>
+        </Field>
+        <Field Name="VJoursi6">
+          <DataField>VJoursi6</DataField>
+        </Field>
+        <Field Name="VJoursi6Format">
+          <DataField>VJoursi6Format</DataField>
+        </Field>
+        <Field Name="VJoursi7">
+          <DataField>VJoursi7</DataField>
+        </Field>
+        <Field Name="VJoursi7Format">
+          <DataField>VJoursi7Format</DataField>
+        </Field>
+        <Field Name="VJoursi8">
+          <DataField>VJoursi8</DataField>
+        </Field>
+        <Field Name="VJoursi8Format">
+          <DataField>VJoursi8Format</DataField>
+        </Field>
+        <Field Name="VJoursi9">
+          <DataField>VJoursi9</DataField>
+        </Field>
+        <Field Name="VJoursi9Format">
+          <DataField>VJoursi9Format</DataField>
+        </Field>
+        <Field Name="VJoursi10">
+          <DataField>VJoursi10</DataField>
+        </Field>
+        <Field Name="VJoursi10Format">
+          <DataField>VJoursi10Format</DataField>
+        </Field>
+        <Field Name="Jours_Number">
+          <DataField>Jours_Number</DataField>
+        </Field>
+        <Field Name="V100_">
+          <DataField>V100_</DataField>
+        </Field>
+        <Field Name="salaire_de_base_">
+          <DataField>salaire_de_base_</DataField>
+        </Field>
+        <Field Name="Sbasei1">
+          <DataField>Sbasei1</DataField>
+        </Field>
+        <Field Name="Sbasei1Format">
+          <DataField>Sbasei1Format</DataField>
+        </Field>
+        <Field Name="Sbasei2">
+          <DataField>Sbasei2</DataField>
+        </Field>
+        <Field Name="Sbasei2Format">
+          <DataField>Sbasei2Format</DataField>
+        </Field>
+        <Field Name="Sbasei3">
+          <DataField>Sbasei3</DataField>
+        </Field>
+        <Field Name="Sbasei3Format">
+          <DataField>Sbasei3Format</DataField>
+        </Field>
+        <Field Name="Sbasei4">
+          <DataField>Sbasei4</DataField>
+        </Field>
+        <Field Name="Sbasei4Format">
+          <DataField>Sbasei4Format</DataField>
+        </Field>
+        <Field Name="Sbasei5">
+          <DataField>Sbasei5</DataField>
+        </Field>
+        <Field Name="Sbasei5Format">
+          <DataField>Sbasei5Format</DataField>
+        </Field>
+        <Field Name="Sbasei6">
+          <DataField>Sbasei6</DataField>
+        </Field>
+        <Field Name="Sbasei6Format">
+          <DataField>Sbasei6Format</DataField>
+        </Field>
+        <Field Name="Sbasei7">
+          <DataField>Sbasei7</DataField>
+        </Field>
+        <Field Name="Sbasei7Format">
+          <DataField>Sbasei7Format</DataField>
+        </Field>
+        <Field Name="Sbasei8">
+          <DataField>Sbasei8</DataField>
+        </Field>
+        <Field Name="Sbasei8Format">
+          <DataField>Sbasei8Format</DataField>
+        </Field>
+        <Field Name="Sbasei9">
+          <DataField>Sbasei9</DataField>
+        </Field>
+        <Field Name="Sbasei9Format">
+          <DataField>Sbasei9Format</DataField>
+        </Field>
+        <Field Name="Sbasei10">
+          <DataField>Sbasei10</DataField>
+        </Field>
+        <Field Name="Sbasei10Format">
+          <DataField>Sbasei10Format</DataField>
+        </Field>
+        <Field Name="SalaireDeBase_Number">
+          <DataField>SalaireDeBase_Number</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Code2">
+          <DataField>Code2</DataField>
+        </Field>
+        <Field Name="Description2">
+          <DataField>Description2</DataField>
+        </Field>
+        <Field Name="Code">
+          <DataField>Code</DataField>
+        </Field>
+        <Field Name="IndemImpoi1_j">
+          <DataField>IndemImpoi1_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi1_jFormat">
+          <DataField>IndemImpoi1_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi2_j">
+          <DataField>IndemImpoi2_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi2_jFormat">
+          <DataField>IndemImpoi2_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi3_j">
+          <DataField>IndemImpoi3_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi3_jFormat">
+          <DataField>IndemImpoi3_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi4_j">
+          <DataField>IndemImpoi4_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi4_jFormat">
+          <DataField>IndemImpoi4_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi5_j">
+          <DataField>IndemImpoi5_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi5_jFormat">
+          <DataField>IndemImpoi5_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi6_j">
+          <DataField>IndemImpoi6_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi6_jFormat">
+          <DataField>IndemImpoi6_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi7_j">
+          <DataField>IndemImpoi7_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi7_jFormat">
+          <DataField>IndemImpoi7_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi8_j">
+          <DataField>IndemImpoi8_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi8_jFormat">
+          <DataField>IndemImpoi8_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi9_j">
+          <DataField>IndemImpoi9_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi9_jFormat">
+          <DataField>IndemImpoi9_jFormat</DataField>
+        </Field>
+        <Field Name="IndemImpoi10_j">
+          <DataField>IndemImpoi10_j</DataField>
+        </Field>
+        <Field Name="IndemImpoi10_jFormat">
+          <DataField>IndemImpoi10_jFormat</DataField>
+        </Field>
+        <Field Name="H_Sup_à_15__">
+          <DataField>H_Sup_à_15__</DataField>
+        </Field>
+        <Field Name="HSupp15i1">
+          <DataField>HSupp15i1</DataField>
+        </Field>
+        <Field Name="HSupp15i1Format">
+          <DataField>HSupp15i1Format</DataField>
+        </Field>
+        <Field Name="HSupp15i2">
+          <DataField>HSupp15i2</DataField>
+        </Field>
+        <Field Name="HSupp15i2Format">
+          <DataField>HSupp15i2Format</DataField>
+        </Field>
+        <Field Name="HSupp15i3">
+          <DataField>HSupp15i3</DataField>
+        </Field>
+        <Field Name="HSupp15i3Format">
+          <DataField>HSupp15i3Format</DataField>
+        </Field>
+        <Field Name="HSupp15i4">
+          <DataField>HSupp15i4</DataField>
+        </Field>
+        <Field Name="HSupp15i4Format">
+          <DataField>HSupp15i4Format</DataField>
+        </Field>
+        <Field Name="HSupp15i5">
+          <DataField>HSupp15i5</DataField>
+        </Field>
+        <Field Name="HSupp15i5Format">
+          <DataField>HSupp15i5Format</DataField>
+        </Field>
+        <Field Name="HSupp15i6">
+          <DataField>HSupp15i6</DataField>
+        </Field>
+        <Field Name="HSupp15i6Format">
+          <DataField>HSupp15i6Format</DataField>
+        </Field>
+        <Field Name="HSupp15i7">
+          <DataField>HSupp15i7</DataField>
+        </Field>
+        <Field Name="HSupp15i7Format">
+          <DataField>HSupp15i7Format</DataField>
+        </Field>
+        <Field Name="HSupp15i8">
+          <DataField>HSupp15i8</DataField>
+        </Field>
+        <Field Name="HSupp15i8Format">
+          <DataField>HSupp15i8Format</DataField>
+        </Field>
+        <Field Name="HSupp15i9">
+          <DataField>HSupp15i9</DataField>
+        </Field>
+        <Field Name="HSupp15i9Format">
+          <DataField>HSupp15i9Format</DataField>
+        </Field>
+        <Field Name="HSupp15i10">
+          <DataField>HSupp15i10</DataField>
+        </Field>
+        <Field Name="HSupp15i10Format">
+          <DataField>HSupp15i10Format</DataField>
+        </Field>
+        <Field Name="V205_">
+          <DataField>V205_</DataField>
+        </Field>
+        <Field Name="HeureSupp15__Number">
+          <DataField>HeureSupp15__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_35__">
+          <DataField>H_Sup_à_35__</DataField>
+        </Field>
+        <Field Name="HSupp50i1">
+          <DataField>HSupp50i1</DataField>
+        </Field>
+        <Field Name="HSupp50i1Format">
+          <DataField>HSupp50i1Format</DataField>
+        </Field>
+        <Field Name="HSupp50i2">
+          <DataField>HSupp50i2</DataField>
+        </Field>
+        <Field Name="HSupp50i2Format">
+          <DataField>HSupp50i2Format</DataField>
+        </Field>
+        <Field Name="HSupp50i3">
+          <DataField>HSupp50i3</DataField>
+        </Field>
+        <Field Name="HSupp50i3Format">
+          <DataField>HSupp50i3Format</DataField>
+        </Field>
+        <Field Name="HSupp50i4">
+          <DataField>HSupp50i4</DataField>
+        </Field>
+        <Field Name="HSupp50i4Format">
+          <DataField>HSupp50i4Format</DataField>
+        </Field>
+        <Field Name="HSupp50i5">
+          <DataField>HSupp50i5</DataField>
+        </Field>
+        <Field Name="HSupp50i5Format">
+          <DataField>HSupp50i5Format</DataField>
+        </Field>
+        <Field Name="HSupp50i6">
+          <DataField>HSupp50i6</DataField>
+        </Field>
+        <Field Name="HSupp50i6Format">
+          <DataField>HSupp50i6Format</DataField>
+        </Field>
+        <Field Name="HSupp50i7">
+          <DataField>HSupp50i7</DataField>
+        </Field>
+        <Field Name="HSupp50i7Format">
+          <DataField>HSupp50i7Format</DataField>
+        </Field>
+        <Field Name="HSupp50i8">
+          <DataField>HSupp50i8</DataField>
+        </Field>
+        <Field Name="HSupp50i8Format">
+          <DataField>HSupp50i8Format</DataField>
+        </Field>
+        <Field Name="HSupp50i9">
+          <DataField>HSupp50i9</DataField>
+        </Field>
+        <Field Name="HSupp50i9Format">
+          <DataField>HSupp50i9Format</DataField>
+        </Field>
+        <Field Name="HSupp50i10">
+          <DataField>HSupp50i10</DataField>
+        </Field>
+        <Field Name="HSupp50i10Format">
+          <DataField>HSupp50i10Format</DataField>
+        </Field>
+        <Field Name="V206_">
+          <DataField>V206_</DataField>
+        </Field>
+        <Field Name="HeureSupp35__Number">
+          <DataField>HeureSupp35__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_50__">
+          <DataField>H_Sup_à_50__</DataField>
+        </Field>
+        <Field Name="HSupp75i1">
+          <DataField>HSupp75i1</DataField>
+        </Field>
+        <Field Name="HSupp75i1Format">
+          <DataField>HSupp75i1Format</DataField>
+        </Field>
+        <Field Name="HSupp75i2">
+          <DataField>HSupp75i2</DataField>
+        </Field>
+        <Field Name="HSupp75i2Format">
+          <DataField>HSupp75i2Format</DataField>
+        </Field>
+        <Field Name="HSupp75i3">
+          <DataField>HSupp75i3</DataField>
+        </Field>
+        <Field Name="HSupp75i3Format">
+          <DataField>HSupp75i3Format</DataField>
+        </Field>
+        <Field Name="HSupp75i4">
+          <DataField>HSupp75i4</DataField>
+        </Field>
+        <Field Name="HSupp75i4Format">
+          <DataField>HSupp75i4Format</DataField>
+        </Field>
+        <Field Name="HSupp75i5">
+          <DataField>HSupp75i5</DataField>
+        </Field>
+        <Field Name="HSupp75i5Format">
+          <DataField>HSupp75i5Format</DataField>
+        </Field>
+        <Field Name="HSupp75i6">
+          <DataField>HSupp75i6</DataField>
+        </Field>
+        <Field Name="HSupp75i6Format">
+          <DataField>HSupp75i6Format</DataField>
+        </Field>
+        <Field Name="HSupp75i7">
+          <DataField>HSupp75i7</DataField>
+        </Field>
+        <Field Name="HSupp75i7Format">
+          <DataField>HSupp75i7Format</DataField>
+        </Field>
+        <Field Name="HSupp75i8">
+          <DataField>HSupp75i8</DataField>
+        </Field>
+        <Field Name="HSupp75i8Format">
+          <DataField>HSupp75i8Format</DataField>
+        </Field>
+        <Field Name="HSupp75i9">
+          <DataField>HSupp75i9</DataField>
+        </Field>
+        <Field Name="HSupp75i9Format">
+          <DataField>HSupp75i9Format</DataField>
+        </Field>
+        <Field Name="HSupp75i10">
+          <DataField>HSupp75i10</DataField>
+        </Field>
+        <Field Name="HSupp75i10Format">
+          <DataField>HSupp75i10Format</DataField>
+        </Field>
+        <Field Name="V207_">
+          <DataField>V207_</DataField>
+        </Field>
+        <Field Name="HeureSupp50__Number">
+          <DataField>HeureSupp50__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_60__">
+          <DataField>H_Sup_à_60__</DataField>
+        </Field>
+        <Field Name="HSupp100i1">
+          <DataField>HSupp100i1</DataField>
+        </Field>
+        <Field Name="HSupp100i1Format">
+          <DataField>HSupp100i1Format</DataField>
+        </Field>
+        <Field Name="HSupp100i2">
+          <DataField>HSupp100i2</DataField>
+        </Field>
+        <Field Name="HSupp100i2Format">
+          <DataField>HSupp100i2Format</DataField>
+        </Field>
+        <Field Name="HSupp100i3">
+          <DataField>HSupp100i3</DataField>
+        </Field>
+        <Field Name="HSupp100i3Format">
+          <DataField>HSupp100i3Format</DataField>
+        </Field>
+        <Field Name="HSupp100i4">
+          <DataField>HSupp100i4</DataField>
+        </Field>
+        <Field Name="HSupp100i4Format">
+          <DataField>HSupp100i4Format</DataField>
+        </Field>
+        <Field Name="HSupp100i5">
+          <DataField>HSupp100i5</DataField>
+        </Field>
+        <Field Name="HSupp100i5Format">
+          <DataField>HSupp100i5Format</DataField>
+        </Field>
+        <Field Name="HSupp100i6">
+          <DataField>HSupp100i6</DataField>
+        </Field>
+        <Field Name="HSupp100i6Format">
+          <DataField>HSupp100i6Format</DataField>
+        </Field>
+        <Field Name="HSupp100i7">
+          <DataField>HSupp100i7</DataField>
+        </Field>
+        <Field Name="HSupp100i7Format">
+          <DataField>HSupp100i7Format</DataField>
+        </Field>
+        <Field Name="HSupp100i8">
+          <DataField>HSupp100i8</DataField>
+        </Field>
+        <Field Name="HSupp100i8Format">
+          <DataField>HSupp100i8Format</DataField>
+        </Field>
+        <Field Name="HSupp100i9">
+          <DataField>HSupp100i9</DataField>
+        </Field>
+        <Field Name="HSupp100i9Format">
+          <DataField>HSupp100i9Format</DataField>
+        </Field>
+        <Field Name="HSupp100i10">
+          <DataField>HSupp100i10</DataField>
+        </Field>
+        <Field Name="HSupp100i10Format">
+          <DataField>HSupp100i10Format</DataField>
+        </Field>
+        <Field Name="V8_">
+          <DataField>V8_</DataField>
+        </Field>
+        <Field Name="HeureSupp60__Number">
+          <DataField>HeureSupp60__Number</DataField>
+        </Field>
+        <Field Name="H_Sup_à_120__">
+          <DataField>H_Sup_à_120__</DataField>
+        </Field>
+        <Field Name="HSupp120i1">
+          <DataField>HSupp120i1</DataField>
+        </Field>
+        <Field Name="HSupp120i1Format">
+          <DataField>HSupp120i1Format</DataField>
+        </Field>
+        <Field Name="HSupp120i2">
+          <DataField>HSupp120i2</DataField>
+        </Field>
+        <Field Name="HSupp120i2Format">
+          <DataField>HSupp120i2Format</DataField>
+        </Field>
+        <Field Name="HSupp120i3">
+          <DataField>HSupp120i3</DataField>
+        </Field>
+        <Field Name="HSupp120i3Format">
+          <DataField>HSupp120i3Format</DataField>
+        </Field>
+        <Field Name="HSupp120i4">
+          <DataField>HSupp120i4</DataField>
+        </Field>
+        <Field Name="HSupp120i4Format">
+          <DataField>HSupp120i4Format</DataField>
+        </Field>
+        <Field Name="HSupp120i5">
+          <DataField>HSupp120i5</DataField>
+        </Field>
+        <Field Name="HSupp120i5Format">
+          <DataField>HSupp120i5Format</DataField>
+        </Field>
+        <Field Name="HSupp120i6">
+          <DataField>HSupp120i6</DataField>
+        </Field>
+        <Field Name="HSupp120i6Format">
+          <DataField>HSupp120i6Format</DataField>
+        </Field>
+        <Field Name="HSupp120i7">
+          <DataField>HSupp120i7</DataField>
+        </Field>
+        <Field Name="HSupp120i7Format">
+          <DataField>HSupp120i7Format</DataField>
+        </Field>
+        <Field Name="HSupp120i8">
+          <DataField>HSupp120i8</DataField>
+        </Field>
+        <Field Name="HSupp120i8Format">
+          <DataField>HSupp120i8Format</DataField>
+        </Field>
+        <Field Name="HSupp120i9">
+          <DataField>HSupp120i9</DataField>
+        </Field>
+        <Field Name="HSupp120i9Format">
+          <DataField>HSupp120i9Format</DataField>
+        </Field>
+        <Field Name="HSupp120i10">
+          <DataField>HSupp120i10</DataField>
+        </Field>
+        <Field Name="HSupp120i10Format">
+          <DataField>HSupp120i10Format</DataField>
+        </Field>
+        <Field Name="V8__Control1000000222">
+          <DataField>V8__Control1000000222</DataField>
+        </Field>
+        <Field Name="HeureSupp120__Number">
+          <DataField>HeureSupp120__Number</DataField>
+        </Field>
+        <Field Name="IUTS_">
+          <DataField>IUTS_</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi1">
+          <DataField>EmployeeValuesi1</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi1Format">
+          <DataField>EmployeeValuesi1Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi2">
+          <DataField>EmployeeValuesi2</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi2Format">
+          <DataField>EmployeeValuesi2Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi3">
+          <DataField>EmployeeValuesi3</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi3Format">
+          <DataField>EmployeeValuesi3Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi4">
+          <DataField>EmployeeValuesi4</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi4Format">
+          <DataField>EmployeeValuesi4Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi5">
+          <DataField>EmployeeValuesi5</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi5Format">
+          <DataField>EmployeeValuesi5Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi6">
+          <DataField>EmployeeValuesi6</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi6Format">
+          <DataField>EmployeeValuesi6Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi7">
+          <DataField>EmployeeValuesi7</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi7Format">
+          <DataField>EmployeeValuesi7Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi8">
+          <DataField>EmployeeValuesi8</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi8Format">
+          <DataField>EmployeeValuesi8Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi9">
+          <DataField>EmployeeValuesi9</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi9Format">
+          <DataField>EmployeeValuesi9Format</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi10">
+          <DataField>EmployeeValuesi10</DataField>
+        </Field>
+        <Field Name="EmployeeValuesi10Format">
+          <DataField>EmployeeValuesi10Format</DataField>
+        </Field>
+        <Field Name="V500_">
+          <DataField>V500_</DataField>
+        </Field>
+        <Field Name="IUTS_Number">
+          <DataField>IUTS_Number</DataField>
+        </Field>
+        <Field Name="TPA_">
+          <DataField>TPA_</DataField>
+        </Field>
+        <Field Name="VCNi1">
+          <DataField>VCNi1</DataField>
+        </Field>
+        <Field Name="VCNi1Format">
+          <DataField>VCNi1Format</DataField>
+        </Field>
+        <Field Name="VCNi2">
+          <DataField>VCNi2</DataField>
+        </Field>
+        <Field Name="VCNi2Format">
+          <DataField>VCNi2Format</DataField>
+        </Field>
+        <Field Name="VCNi3">
+          <DataField>VCNi3</DataField>
+        </Field>
+        <Field Name="VCNi3Format">
+          <DataField>VCNi3Format</DataField>
+        </Field>
+        <Field Name="VCNi4">
+          <DataField>VCNi4</DataField>
+        </Field>
+        <Field Name="VCNi4Format">
+          <DataField>VCNi4Format</DataField>
+        </Field>
+        <Field Name="VCNi5">
+          <DataField>VCNi5</DataField>
+        </Field>
+        <Field Name="VCNi5Format">
+          <DataField>VCNi5Format</DataField>
+        </Field>
+        <Field Name="VCNi6">
+          <DataField>VCNi6</DataField>
+        </Field>
+        <Field Name="VCNi6Format">
+          <DataField>VCNi6Format</DataField>
+        </Field>
+        <Field Name="VCNi7">
+          <DataField>VCNi7</DataField>
+        </Field>
+        <Field Name="VCNi7Format">
+          <DataField>VCNi7Format</DataField>
+        </Field>
+        <Field Name="VCNi8">
+          <DataField>VCNi8</DataField>
+        </Field>
+        <Field Name="VCNi8Format">
+          <DataField>VCNi8Format</DataField>
+        </Field>
+        <Field Name="VCNi9">
+          <DataField>VCNi9</DataField>
+        </Field>
+        <Field Name="VCNi9Format">
+          <DataField>VCNi9Format</DataField>
+        </Field>
+        <Field Name="VCNi10">
+          <DataField>VCNi10</DataField>
+        </Field>
+        <Field Name="VCNi10Format">
+          <DataField>VCNi10Format</DataField>
+        </Field>
+        <Field Name="V503_">
+          <DataField>V503_</DataField>
+        </Field>
+        <Field Name="TPA_Number">
+          <DataField>TPA_Number</DataField>
+        </Field>
+        <Field Name="CNSS_">
+          <DataField>CNSS_</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei1">
+          <DataField>RegimeRetraitei1</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei1Format">
+          <DataField>RegimeRetraitei1Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei2">
+          <DataField>RegimeRetraitei2</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei2Format">
+          <DataField>RegimeRetraitei2Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei3">
+          <DataField>RegimeRetraitei3</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei3Format">
+          <DataField>RegimeRetraitei3Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei4">
+          <DataField>RegimeRetraitei4</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei4Format">
+          <DataField>RegimeRetraitei4Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei5">
+          <DataField>RegimeRetraitei5</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei5Format">
+          <DataField>RegimeRetraitei5Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei6">
+          <DataField>RegimeRetraitei6</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei6Format">
+          <DataField>RegimeRetraitei6Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei7">
+          <DataField>RegimeRetraitei7</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei7Format">
+          <DataField>RegimeRetraitei7Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei8">
+          <DataField>RegimeRetraitei8</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei8Format">
+          <DataField>RegimeRetraitei8Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei9">
+          <DataField>RegimeRetraitei9</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei9Format">
+          <DataField>RegimeRetraitei9Format</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei10">
+          <DataField>RegimeRetraitei10</DataField>
+        </Field>
+        <Field Name="RegimeRetraitei10Format">
+          <DataField>RegimeRetraitei10Format</DataField>
+        </Field>
+        <Field Name="V533_">
+          <DataField>V533_</DataField>
+        </Field>
+        <Field Name="CNSS_Number">
+          <DataField>CNSS_Number</DataField>
+        </Field>
+        <Field Name="IndemniteNonImposable_Description">
+          <DataField>IndemniteNonImposable_Description</DataField>
+        </Field>
+        <Field Name="IndemniteNonImposable_Code">
+          <DataField>IndemniteNonImposable_Code</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi1_k">
+          <DataField>IndemNonImpoi1_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi1_kFormat">
+          <DataField>IndemNonImpoi1_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi2_k">
+          <DataField>IndemNonImpoi2_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi2_kFormat">
+          <DataField>IndemNonImpoi2_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi3_k">
+          <DataField>IndemNonImpoi3_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi3_kFormat">
+          <DataField>IndemNonImpoi3_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi4_k">
+          <DataField>IndemNonImpoi4_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi4_kFormat">
+          <DataField>IndemNonImpoi4_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi5_k">
+          <DataField>IndemNonImpoi5_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi5_kFormat">
+          <DataField>IndemNonImpoi5_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi6_k">
+          <DataField>IndemNonImpoi6_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi6_kFormat">
+          <DataField>IndemNonImpoi6_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi7_k">
+          <DataField>IndemNonImpoi7_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi7_kFormat">
+          <DataField>IndemNonImpoi7_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi8_k">
+          <DataField>IndemNonImpoi8_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi8_kFormat">
+          <DataField>IndemNonImpoi8_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi9_k">
+          <DataField>IndemNonImpoi9_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi9_kFormat">
+          <DataField>IndemNonImpoi9_kFormat</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi10_k">
+          <DataField>IndemNonImpoi10_k</DataField>
+        </Field>
+        <Field Name="IndemNonImpoi10_kFormat">
+          <DataField>IndemNonImpoi10_kFormat</DataField>
+        </Field>
+        <Field Name="Avance_Sur_Salaire_">
+          <DataField>Avance_Sur_Salaire_</DataField>
+        </Field>
+        <Field Name="V712_">
+          <DataField>V712_</DataField>
+        </Field>
+        <Field Name="VAvancei1">
+          <DataField>VAvancei1</DataField>
+        </Field>
+        <Field Name="VAvancei1Format">
+          <DataField>VAvancei1Format</DataField>
+        </Field>
+        <Field Name="VAvancei2">
+          <DataField>VAvancei2</DataField>
+        </Field>
+        <Field Name="VAvancei2Format">
+          <DataField>VAvancei2Format</DataField>
+        </Field>
+        <Field Name="VAvancei3">
+          <DataField>VAvancei3</DataField>
+        </Field>
+        <Field Name="VAvancei3Format">
+          <DataField>VAvancei3Format</DataField>
+        </Field>
+        <Field Name="VAvancei4">
+          <DataField>VAvancei4</DataField>
+        </Field>
+        <Field Name="VAvancei4Format">
+          <DataField>VAvancei4Format</DataField>
+        </Field>
+        <Field Name="VAvancei5">
+          <DataField>VAvancei5</DataField>
+        </Field>
+        <Field Name="VAvancei5Format">
+          <DataField>VAvancei5Format</DataField>
+        </Field>
+        <Field Name="VAvancei6">
+          <DataField>VAvancei6</DataField>
+        </Field>
+        <Field Name="VAvancei6Format">
+          <DataField>VAvancei6Format</DataField>
+        </Field>
+        <Field Name="VAvancei7">
+          <DataField>VAvancei7</DataField>
+        </Field>
+        <Field Name="VAvancei7Format">
+          <DataField>VAvancei7Format</DataField>
+        </Field>
+        <Field Name="VAvancei8">
+          <DataField>VAvancei8</DataField>
+        </Field>
+        <Field Name="VAvancei8Format">
+          <DataField>VAvancei8Format</DataField>
+        </Field>
+        <Field Name="VAvancei9">
+          <DataField>VAvancei9</DataField>
+        </Field>
+        <Field Name="VAvancei9Format">
+          <DataField>VAvancei9Format</DataField>
+        </Field>
+        <Field Name="VAvancei10">
+          <DataField>VAvancei10</DataField>
+        </Field>
+        <Field Name="VAvancei10Format">
+          <DataField>VAvancei10Format</DataField>
+        </Field>
+        <Field Name="Avance_Number">
+          <DataField>Avance_Number</DataField>
+        </Field>
+        <Field Name="Prêt_">
+          <DataField>Prêt_</DataField>
+        </Field>
+        <Field Name="V713_">
+          <DataField>V713_</DataField>
+        </Field>
+        <Field Name="VPreti1">
+          <DataField>VPreti1</DataField>
+        </Field>
+        <Field Name="VPreti1Format">
+          <DataField>VPreti1Format</DataField>
+        </Field>
+        <Field Name="VPreti2">
+          <DataField>VPreti2</DataField>
+        </Field>
+        <Field Name="VPreti2Format">
+          <DataField>VPreti2Format</DataField>
+        </Field>
+        <Field Name="VPreti3">
+          <DataField>VPreti3</DataField>
+        </Field>
+        <Field Name="VPreti3Format">
+          <DataField>VPreti3Format</DataField>
+        </Field>
+        <Field Name="VPreti4">
+          <DataField>VPreti4</DataField>
+        </Field>
+        <Field Name="VPreti4Format">
+          <DataField>VPreti4Format</DataField>
+        </Field>
+        <Field Name="VPreti5">
+          <DataField>VPreti5</DataField>
+        </Field>
+        <Field Name="VPreti5Format">
+          <DataField>VPreti5Format</DataField>
+        </Field>
+        <Field Name="VPreti6">
+          <DataField>VPreti6</DataField>
+        </Field>
+        <Field Name="VPreti6Format">
+          <DataField>VPreti6Format</DataField>
+        </Field>
+        <Field Name="VPreti7">
+          <DataField>VPreti7</DataField>
+        </Field>
+        <Field Name="VPreti7Format">
+          <DataField>VPreti7Format</DataField>
+        </Field>
+        <Field Name="VPreti8">
+          <DataField>VPreti8</DataField>
+        </Field>
+        <Field Name="VPreti8Format">
+          <DataField>VPreti8Format</DataField>
+        </Field>
+        <Field Name="VPreti9">
+          <DataField>VPreti9</DataField>
+        </Field>
+        <Field Name="VPreti9Format">
+          <DataField>VPreti9Format</DataField>
+        </Field>
+        <Field Name="VPreti10">
+          <DataField>VPreti10</DataField>
+        </Field>
+        <Field Name="VPreti10Format">
+          <DataField>VPreti10Format</DataField>
+        </Field>
+        <Field Name="Pret_Number">
+          <DataField>Pret_Number</DataField>
+        </Field>
+        <Field Name="V999_">
+          <DataField>V999_</DataField>
+        </Field>
+        <Field Name="Net_à_Payer_">
+          <DataField>Net_à_Payer_</DataField>
+        </Field>
+        <Field Name="VNETi1">
+          <DataField>VNETi1</DataField>
+        </Field>
+        <Field Name="VNETi1Format">
+          <DataField>VNETi1Format</DataField>
+        </Field>
+        <Field Name="VNETi2">
+          <DataField>VNETi2</DataField>
+        </Field>
+        <Field Name="VNETi2Format">
+          <DataField>VNETi2Format</DataField>
+        </Field>
+        <Field Name="VNETi3">
+          <DataField>VNETi3</DataField>
+        </Field>
+        <Field Name="VNETi3Format">
+          <DataField>VNETi3Format</DataField>
+        </Field>
+        <Field Name="VNETi4">
+          <DataField>VNETi4</DataField>
+        </Field>
+        <Field Name="VNETi4Format">
+          <DataField>VNETi4Format</DataField>
+        </Field>
+        <Field Name="VNETi5">
+          <DataField>VNETi5</DataField>
+        </Field>
+        <Field Name="VNETi5Format">
+          <DataField>VNETi5Format</DataField>
+        </Field>
+        <Field Name="VNETi6">
+          <DataField>VNETi6</DataField>
+        </Field>
+        <Field Name="VNETi6Format">
+          <DataField>VNETi6Format</DataField>
+        </Field>
+        <Field Name="VNETi7">
+          <DataField>VNETi7</DataField>
+        </Field>
+        <Field Name="VNETi7Format">
+          <DataField>VNETi7Format</DataField>
+        </Field>
+        <Field Name="VNETi8">
+          <DataField>VNETi8</DataField>
+        </Field>
+        <Field Name="VNETi8Format">
+          <DataField>VNETi8Format</DataField>
+        </Field>
+        <Field Name="VNETi9">
+          <DataField>VNETi9</DataField>
+        </Field>
+        <Field Name="VNETi9Format">
+          <DataField>VNETi9Format</DataField>
+        </Field>
+        <Field Name="VNETi10">
+          <DataField>VNETi10</DataField>
+        </Field>
+        <Field Name="VNETi10Format">
+          <DataField>VNETi10Format</DataField>
+        </Field>
+        <Field Name="SalaireNET_Number">
+          <DataField>SalaireNET_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

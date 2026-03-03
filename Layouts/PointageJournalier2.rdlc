@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Entete_Pointage_Vehicule_Journee">
+          <DataField>Entete_Pointage_Vehicule_Journee</DataField>
+        </Field>
+        <Field Name="Entete_Pointage_VehiculeCaption">
+          <DataField>Entete_Pointage_VehiculeCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="POINTAGE_JOURNEECaption">
+          <DataField>POINTAGE_JOURNEECaption</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule_DescriptionCaption">
+          <DataField>Ligne_Pointage_Vehicule_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="VéhiculeCaption">
+          <DataField>VéhiculeCaption</DataField>
+        </Field>
+        <Field Name="StatutCaption">
+          <DataField>StatutCaption</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Depart_Caption">
+          <DataField>Ligne_Pointage_Vehicule__Index_Depart_Caption</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Final_Caption">
+          <DataField>Ligne_Pointage_Vehicule__Index_Final_Caption</DataField>
+        </Field>
+        <Field Name="ChauffeurCaption">
+          <DataField>ChauffeurCaption</DataField>
+        </Field>
+        <Field Name="Entete_Pointage_Vehicule_N__Document">
+          <DataField>Entete_Pointage_Vehicule_N__Document</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule_Vehicule">
+          <DataField>Ligne_Pointage_Vehicule_Vehicule</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule_Description">
+          <DataField>Ligne_Pointage_Vehicule_Description</DataField>
+        </Field>
+        <Field Name="FORMAT_Statut_">
+          <DataField>FORMAT_Statut_</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Depart_">
+          <DataField>Ligne_Pointage_Vehicule__Index_Depart_</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Depart_Format">
+          <DataField>Ligne_Pointage_Vehicule__Index_Depart_Format</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Final_">
+          <DataField>Ligne_Pointage_Vehicule__Index_Final_</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule__Index_Final_Format">
+          <DataField>Ligne_Pointage_Vehicule__Index_Final_Format</DataField>
+        </Field>
+        <Field Name="TxtChaffeur">
+          <DataField>TxtChaffeur</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule_Document_N_">
+          <DataField>Ligne_Pointage_Vehicule_Document_N_</DataField>
+        </Field>
+        <Field Name="Ligne_Pointage_Vehicule_Journee">
+          <DataField>Ligne_Pointage_Vehicule_Journee</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="TIME">
+          <DataField>TIME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="Journée_Du________FORMAT_GETRANGEMIN_Journee________Au________FORMAT_GETRANGEMAX_Journee__">
+          <DataField>Journée_Du________FORMAT_GETRANGEMIN_Journee________Au________FORMAT_GETRANGEMAX_Journee__</DataField>
+        </Field>
+        <Field Name="Entete_Fiche_Gasoil_Cuve">
+          <DataField>Entete_Fiche_Gasoil_Cuve</DataField>
+        </Field>
+        <Field Name="TotalGasoil">
+          <DataField>TotalGasoil</DataField>
+        </Field>
+        <Field Name="TotalGasoilFormat">
+          <DataField>TotalGasoilFormat</DataField>
+        </Field>
+        <Field Name="N__VéhiculeCaption">
+          <DataField>N__VéhiculeCaption</DataField>
+        </Field>
+        <Field Name="MatriculeCaption">
+          <DataField>MatriculeCaption</DataField>
+        </Field>
+        <Field Name="CiterneCaption">
+          <DataField>CiterneCaption</DataField>
+        </Field>
+        <Field Name="HeureCaption">
+          <DataField>HeureCaption</DataField>
+        </Field>
+        <Field Name="ChauffeurCaption">
+          <DataField>ChauffeurCaption</DataField>
+        </Field>
+        <Field Name="DéstinationCaption">
+          <DataField>DéstinationCaption</DataField>
+        </Field>
+        <Field Name="CompteurCaption">
+          <DataField>CompteurCaption</DataField>
+        </Field>
+        <Field Name="QuantitéCaption">
+          <DataField>QuantitéCaption</DataField>
+        </Field>
+        <Field Name="Inventory_MovementCaption">
+          <DataField>Inventory_MovementCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="JourneeCaption">
+          <DataField>JourneeCaption</DataField>
+        </Field>
+        <Field Name="N__FicheCaption">
+          <DataField>N__FicheCaption</DataField>
+        </Field>
+        <Field Name="Index_De_La_CiterneCaption">
+          <DataField>Index_De_La_CiterneCaption</DataField>
+        </Field>
+        <Field Name="Citerne__Caption">
+          <DataField>Citerne__Caption</DataField>
+        </Field>
+        <Field Name="TOTALCaption">
+          <DataField>TOTALCaption</DataField>
+        </Field>
+        <Field Name="Entete_Fiche_Gasoil_No_">
+          <DataField>Entete_Fiche_Gasoil_No_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Materiel">
+          <DataField>Ligne_Fiche_Gasoil_Materiel</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Valeur_Compteur_">
+          <DataField>Ligne_Fiche_Gasoil__Valeur_Compteur_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Valeur_Compteur_Format">
+          <DataField>Ligne_Fiche_Gasoil__Valeur_Compteur_Format</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Quantité_Gasoil_">
+          <DataField>Ligne_Fiche_Gasoil__Quantité_Gasoil_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Quantité_Gasoil_Format">
+          <DataField>Ligne_Fiche_Gasoil__Quantité_Gasoil_Format</DataField>
+        </Field>
+        <Field Name="Chauff">
+          <DataField>Chauff</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Destination">
+          <DataField>Ligne_Fiche_Gasoil_Destination</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Heure">
+          <DataField>Ligne_Fiche_Gasoil_Heure</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Cuve">
+          <DataField>Ligne_Fiche_Gasoil_Cuve</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil__Journee">
+          <DataField>Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil__Journee</DataField>
+        </Field>
+        <Field Name="Fiche">
+          <DataField>Fiche</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Immatricule_Vehicule_">
+          <DataField>Ligne_Fiche_Gasoil__Immatricule_Vehicule_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil___Index_de_la_Citerne_">
+          <DataField>Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil___Index_de_la_Citerne_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil___Index_de_la_Citerne_Format">
+          <DataField>Ligne_Fiche_Gasoil__Ligne_Fiche_Gasoil___Index_de_la_Citerne_Format</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Document_No_">
+          <DataField>Ligne_Fiche_Gasoil_Document_No_</DataField>
+        </Field>
+        <Field Name="Ligne_Fiche_Gasoil_Numero_Ligne">
+          <DataField>Ligne_Fiche_Gasoil_Numero_Ligne</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

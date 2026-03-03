@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Address">
+          <DataField>CompanyInformation_Address</DataField>
+        </Field>
+        <Field Name="CompanyInformation__Entete_de_page_">
+          <DataField>CompanyInformation__Entete_de_page_</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Year">
+          <DataField>Salary_Lines_Year</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Month">
+          <DataField>Salary_Lines_Month</DataField>
+        </Field>
+        <Field Name="CompanyInformation__N__CNSS_">
+          <DataField>CompanyInformation__N__CNSS_</DataField>
+        </Field>
+        <Field Name="Compteur">
+          <DataField>Compteur</DataField>
+        </Field>
+        <Field Name="Employer__First_Name________Employer__Last_Name_">
+          <DataField>Employer__First_Name________Employer__Last_Name_</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Employee">
+          <DataField>Salary_Lines_Employee</DataField>
+        </Field>
+        <Field Name="Employer__Social_Security_No__">
+          <DataField>Employer__Social_Security_No__</DataField>
+        </Field>
+        <Field Name="BaseCOtisation">
+          <DataField>BaseCOtisation</DataField>
+        </Field>
+        <Field Name="BaseCOtisationFormat">
+          <DataField>BaseCOtisationFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Paied_days_">
+          <DataField>Salary_Lines__Paied_days_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Paied_days_Format">
+          <DataField>Salary_Lines__Paied_days_Format</DataField>
+        </Field>
+        <Field Name="Risque">
+          <DataField>Risque</DataField>
+        </Field>
+        <Field Name="RisqueFormat">
+          <DataField>RisqueFormat</DataField>
+        </Field>
+        <Field Name="Prestation">
+          <DataField>Prestation</DataField>
+        </Field>
+        <Field Name="PrestationFormat">
+          <DataField>PrestationFormat</DataField>
+        </Field>
+        <Field Name="VeillessP">
+          <DataField>VeillessP</DataField>
+        </Field>
+        <Field Name="VeillessPFormat">
+          <DataField>VeillessPFormat</DataField>
+        </Field>
+        <Field Name="VeillessS">
+          <DataField>VeillessS</DataField>
+        </Field>
+        <Field Name="VeillessSFormat">
+          <DataField>VeillessSFormat</DataField>
+        </Field>
+        <Field Name="TotalCotisation">
+          <DataField>TotalCotisation</DataField>
+        </Field>
+        <Field Name="TotalCotisationFormat">
+          <DataField>TotalCotisationFormat</DataField>
+        </Field>
+        <Field Name="Employer_Spécialité">
+          <DataField>Employer_Spécialité</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Congé_Pri_">
+          <DataField>Salary_Lines__Congé_Pri_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Congé_Pri_Format">
+          <DataField>Salary_Lines__Congé_Pri_Format</DataField>
+        </Field>
+        <Field Name="TotBaseCOtisation">
+          <DataField>TotBaseCOtisation</DataField>
+        </Field>
+        <Field Name="TotBaseCOtisationFormat">
+          <DataField>TotBaseCOtisationFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Paied_days__Control1000000035">
+          <DataField>Salary_Lines__Paied_days__Control1000000035</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Paied_days__Control1000000035Format">
+          <DataField>Salary_Lines__Paied_days__Control1000000035Format</DataField>
+        </Field>
+        <Field Name="Risque_Control1000000036">
+          <DataField>Risque_Control1000000036</DataField>
+        </Field>
+        <Field Name="Risque_Control1000000036Format">
+          <DataField>Risque_Control1000000036Format</DataField>
+        </Field>
+        <Field Name="Prestation_Control1000000037">
+          <DataField>Prestation_Control1000000037</DataField>
+        </Field>
+        <Field Name="Prestation_Control1000000037Format">
+          <DataField>Prestation_Control1000000037Format</DataField>
+        </Field>
+        <Field Name="VeillessP_Control1000000038">
+          <DataField>VeillessP_Control1000000038</DataField>
+        </Field>
+        <Field Name="VeillessP_Control1000000038Format">
+          <DataField>VeillessP_Control1000000038Format</DataField>
+        </Field>
+        <Field Name="VeillessS_Control1000000039">
+          <DataField>VeillessS_Control1000000039</DataField>
+        </Field>
+        <Field Name="VeillessS_Control1000000039Format">
+          <DataField>VeillessS_Control1000000039Format</DataField>
+        </Field>
+        <Field Name="TotalGeneralCotisation">
+          <DataField>TotalGeneralCotisation</DataField>
+        </Field>
+        <Field Name="TotalGeneralCotisationFormat">
+          <DataField>TotalGeneralCotisationFormat</DataField>
+        </Field>
+        <Field Name="Compteur_Control1000000033">
+          <DataField>Compteur_Control1000000033</DataField>
+        </Field>
+        <Field Name="BORDEREAU_NOMINATIF_DES_TRAVAILLEURS_SALARIES_DE_SOUROUBAT___BFCaption">
+          <DataField>BORDEREAU_NOMINATIF_DES_TRAVAILLEURS_SALARIES_DE_SOUROUBAT___BFCaption</DataField>
+        </Field>
+        <Field Name="ANNEECaption">
+          <DataField>ANNEECaption</DataField>
+        </Field>
+        <Field Name="MOISCaption">
+          <DataField>MOISCaption</DataField>
+        </Field>
+        <Field Name="N__CNSS_EMPLOYEUR__Caption">
+          <DataField>N__CNSS_EMPLOYEUR__Caption</DataField>
+        </Field>
+        <Field Name="N_Caption">
+          <DataField>N_Caption</DataField>
+        </Field>
+        <Field Name="MATCaption">
+          <DataField>MATCaption</DataField>
+        </Field>
+        <Field Name="NOM_ET_PRENOMCaption">
+          <DataField>NOM_ET_PRENOMCaption</DataField>
+        </Field>
+        <Field Name="N__CNSSCaption">
+          <DataField>N__CNSSCaption</DataField>
+        </Field>
+        <Field Name="BASE_COTISACaption">
+          <DataField>BASE_COTISACaption</DataField>
+        </Field>
+        <Field Name="TOTALCaption">
+          <DataField>TOTALCaption</DataField>
+        </Field>
+        <Field Name="JOURSCaption">
+          <DataField>JOURSCaption</DataField>
+        </Field>
+        <Field Name="RISC_PROFCaption">
+          <DataField>RISC_PROFCaption</DataField>
+        </Field>
+        <Field Name="PREST_FAMILCaption">
+          <DataField>PREST_FAMILCaption</DataField>
+        </Field>
+        <Field Name="VEILLESS_PATRCaption">
+          <DataField>VEILLESS_PATRCaption</DataField>
+        </Field>
+        <Field Name="VEILL_SALACaption">
+          <DataField>VEILL_SALACaption</DataField>
+        </Field>
+        <Field Name="OBSERVATIONCaption">
+          <DataField>OBSERVATIONCaption</DataField>
+        </Field>
+        <Field Name="FONCTIONCaption">
+          <DataField>FONCTIONCaption</DataField>
+        </Field>
+        <Field Name="DATE_ENTREECaption">
+          <DataField>DATE_ENTREECaption</DataField>
+        </Field>
+        <Field Name="TOTALCaption_Control1000000041">
+          <DataField>TOTALCaption_Control1000000041</DataField>
+        </Field>
+        <Field Name="Salary_Lines_No_">
+          <DataField>Salary_Lines_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

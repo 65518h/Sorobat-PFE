@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No__">
+          <DataField>Rec__Salary_Headers__No__</DataField>
+        </Field>
+        <Field Name="SNet">
+          <DataField>SNet</DataField>
+        </Field>
+        <Field Name="SNetFormat">
+          <DataField>SNetFormat</DataField>
+        </Field>
+        <Field Name="Avance">
+          <DataField>Avance</DataField>
+        </Field>
+        <Field Name="AvanceFormat">
+          <DataField>AvanceFormat</DataField>
+        </Field>
+        <Field Name="SBase">
+          <DataField>SBase</DataField>
+        </Field>
+        <Field Name="SBaseFormat">
+          <DataField>SBaseFormat</DataField>
+        </Field>
+        <Field Name="HSupp">
+          <DataField>HSupp</DataField>
+        </Field>
+        <Field Name="HSuppFormat">
+          <DataField>HSuppFormat</DataField>
+        </Field>
+        <Field Name="Pret">
+          <DataField>Pret</DataField>
+        </Field>
+        <Field Name="PretFormat">
+          <DataField>PretFormat</DataField>
+        </Field>
+        <Field Name="CNSSsalarial">
+          <DataField>CNSSsalarial</DataField>
+        </Field>
+        <Field Name="CNSSsalarialFormat">
+          <DataField>CNSSsalarialFormat</DataField>
+        </Field>
+        <Field Name="IUTS">
+          <DataField>IUTS</DataField>
+        </Field>
+        <Field Name="IUTSFormat">
+          <DataField>IUTSFormat</DataField>
+        </Field>
+        <Field Name="Debiteur">
+          <DataField>Debiteur</DataField>
+        </Field>
+        <Field Name="DebiteurFormat">
+          <DataField>DebiteurFormat</DataField>
+        </Field>
+        <Field Name="Crediteur">
+          <DataField>Crediteur</DataField>
+        </Field>
+        <Field Name="CrediteurFormat">
+          <DataField>CrediteurFormat</DataField>
+        </Field>
+        <Field Name="RISQUE">
+          <DataField>RISQUE</DataField>
+        </Field>
+        <Field Name="RISQUEFormat">
+          <DataField>RISQUEFormat</DataField>
+        </Field>
+        <Field Name="Prestation">
+          <DataField>Prestation</DataField>
+        </Field>
+        <Field Name="PrestationFormat">
+          <DataField>PrestationFormat</DataField>
+        </Field>
+        <Field Name="Assurance">
+          <DataField>Assurance</DataField>
+        </Field>
+        <Field Name="AssuranceFormat">
+          <DataField>AssuranceFormat</DataField>
+        </Field>
+        <Field Name="Prime">
+          <DataField>Prime</DataField>
+        </Field>
+        <Field Name="PrimeFormat">
+          <DataField>PrimeFormat</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000044">
+          <DataField>Rec__Salary_Headers__No___Control1000000044</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000045">
+          <DataField>Rec__Salary_Headers__No___Control1000000045</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000046">
+          <DataField>Rec__Salary_Headers__No___Control1000000046</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000047">
+          <DataField>Rec__Salary_Headers__No___Control1000000047</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000048">
+          <DataField>Rec__Salary_Headers__No___Control1000000048</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000049">
+          <DataField>Rec__Salary_Headers__No___Control1000000049</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000050">
+          <DataField>Rec__Salary_Headers__No___Control1000000050</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000051">
+          <DataField>Rec__Salary_Headers__No___Control1000000051</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000052">
+          <DataField>Rec__Salary_Headers__No___Control1000000052</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000053">
+          <DataField>Rec__Salary_Headers__No___Control1000000053</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000054">
+          <DataField>Rec__Salary_Headers__No___Control1000000054</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000055">
+          <DataField>Rec__Salary_Headers__No___Control1000000055</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000021">
+          <DataField>Prime_Control1000000021</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000021Format">
+          <DataField>Prime_Control1000000021Format</DataField>
+        </Field>
+        <Field Name="ChargeSocial">
+          <DataField>ChargeSocial</DataField>
+        </Field>
+        <Field Name="ChargeSocialFormat">
+          <DataField>ChargeSocialFormat</DataField>
+        </Field>
+        <Field Name="SBaseInitial">
+          <DataField>SBaseInitial</DataField>
+        </Field>
+        <Field Name="SBaseInitialFormat">
+          <DataField>SBaseInitialFormat</DataField>
+        </Field>
+        <Field Name="Sursalaire">
+          <DataField>Sursalaire</DataField>
+        </Field>
+        <Field Name="SursalaireFormat">
+          <DataField>SursalaireFormat</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000064">
+          <DataField>Prime_Control1000000064</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000064Format">
+          <DataField>Prime_Control1000000064Format</DataField>
+        </Field>
+        <Field Name="HSupp_Control1000000065">
+          <DataField>HSupp_Control1000000065</DataField>
+        </Field>
+        <Field Name="HSupp_Control1000000065Format">
+          <DataField>HSupp_Control1000000065Format</DataField>
+        </Field>
+        <Field Name="Salary_HeadersCaption">
+          <DataField>Salary_HeadersCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Numero_PaieCaption">
+          <DataField>Numero_PaieCaption</DataField>
+        </Field>
+        <Field Name="Salairs_NetCaption">
+          <DataField>Salairs_NetCaption</DataField>
+        </Field>
+        <Field Name="AvanceCaption">
+          <DataField>AvanceCaption</DataField>
+        </Field>
+        <Field Name="PretCaption">
+          <DataField>PretCaption</DataField>
+        </Field>
+        <Field Name="CNSSCaption">
+          <DataField>CNSSCaption</DataField>
+        </Field>
+        <Field Name="Salaire_Base___SursalaireCaption">
+          <DataField>Salaire_Base___SursalaireCaption</DataField>
+        </Field>
+        <Field Name="Heures_suplementaireCaption">
+          <DataField>Heures_suplementaireCaption</DataField>
+        </Field>
+        <Field Name="IUTSCaption">
+          <DataField>IUTSCaption</DataField>
+        </Field>
+        <Field Name="RisqueCaption">
+          <DataField>RisqueCaption</DataField>
+        </Field>
+        <Field Name="PrestationCaption">
+          <DataField>PrestationCaption</DataField>
+        </Field>
+        <Field Name="AssuranceCaption">
+          <DataField>AssuranceCaption</DataField>
+        </Field>
+        <Field Name="ChargeCaption">
+          <DataField>ChargeCaption</DataField>
+        </Field>
+        <Field Name="PrimeCaption">
+          <DataField>PrimeCaption</DataField>
+        </Field>
+        <Field Name="Libellé_écritureCaption">
+          <DataField>Libellé_écritureCaption</DataField>
+        </Field>
+        <Field Name="Mvts_débitCaption">
+          <DataField>Mvts_débitCaption</DataField>
+        </Field>
+        <Field Name="Mvts_créditCaption">
+          <DataField>Mvts_créditCaption</DataField>
+        </Field>
+        <Field Name="Numero_PaieCaption_Control1000000041">
+          <DataField>Numero_PaieCaption_Control1000000041</DataField>
+        </Field>
+        <Field Name="JourCaption">
+          <DataField>JourCaption</DataField>
+        </Field>
+        <Field Name="Salaire_BaseCaption">
+          <DataField>Salaire_BaseCaption</DataField>
+        </Field>
+        <Field Name="SursalaireCaption">
+          <DataField>SursalaireCaption</DataField>
+        </Field>
+        <Field Name="PrimeCaption_Control1000000063">
+          <DataField>PrimeCaption_Control1000000063</DataField>
+        </Field>
+        <Field Name="Heures_suplementaireCaption_Control1000000066">
+          <DataField>Heures_suplementaireCaption_Control1000000066</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

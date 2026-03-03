@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_City_">
+          <DataField>Sales_Header__Bill_to_City_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Address_2_">
+          <DataField>Sales_Header__Bill_to_Address_2_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Address_">
+          <DataField>Sales_Header__Bill_to_Address_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_Name_">
+          <DataField>Sales_Header__Bill_to_Name_</DataField>
+        </Field>
+        <Field Name="Textcin">
+          <DataField>Textcin</DataField>
+        </Field>
+        <Field Name="valeurCin">
+          <DataField>valeurCin</DataField>
+        </Field>
+        <Field Name="DEMANDE_DE_CREDITCaption">
+          <DataField>DEMANDE_DE_CREDITCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Fiche_de_renseignementCaption">
+          <DataField>Fiche_de_renseignementCaption</DataField>
+        </Field>
+        <Field Name="IDENTITE_DU__OU_DES__CLIENTS_Caption">
+          <DataField>IDENTITE_DU__OU_DES__CLIENTS_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Header__Bill_to_City_Caption">
+          <DataField>Sales_Header__Bill_to_City_Caption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="DomicileCaption">
+          <DataField>DomicileCaption</DataField>
+        </Field>
+        <Field Name="Nom___prénomCaption">
+          <DataField>Nom___prénomCaption</DataField>
+        </Field>
+        <Field Name="Délivrée_àCaption">
+          <DataField>Délivrée_àCaption</DataField>
+        </Field>
+        <Field Name="Date___lieu_de_naissanceCaption">
+          <DataField>Date___lieu_de_naissanceCaption</DataField>
+        </Field>
+        <Field Name="ProfessionCaption">
+          <DataField>ProfessionCaption</DataField>
+        </Field>
+        <Field Name="SalaireCaption">
+          <DataField>SalaireCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control31">
+          <DataField>EmptyStringCaption_Control31</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control32">
+          <DataField>EmptyStringCaption_Control32</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control34">
+          <DataField>EmptyStringCaption_Control34</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control36">
+          <DataField>EmptyStringCaption_Control36</DataField>
+        </Field>
+        <Field Name="Sales_Header_Document_Type">
+          <DataField>Sales_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Header_No_">
+          <DataField>Sales_Header_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT_">
+          <DataField>Sales_Header___Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT_Format">
+          <DataField>Sales_Header___Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT__Control43">
+          <DataField>Sales_Header___Amount_Including_VAT__Control43</DataField>
+        </Field>
+        <Field Name="Sales_Header___Amount_Including_VAT__Control43Format">
+          <DataField>Sales_Header___Amount_Including_VAT__Control43Format</DataField>
+        </Field>
+        <Field Name="PaymentTerms_Description">
+          <DataField>PaymentTerms_Description</DataField>
+        </Field>
+        <Field Name="MATERIEL_A_ACQUERIR_Caption">
+          <DataField>MATERIEL_A_ACQUERIR_Caption</DataField>
+        </Field>
+        <Field Name="CREDIT_Caption">
+          <DataField>CREDIT_Caption</DataField>
+        </Field>
+        <Field Name="Montant_du_crédit_demandé_Caption">
+          <DataField>Montant_du_crédit_demandé_Caption</DataField>
+        </Field>
+        <Field Name="Montant_total_de_la_facture_Caption">
+          <DataField>Montant_total_de_la_facture_Caption</DataField>
+        </Field>
+        <Field Name="Paiement_à_la_commande_Caption">
+          <DataField>Paiement_à_la_commande_Caption</DataField>
+        </Field>
+        <Field Name="Durée___modalité_du_crédit_Caption">
+          <DataField>Durée___modalité_du_crédit_Caption</DataField>
+        </Field>
+        <Field Name="RESSOURCES_Caption">
+          <DataField>RESSOURCES_Caption</DataField>
+        </Field>
+        <Field Name="a__Exploitation_Agricole_Caption">
+          <DataField>a__Exploitation_Agricole_Caption</DataField>
+        </Field>
+        <Field Name="Grandes_cultures___Superficie_et_nature_Caption">
+          <DataField>Grandes_cultures___Superficie_et_nature_Caption</DataField>
+        </Field>
+        <Field Name="Elevage___Nature_et_nombre_de_sujet_Caption">
+          <DataField>Elevage___Nature_et_nombre_de_sujet_Caption</DataField>
+        </Field>
+        <Field Name="Point_d_eaus___Precier_puits__Réseau_public_etc_Caption">
+          <DataField>Point_d_eaus___Precier_puits__Réseau_public_etc_Caption</DataField>
+        </Field>
+        <Field Name="Culture_maraichéres___Superficie_Caption">
+          <DataField>Culture_maraichéres___Superficie_Caption</DataField>
+        </Field>
+        <Field Name="Arboricultures___Nombre_Age_et_nature_Caption">
+          <DataField>Arboricultures___Nombre_Age_et_nature_Caption</DataField>
+        </Field>
+        <Field Name="b_Autres_Biens__Caption">
+          <DataField>b_Autres_Biens__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control56">
+          <DataField>EmptyStringCaption_Control56</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control57">
+          <DataField>EmptyStringCaption_Control57</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control58">
+          <DataField>EmptyStringCaption_Control58</DataField>
+        </Field>
+        <Field Name="c__Revenue_annuel_de_l_exploitation__Caption">
+          <DataField>c__Revenue_annuel_de_l_exploitation__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control60">
+          <DataField>EmptyStringCaption_Control60</DataField>
+        </Field>
+        <Field Name="d__Autres_Revenues__Caption">
+          <DataField>d__Autres_Revenues__Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control62">
+          <DataField>EmptyStringCaption_Control62</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control63">
+          <DataField>EmptyStringCaption_Control63</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control64">
+          <DataField>EmptyStringCaption_Control64</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control65">
+          <DataField>EmptyStringCaption_Control65</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control66">
+          <DataField>EmptyStringCaption_Control66</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control67">
+          <DataField>EmptyStringCaption_Control67</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_Type">
+          <DataField>Sales_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

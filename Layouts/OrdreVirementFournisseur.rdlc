@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ORDRE_DE_VIREMENT_N______No__">
+          <DataField>ORDRE_DE_VIREMENT_N______No__</DataField>
+        </Field>
+        <Field Name="RIBsociete">
+          <DataField>RIBsociete</DataField>
+        </Field>
+        <Field Name="RaisonSociale">
+          <DataField>RaisonSociale</DataField>
+        </Field>
+        <Field Name="Mégrine_le______FORMAT__Document_Date__">
+          <DataField>Mégrine_le______FORMAT__Document_Date__</DataField>
+        </Field>
+        <Field Name="NomBanque">
+          <DataField>NomBanque</DataField>
+        </Field>
+        <Field Name="Payment_Header_Motif">
+          <DataField>Payment_Header_Motif</DataField>
+        </Field>
+        <Field Name="RIB_DONNEUR_D_ORDRE__Caption">
+          <DataField>RIB_DONNEUR_D_ORDRE__Caption</DataField>
+        </Field>
+        <Field Name="RAISON_SOCIALE__Caption">
+          <DataField>RAISON_SOCIALE__Caption</DataField>
+        </Field>
+        <Field Name="RIB___RIP_Bénéficiaire__s_Caption">
+          <DataField>RIB___RIP_Bénéficiaire__s_Caption</DataField>
+        </Field>
+        <Field Name="BanqueCaption">
+          <DataField>BanqueCaption</DataField>
+        </Field>
+        <Field Name="Nom___Prénom___Raison_socialeCaption">
+          <DataField>Nom___Prénom___Raison_socialeCaption</DataField>
+        </Field>
+        <Field Name="MontantCaption">
+          <DataField>MontantCaption</DataField>
+        </Field>
+        <Field Name="MOTIF_DE_VIREMENT__Caption">
+          <DataField>MOTIF_DE_VIREMENT__Caption</DataField>
+        </Field>
+        <Field Name="Payment_Header_No_">
+          <DataField>Payment_Header_No_</DataField>
+        </Field>
+        <Field Name="RIBfournisseur">
+          <DataField>RIBfournisseur</DataField>
+        </Field>
+        <Field Name="BanqueFournisseur">
+          <DataField>BanqueFournisseur</DataField>
+        </Field>
+        <Field Name="NomFournisseur">
+          <DataField>NomFournisseur</DataField>
+        </Field>
+        <Field Name="MontantFournisseur">
+          <DataField>MontantFournisseur</DataField>
+        </Field>
+        <Field Name="MontantFournisseurFormat">
+          <DataField>MontantFournisseurFormat</DataField>
+        </Field>
+        <Field Name="Nbre">
+          <DataField>Nbre</DataField>
+        </Field>
+        <Field Name="MontantTotal">
+          <DataField>MontantTotal</DataField>
+        </Field>
+        <Field Name="MontantTotalFormat">
+          <DataField>MontantTotalFormat</DataField>
+        </Field>
+        <Field Name="TextGMnt">
+          <DataField>TextGMnt</DataField>
+        </Field>
+        <Field Name="NombreCaption">
+          <DataField>NombreCaption</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="Total_en_toutes_lettres__Caption">
+          <DataField>Total_en_toutes_lettres__Caption</DataField>
+        </Field>
+        <Field Name="Important__Caption">
+          <DataField>Important__Caption</DataField>
+        </Field>
+        <Field Name="V1_Cet_Ordre_ne_sera_exécuté_que_si_la_situation_du_donneur_d_ordre_le_permet_Caption">
+          <DataField>V1_Cet_Ordre_ne_sera_exécuté_que_si_la_situation_du_donneur_d_ordre_le_permet_Caption</DataField>
+        </Field>
+        <Field Name="DataItem1000000036">
+          <DataField>DataItem1000000036</DataField>
+        </Field>
+        <Field Name="Signature_du_ClientCaption">
+          <DataField>Signature_du_ClientCaption</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

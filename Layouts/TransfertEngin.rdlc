@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyPicture">
+          <DataField>CompanyPicture</DataField>
+        </Field>
+        <Field Name="BON_TRANSFERT_ENGIN_N____________Code_Transfert_">
+          <DataField>BON_TRANSFERT_ENGIN_N____________Code_Transfert_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Engin_">
+          <DataField>Historique_Transfert_Engin__Code_Engin_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Immatriculation">
+          <DataField>Historique_Transfert_Engin_Immatriculation</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__User_Id_">
+          <DataField>Historique_Transfert_Engin__User_Id_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Engin_">
+          <DataField>Historique_Transfert_Engin__Description_Engin_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Date_Transfert_">
+          <DataField>Historique_Transfert_Engin__Date_Transfert_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Depart">
+          <DataField>Historique_Transfert_Engin_Depart</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Destination">
+          <DataField>Historique_Transfert_Engin_Destination</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Depart_">
+          <DataField>Historique_Transfert_Engin__Description_Depart_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Destination_">
+          <DataField>Historique_Transfert_Engin__Description_Destination_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Chauffeur">
+          <DataField>Historique_Transfert_Engin_Chauffeur</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Observation">
+          <DataField>Historique_Transfert_Engin_Observation</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Tracteur_Routier_">
+          <DataField>Historique_Transfert_Engin__Code_Tracteur_Routier_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Tracteur_Routier_">
+          <DataField>Historique_Transfert_Engin__Description_Tracteur_Routier_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Port_Chart_">
+          <DataField>Historique_Transfert_Engin__Code_Port_Chart_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Port_Chart_">
+          <DataField>Historique_Transfert_Engin__Description_Port_Chart_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Immat_Tracteur_Routier_">
+          <DataField>Historique_Transfert_Engin__Immat_Tracteur_Routier_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Immat_Port_Chart_">
+          <DataField>Historique_Transfert_Engin__Immat_Port_Chart_</DataField>
+        </Field>
+        <Field Name="SOROUBATCaption">
+          <DataField>SOROUBATCaption</DataField>
+        </Field>
+        <Field Name="Adresse1">
+          <DataField>Adresse1</DataField>
+        </Field>
+        <Field Name="Adresse2">
+          <DataField>Adresse2</DataField>
+        </Field>
+        <Field Name="Adresse3">
+          <DataField>Adresse3</DataField>
+        </Field>
+        <Field Name="Adresse4">
+          <DataField>Adresse4</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Engin_Caption">
+          <DataField>Historique_Transfert_Engin__Code_Engin_Caption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_ImmatriculationCaption">
+          <DataField>Historique_Transfert_Engin_ImmatriculationCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__User_Id_Caption">
+          <DataField>Historique_Transfert_Engin__User_Id_Caption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Date_Transfert_Caption">
+          <DataField>Historique_Transfert_Engin__Date_Transfert_Caption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_DepartCaption">
+          <DataField>Historique_Transfert_Engin_DepartCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_DestinationCaption">
+          <DataField>Historique_Transfert_Engin_DestinationCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_ChauffeurCaption">
+          <DataField>Historique_Transfert_Engin_ChauffeurCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_ObservationCaption">
+          <DataField>Historique_Transfert_Engin_ObservationCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Tracteur_Routier_Caption">
+          <DataField>Historique_Transfert_Engin__Code_Tracteur_Routier_Caption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Port_Chart_Caption">
+          <DataField>Historique_Transfert_Engin__Code_Port_Chart_Caption</DataField>
+        </Field>
+        <Field Name="Directeur_de_ParcCaption">
+          <DataField>Directeur_de_ParcCaption</DataField>
+        </Field>
+        <Field Name="ChauffeurCaption">
+          <DataField>ChauffeurCaption</DataField>
+        </Field>
+        <Field Name="ResponsableCaption">
+          <DataField>ResponsableCaption</DataField>
+        </Field>
+        <Field Name="ReceptionCaption">
+          <DataField>ReceptionCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Code_Transfert">
+          <DataField>Historique_Transfert_Engin_Code_Transfert</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,16 @@
+<!-- layout/main-layout/main-layout.html -->
+<div class="main-layout">
+  <app-navbar></app-navbar>
+  
+  <div class="content-wrapper">
+    <app-sidebar></app-sidebar>
+    
+    <main class="main-content">
+      <div class="content-container">
+        <router-outlet></router-outlet>  <!-- C'est ici que les projets s'affichent -->
+      </div>
+    </main>
+  </div>
+  
+  <app-footer></app-footer>
+</div>

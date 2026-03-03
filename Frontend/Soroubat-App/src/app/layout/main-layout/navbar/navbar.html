@@ -1,0 +1,45 @@
+<!-- layout/main-layout/navbar/navbar.html -->
+<mat-toolbar color="primary" class="navbar">
+  <button mat-icon-button class="menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="navbar-brand">
+    <img src="logo.jpg" alt="SOROUBAT" class="logo">
+    <span class="app-title">SOROUBAT</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="navbar-actions">
+    <button mat-icon-button matBadge="3" matBadgeColor="warn">
+      <mat-icon>notifications</mat-icon>
+    </button>
+
+    <button mat-icon-button>
+      <mat-icon>chat</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+      <mat-icon>account_circle</mat-icon>
+      <span class="user-name">{{ userName }}</span>
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Mon profil</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Paramètres</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon color="warn">exit_to_app</mat-icon>
+        <span class="logout-text">Déconnexion</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="GETFILTERS_">
+          <DataField>GETFILTERS_</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="PaymentClass">
+          <DataField>PaymentClass</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Bordereau_d_encaissement_JournalierCaption">
+          <DataField>Bordereau_d_encaissement_JournalierCaption</DataField>
+        </Field>
+        <Field Name="Filtre_BordereauCaption">
+          <DataField>Filtre_BordereauCaption</DataField>
+        </Field>
+        <Field Name="N__bordereauCaption">
+          <DataField>N__bordereauCaption</DataField>
+        </Field>
+        <Field Name="MontantCaption">
+          <DataField>MontantCaption</DataField>
+        </Field>
+        <Field Name="Code_FournisseursCaption">
+          <DataField>Code_FournisseursCaption</DataField>
+        </Field>
+        <Field Name="N__Doc_ExterneCaption">
+          <DataField>N__Doc_ExterneCaption</DataField>
+        </Field>
+        <Field Name="Nom_FournisseursCaption">
+          <DataField>Nom_FournisseursCaption</DataField>
+        </Field>
+        <Field Name="BANKCaption">
+          <DataField>BANKCaption</DataField>
+        </Field>
+        <Field Name="CommentaireCaption">
+          <DataField>CommentaireCaption</DataField>
+        </Field>
+        <Field Name="EcheanceCaption">
+          <DataField>EcheanceCaption</DataField>
+        </Field>
+        <Field Name="Type_de_réglementCaption">
+          <DataField>Type_de_réglementCaption</DataField>
+        </Field>
+        <Field Name="N__De_FactureCaption">
+          <DataField>N__De_FactureCaption</DataField>
+        </Field>
+        <Field Name="Total__Caption">
+          <DataField>Total__Caption</DataField>
+        </Field>
+        <Field Name="ReportForNavId_8">
+          <DataField>ReportForNavId_8</DataField>
+        </Field>
+        <Field Name="PaymentLineCommentaires">
+          <DataField>PaymentLineCommentaires</DataField>
+        </Field>
+        <Field Name="Facture">
+          <DataField>Facture</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo">
+          <DataField>ExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="PaymentLineDueDate">
+          <DataField>PaymentLineDueDate</DataField>
+        </Field>
+        <Field Name="RecBanqueName">
+          <DataField>RecBanqueName</DataField>
+        </Field>
+        <Field Name="PaymentLineLibelle">
+          <DataField>PaymentLineLibelle</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="Amount2">
+          <DataField>Amount2</DataField>
+        </Field>
+        <Field Name="Amount2Format">
+          <DataField>Amount2Format</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

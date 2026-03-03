@@ -1,25 +1,95 @@
 using Microsoft.AspNetCore.Mvc;
-using Soroubat.Api.Models;   // Pour trouver JobTaskDto
-using Soroubat.Api.Services; // Pour trouver IJobTaskService
+using Soroubat.Api.Models;
+using Soroubat.Api.Services;
 
 namespace Soroubat.Api.Controllers
 {
-    [ApiController] //Indique à ASP.NET Core que cette classe n'est pas une page web classique, mais une API REST
-    [Route("api/[controller]")] //http://localhost:5227/api/jobtasks dans notre cas . Angular envoie une requête HTTP de type GET vers l'URL http://localhost:5227/api/jobtasks, et ASP.NET Core sait que cette requête doit être traitée par la méthode GetTasks() de cette classe.
+    [ApiController]
+    [Route("api/[controller]")]
     public class JobTasksController : ControllerBase
     {
         private readonly IJobTaskService _service;
 
-        public JobTasksController(IJobTaskService service) // consommation du service : ASP.NET Core va automatiquement injecter une instance de BusinessCentralService (grâce à l'enregistrement que tu as fait dans Program.cs) dans ce constructeur lorsque quelqu'un crée une instance de JobTasksController. C'est ce qu'on appelle l'injection de dépendance.
+        public JobTasksController(IJobTaskService service)
         { 
             _service = service; 
         }
 
+        // GET: api/jobtasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<JobTaskDto>>> GetTasks() // ActionResult est une classe qui encapsule une réponse HTTP. Elle peut contenir des données (comme votre liste de tâches) et un code de statut (200, 404, etc.). IEnumerable<JobTaskDto> indique que la réponse contiendra une collection de JobTaskDto.
+        public async Task<ActionResult<IEnumerable<JobTaskDto>>> GetTasks()
         {
             var tasks = await _service.GetAllTasksAsync();
-            return Ok(tasks); // Le Ok() génère un code de statut HTTP 200 . Il transforme automatiquement votre liste d'objets C# en format JSON pour qu'Angular puisse le lire.
+            return Ok(tasks);
+        }
+
+        // GET: api/jobtasks/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<JobTaskDto>> GetTask(string id)
+        {
+            var task = await _service.GetTaskByIdAsync(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return Ok(task);
+        }
+
+        // GET: api/jobtasks/project/{projectId}
+        [HttpGet("project/{projectId}")]
+        public async Task<ActionResult<IEnumerable<JobTaskDto>>> GetTasksByProject(string projectId)
+        {
+            var tasks = await _service.GetTasksByProjectIdAsync(projectId);
+            return Ok(tasks);
+        }
+
+        // PATCH: api/jobtasks/{id}/progress
+        [HttpPatch("{id}/progress")]
+        public async Task<IActionResult> UpdateTaskProgress(string id, [FromBody] int progress)
+        {
+            var result = await _service.UpdateTaskProgressAsync(id, progress);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return Ok(new { message = "Progression mise à jour avec succès" });
+        }
+
+        // POST: api/jobtasks
+        [HttpPost]
+        public async Task<ActionResult<JobTaskDto>> CreateTask([FromBody] JobTaskDto task)
+        {
+            var createdTask = await _service.CreateTaskAsync(task);
+            return CreatedAtAction(nameof(GetTask), new { id = createdTask.TaskNo }, createdTask);
+        }
+
+        // PUT: api/jobtasks/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTask(string id, [FromBody] JobTaskDto task)
+        {
+            if (id != task.TaskNo)
+            {
+                return BadRequest();
+            }
+
+            var result = await _service.UpdateTaskAsync(id, task);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        // DELETE: api/jobtasks/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTask(string id)
+        {
+            var result = await _service.DeleteTaskAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }

@@ -1,0 +1,167 @@
+<!-- auth/login/login.component.html -->
+<div class="split-container">
+  <!-- Partie gauche - Bannière/image -->
+  <div class="left-panel">
+    <div class="brand-content">
+      <h1 class="brand-title">SOROUBAT</h1>
+      <p class="brand-subtitle">Plateforme intelligente de gestion de chantiers</p>
+      
+      <div class="features">
+        <div class="feature-item">
+          <mat-icon class="feature-icon">assignment</mat-icon>
+          <span>Gestion de projets & tâches</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">shopping_cart</mat-icon>
+          <span>Demandes d'achat simplifiées</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">inventory</mat-icon>
+          <span>Gestion de stock par chantier</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">construction</mat-icon>
+          <span>Pointage main-d'œuvre & engins</span>
+        </div>
+      </div>
+
+      <div class="integration-badge">
+        <span>Intégré à</span>
+        <strong>Microsoft Dynamics 365</strong>
+        <span>&</span>
+        <strong>Power BI</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partie droite - Formulaire de connexion -->
+  <div class="right-panel">
+    <mat-card class="login-card">
+      <!-- Logo et en-tête -->
+      <div class="login-header">
+        <div class="logo-container">
+          
+          <div class="logo-fallback">SOROUBAT</div>
+        </div>
+        <h2>Bienvenue</h2>
+        <p class="welcome-text">Connectez-vous pour accéder à votre espace</p>
+      </div>
+
+      <!-- Message d'erreur -->
+      <div class="error-message" *ngIf="errorMessage">
+        <mat-icon color="warn">error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <!-- Formulaire -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        
+        <!-- Champ Nom d'utilisateur -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input 
+            matInput 
+            formControlName="username" 
+            placeholder="Entrez votre nom d'utilisateur"
+            autocomplete="username"
+          >
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+            Nom d'utilisateur requis
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('minlength')">
+            Minimum 3 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Champ Mot de passe -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input 
+            matInput 
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="Entrez votre mot de passe"
+            autocomplete="current-password"
+          >
+          <mat-icon matPrefix>lock</mat-icon>
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Afficher mot de passe'"
+          >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Mot de passe requis
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+            Minimum 4 caractères
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Options supplémentaires -->
+        <div class="login-options">
+          <mat-checkbox formControlName="rememberMe" color="primary">
+            Se souvenir de moi
+          </mat-checkbox>
+          <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+        </div>
+
+        <!-- Bouton de connexion -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          class="login-button"
+          [disabled]="loginForm.invalid || isLoading"
+        >
+          <span *ngIf="!isLoading">Se connecter</span>
+          <mat-spinner diameter="24" *ngIf="isLoading"></mat-spinner>
+        </button>
+
+        <div class="separator">
+          <span>OU</span>
+        </div>
+
+        <!-- Section démo -->
+        <div class="demo-section">
+          <p class="demo-title">🔐 Comptes de démonstration :</p>
+          <div class="demo-buttons">
+            <button 
+              type="button" 
+              class="demo-btn chef" 
+              (click)="setDemoCredentials('chef', 'chef123')"
+            >
+              <mat-icon>engineering</mat-icon>
+              Chef
+            </button>
+            <button 
+              type="button" 
+              class="demo-btn resp" 
+              (click)="setDemoCredentials('resp', 'resp123')"
+            >
+              <mat-icon>supervisor_account</mat-icon>
+              Responsable
+            </button>
+            <button 
+              type="button" 
+              class="demo-btn admin" 
+              (click)="setDemoCredentials('admin', 'admin123')"
+            >
+              <mat-icon>admin_panel_settings</mat-icon>
+              Admin
+            </button>
+          </div>
+          <p class="demo-hint">Cliquez sur un rôle pour remplir automatiquement</p>
+        </div>
+      </form>
+
+      <div class="login-footer">
+        <p>&copy; 2026 SOROUBAT - Démo PFE</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="RecPaymentMethod_Description">
+          <DataField>RecPaymentMethod_Description</DataField>
+        </Field>
+        <Field Name="ReportForNavId_4">
+          <DataField>ReportForNavId_4</DataField>
+        </Field>
+        <Field Name="ReportForNavId_5">
+          <DataField>ReportForNavId_5</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderDateDA">
+          <DataField>PurchaseHeaderDateDA</DataField>
+        </Field>
+        <Field Name="ROUND_DecLinAmount_1">
+          <DataField>ROUND_DecLinAmount_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecLinAmount_1Format">
+          <DataField>ROUND_DecLinAmount_1Format</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderShipmentRemark">
+          <DataField>PurchaseHeaderShipmentRemark</DataField>
+        </Field>
+        <Field Name="RecPaymentMethod_Description2">
+          <DataField>RecPaymentMethod_Description2</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderLocation">
+          <DataField>PurchaseHeaderLocation</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderPayToAdress">
+          <DataField>PurchaseHeaderPayToAdress</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderPaytoName">
+          <DataField>PurchaseHeaderPaytoName</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderNo">
+          <DataField>PurchaseHeaderNo</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderOrderDate">
+          <DataField>PurchaseHeaderOrderDate</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderNODA">
+          <DataField>PurchaseHeaderNODA</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderVendorOrderNo">
+          <DataField>PurchaseHeaderVendorOrderNo</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderRequestReceipdate">
+          <DataField>PurchaseHeaderRequestReceipdate</DataField>
+        </Field>
+        <Field Name="PurchaseHeaderN_Demandedachat">
+          <DataField>PurchaseHeaderN_Demandedachat</DataField>
+        </Field>
+        <Field Name="G_RecVendCompteContribuable">
+          <DataField>G_RecVendCompteContribuable</DataField>
+        </Field>
+        <Field Name="G_RecVend_PhoneNo">
+          <DataField>G_RecVend_PhoneNo</DataField>
+        </Field>
+        <Field Name="G_RecVend_FaxNo">
+          <DataField>G_RecVend_FaxNo</DataField>
+        </Field>
+        <Field Name="G_RecVend_Address">
+          <DataField>G_RecVend_Address</DataField>
+        </Field>
+        <Field Name="ROUND_DecMontantTVA_1">
+          <DataField>ROUND_DecMontantTVA_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecMontantTVA_1Format">
+          <DataField>ROUND_DecMontantTVA_1Format</DataField>
+        </Field>
+        <Field Name="ROUND_DecAmountIncludingVAt_DecAcompte_1">
+          <DataField>ROUND_DecAmountIncludingVAt_DecAcompte_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecAmountIncludingVAt_DecAcompte_1Format">
+          <DataField>ROUND_DecAmountIncludingVAt_DecAcompte_1Format</DataField>
+        </Field>
+        <Field Name="ROUND_DecAcompte_1">
+          <DataField>ROUND_DecAcompte_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecAcompte_1Format">
+          <DataField>ROUND_DecAcompte_1Format</DataField>
+        </Field>
+        <Field Name="ROUND_DecAmountIncludingVAt_1">
+          <DataField>ROUND_DecAmountIncludingVAt_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecAmountIncludingVAt_1Format">
+          <DataField>ROUND_DecAmountIncludingVAt_1Format</DataField>
+        </Field>
+        <Field Name="ROUND_DecDiscountAmount_1">
+          <DataField>ROUND_DecDiscountAmount_1</DataField>
+        </Field>
+        <Field Name="ROUND_DecDiscountAmount_1Format">
+          <DataField>ROUND_DecDiscountAmount_1Format</DataField>
+        </Field>
+        <Field Name="DecTauxTva">
+          <DataField>DecTauxTva</DataField>
+        </Field>
+        <Field Name="DecTauxTvaFormat">
+          <DataField>DecTauxTvaFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_20">
+          <DataField>ReportForNavId_20</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineAmount">
+          <DataField>PurchaseLine_LineAmount</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineAmountFormat">
+          <DataField>PurchaseLine_LineAmountFormat</DataField>
+        </Field>
+        <Field Name="PurchaseLine_DirectUnitCost">
+          <DataField>PurchaseLine_DirectUnitCost</DataField>
+        </Field>
+        <Field Name="PurchaseLine_DirectUnitCostFormat">
+          <DataField>PurchaseLine_DirectUnitCostFormat</DataField>
+        </Field>
+        <Field Name="PurchaseLine_No">
+          <DataField>PurchaseLine_No</DataField>
+        </Field>
+        <Field Name="PurchaseLine_Desc">
+          <DataField>PurchaseLine_Desc</DataField>
+        </Field>
+        <Field Name="PurchaseLine_Quantity">
+          <DataField>PurchaseLine_Quantity</DataField>
+        </Field>
+        <Field Name="PurchaseLine_QuantityFormat">
+          <DataField>PurchaseLine_QuantityFormat</DataField>
+        </Field>
+        <Field Name="PurchaseLine_DirectUnitPrice">
+          <DataField>PurchaseLine_DirectUnitPrice</DataField>
+        </Field>
+        <Field Name="PurchaseLine_DirectUnitPriceFormat">
+          <DataField>PurchaseLine_DirectUnitPriceFormat</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineDiscount">
+          <DataField>PurchaseLine_LineDiscount</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineDiscountFormat">
+          <DataField>PurchaseLine_LineDiscountFormat</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineAount">
+          <DataField>PurchaseLine_LineAount</DataField>
+        </Field>
+        <Field Name="PurchaseLine_LineAountFormat">
+          <DataField>PurchaseLine_LineAountFormat</DataField>
+        </Field>
+        <Field Name="TextGMnt">
+          <DataField>TextGMnt</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

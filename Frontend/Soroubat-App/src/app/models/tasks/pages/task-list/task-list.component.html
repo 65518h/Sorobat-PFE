@@ -1,0 +1,171 @@
+<div class="tasks-container">
+  <!-- En-tête avec titre et actions -->
+  <div class="header">
+    <h1>Liste des tâches</h1>
+    <div class="header-actions">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Rechercher</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. projet, description..." #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="exportToCSV()">
+        <mat-icon>download</mat-icon>
+        Exporter
+      </button>
+    </div>
+  </div>
+
+  <!-- Statistiques -->
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-value">{{ tasks.length }}</div>
+        <div class="stat-label">Total tâches</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-value">{{ getCompletedTasksCount() }}</div>
+        <div class="stat-label">Terminées</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-value">{{ getInProgressTasksCount() }}</div>
+        <div class="stat-label">En cours</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-value">{{ getBlockedTasksCount() }}</div>
+        <div class="stat-label">Bloquées</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Tableau Material -->
+  <mat-card class="tasks-table-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="tasks-table" matSort>
+
+        <!-- Colonne Projet -->
+        <ng-container matColumnDef="jobNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Projet </th>
+          <td mat-cell *matCellDef="let task">
+            <span class="project-badge">{{ task.jobNo }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Tâche -->
+        <ng-container matColumnDef="taskNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tâche </th>
+          <td mat-cell *matCellDef="let task"> {{ task.taskNo }} </td>
+        </ng-container>
+
+        <!-- Colonne Description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let task">
+            <div class="description-cell">
+              <span class="description-text">{{ task.description }}</span>
+              <span class="task-id" *ngIf="task.id">#{{ task.id }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Début -->
+        <ng-container matColumnDef="dateDebut">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Début </th>
+          <td mat-cell *matCellDef="let task">
+            <div class="date-cell">
+              <mat-icon class="date-icon">event</mat-icon>
+              {{ task.dateDebut | date:'dd/MM/yyyy' }}
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Fin -->
+        <ng-container matColumnDef="dateFin">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin </th>
+          <td mat-cell *matCellDef="let task">
+            <div class="date-cell" [class.overdue]="isOverdue(task)">
+              <mat-icon class="date-icon">event</mat-icon>
+              {{ task.dateFin | date:'dd/MM/yyyy' }}
+              <mat-icon *ngIf="isOverdue(task)" class="warning-icon" color="warn">warning</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Statut -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+          <td mat-cell *matCellDef="let task">
+            <mat-chip-set>
+              <mat-chip [class]="getStatusClass(task)" selected>
+                <mat-icon *ngIf="task.isBlocked" class="chip-icon">block</mat-icon>
+                <mat-icon *ngIf="!task.isBlocked && task.progressPct === 100" class="chip-icon">check_circle</mat-icon>
+                <mat-icon *ngIf="!task.isBlocked && task.progressPct > 0 && task.progressPct < 100" class="chip-icon">pending</mat-icon>
+                <mat-icon *ngIf="!task.isBlocked && task.progressPct === 0" class="chip-icon">schedule</mat-icon>
+                {{ getStatusText(task) }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Avancement -->
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Avancement </th>
+          <td mat-cell *matCellDef="let task">
+            <div class="progress-cell">
+              <div class="progress-bar-container">
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="task.progressPct"
+                  [color]="getProgressColor(task)">
+                </mat-progress-bar>
+                <div class="progress-label" [style.left.%]="task.progressPct" *ngIf="task.progressPct > 5">
+                  <span>{{ task.progressPct }}%</span>
+                </div>
+              </div>
+              <span class="progress-value" *ngIf="task.progressPct <= 5">{{ task.progressPct }}%</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let task">
+            <button mat-icon-button color="primary" (click)="editTask(task)" matTooltip="Modifier">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="viewTask(task)" matTooltip="Voir détails">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteTask(task)" matTooltip="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Ligne quand aucun résultat -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+            <mat-icon>info</mat-icon>
+            <p>Aucune tâche trouvée</p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Pagination -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

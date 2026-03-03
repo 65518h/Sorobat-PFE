@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Afficher">
+          <DataField>Afficher</DataField>
+        </Field>
+        <Field Name="Véhicule__No_Vehicule_">
+          <DataField>Véhicule__No_Vehicule_</DataField>
+        </Field>
+        <Field Name="Val1_1_">
+          <DataField>Val1_1_</DataField>
+        </Field>
+        <Field Name="Val1_2_">
+          <DataField>Val1_2_</DataField>
+        </Field>
+        <Field Name="Val1_3_">
+          <DataField>Val1_3_</DataField>
+        </Field>
+        <Field Name="Val1_6_">
+          <DataField>Val1_6_</DataField>
+        </Field>
+        <Field Name="Val1_5_">
+          <DataField>Val1_5_</DataField>
+        </Field>
+        <Field Name="Val1_4_">
+          <DataField>Val1_4_</DataField>
+        </Field>
+        <Field Name="Val1_9_">
+          <DataField>Val1_9_</DataField>
+        </Field>
+        <Field Name="Val1_8_">
+          <DataField>Val1_8_</DataField>
+        </Field>
+        <Field Name="Val1_7_">
+          <DataField>Val1_7_</DataField>
+        </Field>
+        <Field Name="Val1_12_">
+          <DataField>Val1_12_</DataField>
+        </Field>
+        <Field Name="Val1_11_">
+          <DataField>Val1_11_</DataField>
+        </Field>
+        <Field Name="Val1_10_">
+          <DataField>Val1_10_</DataField>
+        </Field>
+        <Field Name="Val1_15_">
+          <DataField>Val1_15_</DataField>
+        </Field>
+        <Field Name="Val1_14_">
+          <DataField>Val1_14_</DataField>
+        </Field>
+        <Field Name="Val1_13_">
+          <DataField>Val1_13_</DataField>
+        </Field>
+        <Field Name="Val1_31_">
+          <DataField>Val1_31_</DataField>
+        </Field>
+        <Field Name="Val1_30_">
+          <DataField>Val1_30_</DataField>
+        </Field>
+        <Field Name="Val1_29_">
+          <DataField>Val1_29_</DataField>
+        </Field>
+        <Field Name="Val1_28_">
+          <DataField>Val1_28_</DataField>
+        </Field>
+        <Field Name="Val1_27_">
+          <DataField>Val1_27_</DataField>
+        </Field>
+        <Field Name="Val1_26_">
+          <DataField>Val1_26_</DataField>
+        </Field>
+        <Field Name="Val1_25_">
+          <DataField>Val1_25_</DataField>
+        </Field>
+        <Field Name="Val1_24_">
+          <DataField>Val1_24_</DataField>
+        </Field>
+        <Field Name="Val1_23_">
+          <DataField>Val1_23_</DataField>
+        </Field>
+        <Field Name="Val1_22_">
+          <DataField>Val1_22_</DataField>
+        </Field>
+        <Field Name="Val1_21_">
+          <DataField>Val1_21_</DataField>
+        </Field>
+        <Field Name="Val1_20_">
+          <DataField>Val1_20_</DataField>
+        </Field>
+        <Field Name="Val1_19_">
+          <DataField>Val1_19_</DataField>
+        </Field>
+        <Field Name="Val1_18_">
+          <DataField>Val1_18_</DataField>
+        </Field>
+        <Field Name="Val1_17_">
+          <DataField>Val1_17_</DataField>
+        </Field>
+        <Field Name="Val1_16_">
+          <DataField>Val1_16_</DataField>
+        </Field>
+        <Field Name="NbrF">
+          <DataField>NbrF</DataField>
+        </Field>
+        <Field Name="NbrD">
+          <DataField>NbrD</DataField>
+        </Field>
+        <Field Name="NbrP">
+          <DataField>NbrP</DataField>
+        </Field>
+        <Field Name="CatégorieVéhicule_Désignation">
+          <DataField>CatégorieVéhicule_Désignation</DataField>
+        </Field>
+        <Field Name="TxtChaffeur">
+          <DataField>TxtChaffeur</DataField>
+        </Field>
+        <Field Name="Véhicule__No_Vehicule__Control1000000233">
+          <DataField>Véhicule__No_Vehicule__Control1000000233</DataField>
+        </Field>
+        <Field Name="Val1_1__Control1000000235">
+          <DataField>Val1_1__Control1000000235</DataField>
+        </Field>
+        <Field Name="Val1_2__Control1000000236">
+          <DataField>Val1_2__Control1000000236</DataField>
+        </Field>
+        <Field Name="Val1_3__Control1000000237">
+          <DataField>Val1_3__Control1000000237</DataField>
+        </Field>
+        <Field Name="Val1_6__Control1000000239">
+          <DataField>Val1_6__Control1000000239</DataField>
+        </Field>
+        <Field Name="Val1_5__Control1000000240">
+          <DataField>Val1_5__Control1000000240</DataField>
+        </Field>
+        <Field Name="Val1_4__Control1000000241">
+          <DataField>Val1_4__Control1000000241</DataField>
+        </Field>
+        <Field Name="Val1_9__Control1000000242">
+          <DataField>Val1_9__Control1000000242</DataField>
+        </Field>
+        <Field Name="Val1_8__Control1000000243">
+          <DataField>Val1_8__Control1000000243</DataField>
+        </Field>
+        <Field Name="Val1_7__Control1000000244">
+          <DataField>Val1_7__Control1000000244</DataField>
+        </Field>
+        <Field Name="Val1_12__Control1000000277">
+          <DataField>Val1_12__Control1000000277</DataField>
+        </Field>
+        <Field Name="Val1_11__Control1000000279">
+          <DataField>Val1_11__Control1000000279</DataField>
+        </Field>
+        <Field Name="Val1_10__Control1000000280">
+          <DataField>Val1_10__Control1000000280</DataField>
+        </Field>
+        <Field Name="Val1_15__Control1000000281">
+          <DataField>Val1_15__Control1000000281</DataField>
+        </Field>
+        <Field Name="Val1_14__Control1000000282">
+          <DataField>Val1_14__Control1000000282</DataField>
+        </Field>
+        <Field Name="Val1_13__Control1000000283">
+          <DataField>Val1_13__Control1000000283</DataField>
+        </Field>
+        <Field Name="Val1_31__Control1000000284">
+          <DataField>Val1_31__Control1000000284</DataField>
+        </Field>
+        <Field Name="Val1_30__Control1000000285">
+          <DataField>Val1_30__Control1000000285</DataField>
+        </Field>
+        <Field Name="Val1_29__Control1000000286">
+          <DataField>Val1_29__Control1000000286</DataField>
+        </Field>
+        <Field Name="Val1_28__Control1000000287">
+          <DataField>Val1_28__Control1000000287</DataField>
+        </Field>
+        <Field Name="Val1_27__Control1000000288">
+          <DataField>Val1_27__Control1000000288</DataField>
+        </Field>
+        <Field Name="Val1_26__Control1000000289">
+          <DataField>Val1_26__Control1000000289</DataField>
+        </Field>
+        <Field Name="Val1_25__Control1000000290">
+          <DataField>Val1_25__Control1000000290</DataField>
+        </Field>
+        <Field Name="Val1_24__Control1000000291">
+          <DataField>Val1_24__Control1000000291</DataField>
+        </Field>
+        <Field Name="Val1_23__Control1000000292">
+          <DataField>Val1_23__Control1000000292</DataField>
+        </Field>
+        <Field Name="Val1_22__Control1000000293">
+          <DataField>Val1_22__Control1000000293</DataField>
+        </Field>
+        <Field Name="Val1_21__Control1000000295">
+          <DataField>Val1_21__Control1000000295</DataField>
+        </Field>
+        <Field Name="Val1_20__Control1000000296">
+          <DataField>Val1_20__Control1000000296</DataField>
+        </Field>
+        <Field Name="Val1_19__Control1000000297">
+          <DataField>Val1_19__Control1000000297</DataField>
+        </Field>
+        <Field Name="Val1_18__Control1000000298">
+          <DataField>Val1_18__Control1000000298</DataField>
+        </Field>
+        <Field Name="Val1_17__Control1000000299">
+          <DataField>Val1_17__Control1000000299</DataField>
+        </Field>
+        <Field Name="Val1_16__Control1000000300">
+          <DataField>Val1_16__Control1000000300</DataField>
+        </Field>
+        <Field Name="Val3_31_">
+          <DataField>Val3_31_</DataField>
+        </Field>
+        <Field Name="Val3_30_">
+          <DataField>Val3_30_</DataField>
+        </Field>
+        <Field Name="Val3_29_">
+          <DataField>Val3_29_</DataField>
+        </Field>
+        <Field Name="Val3_28_">
+          <DataField>Val3_28_</DataField>
+        </Field>
+        <Field Name="Val3_27_">
+          <DataField>Val3_27_</DataField>
+        </Field>
+        <Field Name="Val3_26_">
+          <DataField>Val3_26_</DataField>
+        </Field>
+        <Field Name="Val3_25_">
+          <DataField>Val3_25_</DataField>
+        </Field>
+        <Field Name="Val3_24_">
+          <DataField>Val3_24_</DataField>
+        </Field>
+        <Field Name="Val3_23_">
+          <DataField>Val3_23_</DataField>
+        </Field>
+        <Field Name="Val3_22_">
+          <DataField>Val3_22_</DataField>
+        </Field>
+        <Field Name="Val3_21_">
+          <DataField>Val3_21_</DataField>
+        </Field>
+        <Field Name="Val3_20_">
+          <DataField>Val3_20_</DataField>
+        </Field>
+        <Field Name="Val3_19_">
+          <DataField>Val3_19_</DataField>
+        </Field>
+        <Field Name="Val3_18_">
+          <DataField>Val3_18_</DataField>
+        </Field>
+        <Field Name="Val3_17_">
+          <DataField>Val3_17_</DataField>
+        </Field>
+        <Field Name="Val3_16_">
+          <DataField>Val3_16_</DataField>
+        </Field>
+        <Field Name="Val3_15_">
+          <DataField>Val3_15_</DataField>
+        </Field>
+        <Field Name="Val3_14_">
+          <DataField>Val3_14_</DataField>
+        </Field>
+        <Field Name="Val3_13_">
+          <DataField>Val3_13_</DataField>
+        </Field>
+        <Field Name="Val3_12_">
+          <DataField>Val3_12_</DataField>
+        </Field>
+        <Field Name="Val3_11_">
+          <DataField>Val3_11_</DataField>
+        </Field>
+        <Field Name="Val3_10_">
+          <DataField>Val3_10_</DataField>
+        </Field>
+        <Field Name="Val3_9_">
+          <DataField>Val3_9_</DataField>
+        </Field>
+        <Field Name="Val3_8_">
+          <DataField>Val3_8_</DataField>
+        </Field>
+        <Field Name="Val3_7_">
+          <DataField>Val3_7_</DataField>
+        </Field>
+        <Field Name="Val3_6_">
+          <DataField>Val3_6_</DataField>
+        </Field>
+        <Field Name="Val3_5_">
+          <DataField>Val3_5_</DataField>
+        </Field>
+        <Field Name="Val3_4_">
+          <DataField>Val3_4_</DataField>
+        </Field>
+        <Field Name="Val3_3_">
+          <DataField>Val3_3_</DataField>
+        </Field>
+        <Field Name="Val3_2_">
+          <DataField>Val3_2_</DataField>
+        </Field>
+        <Field Name="Val3_1_">
+          <DataField>Val3_1_</DataField>
+        </Field>
+        <Field Name="Val2_1_">
+          <DataField>Val2_1_</DataField>
+        </Field>
+        <Field Name="Val2_2_">
+          <DataField>Val2_2_</DataField>
+        </Field>
+        <Field Name="Val2_3_">
+          <DataField>Val2_3_</DataField>
+        </Field>
+        <Field Name="Val2_6_">
+          <DataField>Val2_6_</DataField>
+        </Field>
+        <Field Name="Val2_5_">
+          <DataField>Val2_5_</DataField>
+        </Field>
+        <Field Name="Val2_4_">
+          <DataField>Val2_4_</DataField>
+        </Field>
+        <Field Name="Val2_9_">
+          <DataField>Val2_9_</DataField>
+        </Field>
+        <Field Name="Val2_8_">
+          <DataField>Val2_8_</DataField>
+        </Field>
+        <Field Name="Val2_7_">
+          <DataField>Val2_7_</DataField>
+        </Field>
+        <Field Name="Val2_12_">
+          <DataField>Val2_12_</DataField>
+        </Field>
+        <Field Name="Val2_11_">
+          <DataField>Val2_11_</DataField>
+        </Field>
+        <Field Name="Val2_10_">
+          <DataField>Val2_10_</DataField>
+        </Field>
+        <Field Name="Val2_15_">
+          <DataField>Val2_15_</DataField>
+        </Field>
+        <Field Name="Val2_14_">
+          <DataField>Val2_14_</DataField>
+        </Field>
+        <Field Name="Val2_13_">
+          <DataField>Val2_13_</DataField>
+        </Field>
+        <Field Name="Val2_31_">
+          <DataField>Val2_31_</DataField>
+        </Field>
+        <Field Name="Val2_30_">
+          <DataField>Val2_30_</DataField>
+        </Field>
+        <Field Name="Val2_29_">
+          <DataField>Val2_29_</DataField>
+        </Field>
+        <Field Name="Val2_28_">
+          <DataField>Val2_28_</DataField>
+        </Field>
+        <Field Name="Val2_27_">
+          <DataField>Val2_27_</DataField>
+        </Field>
+        <Field Name="Val2_26_">
+          <DataField>Val2_26_</DataField>
+        </Field>
+        <Field Name="Val2_25_">
+          <DataField>Val2_25_</DataField>
+        </Field>
+        <Field Name="Val2_24_">
+          <DataField>Val2_24_</DataField>
+        </Field>
+        <Field Name="Val2_23_">
+          <DataField>Val2_23_</DataField>
+        </Field>
+        <Field Name="Val2_22_">
+          <DataField>Val2_22_</DataField>
+        </Field>
+        <Field Name="Val2_21_">
+          <DataField>Val2_21_</DataField>
+        </Field>
+        <Field Name="Val2_20_">
+          <DataField>Val2_20_</DataField>
+        </Field>
+        <Field Name="Val2_19_">
+          <DataField>Val2_19_</DataField>
+        </Field>
+        <Field Name="Val2_18_">
+          <DataField>Val2_18_</DataField>
+        </Field>
+        <Field Name="Val2_17_">
+          <DataField>Val2_17_</DataField>
+        </Field>
+        <Field Name="Val2_16_">
+          <DataField>Val2_16_</DataField>
+        </Field>
+        <Field Name="V31Caption">
+          <DataField>V31Caption</DataField>
+        </Field>
+        <Field Name="V30Caption">
+          <DataField>V30Caption</DataField>
+        </Field>
+        <Field Name="V29Caption">
+          <DataField>V29Caption</DataField>
+        </Field>
+        <Field Name="V28Caption">
+          <DataField>V28Caption</DataField>
+        </Field>
+        <Field Name="V27Caption">
+          <DataField>V27Caption</DataField>
+        </Field>
+        <Field Name="V26Caption">
+          <DataField>V26Caption</DataField>
+        </Field>
+        <Field Name="V25Caption">
+          <DataField>V25Caption</DataField>
+        </Field>
+        <Field Name="V24Caption">
+          <DataField>V24Caption</DataField>
+        </Field>
+        <Field Name="V23Caption">
+          <DataField>V23Caption</DataField>
+        </Field>
+        <Field Name="V22Caption">
+          <DataField>V22Caption</DataField>
+        </Field>
+        <Field Name="V21Caption">
+          <DataField>V21Caption</DataField>
+        </Field>
+        <Field Name="V20Caption">
+          <DataField>V20Caption</DataField>
+        </Field>
+        <Field Name="V19Caption">
+          <DataField>V19Caption</DataField>
+        </Field>
+        <Field Name="V18Caption">
+          <DataField>V18Caption</DataField>
+        </Field>
+        <Field Name="V17Caption">
+          <DataField>V17Caption</DataField>
+        </Field>
+        <Field Name="V16Caption">
+          <DataField>V16Caption</DataField>
+        </Field>
+        <Field Name="V15Caption">
+          <DataField>V15Caption</DataField>
+        </Field>
+        <Field Name="V14Caption">
+          <DataField>V14Caption</DataField>
+        </Field>
+        <Field Name="V13Caption">
+          <DataField>V13Caption</DataField>
+        </Field>
+        <Field Name="V12Caption">
+          <DataField>V12Caption</DataField>
+        </Field>
+        <Field Name="V11Caption">
+          <DataField>V11Caption</DataField>
+        </Field>
+        <Field Name="V10Caption">
+          <DataField>V10Caption</DataField>
+        </Field>
+        <Field Name="V9Caption">
+          <DataField>V9Caption</DataField>
+        </Field>
+        <Field Name="V8Caption">
+          <DataField>V8Caption</DataField>
+        </Field>
+        <Field Name="V7Caption">
+          <DataField>V7Caption</DataField>
+        </Field>
+        <Field Name="V6Caption">
+          <DataField>V6Caption</DataField>
+        </Field>
+        <Field Name="V5Caption">
+          <DataField>V5Caption</DataField>
+        </Field>
+        <Field Name="V4Caption">
+          <DataField>V4Caption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="MaterielCaption">
+          <DataField>MaterielCaption</DataField>
+        </Field>
+        <Field Name="V1Caption">
+          <DataField>V1Caption</DataField>
+        </Field>
+        <Field Name="V2Caption">
+          <DataField>V2Caption</DataField>
+        </Field>
+        <Field Name="V3Caption">
+          <DataField>V3Caption</DataField>
+        </Field>
+        <Field Name="NBR_FCaption">
+          <DataField>NBR_FCaption</DataField>
+        </Field>
+        <Field Name="NBR_DCaption">
+          <DataField>NBR_DCaption</DataField>
+        </Field>
+        <Field Name="NBR_PCaption">
+          <DataField>NBR_PCaption</DataField>
+        </Field>
+        <Field Name="CHAUFFEURCaption">
+          <DataField>CHAUFFEURCaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

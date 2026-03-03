@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="Periodeant">
+          <DataField>Periodeant</DataField>
+        </Field>
+        <Field Name="Periode">
+          <DataField>Periode</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="Txt">
+          <DataField>Txt</DataField>
+        </Field>
+        <Field Name="G_L_Account__No__">
+          <DataField>G_L_Account__No__</DataField>
+        </Field>
+        <Field Name="G_L_Account_Name">
+          <DataField>G_L_Account_Name</DataField>
+        </Field>
+        <Field Name="MntdebitP_3_">
+          <DataField>MntdebitP_3_</DataField>
+        </Field>
+        <Field Name="MntdebitP_3_Format">
+          <DataField>MntdebitP_3_Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_3_">
+          <DataField>MntcreditP_3_</DataField>
+        </Field>
+        <Field Name="MntcreditP_3_Format">
+          <DataField>MntcreditP_3_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4_">
+          <DataField>MntdebitP_4__MntcreditP_4_</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4_Format">
+          <DataField>MntdebitP_4__MntcreditP_4_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4__">
+          <DataField>MntdebitP_4__MntcreditP_4__</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4__Format">
+          <DataField>MntdebitP_4__MntcreditP_4__Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__MntcreditP_2_">
+          <DataField>MntdebitP_2__MntcreditP_2_</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__MntcreditP_2_Format">
+          <DataField>MntdebitP_2__MntcreditP_2_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__MntcreditP_2__">
+          <DataField>MntdebitP_2__MntcreditP_2__</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__MntcreditP_2__Format">
+          <DataField>MntdebitP_2__MntcreditP_2__Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1__">
+          <DataField>MntdebitP_1__MntcreditP_1__</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1__Format">
+          <DataField>MntdebitP_1__MntcreditP_1__Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1_">
+          <DataField>MntdebitP_1__MntcreditP_1_</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1_Format">
+          <DataField>MntdebitP_1__MntcreditP_1_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4___Control1000000030">
+          <DataField>MntdebitP_4__MntcreditP_4___Control1000000030</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4___Control1000000030Format">
+          <DataField>MntdebitP_4__MntcreditP_4___Control1000000030Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4__Control1000000032">
+          <DataField>MntdebitP_4__MntcreditP_4__Control1000000032</DataField>
+        </Field>
+        <Field Name="MntdebitP_4__MntcreditP_4__Control1000000032Format">
+          <DataField>MntdebitP_4__MntcreditP_4__Control1000000032Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control1000000034">
+          <DataField>MntcreditP_3__Control1000000034</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control1000000034Format">
+          <DataField>MntcreditP_3__Control1000000034Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control1000000036">
+          <DataField>MntdebitP_3__Control1000000036</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control1000000036Format">
+          <DataField>MntdebitP_3__Control1000000036Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_2_">
+          <DataField>MntcreditP_2_</DataField>
+        </Field>
+        <Field Name="MntcreditP_2_Format">
+          <DataField>MntcreditP_2_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_2_">
+          <DataField>MntdebitP_2_</DataField>
+        </Field>
+        <Field Name="MntdebitP_2_Format">
+          <DataField>MntdebitP_2_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1___Control1000000042">
+          <DataField>MntdebitP_1__MntcreditP_1___Control1000000042</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1___Control1000000042Format">
+          <DataField>MntdebitP_1__MntcreditP_1___Control1000000042Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1__Control1000000044">
+          <DataField>MntdebitP_1__MntcreditP_1__Control1000000044</DataField>
+        </Field>
+        <Field Name="MntdebitP_1__MntcreditP_1__Control1000000044Format">
+          <DataField>MntdebitP_1__MntcreditP_1__Control1000000044Format</DataField>
+        </Field>
+        <Field Name="G_L_Account_Name_Control1000000045">
+          <DataField>G_L_Account_Name_Control1000000045</DataField>
+        </Field>
+        <Field Name="G_L_Account__No___Control1000000048">
+          <DataField>G_L_Account__No___Control1000000048</DataField>
+        </Field>
+        <Field Name="Mntdebit_1_">
+          <DataField>Mntdebit_1_</DataField>
+        </Field>
+        <Field Name="Mntdebit_1_Format">
+          <DataField>Mntdebit_1_Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_1_">
+          <DataField>Mntcredit_1_</DataField>
+        </Field>
+        <Field Name="Mntcredit_1_Format">
+          <DataField>Mntcredit_1_Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control181">
+          <DataField>MntdebitP_3__Control181</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control181Format">
+          <DataField>MntdebitP_3__Control181Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control183">
+          <DataField>MntcreditP_3__Control183</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control183Format">
+          <DataField>MntcreditP_3__Control183Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_4_">
+          <DataField>Mntdebit_4_</DataField>
+        </Field>
+        <Field Name="Mntdebit_4_Format">
+          <DataField>Mntdebit_4_Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_4_">
+          <DataField>Mntcredit_4_</DataField>
+        </Field>
+        <Field Name="Mntcredit_4_Format">
+          <DataField>Mntcredit_4_Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_2_">
+          <DataField>Mntcredit_2_</DataField>
+        </Field>
+        <Field Name="Mntcredit_2_Format">
+          <DataField>Mntcredit_2_Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_2_">
+          <DataField>Mntdebit_2_</DataField>
+        </Field>
+        <Field Name="Mntdebit_2_Format">
+          <DataField>Mntdebit_2_Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_1____MntcreditP_3_">
+          <DataField>Mntcredit_1____MntcreditP_3_</DataField>
+        </Field>
+        <Field Name="Mntcredit_1____MntcreditP_3_Format">
+          <DataField>Mntcredit_1____MntcreditP_3_Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_1____MntdebitP_3_">
+          <DataField>Mntdebit_1____MntdebitP_3_</DataField>
+        </Field>
+        <Field Name="Mntdebit_1____MntdebitP_3_Format">
+          <DataField>Mntdebit_1____MntdebitP_3_Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_4__Control1000000050">
+          <DataField>Mntcredit_4__Control1000000050</DataField>
+        </Field>
+        <Field Name="Mntcredit_4__Control1000000050Format">
+          <DataField>Mntcredit_4__Control1000000050Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_4__Control1000000051">
+          <DataField>Mntdebit_4__Control1000000051</DataField>
+        </Field>
+        <Field Name="Mntdebit_4__Control1000000051Format">
+          <DataField>Mntdebit_4__Control1000000051Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control1000000054">
+          <DataField>MntcreditP_3__Control1000000054</DataField>
+        </Field>
+        <Field Name="MntcreditP_3__Control1000000054Format">
+          <DataField>MntcreditP_3__Control1000000054Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control1000000056">
+          <DataField>MntdebitP_3__Control1000000056</DataField>
+        </Field>
+        <Field Name="MntdebitP_3__Control1000000056Format">
+          <DataField>MntdebitP_3__Control1000000056Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_1__Control1000000061">
+          <DataField>Mntcredit_1__Control1000000061</DataField>
+        </Field>
+        <Field Name="Mntcredit_1__Control1000000061Format">
+          <DataField>Mntcredit_1__Control1000000061Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_1__Control1000000063">
+          <DataField>Mntdebit_1__Control1000000063</DataField>
+        </Field>
+        <Field Name="Mntdebit_1__Control1000000063Format">
+          <DataField>Mntdebit_1__Control1000000063Format</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__Control1180250000">
+          <DataField>MntdebitP_2__Control1180250000</DataField>
+        </Field>
+        <Field Name="MntdebitP_2__Control1180250000Format">
+          <DataField>MntdebitP_2__Control1180250000Format</DataField>
+        </Field>
+        <Field Name="MntcreditP_2__Control1180250001">
+          <DataField>MntcreditP_2__Control1180250001</DataField>
+        </Field>
+        <Field Name="MntcreditP_2__Control1180250001Format">
+          <DataField>MntcreditP_2__Control1180250001Format</DataField>
+        </Field>
+        <Field Name="Mntdebit_1____MntdebitP_3__Control1000000089">
+          <DataField>Mntdebit_1____MntdebitP_3__Control1000000089</DataField>
+        </Field>
+        <Field Name="Mntdebit_1____MntdebitP_3__Control1000000089Format">
+          <DataField>Mntdebit_1____MntdebitP_3__Control1000000089Format</DataField>
+        </Field>
+        <Field Name="Mntcredit_1____MntcreditP_3__Control1000000093">
+          <DataField>Mntcredit_1____MntcreditP_3__Control1000000093</DataField>
+        </Field>
+        <Field Name="Mntcredit_1____MntcreditP_3__Control1000000093Format">
+          <DataField>Mntcredit_1____MntcreditP_3__Control1000000093Format</DataField>
+        </Field>
+        <Field Name="Rep">
+          <DataField>Rep</DataField>
+        </Field>
+        <Field Name="TypeImp">
+          <DataField>TypeImp</DataField>
+        </Field>
+        <Field Name="AccountType">
+          <DataField>AccountType</DataField>
+        </Field>
+        <Field Name="Mntdebit1">
+          <DataField>Mntdebit1</DataField>
+        </Field>
+        <Field Name="Mntdebit1Format">
+          <DataField>Mntdebit1Format</DataField>
+        </Field>
+        <Field Name="Mntcredit1">
+          <DataField>Mntcredit1</DataField>
+        </Field>
+        <Field Name="Mntcredit1Format">
+          <DataField>Mntcredit1Format</DataField>
+        </Field>
+        <Field Name="Mntdebit2">
+          <DataField>Mntdebit2</DataField>
+        </Field>
+        <Field Name="Mntdebit2Format">
+          <DataField>Mntdebit2Format</DataField>
+        </Field>
+        <Field Name="Mntcredit2">
+          <DataField>Mntcredit2</DataField>
+        </Field>
+        <Field Name="Mntcredit2Format">
+          <DataField>Mntcredit2Format</DataField>
+        </Field>
+        <Field Name="Mntdebit3">
+          <DataField>Mntdebit3</DataField>
+        </Field>
+        <Field Name="Mntdebit3Format">
+          <DataField>Mntdebit3Format</DataField>
+        </Field>
+        <Field Name="Mntcredit3">
+          <DataField>Mntcredit3</DataField>
+        </Field>
+        <Field Name="Mntcredit3Format">
+          <DataField>Mntcredit3Format</DataField>
+        </Field>
+        <Field Name="Mntdebit4">
+          <DataField>Mntdebit4</DataField>
+        </Field>
+        <Field Name="Mntdebit4Format">
+          <DataField>Mntdebit4Format</DataField>
+        </Field>
+        <Field Name="Mntcredit4">
+          <DataField>Mntcredit4</DataField>
+        </Field>
+        <Field Name="Mntcredit4Format">
+          <DataField>Mntcredit4Format</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="GENERAL_BALANCECaption">
+          <DataField>GENERAL_BALANCECaption</DataField>
+        </Field>
+        <Field Name="Previous_date__Caption">
+          <DataField>Previous_date__Caption</DataField>
+        </Field>
+        <Field Name="Period_date__Caption">
+          <DataField>Period_date__Caption</DataField>
+        </Field>
+        <Field Name="New_balancesCaption">
+          <DataField>New_balancesCaption</DataField>
+        </Field>
+        <Field Name="CREDITCaption">
+          <DataField>CREDITCaption</DataField>
+        </Field>
+        <Field Name="DEBITCaption">
+          <DataField>DEBITCaption</DataField>
+        </Field>
+        <Field Name="CréditCaption">
+          <DataField>CréditCaption</DataField>
+        </Field>
+        <Field Name="Month_AmountCaption">
+          <DataField>Month_AmountCaption</DataField>
+        </Field>
+        <Field Name="DébitCaption">
+          <DataField>DébitCaption</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control31">
+          <DataField>CréditCaption_Control31</DataField>
+        </Field>
+        <Field Name="Previous_balanceCaption">
+          <DataField>Previous_balanceCaption</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control50">
+          <DataField>DébitCaption_Control50</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control54">
+          <DataField>CréditCaption_Control54</DataField>
+        </Field>
+        <Field Name="Opening_BalanceCaption">
+          <DataField>Opening_BalanceCaption</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control73">
+          <DataField>DébitCaption_Control73</DataField>
+        </Field>
+        <Field Name="DescriptionCaption">
+          <DataField>DescriptionCaption</DataField>
+        </Field>
+        <Field Name="No_Caption">
+          <DataField>No_Caption</DataField>
+        </Field>
+        <Field Name="No_Caption_Control1180250003">
+          <DataField>No_Caption_Control1180250003</DataField>
+        </Field>
+        <Field Name="DescriptionCaption_Control1180250005">
+          <DataField>DescriptionCaption_Control1180250005</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250007">
+          <DataField>DébitCaption_Control1180250007</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250008">
+          <DataField>CréditCaption_Control1180250008</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250010">
+          <DataField>DébitCaption_Control1180250010</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250013">
+          <DataField>CréditCaption_Control1180250013</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250014">
+          <DataField>DébitCaption_Control1180250014</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250017">
+          <DataField>CréditCaption_Control1180250017</DataField>
+        </Field>
+        <Field Name="DEBITCaption_Control1180250018">
+          <DataField>DEBITCaption_Control1180250018</DataField>
+        </Field>
+        <Field Name="CREDITCaption_Control1180250021">
+          <DataField>CREDITCaption_Control1180250021</DataField>
+        </Field>
+        <Field Name="New_balancesCaption_Control1180250023">
+          <DataField>New_balancesCaption_Control1180250023</DataField>
+        </Field>
+        <Field Name="Month_AmountCaption_Control1180250025">
+          <DataField>Month_AmountCaption_Control1180250025</DataField>
+        </Field>
+        <Field Name="Previous_balanceCaption_Control1180250027">
+          <DataField>Previous_balanceCaption_Control1180250027</DataField>
+        </Field>
+        <Field Name="Opening_BalanceCaption_Control1180250028">
+          <DataField>Opening_BalanceCaption_Control1180250028</DataField>
+        </Field>
+        <Field Name="No__2Caption">
+          <DataField>No__2Caption</DataField>
+        </Field>
+        <Field Name="Month_AmountCaption_Control1000000003">
+          <DataField>Month_AmountCaption_Control1000000003</DataField>
+        </Field>
+        <Field Name="Previous_amountCaption">
+          <DataField>Previous_amountCaption</DataField>
+        </Field>
+        <Field Name="CREDITCaption_Control1000000010">
+          <DataField>CREDITCaption_Control1000000010</DataField>
+        </Field>
+        <Field Name="DEBITCaption_Control1000000011">
+          <DataField>DEBITCaption_Control1000000011</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1000000013">
+          <DataField>CréditCaption_Control1000000013</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1000000016">
+          <DataField>DébitCaption_Control1000000016</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1000000017">
+          <DataField>CréditCaption_Control1000000017</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1000000020">
+          <DataField>DébitCaption_Control1000000020</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1000000022">
+          <DataField>CréditCaption_Control1000000022</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1000000024">
+          <DataField>DébitCaption_Control1000000024</DataField>
+        </Field>
+        <Field Name="Opening_BalanceCaption_Control1000000001">
+          <DataField>Opening_BalanceCaption_Control1000000001</DataField>
+        </Field>
+        <Field Name="New_balancesCaption_Control1000000007">
+          <DataField>New_balancesCaption_Control1000000007</DataField>
+        </Field>
+        <Field Name="No_Caption_Control1000000026">
+          <DataField>No_Caption_Control1000000026</DataField>
+        </Field>
+        <Field Name="DescriptionCaption_Control1000000028">
+          <DataField>DescriptionCaption_Control1000000028</DataField>
+        </Field>
+        <Field Name="No_Caption_Control1180250034">
+          <DataField>No_Caption_Control1180250034</DataField>
+        </Field>
+        <Field Name="DescriptionCaption_Control1180250036">
+          <DataField>DescriptionCaption_Control1180250036</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250037">
+          <DataField>DébitCaption_Control1180250037</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250040">
+          <DataField>CréditCaption_Control1180250040</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250042">
+          <DataField>DébitCaption_Control1180250042</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250044">
+          <DataField>CréditCaption_Control1180250044</DataField>
+        </Field>
+        <Field Name="DébitCaption_Control1180250046">
+          <DataField>DébitCaption_Control1180250046</DataField>
+        </Field>
+        <Field Name="CréditCaption_Control1180250048">
+          <DataField>CréditCaption_Control1180250048</DataField>
+        </Field>
+        <Field Name="Month_AmountCaption_Control1180250050">
+          <DataField>Month_AmountCaption_Control1180250050</DataField>
+        </Field>
+        <Field Name="Previous_amountCaption_Control1180250052">
+          <DataField>Previous_amountCaption_Control1180250052</DataField>
+        </Field>
+        <Field Name="Opening_BalanceCaption_Control1180250055">
+          <DataField>Opening_BalanceCaption_Control1180250055</DataField>
+        </Field>
+        <Field Name="DEBITCaption_Control1180250057">
+          <DataField>DEBITCaption_Control1180250057</DataField>
+        </Field>
+        <Field Name="New_balancesCaption_Control1180250059">
+          <DataField>New_balancesCaption_Control1180250059</DataField>
+        </Field>
+        <Field Name="CREDITCaption_Control1180250060">
+          <DataField>CREDITCaption_Control1180250060</DataField>
+        </Field>
+        <Field Name="No__2Caption_Control1180250063">
+          <DataField>No__2Caption_Control1180250063</DataField>
+        </Field>
+        <Field Name="Totals__Caption">
+          <DataField>Totals__Caption</DataField>
+        </Field>
+        <Field Name="Totals__Caption_Control1000000087">
+          <DataField>Totals__Caption_Control1000000087</DataField>
+        </Field>
+        <Field Name="Totals__Caption_Control1000000058">
+          <DataField>Totals__Caption_Control1000000058</DataField>
+        </Field>
+        <Field Name="Totals__Caption_Control1000000091">
+          <DataField>Totals__Caption_Control1000000091</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="ReportForNav_Entete">
+          <DataField>ReportForNav_Entete</DataField>
+        </Field>
+        <Field Name="DAN___N_Demandedachat">
+          <DataField>DAN___N_Demandedachat</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="WORKDATE">
+          <DataField>WORKDATE</DataField>
+        </Field>
+        <Field Name="RecG_CompanyInfo_Picture">
+          <DataField>RecG_CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="TxtObservation">
+          <DataField>TxtObservation</DataField>
+        </Field>
+        <Field Name="TxtG_ModePaiementFrs5">
+          <DataField>TxtG_ModePaiementFrs5</DataField>
+        </Field>
+        <Field Name="TxtG_DelaiPaiementFrs5">
+          <DataField>TxtG_DelaiPaiementFrs5</DataField>
+        </Field>
+        <Field Name="TxtG_DelaisLivFrs5">
+          <DataField>TxtG_DelaisLivFrs5</DataField>
+        </Field>
+        <Field Name="TxtG_ModePaiementFrs4">
+          <DataField>TxtG_ModePaiementFrs4</DataField>
+        </Field>
+        <Field Name="TxtG_DelaiPaiementFrs4">
+          <DataField>TxtG_DelaiPaiementFrs4</DataField>
+        </Field>
+        <Field Name="TxtG_DelaisLivFrs4">
+          <DataField>TxtG_DelaisLivFrs4</DataField>
+        </Field>
+        <Field Name="TxtG_ModePaiementFrs3">
+          <DataField>TxtG_ModePaiementFrs3</DataField>
+        </Field>
+        <Field Name="TxtG_DelaiPaiementFrs3">
+          <DataField>TxtG_DelaiPaiementFrs3</DataField>
+        </Field>
+        <Field Name="TxtG_DelaisLivFrs3">
+          <DataField>TxtG_DelaisLivFrs3</DataField>
+        </Field>
+        <Field Name="TxtG_ModePaiementFrs2">
+          <DataField>TxtG_ModePaiementFrs2</DataField>
+        </Field>
+        <Field Name="TxtG_DelaiPaiementFrs2">
+          <DataField>TxtG_DelaiPaiementFrs2</DataField>
+        </Field>
+        <Field Name="TxtG_DelaisLivFrs2">
+          <DataField>TxtG_DelaisLivFrs2</DataField>
+        </Field>
+        <Field Name="TxtG_ModePaiementFrs1">
+          <DataField>TxtG_ModePaiementFrs1</DataField>
+        </Field>
+        <Field Name="TxtG_DelaiPaiementFrs1">
+          <DataField>TxtG_DelaiPaiementFrs1</DataField>
+        </Field>
+        <Field Name="TxtG_DelaisLivFrs1">
+          <DataField>TxtG_DelaisLivFrs1</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns1">
+          <DataField>DecGT_PrixFrns1</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns1Format">
+          <DataField>DecGT_PrixFrns1Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns5">
+          <DataField>DecGT_PrixFrns5</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns5Format">
+          <DataField>DecGT_PrixFrns5Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns4">
+          <DataField>DecGT_PrixFrns4</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns4Format">
+          <DataField>DecGT_PrixFrns4Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns3">
+          <DataField>DecGT_PrixFrns3</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns3Format">
+          <DataField>DecGT_PrixFrns3Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns2">
+          <DataField>DecGT_PrixFrns2</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns2Format">
+          <DataField>DecGT_PrixFrns2Format</DataField>
+        </Field>
+        <Field Name="ReportForNavId_27">
+          <DataField>ReportForNavId_27</DataField>
+        </Field>
+        <Field Name="ReportForNav_PurchaseLine">
+          <DataField>ReportForNav_PurchaseLine</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns5">
+          <DataField>TxtG_NomFrns5</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns4">
+          <DataField>TxtG_NomFrns4</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns3">
+          <DataField>TxtG_NomFrns3</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns2">
+          <DataField>TxtG_NomFrns2</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Unit_of_Measure_">
+          <DataField>Purchase_Line__Unit_of_Measure_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Quantity">
+          <DataField>Purchase_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Purchase_Line_QuantityFormat">
+          <DataField>Purchase_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns1">
+          <DataField>TxtG_NomFrns1</DataField>
+        </Field>
+        <Field Name="TxtUnite">
+          <DataField>TxtUnite</DataField>
+        </Field>
+        <Field Name="DecG_PrixLastFrns">
+          <DataField>DecG_PrixLastFrns</DataField>
+        </Field>
+        <Field Name="DecG_PrixLastFrnsFormat">
+          <DataField>DecG_PrixLastFrnsFormat</DataField>
+        </Field>
+        <Field Name="TxtG_NomLastFrns">
+          <DataField>TxtG_NomLastFrns</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns1">
+          <DataField>DecG_PrixFrns1</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns1Format">
+          <DataField>DecG_PrixFrns1Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns5">
+          <DataField>DecG_PrixFrns5</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns5Format">
+          <DataField>DecG_PrixFrns5Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns4">
+          <DataField>DecG_PrixFrns4</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns4Format">
+          <DataField>DecG_PrixFrns4Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns3">
+          <DataField>DecG_PrixFrns3</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns3Format">
+          <DataField>DecG_PrixFrns3Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns2">
+          <DataField>DecG_PrixFrns2</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns2Format">
+          <DataField>DecG_PrixFrns2Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns12">
+          <DataField>DecGT_PrixFrns12</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns12Format">
+          <DataField>DecGT_PrixFrns12Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns52">
+          <DataField>DecGT_PrixFrns52</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns52Format">
+          <DataField>DecGT_PrixFrns52Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns42">
+          <DataField>DecGT_PrixFrns42</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns42Format">
+          <DataField>DecGT_PrixFrns42Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns32">
+          <DataField>DecGT_PrixFrns32</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns32Format">
+          <DataField>DecGT_PrixFrns32Format</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns22">
+          <DataField>DecGT_PrixFrns22</DataField>
+        </Field>
+        <Field Name="DecGT_PrixFrns22Format">
+          <DataField>DecGT_PrixFrns22Format</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

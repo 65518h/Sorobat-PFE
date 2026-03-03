@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="ReportForNav_PurchRcptHeader">
+          <DataField>ReportForNav_PurchRcptHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_2">
+          <DataField>ReportForNavId_2</DataField>
+        </Field>
+        <Field Name="ReportForNav_CopyLoop">
+          <DataField>ReportForNav_CopyLoop</DataField>
+        </Field>
+        <Field Name="HeadFootPictureNextHeaderPicture">
+          <DataField>HeadFootPictureNextHeaderPicture</DataField>
+        </Field>
+        <Field Name="ReportForNavId_5">
+          <DataField>ReportForNavId_5</DataField>
+        </Field>
+        <Field Name="ReportForNav_PageLoop">
+          <DataField>ReportForNav_PageLoop</DataField>
+        </Field>
+        <Field Name="SalesPurchPerson_PhoneNo">
+          <DataField>SalesPurchPerson_PhoneNo</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderJobNo">
+          <DataField>PurchRcptHeaderJobNo</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderPaytoName">
+          <DataField>PurchRcptHeaderPaytoName</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderVendorShipment">
+          <DataField>PurchRcptHeaderVendorShipment</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderorderNo">
+          <DataField>PurchRcptHeaderorderNo</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderPaytoVendorNo">
+          <DataField>PurchRcptHeaderPaytoVendorNo</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderBuyfromAddress">
+          <DataField>PurchRcptHeaderBuyfromAddress</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderDemandeachat">
+          <DataField>PurchRcptHeaderDemandeachat</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderNo">
+          <DataField>PurchRcptHeaderNo</DataField>
+        </Field>
+        <Field Name="PurchRcptHeadLocation">
+          <DataField>PurchRcptHeadLocation</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderN_Demandedachat">
+          <DataField>PurchRcptHeaderN_Demandedachat</DataField>
+        </Field>
+        <Field Name="PurchRcptHeaderPostingDate_0_4">
+          <DataField>PurchRcptHeaderPostingDate_0_4</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PhoneNo">
+          <DataField>CompanyInfo_PhoneNo</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address2">
+          <DataField>CompanyInfo_Address2</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="ReportForNavId_22">
+          <DataField>ReportForNavId_22</DataField>
+        </Field>
+        <Field Name="ReportForNav_DimensionLoop1">
+          <DataField>ReportForNav_DimensionLoop1</DataField>
+        </Field>
+        <Field Name="DimText">
+          <DataField>DimText</DataField>
+        </Field>
+        <Field Name="ReportForNavId_24">
+          <DataField>ReportForNavId_24</DataField>
+        </Field>
+        <Field Name="ReportForNav_PurchRcptLine">
+          <DataField>ReportForNav_PurchRcptLine</DataField>
+        </Field>
+        <Field Name="wItem_ShelfNo">
+          <DataField>wItem_ShelfNo</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Unit_of_Measure">
+          <DataField>Unit_of_Measure</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="wTexteLot">
+          <DataField>wTexteLot</DataField>
+        </Field>
+        <Field Name="ReportForNavId_31">
+          <DataField>ReportForNavId_31</DataField>
+        </Field>
+        <Field Name="ReportForNav_DimensionLoop2">
+          <DataField>ReportForNav_DimensionLoop2</DataField>
+        </Field>
+        <Field Name="DimText3">
+          <DataField>DimText3</DataField>
+        </Field>
+        <Field Name="ReportForNavId_33">
+          <DataField>ReportForNavId_33</DataField>
+        </Field>
+        <Field Name="ReportForNav_Total">
+          <DataField>ReportForNav_Total</DataField>
+        </Field>
+        <Field Name="ReportForNavId_34">
+          <DataField>ReportForNavId_34</DataField>
+        </Field>
+        <Field Name="ReportForNav_Total2">
+          <DataField>ReportForNav_Total2</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Location_Code">
+          <DataField>Location_Code</DataField>
+        </Field>
+        <Field Name="N__Materiel">
+          <DataField>N__Materiel</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="CompanyAdrersse">
+          <DataField>CompanyAdrersse</DataField>
+        </Field>
+        <Field Name="Observation">
+          <DataField>Observation</DataField>
+        </Field>
+        <Field Name="CompanyPosteCode">
+          <DataField>CompanyPosteCode</DataField>
+        </Field>
+        <Field Name="CompanyCity">
+          <DataField>CompanyCity</DataField>
+        </Field>
+        <Field Name="CompanyPhone">
+          <DataField>CompanyPhone</DataField>
+        </Field>
+        <Field Name="CompanyFax">
+          <DataField>CompanyFax</DataField>
+        </Field>
+        <Field Name="CompanyVatRegistration">
+          <DataField>CompanyVatRegistration</DataField>
+        </Field>
+        <Field Name="VehiculeDesignation">
+          <DataField>VehiculeDesignation</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo">
+          <DataField>ExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="PostingDate">
+          <DataField>PostingDate</DataField>
+        </Field>
+        <Field Name="LieuLivraison_Provenance">
+          <DataField>LieuLivraison_Provenance</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryReceptioneur">
+          <DataField>ItemLedgerEntryReceptioneur</DataField>
+        </Field>
+        <Field Name="NomREceptionneur">
+          <DataField>NomREceptionneur</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Emplacement">
+          <DataField>Emplacement</DataField>
+        </Field>
+        <Field Name="ABS_ItemLedgerEntryCostAmount_Actual_">
+          <DataField>ABS_ItemLedgerEntryCostAmount_Actual_</DataField>
+        </Field>
+        <Field Name="ABS_CostAmount_Actual__Quantity">
+          <DataField>ABS_CostAmount_Actual__Quantity</DataField>
+        </Field>
+        <Field Name="ABS_CostAmount_Actual__QuantityFormat">
+          <DataField>ABS_CostAmount_Actual__QuantityFormat</DataField>
+        </Field>
+        <Field Name="ABS_Quantity">
+          <DataField>ABS_Quantity</DataField>
+        </Field>
+        <Field Name="ABS_QuantityFormat">
+          <DataField>ABS_QuantityFormat</DataField>
+        </Field>
+        <Field Name="RecItemDescription__ExternalDocumentNo">
+          <DataField>RecItemDescription__ExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="ItemNo">
+          <DataField>ItemNo</DataField>
+        </Field>
+        <Field Name="ABS_TotQte">
+          <DataField>ABS_TotQte</DataField>
+        </Field>
+        <Field Name="ABS_TotQteFormat">
+          <DataField>ABS_TotQteFormat</DataField>
+        </Field>
+        <Field Name="ABS_TotMontant">
+          <DataField>ABS_TotMontant</DataField>
+        </Field>
+        <Field Name="ABS_TotMontantFormat">
+          <DataField>ABS_TotMontantFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

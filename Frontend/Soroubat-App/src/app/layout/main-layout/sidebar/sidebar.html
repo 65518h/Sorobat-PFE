@@ -1,0 +1,83 @@
+<!-- layout/main-layout/sidebar/sidebar.html -->
+<mat-nav-list class="sidebar">
+  <div class="sidebar-header">
+    <img src="logo.jpg" alt="SOROUBAT" class="sidebar-logo">
+    <h3>SOROUBAT</h3>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="menu-items">
+
+    <a mat-list-item 
+      routerLink="/tasks" 
+      routerLinkActive="active-link"
+      #rla0="routerLinkActive"
+      [activated]="rla0.isActive">  
+      <mat-icon matListItemIcon>assignment</mat-icon>
+      <span matListItemTitle>Tâches</span>
+    </a>
+
+
+    <a mat-list-item 
+       routerLink="/dashboard"
+       routerLinkActive="active-link"
+       #rla1="routerLinkActive"
+       [activated]="rla1.isActive">
+      <mat-icon matListItemIcon>dashboard</mat-icon>
+      <span matListItemTitle>Tableau de bord</span>
+    </a>
+
+    <a mat-list-item 
+       routerLink="/projects"
+       routerLinkActive="active-link"
+       #rla2="routerLinkActive"
+       [activated]="rla2.isActive">
+      <mat-icon matListItemIcon>assignment</mat-icon>
+      <span matListItemTitle>Projets</span>
+      <span class="badge">3</span>
+    </a>
+
+    <a mat-list-item 
+       routerLink="/purchases"
+       routerLinkActive="active-link"
+       #rla3="routerLinkActive"
+       [activated]="rla3.isActive">
+      <mat-icon matListItemIcon>shopping_cart</mat-icon>
+      <span matListItemTitle>Demandes d'achat</span>
+      <span class="badge">5</span>
+    </a>
+
+    <a mat-list-item 
+       routerLink="/inventory"
+       routerLinkActive="active-link"
+       #rla4="routerLinkActive"
+       [activated]="rla4.isActive">
+      <mat-icon matListItemIcon>inventory</mat-icon>
+      <span matListItemTitle>Stock</span>
+      <span class="badge">2</span>
+    </a>
+
+    <a mat-list-item 
+       routerLink="/equipment"
+       routerLinkActive="active-link"
+       #rla5="routerLinkActive"
+       [activated]="rla5.isActive">
+      <mat-icon matListItemIcon>construction</mat-icon>
+      <span matListItemTitle>Engins</span>
+    </a>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="sidebar-footer">
+    <a mat-list-item routerLink="/settings">
+      <mat-icon matListItemIcon>settings</mat-icon>
+      <span matListItemTitle>Paramètres</span>
+    </a>
+    <a mat-list-item routerLink="/help">
+      <mat-icon matListItemIcon>help</mat-icon>
+      <span matListItemTitle>Aide</span>
+    </a>
+  </div>
+</mat-nav-list>

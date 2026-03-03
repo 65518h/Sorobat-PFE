@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="N__Vehicule___________Désignation">
+          <DataField>N__Vehicule___________Désignation</DataField>
+        </Field>
+        <Field Name="DecTotalCout">
+          <DataField>DecTotalCout</DataField>
+        </Field>
+        <Field Name="DecTotalCoutFormat">
+          <DataField>DecTotalCoutFormat</DataField>
+        </Field>
+        <Field Name="Total_____Véhicule__N__Vehicule___________Véhicule_Désignation">
+          <DataField>Total_____Véhicule__N__Vehicule___________Véhicule_Désignation</DataField>
+        </Field>
+        <Field Name="ABS_DeQte_">
+          <DataField>ABS_DeQte_</DataField>
+        </Field>
+        <Field Name="ABS_DeQte_Format">
+          <DataField>ABS_DeQte_Format</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_EntryCaption">
+          <DataField>Item_Ledger_EntryCaption</DataField>
+        </Field>
+        <Field Name="LISTE_CONSOMMATION_VEHICULESCaption">
+          <DataField>LISTE_CONSOMMATION_VEHICULESCaption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="QuantitéCaption">
+          <DataField>QuantitéCaption</DataField>
+        </Field>
+        <Field Name="CoûtCaption">
+          <DataField>CoûtCaption</DataField>
+        </Field>
+        <Field Name="Article_ConsomméCaption">
+          <DataField>Article_ConsomméCaption</DataField>
+        </Field>
+        <Field Name="CoûtCaption_Control1000000044">
+          <DataField>CoûtCaption_Control1000000044</DataField>
+        </Field>
+        <Field Name="Lieu_Liv_Caption">
+          <DataField>Lieu_Liv_Caption</DataField>
+        </Field>
+        <Field Name="Véhicule_N__Vehicule">
+          <DataField>Véhicule_N__Vehicule</DataField>
+        </Field>
+        <Field Name="FicheNoLbl">
+          <DataField>FicheNoLbl</DataField>
+        </Field>
+        <Field Name="Item_No_____________RecItem_Description">
+          <DataField>Item_No_____________RecItem_Description</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Posting_Date_">
+          <DataField>Item_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Item_No_">
+          <DataField>Item_No_</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="Cost_Amount__Actual__">
+          <DataField>Cost_Amount__Actual__</DataField>
+        </Field>
+        <Field Name="Cost_Amount__Actual__Format">
+          <DataField>Cost_Amount__Actual__Format</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="ArticleCaption">
+          <DataField>ArticleCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Entry_No_">
+          <DataField>Item_Ledger_Entry_Entry_No_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_N__Véhicule">
+          <DataField>Item_Ledger_Entry_N__Véhicule</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg___Montant_Reparation_">
+          <DataField>Détail_Reparation_Enreg___Montant_Reparation_</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg___Montant_Reparation_Format">
+          <DataField>Détail_Reparation_Enreg___Montant_Reparation_Format</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg__Désignation">
+          <DataField>Détail_Reparation_Enreg__Désignation</DataField>
+        </Field>
+        <Field Name="RecRéparationVéhiculeEnreg____Date_document_">
+          <DataField>RecRéparationVéhiculeEnreg____Date_document_</DataField>
+        </Field>
+        <Field Name="InterventionCaption">
+          <DataField>InterventionCaption</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg__N__Reparation">
+          <DataField>Détail_Reparation_Enreg__N__Reparation</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg__N__Ligne">
+          <DataField>Détail_Reparation_Enreg__N__Ligne</DataField>
+        </Field>
+        <Field Name="Détail_Reparation_Enreg__N__Véhicule">
+          <DataField>Détail_Reparation_Enreg__N__Véhicule</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg___Coût_Opération_">
+          <DataField>Reparation_Pneu_Enreg___Coût_Opération_</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg___Coût_Opération_Format">
+          <DataField>Reparation_Pneu_Enreg___Coût_Opération_Format</DataField>
+        </Field>
+        <Field Name="PNEUMATIQUE_REF___">
+          <DataField>PNEUMATIQUE_REF___</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg___Réf__Pneu_">
+          <DataField>Reparation_Pneu_Enreg___Réf__Pneu_</DataField>
+        </Field>
+        <Field Name="RecRéparationVéhiculeEnreg____Date_document__Control1000000027">
+          <DataField>RecRéparationVéhiculeEnreg____Date_document__Control1000000027</DataField>
+        </Field>
+        <Field Name="PneumatiqueCaption">
+          <DataField>PneumatiqueCaption</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg__N__Reparation">
+          <DataField>Reparation_Pneu_Enreg__N__Reparation</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg__N__Ligne">
+          <DataField>Reparation_Pneu_Enreg__N__Ligne</DataField>
+        </Field>
+        <Field Name="Reparation_Pneu_Enreg__N_Véhicule">
+          <DataField>Reparation_Pneu_Enreg__N_Véhicule</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="DateFin">
+          <DataField>DateFin</DataField>
+        </Field>
+        <Field Name="DateDebut">
+          <DataField>DateDebut</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="TODAY_0_4">
+          <DataField>TODAY_0_4</DataField>
+        </Field>
+        <Field Name="Resultat">
+          <DataField>Resultat</DataField>
+        </Field>
+        <Field Name="ResultatFormat">
+          <DataField>ResultatFormat</DataField>
+        </Field>
+        <Field Name="Total">
+          <DataField>Total</DataField>
+        </Field>
+        <Field Name="TotalFormat">
+          <DataField>TotalFormat</DataField>
+        </Field>
+        <Field Name="Divers">
+          <DataField>Divers</DataField>
+        </Field>
+        <Field Name="DiversFormat">
+          <DataField>DiversFormat</DataField>
+        </Field>
+        <Field Name="MSJ">
+          <DataField>MSJ</DataField>
+        </Field>
+        <Field Name="MSJFormat">
+          <DataField>MSJFormat</DataField>
+        </Field>
+        <Field Name="AMMJ">
+          <DataField>AMMJ</DataField>
+        </Field>
+        <Field Name="AMMJFormat">
+          <DataField>AMMJFormat</DataField>
+        </Field>
+        <Field Name="LignePointageVehiculeDescription">
+          <DataField>LignePointageVehiculeDescription</DataField>
+        </Field>
+        <Field Name="CPR">
+          <DataField>CPR</DataField>
+        </Field>
+        <Field Name="CPRFormat">
+          <DataField>CPRFormat</DataField>
+        </Field>
+        <Field Name="CoutLocation">
+          <DataField>CoutLocation</DataField>
+        </Field>
+        <Field Name="CoutLocationFormat">
+          <DataField>CoutLocationFormat</DataField>
+        </Field>
+        <Field Name="PrixLocation">
+          <DataField>PrixLocation</DataField>
+        </Field>
+        <Field Name="PrixLocationFormat">
+          <DataField>PrixLocationFormat</DataField>
+        </Field>
+        <Field Name="CMOYH">
+          <DataField>CMOYH</DataField>
+        </Field>
+        <Field Name="CMOYHFormat">
+          <DataField>CMOYHFormat</DataField>
+        </Field>
+        <Field Name="PUGasoil">
+          <DataField>PUGasoil</DataField>
+        </Field>
+        <Field Name="PUGasoilFormat">
+          <DataField>PUGasoilFormat</DataField>
+        </Field>
+        <Field Name="FORMAT_ROUND_TauxOccup_1_Pct">
+          <DataField>FORMAT_ROUND_TauxOccup_1_Pct</DataField>
+        </Field>
+        <Field Name="QteGasoil">
+          <DataField>QteGasoil</DataField>
+        </Field>
+        <Field Name="QteGasoilFormat">
+          <DataField>QteGasoilFormat</DataField>
+        </Field>
+        <Field Name="MHT">
+          <DataField>MHT</DataField>
+        </Field>
+        <Field Name="MHTFormat">
+          <DataField>MHTFormat</DataField>
+        </Field>
+        <Field Name="MQA">
+          <DataField>MQA</DataField>
+        </Field>
+        <Field Name="MQAFormat">
+          <DataField>MQAFormat</DataField>
+        </Field>
+        <Field Name="IndexFinal">
+          <DataField>IndexFinal</DataField>
+        </Field>
+        <Field Name="IndexFinalFormat">
+          <DataField>IndexFinalFormat</DataField>
+        </Field>
+        <Field Name="IndexDepart">
+          <DataField>IndexDepart</DataField>
+        </Field>
+        <Field Name="IndexDepartFormat">
+          <DataField>IndexDepartFormat</DataField>
+        </Field>
+        <Field Name="HNormal">
+          <DataField>HNormal</DataField>
+        </Field>
+        <Field Name="HNormalFormat">
+          <DataField>HNormalFormat</DataField>
+        </Field>
+        <Field Name="HeureUtilisation">
+          <DataField>HeureUtilisation</DataField>
+        </Field>
+        <Field Name="HeureUtilisationFormat">
+          <DataField>HeureUtilisationFormat</DataField>
+        </Field>
+        <Field Name="NbJourPanne">
+          <DataField>NbJourPanne</DataField>
+        </Field>
+        <Field Name="NbJourPanneFormat">
+          <DataField>NbJourPanneFormat</DataField>
+        </Field>
+        <Field Name="NbrJourDisponible">
+          <DataField>NbrJourDisponible</DataField>
+        </Field>
+        <Field Name="NbrJourDisponibleFormat">
+          <DataField>NbrJourDisponibleFormat</DataField>
+        </Field>
+        <Field Name="NbrJourFonctionne">
+          <DataField>NbrJourFonctionne</DataField>
+        </Field>
+        <Field Name="NbrJourFonctionneFormat">
+          <DataField>NbrJourFonctionneFormat</DataField>
+        </Field>
+        <Field Name="Vehicule">
+          <DataField>Vehicule</DataField>
+        </Field>
+        <Field Name="HeureUtilisation2">
+          <DataField>HeureUtilisation2</DataField>
+        </Field>
+        <Field Name="HeureUtilisation2Format">
+          <DataField>HeureUtilisation2Format</DataField>
+        </Field>
+        <Field Name="NbrJourFonctionne_9_HeureUtilisation">
+          <DataField>NbrJourFonctionne_9_HeureUtilisation</DataField>
+        </Field>
+        <Field Name="NbrJourFonctionne_9_HeureUtilisationFormat">
+          <DataField>NbrJourFonctionne_9_HeureUtilisationFormat</DataField>
+        </Field>
+        <Field Name="TauxOccup">
+          <DataField>TauxOccup</DataField>
+        </Field>
+        <Field Name="TauxOccupFormat">
+          <DataField>TauxOccupFormat</DataField>
+        </Field>
+        <Field Name="CoutTotGasoil">
+          <DataField>CoutTotGasoil</DataField>
+        </Field>
+        <Field Name="CoutTotGasoilFormat">
+          <DataField>CoutTotGasoilFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

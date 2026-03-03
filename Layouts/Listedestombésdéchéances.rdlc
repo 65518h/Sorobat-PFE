@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="PageConst_________FORMAT_CurrReport_PAGENO_">
+          <DataField>PageConst_________FORMAT_CurrReport_PAGENO_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="DateDep">
+          <DataField>DateDep</DataField>
+        </Field>
+        <Field Name="DateRec">
+          <DataField>DateRec</DataField>
+        </Field>
+        <Field Name="Payment_Line_Banque">
+          <DataField>Payment_Line_Banque</DataField>
+        </Field>
+        <Field Name="RibCompte">
+          <DataField>RibCompte</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount">
+          <DataField>Payment_Line_Amount</DataField>
+        </Field>
+        <Field Name="Payment_Line_AmountFormat">
+          <DataField>Payment_Line_AmountFormat</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_">
+          <DataField>Payment_Line__Due_Date_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Drawee_Reference_">
+          <DataField>Payment_Line__Drawee_Reference_</DataField>
+        </Field>
+        <Field Name="Payment_Line__External_Document_No__">
+          <DataField>Payment_Line__External_Document_No__</DataField>
+        </Field>
+        <Field Name="TypeAvance">
+          <DataField>TypeAvance</DataField>
+        </Field>
+        <Field Name="Payment_Line__No__">
+          <DataField>Payment_Line__No__</DataField>
+        </Field>
+        <Field Name="TotalFor___FIELDCAPTION__Compte_Bancaire_______">
+          <DataField>TotalFor___FIELDCAPTION__Compte_Bancaire_______</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000033">
+          <DataField>Payment_Line_Amount_Control1000000033</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000033Format">
+          <DataField>Payment_Line_Amount_Control1000000033Format</DataField>
+        </Field>
+        <Field Name="Nbre1">
+          <DataField>Nbre1</DataField>
+        </Field>
+        <Field Name="TotalFor___FIELDCAPTION_Banque______">
+          <DataField>TotalFor___FIELDCAPTION_Banque______</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000035">
+          <DataField>Payment_Line_Amount_Control1000000035</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000035Format">
+          <DataField>Payment_Line_Amount_Control1000000035Format</DataField>
+        </Field>
+        <Field Name="Nbre2">
+          <DataField>Nbre2</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000020">
+          <DataField>Payment_Line_Amount_Control1000000020</DataField>
+        </Field>
+        <Field Name="Payment_Line_Amount_Control1000000020Format">
+          <DataField>Payment_Line_Amount_Control1000000020Format</DataField>
+        </Field>
+        <Field Name="Nbre3">
+          <DataField>Nbre3</DataField>
+        </Field>
+        <Field Name="Liste_des_tombés_d_échéances_des_LCCaption">
+          <DataField>Liste_des_tombés_d_échéances_des_LCCaption</DataField>
+        </Field>
+        <Field Name="Au__Caption">
+          <DataField>Au__Caption</DataField>
+        </Field>
+        <Field Name="Période_du__Caption">
+          <DataField>Période_du__Caption</DataField>
+        </Field>
+        <Field Name="Payment_Line_AmountCaption">
+          <DataField>Payment_Line_AmountCaption</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_Caption">
+          <DataField>Payment_Line__Due_Date_Caption</DataField>
+        </Field>
+        <Field Name="FournisseurCaption">
+          <DataField>FournisseurCaption</DataField>
+        </Field>
+        <Field Name="Numéro_PièceCaption">
+          <DataField>Numéro_PièceCaption</DataField>
+        </Field>
+        <Field Name="BanqueCaption">
+          <DataField>BanqueCaption</DataField>
+        </Field>
+        <Field Name="N__CompteCaption">
+          <DataField>N__CompteCaption</DataField>
+        </Field>
+        <Field Name="Nbre__Caption">
+          <DataField>Nbre__Caption</DataField>
+        </Field>
+        <Field Name="Nbre__Caption_Control1000000061">
+          <DataField>Nbre__Caption_Control1000000061</DataField>
+        </Field>
+        <Field Name="Total_général__Caption">
+          <DataField>Total_général__Caption</DataField>
+        </Field>
+        <Field Name="Nbre__Caption_Control1000000062">
+          <DataField>Nbre__Caption_Control1000000062</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Compte_Bancaire">
+          <DataField>Payment_Line_Compte_Bancaire</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

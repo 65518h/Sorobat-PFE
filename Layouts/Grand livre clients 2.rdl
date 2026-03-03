@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO_Text003_USERID_">
+          <DataField>STRSUBSTNO_Text003_USERID_</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO_Text004_PreviousStartDate_">
+          <DataField>STRSUBSTNO_Text004_PreviousStartDate_</DataField>
+        </Field>
+        <Field Name="PageCaption">
+          <DataField>PageCaption</DataField>
+        </Field>
+        <Field Name="PrintedByCaption">
+          <DataField>PrintedByCaption</DataField>
+        </Field>
+        <Field Name="ExcludeBalanceOnly">
+          <DataField>ExcludeBalanceOnly</DataField>
+        </Field>
+        <Field Name="Customer_TABLECAPTION__________Filter">
+          <DataField>Customer_TABLECAPTION__________Filter</DataField>
+        </Field>
+        <Field Name="Filter">
+          <DataField>Filter</DataField>
+        </Field>
+        <Field Name="Customer__No__">
+          <DataField>Customer__No__</DataField>
+        </Field>
+        <Field Name="Customer_Name">
+          <DataField>Customer_Name</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY">
+          <DataField>ReportDebitAmountLCY</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCYFormat">
+          <DataField>ReportDebitAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="ReportCreditAmountLCY">
+          <DataField>ReportCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="ReportCreditAmountLCYFormat">
+          <DataField>ReportCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_ReportCreditAmountLCY">
+          <DataField>ReportDebitAmountLCY_ReportCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_ReportCreditAmountLCYFormat">
+          <DataField>ReportDebitAmountLCY_ReportCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO_Text006_PreviousEndDate_">
+          <DataField>STRSUBSTNO_Text006_PreviousEndDate_</DataField>
+        </Field>
+        <Field Name="PreviousDebitAmountLCY">
+          <DataField>PreviousDebitAmountLCY</DataField>
+        </Field>
+        <Field Name="PreviousDebitAmountLCYFormat">
+          <DataField>PreviousDebitAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="PreviousCreditAmountLCY">
+          <DataField>PreviousCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="PreviousCreditAmountLCYFormat">
+          <DataField>PreviousCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="PreviousDebitAmountLCY_PreviousCreditAmountLCY">
+          <DataField>PreviousDebitAmountLCY_PreviousCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="PreviousDebitAmountLCY_PreviousCreditAmountLCYFormat">
+          <DataField>PreviousDebitAmountLCY_PreviousCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_Control1120062">
+          <DataField>ReportDebitAmountLCY_Control1120062</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_Control1120062Format">
+          <DataField>ReportDebitAmountLCY_Control1120062Format</DataField>
+        </Field>
+        <Field Name="ReportCreditAmountLCY_Control1120064">
+          <DataField>ReportCreditAmountLCY_Control1120064</DataField>
+        </Field>
+        <Field Name="ReportCreditAmountLCY_Control1120064Format">
+          <DataField>ReportCreditAmountLCY_Control1120064Format</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_ReportCreditAmountLCY_Control1120066">
+          <DataField>ReportDebitAmountLCY_ReportCreditAmountLCY_Control1120066</DataField>
+        </Field>
+        <Field Name="ReportDebitAmountLCY_ReportCreditAmountLCY_Control1120066Format">
+          <DataField>ReportDebitAmountLCY_ReportCreditAmountLCY_Control1120066Format</DataField>
+        </Field>
+        <Field Name="GeneralDebitAmountLCY">
+          <DataField>GeneralDebitAmountLCY</DataField>
+        </Field>
+        <Field Name="GeneralDebitAmountLCYFormat">
+          <DataField>GeneralDebitAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="GeneralCreditAmountLCY">
+          <DataField>GeneralCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="GeneralCreditAmountLCYFormat">
+          <DataField>GeneralCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="GeneralDebitAmountLCY_GeneralCreditAmountLCY">
+          <DataField>GeneralDebitAmountLCY_GeneralCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="GeneralDebitAmountLCY_GeneralCreditAmountLCYFormat">
+          <DataField>GeneralDebitAmountLCY_GeneralCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="Customer_Date_Filter">
+          <DataField>Customer_Date_Filter</DataField>
+        </Field>
+        <Field Name="Customer_Global_Dimension_1_Filter">
+          <DataField>Customer_Global_Dimension_1_Filter</DataField>
+        </Field>
+        <Field Name="Customer_Global_Dimension_2_Filter">
+          <DataField>Customer_Global_Dimension_2_Filter</DataField>
+        </Field>
+        <Field Name="Customer_Currency_Filter">
+          <DataField>Customer_Currency_Filter</DataField>
+        </Field>
+        <Field Name="Customer_Detail_Trial_BalanceCaption">
+          <DataField>Customer_Detail_Trial_BalanceCaption</DataField>
+        </Field>
+        <Field Name="This_report_also_includes_customers_that_only_have_balances_Caption">
+          <DataField>This_report_also_includes_customers_that_only_have_balances_Caption</DataField>
+        </Field>
+        <Field Name="Posting_DateCaption">
+          <DataField>Posting_DateCaption</DataField>
+        </Field>
+        <Field Name="Source_CodeCaption">
+          <DataField>Source_CodeCaption</DataField>
+        </Field>
+        <Field Name="Document_No_Caption">
+          <DataField>Document_No_Caption</DataField>
+        </Field>
+        <Field Name="External_Document_No_Caption">
+          <DataField>External_Document_No_Caption</DataField>
+        </Field>
+        <Field Name="DescriptionCaption">
+          <DataField>DescriptionCaption</DataField>
+        </Field>
+        <Field Name="DebitCaption">
+          <DataField>DebitCaption</DataField>
+        </Field>
+        <Field Name="CreditCaption">
+          <DataField>CreditCaption</DataField>
+        </Field>
+        <Field Name="BalanceCaption">
+          <DataField>BalanceCaption</DataField>
+        </Field>
+        <Field Name="ContinuedCaption">
+          <DataField>ContinuedCaption</DataField>
+        </Field>
+        <Field Name="To_be_continuedCaption">
+          <DataField>To_be_continuedCaption</DataField>
+        </Field>
+        <Field Name="Grand_TotalCaption">
+          <DataField>Grand_TotalCaption</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY_">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY_</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY_Format">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY_Format</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmount_PreviousCreditAmountLCY">
+          <DataField>CreditPeriodAmount_PreviousCreditAmountLCY</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmount_PreviousCreditAmountLCYFormat">
+          <DataField>CreditPeriodAmount_PreviousCreditAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCYFormat">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO_Text006_EndDate_">
+          <DataField>STRSUBSTNO_Text006_EndDate_</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO_Text007_EndDate_">
+          <DataField>STRSUBSTNO_Text007_EndDate_</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount">
+          <DataField>DebitPeriodAmount</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmountFormat">
+          <DataField>DebitPeriodAmountFormat</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY_Control1120082">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY_Control1120082</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY_Control1120082Format">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY_Control1120082Format</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmount">
+          <DataField>CreditPeriodAmount</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmountFormat">
+          <DataField>CreditPeriodAmountFormat</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmount_PreviousCreditAmountLCY_Control1120086">
+          <DataField>CreditPeriodAmount_PreviousCreditAmountLCY_Control1120086</DataField>
+        </Field>
+        <Field Name="CreditPeriodAmount_PreviousCreditAmountLCY_Control1120086Format">
+          <DataField>CreditPeriodAmount_PreviousCreditAmountLCY_Control1120086Format</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_CreditPeriodAmount">
+          <DataField>DebitPeriodAmount_CreditPeriodAmount</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_CreditPeriodAmountFormat">
+          <DataField>DebitPeriodAmount_CreditPeriodAmountFormat</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY__Control1120090">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY__Control1120090</DataField>
+        </Field>
+        <Field Name="DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY__Control1120090Format">
+          <DataField>DebitPeriodAmount_PreviousDebitAmountLCY___CreditPeriodAmount_PreviousCreditAmountLCY__Control1120090Format</DataField>
+        </Field>
+        <Field Name="Date_Period_Type">
+          <DataField>Date_Period_Type</DataField>
+        </Field>
+        <Field Name="Date_Period_Start">
+          <DataField>Date_Period_Start</DataField>
+        </Field>
+        <Field Name="Total_Date_RangeCaption">
+          <DataField>Total_Date_RangeCaption</DataField>
+        </Field>
+        <Field Name="PreviousOriginalLedgerEntryDesc">
+          <DataField>PreviousOriginalLedgerEntryDesc</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__Format</DataField>
+        </Field>
+        <Field Name="BalanceD">
+          <DataField>BalanceD</DataField>
+        </Field>
+        <Field Name="BalanceDFormat">
+          <DataField>BalanceDFormat</DataField>
+        </Field>
+        <Field Name="Debit_Amount__LCY______Credit_Amount__LCY__">
+          <DataField>Debit_Amount__LCY______Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Debit_Amount__LCY______Credit_Amount__LCY__Format">
+          <DataField>Debit_Amount__LCY______Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Posting_Date_">
+          <DataField>Detailed_Cust__Ledg__Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Source_Code_">
+          <DataField>Detailed_Cust__Ledg__Entry__Source_Code_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_No__">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="OriginalLedgerEntry__External_Document_No__">
+          <DataField>OriginalLedgerEntry__External_Document_No__</DataField>
+        </Field>
+        <Field Name="OriginalLedgerEntry_Description">
+          <DataField>OriginalLedgerEntry_Description</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120116">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120116</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120116Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120116Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120119">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120119</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120119Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120119Format</DataField>
+        </Field>
+        <Field Name="BalanceLCY">
+          <DataField>BalanceLCY</DataField>
+        </Field>
+        <Field Name="BalanceLCYFormat">
+          <DataField>BalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120126">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120126</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120126Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120126Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120128">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120128</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120128Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120128Format</DataField>
+        </Field>
+        <Field Name="Debit_Amount__LCY______Credit_Amount__LCY___Control1120130">
+          <DataField>Debit_Amount__LCY______Credit_Amount__LCY___Control1120130</DataField>
+        </Field>
+        <Field Name="Debit_Amount__LCY______Credit_Amount__LCY___Control1120130Format">
+          <DataField>Debit_Amount__LCY______Credit_Amount__LCY___Control1120130Format</DataField>
+        </Field>
+        <Field Name="Text008_________FORMAT_Date__Period_Type___________Date__Period_Name_">
+          <DataField>Text008_________FORMAT_Date__Period_Type___________Date__Period_Name_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120136">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120136</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120136Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY___Control1120136Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120139">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120139</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120139Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY___Control1120139Format</DataField>
+        </Field>
+        <Field Name="BalanceLCY_Control1120142">
+          <DataField>BalanceLCY_Control1120142</DataField>
+        </Field>
+        <Field Name="BalanceLCY_Control1120142Format">
+          <DataField>BalanceLCY_Control1120142Format</DataField>
+        </Field>
+        <Field Name="DatePeriodTypeInt">
+          <DataField>DatePeriodTypeInt</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Entry_No_">
+          <DataField>Detailed_Cust__Ledg__Entry_Entry_No_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Customer_No_">
+          <DataField>Detailed_Cust__Ledg__Entry_Customer_No_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Posting_Date">
+          <DataField>Detailed_Cust__Ledg__Entry_Posting_Date</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Initial_Entry_Global_Dim__1">
+          <DataField>Detailed_Cust__Ledg__Entry_Initial_Entry_Global_Dim__1</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Initial_Entry_Global_Dim__2">
+          <DataField>Detailed_Cust__Ledg__Entry_Initial_Entry_Global_Dim__2</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry_Currency_Code">
+          <DataField>Detailed_Cust__Ledg__Entry_Currency_Code</DataField>
+        </Field>
+        <Field Name="Previous_pageCaption">
+          <DataField>Previous_pageCaption</DataField>
+        </Field>
+        <Field Name="Current_pageCaption">
+          <DataField>Current_pageCaption</DataField>
+        </Field>
+        <Field Name="PostingYearValue">
+          <DataField>PostingYearValue</DataField>
+        </Field>
+        <Field Name="OriginalLedgerEntryDesc">
+          <DataField>OriginalLedgerEntryDesc</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
