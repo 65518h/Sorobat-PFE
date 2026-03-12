@@ -1,22 +1,31 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Your own server",
-            "request": "launch",
-            "type": "al",
-            "environmentType": "OnPrem",
-            "server": "http://localhost",
-            "serverInstance": "BC243",
-            "authentication": "Windows",
-            "startupObjectId": 22,
-            "startupObjectType": "Page",
-            "breakOnError": "All",
-            "launchBrowser": true,
-            "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": true,
-            "tenant": "default",
-            "usePublicURLFromServer": true
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Your own server",
+      "request": "launch",
+      "type": "al",
+      "environmentType": "OnPrem",
+      "server": "http://localhost",
+      "serverInstance": "BC240",
+      "authentication": "Windows",
+      "startupObjectId": 22,
+      "startupObjectType": "Page",
+      "breakOnError": "All",
+      "launchBrowser": true,
+      "enableLongRunningSqlStatements": true,
+      "enableSqlInformationDebugger": true,
+      "tenant": "default",
+      "usePublicURLFromServer": true
+    },
+    {
+      "name": "AL: Generated Download Symbols request",
+      "request": "launch",
+      "type": "al",
+      "server": "http://Asus",
+      "serverInstance": "BC240",
+      "authentication": "Windows",
+      "port": 7049
+    }
+  ]
 }

@@ -1,3 +1,4 @@
+using Soroubat.Api.Interfaces;
 using Soroubat.Api.Services;
 using System.Text.Json;
 
@@ -15,11 +16,11 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configuration du HttpClient avec authentification Windows (NTLM)
-builder.Services.AddHttpClient<IJobTaskService, BusinessCentralService>()
+// Remplacez l'ancien enregistrement par celui-ci :
+builder.Services.AddHttpClient<ISiteManagementService, SiteManagementService>()
     .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
     {
-        UseDefaultCredentials = true,
+        UseDefaultCredentials = true, // Authentification Windows NTLM
         AllowAutoRedirect = true
     });
 
