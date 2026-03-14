@@ -39,7 +39,7 @@ namespace Soroubat.Api.Services
 
         public async Task<bool> UpdateTaskProgressAsync(string jobNo, string taskNo, decimal progress)
         {
-            // Construction de l'URL spécifique à la ressource (Clé composée)
+            // c'est l'url spécifique pour mettre à jour une tâche précise, en utilisant les clés de partition jobNo et taskNo
             var url = $"{_apiBaseUrl}jobTasks(jobNo='{jobNo}',taskNo='{taskNo}')";
             
             // On n'envoie que le champ modifiable
@@ -53,7 +53,14 @@ namespace Soroubat.Api.Services
             var content = new StringContent(json, Encoding.UTF8, "application/json"); 
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), url) { Content = content };
-            var response = await _httpClient.SendAsync(request);
+            request.Headers.Add("If-Match", "*");
+            var response = await _httpClient.SendAsync(request); // c'est là ou la requéte patch est envoyée à BC
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                // Affichez errorContent dans votre console ou votre debugger
+                throw new Exception($"Erreur BC: {errorContent}");
+            }
             
             return response.IsSuccessStatusCode;
         }

@@ -40,7 +40,7 @@ page 50120 "JobTaskAPI"
                 
                 // Pourcentages d'avancement saisis par les chefs de chantier
                 field(progressPct; Rec."Progress %") { Caption = 'Progress %'; }
-                field(taskProgressPct; Rec."Task Progress %") { Caption = 'Task Progress %'; }
+                field(taskProgressPct; Rec."Task Progress %") { Caption = 'Task Progress %'; } // un champ d'avacement théorique calculé en fonction de la quantité réalisée vs la quantité initiale, pour comparer avec le progressPct saisi manuellement
                 
                 // --- DONNÉES CALCULÉES & RÉALISÉ (Toujours en lecture seule) ---
                 // quantityShipped représente ce qui a été réellement consommé/réalisé (FlowField)

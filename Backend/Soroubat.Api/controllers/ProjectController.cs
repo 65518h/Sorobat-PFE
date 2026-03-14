@@ -29,8 +29,9 @@ namespace Soroubat.Api.Controllers
             return Ok(tasks);
         }
 
-        [HttpPatch("update-progress")]
-        public async Task<IActionResult> UpdateProgress([FromBody] UpdateProgressRequest request)
+        [HttpPatch("update-progress")] // la méthode patch est utilisée pour les mises à jour partielles
+        public async Task<IActionResult> UpdateProgress([FromBody] UpdateProgressRequest request) 
+        // IactionResult est un type de retour plus générique qui permet de retourner différents types de réponses HTTP (Ok, BadRequest, NotFound, etc.) selon le résultat de l'opération
         {
             var success = await _siteService.UpdateTaskProgressAsync(request.JobNo, request.TaskNo, request.Progress);
             if (success) return Ok(new { message = "Mise à jour réussie" });
@@ -38,7 +39,7 @@ namespace Soroubat.Api.Controllers
         }
     }
 
-    public class UpdateProgressRequest
+    public class UpdateProgressRequest // c'est la classe qui génére le formulaire de données attendu dans le corps de la requête PATCH pour mettre à jour le progrès d'une tâche
     {
         public string JobNo { get; set; } = string.Empty;
         public string TaskNo { get; set; } = string.Empty;
