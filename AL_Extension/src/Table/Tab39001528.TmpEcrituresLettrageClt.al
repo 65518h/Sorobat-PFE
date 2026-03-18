@@ -556,93 +556,93 @@
 
 //     keys
 //     {
-//         key(Key1; "Entry No.")
+//         key(STG_Key1; "Entry No.")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "Customer No.", "Posting Date", "Currency Code")
+//         key(STG_Key2; "Customer No.", "Posting Date", "Currency Code")
 //         {
 //             SumIndexFields = "Sales (LCY)", "Profit (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key3; "Customer No.", "Currency Code", "Posting Date")
+//         key(STG_Key3; "Customer No.", "Currency Code", "Posting Date")
 //         {
 //             Enabled = false;
 //         }
-//         key(Key4; "Document No.")
+//         key(STG_Key4; "Document No.")
 //         {
 //         }
-//         key(Key5; "External Document No.")
+//         key(STG_Key5; "External Document No.")
 //         {
 //         }
-//         key(Key6; "Customer No.", Open, Positive, "Due Date", "Currency Code")
+//         key(STG_Key6; "Customer No.", Open, Positive, "Due Date", "Currency Code")
 //         {
 //         }
-//         key(Key7; Open, "Due Date")
+//         key(STG_Key7; Open, "Due Date")
 //         {
 //         }
-//         key(Key8; "Document Type", "Customer No.", "Posting Date", "Currency Code")
+//         key(STG_Key8; "Document Type", "Customer No.", "Posting Date", "Currency Code")
 //         {
 //             MaintainSIFTIndex = false;
 //             MaintainSQLIndex = false;
 //             SumIndexFields = "Sales (LCY)", "Profit (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key9; "Salesperson Code", "Posting Date")
+//         key(STG_Key9; "Salesperson Code", "Posting Date")
 //         {
 //         }
-//         key(Key10; "Closed by Entry No.")
+//         key(STG_Key10; "Closed by Entry No.")
 //         {
 //         }
-//         key(Key11; "Transaction No.")
+//         key(STG_Key11; "Transaction No.")
 //         {
 //         }
-//         key(Key12; "Customer No.", Open, Positive, "Calculate Interest", "Due Date")
+//         key(STG_Key12; "Customer No.", Open, Positive, "Calculate Interest", "Due Date")
 //         {
 //             Enabled = false;
 //         }
-//         key(Key13; "Customer No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
+//         key(STG_Key13; "Customer No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
 //         {
 //             SumIndexFields = "Sales (LCY)", "Profit (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key14; "Customer No.", Open, "Global Dimension 1 Code", "Global Dimension 2 Code", Positive, "Due Date", "Currency Code")
+//         key(STG_Key14; "Customer No.", Open, "Global Dimension 1 Code", "Global Dimension 2 Code", Positive, "Due Date", "Currency Code")
 //         {
 //         }
-//         key(Key15; Open, "Global Dimension 1 Code", "Global Dimension 2 Code", "Due Date")
+//         key(STG_Key15; Open, "Global Dimension 1 Code", "Global Dimension 2 Code", "Due Date")
 //         {
 //         }
-//         key(Key16; "Document Type", "Customer No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
+//         key(STG_Key16; "Document Type", "Customer No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
 //         {
 //         }
-//         key(Key17; "Customer No.", "Applies-to ID", Open, Positive, "Due Date")
+//         key(STG_Key17; "Customer No.", "Applies-to ID", Open, Positive, "Due Date")
 //         {
 //         }
-//         key(Key18; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
+//         key(STG_Key18; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
 //         {
 //         }
-//         key(Key19; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
+//         key(STG_Key19; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
 //         {
 //         }
-//         key(Key20; Open, "Value Date")
+//         key(STG_Key20; Open, "Value Date")
 //         {
 //         }
-//         key(Key21; "Job No.", "Customer No.", Open, Positive, "Due Date", "Currency Code")
+//         key(STG_Key21; "Job No.", "Customer No.", Open, Positive, "Due Date", "Currency Code")
 //         {
 //         }
-//         key(Key22; "Document Type", "Document No.", "Retention Code", "Job No.", Open)
+//         key(STG_Key22; "Document Type", "Document No.", "Retention Code", "Job No.", Open)
 //         {
 //         }
-//         key(Key23; "Document No.", "Document Type", "Customer No.")
+//         key(STG_Key23; "Document No.", "Document Type", "Customer No.")
 //         {
 //         }
-//         key(Key24; "LSV No.", "Customer No.")
+//         key(STG_Key24; "LSV No.", "Customer No.")
 //         {
 //         }
-//         key(Key25; "Source Code", "Posting Date")
+//         key(STG_Key25; "Source Code", "Posting Date")
 //         {
 //         }
-//         key(Key26; "Source Code", "Posting Date", "Document No.")
+//         key(STG_Key26; "Source Code", "Posting Date", "Document No.")
 //         {
 //         }
-//         key(Key27; "Applies-to ID")
+//         key(STG_Key27; "Applies-to ID")
 //         {
 //         }
 //     }

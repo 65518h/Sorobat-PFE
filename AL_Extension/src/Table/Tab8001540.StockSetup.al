@@ -99,7 +99,7 @@ Table 8001540 "Stock Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

@@ -65,7 +65,7 @@ Table 8004054 "Setup Formula Amount"
 
     keys
     {
-        key(Key1; "Table No.", "Column No.")
+        key(STG_Key1; "Table No.", "Column No.")
         {
             Clustered = true;
         }

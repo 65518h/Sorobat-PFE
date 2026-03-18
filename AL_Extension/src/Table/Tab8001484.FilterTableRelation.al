@@ -119,7 +119,7 @@ Table 8001484 "Filter Table Relation"
 
     keys
     {
-        key(Key1; TableNo)
+        key(STG_Key1; TableNo)
         {
             Clustered = true;
         }

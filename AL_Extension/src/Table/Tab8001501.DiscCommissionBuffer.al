@@ -331,11 +331,11 @@ Table 8001501 "Disc. Commission Buffer"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Rule No.", "Disc. Commission Type", "Salesperson Code", "Source No.", "Source Gen. Bus. Posting Gr.", "Gen. Bus. Posting Group", "Inventory Posting Group", "Gen. Prod. Posting Group", Type, "No.", "Posting Date")
+        key(STG_Key2; "Rule No.", "Disc. Commission Type", "Salesperson Code", "Source No.", "Source Gen. Bus. Posting Gr.", "Gen. Bus. Posting Group", "Inventory Posting Group", "Gen. Prod. Posting Group", Type, "No.", "Posting Date")
         {
         }
     }

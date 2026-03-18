@@ -78,7 +78,7 @@ Table 8001409 "Sage Interface Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

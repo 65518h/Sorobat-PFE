@@ -543,11 +543,11 @@ Table 8004070 "Structure Component"
 
     keys
     {
-        key(Key1; "Parent Structure No.", "Line No.")
+        key(STG_Key1; "Parent Structure No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, "No.")
+        key(STG_Key2; Type, "No.")
         {
         }
     }

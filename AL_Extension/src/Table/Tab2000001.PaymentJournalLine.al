@@ -608,20 +608,20 @@ Table 2000001 "Payment Journal Line"
 
     keys
     {
-        key(Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
+        key(STG_Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
         {
             Clustered = true;
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key2; "Account Type", "Account No.", "Currency Code", "Applies-to ID", "Separate Line", "Applies-to Doc. Type", "Applies-to Doc. No.")
+        key(STG_Key2; "Account Type", "Account No.", "Currency Code", "Applies-to ID", "Separate Line", "Applies-to Doc. Type", "Applies-to Doc. No.")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key3; "ISO Currency Code")
+        key(STG_Key3; "ISO Currency Code")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key4; "Bank Account", "Beneficiary Bank Account No.", Status, "Account Type", "Account No.", "Currency Code")
+        key(STG_Key4; "Bank Account", "Beneficiary Bank Account No.", Status, "Account Type", "Account No.", "Currency Code")
         {
         }
     }

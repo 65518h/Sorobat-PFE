@@ -28,7 +28,7 @@ Table 8001581 "Planning Link Source ID"
 
     keys
     {
-        key(Key1; "Planning Task No.", "Source Line No.")
+        key(STG_Key1; "Planning Task No.", "Source Line No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;

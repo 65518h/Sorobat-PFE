@@ -18,7 +18,7 @@ Table 52049006 "Chauffeur Location"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

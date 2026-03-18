@@ -21,7 +21,7 @@ Table 8003998 "Ligne avoir à établir"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

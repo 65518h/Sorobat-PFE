@@ -48,11 +48,11 @@ Table 8003972 "Transfer Order Link"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Structure Line No.", "Line No.", "Transfer Document Type", "Transfer Document No.")
+        key(STG_Key1; "Document Type", "Document No.", "Structure Line No.", "Line No.", "Transfer Document Type", "Transfer Document No.")
         {
             Clustered = true;
         }
-        key(Key2; "Transfer Document Type", "Transfer Document No.")
+        key(STG_Key2; "Transfer Document Type", "Transfer Document No.")
         {
         }
     }

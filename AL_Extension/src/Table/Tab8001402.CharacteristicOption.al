@@ -32,7 +32,7 @@ Table 8001402 "Characteristic Option"
 
     keys
     {
-        key(Key1; "Table Name", "Characteristic code", Option)
+        key(STG_Key1; "Table Name", "Characteristic code", Option)
         {
             Clustered = true;
         }

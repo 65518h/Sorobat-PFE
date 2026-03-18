@@ -42,7 +42,7 @@ Table 8003903 "Job Phase Comment Line"
 
     keys
     {
-        key(Key1; "Job No.", "Phase Code", "Line No.")
+        key(STG_Key1; "Job No.", "Phase Code", "Line No.")
         {
             Clustered = true;
         }

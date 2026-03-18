@@ -44,11 +44,11 @@ Table 8001469 "Header/Footer Logos Setup"
 
     keys
     {
-        key(Key1; "Report ID", "Responsibility Center")
+        key(STG_Key1; "Report ID", "Responsibility Center")
         {
             Clustered = true;
         }
-        key(Key2; "Responsibility Center")
+        key(STG_Key2; "Responsibility Center")
         {
         }
     }

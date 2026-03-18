@@ -58,7 +58,7 @@ Table 50057 "Entete rapport DG"
 
     keys
     {
-        key(Key1; "N° Rapport")
+        key(STG_Key1; "N° Rapport")
         {
             Clustered = true;
         }

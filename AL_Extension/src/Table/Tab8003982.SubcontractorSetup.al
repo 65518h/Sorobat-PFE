@@ -29,7 +29,7 @@ Table 8003982 "Subcontractor Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

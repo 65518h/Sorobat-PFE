@@ -55,7 +55,7 @@ Table 8001560 "Workflow Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

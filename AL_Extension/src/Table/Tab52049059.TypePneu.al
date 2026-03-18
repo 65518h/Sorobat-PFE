@@ -27,7 +27,7 @@ Table 52049059 "Type Pneu"
 
     keys
     {
-        key(Key1; "Code type")
+        key(STG_Key1; "Code type")
         {
             Clustered = true;
         }

@@ -78,7 +78,7 @@ table 52049046 "Frais de mission Enregistrées"
 
     keys
     {
-        key(Key1; "N° Document", "Code Mission", "N° ligne")
+        key(STG_Key1; "N° Document", "Code Mission", "N° ligne")
         {
             Clustered = true;
         }

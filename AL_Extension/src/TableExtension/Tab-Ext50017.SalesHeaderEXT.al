@@ -2082,31 +2082,31 @@ TableExtension 50017 "Sales HeaderEXT" extends "Sales Header"
     }
     keys
     {
-        /* GL2024  key(Key14; "Document Type", "Sell-to Contact Company No.")
+        /* GL2024  key(STG_Key14; "Document Type", "Sell-to Contact Company No.")
            {
            }*/
-        key(Key15; "Job No.")
+        key(STG_Key15; "Job No.")
         {
         }
 
-        /* GL2024 key(Key16;"Order Type","Document Type","No.","Invoicing Method",Finished)
+        /* GL2024 key(STG_Key16;"Order Type","Document Type","No.","Invoicing Method",Finished)
           {
           }*/
-        key(Key17; "Rider to Order No.")
+        key(STG_Key17; "Rider to Order No.")
         {
         }
-        key(Key18; Synchronise)
-        {
-        }
-
-        key(Key19; "Sell-to Customer Name")
+        key(STG_Key18; Synchronise)
         {
         }
 
-        key(Key20; "Posting Date")
+        key(STG_Key19; "Sell-to Customer Name")
         {
         }
-        key(Key21; "Transfer Job No.")
+
+        key(STG_Key20; "Posting Date")
+        {
+        }
+        key(STG_Key21; "Transfer Job No.")
         {
         }
     }

@@ -75,35 +75,35 @@ TableExtension 50011 "Cust. Ledger EntryEXT" extends "Cust. Ledger Entry"
     }
     keys
     {
-        key(Key37; "Customer No.", "Applies-to ID", Open, Positive, "Due Date")
+        key(STG_Key37; "Customer No.", "Applies-to ID", Open, Positive, "Due Date")
         {
         }
-        key(Key38; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
+        key(STG_Key38; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
         {
         }
-        key(Key39; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
+        key(STG_Key39; "Customer No.", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
         {
         }
         //GL2024
-        /*  key(Key40; Open, "Value Date")
+        /*  key(STG_Key40; Open, "Value Date")
           {
           }
-          key(Key41; "Job No.", "Customer No.", Open, Positive, "Due Date", "Currency Code")
+          key(STG_Key41; "Job No.", "Customer No.", Open, Positive, "Due Date", "Currency Code")
           {
           }
-          key(Key42; "Document Type", "Document No.", "Retention Code", "Job No.", "Open")
+          key(STG_Key42; "Document Type", "Document No.", "Retention Code", "Job No.", "Open")
           {
           }
-          key(Key43; "Document No.", "Document Type", "Customer No.")
+          key(STG_Key43; "Document No.", "Document Type", "Customer No.")
           {
           }
-          key(Key44; "LSV No.", "Customer No.")
+          key(STG_Key44; "LSV No.", "Customer No.")
           {
           }*/
-        key(Key45; "Source Code", "Posting Date")
+        key(STG_Key45; "Source Code", "Posting Date")
         {
         }
-        key(Key46; "Lettre")
+        key(STG_Key46; "Lettre")
         {
         }
 

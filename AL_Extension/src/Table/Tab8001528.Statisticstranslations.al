@@ -25,7 +25,7 @@ Table 8001528 "Statistics translations"
 
     keys
     {
-        key(Key1; Description, "Language ID")
+        key(STG_Key1; Description, "Language ID")
         {
             Clustered = true;
         }

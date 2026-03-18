@@ -20,7 +20,7 @@ TableExtension 50101 "Payment BufferEXT" extends "Payment Buffer"
     keys
     {
 
-        //GL2024 key(Key1;"Vendor No.","Currency Code","Vendor Ledg. Entry No.","Dimension Entry No.","Due Date")
+        //GL2024 key(STG_Key1;"Vendor No.","Currency Code","Vendor Ledg. Entry No.","Dimension Entry No.","Due Date")
         // {
         // Clustered = true;
         // }

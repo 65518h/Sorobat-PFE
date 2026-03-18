@@ -32,7 +32,7 @@ table 52048923 "FOR-Themes Formations"
 
     keys
     {
-        key(Key1; "Code", "Topic Code")
+        key(STG_Key1; "Code", "Topic Code")
         {
             Clustered = true;
         }

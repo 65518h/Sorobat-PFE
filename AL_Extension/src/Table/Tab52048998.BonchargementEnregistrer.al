@@ -100,7 +100,7 @@ table 52048998 "Bon chargement Enregistrer"
 
     keys
     {
-        key(Key1; "N° Expédition", "N° Bon Chargenemt", "Code Article")
+        key(STG_Key1; "N° Expédition", "N° Bon Chargenemt", "Code Article")
         {
             Clustered = true;
         }

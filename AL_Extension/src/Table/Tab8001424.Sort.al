@@ -34,11 +34,11 @@ Table 8001424 Sort
 
     keys
     {
-        key(Key1; DateTime, "Entry No.")
+        key(STG_Key1; DateTime, "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; DateTime, "Key 1", "Key 2", "Key 3", "Key 4", "Key 5")
+        key(STG_Key2; DateTime, "Key 1", "Key 2", "Key 3", "Key 4", "Key 5")
         {
         }
     }

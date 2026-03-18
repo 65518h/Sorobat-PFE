@@ -174,7 +174,7 @@ table 52049061 "Lig Programmation Enr"
 
     keys
     {
-        key(Key1; Compteur)
+        key(STG_Key1; Compteur)
         {
             Clustered = true;
         }

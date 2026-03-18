@@ -1,16 +1,24 @@
 <!-- layout/main-layout/main-layout.html -->
 <div class="main-layout">
-  <app-navbar></app-navbar>
+  <app-navbar 
+  (menuToggle)="toggleSidebar()"
+  [isSidebarOpen]="isSidebarOpen">
+</app-navbar>
   
   <div class="content-wrapper">
-    <app-sidebar></app-sidebar>
+    <!-- La sidebar est conditionnée par la classe -->
+    <div class="sidebar-wrapper" [class.closed]="!isSidebarOpen">
+      <app-sidebar></app-sidebar>
+    </div>
     
-    <main class="main-content">
-      <div class="content-container">
-        <router-outlet></router-outlet>  <!-- C'est ici que les projets s'affichent -->
-      </div>
-    </main>
+    <!-- Le contenu principal s'adapte -->
+    <div class="main-wrapper" [class.expanded]="!isSidebarOpen">
+      <main class="main-content">
+        <div class="content-container">
+          <router-outlet></router-outlet>
+        </div>
+      </main>
+      <!-- <app-footer></app-footer> -->
+    </div>
   </div>
-  
-  <app-footer></app-footer>
 </div>

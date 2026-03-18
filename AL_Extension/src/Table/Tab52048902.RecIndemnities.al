@@ -185,44 +185,44 @@ Table 52048902 "Rec. Indemnities"
 
     keys
     {
-        key(Key1; "No.", "Employee No.", Indemnity)
+        key(STG_Key1; "No.", "Employee No.", Indemnity)
         {
             Clustered = true;
             SumIndexFields = "Real Amount";
         }
-        key(Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global dimension 1", "Global dimension 2")
+        key(STG_Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key3; Indemnity, "Global dimension 1", "Global dimension 2")
+        key(STG_Key3; Indemnity, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key4; Indemnity, "Employee Posting Group", "Global dimension 1", "Global dimension 2")
+        key(STG_Key4; Indemnity, "Employee Posting Group", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key5; "Employee Posting Group", "Global dimension 1", "Global dimension 2", Indemnity, "Compte contre partie indemnité")
+        key(STG_Key5; "Employee Posting Group", "Global dimension 1", "Global dimension 2", Indemnity, "Compte contre partie indemnité")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key6; "No.", "Employee No.", "Non Inclus en Prime", "Type Indemnité", Type)
+        key(STG_Key6; "No.", "Employee No.", "Non Inclus en Prime", "Type Indemnité", Type)
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key7; "Employee Statistic Group", Type, "No.")
+        key(STG_Key7; "Employee Statistic Group", Type, "No.")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key8; "Compte contre partie indemnité", "Compte indemnité")
+        key(STG_Key8; "Compte contre partie indemnité", "Compte indemnité")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key9; "Employee Posting Group", "Global dimension 1", "Global dimension 2", "Compte indemnité")
+        key(STG_Key9; "Employee Posting Group", "Global dimension 1", "Global dimension 2", "Compte indemnité")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key10; "No.", Indemnity)
+        key(STG_Key10; "No.", Indemnity)
         {
             SumIndexFields = "Real Amount";
         }

@@ -18,7 +18,7 @@ TableExtension 50084 "No. SeriesEXT" extends "No. Series"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

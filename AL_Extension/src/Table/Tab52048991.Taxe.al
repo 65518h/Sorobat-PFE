@@ -49,7 +49,7 @@ Table 52048991 Taxe
 
     keys
     {
-        key(Key1; "N° Véhicule", "Date Document")
+        key(STG_Key1; "N° Véhicule", "Date Document")
         {
             Clustered = true;
             SumIndexFields = Montant;

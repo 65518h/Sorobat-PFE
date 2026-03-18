@@ -77,11 +77,11 @@ table 52049025 "Calcul Cout"
 
     keys
     {
-        key(Key1; Ligne)
+        key(STG_Key1; Ligne)
         {
             Clustered = true;
         }
-        key(Key2; Rubrique, "Element Calcul")
+        key(STG_Key2; Rubrique, "Element Calcul")
         {
         }
     }

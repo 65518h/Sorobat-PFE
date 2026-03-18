@@ -56,7 +56,7 @@ TableExtension 50067 "General Posting SetupEXT" extends "General Posting Setup"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

@@ -13,7 +13,7 @@ TableExtension 50003 "Customer Price GroupEXT" extends "Customer Price Group"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

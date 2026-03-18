@@ -116,7 +116,7 @@ table 52048922 "FOR-Centres Formations"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

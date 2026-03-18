@@ -109,7 +109,7 @@ Table 8001460 "Job Scheduler Filter"
 
     keys
     {
-        key(Key1; "Scheduler Code", "Table No.", "Field No.")
+        key(STG_Key1; "Scheduler Code", "Table No.", "Field No.")
         {
             Clustered = true;
         }

@@ -1982,7 +1982,7 @@ Table 8001523 "Temp. statistic filter"
 
     keys
     {
-        key(Key1; "User ID", "Code")
+        key(STG_Key1; "User ID", "Code")
         {
             Clustered = true;
         }

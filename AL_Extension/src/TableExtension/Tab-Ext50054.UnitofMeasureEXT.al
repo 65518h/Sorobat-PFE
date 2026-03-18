@@ -26,7 +26,7 @@ TableExtension 50054 "Unit of MeasureEXT" extends "Unit of Measure"
     }
     keys
     {
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

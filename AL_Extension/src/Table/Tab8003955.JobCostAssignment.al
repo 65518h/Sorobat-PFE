@@ -57,12 +57,12 @@ Table 8003955 "Job Cost Assignment"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Document Line No.", "Applies-to Doc. Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Document Line No.", "Applies-to Doc. Line No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Document Type", "Document No.", "Applies-to Doc. Line No.")
+        key(STG_Key2; "Document Type", "Document No.", "Applies-to Doc. Line No.")
         {
         }
     }

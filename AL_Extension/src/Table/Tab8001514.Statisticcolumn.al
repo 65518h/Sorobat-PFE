@@ -120,7 +120,7 @@ Table 8001514 "Statistic column"
 
     keys
     {
-        key(Key1; "Code", "Line No.")
+        key(STG_Key1; "Code", "Line No.")
         {
             Clustered = true;
         }

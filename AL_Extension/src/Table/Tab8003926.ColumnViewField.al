@@ -40,7 +40,7 @@ Table 8003926 "Column View Field"
 
     keys
     {
-        key(Key1; TableNo, ColumnKey, LineNo)
+        key(STG_Key1; TableNo, ColumnKey, LineNo)
         {
             Clustered = true;
         }

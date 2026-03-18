@@ -156,7 +156,7 @@ Table 52048880 "Social Contribution"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

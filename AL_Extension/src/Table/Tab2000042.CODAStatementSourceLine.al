@@ -162,11 +162,11 @@ Table 2000042 "CODA Statement Source Line"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Statement No.", "Line No.")
+        key(STG_Key1; "Bank Account No.", "Statement No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; ID, "Sequence No.", "Detail No.")
+        key(STG_Key2; ID, "Sequence No.", "Detail No.")
         {
         }
     }

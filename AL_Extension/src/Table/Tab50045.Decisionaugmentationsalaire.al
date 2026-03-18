@@ -102,7 +102,7 @@ Table 50045 "Decision augmentation salaire"
 
     keys
     {
-        key(Key1; "N° Decision")
+        key(STG_Key1; "N° Decision")
         {
             Clustered = true;
         }

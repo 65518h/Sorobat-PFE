@@ -233,23 +233,23 @@ table 50017 "Ligne Fiche Gasoil"
 
     keys
     {
-        key(Key1; "Document No.", "Numero Ligne")
+        key(STG_Key1; "Document No.", "Numero Ligne")
         {
             Clustered = true;
         }
-        key(Key2; "Index Horaire")
+        key(STG_Key2; "Index Horaire")
         {
         }
-        key(Key3; "Index Kilometrique")
+        key(STG_Key3; "Index Kilometrique")
         {
         }
-        key(Key4; Journee, Cuve, "Numero Ligne")
+        key(STG_Key4; Journee, Cuve, "Numero Ligne")
         {
         }
-        key(Key5; Materiel, "Numero Ligne")
+        key(STG_Key5; Materiel, "Numero Ligne")
         {
         }
-        key(Key6; Materiel, Journee, Heure)
+        key(STG_Key6; Materiel, Journee, Heure)
         {
         }
     }

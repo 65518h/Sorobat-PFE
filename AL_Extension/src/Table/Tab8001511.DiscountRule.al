@@ -813,7 +813,7 @@ Table 8001511 "Discount Rule"
 
     keys
     {
-        key(Key1; "Discount and comm. type", "No.")
+        key(STG_Key1; "Discount and comm. type", "No.")
         {
             Clustered = true;
         }

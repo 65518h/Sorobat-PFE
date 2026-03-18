@@ -44,11 +44,11 @@ Table 8003950 "Job Status Log"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", Date)
+        key(STG_Key2; "Job No.", Date)
         {
         }
     }

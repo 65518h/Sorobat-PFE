@@ -88,7 +88,7 @@ table 52049049 "Détail Mission"
 
     keys
     {
-        key(Key1; "N° Mission", "Num Document", "Num Ligne Document")
+        key(STG_Key1; "N° Mission", "Num Document", "Num Ligne Document")
         {
             Clustered = true;
         }

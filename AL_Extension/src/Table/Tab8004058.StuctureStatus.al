@@ -13,7 +13,7 @@ Table 8004058 "Stucture Status"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

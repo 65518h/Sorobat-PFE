@@ -158,7 +158,7 @@ TableExtension 50043 "Purch. Rcpt. HeaderEXT" extends "Purch. Rcpt. Header"
     }
     keys
     {
-        key(Key7; Synchronise)
+        key(STG_Key7; Synchronise)
         {
         }
     }

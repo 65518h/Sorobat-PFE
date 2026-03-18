@@ -78,7 +78,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code", "Matricule Salarié")
+//         key(STG_Key1; "Code", "Matricule Salarié")
 //         {
 //             Clustered = true;
 //             SumIndexFields = "Montant Net";

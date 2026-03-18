@@ -17,7 +17,7 @@ Table 8001545 "BAR : xxxxxxxxx"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

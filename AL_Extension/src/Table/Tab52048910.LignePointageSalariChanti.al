@@ -527,11 +527,11 @@ Table 52048910 "Ligne Pointage Salarié Chanti"
 
     keys
     {
-        key(Key1; "No. Pointage", Matricule, "Annee Attachement", "Mois Attachement", Affectation)
+        key(STG_Key1; "No. Pointage", Matricule, "Annee Attachement", "Mois Attachement", Affectation)
         {
             Clustered = true;
         }
-        key(Key2; Affectation, "Base Jour", Matricule)
+        key(STG_Key2; Affectation, "Base Jour", Matricule)
         {
         }
     }

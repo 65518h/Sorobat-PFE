@@ -41,7 +41,7 @@ Table 8001534 "BAR : Interbank Code"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Interbank Code", Direction)
+        key(STG_Key1; "Bank Account No.", "Interbank Code", Direction)
         {
             Clustered = true;
         }

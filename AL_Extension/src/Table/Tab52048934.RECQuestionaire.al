@@ -37,7 +37,7 @@ table 52048934 "REC-Questionaire"
 
     keys
     {
-        key(Key1; "N° Demande", Theme, "Code question")
+        key(STG_Key1; "N° Demande", Theme, "Code question")
         {
             Clustered = true;
         }

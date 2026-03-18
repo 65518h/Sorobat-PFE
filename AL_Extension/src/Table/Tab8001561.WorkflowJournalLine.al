@@ -295,17 +295,17 @@ Table 8001561 "Workflow Journal Line"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, "No.")
+        key(STG_Key2; Type, "No.")
         {
         }
-        key(Key3; Type, "Workflow Code", Open)
+        key(STG_Key3; Type, "Workflow Code", Open)
         {
         }
-        key(Key4; Open, "Due Date")
+        key(STG_Key4; Open, "Due Date")
         {
         }
     }

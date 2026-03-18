@@ -30,7 +30,7 @@ Table 8001551 "Tax Gen. Bus. Posting Group"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

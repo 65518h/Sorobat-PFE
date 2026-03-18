@@ -80,7 +80,7 @@ table 50005 "Calcul Interet Moratoire"
 
     keys
     {
-        key(Key1; "Type Document", "N°Document", "N°Ligne")
+        key(STG_Key1; "Type Document", "N°Document", "N°Ligne")
         {
             Clustered = true;
         }

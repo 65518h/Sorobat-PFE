@@ -75,7 +75,7 @@ Table 52049008 "Entete rendement Vehicule Enr"
 
     keys
     {
-        key(Key1; Journee, Provenance, Destination, Vehicule, Produit, Marche)
+        key(STG_Key1; Journee, Provenance, Destination, Vehicule, Produit, Marche)
         {
             Clustered = true;
         }

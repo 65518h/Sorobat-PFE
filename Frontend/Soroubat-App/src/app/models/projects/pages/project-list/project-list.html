@@ -1,6 +1,8 @@
+<!-- src/app/modules/projects/pages/project-list/project-list.component.html -->
+
 <div class="project-list-container">
-  <!-- En-tête avec titre et actions -->
-  <div class="header">
+  <!-- En-tête avec effet glassmorphisme -->
+  <div class="header glass-effect">
     <div class="title-section">
       <h1>Projets</h1>
       <p class="subtitle">Gérez et suivez l'avancement de vos chantiers</p>
@@ -9,205 +11,317 @@
     <div class="header-actions">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Rechercher un projet</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Nom, client, responsable..." #input>
-        <mat-icon matSuffix>search</mat-icon>
+        <input matInput (keyup)="applyFilter($event)" placeholder="N° projet, description..." #input>
+        <button matSuffix mat-icon-button *ngIf="input.value" (click)="input.value=''; applyFilter($event)" class="clear-search">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-icon matSuffix class="search-icon">search</mat-icon>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="createProject()">
+      <button mat-raised-button class="primary-gradient-btn" (click)="createProject()">
         <mat-icon>add</mat-icon>
         Nouveau projet
       </button>
     </div>
   </div>
 
-  <!-- Statistiques -->
+  <!-- Statistiques avec cartes animées -->
   <div class="stats-grid">
-    <mat-card class="stat-card" (click)="filterByStatus('all')">
+    <mat-card class="stat-card total" (click)="filterByStatus('all')">
       <mat-card-content>
-        <div class="stat-value">{{ totalProjects }}</div>
-        <div class="stat-label">Total projets</div>
+        <div class="stat-icon-wrapper">
+          <mat-icon class="stat-icon">dashboard</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ totalProjects }}</div>
+          <div class="stat-label">Total projets</div>
+        </div>
+        <div class="stat-trend neutral">
+          <mat-icon>trending_flat</mat-icon>
+          <span>Global</span>
+        </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card" (click)="filterByStatus('En cours')">
+    <mat-card class="stat-card in-progress" (click)="filterByStatus('En cours')">
       <mat-card-content>
-        <div class="stat-value">{{ activeProjects }}</div>
-        <div class="stat-label">En cours</div>
-        <mat-icon class="stat-icon">pending</mat-icon>
+        <div class="stat-icon-wrapper">
+          <mat-icon class="stat-icon">pending_actions</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ activeProjects }}</div>
+          <div class="stat-label">En cours</div>
+        </div>
+        <div class="stat-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="(activeProjects / totalProjects) * 100 || 0"></div>
+          </div>
+          <span class="progress-text">{{ ((activeProjects / totalProjects) * 100 || 0).toFixed(1) }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card" (click)="filterByStatus('Terminé')">
+    <mat-card class="stat-card completed" (click)="filterByStatus('Terminé')">
       <mat-card-content>
-        <div class="stat-value">{{ completedProjects }}</div>
-        <div class="stat-label">Terminés</div>
-        <mat-icon class="stat-icon">check_circle</mat-icon>
+        <div class="stat-icon-wrapper">
+          <mat-icon class="stat-icon">check_circle</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ completedProjects }}</div>
+          <div class="stat-label">Terminés</div>
+        </div>
+        <div class="stat-trend up">
+          <mat-icon>trending_up</mat-icon>
+          <span>+{{ ((completedProjects / totalProjects) * 100 || 0).toFixed(1) }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card" (click)="filterByStatus('Suspendu')">
+    <mat-card class="stat-card suspended" (click)="filterByStatus('Suspendu')">
       <mat-card-content>
-        <div class="stat-value">{{ suspendedProjects }}</div>
-        <div class="stat-label">Suspendus</div>
-        <mat-icon class="stat-icon">pause_circle</mat-icon>
+        <div class="stat-icon-wrapper">
+          <mat-icon class="stat-icon">pause_circle</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value">{{ suspendedProjects }}</div>
+          <div class="stat-label">Suspendus</div>
+        </div>
+      
       </mat-card-content>
     </mat-card>
   </div>
 
-  <!-- Filtres rapides -->
-  <div class="quick-filters">
+  <!-- Filtres rapides avec chips design moderne -->
+  <div class="quick-filters glass-effect">
+    <span class="filter-label">Filtres :</span>
     <mat-chip-listbox multiple class="filter-chips" (change)="onFilterChange($event)">
-      <mat-chip-option selected>Projets en cours</mat-chip-option>
-      <mat-chip-option>Projets terminés</mat-chip-option>
-      <mat-chip-option>Projets suspendus</mat-chip-option>
-      <mat-chip-option>Retard d'avancement</mat-chip-option>
+      <mat-chip-option value="En cours" class="filter-chip">
+        <mat-icon class="chip-icon">pending</mat-icon>
+        Projets en cours
+      </mat-chip-option>
+      <mat-chip-option value="Terminé" class="filter-chip">
+        <mat-icon class="chip-icon">check_circle</mat-icon>
+        Projets terminés
+      </mat-chip-option>
+      <mat-chip-option value="Suspendu" class="filter-chip">
+        <mat-icon class="chip-icon">pause_circle</mat-icon>
+        Projets suspendus
+      </mat-chip-option>
+      <mat-chip-option value="retard" class="filter-chip">
+        <mat-icon class="chip-icon">warning</mat-icon>
+        Retard d'avancement
+      </mat-chip-option>
     </mat-chip-listbox>
   </div>
 
-  <!-- Tableau des projets -->
+  <!-- Tableau des projets avec design premium -->
   <mat-card class="projects-table-card">
     <mat-card-header class="table-header">
-      <mat-card-title>Liste des projets</mat-card-title>
-      <mat-card-subtitle>{{ filteredProjects.length }} projet(s) trouvé(s)</mat-card-subtitle>
+      <div class="header-title">
+        <mat-icon class="title-icon">folder</mat-icon>
+      
+        <div>
+          <mat-card-title>Liste des projets</mat-card-title>
+          <mat-card-subtitle>{{ filteredProjects.length }} projet(s) trouvé(s)</mat-card-subtitle>
+        </div>
+      </div>
       <div class="table-actions">
-        <button mat-icon-button matTooltip="Exporter en CSV" (click)="exportToCSV()">
+        <button mat-icon-button class="action-btn" matTooltip="Exporter en CSV" (click)="exportToCSV()">
           <mat-icon>download</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Actualiser" (click)="loadProjects()">
+        <button mat-icon-button class="action-btn" matTooltip="Actualiser" (click)="loadProjects()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
     </mat-card-header>
 
-    <mat-card-content>
-      <table mat-table [dataSource]="dataSource" class="projects-table" matSort>
+    <mat-card-content class="table-content">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="projects-table" matSort>
 
-        <!-- N° Projet -->
-        <ng-container matColumnDef="number">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
-          <td mat-cell *matCellDef="let project"> 
-            <span class="project-number">{{ project.number }}</span>
-          </td>
-        </ng-container>
-
-        <!-- Projet -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Projet </th>
-          <td mat-cell *matCellDef="let project">
-            <div class="project-info">
-              <div class="project-name">{{ project.name }}</div>
-              <div class="project-description">{{ project.description }}</div>
-              <div class="project-meta">
-                <mat-icon class="meta-icon">assignment</mat-icon>
-                <span>{{ project.taskCount || 0 }} tâches</span>
+          <!-- N° Projet (no) -->
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                 <mat-icon>folder</mat-icon>
+                <span>N° Projet</span>
               </div>
-            </div>
-          </td>
-        </ng-container>
+            </th>
+            <td mat-cell *matCellDef="let project"> 
+              <span class="project-number">{{ project.no }}</span>
+            </td>
+          </ng-container>
 
-        <!-- Client -->
-        <ng-container matColumnDef="customer">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
-          <td mat-cell *matCellDef="let project">
-            <div class="client-info">
-              <mat-icon class="client-icon">business</mat-icon>
-              {{ project.customerName }}
-            </div>
-          </td>
-        </ng-container>
-
-        <!-- Responsable -->
-        <ng-container matColumnDef="responsible">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsable </th>
-          <td mat-cell *matCellDef="let project">
-            <div class="responsible-info">
-              <mat-icon class="responsible-icon">person</mat-icon>
-              {{ project.responsible }}
-            </div>
-          </td>
-        </ng-container>
-
-        <!-- Dates -->
-        <ng-container matColumnDef="dates">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Dates </th>
-          <td mat-cell *matCellDef="let project">
-            <div class="date-range">
-              <div class="date-item">
-                <mat-icon class="date-icon">event</mat-icon>
-                <span>{{ project.startDate | date:'dd/MM/yyyy' }}</span>
+          <!-- Description -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>description</mat-icon>
+                <span>Description</span>
               </div>
-              <mat-icon class="date-arrow">arrow_forward</mat-icon>
-              <div class="date-item">
-                <mat-icon class="date-icon">event</mat-icon>
-                <span>{{ project.endDate | date:'dd/MM/yyyy' }}</span>
-              </div>
-            </div>
-          </td>
-        </ng-container>
-
-        <!-- Avancement -->
-        <ng-container matColumnDef="progress">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Avancement </th>
-          <td mat-cell *matCellDef="let project">
-            <div class="progress-cell">
-              <div class="progress-bar-container">
-                <mat-progress-bar
-                  mode="determinate"
-                  [value]="project.progress"
-                  [color]="project.progress === 100 ? 'primary' : project.progress > 0 ? 'accent' : 'warn'">
-                </mat-progress-bar>
-                <div class="progress-label" [style.left.%]="project.progress" *ngIf="project.progress > 5">
-                  <span>{{ project.progress }}%</span>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="project-info">
+                <span class="project-name">{{ project.description | slice:0:50 }}{{ project.description?.length > 50 ? '...' : '' }}</span>
+                <div class="project-meta" *ngIf="project.taskCount">
+                  <mat-icon class="meta-icon">assignment</mat-icon>
+                  <span>{{ project.taskCount }} tâches</span>
                 </div>
               </div>
-              <span class="progress-value" *ngIf="project.progress <= 5">{{ project.progress }}%</span>
-            </div>
-          </td>
-        </ng-container>
+            </td>
+          </ng-container>
 
-        <!-- Statut -->
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
-          <td mat-cell *matCellDef="let project">
-            <mat-chip-set>
-              <mat-chip [class]="getStatusClass(project.status)" selected>
-                <mat-icon class="chip-icon">{{ getStatusIcon(project.status) }}</mat-icon>
-                {{ project.status }}
-              </mat-chip>
-            </mat-chip-set>
-          </td>
-        </ng-container>
+          <!-- Personne responsable -->
+          <ng-container matColumnDef="personResponsible">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>person</mat-icon>
+                <span>Responsable</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="responsible-info">
+                <div class="avatar" [style.background]="'linear-gradient(135deg, #3f51b5, #5c6bc0)'">
+                  {{ project.personResponsible?.charAt(0) || '?' }}
+                </div>
+                <span>{{ project.personResponsible || 'Non assigné' }}</span>
+              </div>
+            </td>
+          </ng-container>
 
-        <!-- Actions -->
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let project">
-            <button mat-icon-button color="primary" (click)="viewProject(project.id)" matTooltip="Voir détails">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="editProject(project.id)" matTooltip="Modifier">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="deleteProject(project.id)" matTooltip="Supprimer">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+          <!-- Chef de projet -->
+          <ng-container matColumnDef="projectManager">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>engineering</mat-icon>
+                <span>Chef de projet</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="manager-info">
+                <div class="avatar" [style.background]="'linear-gradient(135deg, #ff4081, #f50057)'">
+                  {{ project.projectManager?.charAt(0) || '?' }}
+                </div>
+                <span>{{ project.projectManager || 'Non assigné' }}</span>
+              </div>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewProject(row.id)"></tr>
+          <!-- Affectation magasin -->
+          <ng-container matColumnDef="affectationMagasin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>store</mat-icon>
+                <span>Magasin</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <span class="magasin-badge" [class.not-assigned]="!project.affectationMagasin">
+                {{ project.affectationMagasin || 'Non affecté' }}
+              </span>
+            </td>
+          </ng-container>
 
-        <!-- Ligne quand aucun résultat -->
-        <tr class="mat-row" *matNoDataRow>
-          <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
-            <mat-icon>info</mat-icon>
-            <p>Aucun projet trouvé</p>
-          </td>
-        </tr>
-      </table>
+          <!-- Avancement -->
+          <ng-container matColumnDef="progress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>trending_up</mat-icon>
+                <span>Avancement</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+             
+
+              <div class="progress-cell">
+                <div class="progress-bar-container">
+                 <mat-progress-bar
+                    class="custom-progress-bar"
+                    mode="determinate"
+                    [value]="project.progress || 0"
+                    [color]="getProgressColor(project.progress || 0)">
+                  </mat-progress-bar>
+                  
+                  <!-- Badge flottant moderne -->
+                  <div class="progress-float" 
+                      *ngIf="project.progress !=undefined && project.progress != null" 
+                      [style.left.%]="project.progress">
+                    <div class="progress-float-content">
+                      <span class="progress-float-value">{{ project.progress || 0}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </td>
+          </ng-container>
+
+          <!-- Statut -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>circle</mat-icon>
+                <span>Statut</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="status-chip" [ngClass]="getStatusClass(getProjectStatus(project))">
+              <mat-icon class="chip-icon">{{ getStatusIcon(getProjectStatus(project)) }}</mat-icon>
+            <span>{{ getProjectStatus(project) }}</span>
+          </div>
+            </td>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header-content">
+                <mat-icon>settings</mat-icon>
+                <span>Actions</span>
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let project">
+              <div class="action-buttons">
+                <button mat-icon-button class="action-btn view-btn" (click)="viewProject(project.no)" matTooltip="Voir détails" matTooltipPosition="above">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button class="action-btn edit-btn" (click)="editProject(project.no)" matTooltip="Modifier" matTooltipPosition="above">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="action-btn delete-btn" (click)="deleteProject(project.no)" matTooltip="Supprimer" matTooltipPosition="above">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewProject(row.no)"></tr>
+
+          <!-- Ligne quand aucun résultat -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+              <div class="no-data-content">
+                <mat-icon class="no-data-icon">search_off</mat-icon>
+                <h3>Aucun projet trouvé</h3>
+                <p>Aucun résultat ne correspond à votre recherche</p>
+                <button mat-stroked-button class="reset-btn" (click)="input.value=''; applyFilter($event)">
+                  <mat-icon>clear</mat-icon>
+                  Effacer les filtres
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
 
       <!-- Pagination -->
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+      <mat-paginator 
+        [pageSizeOptions]="[5, 10, 25, 50]" 
+        [pageSize]="10"
+        showFirstLastButtons
+        class="custom-paginator">
+      </mat-paginator>
     </mat-card-content>
   </mat-card>
 </div>

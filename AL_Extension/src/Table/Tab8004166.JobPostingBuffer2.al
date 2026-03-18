@@ -102,7 +102,7 @@ Table 8004166 "Job Posting Buffer2"
 
     keys
     {
-        key(Key1; "Job No.", "Entry Type", "Posting Group Type", "No.", "Variant Code", "Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Unit of Measure Code", "Work Type Code", "Dimension Entry No.")
+        key(STG_Key1; "Job No.", "Entry Type", "Posting Group Type", "No.", "Variant Code", "Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Unit of Measure Code", "Work Type Code", "Dimension Entry No.")
         {
             Clustered = true;
         }

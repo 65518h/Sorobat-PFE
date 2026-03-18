@@ -190,126 +190,126 @@ Table 52048895 "Employee's days off Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Posting year", "Posting month", "From Date", "Line type", "Entry No.")
+        key(STG_Key2; "Posting year", "Posting month", "From Date", "Line type", "Entry No.")
         {
         }
-        key(Key3; "Transaction No.", "Entry No.", "Employee No.")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)";
-        }
-        key(Key4; "Cause of Absence Code", "To Date")
+        key(STG_Key3; "Transaction No.", "Entry No.", "Employee No.")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key5; "Line type", "Employee No.", "To Date")
+        key(STG_Key4; "Cause of Absence Code", "To Date")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key6; "Employee No.", "Posting month", "Posting year", "Line type", "Payment No.", "From Date", "To Date")
+        key(STG_Key5; "Line type", "Employee No.", "To Date")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)";
+        }
+        key(STG_Key6; "Employee No.", "Posting month", "Posting year", "Line type", "Payment No.", "From Date", "To Date")
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
         }
-        key(Key7; "Employee Posting Group", "Employee No.", "Global dimension 1", "Global dimension 2", "Line type", "Posting month", "Posting year", "Payment No.")
+        key(STG_Key7; "Employee Posting Group", "Employee No.", "Global dimension 1", "Global dimension 2", "Line type", "Posting month", "Posting year", "Payment No.")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key8; "Line type", "Employee No.", "Posting month", "Posting year", "Payment No.")
+        key(STG_Key8; "Line type", "Employee No.", "Posting month", "Posting year", "Payment No.")
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Montant Ligne", "Quantity (Hours)";
         }
-        key(Key9; "Line type", "Employee No.", "From Date", "To Date", "Heure Debut")
+        key(STG_Key9; "Line type", "Employee No.", "From Date", "To Date", "Heure Debut")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key10; "Line type", "Employee No.", "From Date", "To Date", "Heure Debut", "Heure Fin")
+        key(STG_Key10; "Line type", "Employee No.", "From Date", "To Date", "Heure Debut", "Heure Fin")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key11; "Posting year", "Line type", "Cause of Absence Code", "Employee No.")
+        key(STG_Key11; "Posting year", "Line type", "Cause of Absence Code", "Employee No.")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key12; "Employee No.", "Posting year", "Posting month", "Line type", "Impute on days off")
+        key(STG_Key12; "Employee No.", "Posting year", "Posting month", "Line type", "Impute on days off")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key13; "Entry No. Autorisation", "Entry No.")
+        key(STG_Key13; "Entry No. Autorisation", "Entry No.")
         {
         }
-        key(Key14; "Employee No.", "From Date", direction, "Cause of Absence Code", "Entry No.")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)";
-        }
-        key(Key15; "Employee No.", "Line type", "From Date")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key16; "Line type", "Employee No.", "Date Validité", "Entry No.")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key17; "Line type", "Employee No.", "Entry No. Autorisation")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key18; "Employee No.", "Posting year", "Posting month", "Cause of Absence Code", "Motif D'absence")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key19; "Employee No.", "Line type", "Date Validité")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key20; "Employee No.", "Posting year", "Transaction No.", "Line type")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key21; "Employee No.", "Posting month", "Posting year", Quantity)
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key22; "Cause of Absence Code", "Transaction No.", "Entry No.", "Employee No.", "From Date", "To Date")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key23; "Employee No.", "From Date", "Line type")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
-        }
-        key(Key24; "Employee No.", "From Date", "Motif D'absence")
-        {
-        }
-        key(Key25; "Employee No.", "Posting year", "Posting month", "Motif D'absence")
-        {
-        }
-        key(Key26; "N° seq Chantier", "Entry No.")
-        {
-        }
-        key(Key27; "Employee No.", "Posting year", "Posting month", "Motif D'absence", Semaine, Quinzaine)
+        key(STG_Key14; "Employee No.", "From Date", direction, "Cause of Absence Code", "Entry No.")
         {
             SumIndexFields = Quantity, "Quantity (Days)";
         }
-        key(Key28; "Employee No.", "Posting year", "Cause of Absence Code", "Posting month")
-        {
-            SumIndexFields = Quantity, "Quantity (Days)";
-        }
-        key(Key29; "Employee Statistic Group", "Line type", "Posting year", "Posting month")
+        key(STG_Key15; "Employee No.", "Line type", "From Date")
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
         }
-        key(Key30; "Line type", "Employee No.", "Posting month", "Posting year", Quinzaine)
+        key(STG_Key16; "Line type", "Employee No.", "Date Validité", "Entry No.")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key17; "Line type", "Employee No.", "Entry No. Autorisation")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key18; "Employee No.", "Posting year", "Posting month", "Cause of Absence Code", "Motif D'absence")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key19; "Employee No.", "Line type", "Date Validité")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key20; "Employee No.", "Posting year", "Transaction No.", "Line type")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key21; "Employee No.", "Posting month", "Posting year", Quantity)
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key22; "Cause of Absence Code", "Transaction No.", "Entry No.", "Employee No.", "From Date", "To Date")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key23; "Employee No.", "From Date", "Line type")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key24; "Employee No.", "From Date", "Motif D'absence")
+        {
+        }
+        key(STG_Key25; "Employee No.", "Posting year", "Posting month", "Motif D'absence")
+        {
+        }
+        key(STG_Key26; "N° seq Chantier", "Entry No.")
+        {
+        }
+        key(STG_Key27; "Employee No.", "Posting year", "Posting month", "Motif D'absence", Semaine, Quinzaine)
+        {
+            SumIndexFields = Quantity, "Quantity (Days)";
+        }
+        key(STG_Key28; "Employee No.", "Posting year", "Cause of Absence Code", "Posting month")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)";
+        }
+        key(STG_Key29; "Employee Statistic Group", "Line type", "Posting year", "Posting month")
+        {
+            SumIndexFields = Quantity, "Quantity (Days)", "Quantity (Hours)";
+        }
+        key(STG_Key30; "Line type", "Employee No.", "Posting month", "Posting year", Quinzaine)
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Montant Ligne", "Quantity (Hours)";
         }
-        key(Key31; "Employee No.", "Posting month", "Posting year", "Motif D'absence")
+        key(STG_Key31; "Employee No.", "Posting month", "Posting year", "Motif D'absence")
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Montant Ligne", "Quantity (Hours)";
         }
-        key(Key32; "Line type", "Employee No.", "Posting month", "Posting year", Quinzaine, "Motif D'absence", Unit)
+        key(STG_Key32; "Line type", "Employee No.", "Posting month", "Posting year", Quinzaine, "Motif D'absence", Unit)
         {
             SumIndexFields = Quantity, "Quantity (Days)", "Montant Ligne", "Quantity (Hours)";
         }

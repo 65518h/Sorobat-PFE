@@ -26,7 +26,7 @@ Table 50026 "Parametre declaration emp"
 
     keys
     {
-        key(Key1; Annexe, Compte)
+        key(STG_Key1; Annexe, Compte)
         {
             Clustered = true;
         }

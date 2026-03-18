@@ -74,7 +74,7 @@ Table 8003925 "Column Field"
 
     keys
     {
-        key(Key1; TableNo, ColumnKey, "Line No.")
+        key(STG_Key1; TableNo, ColumnKey, "Line No.")
         {
             Clustered = true;
         }

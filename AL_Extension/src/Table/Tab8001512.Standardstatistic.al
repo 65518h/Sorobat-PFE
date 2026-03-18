@@ -1727,7 +1727,7 @@ Table 8001512 "Standard statistic"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -1625,7 +1625,7 @@ table 50021 "Table cue"
     }
     keys
     {
-        key(Key1; "Cle Primaire")
+        key(STG_Key1; "Cle Primaire")
         {
             Clustered = true;
         }

@@ -625,24 +625,24 @@ table 52049066 "Transfer Line Archive"
 
     keys
     {
-        key(Key1; "Document No.", "Line No.")
+        key(STG_Key1; "Document No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Transfer-to Code", Status, "Derived From Line No.", "Item No.", "Variant Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Receipt Date", "In-Transit Code")
+        key(STG_Key2; "Transfer-to Code", Status, "Derived From Line No.", "Item No.", "Variant Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Receipt Date", "In-Transit Code")
         {
             IncludedFields = "Qty. in Transit (Base)", "Outstanding Qty. (Base)", "Shipment Date";
         }
-        key(Key3; "Transfer-from Code", Status, "Derived From Line No.", "Item No.", "Variant Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Shipment Date", "In-Transit Code")
+        key(STG_Key3; "Transfer-from Code", Status, "Derived From Line No.", "Item No.", "Variant Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Shipment Date", "In-Transit Code")
         {
         }
-        key(Key4; "Item No.", "Variant Code")
+        key(STG_Key4; "Item No.", "Variant Code")
         {
         }
-        key(Key5; "Transfer-to Code", "Receipt Date", "Item No.", "Variant Code")
+        key(STG_Key5; "Transfer-to Code", "Receipt Date", "Item No.", "Variant Code")
         {
         }
-        key(Key6; "Transfer-from Code", "Shipment Date", "Item No.", "Variant Code")
+        key(STG_Key6; "Transfer-from Code", "Shipment Date", "Item No.", "Variant Code")
         {
         }
     }

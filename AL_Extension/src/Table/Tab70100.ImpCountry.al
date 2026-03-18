@@ -48,7 +48,7 @@ Table 70100 "Imp Country"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

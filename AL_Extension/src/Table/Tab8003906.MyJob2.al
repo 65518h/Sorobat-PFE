@@ -24,7 +24,7 @@ Table 8003906 "My Job2"
 
     keys
     {
-        key(Key1; "User ID", "Job No.")
+        key(STG_Key1; "User ID", "Job No.")
         {
             Clustered = true;
         }

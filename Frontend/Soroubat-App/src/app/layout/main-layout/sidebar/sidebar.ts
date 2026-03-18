@@ -1,5 +1,4 @@
-// layout/main-layout/sidebar/sidebar.ts
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -16,9 +15,22 @@ import { MatDividerModule } from '@angular/material/divider';
     RouterModule,
     MatListModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css']
 })
-export class SidebarComponent {}
+export class SidebarComponent {
+  @Input() class: string = '';
+  
+  menuItems = [
+    { path: '/tasks', icon: 'assignment', label: 'Tâches', badge: 0 },
+    { path: '/dashboard', icon: 'dashboard', label: 'Tableau de bord', badge: 0 },
+    { path: '/projects', icon: 'folder', label: 'Projets', badge: 3 },
+    { path: '/purchases', icon: 'shopping_cart', label: 'Demandes d\'achat', badge: 5 },
+    { path: '/inventory', icon: 'inventory', label: 'Stock', badge: 2 },
+    { path: '/equipment', icon: 'construction', label: 'Engins', badge: 0 },
+    { path: '/settings', icon: 'settings', label: 'Paramètres', badge: 0 },
+    { path: '/help', icon: 'help', label: 'Aide', badge: 0 }
+  ];
+}

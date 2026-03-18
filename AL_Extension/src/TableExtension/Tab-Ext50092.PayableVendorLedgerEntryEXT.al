@@ -20,7 +20,7 @@ TableExtension 50092 "Payable Vendor Ledger EntryEXT" extends "Payable Vendor Le
     {
 
 
-        key(Key2; "Due Date2")
+        key(STG_Key2; "Due Date2")
         {
         }
     }

@@ -59,7 +59,7 @@ Table 50022 "Messagerie Chat"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

@@ -49,7 +49,7 @@ Table 52048937 "Carte Grise Vehicule"
 
     keys
     {
-        key(Key1; "N° Veh", "N° Carte")
+        key(STG_Key1; "N° Veh", "N° Carte")
         {
             Clustered = true;
         }

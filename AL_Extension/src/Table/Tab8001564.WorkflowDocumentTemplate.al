@@ -142,7 +142,7 @@ Table 8001564 "Workflow Document Template"
 
     keys
     {
-        key(Key1; "Document Template")
+        key(STG_Key1; "Document Template")
         {
             Clustered = true;
         }

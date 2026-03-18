@@ -38,7 +38,7 @@ Table 2000002 "Paym. Journal Batch"
 
     keys
     {
-        key(Key1; "Journal Template Name", Name)
+        key(STG_Key1; "Journal Template Name", Name)
         {
             Clustered = true;
         }

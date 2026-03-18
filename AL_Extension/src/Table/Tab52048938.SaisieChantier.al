@@ -78,7 +78,7 @@ Table 52048938 "Saisie Chantier"
 
     keys
     {
-        key(Key1; Sequence)
+        key(STG_Key1; Sequence)
         {
             Clustered = true;
         }

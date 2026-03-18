@@ -25,7 +25,7 @@ Table 8001410 "Version List"
 
     keys
     {
-        key(Key1; "Entry ID")
+        key(STG_Key1; "Entry ID")
         {
             Clustered = true;
         }

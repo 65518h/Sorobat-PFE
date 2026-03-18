@@ -127,14 +127,14 @@ Table 8003986 Free8003986
 
     keys
     {
-        key(Key1; "Order No.", "Closing No.", "Document Type", "Document No.", "Invoice No.")
+        key(STG_Key1; "Order No.", "Closing No.", "Document Type", "Document No.", "Invoice No.")
         {
             Clustered = true;
         }
-        key(Key2; "Invoice No.", "Invoice Line No. (Revision)")
+        key(STG_Key2; "Invoice No.", "Invoice Line No. (Revision)")
         {
         }
-        key(Key3; "Closing No.", "Order No.")
+        key(STG_Key3; "Closing No.", "Order No.")
         {
         }
     }

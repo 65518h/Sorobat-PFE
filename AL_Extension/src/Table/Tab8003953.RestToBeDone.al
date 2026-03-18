@@ -29,7 +29,7 @@ Table 8003953 "Rest To Be Done"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", "Gen. Prod. Posting Group")
+        key(STG_Key1; "Job No.", "Job Task No.", "Gen. Prod. Posting Group")
         {
             Clustered = true;
             SumIndexFields = "New Budget Amount";

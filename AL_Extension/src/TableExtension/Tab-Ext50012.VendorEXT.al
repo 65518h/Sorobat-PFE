@@ -510,13 +510,13 @@ TableExtension 50012 VendorEXT extends Vendor
     }
     keys
     {
-        key(Key17; "Import Priority")
+        key(STG_Key17; "Import Priority")
         {
         }
-        key(Key18; Synchronise)
+        key(STG_Key18; Synchronise)
         {
         }
-        key(Key19; "Ancien Numero")
+        key(STG_Key19; "Ancien Numero")
         {
         }
     }

@@ -58,14 +58,14 @@ Table 50058 "Correspondan Rapport DG"
 
     keys
     {
-        key(Key1; "Marché", "Désignation")
+        key(STG_Key1; "Marché", "Désignation")
         {
             Clustered = true;
         }
-        key(Key2; Niveau)
+        key(STG_Key2; Niveau)
         {
         }
-        key(Key3; "Marché", Niveau)
+        key(STG_Key3; "Marché", Niveau)
         {
         }
     }

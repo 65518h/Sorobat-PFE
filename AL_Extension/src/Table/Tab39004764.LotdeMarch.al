@@ -13,7 +13,7 @@
 
 //     keys
 //     {
-//         key(Key1; Description)
+//         key(STG_Key1; Description)
 //         {
 //             Clustered = true;
 //         }

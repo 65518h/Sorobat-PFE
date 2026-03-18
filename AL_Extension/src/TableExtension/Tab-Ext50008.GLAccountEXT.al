@@ -155,7 +155,7 @@ TableExtension 50008 "G/L AccountEXT" extends "G/L Account"
     keys
     {
 
-        key(Key12; "No. 2")
+        key(STG_Key12; "No. 2")
         {
         }
     }

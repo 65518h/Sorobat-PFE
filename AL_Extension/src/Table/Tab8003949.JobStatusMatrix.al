@@ -21,7 +21,7 @@ Table 8003949 "Job Status Matrix"
 
     keys
     {
-        key(Key1; "From Status", "To Status Code")
+        key(STG_Key1; "From Status", "To Status Code")
         {
             Clustered = true;
         }

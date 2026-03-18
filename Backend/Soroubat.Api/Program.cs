@@ -44,6 +44,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 // Ordre correct
 app.UseCors("AllowAngular");
 // app.UseHttpsRedirection(); // Désactivé en dev

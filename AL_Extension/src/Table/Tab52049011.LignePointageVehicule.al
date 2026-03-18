@@ -337,12 +337,12 @@ Table 52049011 "Ligne Pointage Vehicule"
 
     keys
     {
-        key(Key1; "Document N°", Vehicule, Journee)
+        key(STG_Key1; "Document N°", Vehicule, Journee)
         {
             Clustered = true;
             SumIndexFields = "Heure Travailler", "Heure Utilisation", "Heure Immobilisation", "Cout Total Journee", "Cout Heure Reel", "Cout Heure Immobilisation", "Cout Gasoil", Gasoil;
         }
-        key(Key2; Vehicule, Journee)
+        key(STG_Key2; Vehicule, Journee)
         {
         }
     }

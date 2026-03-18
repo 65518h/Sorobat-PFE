@@ -18,7 +18,7 @@ Table 52049000 "Sous Nature Panne"
 
     keys
     {
-        key(Key1; "Nature Panne", "Sous Nature Panne")
+        key(STG_Key1; "Nature Panne", "Sous Nature Panne")
         {
             Clustered = true;
         }

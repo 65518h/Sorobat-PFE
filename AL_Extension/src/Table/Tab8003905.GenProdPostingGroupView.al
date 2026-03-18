@@ -245,7 +245,7 @@ Table 8003905 "Gen. Prod. Posting Group View"
 
     keys
     {
-        key(Key1; "View Code")
+        key(STG_Key1; "View Code")
         {
             Clustered = true;
         }

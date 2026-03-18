@@ -53,15 +53,15 @@ Table 8003912 "Guarantee,Penalty & Acceptance"
 
     keys
     {
-        key(Key1; "Entry No.", "Job No.")
+        key(STG_Key1; "Entry No.", "Job No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", Type, Open, Date)
+        key(STG_Key2; "Job No.", Type, Open, Date)
         {
             SumIndexFields = "Amount LCY";
         }
-        key(Key3; Open, "Due Date")
+        key(STG_Key3; Open, "Due Date")
         {
         }
     }

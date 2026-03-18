@@ -50,7 +50,7 @@ Table 8001900 "Subscription Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

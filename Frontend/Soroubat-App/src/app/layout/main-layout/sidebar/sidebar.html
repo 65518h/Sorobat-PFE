@@ -1,83 +1,154 @@
-<!-- layout/main-layout/sidebar/sidebar.html -->
 <mat-nav-list class="sidebar">
-  <div class="sidebar-header">
-    <img src="logo.jpg" alt="SOROUBAT" class="sidebar-logo">
-    <h3>SOROUBAT</h3>
+  <!-- En-tête -->
+  <div class="menu-section">
+    <div class="sidebar-header">
+      <div class="header-wave"></div>
+      <div class="header-content">
+        <div class="logo-wrapper">
+          <img src="logo.jpg" alt="SOROUBAT" class="sidebar-logo">
+          <div class="logo-glow"></div>
+        </div>
+        <div class="header-text">
+          <h3>SOROUBAT</h3>
+          <span class="version">Version 2.0</span>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    
+    <div class="menu-label">PRINCIPAL</div>
+    
+    <div class="menu-items">
+      <!-- Tâches -->
+      <a mat-list-item 
+         routerLink="/tasks" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">assignment</mat-icon>
+          </div>
+          <span class="item-title">Tâches</span>
+        </div>
+        <span class="notification-dot primary"></span>
+        <div class="item-hover-effect"></div>
+      </a>
+
+      <!-- Tableau de bord -->
+      <a mat-list-item 
+         routerLink="/dashboard" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">dashboard</mat-icon>
+          </div>
+          <span class="item-title">Tableau de bord</span>
+        </div>
+        <div class="item-hover-effect"></div>
+      </a>
+
+      <!-- Projets -->
+      <a mat-list-item 
+         routerLink="/projects" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">folder</mat-icon>
+          </div>
+          <span class="item-title">Projets</span>
+        </div>
+        <span class="notification-dot primary"></span>
+        <div class="item-hover-effect"></div>
+      </a>
+
+      <!-- Demandes d'achat -->
+      <a mat-list-item 
+         routerLink="/purchases" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">shopping_cart</mat-icon>
+          </div>
+          <span class="item-title">Demandes d'achat</span>
+        </div>
+        <span class="notification-dot warn"></span>
+        <div class="item-hover-effect"></div>
+      </a>
+
+      <!-- Stock -->
+      <a mat-list-item 
+         routerLink="/inventory" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">inventory</mat-icon>
+          </div>
+          <span class="item-title">Stock</span>
+        </div>
+        <span class="notification-dot accent"></span>
+        <div class="item-hover-effect"></div>
+      </a>
+
+      <!-- Engins -->
+      <a mat-list-item 
+         routerLink="/equipment" 
+         routerLinkActive="active-link"
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">construction</mat-icon>
+          </div>
+          <span class="item-title">Engins</span>
+        </div>
+        <div class="item-hover-effect"></div>
+      </a>
+    </div>
   </div>
 
-  <mat-divider></mat-divider>
+  <mat-divider class="divider"></mat-divider>
 
-  <div class="menu-items">
+  <!-- Menu système -->
+  <div class="menu-section">
+    <div class="menu-label">SYSTÈME</div>
+    
+    <div class="menu-items">
+      <!-- Paramètres -->
+      <a mat-list-item 
+         routerLink="/settings" 
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">settings</mat-icon>
+          </div>
+          <span class="item-title">Paramètres</span>
+        </div>
+        <div class="item-hover-effect"></div>
+      </a>
 
-    <a mat-list-item 
-      routerLink="/tasks" 
-      routerLinkActive="active-link"
-      #rla0="routerLinkActive"
-      [activated]="rla0.isActive">  
-      <mat-icon matListItemIcon>assignment</mat-icon>
-      <span matListItemTitle>Tâches</span>
-    </a>
-
-
-    <a mat-list-item 
-       routerLink="/dashboard"
-       routerLinkActive="active-link"
-       #rla1="routerLinkActive"
-       [activated]="rla1.isActive">
-      <mat-icon matListItemIcon>dashboard</mat-icon>
-      <span matListItemTitle>Tableau de bord</span>
-    </a>
-
-    <a mat-list-item 
-       routerLink="/projects"
-       routerLinkActive="active-link"
-       #rla2="routerLinkActive"
-       [activated]="rla2.isActive">
-      <mat-icon matListItemIcon>assignment</mat-icon>
-      <span matListItemTitle>Projets</span>
-      <span class="badge">3</span>
-    </a>
-
-    <a mat-list-item 
-       routerLink="/purchases"
-       routerLinkActive="active-link"
-       #rla3="routerLinkActive"
-       [activated]="rla3.isActive">
-      <mat-icon matListItemIcon>shopping_cart</mat-icon>
-      <span matListItemTitle>Demandes d'achat</span>
-      <span class="badge">5</span>
-    </a>
-
-    <a mat-list-item 
-       routerLink="/inventory"
-       routerLinkActive="active-link"
-       #rla4="routerLinkActive"
-       [activated]="rla4.isActive">
-      <mat-icon matListItemIcon>inventory</mat-icon>
-      <span matListItemTitle>Stock</span>
-      <span class="badge">2</span>
-    </a>
-
-    <a mat-list-item 
-       routerLink="/equipment"
-       routerLinkActive="active-link"
-       #rla5="routerLinkActive"
-       [activated]="rla5.isActive">
-      <mat-icon matListItemIcon>construction</mat-icon>
-      <span matListItemTitle>Engins</span>
-    </a>
+      <!-- Aide -->
+      <a mat-list-item 
+         routerLink="/help" 
+         class="menu-item">
+        <div class="item-content">
+          <div class="icon-container">
+            <mat-icon class="item-icon">help</mat-icon>
+          </div>
+          <span class="item-title">Aide</span>
+        </div>
+        <div class="item-hover-effect"></div>
+      </a>
+    </div>
   </div>
 
-  <mat-divider></mat-divider>
-
+  <!-- Footer -->
   <div class="sidebar-footer">
-    <a mat-list-item routerLink="/settings">
-      <mat-icon matListItemIcon>settings</mat-icon>
-      <span matListItemTitle>Paramètres</span>
-    </a>
-    <a mat-list-item routerLink="/help">
-      <mat-icon matListItemIcon>help</mat-icon>
-      <span matListItemTitle>Aide</span>
-    </a>
+    <div class="version-info">
+      <mat-icon>info</mat-icon>
+      <span>© 2026 SOROUBAT</span>
+    </div>
   </div>
 </mat-nav-list>

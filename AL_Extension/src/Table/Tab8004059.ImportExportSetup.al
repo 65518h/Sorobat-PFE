@@ -59,7 +59,7 @@ Table 8004059 "Import/Export Setup"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -43,11 +43,11 @@ Table 8001530 "StatsExplorer fields"
 
     keys
     {
-        key(Key1; "Entry name", "Field No")
+        key(STG_Key1; "Entry name", "Field No")
         {
             Clustered = true;
         }
-        key(Key2; "Field No", Available, "Entry name")
+        key(STG_Key2; "Field No", Available, "Entry name")
         {
         }
     }

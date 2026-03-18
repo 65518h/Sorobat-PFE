@@ -41,7 +41,7 @@ Table 8001494 "OutlookLink Compare Buffer"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

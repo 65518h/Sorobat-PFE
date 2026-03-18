@@ -13,7 +13,7 @@ Table 8003999 "CW 004"
 
     keys
     {
-        key(Key1; CW)
+        key(STG_Key1; CW)
         {
             Clustered = true;
         }

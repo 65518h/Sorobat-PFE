@@ -276,11 +276,11 @@ Table 8001543 "Stock Line"
 
     keys
     {
-        key(Key1; "Stock Code", "Line No.")
+        key(STG_Key1; "Stock Code", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Posting Date", Type)
+        key(STG_Key2; "Posting Date", Type)
         {
             SumIndexFields = Quantity, "Signed Quantity", "Amount (LCY)", "Charges Amount (LCY)", "Capital Gain Amount (LCY)", "Loss In Value Amount (LCY)";
         }

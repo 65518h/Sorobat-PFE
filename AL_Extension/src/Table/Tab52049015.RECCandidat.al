@@ -431,20 +431,20 @@ table 52049015 "REC-Candidat"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Search Name")
+        key(STG_Key2; "Search Name")
         {
         }
-        key(Key3; Status, "Union Code")
+        key(STG_Key3; Status, "Union Code")
         {
         }
-        key(Key4; Status, "Emplymt. Contract Code")
+        key(STG_Key4; Status, "Emplymt. Contract Code")
         {
         }
-        key(Key5; "Last Name", "First Name", "Middle Name")
+        key(STG_Key5; "Last Name", "First Name", "Middle Name")
         {
         }
     }

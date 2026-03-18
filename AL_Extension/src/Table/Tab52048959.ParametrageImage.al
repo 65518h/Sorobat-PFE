@@ -51,11 +51,11 @@ Table 52048959 "Parametrage Image"
 
     keys
     {
-        key(Key1; "Table")
+        key(STG_Key1; "Table")
         {
             Clustered = true;
         }
-        key(Key2; "Derniere Sequence")
+        key(STG_Key2; "Derniere Sequence")
         {
 
         }

@@ -445,22 +445,22 @@ TableExtension 50130 "Sales Header ArchiveEXT" extends "Sales Header Archive"
     keys
     {
 
-        /*GL2024 key(Key5;"Document Type","Order Type","No.")
+        /*GL2024 key(STG_Key5;"Document Type","Order Type","No.")
          {
          }*/
-        key(Key6; "Job No.")
+        key(STG_Key6; "Job No.")
         {
         }
 
-        key(Key7; "Document Type", "Sell-to Contact No.")
+        key(STG_Key7; "Document Type", "Sell-to Contact No.")
         {
         }
 
-        /* GL2024   key(Key8;"Document Type","Sell-to Contact Company No.")
+        /* GL2024   key(STG_Key8;"Document Type","Sell-to Contact Company No.")
            {
            }
 
-           key(Key9;"Document Type","Order No.")
+           key(STG_Key9;"Document Type","Order No.")
            {
            }*/
     }

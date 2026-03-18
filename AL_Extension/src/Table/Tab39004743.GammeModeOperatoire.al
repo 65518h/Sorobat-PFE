@@ -17,7 +17,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code Gamme", "N° Ligne")
+//         key(STG_Key1; "Code Gamme", "N° Ligne")
 //         {
 //             Clustered = true;
 //         }

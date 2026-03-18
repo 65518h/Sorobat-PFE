@@ -8,7 +8,7 @@ TableExtension 50208 "Routing HeaderEXT" extends "Routing Header"
     }
     keys
     {
-        key(Key5; Synchronise)
+        key(STG_Key5; Synchronise)
         {
         }
     }

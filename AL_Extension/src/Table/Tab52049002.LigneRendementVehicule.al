@@ -244,20 +244,20 @@ Table 52049002 "Ligne Rendement Vehicule"
 
     keys
     {
-        key(Key1; Journee, Marche, Heure, "Provenance 2", Destination, Vehicule, Produit)
+        key(STG_Key1; Journee, Marche, Heure, "Provenance 2", Destination, Vehicule, Produit)
         {
             Clustered = true;
         }
-        key(Key2; Journee, Vehicule, "Numero Voyage")
+        key(STG_Key2; Journee, Vehicule, "Numero Voyage")
         {
         }
-        key(Key3; Journee, "Numero Voyage", "Provenance 2", Destination, Vehicule, Produit)
+        key(STG_Key3; Journee, "Numero Voyage", "Provenance 2", Destination, Vehicule, Produit)
         {
         }
-        key(Key4; Journee, Vehicule, Heure)
+        key(STG_Key4; Journee, Vehicule, Heure)
         {
         }
-        key(Key5; Vehicule, "Provenance 2", Destination, Produit)
+        key(STG_Key5; Vehicule, "Provenance 2", Destination, Produit)
         {
         }
     }

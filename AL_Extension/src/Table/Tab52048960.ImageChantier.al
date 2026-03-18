@@ -51,7 +51,7 @@ Table 52048960 "Image Chantier"
 
     keys
     {
-        key(Key1; Chantier, "Table", Sequence)
+        key(STG_Key1; Chantier, "Table", Sequence)
         {
             Clustered = true;
         }

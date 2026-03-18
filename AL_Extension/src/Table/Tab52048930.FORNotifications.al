@@ -49,7 +49,7 @@ table 52048930 "FOR-Notifications"
 
     keys
     {
-        key(Key1; "N° Notification")
+        key(STG_Key1; "N° Notification")
         {
             Clustered = true;
         }

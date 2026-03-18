@@ -187,54 +187,54 @@ TableExtension 50009 "G/L EntryEXT" extends "G/L Entry"
     keys
     {
 
-        key(Key22; "G/L Account No.", Letter)
+        key(STG_Key22; "G/L Account No.", Letter)
         {
         }
-        key(Key23; "Subscription Entry No.")
-        {
-        }
-        //GL2024
-        // key(Key24; "Analytical Distribution", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Job No.", "Source Code", "Business Unit Code", "Posting Date")
-        // {
-        // }
-        key(Key25; "G/L Account No.", "Posting Date", "Document Type")
-        {
-        }
-        key(Key26; "Source No.")
-        {
-        }
-        key(Key27; "Posting Date")
-        {
-        }
-        key(Key28; "Source No.", "G/L Account No.", "Posting Date")
-        {
-        }
-        key(Key29; "Source Code", "Posting Date")
-        {
-        }
-        key(Key30; "G/L Account No.", "Posting Date", "Source Code")
-        {
-        }
-        key(Key31; "Source Type", "Source No.")
-        {
-        }
-        key(Key32; "Applies-to ID")
-        {
-        }
-        key(Key33; "Letter", "Source No.", "External Document No.", "Posting Date", Amount, "G/L Account No.")
-        {
-        }
-        key(Key34; "G/L Account No.", "Source No.")
-        {
-        }
-        key(Key35; "salarie")
+        key(STG_Key23; "Subscription Entry No.")
         {
         }
         //GL2024
-        // key(Key36; "Source No.","Source Type",Lettre,"G/L Account No.")
+        // key(STG_Key24; "Analytical Distribution", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Job No.", "Source Code", "Business Unit Code", "Posting Date")
         // {
         // }
-        // key(Key37; "G/L Account No.","Posting Date","Source No.","Entry Type","Auxiliaire déb/créd1","Auxiliaire déb/créd2")
+        key(STG_Key25; "G/L Account No.", "Posting Date", "Document Type")
+        {
+        }
+        key(STG_Key26; "Source No.")
+        {
+        }
+        key(STG_Key27; "Posting Date")
+        {
+        }
+        key(STG_Key28; "Source No.", "G/L Account No.", "Posting Date")
+        {
+        }
+        key(STG_Key29; "Source Code", "Posting Date")
+        {
+        }
+        key(STG_Key30; "G/L Account No.", "Posting Date", "Source Code")
+        {
+        }
+        key(STG_Key31; "Source Type", "Source No.")
+        {
+        }
+        key(STG_Key32; "Applies-to ID")
+        {
+        }
+        key(STG_Key33; "Letter", "Source No.", "External Document No.", "Posting Date", Amount, "G/L Account No.")
+        {
+        }
+        key(STG_Key34; "G/L Account No.", "Source No.")
+        {
+        }
+        key(STG_Key35; "salarie")
+        {
+        }
+        //GL2024
+        // key(STG_Key36; "Source No.","Source Type",Lettre,"G/L Account No.")
+        // {
+        // }
+        // key(STG_Key37; "G/L Account No.","Posting Date","Source No.","Entry Type","Auxiliaire déb/créd1","Auxiliaire déb/créd2")
         // {
         // }
     }

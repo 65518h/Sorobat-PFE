@@ -22,7 +22,7 @@ Table 11306 "Electronic Banking Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

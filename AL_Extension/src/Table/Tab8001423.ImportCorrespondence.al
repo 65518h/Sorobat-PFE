@@ -44,7 +44,7 @@ Table 8001423 "Import Correspondence"
 
     keys
     {
-        key(Key1; "Import Code", "Field No.", "External Code")
+        key(STG_Key1; "Import Code", "Field No.", "External Code")
         {
             Clustered = true;
         }

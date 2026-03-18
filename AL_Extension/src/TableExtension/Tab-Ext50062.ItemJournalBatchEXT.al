@@ -23,7 +23,7 @@ TableExtension 50062 "Item Journal BatchEXT" extends "Item Journal Batch"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

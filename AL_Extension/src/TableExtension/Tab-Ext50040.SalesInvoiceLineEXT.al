@@ -220,19 +220,19 @@ TableExtension 50040 "Sales Invoice LineEXT" extends "Sales Invoice Line"
     }
     keys
     {
-        key(Key14; "Prepayment Order No.", "Prepayment Order Line No.")
+        key(STG_Key14; "Prepayment Order No.", "Prepayment Order Line No.")
         {
         }
 
-        /* GL2024  key(Key15;"Document No.","Presentation Code","Line No.")
+        /* GL2024  key(STG_Key15;"Document No.","Presentation Code","Line No.")
            {
            }*/
 
-        key(Key16; "VAT %")
+        key(STG_Key16; "VAT %")
         {
         }
 
-        key(Key17; Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Shipment Date")
+        key(STG_Key17; Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Shipment Date")
         {
         }
     }

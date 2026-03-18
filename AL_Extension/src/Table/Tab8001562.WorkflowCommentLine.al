@@ -50,11 +50,11 @@ Table 8001562 "Workflow Comment Line"
 
     keys
     {
-        key(Key1; "Journal Line No.", "Line No.")
+        key(STG_Key1; "Journal Line No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, "No.")
+        key(STG_Key2; Type, "No.")
         {
         }
     }

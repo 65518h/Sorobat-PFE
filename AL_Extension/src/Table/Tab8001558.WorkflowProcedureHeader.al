@@ -33,7 +33,7 @@ Table 8001558 "Workflow Procedure Header"
 
     keys
     {
-        key(Key1; "Workflow Type", "Code")
+        key(STG_Key1; "Workflow Type", "Code")
         {
             Clustered = true;
         }

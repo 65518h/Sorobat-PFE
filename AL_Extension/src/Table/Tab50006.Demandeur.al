@@ -20,7 +20,7 @@ Table 50006 Demandeur
 
     keys
     {
-        key(Key1; "Nom Et Prenom")
+        key(STG_Key1; "Nom Et Prenom")
         {
             Clustered = true;
         }

@@ -36,7 +36,7 @@ Table 8001443 "My Opportunities"
 
     keys
     {
-        key(Key1; "User ID", "Salesperson Code")
+        key(STG_Key1; "User ID", "Salesperson Code")
         {
             Clustered = true;
         }

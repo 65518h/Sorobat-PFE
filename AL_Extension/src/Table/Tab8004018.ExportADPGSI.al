@@ -29,7 +29,7 @@ Table 8004018 "Export ADP/GSI"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

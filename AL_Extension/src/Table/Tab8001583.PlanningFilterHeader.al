@@ -367,7 +367,7 @@ Table 8001583 "Planning Filter Header"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

@@ -47,7 +47,7 @@ table 52048929 "FOR-Liste demande Formation"
 
     keys
     {
-        key(Key1; "N° Sequence", "Employee No.")
+        key(STG_Key1; "N° Sequence", "Employee No.")
         {
             Clustered = true;
         }

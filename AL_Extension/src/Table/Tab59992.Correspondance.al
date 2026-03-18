@@ -14,7 +14,7 @@ Table 59992 Correspondance
 
     keys
     {
-        key(Key1; "Compte General")
+        key(STG_Key1; "Compte General")
         {
             Clustered = true;
         }

@@ -116,7 +116,7 @@ Table 8001908 "Sales Contract Gain/Loss Buff."
 
     keys
     {
-        key(Key1; "Entry No.", Type, "Change Date", "Sell-to Customer No.", "Salesperson Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Job No.", "Gen. Prod. Posting Group", "Currency Code", "Job Task No.", "Responsibility Center")
+        key(STG_Key1; "Entry No.", Type, "Change Date", "Sell-to Customer No.", "Salesperson Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Job No.", "Gen. Prod. Posting Group", "Currency Code", "Job Task No.", "Responsibility Center")
         {
             Clustered = true;
         }

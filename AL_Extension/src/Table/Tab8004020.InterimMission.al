@@ -103,17 +103,17 @@ Table 8004020 "Interim Mission"
 
     keys
     {
-        key(Key1; "Resource No.", "Mission No.")
+        key(STG_Key1; "Resource No.", "Mission No.")
         {
             Clustered = true;
         }
-        key(Key2; "Vendor No.")
+        key(STG_Key2; "Vendor No.")
         {
         }
-        key(Key3; "Resource No.", "Starting Date", "Ending Date")
+        key(STG_Key3; "Resource No.", "Starting Date", "Ending Date")
         {
         }
-        key(Key4; "Vendor No.", "Resource No.", "Ending Date", "Mission No.")
+        key(STG_Key4; "Vendor No.", "Resource No.", "Ending Date", "Mission No.")
         {
         }
     }

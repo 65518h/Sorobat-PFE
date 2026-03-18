@@ -81,7 +81,7 @@ table 52048913 "Line Calendar Roulement"
 
     keys
     {
-        key(Key1; "Code", "Type Abonnement", "Line no.", Date)
+        key(STG_Key1; "Code", "Type Abonnement", "Line no.", Date)
         {
             Clustered = true;
         }

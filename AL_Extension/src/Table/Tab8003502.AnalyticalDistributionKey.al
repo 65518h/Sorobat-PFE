@@ -144,11 +144,11 @@ Table 8003502 "Analytical Distribution Key"
 
     keys
     {
-        key(Key1; "Analytical Distribution Code", "Line No.")
+        key(STG_Key1; "Analytical Distribution Code", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Analytical Distribution Code", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Reason Code", "Job Task No.", "Work Type Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", "Job Posting Group")
+        key(STG_Key2; "Analytical Distribution Code", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Reason Code", "Job Task No.", "Work Type Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", "Job Posting Group")
         {
         }
     }

@@ -32,7 +32,7 @@
 
 //     keys
 //     {
-//         key(Key1; tiers)
+//         key(STG_Key1; tiers)
 //         {
 //             Clustered = true;
 //         }

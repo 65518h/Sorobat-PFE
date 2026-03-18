@@ -17,7 +17,7 @@ table 50011 "Salarier"
 
     keys
     {
-        key(Key1; Salarie)
+        key(STG_Key1; Salarie)
         {
             Clustered = true;
         }

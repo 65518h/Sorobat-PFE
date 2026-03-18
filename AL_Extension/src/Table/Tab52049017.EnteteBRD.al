@@ -34,7 +34,7 @@ table 52049017 "Entete BRD"
 
     keys
     {
-        key(Key1; "No. BRD")
+        key(STG_Key1; "No. BRD")
         {
             Clustered = true;
         }

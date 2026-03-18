@@ -131,10 +131,10 @@ TableExtension 50146 "Employment ContractEXT" extends "Employment Contract"
     }
     keys
     {
-        key(Key2; "Employee's type Contrat")
+        key(STG_Key2; "Employee's type Contrat")
         {
         }
-        /*    key(Key3; "Salary grid", Code)
+        /*    key(STG_Key3; "Salary grid", Code)
             {
             }*/
     }

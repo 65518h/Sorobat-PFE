@@ -31,11 +31,11 @@ Table 8004091 "Vendor Discount Group"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

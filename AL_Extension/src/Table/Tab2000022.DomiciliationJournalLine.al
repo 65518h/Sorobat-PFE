@@ -334,16 +334,16 @@ Table 2000022 "Domiciliation Journal Line"
 
     keys
     {
-        key(Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
+        key(STG_Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
         {
             Clustered = true;
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key2; "Customer No.", "Applies-to Doc. Type", "Applies-to Doc. No.")
+        key(STG_Key2; "Customer No.", "Applies-to Doc. Type", "Applies-to Doc. No.")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key3; "Bank Account No.", "Customer No.", "Posting Date")
+        key(STG_Key3; "Bank Account No.", "Customer No.", "Posting Date")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }

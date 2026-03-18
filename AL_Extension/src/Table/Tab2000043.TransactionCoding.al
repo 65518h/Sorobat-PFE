@@ -55,7 +55,7 @@ Table 2000043 "Transaction Coding"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Transaction Family", Transaction, "Transaction Category")
+        key(STG_Key1; "Bank Account No.", "Transaction Family", Transaction, "Transaction Category")
         {
             Clustered = true;
         }

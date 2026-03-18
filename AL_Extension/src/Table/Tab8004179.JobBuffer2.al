@@ -44,7 +44,7 @@ Table 8004179 "Job Buffer2"
 
     keys
     {
-        key(Key1; "Account No. 1", "Account No. 2")
+        key(STG_Key1; "Account No. 1", "Account No. 2")
         {
             Clustered = true;
         }

@@ -293,7 +293,7 @@ Table 8004066 "Dynalog - Composants (BXmx)"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

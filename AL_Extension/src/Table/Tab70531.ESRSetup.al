@@ -159,7 +159,7 @@ Table 70531 "ESR Setup"
 
     keys
     {
-        key(Key1; "Bank Code")
+        key(STG_Key1; "Bank Code")
         {
             Clustered = true;
         }

@@ -21,7 +21,7 @@ Table 8004038 "Ligne planning financier"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

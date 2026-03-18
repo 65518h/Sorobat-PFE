@@ -30,7 +30,7 @@ Table 8001550 "Tax Gen. Prod. Posting Group"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

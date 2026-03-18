@@ -23,7 +23,7 @@ Table 89429 "UPG IC Outbox Purchase Line"
 
     keys
     {
-        key(Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
+        key(STG_Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
         {
             Clustered = true;
         }

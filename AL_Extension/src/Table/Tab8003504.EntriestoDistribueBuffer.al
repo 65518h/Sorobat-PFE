@@ -141,14 +141,14 @@ Table 8003504 "Entries to Distribue Buffer"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Entry Type", "Posting Date", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job no.", "Reason Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", Type, "No.", "Job Posting Group", "Work Type Code", "Job Task No.", "Business Unit Code")
+        key(STG_Key2; "Entry Type", "Posting Date", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job no.", "Reason Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", Type, "No.", "Job Posting Group", "Work Type Code", "Job Task No.", "Business Unit Code")
         {
         }
-        key(Key3; "Entry Type", "Origin Entry No.")
+        key(STG_Key3; "Entry Type", "Origin Entry No.")
         {
         }
     }

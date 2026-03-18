@@ -490,7 +490,7 @@ Table 70102 "Imp Customer"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

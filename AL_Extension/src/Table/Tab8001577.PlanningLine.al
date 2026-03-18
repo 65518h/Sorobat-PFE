@@ -360,14 +360,14 @@ Table 8001577 "Planning Line"
 
     keys
     {
-        key(Key1; "Task No.")
+        key(STG_Key1; "Task No.")
         {
         }
-        key(Key2; "Attached To Task No.")
+        key(STG_Key2; "Attached To Task No.")
         {
             MaintainSIFTIndex = false;
         }
-        key(Key3; "Project Header No.", "WBS Code")
+        key(STG_Key3; "Project Header No.", "WBS Code")
         {
             //GL2024   Clustered = true;
             MaintainSIFTIndex = false;

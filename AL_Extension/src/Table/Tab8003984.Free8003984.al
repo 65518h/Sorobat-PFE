@@ -62,7 +62,7 @@ Table 8003984 Free8003984
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

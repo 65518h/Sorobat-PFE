@@ -67,7 +67,7 @@ TableExtension 50141 "Employee RelativeEXT" extends "Employee Relative"
     }
     keys
     {
-        key(Key2; "Associated deduction")
+        key(STG_Key2; "Associated deduction")
         {
             SumIndexFields = "Associated deduction";
         }

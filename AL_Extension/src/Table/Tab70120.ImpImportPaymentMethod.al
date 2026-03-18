@@ -31,7 +31,7 @@ Table 70120 "Imp Import Payment Method"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

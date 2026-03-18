@@ -80,16 +80,16 @@ Table 52048984 "Prise carburant Enregistré"
 
     keys
     {
-        key(Key1; Sequence, "N° Véhicule", "N° Mission")
+        key(STG_Key1; Sequence, "N° Véhicule", "N° Mission")
         {
             Clustered = true;
             SumIndexFields = "Gasoil Consommé", "Coût Réel Mission";
         }
-        key(Key2; "Date de Prise", "N° Véhicule")
+        key(STG_Key2; "Date de Prise", "N° Véhicule")
         {
             SumIndexFields = "Gasoil Consommé", "Coût Réel Mission";
         }
-        key(Key3; "N° Véhicule", "N° Mission", "Date de Prise")
+        key(STG_Key3; "N° Véhicule", "N° Mission", "Date de Prise")
         {
             SumIndexFields = "Gasoil Consommé", "Coût Réel Mission";
         }

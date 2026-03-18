@@ -22,10 +22,10 @@ TableExtension 50085 "No. Series LineEXT" extends "No. Series Line"
     keys
     {
 
-        /*  GL2024   key(Key3;"Series Code","Responsibility Center","Starting Date","Starting No.")
+        /*  GL2024   key(STG_Key3;"Series Code","Responsibility Center","Starting Date","Starting No.")
              {
              }*/
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

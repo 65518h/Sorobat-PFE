@@ -23,7 +23,7 @@ TableExtension 50096 "Resource Price ChangeEXT" extends "Resource Price Change"
     keys
     {
 
-        //GL2024 key(Key1;"Customer No.","Job No.",Type,"Code","Work Type Code","Currency Code")
+        //GL2024 key(STG_Key1;"Customer No.","Job No.",Type,"Code","Work Type Code","Currency Code")
         // {
         // Clustered = true;
         // }

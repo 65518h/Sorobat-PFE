@@ -384,15 +384,15 @@ Table 52049034 "Heures sup. m"
 
     keys
     {
-        key(Key1; "N° Ligne")
+        key(STG_Key1; "N° Ligne")
         {
             Clustered = true;
         }
-        key(Key2; "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
+        key(STG_Key2; "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
         {
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }
-        key(Key3; "Type heure", "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
+        key(STG_Key3; "Type heure", "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
         {
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }

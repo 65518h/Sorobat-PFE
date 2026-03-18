@@ -82,7 +82,7 @@ table 52049055 "Pneumatique Véhicule1"
 
     keys
     {
-        key(Key1; "N° Véhicule", "Réf. Pneu", "Date d'installation", "Num Ligne")
+        key(STG_Key1; "N° Véhicule", "Réf. Pneu", "Date d'installation", "Num Ligne")
         {
             Clustered = true;
         }

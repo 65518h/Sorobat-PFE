@@ -24,7 +24,7 @@ Table 8004082 "Deadline Term"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

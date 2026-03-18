@@ -72,7 +72,7 @@ TableExtension 50095 "VAT Posting SetupEXT" extends "VAT Posting Setup"
     }
     keys
     {
-        key(Key3; Synchronise)
+        key(STG_Key3; Synchronise)
         {
         }
     }

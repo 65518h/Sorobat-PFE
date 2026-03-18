@@ -69,11 +69,11 @@ Table 50035 "BR Heure Suplémentaire"
 
     keys
     {
-        key(Key1; Mois, Annee, Maticule)
+        key(STG_Key1; Mois, Annee, Maticule)
         {
             Clustered = true;
         }
-        key(Key2; Affectation, Mois, Annee, Maticule)
+        key(STG_Key2; Affectation, Mois, Annee, Maticule)
         {
         }
     }

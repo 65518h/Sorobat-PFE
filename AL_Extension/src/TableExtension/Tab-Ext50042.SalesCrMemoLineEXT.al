@@ -188,11 +188,11 @@ TableExtension 50042 "Sales Cr.Memo LineEXT" extends "Sales Cr.Memo Line"
     keys
     {
 
-        key(Key9; "Job No.", "Document No.")
+        key(STG_Key9; "Job No.", "Document No.")
         {
         }
 
-        /*GL2024  key(Key10; "Document No.", "Presentation Code")
+        /*GL2024  key(STG_Key10; "Document No.", "Presentation Code")
           {
           }*/
     }

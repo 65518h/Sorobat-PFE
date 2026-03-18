@@ -88,14 +88,14 @@ Table 50023 "Liste Factures Lettrage"
 
     keys
     {
-        key(Key1; Sequence, "Numero Reglement", "Num Ligne Reglement")
+        key(STG_Key1; Sequence, "Numero Reglement", "Num Ligne Reglement")
         {
             Clustered = true;
         }
-        key(Key2; "Numero Reglement")
+        key(STG_Key2; "Numero Reglement")
         {
         }
-        key(Key3; "Mode Paiement")
+        key(STG_Key3; "Mode Paiement")
         {
         }
     }

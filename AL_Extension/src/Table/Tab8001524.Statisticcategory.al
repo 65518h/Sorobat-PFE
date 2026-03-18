@@ -28,7 +28,7 @@ Table 8001524 "Statistic category"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

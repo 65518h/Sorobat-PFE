@@ -21,7 +21,7 @@ Table 50047 "Temp beton Prix"
 
     keys
     {
-        key(Key1; CodeBeton)
+        key(STG_Key1; CodeBeton)
         {
             Clustered = true;
         }

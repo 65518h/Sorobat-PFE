@@ -15,7 +15,7 @@ table 52049041 "Type Dégats"
 
     keys
     {
-        key(Key1; "Code Type Dégat")
+        key(STG_Key1; "Code Type Dégat")
         {
             Clustered = true;
         }

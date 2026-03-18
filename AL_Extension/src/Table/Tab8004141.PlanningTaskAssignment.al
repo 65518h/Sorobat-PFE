@@ -45,12 +45,12 @@ Table 8004141 "Planning Task Assignment"
 
     keys
     {
-        key(Key1; "Task No.", Type, "No.")
+        key(STG_Key1; "Task No.", Type, "No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Project Header No.", "Task No.", Type, "No.")
+        key(STG_Key2; "Project Header No.", "Task No.", Type, "No.")
         {
             MaintainSQLIndex = false;
             SumIndexFields = Quantity;

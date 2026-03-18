@@ -676,94 +676,94 @@ Table 52048901 "Rec. Salary Lines"
 
     keys
     {
-        key(Key1; "No.", Employee)
+        key(STG_Key1; "No.", Employee)
         {
             Clustered = true;
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Supp. hours", "Taxable indemnities", "Ajout  en +", "Report en -", "Montant retenu caisse FS", "Salaire Net Imposable", "IUTS Net";
         }
-        key(Key2; "Employee Posting Group", "Global dimension 1", "Global dimension 2")
+        key(STG_Key2; "Employee Posting Group", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key3; Year, Employee, "Global dimension 1", "Global dimension 2")
+        key(STG_Key3; Year, Employee, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key4; Employee, Quarter, Year, "Global dimension 1", "Global dimension 2")
+        key(STG_Key4; Employee, Quarter, Year, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key5; Employee, "Last Date Modified", "Global dimension 1", "Global dimension 2")
+        key(STG_Key5; Employee, "Last Date Modified", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key6; Year, Employee, Month, "No.", Imposable)
+        key(STG_Key6; Year, Employee, Month, "No.", Imposable)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key7; Year, Month, Employee, "No.", "Real taxable", CNSS, Imposable)
+        key(STG_Key7; Year, Month, Employee, "No.", "Real taxable", CNSS, Imposable)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Days off remaining", "Days off balacement", Absences, "Days off", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key8; Employee, Year, Month, "Type Prime")
+        key(STG_Key8; Employee, Year, Month, "Type Prime")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key9; "No.", "Employee Posting Group", Employee)
+        key(STG_Key9; "No.", "Employee Posting Group", Employee)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key10; Year, Month, "Global dimension 1", "Global dimension 2", "No.")
+        key(STG_Key10; Year, Month, "Global dimension 1", "Global dimension 2", "No.")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key11; "No.", "Num Compte")
+        key(STG_Key11; "No.", "Num Compte")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key12; "year of Calculate", "Posting Date", Month, "Type Prime", "No.")
+        key(STG_Key12; "year of Calculate", "Posting Date", Month, "Type Prime", "No.")
         {
         }
-        key(Key13; Employee, "year of Calculate", Month, "Type Prime")
+        key(STG_Key13; Employee, "year of Calculate", Month, "Type Prime")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "6 * SMIG", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key14; Employee, "Posting Date", Month, "Type Prime")
+        key(STG_Key14; Employee, "Posting Date", Month, "Type Prime")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "6 * SMIG", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key15; Year, Month, "Type Prime", Employee, "No.")
+        key(STG_Key15; Year, Month, "Type Prime", Employee, "No.")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "6 * SMIG", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key16; Employee, "Employee Posting Group")
+        key(STG_Key16; Employee, "Employee Posting Group")
         {
         }
-        key(Key17; "Statistics Group Code", Employee)
+        key(STG_Key17; "Statistics Group Code", Employee)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key18; Year, Month, "No.")
+        key(STG_Key18; Year, Month, "No.")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key19; "Statistics Group Code", Year, Month, "No.")
+        key(STG_Key19; "Statistics Group Code", Year, Month, "No.")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key20; "Employee Posting Group", Employee)
+        key(STG_Key20; "Employee Posting Group", Employee)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key21; Year, Month, Employee, "No.", Imposable)
+        key(STG_Key21; Year, Month, Employee, "No.", Imposable)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key22; Year, Employee, "No.")
+        key(STG_Key22; Year, Employee, "No.")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Real taxable", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours", "Montant retenu caisse FS";
         }
-        key(Key23; "Date Entree")
+        key(STG_Key23; "Date Entree")
         {
         }
     }

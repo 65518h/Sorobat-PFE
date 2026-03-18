@@ -470,7 +470,7 @@ Table 8004053 "Sales Line View"
 
     keys
     {
-        key(Key1; "View Code")
+        key(STG_Key1; "View Code")
         {
             Clustered = true;
         }

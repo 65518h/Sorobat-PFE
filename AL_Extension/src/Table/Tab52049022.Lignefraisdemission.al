@@ -145,11 +145,11 @@ table 52049022 "Ligne frais de mission"
 
     keys
     {
-        key(Key1; "N°", "N° Ligne")
+        key(STG_Key1; "N°", "N° Ligne")
         {
             Clustered = true;
         }
-        key(Key2; "Enveloppe Bank")
+        key(STG_Key2; "Enveloppe Bank")
         {
             SumIndexFields = "Montant DS";
         }

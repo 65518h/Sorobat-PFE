@@ -15,7 +15,7 @@ Table 8001440 "Bitmap Buffer"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

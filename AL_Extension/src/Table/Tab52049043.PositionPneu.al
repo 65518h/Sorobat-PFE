@@ -15,7 +15,7 @@ table 52049043 "Position Pneu"
 
     keys
     {
-        key(Key1; "Code Position")
+        key(STG_Key1; "Code Position")
         {
             Clustered = true;
         }

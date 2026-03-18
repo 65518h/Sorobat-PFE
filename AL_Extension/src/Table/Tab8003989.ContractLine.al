@@ -48,7 +48,7 @@ Table 8003989 "Contract Line"
 
     keys
     {
-        key(Key1; "Contract type", "Line No.")
+        key(STG_Key1; "Contract type", "Line No.")
         {
             Clustered = true;
         }

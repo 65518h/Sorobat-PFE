@@ -95,7 +95,7 @@ Table 8001414 "Folder Setup"
 
     keys
     {
-        key(Key1; "Table ID")
+        key(STG_Key1; "Table ID")
         {
             Clustered = true;
         }

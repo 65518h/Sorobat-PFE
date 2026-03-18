@@ -29,7 +29,7 @@
 
 //     keys
 //     {
-//         key(Key1; Chantier, Year, Month)
+//         key(STG_Key1; Chantier, Year, Month)
 //         {
 //             Clustered = true;
 //         }

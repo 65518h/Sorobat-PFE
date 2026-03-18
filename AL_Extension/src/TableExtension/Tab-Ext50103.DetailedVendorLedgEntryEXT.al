@@ -38,19 +38,19 @@ TableExtension 50103 "Detailed Vendor Ledg. EntryEXT" extends "Detailed Vendor L
     keys
     {
 
-        /* GL2024 key(Key13;"Vendor No.","Value Date","Currency Code")
+        /* GL2024 key(STG_Key13;"Vendor No.","Value Date","Currency Code")
            {
            SumIndexFields = Amount,"Amount (LCY)","Debit Amount","Credit Amount","Debit Amount (LCY)","Credit Amount (LCY)";
            }
-           key(Key14;"Entry Type","Vendor No.","N° Dossier","Document Type","Amount (LCY)")
+           key(STG_Key14;"Entry Type","Vendor No.","N° Dossier","Document Type","Amount (LCY)")
            {
            SumIndexFields = "Amount (LCY)";
            }*/
-        key(Key15; "Vendor No.", "Document No.")
+        key(STG_Key15; "Vendor No.", "Document No.")
         {
             SumIndexFields = "Amount (LCY)";
         }
-        key(Key16; Lettre)
+        key(STG_Key16; Lettre)
         {
         }
     }

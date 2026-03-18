@@ -22,7 +22,7 @@ Table 70113 "Imp Resource Unit of Measu"
 
     keys
     {
-        key(Key1; "Resource No.", "Code")
+        key(STG_Key1; "Resource No.", "Code")
         {
             Clustered = true;
         }

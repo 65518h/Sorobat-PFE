@@ -147,7 +147,7 @@ Table 52048993 "PR Réparation"
 
     keys
     {
-        key(Key1; "N° Reparation", "N° Ligne")
+        key(STG_Key1; "N° Reparation", "N° Ligne")
         {
             Clustered = true;
             SumIndexFields = "Coût Total";

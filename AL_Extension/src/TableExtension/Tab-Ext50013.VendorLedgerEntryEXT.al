@@ -185,24 +185,24 @@ TableExtension 50013 "Vendor Ledger EntryEXT" extends "Vendor Ledger Entry"
     keys
     {
         //GL2024
-        //key(key26; "Open", "Value Date") { }
-        key(key27; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date") { }
-        key(key28; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date") { }
-        key(key29; "Apply-to Sales Order No.") { }
-        key(key30; "Job No.") { }
-        key(key31; "Applies-to ID") { }
-        key(key32; "Source Code", "Posting Date") { }
-        key(key33; "Source Code", "Posting Date", "Document No.") { }
-        key(key34;
+        //key(STG_Key26; "Open", "Value Date") { }
+        key(STG_Key27; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date") { }
+        key(STG_Key28; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date") { }
+        key(STG_Key29; "Apply-to Sales Order No.") { }
+        key(STG_Key30; "Job No.") { }
+        key(STG_Key31; "Applies-to ID") { }
+        key(STG_Key32; "Source Code", "Posting Date") { }
+        key(STG_Key33; "Source Code", "Posting Date", "Document No.") { }
+        key(STG_Key34;
         "Document Type")
         { }
-        key(key35;
+        key(STG_Key35;
         "Vendor No.", "Document No.", Open)
         { }
-        key(key36;
+        key(STG_Key36;
         Lettre)
         { }
-        key(key37;
+        key(STG_Key37;
         "Document Type", "Vendor No.", "Due Date")
         { }
 

@@ -38,7 +38,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code Gamme", "Code sous Famille", "Code Article")
+//         key(STG_Key1; "Code Gamme", "Code sous Famille", "Code Article")
 //         {
 //             Clustered = true;
 //         }

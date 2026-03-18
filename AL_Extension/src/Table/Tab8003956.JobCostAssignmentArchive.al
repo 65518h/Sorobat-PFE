@@ -57,12 +57,12 @@ Table 8003956 "Job Cost Assignment Archive"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Document Line No.", "Doc. No. Occurrence", "Version No.", "Applies-to Doc. Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Document Line No.", "Doc. No. Occurrence", "Version No.", "Applies-to Doc. Line No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Applies-to Doc. Line No.")
+        key(STG_Key2; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Applies-to Doc. Line No.")
         {
         }
     }

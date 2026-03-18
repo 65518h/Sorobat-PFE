@@ -26,7 +26,7 @@ Table 84056 "UPG Sales Contributor Arch"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Line No.", "Version No.", "Doc. No. Occurrence")
+        key(STG_Key1; "Document Type", "Document No.", "Line No.", "Version No.", "Doc. No. Occurrence")
         {
             Clustered = true;
         }

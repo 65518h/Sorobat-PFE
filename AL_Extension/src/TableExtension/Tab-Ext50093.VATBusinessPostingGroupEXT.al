@@ -16,7 +16,7 @@ TableExtension 50093 "VAT Business Posting GroupEXT" extends "VAT Business Posti
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

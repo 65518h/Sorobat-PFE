@@ -151,11 +151,11 @@ Table 8001907 "Sales Contract Gain/Loss Entry"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Change Date", "Type of Change", "Entry No.")
+        key(STG_Key1; "Document Type", "Document No.", "Change Date", "Type of Change", "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Salesperson Code", "Change Date")
+        key(STG_Key2; "Salesperson Code", "Change Date")
         {
             SumIndexFields = Amount;
         }

@@ -53,7 +53,7 @@ Table 8001401 "Characteristic Code"
 
     keys
     {
-        key(Key1; "Table Name", "Code")
+        key(STG_Key1; "Table Name", "Code")
         {
             Clustered = true;
         }

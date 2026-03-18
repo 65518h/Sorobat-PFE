@@ -22,7 +22,7 @@ Table 8001931 "Subscr. Review Index"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

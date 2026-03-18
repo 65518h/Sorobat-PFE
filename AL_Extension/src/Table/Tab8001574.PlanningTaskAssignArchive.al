@@ -55,13 +55,13 @@ Table 8001574 "Planning Task Assign Archive"
 
     keys
     {
-        key(Key1; "Task No.", Type, "No.", "Version No.")
+        key(STG_Key1; "Task No.", Type, "No.", "Version No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
             SumIndexFields = Quantity;
         }
-        key(Key2; "Project Header No.")
+        key(STG_Key2; "Project Header No.")
         {
         }
     }

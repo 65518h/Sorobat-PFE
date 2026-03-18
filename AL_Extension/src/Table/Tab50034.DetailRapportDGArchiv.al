@@ -193,7 +193,7 @@ Table 50034 "Detail Rapport DG Archivé"
 
     keys
     {
-        key(Key1; "Marché", "Date Rapport", "N° Rapport", "N° Ligne", "Type Ligne")
+        key(STG_Key1; "Marché", "Date Rapport", "N° Rapport", "N° Ligne", "Type Ligne")
         {
             Clustered = true;
         }

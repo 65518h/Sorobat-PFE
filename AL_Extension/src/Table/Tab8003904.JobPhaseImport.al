@@ -25,7 +25,7 @@ Table 8003904 "Job Phase Import"
 
     keys
     {
-        key(Key1; "Job No.", "Line No.")
+        key(STG_Key1; "Job No.", "Line No.")
         {
             Clustered = true;
         }

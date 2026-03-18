@@ -57,7 +57,7 @@ Table 8001901 "Contract Cue"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

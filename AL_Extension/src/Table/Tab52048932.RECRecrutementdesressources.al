@@ -141,7 +141,7 @@ Table 52048932 "REC-Recrutement des ressources"
 
     keys
     {
-        key(Key1; "N° Sequence")
+        key(STG_Key1; "N° Sequence")
         {
             Clustered = true;
         }

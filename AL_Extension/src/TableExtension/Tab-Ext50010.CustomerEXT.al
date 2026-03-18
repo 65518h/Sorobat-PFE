@@ -201,7 +201,7 @@ TableExtension 50010 CustomerEXT extends Customer
     }
     keys
     {
-        key(Key23; Synchronise)
+        key(STG_Key23; Synchronise)
         {
         }
     }

@@ -22,11 +22,11 @@ Table 8001536 "BAR : Reconciliation Mode"
 
     keys
     {
-        key(Key1; "Reconciliation Mode")
+        key(STG_Key1; "Reconciliation Mode")
         {
             Clustered = true;
         }
-        key(Key2; "Internal No.")
+        key(STG_Key2; "Internal No.")
         {
         }
     }

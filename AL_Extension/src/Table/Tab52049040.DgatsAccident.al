@@ -34,7 +34,7 @@ table 52049040 "Dégats Accident"
 
     keys
     {
-        key(Key1; "N° Accident", "N° constat", "N° Ligne")
+        key(STG_Key1; "N° Accident", "N° constat", "N° Ligne")
         {
             Clustered = true;
         }

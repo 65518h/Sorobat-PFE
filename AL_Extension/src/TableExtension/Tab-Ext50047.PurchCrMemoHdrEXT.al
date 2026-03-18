@@ -100,7 +100,7 @@ TableExtension 50047 "Purch. Cr. Memo Hdr.EXT" extends "Purch. Cr. Memo Hdr."
     }
     keys
     {
-        key(Key9; "N° Decharge")
+        key(STG_Key9; "N° Decharge")
         {
         }
     }

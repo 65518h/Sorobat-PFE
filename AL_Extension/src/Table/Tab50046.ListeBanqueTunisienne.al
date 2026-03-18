@@ -19,7 +19,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code Banque")
+//         key(STG_Key1; "Code Banque")
 //         {
 //             Clustered = true;
 //         }

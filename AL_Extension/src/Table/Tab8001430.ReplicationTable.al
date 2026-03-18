@@ -49,7 +49,7 @@ Table 8001430 "Replication Table"
 
     keys
     {
-        key(Key1; "Table No.")
+        key(STG_Key1; "Table No.")
         {
             Clustered = true;
         }

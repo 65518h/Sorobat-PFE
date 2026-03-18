@@ -14,7 +14,7 @@ table 52049035 "Objet de mission"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

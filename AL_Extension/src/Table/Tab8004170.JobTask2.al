@@ -538,11 +538,11 @@ Table 8004170 "Job Task2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.")
+        key(STG_Key1; "Job No.", "Job Task No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job Task No.")
+        key(STG_Key2; "Job Task No.")
         {
         }
     }

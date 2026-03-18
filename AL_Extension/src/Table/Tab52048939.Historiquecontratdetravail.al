@@ -283,7 +283,7 @@ Table 52048939 "Historique contrat de travail"
 
     keys
     {
-        key(Key1; "Code", "Code contrat archivé")
+        key(STG_Key1; "Code", "Code contrat archivé")
         {
             Clustered = true;
         }

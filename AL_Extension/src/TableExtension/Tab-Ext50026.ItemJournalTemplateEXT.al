@@ -135,7 +135,7 @@ TableExtension 50026 "Item Journal TemplateEXT" extends "Item Journal Template"
     }
     keys
     {
-        key(Key3; Synchronise)
+        key(STG_Key3; Synchronise)
         {
         }
     }

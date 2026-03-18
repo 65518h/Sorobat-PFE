@@ -190,11 +190,11 @@ Table 50004 "PV Reception"
 
     keys
     {
-        key(Key1; "N° Sequence", "N° Commande", "N° Article")
+        key(STG_Key1; "N° Sequence", "N° Commande", "N° Article")
         {
             Clustered = true;
         }
-        key(Key2; "Code Magasin")
+        key(STG_Key2; "Code Magasin")
         {
         }
     }

@@ -4563,71 +4563,71 @@ Table 52049070 "Purchase request Line"
 
     keys
     {
-        key(Key1; "Document No.", "Line No.")
+        key(STG_Key1; "Document No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key3; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Expected Receipt Date")
+        key(STG_Key3; "Document Type", Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Expected Receipt Date")
         {
             IncludedFields = "Outstanding Qty. (Base)";
         }
-        key(Key4; "Document Type", "Pay-to Vendor No.", "Currency Code", "Document No.")
+        key(STG_Key4; "Document Type", "Pay-to Vendor No.", "Currency Code", "Document No.")
         {
 #pragma warning disable AS0038
             IncludedFields = "Outstanding Amount", "Amt. Rcd. Not Invoiced", "Outstanding Amount (LCY)", "Amt. Rcd. Not Invoiced (LCY)", "Prepmt. Amount Inv. (LCY)", "Prepmt. VAT Amount Inv. (LCY)";
 #pragma warning RESTORE AS0038
         }
-        key(Key7; "Document Type", "Blanket Order No.", "Blanket Order Line No.")
+        key(STG_Key7; "Document Type", "Blanket Order No.", "Blanket Order Line No.")
         {
         }
-        key(Key8; "Document Type", Type, "Prod. Order No.", "Prod. Order Line No.", "Routing No.", "Operation No.")
+        key(STG_Key8; "Document Type", Type, "Prod. Order No.", "Prod. Order Line No.", "Routing No.", "Operation No.")
         {
         }
-        key(Key9; "Document Type", "Document No.", "Location Code")
+        key(STG_Key9; "Document Type", "Document No.", "Location Code")
         {
             IncludedFields = Amount, "Amount Including VAT";
         }
-        key(Key10; "Document Type", "Receipt No.", "Receipt Line No.")
+        key(STG_Key10; "Document Type", "Receipt No.", "Receipt Line No.")
         {
             IncludedFields = Quantity;
         }
-        key(Key11; Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Document Type", "Expected Receipt Date")
+        key(STG_Key11; Type, "No.", "Variant Code", "Drop Shipment", "Location Code", "Document Type", "Expected Receipt Date")
         {
             MaintainSQLIndex = false;
         }
-        key(Key12; "Document Type", "Buy-from Vendor No.")
+        key(STG_Key12; "Document Type", "Buy-from Vendor No.")
         {
         }
-        key(Key13; "Document Type", "Job No.", "Job Task No.", "Document No.")
+        key(STG_Key13; "Document Type", "Job No.", "Job Task No.", "Document No.")
         {
             IncludedFields = "Outstanding Amt. Ex. VAT (LCY)", "A. Rcd. Not Inv. Ex. VAT (LCY)";
         }
-        key(Key16; "Recalculate Invoice Disc.")
+        key(STG_Key16; "Recalculate Invoice Disc.")
         {
         }
-        key(Key18; "Location Code", "Quantity Invoiced")
+        key(STG_Key18; "Location Code", "Quantity Invoiced")
         {
         }
-        key(Key19; "Completely Received")
+        key(STG_Key19; "Completely Received")
         {
             IncludedFields = Type, "Location Code";
         }
-        key(Key20; "Document Type", "Document No.", "Drop Shipment")
+        key(STG_Key20; "Document Type", "Document No.", "Drop Shipment")
         {
             IncludedFields = Quantity;
         }
-        key(Key21; "Document Type", "Document No.", Type, "No.", "System-Created Entry")
+        key(STG_Key21; "Document Type", "Document No.", Type, "No.", "System-Created Entry")
         {
             IncludedFields = Quantity, "Outstanding Quantity", "Return Qty. Shipped", "Quantity Received", "Line Amount", Amount, "Amount Including VAT", "Inv. Discount Amount";
         }
-        key(Key22; "Document Type", "Document No.", "VAT Identifier", "Line No.")
+        key(STG_Key22; "Document Type", "Document No.", "VAT Identifier", "Line No.")
         {
             IncludedFields = "VAT %", "Tax Area Code", "Tax Group Code", "VAT Calculation Type", "Line Amount", "Inv. Discount Amount", Amount, "Amount Including VAT", "Quantity (Base)", "VAT Difference";
         }
-        key(Key23; "Attached to Line No.")
+        key(STG_Key23; "Attached to Line No.")
         {
         }
-        key(Key24; "No.", Type)
+        key(STG_Key24; "No.", Type)
         {
         }
     }

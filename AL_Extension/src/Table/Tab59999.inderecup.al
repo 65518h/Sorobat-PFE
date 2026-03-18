@@ -88,7 +88,7 @@ table 59999 inderecup
 
     keys
     {
-        key(Key1; Employer)
+        key(STG_Key1; Employer)
         {
             Clustered = true;
         }

@@ -76,7 +76,7 @@ Table 8001556 "Workflow Role"
 
     keys
     {
-        key(Key1; "Role ID")
+        key(STG_Key1; "Role ID")
         {
             Clustered = true;
         }

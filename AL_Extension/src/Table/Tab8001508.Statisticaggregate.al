@@ -993,23 +993,23 @@ Table 8001508 "Statistic aggregate"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Period Length", "Entry Type", "Ending Date")
+        key(STG_Key2; "Period Length", "Entry Type", "Ending Date")
         {
         }
-        key(Key3; "Entry Type", "Ending Date")
+        key(STG_Key3; "Entry Type", "Ending Date")
         {
         }
-        key(Key4; "Entry Type", Type, "No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Ending Date")
+        key(STG_Key4; "Entry Type", Type, "No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Ending Date")
         {
         }
-        key(Key5; "Ending Date")
+        key(STG_Key5; "Ending Date")
         {
         }
-        key(Key6; "Period Length", "Ending Date", "Entry Type", Type, "No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Country Code", "Business Unit Code")
+        key(STG_Key6; "Period Length", "Ending Date", "Entry Type", Type, "No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Country Code", "Business Unit Code")
         {
         }
     }

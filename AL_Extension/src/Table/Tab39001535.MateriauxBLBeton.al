@@ -32,7 +32,7 @@
 
 //     keys
 //     {
-//         key(Key1; Mat_ID)
+//         key(STG_Key1; Mat_ID)
 //         {
 //             Clustered = true;
 //         }

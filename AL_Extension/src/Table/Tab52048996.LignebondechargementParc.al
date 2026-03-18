@@ -119,41 +119,41 @@ table 52048996 "Ligne bon de chargement Parc"
 
     keys
     {
-        key(Key1; "N° Expédition", "Code Article", "N Séquence")
+        key(STG_Key1; "N° Expédition", "Code Article", "N Séquence")
         {
             Clustered = true;
         }
-        key(Key2; "Code Article")
+        key(STG_Key2; "Code Article")
         {
         }
-        key(Key3; Transporteur)
+        key(STG_Key3; Transporteur)
         {
         }
-        key(Key4; Transporteur, "Déstination")
+        key(STG_Key4; Transporteur, "Déstination")
         {
         }
-        key(Key5; Kilometrage)
+        key(STG_Key5; Kilometrage)
         {
         }
-        key(Key6; "Code Camion")
+        key(STG_Key6; "Code Camion")
         {
         }
-        key(Key7; "Tonnage Camion")
+        key(STG_Key7; "Tonnage Camion")
         {
         }
-        key(Key8; Transporteur, "N° Bon Chargenemt", "Départ", "Déstination", "Code Camion")
+        key(STG_Key8; Transporteur, "N° Bon Chargenemt", "Départ", "Déstination", "Code Camion")
         {
         }
-        key(Key9; Transporteur, "N° Bon Chargenemt", "Code Camion", "Frais Transport Associé")
+        key(STG_Key9; Transporteur, "N° Bon Chargenemt", "Code Camion", "Frais Transport Associé")
         {
         }
-        key(Key10; Transporteur, "N° Bon Chargenemt", "Déstination", "Frais Transport Associé")
+        key(STG_Key10; Transporteur, "N° Bon Chargenemt", "Déstination", "Frais Transport Associé")
         {
         }
-        key(Key11; Transporteur, "N° Bon Chargenemt", "Frais Transport Associé")
+        key(STG_Key11; Transporteur, "N° Bon Chargenemt", "Frais Transport Associé")
         {
         }
-        key(Key12; "N Séquence")
+        key(STG_Key12; "N Séquence")
         {
         }
     }

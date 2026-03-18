@@ -30,11 +30,11 @@ Table 52048975 "Sous Catégorie Véhicule"
 
     keys
     {
-        key(Key1; "Code Catégorie", "Code Sous-Catégorie")
+        key(STG_Key1; "Code Catégorie", "Code Sous-Catégorie")
         {
             Clustered = true;
         }
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

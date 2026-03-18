@@ -321,7 +321,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Compte", Date)
+//         key(STG_Key1; "N° Compte", Date)
 //         {
 //             Clustered = true;
 //         }

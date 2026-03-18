@@ -89,7 +89,7 @@ Table 8004177 "Job G/L Account Price2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", "G/L Account No.", "Currency Code")
+        key(STG_Key1; "Job No.", "Job Task No.", "G/L Account No.", "Currency Code")
         {
             Clustered = true;
         }

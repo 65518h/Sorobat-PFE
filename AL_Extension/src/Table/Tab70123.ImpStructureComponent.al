@@ -120,7 +120,7 @@ Table 70123 "Imp Structure Component"
 
     keys
     {
-        key(Key1; "Parent Structure No.", "Line No.")
+        key(STG_Key1; "Parent Structure No.", "Line No.")
         {
             Clustered = true;
         }

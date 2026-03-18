@@ -14,7 +14,7 @@ table 52049030 "Liste Moyens de transport"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

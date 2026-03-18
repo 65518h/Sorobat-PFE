@@ -14,7 +14,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Materiel", "N° Immobilisation")
+//         key(STG_Key1; "N° Materiel", "N° Immobilisation")
 //         {
 //             Clustered = true;
 //         }

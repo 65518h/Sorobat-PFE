@@ -276,17 +276,17 @@ Table 52049028 "Ligne Rapport Chantier"
 
     keys
     {
-        key(Key1; "N° Document", Ligne)
+        key(STG_Key1; "N° Document", Ligne)
         {
             Clustered = true;
         }
-        key(Key2; Journee, Marche, Materiel)
+        key(STG_Key2; Journee, Marche, Materiel)
         {
         }
-        key(Key3; Journee, Marche, Produit)
+        key(STG_Key3; Journee, Marche, Produit)
         {
         }
-        key(Key4; Journee, Marche, MO)
+        key(STG_Key4; Journee, Marche, MO)
         {
         }
     }

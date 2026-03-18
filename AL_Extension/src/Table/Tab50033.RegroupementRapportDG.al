@@ -56,11 +56,11 @@ Table 50033 "Regroupement Rapport DG"
 
     keys
     {
-        key(Key1; "Code", Chantier)
+        key(STG_Key1; "Code", Chantier)
         {
             Clustered = true;
         }
-        key(Key2; Type, "Code")
+        key(STG_Key2; Type, "Code")
         {
         }
     }

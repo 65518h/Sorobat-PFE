@@ -122,23 +122,23 @@ Table 8004016 "Prepay Ledger Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Employee No.", "From Date")
+        key(STG_Key2; "Employee No.", "From Date")
         {
             SumIndexFields = Quantity, "Quantity (Base)";
         }
-        key(Key3; "Employee No.", "Prepay Reason Code", "From Date")
+        key(STG_Key3; "Employee No.", "Prepay Reason Code", "From Date")
         {
             SumIndexFields = Quantity, "Quantity (Base)";
         }
-        key(Key4; "Prepay Reason Code", "From Date")
+        key(STG_Key4; "Prepay Reason Code", "From Date")
         {
             SumIndexFields = Quantity, "Quantity (Base)";
         }
-        key(Key5; "From Date", "To Date")
+        key(STG_Key5; "From Date", "To Date")
         {
         }
     }

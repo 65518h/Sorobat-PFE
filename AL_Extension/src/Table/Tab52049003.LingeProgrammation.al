@@ -262,11 +262,11 @@ Table 52049003 "Linge Programmation"
 
     keys
     {
-        key(Key1; "N° Document", Vehicule)
+        key(STG_Key1; "N° Document", Vehicule)
         {
             Clustered = true;
         }
-        key(Key2; Chantier, Vehicule)
+        key(STG_Key2; Chantier, Vehicule)
         {
         }
     }

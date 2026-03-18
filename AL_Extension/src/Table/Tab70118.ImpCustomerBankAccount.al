@@ -82,7 +82,7 @@ Table 70118 "Imp Customer Bank Account"
 
     keys
     {
-        key(Key1; "Customer No.", "Code")
+        key(STG_Key1; "Customer No.", "Code")
         {
             Clustered = true;
         }

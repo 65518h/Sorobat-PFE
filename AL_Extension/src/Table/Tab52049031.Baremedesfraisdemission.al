@@ -47,7 +47,7 @@ table 52049031 "Bareme des frais de mission"
 
     keys
     {
-        key(Key1; "Code Frais", "Groupe Destination", "Moyen Transport")
+        key(STG_Key1; "Code Frais", "Groupe Destination", "Moyen Transport")
         {
             Clustered = true;
         }

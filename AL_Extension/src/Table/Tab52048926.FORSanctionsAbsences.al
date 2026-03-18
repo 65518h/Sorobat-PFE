@@ -40,7 +40,7 @@ table 52048926 "FOR-Sanctions/Absences"
 
     keys
     {
-        key(Key1; "Cause Absence", "Code Note", "Number of times")
+        key(STG_Key1; "Cause Absence", "Code Note", "Number of times")
         {
             Clustered = true;
         }

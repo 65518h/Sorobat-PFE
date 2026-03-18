@@ -77,11 +77,11 @@ Table 8001549 "Tax Posting Setup"
 
     keys
     {
-        key(Key1; Type, "Gen. Bus. Posting Group", "Gen. Prod. Posting Group")
+        key(STG_Key1; Type, "Gen. Bus. Posting Group", "Gen. Prod. Posting Group")
         {
             Clustered = true;
         }
-        key(Key2; Type, "Gen. Prod. Posting Group", "Gen. Bus. Posting Group")
+        key(STG_Key2; Type, "Gen. Prod. Posting Group", "Gen. Bus. Posting Group")
         {
         }
     }

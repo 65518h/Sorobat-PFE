@@ -58,7 +58,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code BT", "Num Ligne", "Code Article")
+//         key(STG_Key1; "Code BT", "Num Ligne", "Code Article")
 //         {
 //             Clustered = true;
 //         }

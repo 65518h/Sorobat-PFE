@@ -45,7 +45,7 @@ table 52049036 "Enveloppe Bank"
 
     keys
     {
-        key(Key1; "N° Enveloppe")
+        key(STG_Key1; "N° Enveloppe")
         {
             Clustered = true;
         }

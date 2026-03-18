@@ -35,7 +35,7 @@ table 52048927 "FOR-Paramétres Notations"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

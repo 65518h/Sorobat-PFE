@@ -44,7 +44,7 @@ Table 8001429 "ReportList Translation"
 
     keys
     {
-        key(Key1; "Menu ID", "Line No.", "Language ID")
+        key(STG_Key1; "Menu ID", "Line No.", "Language ID")
         {
             Clustered = true;
         }

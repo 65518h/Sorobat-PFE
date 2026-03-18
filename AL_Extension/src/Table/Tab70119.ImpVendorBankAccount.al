@@ -111,7 +111,7 @@ Table 70119 "Imp Vendor Bank Account"
 
     keys
     {
-        key(Key1; "Vendor No.", "Code")
+        key(STG_Key1; "Vendor No.", "Code")
         {
             Clustered = true;
         }

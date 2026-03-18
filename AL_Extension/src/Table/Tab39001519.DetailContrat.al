@@ -36,7 +36,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Contrat", Fournisseurs, Ligne)
+//         key(STG_Key1; "N° Contrat", Fournisseurs, Ligne)
 //         {
 //             Clustered = true;
 //             SumIndexFields = "Prix TTC";

@@ -242,17 +242,17 @@ Table 52049012 "Entete Pointage Vehicule"
 
     keys
     {
-        key(Key1; "N° Document")
+        key(STG_Key1; "N° Document")
         {
             Clustered = true;
         }
-        key(Key2; Mois)
+        key(STG_Key2; Mois)
         {
         }
-        key(Key3; Vehicule)
+        key(STG_Key3; Vehicule)
         {
         }
-        key(Key4; Journee)
+        key(STG_Key4; Journee)
         {
         }
     }

@@ -17,7 +17,7 @@
 
 //     keys
 //     {
-//         key(Key1; Annee, Mois)
+//         key(STG_Key1; Annee, Mois)
 //         {
 //             Clustered = true;
 //         }

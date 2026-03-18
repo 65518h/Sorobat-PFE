@@ -148,7 +148,7 @@ Table 8004133 "Planning Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

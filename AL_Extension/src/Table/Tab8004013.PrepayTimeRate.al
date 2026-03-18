@@ -31,7 +31,7 @@ Table 8004013 "Prepay Time Rate"
 
     keys
     {
-        key(Key1; "Resource No.", "Starting Date")
+        key(STG_Key1; "Resource No.", "Starting Date")
         {
             Clustered = true;
         }

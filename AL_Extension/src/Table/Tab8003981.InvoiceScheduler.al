@@ -368,12 +368,12 @@ Table 8003981 "Invoice Scheduler"
 
     keys
     {
-        key(Key1; "Sales Header Doc. Type", "Sales Header Doc. No.", "Line No.")
+        key(STG_Key1; "Sales Header Doc. Type", "Sales Header Doc. No.", "Line No.")
         {
             Clustered = true;
             SumIndexFields = "Document Percentage", "Amount to Emit (LCY)", "Amount to Emit", "Amount Emitted (LCY)";
         }
-        key(Key2; "Sales Header Doc. Type", "Sales Header Doc. No.", Invoice, "Line No.")
+        key(STG_Key2; "Sales Header Doc. Type", "Sales Header Doc. No.", Invoice, "Line No.")
         {
             SumIndexFields = "Amount to Emit", "Amount to Emit (LCY)", "Amount Emitted", "Amount Emitted (LCY)";
         }

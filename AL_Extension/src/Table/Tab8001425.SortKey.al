@@ -36,7 +36,7 @@ Table 8001425 "Sort Key"
 
     keys
     {
-        key(Key1; TableNo, SortKey)
+        key(STG_Key1; TableNo, SortKey)
         {
             Clustered = true;
         }

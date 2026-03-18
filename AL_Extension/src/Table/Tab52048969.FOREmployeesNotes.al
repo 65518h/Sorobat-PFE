@@ -35,7 +35,7 @@ table 52048969 "FOR-Employees Notes"
 
     keys
     {
-        key(Key1; "Employee No.", "Code Note", Year, Quarter, Month)
+        key(STG_Key1; "Employee No.", "Code Note", Year, Quarter, Month)
         {
             Clustered = true;
         }

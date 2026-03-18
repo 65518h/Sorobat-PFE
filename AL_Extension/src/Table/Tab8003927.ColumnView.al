@@ -23,7 +23,7 @@ Table 8003927 "Column View"
 
     keys
     {
-        key(Key1; TableNo, ColumnKey)
+        key(STG_Key1; TableNo, ColumnKey)
         {
             Clustered = true;
         }

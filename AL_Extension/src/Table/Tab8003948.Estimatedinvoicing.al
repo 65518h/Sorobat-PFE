@@ -53,11 +53,11 @@ Table 8003948 "Estimated invoicing"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", "Doc. Type", "Doc. No.", "Gen. Prod. Posting Group", "Posting Date")
+        key(STG_Key2; "Job No.", "Doc. Type", "Doc. No.", "Gen. Prod. Posting Group", "Posting Date")
         {
             SumIndexFields = Amount;
         }

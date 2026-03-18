@@ -18,7 +18,7 @@ table 52048912 "Caledar Roulement"
 
     keys
     {
-        key(Key1; "Code calend Roulement")
+        key(STG_Key1; "Code calend Roulement")
         {
             Clustered = true;
         }

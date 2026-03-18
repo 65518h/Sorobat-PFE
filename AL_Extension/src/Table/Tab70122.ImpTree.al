@@ -23,7 +23,7 @@ Table 70122 "Imp Tree"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

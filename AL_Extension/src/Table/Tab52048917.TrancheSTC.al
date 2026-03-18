@@ -26,7 +26,7 @@ table 52048917 "Tranche STC"
 
     keys
     {
-        key(Key1; "Plage Min", "Plage Max", "Taux STC")
+        key(STG_Key1; "Plage Min", "Plage Max", "Taux STC")
         {
             Clustered = true;
         }

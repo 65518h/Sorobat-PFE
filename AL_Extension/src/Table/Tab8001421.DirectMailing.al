@@ -18,7 +18,7 @@ Table 8001421 "Direct Mailing"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

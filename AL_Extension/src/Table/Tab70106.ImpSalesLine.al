@@ -815,7 +815,7 @@ Table 70106 "Imp Sales Line"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Line No.")
         {
             Clustered = true;
         }

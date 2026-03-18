@@ -17,7 +17,7 @@ Table 52049060 "Marque Pneu"
 
     keys
     {
-        key(Key1; "Code marque")
+        key(STG_Key1; "Code marque")
         {
             Clustered = true;
         }

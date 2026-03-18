@@ -188,15 +188,15 @@ TableExtension 50202 "Payment Step LedgerEXT" extends "Payment Step Ledger"
     keys
     {
 
-        /*GL2024  key(Key2;"Payment Class","Compta. Retenue à la source","Compta. Retenue Sur TVA",Line)
+        /*GL2024  key(STG_Key2;"Payment Class","Compta. Retenue à la source","Compta. Retenue Sur TVA",Line)
           {
           }
 
-          key(Key3;"Payment Class","Inclure Commission",Line)
+          key(STG_Key3;"Payment Class","Inclure Commission",Line)
           {
           }
 
-          key(Key4;"Payment Class","Annuler Compta Retn. à la Sour",Line)
+          key(STG_Key4;"Payment Class","Annuler Compta Retn. à la Sour",Line)
           {
           }*/
     }

@@ -39,7 +39,7 @@ Table 8004103 Fractionation
 
     keys
     {
-        key(Key1; "Payment Terms Code", "Line No.")
+        key(STG_Key1; "Payment Terms Code", "Line No.")
         {
             Clustered = true;
         }

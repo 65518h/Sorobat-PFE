@@ -22,7 +22,7 @@ Table 50010 "Bureau Ordre Envoyé a"
 
     keys
     {
-        key(Key1; "No. Document", Utilisateur)
+        key(STG_Key1; "No. Document", Utilisateur)
         {
             Clustered = true;
         }

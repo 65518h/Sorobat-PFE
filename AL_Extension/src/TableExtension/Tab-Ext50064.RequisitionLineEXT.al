@@ -136,7 +136,7 @@ TableExtension 50064 "Requisition LineEXT" extends "Requisition Line"
     keys
     {
 
-        key(Key15; "Vendor No.")
+        key(STG_Key15; "Vendor No.")
         {
         }
     }

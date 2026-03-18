@@ -26,7 +26,7 @@ Table 84133 "UPG Planning Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

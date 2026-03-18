@@ -16,7 +16,7 @@ Table 59997 "Affectation Utlisateur"
 
     keys
     {
-        key(Key1; USERID)
+        key(STG_Key1; USERID)
         {
             Clustered = true;
         }

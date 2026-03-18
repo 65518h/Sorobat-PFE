@@ -80,7 +80,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Numero Credit", Numero)
+//         key(STG_Key1; "Numero Credit", Numero)
 //         {
 //             Clustered = true;
 //         }

@@ -82,7 +82,7 @@ Table 50043 "Commande Central Enrobe"
 
     keys
     {
-        key(Key1; "Num Bon")
+        key(STG_Key1; "Num Bon")
         {
             Clustered = true;
         }

@@ -10,7 +10,7 @@ Table 50044 "Rapport Vidange vehicule"
 
     keys
     {
-        key(Key1; Vehicule)
+        key(STG_Key1; Vehicule)
         {
             Clustered = true;
         }

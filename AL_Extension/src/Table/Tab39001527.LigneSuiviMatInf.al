@@ -56,7 +56,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Document", Marque, "N° Serie")
+//         key(STG_Key1; "N° Document", Marque, "N° Serie")
 //         {
 //             Clustered = true;
 //         }

@@ -36,7 +36,7 @@ Table 8001411 Translation2
 
     keys
     {
-        key(Key1; TableID, FieldID, "Code", "Language Code", "Line No.")
+        key(STG_Key1; TableID, FieldID, "Code", "Language Code", "Line No.")
         {
             Clustered = true;
         }

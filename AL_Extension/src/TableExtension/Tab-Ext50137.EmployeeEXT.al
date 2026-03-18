@@ -1120,29 +1120,29 @@ TableExtension 50137 EmployeeEXT extends Employee
     keys
     {
 
-        key(Key6; "Social Security No.")
+        key(STG_Key6; "Social Security No.")
         {
         }
-        // key(Key7; "National Identity Card No.")
+        // key(STG_Key7; "National Identity Card No.")
         // {
         // }
 
-        key(Key8; "Statistics Group Code", "No.")
+        key(STG_Key8; "Statistics Group Code", "No.")
         {
         }
-        // key(Key9; "Intervenir SAV")
+        // key(STG_Key9; "Intervenir SAV")
         // {
         //     SumIndexFields = "Salaire Brut";
         // }
 
-        // /*GL2024   key(Key10;Affectation,"No.")
+        // /*GL2024   key(STG_Key10;Affectation,"No.")
         //    {
         //    }
 
-        //    key(Key11;"Collège","No.")
+        //    key(STG_Key11;"Collège","No.")
         //    {
         //    }*/
-        // key(Key12; Qualification)
+        // key(STG_Key12; Qualification)
         // {
         // }
     }

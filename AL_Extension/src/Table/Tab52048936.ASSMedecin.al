@@ -24,7 +24,7 @@ table 52048936 "ASS-Medecin"
 
     keys
     {
-        key(Key1; "No.", Nom)
+        key(STG_Key1; "No.", Nom)
         {
             Clustered = true;
         }

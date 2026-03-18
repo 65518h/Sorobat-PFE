@@ -46,20 +46,20 @@ TableExtension 50171 "Item Charge Assignment (Pu)EXT" extends "Item Charge Assig
     }
     keys
     {
-        key(Key4; "Source Type", "Type Frais", "N° Dossier")
+        key(STG_Key4; "Source Type", "Type Frais", "N° Dossier")
         {
             SumIndexFields = "Montant associé DS", "Montant associé";
         }
 
-        /* GL2024   key(Key5;"Source No.","Source Type","Type Frais","N° Dossier","Item Charge No.")
+        /* GL2024   key(STG_Key5;"Source No.","Source Type","Type Frais","N° Dossier","Item Charge No.")
             {
             }
 
-            key(Key6;"Item Charge No.","N° Dossier")
+            key(STG_Key6;"Item Charge No.","N° Dossier")
             {
             }
 
-            key(Key7;"Document Type","Document No.","Document Line No.","N° Dossier","Item Charge No.")
+            key(STG_Key7;"Document Type","Document No.","Document Line No.","N° Dossier","Item Charge No.")
             {
             SumIndexFields = "Montant associé DS";
             }*/

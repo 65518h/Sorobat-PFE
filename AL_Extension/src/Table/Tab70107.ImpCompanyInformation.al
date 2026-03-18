@@ -156,7 +156,7 @@ Table 70107 "Imp Company Information"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

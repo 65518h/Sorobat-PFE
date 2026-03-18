@@ -726,101 +726,101 @@ table 50050 "Item Ledger Entry History"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Item No.")
+        key(STG_Key2; "Item No.")
         {
         }
-        key(Key3; "Item No.", "Posting Date")
+        key(STG_Key3; "Item No.", "Posting Date")
         {
         }
-        key(Key4; "Item No.", "Entry Type", "Variant Code", "Drop Shipment", "Location Code", "Posting Date")
+        key(STG_Key4; "Item No.", "Entry Type", "Variant Code", "Drop Shipment", "Location Code", "Posting Date")
         {
             SumIndexFields = Quantity, "Invoiced Quantity";
         }
-        key(Key5; "Source Type", "Source No.", "Item No.", "Variant Code", "Posting Date")
+        key(STG_Key5; "Source Type", "Source No.", "Item No.", "Variant Code", "Posting Date")
         {
             SumIndexFields = Quantity;
         }
-        key(Key6; "Item No.", Open, "Variant Code", Positive, "Location Code", "Posting Date")
+        key(STG_Key6; "Item No.", Open, "Variant Code", Positive, "Location Code", "Posting Date")
         {
             SumIndexFields = Quantity, "Remaining Quantity";
         }
-        key(Key7; "Item No.", Open, "Variant Code", Positive, "Location Code", "Posting Date", "Expiration Date", "Lot No.", "Serial No.")
+        key(STG_Key7; "Item No.", Open, "Variant Code", Positive, "Location Code", "Posting Date", "Expiration Date", "Lot No.", "Serial No.")
         {
             SumIndexFields = Quantity, "Remaining Quantity";
         }
-        key(Key8; "Country/Region Code", "Entry Type", "Posting Date")
+        key(STG_Key8; "Country/Region Code", "Entry Type", "Posting Date")
         {
         }
-        key(Key9; "Document No.", "Document Type", "Document Line No.")
+        key(STG_Key9; "Document No.", "Document Type", "Document Line No.")
         {
         }
-        // key(Key10; "Prod. Order No.", "Prod. Order Line No.", "Entry Type", "Prod. Order Comp. Line No.")
+        // key(STG_Key10; "Prod. Order No.", "Prod. Order Line No.", "Entry Type", "Prod. Order Comp. Line No.")
         // {
         //     MaintainSIFTIndex = false;
         //     SumIndexFields = Quantity;
         // }
-        key(Key11; "Item No.", "Applied Entry to Adjust")
+        key(STG_Key11; "Item No.", "Applied Entry to Adjust")
         {
         }
-        key(Key12; "Item No.", Positive, "Location Code", "Variant Code")
+        key(STG_Key12; "Item No.", Positive, "Location Code", "Variant Code")
         {
         }
-        key(Key13; "Item No.", Open, "Variant Code", Positive, "Expiration Date", "Lot No.", "Serial No.")
+        key(STG_Key13; "Item No.", Open, "Variant Code", Positive, "Expiration Date", "Lot No.", "Serial No.")
         {
             MaintainSIFTIndex = false;
             MaintainSQLIndex = false;
         }
-        key(Key14; "Item No.", Open, "Variant Code", "Location Code", "Item Tracking", "Lot No.", "Serial No.")
+        key(STG_Key14; "Item No.", Open, "Variant Code", "Location Code", "Item Tracking", "Lot No.", "Serial No.")
         {
             MaintainSIFTIndex = false;
             MaintainSQLIndex = false;
             SumIndexFields = "Remaining Quantity";
         }
-        key(Key15; "Item No.", "Lot No.", "Serial No.", "Posting Date", "Location Code", "Variant Code")
+        key(STG_Key15; "Item No.", "Lot No.", "Serial No.", "Posting Date", "Location Code", "Variant Code")
         {
             SumIndexFields = Quantity, "Remaining Quantity";
         }
-        key(Key16; "Item No.", "Document No.", "Location Code", Quantity, "Entry No.")
+        key(STG_Key16; "Item No.", "Document No.", "Location Code", Quantity, "Entry No.")
         {
         }
-        key(Key17; "Location Code", "Item No.")
+        key(STG_Key17; "Location Code", "Item No.")
         {
         }
-        key(Key18; "Item Category Code", "Product Group Code", "Location Code")
+        key(STG_Key18; "Item Category Code", "Product Group Code", "Location Code")
         {
         }
-        key(Key19; "N° Véhicule")
+        key(STG_Key19; "N° Véhicule")
         {
         }
-        key(Key20; Synchronise)
+        key(STG_Key20; Synchronise)
         {
         }
-        key(Key21; "Num Sequence Synchro")
+        key(STG_Key21; "Num Sequence Synchro")
         {
         }
-        key(Key22; "Item No.", "Location Code")
+        key(STG_Key22; "Item No.", "Location Code")
         {
         }
-        key(Key23; "Job No.", "Code Nature", "Entry Type")
+        key(STG_Key23; "Job No.", "Code Nature", "Entry Type")
         {
         }
-        key(Key24; "Posting Date")
+        key(STG_Key24; "Posting Date")
         {
         }
-        key(Key25; "Posting Date", "Sous Affectation")
+        key(STG_Key25; "Posting Date", "Sous Affectation")
         {
         }
-        key(Key26; "N° Véhicule", "Item No.", "Posting Date", Esseyeu, Position)
+        key(STG_Key26; "N° Véhicule", "Item No.", "Posting Date", Esseyeu, Position)
         {
         }
-        key(Key27; "Posting Date", "Alerte Frequence Changement")
+        key(STG_Key27; "Posting Date", "Alerte Frequence Changement")
         {
         }
-        key(Key28; "Posting Date", "N° Véhicule", "Item No.")
+        key(STG_Key28; "Posting Date", "N° Véhicule", "Item No.")
         {
         }
     }

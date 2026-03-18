@@ -33,7 +33,7 @@ Table 8004169 "Job Journal Quantity2"
 
     keys
     {
-        key(Key1; "Is Total", "Unit of Measure Code", "Line Type", "Work Type Code")
+        key(STG_Key1; "Is Total", "Unit of Measure Code", "Line Type", "Work Type Code")
         {
             Clustered = true;
         }

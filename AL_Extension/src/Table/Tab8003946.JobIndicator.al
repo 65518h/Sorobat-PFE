@@ -304,7 +304,7 @@ Table 8003946 "Job Indicator"
 
     keys
     {
-        key(Key1; "Job No.", "Reporting Date")
+        key(STG_Key1; "Job No.", "Reporting Date")
         {
             Clustered = true;
         }

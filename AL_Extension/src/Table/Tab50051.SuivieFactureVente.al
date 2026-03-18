@@ -182,7 +182,7 @@ Table 50051 "Suivie Facture Vente"
 
     keys
     {
-        key(Key1; "Séquence")
+        key(STG_Key1; "Séquence")
         {
             Clustered = true;
         }

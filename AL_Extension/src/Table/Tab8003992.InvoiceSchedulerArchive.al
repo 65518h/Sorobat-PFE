@@ -145,7 +145,7 @@ Table 8003992 "Invoice Scheduler Archive"
 
     keys
     {
-        key(Key1; "Sales Header Doc. Type", "Sales Header Doc. No.", "Doc. No. Occurrence", "Version No.", "Line No.")
+        key(STG_Key1; "Sales Header Doc. Type", "Sales Header Doc. No.", "Doc. No. Occurrence", "Version No.", "Line No.")
         {
             Clustered = true;
         }

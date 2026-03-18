@@ -10,7 +10,7 @@
 
 //     keys
 //     {
-//         key(Key1; "code")
+//         key(STG_Key1; "code")
 //         {
 //             Clustered = true;
 //         }

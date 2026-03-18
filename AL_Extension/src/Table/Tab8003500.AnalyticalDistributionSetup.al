@@ -52,7 +52,7 @@ Table 8003500 "Analytical Distribution Setup"
 
     keys
     {
-        key(Key1; "Primary key")
+        key(STG_Key1; "Primary key")
         {
             Clustered = true;
         }

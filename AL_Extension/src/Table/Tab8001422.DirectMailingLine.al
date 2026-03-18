@@ -93,7 +93,7 @@ Table 8001422 "Direct Mailing Line"
 
     keys
     {
-        key(Key1; "Code", "Table No.", "Field No.", "Line No.")
+        key(STG_Key1; "Code", "Table No.", "Field No.", "Line No.")
         {
             Clustered = true;
         }

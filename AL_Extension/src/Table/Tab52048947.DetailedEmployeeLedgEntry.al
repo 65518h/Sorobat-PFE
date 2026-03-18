@@ -140,35 +140,35 @@ table 52048947 "Detailed Employee Ledg. Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount (LCY)", "Credit Amount (LCY)";
         }
-        key(Key2; "Employee Ledger Entry No.", "Posting Date")
+        key(STG_Key2; "Employee Ledger Entry No.", "Posting Date")
         {
         }
-        key(Key3; "Employee Ledger Entry No.", "Entry Type", "Posting Date")
+        key(STG_Key3; "Employee Ledger Entry No.", "Entry Type", "Posting Date")
         {
             MaintainSIFTIndex = false;
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount", "Credit Amount", "Debit Amount (LCY)", "Credit Amount (LCY)";
         }
-        key(Key4; "Employee No.", "Initial Entry Due Date", "Currency Code")
+        key(STG_Key4; "Employee No.", "Initial Entry Due Date", "Currency Code")
         {
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount", "Credit Amount", "Debit Amount (LCY)", "Credit Amount (LCY)";
         }
-        key(Key5; "Employee No.", "Posting Date", "Entry Type", "Currency Code")
+        key(STG_Key5; "Employee No.", "Posting Date", "Entry Type", "Currency Code")
         {
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount", "Debit Amount (LCY)", "Credit Amount", "Credit Amount (LCY)";
         }
-        key(Key6; "Employee No.", "Initial Document Type", "Document Type")
+        key(STG_Key6; "Employee No.", "Initial Document Type", "Document Type")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key7; "Document Type", "Document No.", "Posting Date")
+        key(STG_Key7; "Document Type", "Document No.", "Posting Date")
         {
         }
-        key(Key8; "Initial Document Type", "Employee No.", "Posting Date", "Currency Code", "Entry Type")
+        key(STG_Key8; "Initial Document Type", "Employee No.", "Posting Date", "Currency Code", "Entry Type")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }

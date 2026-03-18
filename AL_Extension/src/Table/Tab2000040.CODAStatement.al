@@ -58,7 +58,7 @@ Table 2000040 "CODA Statement"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Statement No.")
+        key(STG_Key1; "Bank Account No.", "Statement No.")
         {
             Clustered = true;
         }

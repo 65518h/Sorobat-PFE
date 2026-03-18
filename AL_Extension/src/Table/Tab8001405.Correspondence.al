@@ -50,11 +50,11 @@ Table 8001405 Correspondence
 
     keys
     {
-        key(Key1; "Table", "External Code")
+        key(STG_Key1; "Table", "External Code")
         {
             Clustered = true;
         }
-        key(Key2; "Table", "Navision Code")
+        key(STG_Key2; "Table", "Navision Code")
         {
         }
     }

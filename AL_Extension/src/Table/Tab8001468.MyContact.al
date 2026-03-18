@@ -24,7 +24,7 @@ Table 8001468 "My Contact"
 
     keys
     {
-        key(Key1; "User ID", "Contact No.")
+        key(STG_Key1; "User ID", "Contact No.")
         {
             Clustered = true;
         }

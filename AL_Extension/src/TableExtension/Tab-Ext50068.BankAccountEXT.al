@@ -229,7 +229,7 @@ TableExtension 50068 "Bank AccountEXT" extends "Bank Account"
     }
     keys
     {
-        key(Key6; Synchronise)
+        key(STG_Key6; Synchronise)
         {
         }
     }

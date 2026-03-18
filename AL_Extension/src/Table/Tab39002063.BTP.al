@@ -143,11 +143,11 @@
 
 //     keys
 //     {
-//         key(Key1; cd_OTP, cd_box, "code intervention", "code BTP")
+//         key(STG_Key1; cd_OTP, cd_box, "code intervention", "code BTP")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "code BTP")
+//         key(STG_Key2; "code BTP")
 //         {
 //         }
 //     }

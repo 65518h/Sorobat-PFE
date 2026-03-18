@@ -35,7 +35,7 @@ Table 70126 "Imp Human Res. Comment Lin"
 
     keys
     {
-        key(Key1; "Table Name", "No.", "Table Line No.", "Alternative Address Code", "Line No.")
+        key(STG_Key1; "Table Name", "No.", "Table Line No.", "Alternative Address Code", "Line No.")
         {
             Clustered = true;
         }

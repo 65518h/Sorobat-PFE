@@ -82,7 +82,7 @@ Table 52048967 "Prime de Motivation SIE"
 
     keys
     {
-        key(Key1; "Code Employée")
+        key(STG_Key1; "Code Employée")
         {
             Clustered = true;
         }

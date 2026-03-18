@@ -30,7 +30,7 @@ Table 52048978 "Affectation Véhicule"
 
     keys
     {
-        key(Key1; Type, "Date Affectation", "N° Véhicule")
+        key(STG_Key1; Type, "Date Affectation", "N° Véhicule")
         {
             Clustered = true;
         }

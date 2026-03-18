@@ -10,7 +10,7 @@ Table 8004199 "STOP BAT"
 
     keys
     {
-        key(Key1; Stop)
+        key(STG_Key1; Stop)
         {
             Clustered = true;
         }

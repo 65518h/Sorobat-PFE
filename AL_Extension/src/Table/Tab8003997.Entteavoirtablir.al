@@ -21,7 +21,7 @@ Table 8003997 "En-tête avoir à établir"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

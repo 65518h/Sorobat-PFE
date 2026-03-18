@@ -243,44 +243,44 @@ Table 52048898 Indemnities
 
     keys
     {
-        key(Key1; "No.", "Employee No.", Indemnity, "Non Inclus en Prime")
+        key(STG_Key1; "No.", "Employee No.", Indemnity, "Non Inclus en Prime")
         {
             Clustered = true;
             SumIndexFields = "Real Amount";
         }
-        key(Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key3; Indemnity, "Employee Statistic Group", "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key3; Indemnity, "Employee Statistic Group", "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key4; "No.", "Employee No.", Type)
+        key(STG_Key4; "No.", "Employee No.", Type)
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        /*key(Key5; "No.", "Employee No.", Type, "Non Inclis en AV NAt")
+        /*key(STG_Key5; "No.", "Employee No.", Type, "Non Inclis en AV NAt")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key6; "No.", "Employee No.", Type, "Non Inclis en AV NAt", "Indemnité conventionnelle")
+        key(STG_Key6; "No.", "Employee No.", Type, "Non Inclis en AV NAt", "Indemnité conventionnelle")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }*/
-        key(Key7; "No.", "Employee Statistic Group", Type)
+        key(STG_Key7; "No.", "Employee Statistic Group", Type)
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key8; Indemnity, "Employee Posting Group")
+        key(STG_Key8; Indemnity, "Employee Posting Group")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key9; "No.", "Employee No.", "Non Inclus en Prime")
+        key(STG_Key9; "No.", "Employee No.", "Non Inclus en Prime")
         {
             SumIndexFields = "Real Amount", "Base Amount";
         }
-        key(Key10; "No.", "Employee No.", Indemnity, Type)
+        key(STG_Key10; "No.", "Employee No.", Indemnity, Type)
         {
             SumIndexFields = "Real Amount", "Base Amount";
         }

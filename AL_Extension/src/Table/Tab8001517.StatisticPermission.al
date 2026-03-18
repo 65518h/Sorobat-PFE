@@ -30,7 +30,7 @@ Table 8001517 "Statistic Permission"
 
     keys
     {
-        key(Key1; Type, "Code", "Authorized group")
+        key(STG_Key1; Type, "Code", "Authorized group")
         {
             Clustered = true;
         }

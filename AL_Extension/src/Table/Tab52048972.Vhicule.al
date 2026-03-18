@@ -627,26 +627,26 @@ Table 52048972 "Véhicule"
 
     keys
     {
-        key(Key1; "N° Vehicule")
+        key(STG_Key1; "N° Vehicule")
         {
             Clustered = true;
         }
-        key(Key2; Immatriculation)
+        key(STG_Key2; Immatriculation)
         {
         }
-        key(Key3; Famille)
+        key(STG_Key3; Famille)
         {
         }
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
-        key(Key5; "Grande Famille", Famille, "Sous Famille")
+        key(STG_Key5; "Grande Famille", Famille, "Sous Famille")
         {
         }
-        key(Key6; marche, "N° Vehicule")
+        key(STG_Key6; marche, "N° Vehicule")
         {
         }
-        key(Key7; Ordre)
+        key(STG_Key7; Ordre)
         {
         }
     }

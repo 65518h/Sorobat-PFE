@@ -54,7 +54,7 @@ Table 8001535 "BAR : Reconciliation Rule"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Reason Code", "Application Order")
+        key(STG_Key1; "Bank Account No.", "Reason Code", "Application Order")
         {
             Clustered = true;
         }

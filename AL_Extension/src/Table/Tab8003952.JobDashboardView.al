@@ -180,7 +180,7 @@ Table 8003952 "Job Dashboard View"
 
     keys
     {
-        key(Key1; "View Code")
+        key(STG_Key1; "View Code")
         {
             Clustered = true;
         }

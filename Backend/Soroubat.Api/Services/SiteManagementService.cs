@@ -9,7 +9,7 @@ namespace Soroubat.Api.Services
     {
         private readonly HttpClient _httpClient;
         // c'est l'url de base de l'API exposée par BC, à ajuster selon votre configuration
-        private readonly string _apiBaseUrl = "http://localhost:7048/BC240/api/soroubat/siteManagement/v1.0/"; 
+        private readonly string _apiBaseUrl = "http://localhost:7048/BC243/api/soroubat/siteManagement/v1.0/"; 
 
         public SiteManagementService(HttpClient httpClient)
         {

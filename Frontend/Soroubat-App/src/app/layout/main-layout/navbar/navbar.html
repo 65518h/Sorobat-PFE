@@ -1,45 +1,82 @@
-<!-- layout/main-layout/navbar/navbar.html -->
-<mat-toolbar color="primary" class="navbar">
-  <button mat-icon-button class="menu-button">
-    <mat-icon>menu</mat-icon>
-  </button>
+<mat-toolbar class="navbar">
+  <div class="navbar-left">
+    <button 
+      mat-icon-button 
+      class="menu-button" 
+      (click)="toggleMenu()" 
+      matTooltip="Menu"
+      [class.rotating]="isRotating"
+      (animationend)="isRotating = false">
+      <mat-icon [class.spin]="isSpinning">menu</mat-icon>
+    </button>
 
-  <div class="navbar-brand">
-    <img src="logo.jpg" alt="SOROUBAT" class="logo">
-    <span class="app-title">SOROUBAT</span>
+    <div class="navbar-brand">
+      <div class="logo-wrapper">
+        <img src="logo.jpg" alt="SOROUBAT" class="logo">
+        <div class="logo-glow"></div>
+      </div>
+      <div class="brand-text">
+        <span class="app-title">SOROUBAT</span>
+        <span class="app-subtitle">Gestion de chantiers</span>
+      </div>
+    </div>
   </div>
 
+  <!-- Espace flexible pour pousser les éléments à droite -->
   <span class="spacer"></span>
 
-  <div class="navbar-actions">
-    <button mat-icon-button matBadge="3" matBadgeColor="warn">
+  <div class="navbar-right">
+    <button mat-icon-button class="action-btn" [matBadge]="26" matBadgeColor="accent" matTooltip="Tâches">
+      <mat-icon>assignment</mat-icon>
+    </button>
+
+    <button mat-icon-button class="action-btn" [matBadge]="3" matBadgeColor="warn" matTooltip="Notifications">
       <mat-icon>notifications</mat-icon>
     </button>
 
-    <button mat-icon-button>
+    <button mat-icon-button class="action-btn" matTooltip="Messages">
       <mat-icon>chat</mat-icon>
     </button>
 
-    <button mat-button [matMenuTriggerFor]="menu" class="user-button">
-      <mat-icon>account_circle</mat-icon>
-      <span class="user-name">{{ userName }}</span>
-      <mat-icon>arrow_drop_down</mat-icon>
+    <button mat-icon-button class="action-btn" matTooltip="Calendrier">
+      <mat-icon>calendar_today</mat-icon>
     </button>
-    
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>person</mat-icon>
-        <span>Mon profil</span>
+
+    <div class="user-section">
+      <button mat-button [matMenuTriggerFor]="menu" class="user-button">
+        <div class="user-avatar">
+          <mat-icon>account_circle</mat-icon>
+          <div class="status-indicator online"></div>
+        </div>
+        <span class="user-name">{{ userName }}</span>
+        <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
       </button>
-      <button mat-menu-item>
-        <mat-icon>settings</mat-icon>
-        <span>Paramètres</span>
-      </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon color="warn">exit_to_app</mat-icon>
-        <span class="logout-text">Déconnexion</span>
-      </button>
-    </mat-menu>
+      
+      <mat-menu #menu="matMenu" class="user-menu">
+        <div class="user-menu-header">
+          <div class="menu-user-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <div class="menu-user-info">
+            <div class="menu-user-name">{{ userName }}</div>
+            <div class="menu-user-email">admin@soroubat.com</div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Mon profil</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Paramètres</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="logout()" class="logout-item">
+          <mat-icon color="warn">exit_to_app</mat-icon>
+          <span>Déconnexion</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>

@@ -525,11 +525,11 @@ TableExtension 50039 "Sales Invoice HeaderEXT" extends "Sales Invoice Header"
     keys
     {
 
-        key(Key14; "Prepayment Order No.", "Posting Date")
+        key(STG_Key14; "Prepayment Order No.", "Posting Date")
         {
         }
 
-        /*GL2024 key(Key15;"Job No.","Prepayment Rank No.","Scheduler Origin","No.")
+        /*GL2024 key(STG_Key15;"Job No.","Prepayment Rank No.","Scheduler Origin","No.")
          {
          }*/
     }

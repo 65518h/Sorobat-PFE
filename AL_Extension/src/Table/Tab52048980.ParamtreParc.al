@@ -242,7 +242,7 @@ Table 52048980 "Paramétre Parc"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

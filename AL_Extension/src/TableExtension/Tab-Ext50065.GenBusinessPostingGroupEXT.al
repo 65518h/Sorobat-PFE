@@ -16,7 +16,7 @@ TableExtension 50065 "Gen. Business Posting GroupEXT" extends "Gen. Business Pos
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

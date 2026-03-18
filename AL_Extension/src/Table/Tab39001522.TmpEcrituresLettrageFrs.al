@@ -595,95 +595,95 @@
 
 //     keys
 //     {
-//         key(Key1; "Entry No.", "Closed by Entry No.", "Fature Associé")
+//         key(STG_Key1; "Entry No.", "Closed by Entry No.", "Fature Associé")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "Vendor No.", "Posting Date", "Currency Code")
+//         key(STG_Key2; "Vendor No.", "Posting Date", "Currency Code")
 //         {
 //             SumIndexFields = "Purchase (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key3; "Vendor No.", "Currency Code", "Posting Date")
+//         key(STG_Key3; "Vendor No.", "Currency Code", "Posting Date")
 //         {
 //             Enabled = false;
 //         }
-//         key(Key4; "Document No.")
+//         key(STG_Key4; "Document No.")
 //         {
 //         }
-//         key(Key5; "External Document No.")
+//         key(STG_Key5; "External Document No.")
 //         {
 //         }
-//         key(Key6; "Vendor No.", Open, Positive, "Due Date", "Currency Code")
+//         key(STG_Key6; "Vendor No.", Open, Positive, "Due Date", "Currency Code")
 //         {
 //         }
-//         key(Key7; Open, "Due Date")
+//         key(STG_Key7; Open, "Due Date")
 //         {
 //         }
-//         key(Key8; "Document Type", "Vendor No.", "Posting Date", "Currency Code")
+//         key(STG_Key8; "Document Type", "Vendor No.", "Posting Date", "Currency Code")
 //         {
 //             MaintainSIFTIndex = false;
 //             MaintainSQLIndex = false;
 //             SumIndexFields = "Purchase (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key9; "Closed by Entry No.")
+//         key(STG_Key9; "Closed by Entry No.")
 //         {
 //         }
-//         key(Key10; "Transaction No.")
+//         key(STG_Key10; "Transaction No.")
 //         {
 //         }
-//         key(Key11; "Vendor No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
+//         key(STG_Key11; "Vendor No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
 //         {
 //             Enabled = false;
 //             SumIndexFields = "Purchase (LCY)", "Inv. Discount (LCY)";
 //         }
-//         key(Key12; "Vendor No.", Open, "Global Dimension 1 Code", "Global Dimension 2 Code", Positive, "Due Date", "Currency Code")
+//         key(STG_Key12; "Vendor No.", Open, "Global Dimension 1 Code", "Global Dimension 2 Code", Positive, "Due Date", "Currency Code")
 //         {
 //             Enabled = false;
 //         }
-//         key(Key13; Open, "Global Dimension 1 Code", "Global Dimension 2 Code", "Due Date")
+//         key(STG_Key13; Open, "Global Dimension 1 Code", "Global Dimension 2 Code", "Due Date")
 //         {
 //             Enabled = false;
 //         }
-//         key(Key14; "Document Type", "Vendor No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
+//         key(STG_Key14; "Document Type", "Vendor No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date", "Currency Code")
 //         {
 //             Enabled = false;
 //             MaintainSIFTIndex = false;
 //             MaintainSQLIndex = false;
 //         }
-//         key(Key15; "Vendor No.", "Applies-to ID", Open, Positive, "Due Date")
+//         key(STG_Key15; "Vendor No.", "Applies-to ID", Open, Positive, "Due Date")
 //         {
 //         }
-//         key(Key16; Open, "Value Date")
+//         key(STG_Key16; Open, "Value Date")
 //         {
 //         }
-//         key(Key17; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
+//         key(STG_Key17; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Due Date")
 //         {
 //         }
-//         key(Key18; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
+//         key(STG_Key18; "Vendor No.", "Vendor Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code", "Currency Code", "Posting Date")
 //         {
 //         }
-//         key(Key19; "Apply-to Sales Order No.")
+//         key(STG_Key19; "Apply-to Sales Order No.")
 //         {
 //         }
-//         key(Key20; "Job No.")
+//         key(STG_Key20; "Job No.")
 //         {
 //         }
-//         key(Key21; "Applies-to ID")
+//         key(STG_Key21; "Applies-to ID")
 //         {
 //         }
-//         key(Key22; "Source Code", "Posting Date")
+//         key(STG_Key22; "Source Code", "Posting Date")
 //         {
 //         }
-//         key(Key23; "Source Code", "Posting Date", "Document No.")
+//         key(STG_Key23; "Source Code", "Posting Date", "Document No.")
 //         {
 //         }
-//         key(Key24; "Document Type")
+//         key(STG_Key24; "Document Type")
 //         {
 //         }
-//         key(Key25; "Vendor No.", "Document No.", Open)
+//         key(STG_Key25; "Vendor No.", "Document No.", Open)
 //         {
 //         }
-//         key(Key26; Lettre)
+//         key(STG_Key26; Lettre)
 //         {
 //         }
 //     }

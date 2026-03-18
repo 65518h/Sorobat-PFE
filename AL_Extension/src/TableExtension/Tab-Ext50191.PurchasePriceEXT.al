@@ -56,7 +56,7 @@ TableExtension 50191 "Purchase PriceEXT" extends "Purchase Price"
 
 
 
-        /*  GL2024  key(Key3;"Vendor No.","Item No.","Job No.","Starting Date","Currency Code","Variant Code","Unit of Measure Code","Minimum Quantity")
+        /*  GL2024  key(STG_Key3;"Vendor No.","Item No.","Job No.","Starting Date","Currency Code","Variant Code","Unit of Measure Code","Minimum Quantity")
             {
             }*/
     }

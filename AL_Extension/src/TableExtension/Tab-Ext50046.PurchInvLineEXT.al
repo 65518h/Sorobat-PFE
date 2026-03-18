@@ -352,28 +352,28 @@ TableExtension 50046 "Purch. Inv. LineEXT" extends "Purch. Inv. Line"
     {
 
 
-        key(Key7; "Job No.", "Gen. Prod. Posting Group", "Job Task No.", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
+        key(STG_Key7; "Job No.", "Gen. Prod. Posting Group", "Job Task No.", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code")
         {
             //GL2024  SumIndexFields = "Amount Ordered (LCY)";
         }
 
-        /*GL2024    key(Key8;"N° Bon Reception","N° Ligne Bon Reception",Type,"No.")
+        /*GL2024    key(STG_Key8;"N° Bon Reception","N° Ligne Bon Reception",Type,"No.")
             {
             }
 
-            key(Key9;"N° dossier","Document No.","No.","Line No.")
+            key(STG_Key9;"N° dossier","Document No.","No.","Line No.")
             {
             }*/
 
-        key(Key10; "VAT %")
+        key(STG_Key10; "VAT %")
         {
         }
 
-        key(Key11; "Document No.", "No.", "Job No.")
+        key(STG_Key11; "Document No.", "No.", "Job No.")
         {
         }
 
-        key(Key12; "Job No.", Type, "No.", "Posting Date")
+        key(STG_Key12; "Job No.", Type, "No.", "Posting Date")
         {
         }
     }

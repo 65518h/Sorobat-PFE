@@ -66,14 +66,14 @@ Table 8001485 "Filter Favorite"
 
     keys
     {
-        key(Key1; "User ID", "Table ID", "Source Type", "No.")
+        key(STG_Key1; "User ID", "Table ID", "Source Type", "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Table ID", "Source Type", "No.")
+        key(STG_Key2; "Table ID", "Source Type", "No.")
         {
         }
-        key(Key3; "Table ID", "Search Description")
+        key(STG_Key3; "Table ID", "Search Description")
         {
         }
     }

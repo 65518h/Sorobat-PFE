@@ -27,7 +27,7 @@ Table 8001522 "Statistic definition"
 
     keys
     {
-        key(Key1; "User ID", "Statistic code", "Line No.")
+        key(STG_Key1; "User ID", "Statistic code", "Line No.")
         {
             Clustered = true;
         }

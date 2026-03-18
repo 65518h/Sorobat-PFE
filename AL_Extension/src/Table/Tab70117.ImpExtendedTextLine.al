@@ -39,7 +39,7 @@ Table 70117 "Imp Extended Text Line"
 
     keys
     {
-        key(Key1; "Table Name", "No.", "Language Code", "Text No.", "Line No.")
+        key(STG_Key1; "Table Name", "No.", "Language Code", "Text No.", "Line No.")
         {
             Clustered = true;
         }

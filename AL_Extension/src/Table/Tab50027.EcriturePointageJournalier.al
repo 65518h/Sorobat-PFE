@@ -74,7 +74,7 @@ Table 50027 "Ecriture Pointage Journalier"
 
     keys
     {
-        key(Key1; "No. Pointage", "Entry No.")
+        key(STG_Key1; "No. Pointage", "Entry No.")
         {
             Clustered = true;
         }

@@ -64,7 +64,7 @@ Table 8004076 "Description Line Archive"
 
     keys
     {
-        key(Key1; "Table ID", "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Document Line No.", "Description Type", "Line No.")
+        key(STG_Key1; "Table ID", "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Document Line No.", "Description Type", "Line No.")
         {
             Clustered = true;
         }

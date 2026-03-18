@@ -1256,38 +1256,38 @@ TableExtension 50019 "Purchase HeaderEXT" extends "Purchase Header"
     keys
     {
 
-        key(Key10; "Pay-to Vendor No.")
+        key(STG_Key10; "Pay-to Vendor No.")
         {
         }
 
-        /*GL2024  key(Key11;"Job No.","Document Type","Buy-from Vendor No.","No.")
+        /*GL2024  key(STG_Key11;"Job No.","Document Type","Buy-from Vendor No.","No.")
           {
           }*/
-        key(Key12; "Attached to Doc. Type", "Attached to Doc. No.")
+        key(STG_Key12; "Attached to Doc. Type", "Attached to Doc. No.")
         {
         }
 
-        key(Key13; "Posting Date")
+        key(STG_Key13; "Posting Date")
         {
         }
-        key(Key14; Synchronise)
+        key(STG_Key14; Synchronise)
         {
         }
 
-        /*GL2024 key(Key15;"Document Type","Etat Commande","Posting Date","Buy-from Vendor No.","Purchaser Code","Ship-to Address")
+        /*GL2024 key(STG_Key15;"Document Type","Etat Commande","Posting Date","Buy-from Vendor No.","Purchaser Code","Ship-to Address")
         {
         }*/
 
-        key(Key16; "Due Date")
+        key(STG_Key16; "Due Date")
         {
         }
-        key(Key17; "User ID")
+        key(STG_Key17; "User ID")
         {
         }
-        key(Key18; "N° Decharge")
+        key(STG_Key18; "N° Decharge")
         {
         }
-        key(Key19; "N° Demande d'achat")
+        key(STG_Key19; "N° Demande d'achat")
         {
         }
     }

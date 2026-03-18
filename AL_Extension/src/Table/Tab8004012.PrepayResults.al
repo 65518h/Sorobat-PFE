@@ -106,26 +106,26 @@ Table 8004012 "Prepay Results"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Employee No.", "Starting Date")
+        key(STG_Key2; "Employee No.", "Starting Date")
         {
             SumIndexFields = Quantity;
         }
-        key(Key3; "Employee No.", "Absence Cause Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Starting Date")
+        key(STG_Key3; "Employee No.", "Absence Cause Code", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Starting Date")
         {
             SumIndexFields = Quantity;
         }
-        key(Key4; "Absence Cause Code", "Starting Date")
+        key(STG_Key4; "Absence Cause Code", "Starting Date")
         {
             SumIndexFields = Quantity;
         }
-        key(Key5; "Starting Date", "End Date")
+        key(STG_Key5; "Starting Date", "End Date")
         {
         }
-        key(Key6; "Employee No.", "Absence Cause Code", "Detail Key")
+        key(STG_Key6; "Employee No.", "Absence Cause Code", "Detail Key")
         {
         }
     }

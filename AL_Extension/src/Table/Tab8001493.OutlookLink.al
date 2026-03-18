@@ -88,20 +88,20 @@ Table 8001493 OutlookLink
 
     keys
     {
-        key(Key1; "User ID", "Table ID", "Line No.")
+        key(STG_Key1; "User ID", "Table ID", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "User ID", "Table ID", "Source Type", "No.")
+        key(STG_Key2; "User ID", "Table ID", "Source Type", "No.")
         {
         }
-        key(Key3; "User ID", "Table ID", "Search Name")
+        key(STG_Key3; "User ID", "Table ID", "Search Name")
         {
         }
-        key(Key4; "User ID", "Table ID", "Outlook EntryID")
+        key(STG_Key4; "User ID", "Table ID", "Outlook EntryID")
         {
         }
-        key(Key5; "Table ID", "Source Type", "No.")
+        key(STG_Key5; "Table ID", "Source Type", "No.")
         {
         }
     }

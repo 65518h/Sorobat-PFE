@@ -48,7 +48,7 @@ Table 8001567 "Workflow Document Line"
 
     keys
     {
-        key(Key1; "Document Template", "No.", "Line No.")
+        key(STG_Key1; "Document Template", "No.", "Line No.")
         {
             Clustered = true;
         }

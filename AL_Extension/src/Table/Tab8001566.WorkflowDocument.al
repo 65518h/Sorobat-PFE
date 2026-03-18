@@ -250,17 +250,17 @@ Table 8001566 "Workflow Document"
 
     keys
     {
-        key(Key1; "Document Template", "No.")
+        key(STG_Key1; "Document Template", "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Company No.", "Creation Date")
+        key(STG_Key2; "Company No.", "Creation Date")
         {
         }
-        key(Key3; "Document Template", "Company No.")
+        key(STG_Key3; "Document Template", "Company No.")
         {
         }
-        key(Key4; "Document Template", "Status Code")
+        key(STG_Key4; "Document Template", "Status Code")
         {
         }
     }

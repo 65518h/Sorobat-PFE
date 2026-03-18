@@ -90,7 +90,7 @@ Table 8001404 "CaptionClass Translation"
 
     keys
     {
-        key(Key1; "Table No.", "Field No.", "Language ID")
+        key(STG_Key1; "Table No.", "Field No.", "Language ID")
         {
             Clustered = true;
         }

@@ -65,14 +65,14 @@ Table 50016 "Entete Fiche Gasoil"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; Journee)
+        key(STG_Key2; Journee)
         {
         }
-        key(Key3; Cuve, Journee)
+        key(STG_Key3; Cuve, Journee)
         {
         }
     }

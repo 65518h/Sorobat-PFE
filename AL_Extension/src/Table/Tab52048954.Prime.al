@@ -24,7 +24,7 @@ table 52048954 Prime
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

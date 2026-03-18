@@ -51,7 +51,7 @@ Table 8004067 "Dynalog - Catalogue"
 
     keys
     {
-        key(Key1; Type, "Code", Ordre)
+        key(STG_Key1; Type, "Code", Ordre)
         {
             Clustered = true;
         }

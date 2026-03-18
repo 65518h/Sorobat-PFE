@@ -21,7 +21,7 @@ Table 8004041 "En-tête planning M.O."
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

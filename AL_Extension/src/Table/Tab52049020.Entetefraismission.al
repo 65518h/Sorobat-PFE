@@ -91,7 +91,7 @@ table 52049020 "Entete frais mission"
 
     keys
     {
-        key(Key1; "N° Demande")
+        key(STG_Key1; "N° Demande")
         {
             Clustered = true;
         }

@@ -32,7 +32,7 @@ Table 52049063 "Veh. Reparation Préventive"
 
     keys
     {
-        key(Key1; "N° Véhicule", "Code Reparation")
+        key(STG_Key1; "N° Véhicule", "Code Reparation")
         {
             Clustered = true;
         }

@@ -188,16 +188,16 @@ TableExtension 50038 "Sales Shipment LineEXT" extends "Sales Shipment Line"
     {
 
 
-        key(Key8; "Job Budget Entry ID")
+        key(STG_Key8; "Job Budget Entry ID")
         {
             //GL2024  SumIndexFields = "Quantity (Base)";
         }
         /* GL2024
-                key(Key9;"Document No.","Presentation Code")
+                key(STG_Key9;"Document No.","Presentation Code")
                 {
                 }*/
 
-        /*  key(Key10; "VAT %")
+        /*  key(STG_Key10; "VAT %")
           {
           }*/
     }

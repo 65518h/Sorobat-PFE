@@ -3718,89 +3718,89 @@ FIELDERROR("Job Task No.", tJobTaskNotEditable);
     {
 
         /*GL2024
-        key(Key23; "Document Type", "Supply Order No.", "Supply Order Line No.")
+        key(STG_Key23; "Document Type", "Supply Order No.", "Supply Order Line No.")
         {
             SumIndexFields = "Quantity (Base)", "Outstanding Qty. (Base)";
         }
   
-        key(Key24;"Document Type","Document No.","Attached to Line No.","Structure Line No.")
+        key(STG_Key24;"Document Type","Document No.","Attached to Line No.","Structure Line No.")
         {
         }
        
-        key(Key25;"Resource Group No.","Document Type","Document No.")
+        key(STG_Key25;"Resource Group No.","Document Type","Document No.")
         {
         SumIndexFields = "Quantity (Base)";
         }
       
-        key(Key26;"Order Type","Document Type","Structure Line No.","Job No.","Job Task No.",Type)
+        key(STG_Key26;"Order Type","Document Type","Structure Line No.","Job No.","Job Task No.",Type)
         {
         Enabled = false;
         SumIndexFields = "Amount Excl. VAT (LCY)";
         }
       
-        key(Key27;"Order Type","Document Type","Document No.","Presentation Code","Structure Line No.","Job No.")
+        key(STG_Key27;"Order Type","Document Type","Document No.","Presentation Code","Structure Line No.","Job No.")
         {
         SumIndexFields = "Quantity (Base)","Total Cost (LCY)";
         }
        
-        key(Key28;"Document Type","Document No.","Structure Line No.","Line No.","Line Type","Assignment Basis",Option,Disable,"Gen. Prod. Posting Group","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
+        key(STG_Key28;"Document Type","Document No.","Structure Line No.","Line No.","Line Type","Assignment Basis",Option,Disable,"Gen. Prod. Posting Group","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
         {
         MaintainSQLIndex = false;
         SumIndexFields = Amount,"Amount Including VAT","Line Amount","Global Disc. Amount","Inv. Discount Amount","Job Costs (LCY)","Total Cost (LCY)","Theoretical Profit Amount(LCY)","Quantity (Base)","Overhead Amount (LCY)","Amount Excl. VAT (LCY)";
         }
         
-        key(Key29;"Document Type","Document No.","Line Type","Cross-Reference No.","Cross-Ref. Line No.","Structure Line No.",Option)
+        key(STG_Key29;"Document Type","Document No.","Line Type","Cross-Reference No.","Cross-Ref. Line No.","Structure Line No.",Option)
         {
         MaintainSQLIndex = false;
         SumIndexFields = "Quantity (Base)";
         }
         
-        key(Key30;"Job No.","Job Task No.","Document Type","Gen. Prod. Posting Group",Disable,Option,"Line Type","Structure Line No.","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
+        key(STG_Key30;"Job No.","Job Task No.","Document Type","Gen. Prod. Posting Group",Disable,Option,"Line Type","Structure Line No.","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
         {
         MaintainSQLIndex = false;
         SumIndexFields = "Prepmt. Line Amount","Prepmt. Amt. Inv.","Amount Excl. VAT (LCY)";
         }
         
-        key(Key31;"Job No.","Document Type","Document No.","Presentation Code","Line No.")
+        key(STG_Key31;"Job No.","Document Type","Document No.","Presentation Code","Line No.")
         {
         Enabled = false;
         MaintainSIFTIndex = false;
         MaintainSQLIndex = false;
         }
 
-        key(Key32;"Job No.","Document Type","Document No.","Structure Line No.","Gen. Prod. Posting Group",Type,"Presentation Code",Disable,Option,"Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
+        key(STG_Key32;"Job No.","Document Type","Document No.","Structure Line No.","Gen. Prod. Posting Group",Type,"Presentation Code",Disable,Option,"Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
         {
         MaintainSIFTIndex = false;
         MaintainSQLIndex = false;
         }
-        key(Key33; "Job No.", "Job Task No.", "Line Type")
+        key(STG_Key33; "Job No.", "Job Task No.", "Line Type")
         {
             SumIndexFields = Quantity, "Outstanding Quantity", "Quantity Shipped";
         }*/
-        key(Key34; Synchronise)
+        key(STG_Key34; Synchronise)
         {
         }
 
-        key(Key35; "VAT %")
+        key(STG_Key35; "VAT %")
         {
         }
-        key(Key36; "Vendor No.")
+        key(STG_Key36; "Vendor No.")
         {
         }
-        key(Key37; "No.")
+        key(STG_Key37; "No.")
         {
         }
-        key(Key38; "Job No.", "No.")
+        key(STG_Key38; "Job No.", "No.")
         {
         }
 
-        key(Key39; "Sell-to Customer No.", "No.")
+        key(STG_Key39; "Sell-to Customer No.", "No.")
         {
         }
-        key(Key40; "Date Comptabilisation")
+        key(STG_Key40; "Date Comptabilisation")
         {
         }
-        key(Key41; "Code Prix")
+        key(STG_Key41; "Code Prix")
         {
         }
     }

@@ -70,18 +70,18 @@ table 52048933 "REC-Entretiens"
 
     keys
     {
-        key(Key1; "N° Entretien", "N° Candidat")
+        key(STG_Key1; "N° Entretien", "N° Candidat")
         {
             Clustered = true;
             SumIndexFields = "Note accordee";
         }
-        key(Key2; Evaluateur, "N° Entretien", "Date entretien", "Heure entretien")
+        key(STG_Key2; Evaluateur, "N° Entretien", "Date entretien", "Heure entretien")
         {
         }
-        key(Key3; "Date entretien", "Heure entretien")
+        key(STG_Key3; "Date entretien", "Heure entretien")
         {
         }
-        key(Key4; "N° Candidat", "Note accordee")
+        key(STG_Key4; "N° Candidat", "Note accordee")
         {
             SumIndexFields = "Note accordee";
         }

@@ -68,7 +68,7 @@ Table 50038 "Chèque mouvementé"
 
     keys
     {
-        key(Key1; "Code banque", "Référence chèque", "N°Chèque")
+        key(STG_Key1; "Code banque", "Référence chèque", "N°Chèque")
         {
             Clustered = true;
         }

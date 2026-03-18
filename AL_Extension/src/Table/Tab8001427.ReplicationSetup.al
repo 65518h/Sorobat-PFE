@@ -45,11 +45,11 @@ Table 8001427 "Replication Setup"
 
     keys
     {
-        key(Key1; "Key")
+        key(STG_Key1; "Key")
         {
             Clustered = true;
         }
-        key(Key2; "Company Name")
+        key(STG_Key2; "Company Name")
         {
         }
     }

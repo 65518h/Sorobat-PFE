@@ -1,27 +1,23 @@
-// modules/projects/models/project.model.ts
-export interface Task {
-  id: string;                     // ← Obligatoire
-  jobNo: string;
-  taskNo: string;
-  description: string;
-  responsible?: string;
-  dateDebut?: Date;
-  dateFin?: Date;
-  progressPct: number;
-  isBlocked: boolean;
-  status?: string;
-}
+// src/app/modules/projects/models/project.model.ts
 
 export interface Project {
-  id: string;
-  number: string;
-  name: string;
-  description: string;
-  customerName: string;
-  responsible: string;
-  startDate: Date;
-  endDate: Date;
-  progress: number;
-  status: 'En cours' | 'Terminé' | 'Suspendu' | 'Annulé';
-  taskCount?: number;
+  // Champs du backend (JobDto)
+  no: string;                    // N° du projet
+  description: string;           // Description
+  status: string;                // Statut
+  personResponsible: string;     // Personne responsable
+  projectManager: string;        // Chef de projet
+  affectationMagasin: string;    // Affectation magasin
+  
+  // Champs calculés pour l'affichage (optionnels)
+  taskCount?: number;            // Nombre de tâches
+  progress?: number;             // Avancement global en %
+}
+
+// Enum pour les statuts (optionnel)
+export enum ProjectStatus {
+  EN_COURS = 'En cours',
+  TERMINE = 'Terminé',
+  SUSPENDU = 'Suspendu',
+  EN_ATTENTE = 'En attente'
 }

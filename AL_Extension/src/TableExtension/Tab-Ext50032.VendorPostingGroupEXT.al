@@ -37,7 +37,7 @@ TableExtension 50032 "Vendor Posting GroupEXT" extends "Vendor Posting Group"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

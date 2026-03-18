@@ -22,12 +22,12 @@ Table 52048942 "Detail de congé consommé"
 
     keys
     {
-        key(Key1; "N°Sequence", "Salarié", "Annee de Consommation")
+        key(STG_Key1; "N°Sequence", "Salarié", "Annee de Consommation")
         {
             Clustered = true;
             SumIndexFields = "Nbre consommé";
         }
-        key(Key2; "Salarié", "Annee de Consommation")
+        key(STG_Key2; "Salarié", "Annee de Consommation")
         {
             SumIndexFields = "Nbre consommé";
         }

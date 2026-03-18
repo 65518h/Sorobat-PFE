@@ -882,11 +882,11 @@ Table 8004042 "NaviBat Sales Doc. Model"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Document Type", "No.")
+        key(STG_Key2; "Document Type", "No.")
         {
         }
     }

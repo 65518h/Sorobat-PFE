@@ -248,7 +248,7 @@ TableExtension 50045 "Purch. Inv. HeaderEXT" extends "Purch. Inv. Header"
     }
     keys
     {
-        key(Key10; "N° Decharge")
+        key(STG_Key10; "N° Decharge")
         {
         }
     }

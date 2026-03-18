@@ -147,7 +147,7 @@ Table 8004164 "Job Journal Template2"
 
     keys
     {
-        key(Key1; Name)
+        key(STG_Key1; Name)
         {
             Clustered = true;
         }

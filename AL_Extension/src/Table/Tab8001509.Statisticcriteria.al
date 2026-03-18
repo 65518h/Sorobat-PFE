@@ -119,11 +119,11 @@ Table 8001509 "Statistic criteria"
 
     keys
     {
-        key(Key1; Type, "Field name")
+        key(STG_Key1; Type, "Field name")
         {
             Clustered = true;
         }
-        key(Key2; Type, "Field No.")
+        key(STG_Key2; Type, "Field No.")
         {
         }
     }

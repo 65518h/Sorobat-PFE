@@ -66,7 +66,7 @@ Table 11303 "VAT Summary Buffer"
 
     keys
     {
-        key(Key1; "VAT Bus. Posting Group", "VAT Prod. Posting Group")
+        key(STG_Key1; "VAT Bus. Posting Group", "VAT Prod. Posting Group")
         {
             Clustered = true;
         }

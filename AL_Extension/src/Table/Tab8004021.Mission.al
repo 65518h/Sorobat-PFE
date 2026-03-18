@@ -25,7 +25,7 @@ Table 8004021 Mission
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

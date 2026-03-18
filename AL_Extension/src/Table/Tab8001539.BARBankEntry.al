@@ -211,35 +211,35 @@ Table 8001539 "BAR : Bank Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; Company, "Bank Account No.", "Bank Statement Date")
+        key(STG_Key2; Company, "Bank Account No.", "Bank Statement Date")
         {
             SumIndexFields = Amount;
         }
-        key(Key3; Company, "Bank Account No.", "Reason Code", "Operation Date", "Value Date", "Statement No. (Treatement)", "Statement Line No. (Treat.)")
-        {
-            MaintainSIFTIndex = false;
-            SumIndexFields = Amount;
-        }
-        key(Key4; Company, "Bank Account No.", "Operation Date", "Reason Code", Amount)
+        key(STG_Key3; Company, "Bank Account No.", "Reason Code", "Operation Date", "Value Date", "Statement No. (Treatement)", "Statement Line No. (Treat.)")
         {
             MaintainSIFTIndex = false;
             SumIndexFields = Amount;
         }
-        key(Key5; Company, "Bank Account No.", "Value Date", "Reason Code", Amount)
+        key(STG_Key4; Company, "Bank Account No.", "Operation Date", "Reason Code", Amount)
         {
             MaintainSIFTIndex = false;
             SumIndexFields = Amount;
         }
-        key(Key6; Company, "Bank Account No.", Amount)
+        key(STG_Key5; Company, "Bank Account No.", "Value Date", "Reason Code", Amount)
         {
             MaintainSIFTIndex = false;
             SumIndexFields = Amount;
         }
-        key(Key7; Company, "Bank Account No.", "Statement No. (Treatement)", "Statement Line No. (Treat.)")
+        key(STG_Key6; Company, "Bank Account No.", Amount)
+        {
+            MaintainSIFTIndex = false;
+            SumIndexFields = Amount;
+        }
+        key(STG_Key7; Company, "Bank Account No.", "Statement No. (Treatement)", "Statement Line No. (Treat.)")
         {
         }
     }

@@ -255,7 +255,7 @@ Table 70110 "Imp Resource"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

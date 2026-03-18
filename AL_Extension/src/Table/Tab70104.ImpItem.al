@@ -689,7 +689,7 @@ Table 70104 "Imp Item"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

@@ -19,7 +19,7 @@ table 52048920 "Baremme CN"
 
     keys
     {
-        key(Key1; "No ligne")
+        key(STG_Key1; "No ligne")
         {
             Clustered = true;
         }

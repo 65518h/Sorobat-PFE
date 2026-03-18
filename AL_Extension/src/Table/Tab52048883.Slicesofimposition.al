@@ -83,7 +83,7 @@ Table 52048883 "Slices of imposition"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

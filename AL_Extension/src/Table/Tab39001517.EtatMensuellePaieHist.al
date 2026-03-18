@@ -486,15 +486,15 @@
 
 //     keys
 //     {
-//         key(Key1; Annee, Mois, Matricule)
+//         key(STG_Key1; Annee, Mois, Matricule)
 //         {
 //             Clustered = true;
 //             SumIndexFields = Heure, "Nombre de jour";
 //         }
-//         key(Key2; Affectation)
+//         key(STG_Key2; Affectation)
 //         {
 //         }
-//         key(Key3; "Type Salarié")
+//         key(STG_Key3; "Type Salarié")
 //         {
 //             SumIndexFields = Heure;
 //         }

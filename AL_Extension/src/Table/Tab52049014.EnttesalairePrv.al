@@ -64,7 +64,7 @@ table 52049014 "En-tête salaire Prév."
 
     keys
     {
-        key(Key1; "N° Paie")
+        key(STG_Key1; "N° Paie")
         {
             Clustered = true;
         }

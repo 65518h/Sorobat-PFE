@@ -924,7 +924,7 @@ Table 8004014 "Prepay Export Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

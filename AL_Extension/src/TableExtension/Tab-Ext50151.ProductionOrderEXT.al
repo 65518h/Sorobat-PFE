@@ -186,7 +186,7 @@ TableExtension 50151 "Production OrderEXT" extends "Production Order"
     keys
     {
 
-        key(Key9; "Due Date")
+        key(STG_Key9; "Due Date")
         {
         }
     }

@@ -133,14 +133,14 @@ Table 52049057 "Visite Technique"
 
     keys
     {
-        key(Key1; "N° Visite")
+        key(STG_Key1; "N° Visite")
         {
             Clustered = true;
         }
-        key(Key2; "Date Visite")
+        key(STG_Key2; "Date Visite")
         {
         }
-        key(Key3; "Date Visite", "N° Véhicule")
+        key(STG_Key3; "Date Visite", "N° Véhicule")
         {
             SumIndexFields = "Montant Total";
         }

@@ -50,11 +50,11 @@ Table 52048907 "Pointage Tmp1"
 
     keys
     {
-        key(Key1; Sequence)
+        key(STG_Key1; Sequence)
         {
             Clustered = true;
         }
-        key(Key2; CardNumber, Date, Heure, Sequence)
+        key(STG_Key2; CardNumber, Date, Heure, Sequence)
         {
         }
     }

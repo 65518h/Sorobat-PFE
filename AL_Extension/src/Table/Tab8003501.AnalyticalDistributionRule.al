@@ -852,7 +852,7 @@ Table 8003501 "Analytical Distribution Rule"
 
     keys
     {
-        key(Key1; "Rule Code")
+        key(STG_Key1; "Rule Code")
         {
             Clustered = true;
         }

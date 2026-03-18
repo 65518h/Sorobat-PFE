@@ -73,38 +73,38 @@ TableExtension 50170 "Value EntryEXT" extends "Value Entry"
     keys
     {
 
-        key(Key20; "Item Ledger Entry Type", "Item No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Posting Date")
+        key(STG_Key20; "Item Ledger Entry Type", "Item No.", "Source Type", "Source No.", "Location Code", "Inventory Posting Group", "Source Posting Group", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Salespers./Purch. Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Posting Date")
         {
         }
 
-        /*GL2024    key(Key21;"N° Dossier","Document No.","Item Charge No.","Valued Quantity")
+        /*GL2024    key(STG_Key21;"N° Dossier","Document No.","Item Charge No.","Valued Quantity")
             {
             SumIndexFields = "Cost Amount (Actual)";
             }
 
-            key(Key22;"Source Type","Type Frais","Invoiced Quantity","N° Dossier","Valued Quantity")
+            key(STG_Key22;"Source Type","Type Frais","Invoiced Quantity","N° Dossier","Valued Quantity")
             {
             SumIndexFields = "Cost Amount (Actual)";
             }*/
 
-        key(Key23; "Item No.", "Item Ledger Entry No.", "Item Charge No.", "Expected Cost", "Entry No.")
+        key(STG_Key23; "Item No.", "Item Ledger Entry No.", "Item Charge No.", "Expected Cost", "Entry No.")
         {
             SumIndexFields = "Cost Amount (Actual)";
         }
 
-        key(Key24; "Cost per Unit")
+        key(STG_Key24; "Cost per Unit")
         {
         }
 
-        key(Key25; "Document No.", "Document Type", "Document Line No.")
+        key(STG_Key25; "Document No.", "Document Type", "Document Line No.")
         {
         }
 
-        key(Key26; "Item No.", "Source No.", "Item Ledger Entry Type", "Location Code")
+        key(STG_Key26; "Item No.", "Source No.", "Item Ledger Entry Type", "Location Code")
         {
         }
 
-        key(Key27; "Item No.", "Item Ledger Entry Type", "Cost per Unit")
+        key(STG_Key27; "Item No.", "Item Ledger Entry Type", "Cost per Unit")
         {
         }
     }

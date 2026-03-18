@@ -297,7 +297,7 @@ Table 8004064 "Dynalog - Ouvrage (BOuv)"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

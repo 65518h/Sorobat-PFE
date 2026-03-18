@@ -19,10 +19,10 @@ Table 8001435 "BOQ Doc Xml Format"
 
     keys
     {
-        key(Key1; EntryNo)
+        key(STG_Key1; EntryNo)
         {
         }
-        key(Key2; RecordID)
+        key(STG_Key2; RecordID)
         {
             Clustered = true;
         }

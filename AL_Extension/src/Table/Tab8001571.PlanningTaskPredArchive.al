@@ -94,7 +94,7 @@ Table 8001571 "Planning Task Pred. Archive"
 
     keys
     {
-        key(Key1; "Project Header", "Task No.", "Version No.", "Project Header Predecessor", "Task No. Predecessor", "Version No. Predecessor")
+        key(STG_Key1; "Project Header", "Task No.", "Version No.", "Project Header Predecessor", "Task No. Predecessor", "Version No. Predecessor")
         {
             Clustered = true;
         }

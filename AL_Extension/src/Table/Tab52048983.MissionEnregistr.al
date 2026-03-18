@@ -239,20 +239,20 @@ Table 52048983 "Mission Enregistré"
 
     keys
     {
-        key(Key1; "N° Mission")
+        key(STG_Key1; "N° Mission")
         {
             Clustered = true;
             SumIndexFields = "Km Parcourus";
         }
-        key(Key2; Status)
+        key(STG_Key2; Status)
         {
             SumIndexFields = "Km Parcourus";
         }
-        key(Key3; "N° Véhicule", Status)
+        key(STG_Key3; "N° Véhicule", Status)
         {
             SumIndexFields = "Km Parcourus";
         }
-        key(Key4; "N° Véhicule", "Index Cpt. Depart")
+        key(STG_Key4; "N° Véhicule", "Index Cpt. Depart")
         {
         }
     }

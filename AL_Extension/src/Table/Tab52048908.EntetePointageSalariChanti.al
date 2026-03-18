@@ -49,7 +49,7 @@ Table 52048908 "Entete Pointage Salarié Chanti"
 
     keys
     {
-        key(Key1; Affecation, Annee, "Mois Attachement")
+        key(STG_Key1; Affecation, Annee, "Mois Attachement")
         {
             Clustered = true;
         }

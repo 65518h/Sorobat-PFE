@@ -178,7 +178,7 @@ table 52048925 "FOR-Personnel Formations"
 
     keys
     {
-        key(Key1; "N° Sequence", "Employee No.")
+        key(STG_Key1; "N° Sequence", "Employee No.")
         {
             Clustered = true;
         }

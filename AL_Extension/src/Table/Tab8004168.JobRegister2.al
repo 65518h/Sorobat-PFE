@@ -52,14 +52,14 @@ Table 8004168 "Job Register2"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Creation Date")
+        key(STG_Key2; "Creation Date")
         {
         }
-        key(Key3; "Source Code", "Journal Batch Name", "Creation Date")
+        key(STG_Key3; "Source Code", "Journal Batch Name", "Creation Date")
         {
         }
     }

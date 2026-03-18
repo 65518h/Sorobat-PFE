@@ -110,11 +110,11 @@ Table 8001576 "Planning Header"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; Type)
+        key(STG_Key2; Type)
         {
             MaintainSIFTIndex = false;
         }

@@ -109,7 +109,7 @@ TableExtension 50203 "Payment Post. BufferEXT" extends "Payment Post. Buffer"
     keys
     {
 
-        key(Key3; "GL Entry No.", "Account Type", "Account No.")
+        key(STG_Key3; "GL Entry No.", "Account Type", "Account No.")
         {
         }
     }

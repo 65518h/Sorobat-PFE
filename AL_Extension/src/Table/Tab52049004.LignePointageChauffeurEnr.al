@@ -96,11 +96,11 @@ Table 52049004 "Ligne Pointage Chauffeur Enr"
 
     keys
     {
-        key(Key1; "N° Document", Journee, Vehicule, Chauffeur, "Code Sous Affaire", "Point Chargement", "Point Dechargement", "Code Affaire", Mission)
+        key(STG_Key1; "N° Document", Journee, Vehicule, Chauffeur, "Code Sous Affaire", "Point Chargement", "Point Dechargement", "Code Affaire", Mission)
         {
             Clustered = true;
         }
-        key(Key2; Journee)
+        key(STG_Key2; Journee)
         {
         }
     }

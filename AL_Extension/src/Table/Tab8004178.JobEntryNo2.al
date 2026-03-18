@@ -19,7 +19,7 @@ Table 8004178 "Job Entry No.2"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

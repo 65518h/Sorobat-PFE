@@ -141,11 +141,11 @@ Table 8001533 "BAR : Bank Account"
 
     keys
     {
-        key(Key1; "Bank Account Internal No.")
+        key(STG_Key1; "Bank Account Internal No.")
         {
             Clustered = true;
         }
-        key(Key2; Iban, Company, "Bank Account No.")
+        key(STG_Key2; Iban, Company, "Bank Account No.")
         {
         }
     }

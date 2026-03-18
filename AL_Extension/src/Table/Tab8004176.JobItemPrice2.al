@@ -111,7 +111,7 @@ Table 8004176 "Job Item Price2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", "Item No.", "Variant Code", "Unit of Measure Code", "Currency Code")
+        key(STG_Key1; "Job No.", "Job Task No.", "Item No.", "Variant Code", "Unit of Measure Code", "Currency Code")
         {
             Clustered = true;
         }

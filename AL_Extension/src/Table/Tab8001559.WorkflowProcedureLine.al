@@ -102,7 +102,7 @@ Table 8001559 "Workflow Procedure Line"
 
     keys
     {
-        key(Key1; "Workflow Type", "Workflow Code", "Operation No.")
+        key(STG_Key1; "Workflow Type", "Workflow Code", "Operation No.")
         {
             Clustered = true;
         }

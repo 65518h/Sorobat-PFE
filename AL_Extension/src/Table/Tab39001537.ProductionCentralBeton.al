@@ -96,7 +96,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Type Etat", "Séquence")
+//         key(STG_Key1; "Type Etat", "Séquence")
 //         {
 //             Clustered = true;
 //         }

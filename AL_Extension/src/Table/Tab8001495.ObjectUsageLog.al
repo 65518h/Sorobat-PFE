@@ -67,7 +67,7 @@ Table 8001495 "Object Usage Log"
 
     keys
     {
-        key(Key1; "Object Type", "Object ID", Date, "User ID", "Company Name")
+        key(STG_Key1; "Object Type", "Object ID", Date, "User ID", "Company Name")
         {
             Clustered = true;
         }

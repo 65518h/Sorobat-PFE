@@ -189,17 +189,17 @@ Table 50031 Caution
 
     keys
     {
-        key(Key1; Compteur)
+        key(STG_Key1; Compteur)
         {
             Clustered = true;
         }
-        key(Key2; "Marché", "Type Caution")
+        key(STG_Key2; "Marché", "Type Caution")
         {
         }
-        key(Key3; "Type Caution")
+        key(STG_Key3; "Type Caution")
         {
         }
-        key(Key4; Banque, "Type Caution")
+        key(STG_Key4; Banque, "Type Caution")
         {
         }
     }

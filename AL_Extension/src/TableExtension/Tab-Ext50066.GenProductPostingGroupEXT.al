@@ -970,7 +970,7 @@ TableExtension 50066 "Gen. Product Posting GroupEXT" extends "Gen. Product Posti
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

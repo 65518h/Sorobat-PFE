@@ -53,7 +53,7 @@ Table 8001428 ReportList
 
     keys
     {
-        key(Key1; "Form ID", "Line No.")
+        key(STG_Key1; "Form ID", "Line No.")
         {
             Clustered = true;
         }

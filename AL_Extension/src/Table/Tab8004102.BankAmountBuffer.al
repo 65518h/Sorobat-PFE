@@ -37,7 +37,7 @@ Table 8004102 "Bank Amount Buffer"
 
     keys
     {
-        key(Key1; "Bank Account No.")
+        key(STG_Key1; "Bank Account No.")
         {
             Clustered = true;
         }
