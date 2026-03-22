@@ -12,6 +12,6 @@ namespace Soroubat.Api.Interfaces
         Task<List<JobTaskDto>> GetTasksByJobAsync(string jobNo); 
 
         // met à jour le progrès d'une tâche spécifique
-        Task<bool> UpdateTaskProgressAsync(string jobNo, string taskNo, decimal progress); 
+        Task<bool> UpdateTaskProgressAsync(Guid id, decimal progress); 
     }
 }

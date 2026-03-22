@@ -9,6 +9,7 @@ page 50123 "JobAPI"
     EntitySetName = 'jobs';
     SourceTable = Job;
     DelayedInsert = true;
+    ODataKeyFields = SystemId;
 
     layout
     {
@@ -16,17 +17,17 @@ page 50123 "JobAPI"
         {
             repeater(GroupName)
             {
-                // L'essentiel pour identifier le chantier
-                field(no; Rec."No.") { }
-                field(description; Rec.Description) { }
-                field(status; Rec.Status) { }
+                field(id; Rec.SystemId) { Caption = 'Id'; Editable = false; }
+                field(no; Rec."No.") { Caption = 'N° Projet'; }
+                field(description; Rec.Description) { Caption = 'description'; }
+                field(status; Rec.Status) { Caption = 'Statut'; }
                 
                 // Pour savoir qui gère le chantier sur le Web
-                field(personResponsible; Rec."Person Responsible") { }
-                field(projectManager; Rec."Project Manager") { } 
+                field(personResponsible; Rec."Person Responsible") { caption = 'Person Responsible'; } // indique la personne opérationnelle responsable du chantier
+                field(projectManager; Rec."Project Manager") { caption = 'Project Manager'; } // indique la personne administrative responsable du chantier
                 
                 // Utile pour la logistique et les demandes d'achat futures
-                field(affectationMagasin; Rec."Affectation Magasin") { } 
+                field(affectationMagasin; Rec."Affectation Magasin") {  caption = 'Affectation Magasin'; } // indique le magasin d'approvisionnement principal pour ce chantier, ce qui peut être utilisé pour filtrer les demandes d'achat et les approvisionnements liés à ce projet
             }
         }
     }

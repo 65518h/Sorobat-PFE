@@ -3700,6 +3700,7 @@ Table 52049070 "Purchase request Line"
             DecimalPlaces = 3 : 3;
             Caption = 'Transportation Detail';
         }
+    
         field(50012; "Subcontracting Detail"; Decimal)
         {
             DecimalPlaces = 3 : 3;
@@ -4558,6 +4559,19 @@ Table 52049070 "Purchase request Line"
         field(64142; "Type article"; Enum "Item Type")
         {
 
+        }
+        field(50100; "Engin"; Code[20]) // c'est un champ que nous avons ajouté pour faire le lien entre la fiche de poste et la fiche de l'immobilisation/engin
+        // pour savoir sur quelle immobilisation/engin porte la demande de travail
+        {
+            Caption = 'Code Engin';
+            DataClassification = CustomerContent;
+            TableRelation = "Fixed Asset"."No."; // Lie le champ à la liste des immobilisations/engins
+            
+            trigger OnValidate()
+            begin
+                //vérifier si la demande est ouverte avant de modifier
+                TestStatusOpen(); 
+            end;
         }
     }
 

@@ -4,6 +4,8 @@ namespace Soroubat.Api.Models
 {
     public class JobTaskDto
     {
+        [JsonPropertyName("id")]
+        public Guid id { get; set; }
         public string JobNo { get; set; } = string.Empty;
         public string TaskNo { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -18,12 +20,4 @@ namespace Soroubat.Api.Models
         public bool IsBlocked { get; set; }
     }
 
-    public class BCResponse<T>
-    {
-        [JsonPropertyName("@odata.context")] //json property name pour mapper le champ "@odata.context" de la réponse BC à la propriété Context de cette classe générique
-        public string Context { get; set; } = string.Empty;
-        
-        [JsonPropertyName("value")]
-        public List<T> Value { get; set; } = new List<T>();
-    }
 }

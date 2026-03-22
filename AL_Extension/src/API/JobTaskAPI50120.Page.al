@@ -12,23 +12,23 @@ page 50120 "JobTaskAPI"
     EntitySetName = 'jobTasks'; //C'est le nom qui apparaît réellement dans l'URL
     SourceTable = "Job Task"; //nom de la table telle qu'elle existe physiquement dans la base de données SQL 
     DelayedInsert = true; // BC attend d'avoir reçu tous les champs envoyés par l'API avant de tenter d'insérer et de valider l'enregistrement dans la table SourceTable
-    
+    ODataKeyFields = SystemId;
     // Configuration des permissions d'écriture
-    InsertAllowed = false; // On ne crée pas de nouvelles tâches depuis le Web
-    ModifyAllowed = true;  // On autorise la modification de l'avancement
-    DeleteAllowed = false; // Sécurité : on ne supprime rien
+    InsertAllowed = false; // On ne crée pas de nouvelles tâches depuis le Web, par défaut à false
+    ModifyAllowed = true;  // On autorise la modification de l'avancement , par défaut à false
+    DeleteAllowed = false; // Sécurité : on ne supprime rien , par défaut à false
 
     layout //séparation de la partie logique (définition de l'api / triggers ) et de la partie présentation (layout)
     {
-        area(Content) // Business Central divise les pages en zones spécifiques. La plus importante est area(content). C'est là que vous placez les champs que vous souhaitez exposer via l'API.
+        area(Content) // Business Central divise les pages en zones spécifiques. C'est là que vous placez les champs que vous souhaitez exposer via l'API.
+        // on utilise content car c'est la zone principale d'une page de type API. Les autres types de pages (Card, List, etc.) ont d'autres zones comme "Factbox", "ActionPane", etc.
         {
             repeater(GroupName) //il "répète" les lignes. Si votre table contient 50 enregistrements, le repeater affichera 50 lignes sous forme de tableau (grille) json pour les pages de type API. 
-            // C'est le nom technique que vous donnez à ce groupe de champs.
+            // group name est le nom technique que vous donnez à ce groupe de champs.
             {
                 //les 3 premiers champs sont issus de la table "Job Task" (SourceTable) et les suivants proviennent de la TableExtension 50877 créée pour SOROUBAT.
                 //Le premier paramètre (ex: jobNo) est le nom que l'application Angular verra. Le second (Rec."Job No.") est le nom technique dans BC.
-
-                // --- IDENTIFIANTS (Lecture seule pour protéger l'intégrité) ---
+                field(id; Rec.SystemId) { Caption = 'Id'; Editable = false; } // le caption est utilisé pour générer la documentation de l'API, il n'apparaît pas dans l'URL ni dans les données échangées.  
                 field(jobNo; Rec."Job No.") { Caption = 'Job No.'; Editable = false; } // editable par défaut à false
                 field(taskNo; Rec."Job Task No.") { Caption = 'Task No.'; Editable = false; }
                 field(description; Rec.Description) { Caption = 'Description'; Editable = false; }
@@ -40,7 +40,7 @@ page 50120 "JobTaskAPI"
                 
                 // Pourcentages d'avancement saisis par les chefs de chantier
                 field(progressPct; Rec."Progress %") { Caption = 'Progress %'; }
-                field(taskProgressPct; Rec."Task Progress %") { Caption = 'Task Progress %'; } // un champ d'avacement théorique calculé en fonction de la quantité réalisée vs la quantité initiale, pour comparer avec le progressPct saisi manuellement
+                field(taskProgressPct; Rec."Task Progress %") { Caption = 'Task Progress %'; Editable = false;} // un champ d'avacement théorique calculé en fonction de la quantité réalisée vs la quantité initiale, pour comparer avec le progressPct saisi manuellement
                 
                 // --- DONNÉES CALCULÉES & RÉALISÉ (Toujours en lecture seule) ---
                 // quantityShipped représente ce qui a été réellement consommé/réalisé (FlowField)
@@ -48,10 +48,13 @@ page 50120 "JobTaskAPI"
                 
                 // --- DONNÉES DE VENTE (Lecture seule pour consultation uniquement) ---
                 // Utile pour comparer le réalisé par rapport à l'objectif de vente
+                // initial quantity est utile pour comparer la quantité initialement prévue (objectif de vente) avec la quantité réellement réalisée (quantityShipped)
                 field(initialQuantity; Rec."Initial Quantity") { Caption = 'Initial Quantity'; Editable = false; }
+                // initial uom est utilisée pour afficher l'unité de mesure de la quantité initiale, afin d'avoir une information complète sur les objectifs de vente
                 field(initialUoM; Rec."Initial Unit Of Measure") { Caption = 'Initial UoM'; Editable = false; }
+                // initial amount est utilisée pour préciser le montant total de la tâche tel que prévu initialement
                 field(initialAmount; Rec."Initial Amount") { Caption = 'Initial Amount'; Editable = false; }
-
+                // le champ is blocked est utilisé pour indiquer si la tâche est bloquée pour des raisons administratives, de sécurité ou autres
                 field(isBlocked; Rec.Blocked) { Caption = 'Is Blocked'; Editable = false; }
             }
         }
