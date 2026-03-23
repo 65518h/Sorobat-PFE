@@ -2,11 +2,12 @@ using Soroubat.Api.Interfaces;
 using Soroubat.Api.Models;
 using System.Text;
 using System.Text.Json;
+using System.Net.Http.Json;
 
 // le namespace sert à organiser le code et à éviter les conflits de noms entre différentes parties de l'application. Ici, Soroubat.Api.Services indique que ce fichier fait partie des services de l'API Soroubat.
 namespace Soroubat.Api.Services
 {
-    public class SiteManagementService : ISiteManagementService
+    public class SiteManagementService : BaseService , ISiteManagementService 
     {
         private readonly HttpClient _httpClient;
         // c'est l'url de base de l'API exposée par BC, à ajuster selon votre configuration
@@ -20,20 +21,40 @@ namespace Soroubat.Api.Services
         {
             // GetAsync("jobs") envoie une requête GET à l'endpoint "jobs" de l'API BC
             var response = await _httpClient.GetAsync("jobs"); 
-            response.EnsureSuccessStatusCode();
+            
+            // Nouveau : gestion d'erreur au lieu de EnsureSuccessStatusCode pour avoir le message de BC
+            if (!response.IsSuccessStatusCode) await HandleErrorResponse(response); // on utilise handleErrorResponse dans les service pour extraire le message d'erreur de BC et le propager au contrôleur en cas où BC retourne une erreur (ex: problème de connexion, endpoint incorrect, etc.)
+
             var data = await response.Content.ReadFromJsonAsync<BCResponse<JobDto>>();
-            return data?.Value ?? new List<JobDto>();
+            
+            // Contrôle sur result : on lève une exception si les données sont nulles au lieu de retourner une liste vide par erreur
+            if (data?.Value == null)
+            {
+                throw new Exception("Le format des données reçues pour les chantiers est invalide.");
+            }
+
+            return data.Value;
         }
 
         public async Task<List<JobTaskDto>> GetTasksByJobAsync(string jobNo) // le paramétre jobNo sera passé dans l'url.
         {
             // Filtrage OData pour ne récupérer que les tâches d'un chantier précis
             // exemple de url : http://localhost:7048/BC240/api/soroubat/siteManagement/v1.0/jobTasks?$filter=jobNo eq 'DESCHAMPS, 8 ET' 
+            // un filter est utilisé ici ( pas un expand ) car on n'a pas besoin d'obtenir toutes les infos du job 
             var response = await _httpClient.GetAsync($"jobTasks?$filter=jobNo eq '{jobNo}'"); 
+            
             // si le filtre n'est pas spécifié, BC renverra toutes les tâches de tous les chantiers
-            response.EnsureSuccessStatusCode(); // retourne une exception si le code de statut HTTP indique une erreur
+            if (!response.IsSuccessStatusCode) await HandleErrorResponse(response);
+
             var data = await response.Content.ReadFromJsonAsync<BCResponse<JobTaskDto>>();
-            return data?.Value ?? new List<JobTaskDto>();
+            
+            // Contrôle sur result : on vérifie que la désérialisation a fonctionné
+            if (data?.Value == null)
+            {
+                throw new Exception("Le format des données reçues pour les tâches est invalide.");
+            }
+
+            return data.Value;
         }
 
         public async Task<bool> UpdateTaskProgressAsync(Guid id, decimal progress)
@@ -52,15 +73,27 @@ namespace Soroubat.Api.Services
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), url) { Content = content };
             request.Headers.Add("If-Match", "*"); // pour éviter les problèmes de concurrence, on utilise If-Match avec * pour dire que la mise à jour doit se faire même si la ressource a été modifiée depuis sa dernière récupération
+            
             var response = await _httpClient.SendAsync(request); // c'est là ou la requéte patch est envoyée à BC
+            
             if (!response.IsSuccessStatusCode)
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                // Affichez errorContent dans votre console ou votre debugger
-                throw new Exception($"Erreur BC: {errorContent}");
+                // Utilisation de la méthode centralisée pour extraire l'erreur réelle de BC
+                await HandleErrorResponse(response);
             }
             
             return response.IsSuccessStatusCode;
+        }
+
+        private async Task HandleErrorResponse(HttpResponseMessage response)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            try {
+                var bcError = JsonSerializer.Deserialize<BCResponseError>(errorContent);
+                throw new Exception(bcError?.Error?.Message ?? errorContent);
+            } catch (JsonException) {
+                throw new Exception($"Réponse de Business Central illisible (Format JSON invalide). Code HTTP {(int)response.StatusCode}. Contenu brut : {errorContent}");
+            }
         }
     }
 }

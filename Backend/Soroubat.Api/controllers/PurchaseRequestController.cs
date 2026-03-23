@@ -17,22 +17,36 @@ namespace Soroubat.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PurchaseRequest>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PurchaseRequestDto>>> GetAll()
         {
-            var requests = await _service.GetAllRequestsAsync();
-            return Ok(requests);
+            try 
+            {
+                var requests = await _service.GetAllRequestsAsync();
+                return Ok(requests);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PurchaseRequest>> GetById(Guid id)
+        public async Task<ActionResult<PurchaseRequestDto>> GetById(Guid id)
         {
-            var request = await _service.GetRequestByIdAsync(id);
-            if (request == null) return NotFound();
-            return Ok(request);
+            try 
+            {
+                var request = await _service.GetRequestByIdAsync(id);
+                if (request == null) return NotFound();
+                return Ok(request);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<PurchaseRequest>> Create([FromBody] PurchaseRequest request)
+        public async Task<ActionResult<PurchaseRequestDto>> Create([FromBody] PurchaseRequestDto request)
         {
             try 
             {
@@ -46,7 +60,9 @@ namespace Soroubat.Api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchHeader(Guid id, [FromBody] JsonElement body)
+        // en utilisant JsonElement , angular sera chargé de construire le corps de la requête de mise à jour partielle en format JSON et de l'envoyer tel quel au backend, qui pourra ensuite le traiter dynamiquement sans avoir besoin d'une classe spécifique pour chaque type de mise à jour.
+        // L'attribut [FromBody] dit à .NET : "Va chercher le texte dans le corps de la requête et essaie de le faire entrer dans le paramètre que j'ai défini (le JsonElement ou le Dto spécifique)". 
+        public async Task<IActionResult> PatchHeader(Guid id, [FromBody] JsonElement body) 
         {
             try 
             {
@@ -63,9 +79,16 @@ namespace Soroubat.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHeader(Guid id)
         {
-            var success = await _service.DeleteRequestAsync(id);
-            if (success) return NoContent();
-            return BadRequest("Impossible de supprimer la demande");
+            try 
+            {
+                var success = await _service.DeleteRequestAsync(id);
+                if (success) return NoContent();
+                return BadRequest("Impossible de supprimer la demande");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         // --- ACTIONS SUR LES LIGNES ---
@@ -88,9 +111,16 @@ namespace Soroubat.Api.Controllers
         [HttpDelete("lines/{id}")]
         public async Task<IActionResult> DeleteLine(Guid id)
         {
-            var success = await _service.DeleteLineAsync(id);
-            if (success) return NoContent();
-            return BadRequest("Impossible de supprimer la ligne.");
+            try 
+            {
+                var success = await _service.DeleteLineAsync(id);
+                if (success) return NoContent();
+                return BadRequest("Impossible de supprimer la ligne.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

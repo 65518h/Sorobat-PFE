@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Soroubat.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+444a4db4f47f36304536b390c23371e7a9ae9d6a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd54ba11bcca84b4e57bd38f762a2a5515ad1e5d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Soroubat.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Soroubat.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 namespace Soroubat.Api.Models
 {
-    public class PurchaseRequest
+    public class PurchaseRequestDto
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [JsonPropertyName("no")]
-        public string No { get; set; }
+        public string? No { get; set; }
 
         [JsonPropertyName("jobNo")]
         public string JobNo { get; set; }
 
         [JsonPropertyName("jobDescription")]
-        public string JobDescription { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public string? JobDescription { get; set; }
 
         [JsonPropertyName("requesterId")]
         public string RequesterId { get; set; }
@@ -30,10 +31,10 @@ namespace Soroubat.Api.Models
         public string DescriptionEngin { get; set; }
 
         [JsonPropertyName("orderDate")]
-        public DateTime? OrderDate { get; set; }
+        public DateOnly? OrderDate { get; set; }
 
         [JsonPropertyName("dueDate")]
-        public DateTime? DueDate { get; set; }
+        public DateOnly? DueDate { get; set; }
 
         [JsonPropertyName("status")]
         public string Status { get; set; }
@@ -46,6 +47,6 @@ namespace Soroubat.Api.Models
 
         // Navigation property pour le Deep Insert
         [JsonPropertyName("purchaseRequestLines")]
-        public List<PurchaseRequestLine> PurchaseRequestLines { get; set; } = new();
+        public List<PurchaseRequestLineDto> PurchaseRequestLines { get; set; } = new();
     }
 }
