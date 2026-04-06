@@ -40,7 +40,7 @@ Table 8004140 "Planning Task Comment Line"
 
     keys
     {
-        key(Key1; "Project Header No.", "Task No.", "Comment Line No.")
+        key(STG_Key1; "Project Header No.", "Task No.", "Comment Line No.")
         {
             Clustered = true;
         }

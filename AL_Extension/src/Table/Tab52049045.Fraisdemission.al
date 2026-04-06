@@ -124,7 +124,7 @@ table 52049045 "Frais de mission"
 
     keys
     {
-        key(Key1; "N° Document", "Code Mission", "N° ligne")
+        key(STG_Key1; "N° Document", "Code Mission", "N° ligne")
         {
             Clustered = true;
         }

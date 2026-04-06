@@ -51,7 +51,7 @@ Table 50029 "Suivi Reception"
 
     keys
     {
-        key(Key1; "Document No.", "Ligne No.", "Article No.", "Quantité Commandé", "Quantité Restante", "Quantité Livré")
+        key(STG_Key1; "Document No.", "Ligne No.", "Article No.", "Quantité Commandé", "Quantité Restante", "Quantité Livré")
         {
             Clustered = true;
         }

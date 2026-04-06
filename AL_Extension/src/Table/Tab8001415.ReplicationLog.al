@@ -100,11 +100,11 @@ Table 8001415 "Replication Log"
 
     keys
     {
-        key(Key1; TableID, "Key 1", "Key 2", "Key 3", "Key 4", "Key 5", "Key 6", "Key 7", "Key 8", "Key 9", "Trigger")
+        key(STG_Key1; TableID, "Key 1", "Key 2", "Key 3", "Key 4", "Key 5", "Key 6", "Key 7", "Key 8", "Key 9", "Trigger")
         {
             Clustered = true;
         }
-        key(Key2; DateTime)
+        key(STG_Key2; DateTime)
         {
         }
     }

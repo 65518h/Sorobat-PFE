@@ -182,15 +182,15 @@ Table 52049037 "Pneumatique Véhicule"
 
     keys
     {
-        key(Key1; "N° Véhicule", "Réf. Pneu", "Date d'installation")
+        key(STG_Key1; "N° Véhicule", "Réf. Pneu", "Date d'installation")
         {
             Clustered = true;
         }
-        key(Key2; "N° Véhicule", "Date d'installation")
+        key(STG_Key2; "N° Véhicule", "Date d'installation")
         {
 
         }
-        key(Key3; "Date d'installation", "N° Véhicule")
+        key(STG_Key3; "Date d'installation", "N° Véhicule")
         {
 
         }

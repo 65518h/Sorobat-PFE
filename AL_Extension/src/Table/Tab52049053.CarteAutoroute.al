@@ -81,7 +81,7 @@ table 52049053 "Carte Autoroute"
 
     keys
     {
-        key(Key1; Sequence, "N° Véhicule", "N° Mission")
+        key(STG_Key1; Sequence, "N° Véhicule", "N° Mission")
         {
             Clustered = true;
         }

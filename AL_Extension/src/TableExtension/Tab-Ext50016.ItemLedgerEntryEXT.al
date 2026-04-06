@@ -220,72 +220,72 @@ TableExtension 50016 "Item Ledger EntryEXT" extends "Item Ledger Entry"
     keys
     {
 
-        key(Key22; "Item No.", "Lot No.", "Serial No.", "Posting Date", "Location Code", "Variant Code")
+        key(STG_Key22; "Item No.", "Lot No.", "Serial No.", "Posting Date", "Location Code", "Variant Code")
         {
             SumIndexFields = Quantity, "Remaining Quantity";
         }
 
-        key(Key23; "Item No.", "Document No.", "Location Code", Quantity, "Entry No.")
+        key(STG_Key23; "Item No.", "Document No.", "Location Code", Quantity, "Entry No.")
         {
         }
 
-        key(Key24; "Location Code", "Item No.")
+        key(STG_Key24; "Location Code", "Item No.")
         {
         }
         //GL2024
-        // key(Key25;"Item Category Code","Product Group Code","Location Code")
+        // key(STG_Key25;"Item Category Code","Product Group Code","Location Code")
         // {
         // }
-        key(Key26; "N° Véhicule")
+        key(STG_Key26; "N° Véhicule")
         {
         }
-        key(Key27; Synchronise)
+        key(STG_Key27; Synchronise)
         {
         }
         //GL2024
-        // key(Key28;Emplacement,"Item No.")
+        // key(STG_Key28;Emplacement,"Item No.")
         // {
         // SumIndexFields = Quantity;
         // }
-        key(Key29; "Num Sequence Synchro")
+        key(STG_Key29; "Num Sequence Synchro")
         {
         }
         //GL2024
-        /*key(Key30;"N° Véhicule","Item No.","Posting Date")
+        /*key(STG_Key30;"N° Véhicule","Item No.","Posting Date")
         {
         }
    
-        key(Key31;"Posting Date",Famille,"N° Véhicule","Entry Type","Item No.")
+        key(STG_Key31;"Posting Date",Famille,"N° Véhicule","Entry Type","Item No.")
         {
         SumIndexFields = Quantity;
         }
      
-        key(Key32;Emplacement,"Item No.","Location Code")
+        key(STG_Key32;Emplacement,"Item No.","Location Code")
         {
         SumIndexFields = Quantity;
         }
 
-        key(Key33;"N° Véhicule","Item No.","Posting Date",Esseyeu,Position)
+        key(STG_Key33;"N° Véhicule","Item No.","Posting Date",Esseyeu,Position)
         {
         }
      
-        key(Key34;"Posting Date","Alerte Frequence Changement")
+        key(STG_Key34;"Posting Date","Alerte Frequence Changement")
         {
         }
 
-        key(Key35;"Posting Date","N° Véhicule","Item No.")
+        key(STG_Key35;"Posting Date","N° Véhicule","Item No.")
         {
         }
 
-        key(Key36;"Posting Date","Sous Affectation")
+        key(STG_Key36;"Posting Date","Sous Affectation")
         {
         }*/
 
-        key(Key37; "External Document No.")
+        key(STG_Key37; "External Document No.")
         {
         }
 
-        key(Key38; "Item No.", "Job No.")
+        key(STG_Key38; "Item No.", "Job No.")
         {
             SumIndexFields = Quantity;
         }

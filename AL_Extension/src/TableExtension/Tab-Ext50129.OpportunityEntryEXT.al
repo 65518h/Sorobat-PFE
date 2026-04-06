@@ -20,7 +20,7 @@ TableExtension 50129 "Opportunity EntryEXT" extends "Opportunity Entry"
     keys
     {
 
-        /* GL2024 key(Key9;"Opportunity No.","Date of Change","Quote Register")
+        /* GL2024 key(STG_Key9;"Opportunity No.","Date of Change","Quote Register")
           {
           SumIndexFields = "Estimated Margin Var(LCY)",Variation;
           }*/

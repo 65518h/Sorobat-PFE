@@ -143,11 +143,11 @@ Table 50009 "Bureau Ordre Diffusion"
 
     keys
     {
-        key(Key1; "Document N°", Action, "Action Faite Par", "Type Destination", Destinataire)
+        key(STG_Key1; "Document N°", Action, "Action Faite Par", "Type Destination", Destinataire)
         {
             Clustered = true;
         }
-        key(Key2; "Document N°", "Action Faite Le")
+        key(STG_Key2; "Document N°", "Action Faite Le")
         {
 
         }

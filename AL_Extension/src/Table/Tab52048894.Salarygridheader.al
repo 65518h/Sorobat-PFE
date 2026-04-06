@@ -73,11 +73,11 @@ Table 52048894 "Salary grid header"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }
-        key(Key2; "Date Debut", "Code")
+        key(STG_Key2; "Date Debut", "Code")
         {
         }
     }

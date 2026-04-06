@@ -184,7 +184,7 @@ Table 8001542 "Stock Header"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -159,20 +159,20 @@ Table 50055 "Recup Default Indemnities 0305"
 
     keys
     {
-        key(Key1; "Employment Contract Code", "Indemnity Code", "Non Inclus en Prime")
+        key(STG_Key1; "Employment Contract Code", "Indemnity Code", "Non Inclus en Prime")
         {
             Clustered = true;
             SumIndexFields = "Default amount", "Basis amount";
         }
-        key(Key2; "Type Indemnité", "Indemnity Code", "Employment Contract Code")
+        key(STG_Key2; "Type Indemnité", "Indemnity Code", "Employment Contract Code")
         {
             SumIndexFields = "Basis amount";
         }
-        key(Key3; "Employment Contract Code", "Evaluation mode", "Non Inclue en jours congé", Type, "Indemnité conventionnelle")
+        key(STG_Key3; "Employment Contract Code", "Evaluation mode", "Non Inclue en jours congé", Type, "Indemnité conventionnelle")
         {
             SumIndexFields = "Basis amount";
         }
-        key(Key4; "Indemnity Code", "Employment Contract Code", "Type Indemnité", "Inclure Calcul Exo Impot")
+        key(STG_Key4; "Indemnity Code", "Employment Contract Code", "Type Indemnité", "Inclure Calcul Exo Impot")
         {
             SumIndexFields = "Basis amount", "Default amount";
         }

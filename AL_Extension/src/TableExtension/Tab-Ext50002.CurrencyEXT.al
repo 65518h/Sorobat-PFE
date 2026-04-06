@@ -43,7 +43,7 @@ TableExtension 50002 CurrencyEXT extends Currency
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

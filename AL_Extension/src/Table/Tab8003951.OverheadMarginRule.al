@@ -59,11 +59,11 @@ Table 8003951 "Overhead-Margin Rule"
 
     keys
     {
-        key(Key1; Type, "Responsibility Center", "Gen. Prod. Posting Group", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code")
+        key(STG_Key1; Type, "Responsibility Center", "Gen. Prod. Posting Group", "Customer Posting Group", "Global Dimension 1 Code", "Global Dimension 2 Code")
         {
             Clustered = true;
         }
-        key(Key2; Type, "Application Order")
+        key(STG_Key2; Type, "Application Order")
         {
         }
     }

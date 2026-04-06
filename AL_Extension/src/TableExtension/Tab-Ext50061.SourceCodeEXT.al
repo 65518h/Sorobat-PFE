@@ -24,7 +24,7 @@ TableExtension 50061 "Source CodeEXT" extends "Source Code"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

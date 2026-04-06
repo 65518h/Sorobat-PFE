@@ -63,12 +63,12 @@
 
 //     keys
 //     {
-//         key(Key1; "Code BT", "N° Ligne")
+//         key(STG_Key1; "Code BT", "N° Ligne")
 //         {
 //             Clustered = true;
 //             SumIndexFields = "Cout Ligne Intervention";
 //         }
-//         key(Key2; "Code Intervenant", "Date Intervention")
+//         key(STG_Key2; "Code Intervenant", "Date Intervention")
 //         {
 //         }
 //     }

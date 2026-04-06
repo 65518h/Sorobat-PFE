@@ -73,7 +73,7 @@ Table 8001553 "Expenses Notes Setup"
 
     keys
     {
-        key(Key1; "Work Type Code")
+        key(STG_Key1; "Work Type Code")
         {
             Clustered = true;
         }

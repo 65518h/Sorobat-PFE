@@ -197,7 +197,7 @@ Table 52048986 "Réparation Véhicule"
 
     keys
     {
-        key(Key1; "N° Reparation")
+        key(STG_Key1; "N° Reparation")
         {
             Clustered = true;
         }

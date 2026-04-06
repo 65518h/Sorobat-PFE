@@ -212,11 +212,11 @@ table 59990 "Job Component"
 
     keys
     {
-        key(Key1; "Line No.", "Job No.", "Job Task No.", "Job Planning Line No.")
+        key(STG_Key1; "Line No.", "Job No.", "Job Task No.", "Job Planning Line No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, "No.")
+        key(STG_Key2; Type, "No.")
         {
         }
     }

@@ -204,7 +204,7 @@ Table 8004001 "Working Time Setup"
 
     keys
     {
-        key(Key1; "Journal Template Name", "Journal Batch Name", "Field")
+        key(STG_Key1; "Journal Template Name", "Journal Batch Name", "Field")
         {
             Clustered = true;
         }

@@ -27,7 +27,7 @@ Table 8004019 "Fournisseurs d'intérim"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

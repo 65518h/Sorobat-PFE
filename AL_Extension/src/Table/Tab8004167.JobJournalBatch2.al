@@ -94,7 +94,7 @@ Table 8004167 "Job Journal Batch2"
 
     keys
     {
-        key(Key1; "Journal Template Name", Name)
+        key(STG_Key1; "Journal Template Name", Name)
         {
             Clustered = true;
         }

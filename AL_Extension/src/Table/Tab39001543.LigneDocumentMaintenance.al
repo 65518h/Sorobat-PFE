@@ -252,7 +252,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Documents", Materiel, "N° Ligne", "Filtre Materiel")
+//         key(STG_Key1; "N° Documents", Materiel, "N° Ligne", "Filtre Materiel")
 //         {
 //             Clustered = true;
 //         }

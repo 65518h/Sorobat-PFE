@@ -75,7 +75,7 @@ TableExtension 50033 "Inventory Posting GroupEXT" extends "Inventory Posting Gro
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

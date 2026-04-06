@@ -198,7 +198,7 @@ Table 52048968 "FOR-Formations Enregistrées"
 
     keys
     {
-        key(Key1; "N° Sequence")
+        key(STG_Key1; "N° Sequence")
         {
             Clustered = true;
             SumIndexFields = Cout;

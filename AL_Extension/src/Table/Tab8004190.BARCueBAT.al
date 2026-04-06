@@ -103,7 +103,7 @@ Table 8004190 "BAR Cue BAT"
 
     keys
     {
-        key(Key1; "Key")
+        key(STG_Key1; "Key")
         {
             Clustered = true;
         }

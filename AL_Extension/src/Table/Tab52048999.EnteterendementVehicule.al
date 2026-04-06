@@ -113,11 +113,11 @@ Table 52048999 "Entete rendement Vehicule"
 
     keys
     {
-        key(Key1; Journee, Provenance, Destination, Vehicule, Produit, Marche)
+        key(STG_Key1; Journee, Provenance, Destination, Vehicule, Produit, Marche)
         {
             Clustered = true;
         }
-        key(Key2; Ordre)
+        key(STG_Key2; Ordre)
         {
 
         }

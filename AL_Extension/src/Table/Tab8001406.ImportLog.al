@@ -53,14 +53,14 @@ Table 8001406 "Import Log"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Import Code")
+        key(STG_Key2; "Import Code")
         {
         }
-        key(Key3; "Start DateTime")
+        key(STG_Key3; "Start DateTime")
         {
         }
     }

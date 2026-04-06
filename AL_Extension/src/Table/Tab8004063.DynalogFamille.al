@@ -28,7 +28,7 @@ Table 8004063 "Dynalog - Famille"
 
     keys
     {
-        key(Key1; Type, Parent, Ordre)
+        key(STG_Key1; Type, Parent, Ordre)
         {
             Clustered = true;
         }

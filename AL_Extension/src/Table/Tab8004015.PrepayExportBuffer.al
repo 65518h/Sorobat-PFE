@@ -427,7 +427,7 @@ Table 8004015 "Prepay Export Buffer"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

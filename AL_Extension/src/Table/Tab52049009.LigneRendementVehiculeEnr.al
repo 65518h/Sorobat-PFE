@@ -229,21 +229,21 @@ Table 52049009 "Ligne Rendement Vehicule Enr"
 
     keys
     {
-        key(Key1; Journee, Heure, "Provenance 2", Destination, Vehicule, Produit, Marche)
+        key(STG_Key1; Journee, Heure, "Provenance 2", Destination, Vehicule, Produit, Marche)
         {
             Clustered = true;
         }
-        key(Key2; Journee, "Numero Voyage", Provenance, Destination, Vehicule, Produit)
+        key(STG_Key2; Journee, "Numero Voyage", Provenance, Destination, Vehicule, Produit)
         {
         }
-        key(Key3; Journee, Vehicule, "Numero Voyage")
+        key(STG_Key3; Journee, Vehicule, "Numero Voyage")
         {
         }
-        key(Key4; Journee, Vehicule, Provenance, Destination, Produit)
+        key(STG_Key4; Journee, Vehicule, Provenance, Destination, Produit)
         {
         }
 
-        key(Key5; Journee, Journee, Produit)
+        key(STG_Key5; Journee, Journee, Produit)
         {
         }
     }

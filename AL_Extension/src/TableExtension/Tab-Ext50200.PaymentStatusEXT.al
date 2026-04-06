@@ -132,7 +132,7 @@ TableExtension 50200 "Payment StatusEXT" extends "Payment Status"
     keys
     {
 
-        /*GL2024  key(Key2;"Payment Class","Calculer Retenue à la source")
+        /*GL2024  key(STG_Key2;"Payment Class","Calculer Retenue à la source")
           {
           }*/
     }

@@ -55,7 +55,7 @@ Table 8001417 "Header/Footer Logos"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

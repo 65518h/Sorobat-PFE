@@ -1213,11 +1213,11 @@ Table 8001518 "Temp. statistic"
 
     keys
     {
-        key(Key1; "User ID", "Statistic code", "Key 1", "Key 2", "Key 3", "Key 4", "Key 5", "Key 6", "Key 7", "Key 8", "Entry No.")
+        key(STG_Key1; "User ID", "Statistic code", "Key 1", "Key 2", "Key 3", "Key 4", "Key 5", "Key 6", "Key 7", "Key 8", "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "User ID", "Statistic code", "Entry No.")
+        key(STG_Key2; "User ID", "Statistic code", "Entry No.")
         {
         }
     }

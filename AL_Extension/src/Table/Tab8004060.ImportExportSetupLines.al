@@ -74,7 +74,7 @@ Table 8004060 "Import/Export Setup Lines"
 
     keys
     {
-        key(Key1; "Code", "Column ID")
+        key(STG_Key1; "Code", "Column ID")
         {
             Clustered = true;
         }

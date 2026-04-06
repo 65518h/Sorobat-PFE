@@ -285,7 +285,7 @@ Table 8001578 "Planning Task Buffer"
 
     keys
     {
-        key(Key1; "Project Header No.", "WBS Code", "Task No.")
+        key(STG_Key1; "Project Header No.", "WBS Code", "Task No.")
         {
             Clustered = true;
         }

@@ -90,11 +90,11 @@ table 52049052 "Détail Mission Enreg"
 
     keys
     {
-        key(Key1; "N° Mission", "Num Document", "Num Ligne Document")
+        key(STG_Key1; "N° Mission", "Num Document", "Num Ligne Document")
         {
             Clustered = true;
         }
-        key(Key2; "Client a facturer")
+        key(STG_Key2; "Client a facturer")
         {
         }
     }

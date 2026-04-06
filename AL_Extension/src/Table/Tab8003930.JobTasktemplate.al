@@ -189,7 +189,7 @@ Table 8003930 "Job Task template"
 
     keys
     {
-        key(Key1; "Code", "Job Task No.")
+        key(STG_Key1; "Code", "Job Task No.")
         {
             Clustered = true;
         }

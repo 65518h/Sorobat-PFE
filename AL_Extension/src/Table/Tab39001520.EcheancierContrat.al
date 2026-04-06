@@ -36,7 +36,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N°", Contrat)
+//         key(STG_Key1; "N°", Contrat)
 //         {
 //             Clustered = true;
 //         }

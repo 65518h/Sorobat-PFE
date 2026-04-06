@@ -106,17 +106,17 @@ Table 52048985 Accidents
 
     keys
     {
-        key(Key1; "N° Accident")
+        key(STG_Key1; "N° Accident")
         {
             Clustered = true;
         }
-        key(Key2; "N° Mission")
+        key(STG_Key2; "N° Mission")
         {
         }
-        key(Key3; "N° Véhicule")
+        key(STG_Key3; "N° Véhicule")
         {
         }
-        key(Key4; "N° Conducteur")
+        key(STG_Key4; "N° Conducteur")
         {
         }
     }

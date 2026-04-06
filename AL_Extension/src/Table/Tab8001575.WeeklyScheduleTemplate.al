@@ -111,7 +111,7 @@ Table 8001575 "Weekly Schedule Template"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

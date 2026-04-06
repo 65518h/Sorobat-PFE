@@ -19,7 +19,7 @@ Table 8003941 "Resource Discount Group"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

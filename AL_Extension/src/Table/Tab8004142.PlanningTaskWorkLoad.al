@@ -48,11 +48,11 @@ Table 8004142 "Planning Task Work Load"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Project Header No.", "WBS Code", "Task No.", Date, "Posting DateTime", Type)
+        key(STG_Key2; "Project Header No.", "WBS Code", "Task No.", Date, "Posting DateTime", Type)
         {
             Clustered = true;
             MaintainSIFTIndex = false;

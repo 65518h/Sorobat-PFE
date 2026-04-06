@@ -16,7 +16,7 @@ TableExtension 50075 "Bank Account Posting GroupEXT" extends "Bank Account Posti
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

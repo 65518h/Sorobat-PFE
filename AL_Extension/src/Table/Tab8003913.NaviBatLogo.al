@@ -20,7 +20,7 @@ Table 8003913 "NaviBat Logo"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

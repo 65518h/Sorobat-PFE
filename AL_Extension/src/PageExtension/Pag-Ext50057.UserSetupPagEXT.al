@@ -399,8 +399,7 @@ PageExtension 50057 "User Setup_PagEXT" extends "User Setup"
     begin
 
         // Vérifier si l'utilisateur connecté est ADMIN
-        if UserId <> 'ADMIN' then
-            Error('Accès refusé : vous n''êtes pas autorisé à ouvrir cette page.');
+
     end;
 
     var

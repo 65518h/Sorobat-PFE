@@ -536,7 +536,7 @@ Table 8001433 "Purch. Document Model"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

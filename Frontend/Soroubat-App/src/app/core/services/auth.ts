@@ -1,4 +1,6 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core'; // 1. On importe inject
+// src/app/core/services/auth.ts
+
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -7,13 +9,15 @@ export interface User {
   username: string;
   role: string;
   name: string;
+  id?: string;           // ✅ Ajouter id pour compatibilité
+  isApprover?: boolean;  // ✅ Ajouter isApprover pour compatibilité
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // 2. On utilise inject() pour récupérer PLATFORM_ID et Router
+  
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
 
@@ -22,13 +26,12 @@ export class AuthService {
   private isBrowser: boolean;
   
   private mockUsers = [
-    { username: 'chef', password: 'chef123', role: 'CHEF_CHANTIER', name: 'Chef de chantier' },
-    { username: 'resp', password: 'resp123', role: 'RESPONSABLE', name: 'Responsable projet' },
-    { username: 'admin', password: 'admin123', role: 'ADMIN', name: 'Administrateur' }
+    { username: 'chef', password: 'chef123', role: 'CHEF_CHANTIER', name: 'Chef de chantier', id: 'user-001', isApprover: false },
+    { username: 'resp', password: 'resp123', role: 'RESPONSABLE', name: 'Responsable projet', id: 'user-002', isApprover: true },
+    { username: 'admin', password: 'admin123', role: 'ADMIN', name: 'Administrateur', id: 'user-003', isApprover: true }
   ];
 
   constructor() {
-    // 3. Le constructeur est maintenant vide de paramètres, ce qui élimine l'erreur TS1206
     this.isBrowser = isPlatformBrowser(this.platformId);
     
     if (this.isBrowser) {
@@ -36,7 +39,11 @@ export class AuthService {
     }
   }
 
-  // ... le reste de vos méthodes (login, logout, etc.) reste identique
+  // ✅ IMPLÉMENTER getCurrentUser
+  getCurrentUser(): User | null {
+    return this.getUser();
+  }
+
   login(username: string, password: string): { success: boolean; message?: string } {
     const user = this.mockUsers.find(
       u => u.username === username && u.password === password
@@ -46,9 +53,11 @@ export class AuthService {
       if (this.isBrowser) {
         localStorage.setItem('auth_token', 'fake-token-' + Date.now());
         localStorage.setItem('user', JSON.stringify({ 
+          id: user.id,
           username: user.username, 
           role: user.role,
-          name: user.name
+          name: user.name,
+          isApprover: user.isApprover
         }));
       }
       
@@ -96,5 +105,17 @@ export class AuthService {
   hasRole(role: string): boolean {
     const user = this.getUser();
     return user?.role === role;
+  }
+  
+  // ✅ Méthode utilitaire pour vérifier si l'utilisateur est approbateur
+  isApprover(): boolean {
+    const user = this.getUser();
+    return user?.isApprover === true || user?.role === 'ADMIN' || user?.role === 'RESPONSABLE';
+  }
+  
+  // ✅ Récupérer l'ID de l'utilisateur
+  getUserId(): string {
+    const user = this.getUser();
+    return user?.id || user?.username || 'unknown';
   }
 }

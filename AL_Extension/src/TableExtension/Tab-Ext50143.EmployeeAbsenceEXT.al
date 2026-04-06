@@ -343,21 +343,21 @@ TableExtension 50143 "Employee AbsenceEXT" extends "Employee Absence"
     keys
     {
 
-        /* GL2024 key(Key1; "Entry No.", "Employee No.")
+        /* GL2024 key(STG_Key1; "Entry No.", "Employee No.")
           {
               // Clustered = true;
           }*/
 
-        key(Key6; "Employee No.", "Cause of Absence Code", "To Date")
+        key(STG_Key6; "Employee No.", "Cause of Absence Code", "To Date")
         {
             SumIndexFields = Quantity;
         }
-        key(Key7; "Cause of Absence Code", "From Date")
+        key(STG_Key7; "Cause of Absence Code", "From Date")
         {
             SumIndexFields = Quantity;
         }
 
-        /*GL2024     key(Key8; "Unit of Measure Code", Unit)
+        /*GL2024     key(STG_Key8; "Unit of Measure Code", Unit)
              {
                  SumIndexFields = Quantity;
              }*/

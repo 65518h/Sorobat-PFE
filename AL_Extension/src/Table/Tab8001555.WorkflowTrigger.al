@@ -33,7 +33,7 @@ Table 8001555 "Workflow Trigger"
 
     keys
     {
-        key(Key1; "Workflow Type", "Trigger ID")
+        key(STG_Key1; "Workflow Type", "Trigger ID")
         {
             Clustered = true;
         }

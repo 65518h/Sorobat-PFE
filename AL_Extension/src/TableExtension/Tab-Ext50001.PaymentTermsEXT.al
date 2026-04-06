@@ -21,7 +21,7 @@ TableExtension 50001 "Payment TermsEXT" extends "Payment Terms"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

@@ -52,14 +52,14 @@
 
 //     keys
 //     {
-//         key(Key1; "N° BL")
+//         key(STG_Key1; "N° BL")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; Article)
+//         key(STG_Key2; Article)
 //         {
 //         }
-//         key(Key3; Client)
+//         key(STG_Key3; Client)
 //         {
 //         }
 //     }

@@ -59,14 +59,14 @@ Table 8003990 "Purchase Rcpt. Invoiced"
 
     keys
     {
-        key(Key1; "Invoice No.", "Invoice Line No.", "Purchase Rcpt. No.", "Purch. Rcpt. Line No.")
+        key(STG_Key1; "Invoice No.", "Invoice Line No.", "Purchase Rcpt. No.", "Purch. Rcpt. Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Order No.", "Order Line No.")
+        key(STG_Key2; "Order No.", "Order Line No.")
         {
         }
-        key(Key3; "Purch. Rcpt. Posting Date", "Invoice Posting Date")
+        key(STG_Key3; "Purch. Rcpt. Posting Date", "Invoice Posting Date")
         {
         }
     }

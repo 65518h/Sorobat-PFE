@@ -37,7 +37,7 @@ table 52048944 "Baréme De Charge"
 
     keys
     {
-        key(Key1; "Nombre De Charge")
+        key(STG_Key1; "Nombre De Charge")
         {
             Clustered = true;
         }

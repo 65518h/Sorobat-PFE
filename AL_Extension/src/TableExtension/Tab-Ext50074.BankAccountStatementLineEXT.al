@@ -40,17 +40,17 @@ TableExtension 50074 "Bank Account Statement LineEXT" extends "Bank Account Stat
     keys
     {
 
-        /*GL2024 key(Key3;"Bank Account No.","Statement No.","Due Date","Applied Amount")
+        /*GL2024 key(STG_Key3;"Bank Account No.","Statement No.","Due Date","Applied Amount")
          {
          SumIndexFields = "Statement Amount",Difference;
          }
 
-         key(Key4;"Bank Account No.","Statement No.","Due Date")
+         key(STG_Key4;"Bank Account No.","Statement No.","Due Date")
          {
          SumIndexFields = "Statement Amount",Difference;
          }*/
 
-        key(Key5; "Bank Account No.", "Statement No.", "Applied Amount")
+        key(STG_Key5; "Bank Account No.", "Statement No.", "Applied Amount")
         {
         }
     }

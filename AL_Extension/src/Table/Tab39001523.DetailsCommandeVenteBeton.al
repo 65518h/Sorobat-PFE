@@ -132,7 +132,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Code Commande")
+//         key(STG_Key1; "Code Commande")
 //         {
 //             Clustered = true;
 //         }

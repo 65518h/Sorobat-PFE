@@ -50,11 +50,11 @@ Table 8004002 "Working Time Line"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "No.", "Posting Date", "Job No.", "Job Task No.", "Work Type Code")
+        key(STG_Key2; "No.", "Posting Date", "Job No.", "Job Task No.", "Work Type Code")
         {
             SumIndexFields = Quantity;
         }

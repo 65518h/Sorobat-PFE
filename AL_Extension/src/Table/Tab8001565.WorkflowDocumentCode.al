@@ -40,7 +40,7 @@ Table 8001565 "Workflow Document Code"
 
     keys
     {
-        key(Key1; "Table No", "Field No", "Code")
+        key(STG_Key1; "Table No", "Field No", "Code")
         {
             Clustered = true;
         }

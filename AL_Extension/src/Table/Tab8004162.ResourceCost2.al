@@ -123,14 +123,14 @@ Table 8004162 "Resource Cost2"
 
     keys
     {
-        key(Key1; Type, "Code", "Work Type Code", "Starting Date", "Vendor No.", "Mission Code", "Mission No.")
+        key(STG_Key1; Type, "Code", "Work Type Code", "Starting Date", "Vendor No.", "Mission Code", "Mission No.")
         {
             Clustered = true;
         }
-        key(Key2; "Cost Type", "Code", "Work Type Code")
+        key(STG_Key2; "Cost Type", "Code", "Work Type Code")
         {
         }
-        key(Key3; "Vendor No.")
+        key(STG_Key3; "Vendor No.")
         {
         }
     }

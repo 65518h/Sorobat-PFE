@@ -285,17 +285,17 @@ Table 52048881 "Bon Reglement"
 
     keys
     {
-        key(Key1; "N° Bon")
+        key(STG_Key1; "N° Bon")
         {
             Clustered = true;
         }
-        key(Key2; Matricule, Annee, Mois)
+        key(STG_Key2; Matricule, Annee, Mois)
         {
         }
-        key(Key3; Affectation)
+        key(STG_Key3; Affectation)
         {
         }
-        key(Key4; "Nom Et Prenom")
+        key(STG_Key4; "Nom Et Prenom")
         {
         }
     }

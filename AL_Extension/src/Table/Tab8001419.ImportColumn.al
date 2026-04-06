@@ -172,7 +172,7 @@ Table 8001419 "Import Column"
 
     keys
     {
-        key(Key1; "Import Code", "Line No.")
+        key(STG_Key1; "Import Code", "Line No.")
         {
             Clustered = true;
         }

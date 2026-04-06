@@ -57,7 +57,7 @@ Table 8001412 "Translation PerCompanyNo"
 
     keys
     {
-        key(Key1; TableID, FieldID, "Code", "Line No.", Language)
+        key(STG_Key1; TableID, FieldID, "Code", "Line No.", Language)
         {
             Clustered = true;
         }

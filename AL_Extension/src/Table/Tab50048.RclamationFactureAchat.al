@@ -47,17 +47,17 @@ Table 50048 "Réclamation Facture Achat"
 
     keys
     {
-        key(Key1; "N° Facture")
+        key(STG_Key1; "N° Facture")
         {
             Clustered = true;
         }
-        key(Key2; "date Comptabilisation")
+        key(STG_Key2; "date Comptabilisation")
         {
         }
-        key(Key3; "Date Réclamation")
+        key(STG_Key3; "Date Réclamation")
         {
         }
-        key(Key4; "Date Prise en Charge")
+        key(STG_Key4; "Date Prise en Charge")
         {
         }
     }

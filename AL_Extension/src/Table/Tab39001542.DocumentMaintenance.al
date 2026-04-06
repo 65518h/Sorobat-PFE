@@ -56,7 +56,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N° Document")
+//         key(STG_Key1; "N° Document")
 //         {
 //             Clustered = true;
 //         }

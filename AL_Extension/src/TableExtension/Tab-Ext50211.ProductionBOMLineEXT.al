@@ -41,7 +41,7 @@ TableExtension 50211 "Production BOM LineEXT" extends "Production BOM Line"
     keys
     {
 
-        key(Key3; Description)
+        key(STG_Key3; Description)
         {
         }
     }

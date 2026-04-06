@@ -64,11 +64,11 @@ Table 8003929 Tree
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

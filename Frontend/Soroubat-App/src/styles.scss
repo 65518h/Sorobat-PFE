@@ -1,11 +1,9 @@
+// src/styles.scss - VERSION CORRIGÉE
 
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
+// ==================== 1. UN SEUL @USE AU DÉBUT ====================
 @use '@angular/material' as mat;
 
+// ==================== 2. APPLIQUER LE THÈME ====================
 html {
   height: 100%;
   @include mat.theme((
@@ -18,57 +16,113 @@ html {
   ));
 }
 
+// ==================== 3. STYLES GLOBAUX ====================
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+  // Default the application to a light color theme
   color-scheme: light;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
+  // Set a default background, font and text colors
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 
-  // Reset the user agent margin.
+  // Reset the user agent margin
   margin: 0;
   height: 100%;
 }
 
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
-
-
-html {
-  height: 100%;
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+// ==================== 4. NOTIFICATIONS PERSONNALISÉES ====================
+.notification-snackbar {
+  &.notification-success {
+    background-color: #10b981;
+    color: white;
+    
+    .mat-simple-snackbar-action {
+      color: white;
+      
+      button {
+        color: white;
+      }
+    }
+  }
+  
+  &.notification-error {
+    background-color: #ef4444;
+    color: white;
+    
+    .mat-simple-snackbar-action {
+      color: white;
+      
+      button {
+        color: white;
+      }
+    }
+  }
+  
+  &.notification-warning {
+    background-color: #f59e0b;
+    color: white;
+    
+    .mat-simple-snackbar-action {
+      color: white;
+      
+      button {
+        color: white;
+      }
+    }
+  }
+  
+  &.notification-info {
+    background-color: #3b82f6;
+    color: white;
+    
+    .mat-simple-snackbar-action {
+      color: white;
+      
+      button {
+        color: white;
+      }
+    }
+  }
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+// ==================== 5. ANIMATIONS ====================
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+.mat-snack-bar-container {
+  animation: slideInRight 0.3s ease !important;
+}
 
-  // Reset the user agent margin.
-  margin: 0;
-  height: 100%;
+// ==================== 6. STYLES SUPPLÉMENTAIRES POUR L'APPLICATION ====================
+* {
+  box-sizing: border-box;
+}
+
+// Style pour les scrollbars
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }

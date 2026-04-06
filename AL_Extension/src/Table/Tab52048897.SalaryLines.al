@@ -723,44 +723,44 @@ Table 52048897 "Salary Lines"
 
     keys
     {
-        key(Key1; "No.", Employee)
+        key(STG_Key1; "No.", Employee)
         {
             Clustered = true;
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key2; "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key2; "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key3; "No.", Month, Year, "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key3; "No.", Month, Year, "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Supp. hours", Absences, "Days off", Advances, Loans, "Ajout  en +", "Report en -", "Taxable indemnities";
         }
-        key(Key4; "No.", "Num Compte")
+        key(STG_Key4; "No.", "Num Compte")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key5; Employee, "year of Calculate", Month, "Type Prime")
+        key(STG_Key5; Employee, "year of Calculate", Month, "Type Prime")
         {
             SumIndexFields = "Gross Salary", "Net salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key6; "No.", "RIB Salarié")
+        key(STG_Key6; "No.", "RIB Salarié")
         {
             SumIndexFields = "Net salary cashed";
         }
-        key(Key7; "No.", "Statistics Group Code", "Employee Posting Group")
+        key(STG_Key7; "No.", "Statistics Group Code", "Employee Posting Group")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key8; Employee, "Employee Posting Group", "Statistics Group Code")
+        key(STG_Key8; Employee, "Employee Posting Group", "Statistics Group Code")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key9; "Statistics Group Code", Employee)
+        key(STG_Key9; "Statistics Group Code", Employee)
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }
-        key(Key10; "Num Compte")
+        key(STG_Key10; "Num Compte")
         {
             SumIndexFields = "Gross Salary", "Basis salary", "Real basis salary", "Net salary", "Net salary cashed", "Taxe (Month)", "Taxable salary", "Ajout  en +", "Report en -", "Taxable indemnities", "Supp. hours";
         }

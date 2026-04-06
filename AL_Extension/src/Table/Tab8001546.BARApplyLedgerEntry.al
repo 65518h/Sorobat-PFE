@@ -18,7 +18,7 @@ Table 8001546 "BAR : Apply Ledger Entry"
 
     keys
     {
-        key(Key1; "Bank Account Internal No.")
+        key(STG_Key1; "Bank Account Internal No.")
         {
             Clustered = true;
         }

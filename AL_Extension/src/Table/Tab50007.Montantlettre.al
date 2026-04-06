@@ -20,7 +20,7 @@ Table 50007 "Montant lettre"
 
     keys
     {
-        key(Key1; "Code mnt")
+        key(STG_Key1; "Code mnt")
         {
             Clustered = true;
         }

@@ -44,11 +44,11 @@ Table 8001400 "Code"
 
     keys
     {
-        key(Key1; "Table No", "Field No", "Code")
+        key(STG_Key1; "Table No", "Field No", "Code")
         {
             Clustered = true;
         }
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

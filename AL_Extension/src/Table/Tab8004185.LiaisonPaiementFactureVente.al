@@ -23,7 +23,7 @@ Table 8004185 "Liaison Paiement Facture Vente"
 
     keys
     {
-        key(Key1; "N° Bordereaux", "N° Ligne")
+        key(STG_Key1; "N° Bordereaux", "N° Ligne")
         {
             Clustered = true;
         }

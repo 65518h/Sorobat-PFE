@@ -44,7 +44,7 @@ Table 8004023 "Travel Relation"
 
     keys
     {
-        key(Key1; "Resource Travel Code", "Job Travel Code")
+        key(STG_Key1; "Resource Travel Code", "Job Travel Code")
         {
             Clustered = true;
         }

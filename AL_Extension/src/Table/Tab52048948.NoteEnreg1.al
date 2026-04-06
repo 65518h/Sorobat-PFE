@@ -53,11 +53,11 @@ table 52048948 "Note Enreg1."
 
     keys
     {
-        key(Key1; "N° Sequence")
+        key(STG_Key1; "N° Sequence")
         {
             Clustered = true;
         }
-        key(Key2; "Année", Trimestre, "N° Salariée", "Type Note")
+        key(STG_Key2; "Année", Trimestre, "N° Salariée", "Type Note")
         {
             SumIndexFields = Note;
         }

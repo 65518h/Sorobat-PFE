@@ -86,7 +86,7 @@ Table 8004069 "Sales Document Cost"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", Type, "No.", "Line No.", "Purchasing Code")
+        key(STG_Key1; "Document Type", "Document No.", Type, "No.", "Line No.", "Purchasing Code")
         {
             Clustered = true;
         }

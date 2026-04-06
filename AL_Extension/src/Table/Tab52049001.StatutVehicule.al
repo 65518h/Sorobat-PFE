@@ -16,7 +16,7 @@ Table 52049001 "Statut Vehicule"
 
     keys
     {
-        key(Key1; Statut)
+        key(STG_Key1; Statut)
         {
             Clustered = true;
         }

@@ -24,7 +24,7 @@ Table 8001416 "Excel Buffer Extended"
 
     keys
     {
-        key(Key1; xlRowID, xlColID, "Line No.")
+        key(STG_Key1; xlRowID, xlColID, "Line No.")
         {
             Clustered = true;
         }

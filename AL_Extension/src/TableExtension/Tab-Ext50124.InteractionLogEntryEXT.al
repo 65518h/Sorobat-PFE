@@ -23,7 +23,7 @@ TableExtension 50124 "Interaction Log EntryEXT" extends "Interaction Log Entry"
     }
     keys
     {
-        key(Key19; "Sales Document Type", "Sales Document No.")
+        key(STG_Key19; "Sales Document Type", "Sales Document No.")
         {
         }
     }

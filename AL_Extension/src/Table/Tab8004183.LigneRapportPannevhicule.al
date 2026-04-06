@@ -53,7 +53,7 @@ Table 8004183 "Ligne Rapport Panne véhicule"
 
     keys
     {
-        key(Key1; "N°", Materiel)
+        key(STG_Key1; "N°", Materiel)
         {
             Clustered = true;
         }

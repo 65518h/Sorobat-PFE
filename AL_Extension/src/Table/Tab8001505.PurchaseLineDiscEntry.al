@@ -91,12 +91,12 @@ Table 8001505 "Purchase Line Disc. Entry"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Line No.", "Disc. Commission Type", "Rule No.")
+        key(STG_Key1; "Document Type", "Document No.", "Line No.", "Disc. Commission Type", "Rule No.")
         {
             Clustered = true;
             SumIndexFields = "Discount Amount", "Discount Amount (LCY)";
         }
-        key(Key2; "Document Type", "Document No.", "Disc. Commission Type", "Rule No.", "Line No.")
+        key(STG_Key2; "Document Type", "Document No.", "Disc. Commission Type", "Rule No.", "Line No.")
         {
         }
     }

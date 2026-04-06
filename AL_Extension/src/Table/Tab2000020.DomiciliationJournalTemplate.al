@@ -72,7 +72,7 @@ Table 2000020 "Domiciliation Journal Template"
 
     keys
     {
-        key(Key1; Name)
+        key(STG_Key1; Name)
         {
             Clustered = true;
         }

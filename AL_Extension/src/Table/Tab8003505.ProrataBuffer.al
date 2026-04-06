@@ -18,7 +18,7 @@ Table 8003505 "Prorata Buffer"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

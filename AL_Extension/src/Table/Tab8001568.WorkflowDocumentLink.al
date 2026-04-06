@@ -63,11 +63,11 @@ Table 8001568 "Workflow Document Link"
 
     keys
     {
-        key(Key1; "Document Template", "Document No.", Type, "No.")
+        key(STG_Key1; "Document Template", "Document No.", Type, "No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, "No.")
+        key(STG_Key2; Type, "No.")
         {
         }
     }

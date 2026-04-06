@@ -48,7 +48,7 @@ Table 8004065 "Dynalog - Ligne ouvrage (Blou)"
 
     keys
     {
-        key(Key1; "Type tache", "Code tache", "Num ligne")
+        key(STG_Key1; "Type tache", "Code tache", "Num ligne")
         {
             Clustered = true;
         }

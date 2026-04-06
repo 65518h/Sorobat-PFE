@@ -20,7 +20,7 @@ Table 52048961 Echelle
 
     keys
     {
-        key(Key1; "Catégorie", Echelle)
+        key(STG_Key1; "Catégorie", Echelle)
         {
             Clustered = true;
         }

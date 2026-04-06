@@ -55,34 +55,34 @@ TableExtension 50069 "Bank Account Ledger EntryEXT" extends "Bank Account Ledger
 
 
 
-        /* GL2024   key(Key13;"Bank Account No.","Posting Date","Due Date")
+        /* GL2024   key(STG_Key13;"Bank Account No.","Posting Date","Due Date")
             {
             SumIndexFields = Amount,"Amount (LCY)","Debit Amount","Credit Amount","Debit Amount (LCY)","Credit Amount (LCY)";
             }
 
-            key(Key14;"Bank Account No.",Open,"Posting Date","Due Date")
+            key(STG_Key14;"Bank Account No.",Open,"Posting Date","Due Date")
             {
             SumIndexFields = Amount,"Amount (LCY)","Debit Amount","Credit Amount","Debit Amount (LCY)","Credit Amount (LCY)","Remaining Amount";
             }
 
-            key(Key15;"Bank Account No.",Open,"Posting Date","Due Date","Document No.","Remaining Amount","Reason Code","Statement Status")
+            key(STG_Key15;"Bank Account No.",Open,"Posting Date","Due Date","Document No.","Remaining Amount","Reason Code","Statement Status")
             {
             SumIndexFields = "Remaining Amount","Amount (LCY)";
             }*/
 
-        key(Key16; "Bank Account No.", "Statement No.", "Statement Line No.", "Posting Date")
+        key(STG_Key16; "Bank Account No.", "Statement No.", "Statement Line No.", "Posting Date")
         {
         }
 
-        /* GL2024  key(Key17;"Bank Account No.",Open,"Due Date")
+        /* GL2024  key(STG_Key17;"Bank Account No.",Open,"Due Date")
            {
            }*/
 
-        key(Key18; "Bank Account No.", "Remaining Amount")
+        key(STG_Key18; "Bank Account No.", "Remaining Amount")
         {
             SumIndexFields = Amount, "Amount (LCY)", "Debit Amount", "Credit Amount", "Debit Amount (LCY)", "Credit Amount (LCY)", "Remaining Amount";
         }
-        key(Key19; "N° Folio")
+        key(STG_Key19; "N° Folio")
         {
         }
     }

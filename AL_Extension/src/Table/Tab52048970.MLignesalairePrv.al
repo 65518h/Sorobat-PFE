@@ -137,16 +137,16 @@ table 52048970 "MLigne salaire Prév."
 
     keys
     {
-        key(Key1; "N° Paie", "Année", "N° salarié")
+        key(STG_Key1; "N° Paie", "Année", "N° salarié")
         {
             Clustered = true;
             SumIndexFields = "Brut du Période";
         }
-        key(Key2; "N° salarié")
+        key(STG_Key2; "N° salarié")
         {
             SumIndexFields = "Brut du Période";
         }
-        key(Key3; "Code département", "Code dossier", Etat)
+        key(STG_Key3; "Code département", "Code dossier", Etat)
         {
             SumIndexFields = "Salaire de base", "Salaire de Base Mensuiel", "Montant de Retri. Provi.", "Brut du Période";
         }

@@ -57,14 +57,14 @@ Table 8001407 "History treatment"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Type of Treatment", "Treatment No.", Date, "Starting Time")
+        key(STG_Key2; "Type of Treatment", "Treatment No.", Date, "Starting Time")
         {
         }
-        key(Key3; Date, "Starting Time", "Ending Time", "User ID")
+        key(STG_Key3; Date, "Starting Time", "Ending Time", "User ID")
         {
         }
     }

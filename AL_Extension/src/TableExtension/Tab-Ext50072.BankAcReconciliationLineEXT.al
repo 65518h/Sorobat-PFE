@@ -71,12 +71,12 @@ TableExtension 50072 "Bank Ac.Reconciliation LineEXT" extends "Bank Acc. Reconci
     keys
     {
 
-        /*  GL2024  key(Key3;"Bank Account No.","Statement No.","Due Date")
+        /*  GL2024  key(STG_Key3;"Bank Account No.","Statement No.","Due Date")
             {
             SumIndexFields = "Statement Amount",Difference;
             }
 
-            key(Key4;"Bank Account No.","Statement No.","Lettré")
+            key(STG_Key4;"Bank Account No.","Statement No.","Lettré")
             {
             SumIndexFields = "Statement Amount",Difference;
             }*/

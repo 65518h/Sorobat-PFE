@@ -67,7 +67,7 @@ Table 8001552 "Tax Setup2"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

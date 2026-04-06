@@ -526,13 +526,13 @@ Table 52048909 "Etat Mensuelle Paie"
 
     keys
     {
-        key(Key1; Matricule)
+        key(STG_Key1; Matricule)
         {
             Clustered = true;
             SumIndexFields = Heure, "Nombre de jour";
         }
 
-        key(Key2; "Type Salarié")
+        key(STG_Key2; "Type Salarié")
         {
             SumIndexFields = Heure, "Nombre de jour";
         }

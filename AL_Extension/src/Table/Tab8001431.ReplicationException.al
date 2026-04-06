@@ -41,7 +41,7 @@ Table 8001431 "Replication Exception"
 
     keys
     {
-        key(Key1; "Table No.", "Field No.")
+        key(STG_Key1; "Table No.", "Field No.")
         {
             Clustered = true;
         }

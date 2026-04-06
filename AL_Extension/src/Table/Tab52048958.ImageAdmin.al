@@ -48,7 +48,7 @@ Table 52048958 "Image Admin"
 
     keys
     {
-        key(Key1; "Table", Sequence)
+        key(STG_Key1; "Table", Sequence)
         {
             Clustered = true;
         }

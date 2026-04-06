@@ -41,7 +41,7 @@
 
 //     keys
 //     {
-//         key(Key1; Matricule)
+//         key(STG_Key1; Matricule)
 //         {
 //             Clustered = true;
 //         }

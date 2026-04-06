@@ -17,7 +17,7 @@ table 52049044 "Reclamation Panne"
 
     keys
     {
-        key(Key1; "Code", "N° Ligne")
+        key(STG_Key1; "Code", "N° Ligne")
         {
             Clustered = true;
         }

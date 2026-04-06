@@ -236,7 +236,7 @@ table 52048921 "FOR-Formations"
 
     keys
     {
-        key(Key1; "Training No.")
+        key(STG_Key1; "Training No.")
         {
             Clustered = true;
         }

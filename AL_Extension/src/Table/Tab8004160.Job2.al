@@ -1656,35 +1656,35 @@ Table 8004160 Job2
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; "Search Description")
+        key(STG_Key2; "Search Description")
         {
         }
-        key(Key3; "Bill-to Customer No.")
+        key(STG_Key3; "Bill-to Customer No.")
         {
         }
-        key(Key4; Description)
+        key(STG_Key4; Description)
         {
         }
-        key(Key5; Status, "Person Responsible", "No.")
+        key(STG_Key5; Status, "Person Responsible", "No.")
         {
         }
-        key(Key6; "Person Responsible", "No.", Status)
+        key(STG_Key6; "Person Responsible", "No.", Status)
         {
         }
-        key(Key7; Status, "Global Dimension 1 Code", "Global Dimension 2 Code", "No.")
+        key(STG_Key7; Status, "Global Dimension 1 Code", "Global Dimension 2 Code", "No.")
         {
         }
-        key(Key8; "Global Dimension 1 Code", "Global Dimension 2 Code", "No.", Status)
+        key(STG_Key8; "Global Dimension 1 Code", "Global Dimension 2 Code", "No.", Status)
         {
         }
-        key(Key9; Status, "No.")
+        key(STG_Key9; Status, "No.")
         {
         }
-        key(Key10; Synchronise)
+        key(STG_Key10; Synchronise)
         {
         }
     }

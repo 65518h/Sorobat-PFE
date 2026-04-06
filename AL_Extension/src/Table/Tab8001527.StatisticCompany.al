@@ -21,7 +21,7 @@ Table 8001527 "Statistic Company"
 
     keys
     {
-        key(Key1; "Statistic code", Company)
+        key(STG_Key1; "Statistic code", Company)
         {
             Clustered = true;
         }

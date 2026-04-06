@@ -53,7 +53,7 @@ Table 8004061 "Sales Overhead-Margin"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Gen. Prod. Post. Code")
+        key(STG_Key1; "Document Type", "Document No.", "Gen. Prod. Post. Code")
         {
             Clustered = true;
         }

@@ -19,7 +19,7 @@ Table 70121 "Imp Code"
 
     keys
     {
-        key(Key1; "Table No", "Field No", "Code")
+        key(STG_Key1; "Table No", "Field No", "Code")
         {
             Clustered = true;
         }

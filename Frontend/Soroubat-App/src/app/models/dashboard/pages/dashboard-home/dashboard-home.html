@@ -1,1 +1,306 @@
-<p>dashboard-home works!</p>
+<!-- src/app/modules/dashboard/pages/dashboard-home/dashboard-home.html -->
+ 
+<div class="dashboard-wrapper">
+ 
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════ -->
+  <div class="dashboard-header">
+    <div>
+      <h1 class="dashboard-title">Tableau de bord</h1>
+      <p class="dashboard-subtitle">Vue globale de vos chantiers en cours</p>
+    </div>
+    <button class="btn-refresh" (click)="loadDashboard()" [disabled]="isLoading">
+      <span class="refresh-icon" [class.spinning]="isLoading">↻</span>
+      Actualiser
+    </button>
+  </div>
+ 
+  <!-- ═══════════════════════════════════════
+       LOADING
+  ═══════════════════════════════════════ -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des données...</p>
+  </div>
+ 
+  <!-- ═══════════════════════════════════════
+       ERREUR
+  ═══════════════════════════════════════ -->
+  <div *ngIf="hasError && !isLoading" class="error-state">
+    <span class="error-icon">⚠️</span>
+    <p>Impossible de charger les données. Vérifiez la connexion au serveur.</p>
+    <button class="btn-retry" (click)="loadDashboard()">Réessayer</button>
+  </div>
+ 
+  <!-- ═══════════════════════════════════════
+       CONTENU PRINCIPAL
+  ═══════════════════════════════════════ -->
+  <div *ngIf="!isLoading && !hasError" class="dashboard-content">
+ 
+    <!-- ───────────────────────────────────
+         SECTION 1 — KPI CARDS
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="kpi-grid">
+ 
+        <!-- Projets actifs -->
+        <div class="kpi-card kpi-blue" [routerLink]="['/projects']">
+          <div class="kpi-icon">📁</div>
+          <div class="kpi-body">
+            <div class="kpi-value">{{ kpi.activeProjects }}</div>
+            <div class="kpi-label">Projets actifs</div>
+            <div class="kpi-sub">{{ kpi.totalProjects }} au total</div>
+          </div>
+          <div class="kpi-bar">
+            <div class="kpi-bar-fill"
+                 [style.width]="kpi.totalProjects > 0 ? pct((kpi.activeProjects / kpi.totalProjects) * 100) : '0%'"
+                 style="background:#3B82F6"></div>
+          </div>
+        </div>
+ 
+        <!-- Tâches en cours -->
+        <div class="kpi-card kpi-amber" [routerLink]="['/tasks']">
+          <div class="kpi-icon">✅</div>
+          <div class="kpi-body">
+            <div class="kpi-value">{{ kpi.tasksInProgress }}</div>
+            <div class="kpi-label">Tâches en cours</div>
+            <div class="kpi-sub">{{ kpi.tasksCompleted }} terminées / {{ kpi.tasksTotal }} total</div>
+          </div>
+          <div class="kpi-bar">
+            <div class="kpi-bar-fill"
+                 [style.width]="kpi.tasksTotal > 0 ? pct((kpi.tasksCompleted / kpi.tasksTotal) * 100) : '0%'"
+                 style="background:#F59E0B"></div>
+          </div>
+        </div>
+ 
+        <!-- Stock critique -->
+        <div class="kpi-card kpi-red">
+          <div class="kpi-icon">📦</div>
+          <div class="kpi-body">
+            <div class="kpi-value">{{ kpi.criticalStockCount }}</div>
+            <div class="kpi-label">Stock critique</div>
+            <div class="kpi-sub">Articles sous le seuil</div>
+          </div>
+          <div class="kpi-badge" [class.badge-danger]="kpi.criticalStockCount > 0"
+               [class.badge-ok]="kpi.criticalStockCount === 0">
+            {{ kpi.criticalStockCount > 0 ? 'Attention' : 'OK' }}
+          </div>
+        </div>
+ 
+        <!-- Engins actifs -->
+        <div class="kpi-card kpi-teal">
+          <div class="kpi-icon">🔧</div>
+          <div class="kpi-body">
+            <div class="kpi-value">{{ kpi.activeEngines }}</div>
+            <div class="kpi-label">Engins actifs</div>
+            <div class="kpi-sub">Affectés à des chantiers</div>
+          </div>
+          <div class="kpi-badge badge-ok">Disponible</div>
+        </div>
+ 
+      </div>
+    </section>
+ 
+    <!-- ───────────────────────────────────
+         SECTION 2 — GRAPHIQUES
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="charts-grid">
+ 
+        <!-- Bar chart — Avancement projets -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Avancement des projets</h3>
+            <span class="chart-count">{{ projectsProgress.length }} projet(s)</span>
+          </div>
+ 
+          <div class="bar-list" *ngIf="projectsProgress.length > 0; else noProjects">
+            <div class="bar-row" *ngFor="let p of projectsProgress">
+              <div class="bar-label">
+                <span class="bar-name">{{ p.name }}</span>
+                <span class="bar-pct">{{ p.progress }}%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"
+                     [style.width]="pct(p.progress)"
+                     [style.background]="progressColor(p.progress)">
+                </div>
+              </div>
+              <span class="bar-status" [class]="statusColor(p.status)">{{ p.status }}</span>
+            </div>
+          </div>
+          <ng-template #noProjects>
+            <div class="empty-state">Aucun projet disponible</div>
+          </ng-template>
+        </div>
+ 
+        <!-- Donut chart — Tâches par statut -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Tâches par statut</h3>
+            <span class="chart-count">{{ totalTasksForDonut }} projet(s)</span>
+          </div>
+ 
+          <div class="donut-wrapper" *ngIf="tasksByStatus.length > 0; else noTasks">
+            <svg viewBox="0 0 42 42" class="donut-svg">
+              <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="transparent"/>
+              <circle class="donut-ring" cx="21" cy="21" r="15.91549430918954"
+                      fill="transparent" stroke-width="5" stroke="#f0f0f0"/>
+              <circle *ngFor="let s of tasksByStatus; let i = index"
+                      cx="21" cy="21" r="15.91549430918954"
+                      fill="transparent" stroke-width="5"
+                      [attr.stroke]="donutColors[i]"
+                      [attr.stroke-dasharray]="donutArc(i)"
+                      [attr.stroke-dashoffset]="donutOffset(i)"/>
+              <text x="21" y="20" text-anchor="middle" class="donut-center-val">
+                {{ totalTasksForDonut }}
+              </text>
+              <text x="21" y="24" text-anchor="middle" class="donut-center-lbl">total</text>
+            </svg>
+ 
+            <div class="donut-legend">
+              <div class="legend-item" *ngFor="let s of tasksByStatus; let i = index">
+                <span class="legend-dot" [style.background]="donutColors[i]"></span>
+                <span class="legend-name">{{ s.name }}</span>
+                <span class="legend-val">{{ s.value }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #noTasks>
+            <div class="empty-state">Aucune donnée de tâches</div>
+          </ng-template>
+        </div>
+ 
+      </div>
+    </section>
+ 
+    <!-- ───────────────────────────────────
+         SECTION 3 — RETARDS + BUDGET
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="bottom-grid">
+ 
+        <!-- Tableau tâches en retard -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">⏰ Tâches en retard</h3>
+            <a [routerLink]="['/tasks']" class="link-all">Voir toutes →</a>
+          </div>
+ 
+          <div *ngIf="overdueTasks.length > 0; else noOverdue">
+            <table class="overdue-table">
+              <thead>
+                <tr>
+                  <th>Projet</th>
+                  <th>Tâche</th>
+                  <th>Échéance</th>
+                  <th>Retard</th>
+                  <th>Avancement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let t of overdueTasks">
+                  <td><span class="tag-project">{{ t.jobNo }}</span></td>
+                  <td>{{ t.taskNo }}</td>
+                  <td class="text-red">{{ formatDate(t.dateFin) }}</td>
+                  <td><span class="badge-danger-sm">{{ daysOverdue(t.dateFin) }}j</span></td>
+                  <td>
+                    <div class="mini-bar-track">
+                      <div class="mini-bar-fill"
+                           [style.width]="pct(t.progressPct)"
+                           style="background:#EF4444">
+                      </div>
+                    </div>
+                    <span class="mini-pct">{{ t.progressPct }}%</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ng-template #noOverdue>
+            <div class="empty-state success-state">
+              ✅ Aucune tâche en retard
+            </div>
+          </ng-template>
+        </div>
+ 
+        <!-- Budget réel vs prévu -->
+<div class="chart-card">
+  <div class="chart-header">
+    <h3 class="chart-title">💰 Budget réel vs prévu</h3>
+  </div>
+
+  <div class="budget-list" *ngIf="budgetData && budgetData.length > 0; else noBudget">
+    <div class="budget-row" *ngFor="let b of budgetData">
+      <span class="budget-name">{{ b.projectName }}</span>
+
+      <div *ngIf="b.budgetPrevu === 0" class="budget-no-data">
+        Aucun montant défini
+      </div>
+
+      <div *ngIf="b.budgetPrevu > 0">
+        <div class="budget-track-label">
+          <span class="budget-lbl-prev">Prévu</span>
+          <span class="budget-amount-prev">{{ b.budgetPrevu | number:'1.2-2' }} €</span>
+        </div>
+        <div class="budget-track">
+          <div class="budget-fill-prev"></div>
+        </div>
+
+        <div class="budget-track-label" style="margin-top:6px">
+          <span class="budget-lbl-reel">Réel consommé</span>
+          <span class="budget-amount-reel">{{ b.budgetReel | number:'1.2-2' }} €</span>
+        </div>
+        <div class="budget-track">
+          <div class="budget-fill-reel"
+               [style.width]="pct(b.progressPct)"
+               [style.background]="progressColor(b.progressPct)">
+          </div>
+        </div>
+
+        <div class="budget-summary">
+          <span class="budget-pct" [class.over-budget]="b.progressPct > 100">
+            {{ b.progressPct }}% consommé
+          </span>
+          <span class="budget-remaining"
+                [class.text-red]="b.budgetReel > b.budgetPrevu"
+                [class.text-green]="b.budgetReel <= b.budgetPrevu">
+            {{ (b.budgetPrevu - b.budgetReel) | number:'1.2-2' }} € restants
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noBudget>
+    <div class="empty-state">Aucune donnée de budget</div>
+  </ng-template>
+</div>
+ 
+      </div>
+    </section>
+ 
+    <!-- ───────────────────────────────────
+         SECTION 4 — ALERTES
+    ─────────────────────────────────────── -->
+    <section class="section" *ngIf="alerts.length > 0">
+      <div class="alerts-header">
+        <h3 class="section-title">🔔 Alertes récentes</h3>
+      </div>
+      <div class="alerts-grid">
+        <div class="alert-item" *ngFor="let a of alerts" [class]="alertClass(a.severity)">
+          <span class="alert-icon">{{ alertIcon(a.type) }}</span>
+          <span class="alert-msg">{{ a.message }}</span>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- Message si aucune alerte -->
+    <section class="section" *ngIf="alerts.length === 0">
+      <div class="no-alerts">
+        ✅ Aucune alerte — tout est sous contrôle
+      </div>
+    </section>
+ 
+  </div>
+</div>

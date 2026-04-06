@@ -24,7 +24,7 @@ Table 8001408 "Add-On Licence"
 
     keys
     {
-        key(Key1; "Granule ID", "Licence ID")
+        key(STG_Key1; "Granule ID", "Licence ID")
         {
             Clustered = true;
         }

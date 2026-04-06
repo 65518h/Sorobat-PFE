@@ -376,45 +376,45 @@ table 52048946 "Employee Ledger Entry2"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Employee No.", "Posting Date", "Currency Code")
+        key(STG_Key2; "Employee No.", "Posting Date", "Currency Code")
         {
         }
-        key(Key3; "Document Type", "Document No.", "Employee No.")
+        key(STG_Key3; "Document Type", "Document No.", "Employee No.")
         {
         }
-        key(Key4; "Document Type", "External Document No.", "Employee No.")
+        key(STG_Key4; "Document Type", "External Document No.", "Employee No.")
         {
         }
-        key(Key5; "Employee No.", Open, Positive, "Due Date", "Currency Code")
+        key(STG_Key5; "Employee No.", Open, Positive, "Due Date", "Currency Code")
         {
         }
-        key(Key6; Open, "Due Date")
+        key(STG_Key6; Open, "Due Date")
         {
         }
-        key(Key7; "Document Type", "Employee No.", "Posting Date", "Currency Code")
+        key(STG_Key7; "Document Type", "Employee No.", "Posting Date", "Currency Code")
         {
             SumIndexFields = "Purchase (LCY)", "Inv. Discount (LCY)";
         }
-        key(Key8; "Closed by Entry No.")
+        key(STG_Key8; "Closed by Entry No.")
         {
         }
-        key(Key9; "Transaction No.")
+        key(STG_Key9; "Transaction No.")
         {
         }
-        key(Key10; "Source Code", "Posting Date", "Document No.")
+        key(STG_Key10; "Source Code", "Posting Date", "Document No.")
         {
         }
-        key(Key11; "Source Code", "Document No.", "Posting Date")
+        key(STG_Key11; "Source Code", "Document No.", "Posting Date")
         {
         }
-        key(Key12; "Employee No.", "Posting Date", "Source Code")
+        key(STG_Key12; "Employee No.", "Posting Date", "Source Code")
         {
         }
-        key(Key13; "Employee No.", "Document No.", "Posting Date")
+        key(STG_Key13; "Employee No.", "Document No.", "Posting Date")
         {
         }
     }

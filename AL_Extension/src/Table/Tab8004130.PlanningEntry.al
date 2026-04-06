@@ -355,39 +355,39 @@ Table 8004130 "Planning Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", "Project Header No.", "Job Task No.", Status, "Resource Group No.", Type, "No.", Date, Private, "Prod. Posting Group", "Employee Absence Entry No.", "Planning Task No.")
+        key(STG_Key2; "Job No.", "Project Header No.", "Job Task No.", Status, "Resource Group No.", Type, "No.", Date, Private, "Prod. Posting Group", "Employee Absence Entry No.", "Planning Task No.")
         {
             //GL2024 Clustered = true;
             MaintainSQLIndex = false;
             SumIndexFields = Quantity;
         }
-        key(Key3; "Job No.", Type, "No.", Date)
+        key(STG_Key3; "Job No.", Type, "No.", Date)
         {
             MaintainSIFTIndex = false;
         }
-        key(Key4; Type, "No.", Date, "Start Time", Private)
+        key(STG_Key4; Type, "No.", Date, "Start Time", Private)
         {
             MaintainSIFTIndex = false;
             SumIndexFields = Quantity;
         }
-        key(Key5; "Job No.", Date)
+        key(STG_Key5; "Job No.", Date)
         {
             MaintainSIFTIndex = false;
             MaintainSQLIndex = false;
         }
-        key(Key6; "Resource Group No.", Date)
+        key(STG_Key6; "Resource Group No.", Date)
         {
             MaintainSIFTIndex = false;
         }
-        key(Key7; "Job No.", "Job Task No.", Date)
+        key(STG_Key7; "Job No.", "Job Task No.", Date)
         {
             MaintainSIFTIndex = false;
         }
-        key(Key8; "Planning Task No.", Date)
+        key(STG_Key8; "Planning Task No.", Date)
         {
             MaintainSIFTIndex = false;
             MaintainSQLIndex = false;

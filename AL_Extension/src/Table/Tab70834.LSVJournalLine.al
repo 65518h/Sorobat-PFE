@@ -205,12 +205,12 @@ Table 70834 "LSV Journal Line"
 
     keys
     {
-        key(Key1; "LSV Journal No.", "Line No.")
+        key(STG_Key1; "LSV Journal No.", "Line No.")
         {
             Clustered = true;
             SumIndexFields = "Collection Amount";
         }
-        key(Key2; "Applies-to Doc. No.")
+        key(STG_Key2; "Applies-to Doc. No.")
         {
         }
     }

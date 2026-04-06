@@ -603,14 +603,14 @@ TableExtension 50131 "Sales Line ArchiveEXT" extends "Sales Line Archive"
     keys
     {
 
-        /* GL2024     key(Key6;"Document Type","Document No.","Line No.","Doc. No. Occurrence","Version No.","Presentation Code")
+        /* GL2024     key(STG_Key6;"Document Type","Document No.","Line No.","Doc. No. Occurrence","Version No.","Presentation Code")
               {
               }
-              key(Key8;"Document Type","Document No.","Doc. No. Occurrence","Version No.","Gen. Prod. Posting Group","Line Type","Structure Line No.",Quantity)
+              key(STG_Key8;"Document Type","Document No.","Doc. No. Occurrence","Version No.","Gen. Prod. Posting Group","Line Type","Structure Line No.",Quantity)
               {
               SumIndexFields = "Quantity (Base)","Total Cost (LCY)","Overhead Amount (LCY)","Job Costs (LCY)","Amount Excl. VAT (LCY)",Amount;
               }
-              key(Key9;"Document Type","Document No.","Doc. No. Occurrence","Version No.","Presentation Code")
+              key(STG_Key9;"Document Type","Document No.","Doc. No. Occurrence","Version No.","Presentation Code")
               {
               }*/
     }

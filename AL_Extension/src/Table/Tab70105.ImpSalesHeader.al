@@ -729,7 +729,7 @@ Table 70105 "Imp Sales Header"
 
     keys
     {
-        key(Key1; "Document Type", "No.")
+        key(STG_Key1; "Document Type", "No.")
         {
             Clustered = true;
         }

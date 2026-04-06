@@ -415,7 +415,7 @@ Table 8003994 "Quantity Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

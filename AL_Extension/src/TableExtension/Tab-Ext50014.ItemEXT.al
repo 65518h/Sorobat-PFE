@@ -821,26 +821,26 @@ TableExtension 50014 ItemEXT extends Item
     }
     keys
     {
-        key(Key20; "Tree Code")
+        key(STG_Key20; "Tree Code")
         {
         }
-        key(Key21; Subcontracting)
+        key(STG_Key21; Subcontracting)
         {
         }
 
-        key(Key22; "Item Disc. Group")
+        key(STG_Key22; "Item Disc. Group")
         {
         }
-        key(Key23; Synchronise)
+        key(STG_Key23; Synchronise)
         {
         }
-        /*  key(Key24; "Emplacement DEPOT Z4")
+        /*  key(STG_Key24; "Emplacement DEPOT Z4")
           {
           }
-          key(Key25; "Ancien Code")
+          key(STG_Key25; "Ancien Code")
           {
           }*/
-        key(Key26; "Seuil Min")
+        key(STG_Key26; "Seuil Min")
         {
         }
     }

@@ -21,7 +21,7 @@ Table 8001513 "Column style name"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

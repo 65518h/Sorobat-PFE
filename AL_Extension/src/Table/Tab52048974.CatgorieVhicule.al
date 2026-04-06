@@ -45,11 +45,11 @@ Table 52048974 "Catégorie Véhicule"
 
     keys
     {
-        key(Key1; "Code Catégorie")
+        key(STG_Key1; "Code Catégorie")
         {
             Clustered = true;
         }
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

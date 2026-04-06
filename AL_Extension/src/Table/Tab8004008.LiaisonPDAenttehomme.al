@@ -60,11 +60,11 @@ Table 8004008 "Liaison PDA : en-tête homme"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "No.", "Posting Date", "Job No.", "Phase Code", "Task Code", "Step Code", "Work Type Code")
+        key(STG_Key2; "No.", "Posting Date", "Job No.", "Phase Code", "Task Code", "Step Code", "Work Type Code")
         {
             SumIndexFields = Quantity;
         }

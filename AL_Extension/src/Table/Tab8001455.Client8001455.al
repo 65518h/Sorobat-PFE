@@ -12,7 +12,7 @@ Table 8001455 "Client 8001455"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

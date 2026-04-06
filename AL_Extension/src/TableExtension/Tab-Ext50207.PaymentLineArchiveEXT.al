@@ -444,12 +444,12 @@ TableExtension 50207 "Payment Line ArchiveEXT" extends "Payment Line Archive"
     keys
     {
 
-        key(Key3; "Payment Class", "Status No.", "Copied To No.", "Account Type", "Account No.")
+        key(STG_Key3; "Payment Class", "Status No.", "Copied To No.", "Account Type", "Account No.")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
 
-        key(Key4; Amount, "No.")
+        key(STG_Key4; Amount, "No.")
         {
         }
     }

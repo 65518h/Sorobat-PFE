@@ -15,7 +15,7 @@ table 50020 "Compte SysCoaDa"
 
     keys
     {
-        key(Key1; "N° Compte")
+        key(STG_Key1; "N° Compte")
         {
             Clustered = true;
         }

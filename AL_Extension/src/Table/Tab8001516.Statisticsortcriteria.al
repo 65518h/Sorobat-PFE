@@ -497,7 +497,7 @@ Table 8001516 "Statistic sort criteria"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

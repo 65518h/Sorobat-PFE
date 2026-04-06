@@ -150,11 +150,11 @@ Table 11300 "VAT VIES Correction"
 
     keys
     {
-        key(Key1; Period, "Line No.")
+        key(STG_Key1; Period, "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Customer No.", Period, "VAT Registration No.", "EU 3-Party Trade", Year, "Month/Quarter")
+        key(STG_Key2; "Customer No.", Period, "VAT Registration No.", "EU 3-Party Trade", Year, "Month/Quarter")
         {
             SumIndexFields = Amount, "Additional-Currency Amount";
         }

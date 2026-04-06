@@ -75,7 +75,7 @@ Table 8001481 "Filter Line"
 
     keys
     {
-        key(Key1; TableNo, FilterCode, FieldNo)
+        key(STG_Key1; TableNo, FilterCode, FieldNo)
         {
             Clustered = true;
         }

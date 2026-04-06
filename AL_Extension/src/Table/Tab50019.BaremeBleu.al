@@ -156,7 +156,7 @@
 
 //     keys
 //     {
-//         key(Key1; "Classe Immo")
+//         key(STG_Key1; "Classe Immo")
 //         {
 //             Clustered = true;
 //         }

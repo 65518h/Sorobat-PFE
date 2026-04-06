@@ -25,7 +25,7 @@ Table 8004182 "Entete Rapport Pane véhicule"
 
     keys
     {
-        key(Key1; "N°")
+        key(STG_Key1; "N°")
         {
             Clustered = true;
         }

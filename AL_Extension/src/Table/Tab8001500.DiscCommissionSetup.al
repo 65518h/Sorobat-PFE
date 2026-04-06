@@ -38,7 +38,7 @@ Table 8001500 "Disc. Commission Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

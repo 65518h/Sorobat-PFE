@@ -132,20 +132,20 @@ Table 52049016 "ASS-Employee Soins"
 
     keys
     {
-        key(Key1; "No.", "Line No.")
+        key(STG_Key1; "No.", "Line No.")
         {
         }
-        key(Key2; Matricule, DateVisite)
+        key(STG_Key2; Matricule, DateVisite)
         {
             Clustered = true;
         }
-        key(Key3; Medecin)
+        key(STG_Key3; Medecin)
         {
         }
-        key(Key4; Biologiste, PrixBiologiste)
+        key(STG_Key4; Biologiste, PrixBiologiste)
         {
         }
-        key(Key5; PrixMedecin)
+        key(STG_Key5; PrixMedecin)
         {
         }
     }

@@ -68,7 +68,7 @@ Table 52048973 "Vignette Véhicule"
 
     keys
     {
-        key(Key1; "N° Veh", "Date Document", "code Vig")
+        key(STG_Key1; "N° Veh", "Date Document", "code Vig")
         {
             Clustered = true;
             SumIndexFields = Tarif;

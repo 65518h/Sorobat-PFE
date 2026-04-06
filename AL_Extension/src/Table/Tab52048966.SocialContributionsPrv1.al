@@ -144,20 +144,20 @@ table 52048966 "Social Contributions Prév1"
 
     keys
     {
-        key(Key1; "No.", Employee, Indemnity, "Social Contribution")
+        key(STG_Key1; "No.", Employee, Indemnity, "Social Contribution")
         {
             Clustered = true;
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer";
         }
-        key(Key2; "Employee Posting Group", "Deductible of taxable basis", Employee, "No.", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key2; "Employee Posting Group", "Deductible of taxable basis", Employee, "No.", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer";
         }
-        key(Key3; "Social Contribution", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key3; "Social Contribution", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer";
         }
-        key(Key4; "No.", Employee, "Deductible of taxable basis")
+        key(STG_Key4; "No.", Employee, "Deductible of taxable basis")
         {
             SumIndexFields = "Real Amount : Employee", "Real Amount : Employee PR";
         }

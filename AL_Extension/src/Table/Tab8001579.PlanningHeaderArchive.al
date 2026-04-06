@@ -94,11 +94,11 @@ Table 8001579 "Planning Header Archive"
 
     keys
     {
-        key(Key1; "No.", "Version No.")
+        key(STG_Key1; "No.", "Version No.")
         {
             Clustered = true;
         }
-        key(Key2; Type)
+        key(STG_Key2; Type)
         {
             MaintainSIFTIndex = false;
         }

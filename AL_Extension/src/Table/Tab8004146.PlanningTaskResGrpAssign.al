@@ -38,12 +38,12 @@ Table 8004146 "Planning Task Res. Grp. Assign"
 
     keys
     {
-        key(Key1; "Task No.", "Resource Group No.", "Skill No.")
+        key(STG_Key1; "Task No.", "Resource Group No.", "Skill No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Project Header No.")
+        key(STG_Key2; "Project Header No.")
         {
         }
     }

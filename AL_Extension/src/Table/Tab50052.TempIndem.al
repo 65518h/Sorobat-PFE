@@ -26,11 +26,11 @@
 
 //     keys
 //     {
-//         key(Key1; ID)
+//         key(STG_Key1; ID)
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; Matricule, "Code")
+//         key(STG_Key2; Matricule, "Code")
 //         {
 //         }
 //     }

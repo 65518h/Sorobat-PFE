@@ -55,23 +55,23 @@ Table 59991 "Recuperation Historique"
 
     keys
     {
-        key(Key1; Cle)
+        key(STG_Key1; Cle)
         {
             Clustered = true;
         }
-        key(Key2; "Code Journal", "Date Ecriture", "N° Pièce", "N° Compte Général")
+        key(STG_Key2; "Code Journal", "Date Ecriture", "N° Pièce", "N° Compte Général")
         {
         }
-        key(Key3; "N° Compte Général")
+        key(STG_Key3; "N° Compte Général")
         {
         }
-        key(Key4; "Compte Tiers")
+        key(STG_Key4; "Compte Tiers")
         {
         }
-        key(Key5; "Code Journal", "N° Pièce")
+        key(STG_Key5; "Code Journal", "N° Pièce")
         {
         }
-        key(Key6; "Date Ecriture")
+        key(STG_Key6; "Date Ecriture")
         {
         }
     }

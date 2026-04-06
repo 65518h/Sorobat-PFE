@@ -39,7 +39,7 @@ table 52049048 "Fiche Frais mission enregistré"
 
     keys
     {
-        key(Key1; "N° Frais")
+        key(STG_Key1; "N° Frais")
         {
             Clustered = true;
         }

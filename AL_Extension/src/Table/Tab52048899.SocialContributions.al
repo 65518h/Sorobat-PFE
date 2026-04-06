@@ -182,36 +182,36 @@ Table 52048899 "Social Contributions"
 
     keys
     {
-        key(Key1; "No.", Employee, Indemnity, "Social Contribution")
+        key(STG_Key1; "No.", Employee, Indemnity, "Social Contribution")
         {
             Clustered = true;
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        key(Key2; "Employee Posting Group", "Deductible of taxable basis", Employee, "No.", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key2; "Employee Posting Group", "Deductible of taxable basis", Employee, "No.", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        key(Key3; "Social Contribution", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key3; "Social Contribution", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        key(Key4; "No.", Employee, "Deductible of taxable basis")
+        key(STG_Key4; "No.", Employee, "Deductible of taxable basis")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        key(Key5; "No.", "Deductible of taxable basis", "Employee Statistic Group")
+        key(STG_Key5; "No.", "Deductible of taxable basis", "Employee Statistic Group")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        key(Key6; "No.", "Deductible of taxable basis", "Employee Posting Group")
+        key(STG_Key6; "No.", "Deductible of taxable basis", "Employee Posting Group")
         {
             SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
         }
-        /*  key(Key7; "No.", Employee, "Deductible of taxable basis", "Basis of calculation")
+        /*  key(STG_Key7; "No.", Employee, "Deductible of taxable basis", "Basis of calculation")
           {
               SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
           }
-          key(Key8; "No.", Employee, "Deductible of taxable basis", "Basis of calculation", "Non Cotisable")
+          key(STG_Key8; "No.", Employee, "Deductible of taxable basis", "Basis of calculation", "Non Cotisable")
           {
               SumIndexFields = "Employer's part", "Employee's part", "Base Amount", "Real Amount : Employee", "Real Amount : Employer", "Real Amount : Employee PR";
           }*/

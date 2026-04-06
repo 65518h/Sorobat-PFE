@@ -33,11 +33,11 @@ Table 50024 "Entete Pointage Salarié Chan"
 
     keys
     {
-        key(Key1; "No. Pointage")
+        key(STG_Key1; "No. Pointage")
         {
             Clustered = true;
         }
-        // key(Key2; "No. Pointage", Matricule, "Annee Attachement", "Mois Attachement", Affectation)
+        // key(STG_Key2; "No. Pointage", Matricule, "Annee Attachement", "Mois Attachement", Affectation)
         // {
 
         // }

@@ -1,1 +1,457 @@
-<p>request-list works!</p>
+<!-- src/app/models/purchases/pages/request-list/request-list.html -->
+
+<div class="request-list-container">
+  
+  <!-- ==================== HEADER AVEC GRADIENT ==================== -->
+  <div class="page-header">
+    <div class="header-gradient"></div>
+    <div class="header-content">
+      <div class="header-left">
+        <div class="header-icon">
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
+        <div class="header-text">
+          <h1>Demandes d'achat</h1>
+          <p class="subtitle">Gérez et suivez toutes vos demandes d'achat en un seul endroit</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn-create" mat-raised-button (click)="createNewRequest()">
+          <mat-icon>add_circle</mat-icon>
+          <span>Nouvelle demande</span>
+        </button>
+        <button class="btn-refresh" mat-icon-button (click)="refresh()" matTooltip="Actualiser">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== STATISTIQUES ==================== -->
+  <div class="stats-grid" *ngIf="!loading && !error">
+    <div class="stat-card" *ngFor="let stat of statsData">
+      <div class="stat-icon" [class]="stat.iconClass">
+        <mat-icon>{{ stat.icon }}</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== SECTION FILTRES MODERNISÉE ==================== -->
+  <div class="filters-section">
+    
+    <!-- Barre de filtres -->
+    <div class="filters-bar">
+      <div class="filters-bar-left">
+        <button class="filters-toggle-btn" (click)="toggleFilters()" [class.active]="filtersExpanded">
+          <mat-icon class="toggle-icon">tune</mat-icon>
+          <span>Filtres</span>
+          <mat-icon class="chevron-icon">{{ filtersExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+        
+        <!-- Indicateurs de filtres actifs -->
+        <div class="active-filters" *ngIf="hasActiveFilters()">
+          <span class="active-filters-label">Filtres actifs :</span>
+          <div class="filter-chips">
+            <div *ngIf="filterForm.get('status')?.value !== 'all'" class="filter-chip">
+              <mat-icon>flag</mat-icon>
+              <span>Statut: {{ filterForm.get('status')?.value }}</span>
+              <button class="chip-remove" (click)="removeFilter('status')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="filterForm.get('jobNo')?.value" class="filter-chip">
+              <mat-icon>business</mat-icon>
+              <span>Projet: {{ filterForm.get('jobNo')?.value }}</span>
+              <button class="chip-remove" (click)="removeFilter('jobNo')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="filterForm.get('dateFrom')?.value" class="filter-chip">
+              <mat-icon>event</mat-icon>
+              <span>À partir du: {{ formatDateShort(filterForm.get('dateFrom')?.value) }}</span>
+              <button class="chip-remove" (click)="removeFilter('dateFrom')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="filterForm.get('dateTo')?.value" class="filter-chip">
+              <mat-icon>event</mat-icon>
+              <span>Jusqu'au: {{ formatDateShort(filterForm.get('dateTo')?.value) }}</span>
+              <button class="chip-remove" (click)="removeFilter('dateTo')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="filterForm.get('search')?.value" class="filter-chip">
+              <mat-icon>search</mat-icon>
+              <span>Recherche: {{ filterForm.get('search')?.value }}</span>
+              <button class="chip-remove" (click)="removeFilter('search')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <button class="clear-all-filters" (click)="resetFilters()" *ngIf="hasActiveFilters()">
+              <mat-icon>clear_all</mat-icon>
+              Tout effacer
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="filters-bar-right">
+        <div class="results-count">
+          <span class="count-number">{{ totalItems }}</span>
+          <span class="count-label">demande(s)</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Panel de filtres étendu -->
+    <div class="filters-panel" [class.expanded]="filtersExpanded">
+      <div class="filters-panel-content">
+        <form [formGroup]="filterForm">
+          <div class="filters-grid">
+            
+            <!-- Statut -->
+            <div class="filter-group">
+              <label class="filter-label">
+                <mat-icon>flag</mat-icon>
+                <span>Statut</span>
+              </label>
+              <div class="status-selector">
+                <button type="button" 
+                        class="status-option" 
+                        [class.active]="filterForm.get('status')?.value === 'all'"
+                        (click)="filterForm.patchValue({ status: 'all' })">
+                  Tous
+                </button>
+                <button type="button" 
+                        *ngFor="let status of statusOptions" 
+                        class="status-option" 
+                        [class.active]="filterForm.get('status')?.value === status"
+                        [class]="getStatusClass(status)"
+                        (click)="filterForm.patchValue({ status: status })">
+                  <span class="status-dot"></span>
+                  {{ status }}
+                </button>
+              </div>
+            </div>
+            
+            <!-- Projet -->
+            <div class="filter-group">
+              <label class="filter-label">
+                <mat-icon>business</mat-icon>
+                <span>Projet</span>
+              </label>
+              <div class="search-input-wrapper">
+                <mat-icon class="input-icon">search</mat-icon>
+                <input type="text" 
+                       formControlName="jobNo" 
+                       placeholder="Rechercher par numéro de projet..."
+                       class="filter-input">
+                <button *ngIf="filterForm.get('jobNo')?.value" 
+                        class="input-clear" 
+                        (click)="filterForm.patchValue({ jobNo: '' })">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Plage de dates -->
+            <div class="filter-group date-range-group">
+              <label class="filter-label">
+                <mat-icon>calendar_today</mat-icon>
+                <span>Période</span>
+              </label>
+              <div class="date-range-inputs">
+                <div class="date-input-wrapper">
+                  <mat-icon>event</mat-icon>
+                  <input type="date" formControlName="dateFrom" class="filter-input date-input">
+                  <span class="date-label">Début</span>
+                </div>
+                <div class="date-separator">—</div>
+                <div class="date-input-wrapper">
+                  <mat-icon>event</mat-icon>
+                  <input type="date" formControlName="dateTo" class="filter-input date-input">
+                  <span class="date-label">Fin</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Recherche textuelle -->
+            <div class="filter-group search-group">
+              <label class="filter-label">
+                <mat-icon>search</mat-icon>
+                <span>Recherche</span>
+              </label>
+              <div class="search-input-wrapper">
+                <mat-icon class="input-icon">search</mat-icon>
+                <input type="text" 
+                       formControlName="search" 
+                       placeholder="N° demande, projet, demandeur..."
+                       class="filter-input">
+                <button *ngIf="filterForm.get('search')?.value" 
+                        class="input-clear" 
+                        (click)="filterForm.patchValue({ search: '' })">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="filter-actions">
+              <button class="btn-clear" (click)="resetFilters()" matTooltip="Réinitialiser tous les filtres">
+                <mat-icon>clear_all</mat-icon>
+                <span>Réinitialiser</span>
+              </button>
+              <button class="btn-apply" (click)="applyFilters()">
+                <mat-icon>search</mat-icon>
+                <span>Appliquer les filtres</span>
+              </button>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING MODERN ==================== -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="skeleton-table">
+      <div class="skeleton-header-row">
+        <div class="skeleton-cell" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+      </div>
+      <div class="skeleton-row" *ngFor="let i of [1,2,3,4,5]">
+        <div class="skeleton-cell" *ngFor="let j of [1,2,3,4,5,6,7,8]"></div>
+      </div>
+    </div>
+    <div class="loading-overlay">
+      <div class="loading-spinner-modern">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <p>Chargement des demandes...</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== ERROR MODERN ==================== -->
+  <div *ngIf="error && !loading" class="error-state">
+    <div class="error-illustration">
+      <div class="error-circle">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <div class="error-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+    </div>
+    <h3>Une erreur est survenue</h3>
+    <p>{{ error }}</p>
+    <button class="btn-retry-modern" (click)="loadRequests()">
+      <mat-icon>refresh</mat-icon>
+      <span>Réessayer</span>
+    </button>
+  </div>
+  
+  <!-- ==================== TABLEAU MODERN ==================== -->
+  <div *ngIf="!loading && !error" class="table-wrapper">
+    
+    <!-- Sélection multiple - Barre flottante -->
+    <div *ngIf="selectedRequests.size > 0" class="selection-floating-bar">
+      <div class="selection-content">
+        <div class="selection-info">
+          <div class="selection-count">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ selectedRequests.size }}</span>
+          </div>
+          <span class="selection-text">demande(s) sélectionnée(s)</span>
+        </div>
+        <div class="selection-actions">
+          <button class="action-btn generate" (click)="generateOrders()" [disabled]="selectedRequests.size === 0">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Générer commandes</span>
+          </button>
+          <button class="action-btn clear" (click)="toggleSelectAll()">
+            <mat-icon>deselect</mat-icon>
+            <span>Tout désélectionner</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Table moderne -->
+    <div class="table-container-modern">
+      <table mat-table [dataSource]="paginatedRequests" class="elegant-table">
+        
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef class="checkbox-cell">
+            <mat-checkbox 
+              [checked]="selectAll" 
+              (change)="toggleSelectAll()"
+              color="primary">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let request" class="checkbox-cell">
+            <mat-checkbox 
+              [checked]="selectedRequests.has(request.id)" 
+              (change)="toggleSelect(request)"
+              color="primary">
+            </mat-checkbox>
+            </td>
+        </ng-container>
+        
+        <!-- N° Demande Column -->
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>N° Demande</th>
+          <td mat-cell *matCellDef="let request" class="request-cell" (click)="viewRequest(request.id)">
+            <div class="request-badge">
+              <mat-icon>receipt</mat-icon>
+              <span>{{ request.no }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Projet Column -->
+        <ng-container matColumnDef="job">
+          <th mat-header-cell *matHeaderCellDef>Projet</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="project-info">
+              <span class="project-code">{{ request.jobNo }}</span>
+              <span class="project-name">{{ request.jobDescription || '—' }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Demandeur Column -->
+        <ng-container matColumnDef="requester">
+          <th mat-header-cell *matHeaderCellDef>Demandeur</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="requester-pill">
+              <div class="requester-avatar-modern">
+                {{ request.requesterId?.charAt(0) || '?' }}
+              </div>
+              <span>{{ request.requesterId }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let request">
+            <span class="type-tag">{{ request.requestType }}</span>
+          </td>
+        </ng-container>
+        
+        <!-- Date Column -->
+        <ng-container matColumnDef="orderDate">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="date-badge">
+              <mat-icon>calendar_today</mat-icon>
+              <span>{{ formatDate(request.orderDate) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Échéance Column -->
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell *matHeaderCellDef>Échéance</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="due-date-modern" [class.overdue]="isOverdue(request.dueDate)">
+              <mat-icon>event</mat-icon>
+              <span>{{ formatDate(request.dueDate) }}</span>
+              <span *ngIf="isOverdue(request.dueDate)" class="overdue-tag">Retard</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Montant Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Montant</th>
+          <td mat-cell *matCellDef="let request" class="amount-cell">
+            <div class="amount-value-modern">
+              <mat-icon>attach_money</mat-icon>
+              <span>{{ formatAmount(request.amount) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Statut Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Statut</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="status-badge-modern" [class]="getStatusClass(request.status)">
+              <span class="status-indicator"></span>
+              <span>{{ getStatusLabel(request.status) }}</span>
+            </div>
+          </td>
+        </ng-container>
+        
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let request">
+            <div class="action-buttons">
+              <button class="action-icon view" mat-icon-button matTooltip="Voir les détails" (click)="viewRequest(request.id)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button class="action-icon edit" mat-icon-button matTooltip="Modifier" (click)="editRequest(request.id)" *ngIf="canEdit(request)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button class="action-icon delete" mat-icon-button matTooltip="Supprimer" (click)="deleteRequest(request)" *ngIf="canDelete(request)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header-modern"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+            [class.selected-row]="selectedRequests.has(row.id)"
+            [class.row-status-open]="row.status === 'Ouvert'"
+            [class.row-status-progress]="row.status === 'Lancé'"
+            [class.row-status-complete]="row.status === 'Totallement Pris En Charge'"
+            class="table-row-modern">
+        </tr>
+        
+        <!-- Empty State -->
+        <tr *matNoDataRow>
+          <td [attr.colspan]="displayedColumns.length" class="empty-state-modern">
+            <div class="empty-illustration">
+              <div class="empty-icon-wrapper">
+                <mat-icon>inbox</mat-icon>
+              </div>
+              <h3>Aucune demande d'achat</h3>
+              <p>Commencez par créer votre première demande d'achat</p>
+              <button class="btn-create-empty" (click)="createNewRequest()">
+                <mat-icon>add</mat-icon>
+                Créer une demande
+              </button>
+            </div>
+          </td>
+        </tr>
+        
+      </table>
+    </div>
+    
+    <!-- Pagination modernisée -->
+    <div class="pagination-modern">
+      <mat-paginator 
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[10, 25, 50, 100]"
+        [pageIndex]="currentPage - 1"
+        (page)="onPageChange($event.pageIndex + 1, $event.pageSize)"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+    
+  </div>
+  
+</div>

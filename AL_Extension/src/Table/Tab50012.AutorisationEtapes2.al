@@ -26,11 +26,11 @@ table 50012 "Autorisation Etapes2"
 
     keys
     {
-        key(Key1; Etape, "Type Reglement", User)
+        key(STG_Key1; Etape, "Type Reglement", User)
         {
             Clustered = true;
         }
-        key(Key2; User)
+        key(STG_Key2; User)
         {
         }
     }

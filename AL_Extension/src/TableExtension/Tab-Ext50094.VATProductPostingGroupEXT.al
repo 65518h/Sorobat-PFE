@@ -16,7 +16,7 @@ TableExtension 50094 "VAT Product Posting GroupEXT" extends "VAT Product Posting
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

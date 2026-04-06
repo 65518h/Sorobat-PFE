@@ -215,14 +215,14 @@ Table 50032 "Detail Rapport DG"
 
     keys
     {
-        key(Key1; "Marché", "N° Rapport", "N° Ligne", "Type Ligne", "Date Rapport")
+        key(STG_Key1; "Marché", "N° Rapport", "N° Ligne", "Type Ligne", "Date Rapport")
         {
             Clustered = true;
         }
-        key(Key2; Niveau)
+        key(STG_Key2; Niveau)
         {
         }
-        key(Key3; "Marché", "Date Rapport", "Type Ligne", Designatiion)
+        key(STG_Key3; "Marché", "Date Rapport", "Type Ligne", Designatiion)
         {
         }
     }

@@ -126,7 +126,7 @@ Table 50056 "Historique Transfert Engin"
 
     keys
     {
-        key(Key1; "Code Transfert")
+        key(STG_Key1; "Code Transfert")
         {
             Clustered = true;
         }

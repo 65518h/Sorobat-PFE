@@ -1,1 +1,424 @@
-<p>request-detail works!</p>
+<!-- src/app/models/purchases/pages/request-detail/request-detail.html -->
+
+<div class="request-detail-container">
+  
+  <!-- ==================== HEADER MODERN ==================== -->
+  <div class="page-header-modern" [class]="'status-' + getStatusClass(request?.status || '')">
+    <div class="header-gradient-bg"></div>
+    <div class="header-content-modern">
+      <div class="header-left-modern">
+        <button class="back-button" mat-icon-button (click)="goBack()" matTooltip="Retour à la liste">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title-section">
+          <div class="title-icon" [class]="getStatusClass(request?.status || '')">
+            <mat-icon>{{ getStatusIcon(request?.status || '') }}</mat-icon>
+          </div>
+          <div class="title-text">
+            <h1>Demande d'achat</h1>
+            <div class="request-badges">
+              <span class="request-number">N° {{ request?.no || '—' }}</span>
+              <span class="status-badge" [class]="getStatusClass(request?.status || '')">
+                <span class="status-dot"></span>
+                {{ getStatusLabel(request?.status || '') }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-right-modern">
+        <div class="action-buttons">
+          <button *ngIf="canEdit()" class="btn-action edit" matTooltip="Modifier" (click)="editRequest()">
+            <mat-icon>edit</mat-icon>
+            <span>Modifier</span>
+          </button>
+          <button *ngIf="canDelete()" class="btn-action delete" matTooltip="Supprimer" (click)="deleteRequest()">
+            <mat-icon>delete</mat-icon>
+            <span>Supprimer</span>
+          </button>
+          <button *ngIf="canApprove()" class="btn-action approve" matTooltip="Approuver" (click)="approveRequest()">
+            <mat-icon>check_circle</mat-icon>
+            <span>Approuver</span>
+          </button>
+          <button *ngIf="canApprove()" class="btn-action refuse" matTooltip="Refuser" (click)="refuseRequest()">
+            <mat-icon>cancel</mat-icon>
+            <span>Refuser</span>
+          </button>
+          <button *ngIf="canGenerateOrder()" class="btn-action generate" matTooltip="Générer commande" (click)="generatePurchaseOrder()">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Générer commande</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div *ngIf="loading" class="loading-state-modern">
+    <div class="loading-card">
+      <div class="loading-spinner-container">
+        <div class="loading-spinner-ring"></div>
+        <div class="loading-spinner-ring"></div>
+        <div class="loading-spinner-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement de la demande...</p>
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== ERROR ==================== -->
+  <div *ngIf="error && !loading" class="error-state-modern">
+    <div class="error-card">
+      <div class="error-icon-wrapper">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Impossible de charger la demande</h3>
+      <p>{{ error }}</p>
+      <button class="btn-retry" (click)="loadRequest(requestId!)" *ngIf="requestId">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+      <button class="btn-back" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Retour à la liste
+      </button>
+    </div>
+  </div>
+  
+  <!-- ==================== CONTENU PRINCIPAL ==================== -->
+  <div *ngIf="!loading && !error && request" class="content-container-modern">
+    
+    <!-- Tabs modernes -->
+    <mat-tab-group class="modern-tabs" animationDuration="0ms">
+      
+      <!-- Onglet Informations générales -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            <mat-icon>info</mat-icon>
+            <span>Informations générales</span>
+          </div>
+        </ng-template>
+        
+        <div class="tab-content">
+          
+          <!-- Section Informations principales -->
+          <div class="info-section">
+            <div class="section-header">
+              <mat-icon>assignment</mat-icon>
+              <h2>Détails de la demande</h2>
+            </div>
+            <div class="info-grid">
+              <div class="info-card">
+                <div class="info-label">
+                  <mat-icon>business</mat-icon>
+                  <span>Projet</span>
+                </div>
+                <div class="info-value">
+                  <strong>{{ request.jobNo }}</strong>
+                  <span class="info-sub">{{ request.jobDescription }}</span>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">
+                  <mat-icon>person</mat-icon>
+                  <span>Demandeur</span>
+                </div>
+                <div class="info-value">
+                  <strong>{{ request.requesterId }}</strong>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">
+                  <mat-icon>category</mat-icon>
+                  <span>Type de demande</span>
+                </div>
+                <div class="info-value">
+                  <span class="type-tag">{{ request.requestType }}</span>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">
+                  <mat-icon>groups</mat-icon>
+                  <span>Service</span>
+                </div>
+                <div class="info-value">
+                  <span class="service-tag">{{ request.service }}</span>
+                </div>
+              </div>
+              <div class="info-card" *ngIf="request.engin">
+                <div class="info-label">
+                  <mat-icon>construction</mat-icon>
+                  <span>Engin</span>
+                </div>
+                <div class="info-value">
+                  <strong>{{ request.engin }}</strong>
+                  <span class="info-sub">{{ request.descriptionEngin }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Section Dates -->
+          <div class="info-section">
+            <div class="section-header">
+              <mat-icon>calendar_today</mat-icon>
+              <h2>Dates</h2>
+            </div>
+            <div class="dates-grid">
+              <div class="date-card">
+                <div class="date-label">Date de commande</div>
+                <div class="date-value">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>{{ formatDate(request.orderDate) }}</span>
+                </div>
+              </div>
+              <div class="date-card" [class.overdue]="isOverdue(request.dueDate)">
+                <div class="date-label">Date d'échéance</div>
+                <div class="date-value">
+                  <mat-icon>event</mat-icon>
+                  <span>{{ formatDate(request.dueDate) }}</span>
+                  <span *ngIf="isOverdue(request.dueDate)" class="overdue-tag">Retard</span>
+                </div>
+              </div>
+              <div class="date-card" *ngIf="request.postingDate">
+                <div class="date-label">Date de comptabilisation</div>
+                <div class="date-value">
+                  <mat-icon>receipt</mat-icon>
+                  <span>{{ formatDate(request.postingDate) }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Section Observation -->
+          <div class="info-section" *ngIf="request.observation">
+            <div class="section-header">
+              <mat-icon>chat_bubble_outline</mat-icon>
+              <h2>Observation</h2>
+            </div>
+            <div class="observation-card">
+              <p>{{ request.observation }}</p>
+            </div>
+          </div>
+          
+          <!-- Section Montant -->
+          <div class="info-section">
+            <div class="section-header">
+              <mat-icon>attach_money</mat-icon>
+              <h2>Récapitulatif financier</h2>
+            </div>
+            <div class="amount-card">
+              <div class="amount-label">Montant total</div>
+              <div class="amount-value">{{ formatAmount(getTotalAmount()) }}</div>
+            </div>
+          </div>
+          
+        </div>
+      </mat-tab>
+      
+      <!-- Onglet Articles demandés -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            <mat-icon>shopping_cart</mat-icon>
+            <span>Articles demandés</span>
+            <span class="tab-badge" *ngIf="lines.length">{{ lines.length }}</span>
+          </div>
+        </ng-template>
+        
+        <div class="tab-content">
+          
+          <div class="lines-section">
+            <div class="section-header">
+              <mat-icon>inventory_2</mat-icon>
+              <h2>Liste des articles</h2>
+            </div>
+            
+            <!-- Tableau des lignes -->
+            <div class="table-wrapper-modern" *ngIf="lines.length > 0">
+              <table mat-table [dataSource]="lines" class="elegant-table">
+                
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef>Type</th>
+                  <td mat-cell *matCellDef="let line">
+                    <div class="type-badge-modern">
+                      <mat-icon>{{ getTypeIcon(line.type) }}</mat-icon>
+                      <span>{{ line.type }}</span>
+                    </div>
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="no">
+                  <th mat-header-cell *matHeaderCellDef>Référence</th>
+                  <td mat-cell *matCellDef="let line">
+                    <span class="reference-code">{{ line.no || '—' }}</span>
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef>Description</th>
+                  <td mat-cell *matCellDef="let line">
+                    <div class="description-cell">
+                      <span class="main-desc">{{ line.description || '—' }}</span>
+                      <span class="sub-desc" *ngIf="line.description2">{{ line.description2 }}</span>
+                    </div>
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef>Qté</th>
+                  <td mat-cell *matCellDef="let line" class="number-cell">
+                    {{ line.quantity }}
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="unit">
+                  <th mat-header-cell *matHeaderCellDef>Unité</th>
+                  <td mat-cell *matCellDef="let line">
+                    {{ line.unitOfMeasureCode }}
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef>Magasin</th>
+                  <td mat-cell *matCellDef="let line">
+                    <span class="location-tag">{{ line.locationCode || '—' }}</span>
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="jobTask">
+                  <th mat-header-cell *matHeaderCellDef>Tâche</th>
+                  <td mat-cell *matCellDef="let line">
+                    {{ line.jobTaskNo || '—' }}
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="engin">
+                  <th mat-header-cell *matHeaderCellDef>Engin</th>
+                  <td mat-cell *matCellDef="let line">
+                    {{ line.engin || '—' }}
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="unitCost">
+                  <th mat-header-cell *matHeaderCellDef>Prix unit.</th>
+                  <td mat-cell *matCellDef="let line" class="number-cell">
+                    {{ formatAmount(line.unitCost || 0) }}
+                   </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="lineAmount">
+                  <th mat-header-cell *matHeaderCellDef>Total</th>
+                  <td mat-cell *matCellDef="let line" class="amount-cell">
+                    {{ formatAmount(line.lineAmount || 0) }}
+                   </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header-modern"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row-modern"></tr>
+                
+              </table>
+            </div>
+            
+            <!-- Empty state -->
+            <div *ngIf="lines.length === 0" class="empty-lines-modern">
+              <div class="empty-icon-wrapper">
+                <mat-icon>shopping_bag</mat-icon>
+              </div>
+              <h3>Aucun article</h3>
+              <p>Cette demande ne contient aucun article</p>
+            </div>
+            
+            <!-- Total -->
+            <div class="lines-total-modern" *ngIf="lines.length > 0">
+              <div class="total-label">
+                <mat-icon>summarize</mat-icon>
+                <span>Montant total</span>
+              </div>
+              <div class="total-value">{{ formatAmount(getTotalAmount()) }}</div>
+            </div>
+            
+          </div>
+          
+        </div>
+      </mat-tab>
+      
+      <!-- Onglet Historique des validations -->
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="tab-label">
+            <mat-icon>history</mat-icon>
+            <span>Historique</span>
+            <span class="tab-badge" *ngIf="approvalHistory.length">{{ approvalHistory.length }}</span>
+          </div>
+        </ng-template>
+        
+        <div class="tab-content">
+          
+          <div class="history-section">
+            <div class="section-header">
+              <mat-icon>timeline</mat-icon>
+              <h2>Historique des validations</h2>
+            </div>
+            
+            <div class="timeline-modern" *ngIf="approvalHistory.length > 0">
+              <div class="timeline-item" *ngFor="let item of approvalHistory; let last = last">
+                <div class="timeline-marker" [class.approved]="item.decision === 'Approuvé'" [class.refused]="item.decision === 'Refusé'">
+                  <mat-icon *ngIf="item.decision === 'Approuvé'">check_circle</mat-icon>
+                  <mat-icon *ngIf="item.decision === 'Refusé'">cancel</mat-icon>
+                  <mat-icon *ngIf="item.decision !== 'Approuvé' && item.decision !== 'Refusé'">pending</mat-icon>
+                </div>
+                <div class="timeline-content" *ngIf="!last; else lastTemplate">
+                  <div class="timeline-connector"></div>
+                </div>
+                <ng-template #lastTemplate>
+                  <div class="timeline-content last"></div>
+                </ng-template>
+                <div class="timeline-card">
+                  <div class="timeline-header">
+                    <div class="timeline-approver">
+                      <div class="approver-avatar">{{ (item.approverName || item.approverId || '?').charAt(0) }}</div>
+                      <div class="approver-info">
+                        <span class="approver-name">{{ item.approverName || item.approverId }}</span>
+                        <span class="approver-role">Approbateur</span>
+                      </div>
+                    </div>
+                    <div class="timeline-decision" [class.approved]="item.decision === 'Approuvé'" [class.refused]="item.decision === 'Refusé'">
+                      {{ item.decision }}
+                    </div>
+                  </div>
+                  <div class="timeline-date">
+                    <mat-icon>schedule</mat-icon>
+                    <span>{{ formatDateTime(item.approvalDate) }}</span>
+                  </div>
+                  <div class="timeline-comment" *ngIf="item.comment">
+                    <mat-icon>comment</mat-icon>
+                    <p>{{ item.comment }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="approvalHistory.length === 0" class="empty-history">
+              <div class="empty-icon-wrapper">
+                <mat-icon>history</mat-icon>
+              </div>
+              <h3>Aucun historique</h3>
+              <p>Aucune validation n'a encore été effectuée sur cette demande</p>
+            </div>
+            
+          </div>
+          
+        </div>
+      </mat-tab>
+      
+    </mat-tab-group>
+    
+  </div>
+  
+</div>

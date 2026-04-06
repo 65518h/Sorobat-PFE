@@ -35,7 +35,7 @@ Table 8001490 "Phys. Inv. Journal Batch"
 
     keys
     {
-        key(Key1; "Location Code", Name)
+        key(STG_Key1; "Location Code", Name)
         {
             Clustered = true;
         }

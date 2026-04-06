@@ -66,7 +66,7 @@ Table 8004145 "Job Task Period"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

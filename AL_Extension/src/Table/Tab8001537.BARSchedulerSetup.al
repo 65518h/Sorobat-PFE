@@ -84,7 +84,7 @@ Table 8001537 "BAR : Scheduler Setup"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

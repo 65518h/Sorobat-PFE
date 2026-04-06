@@ -108,19 +108,19 @@ table 52048928 "FOR-Ecritures Sanctions"
 
     keys
     {
-        key(Key1; "N° Sequences", "Code Note")
+        key(STG_Key1; "N° Sequences", "Code Note")
         {
             Clustered = true;
         }
-        key(Key2; "Code Note", Annee, Trimestre, Mois, "Employee No.", Date, Periode)
+        key(STG_Key2; "Code Note", Annee, Trimestre, Mois, "Employee No.", Date, Periode)
         {
             SumIndexFields = "Points Sanctionees";
         }
-        key(Key3; "Employee No.", "Code Motif", Annee, Trimestre, Mois, Date)
+        key(STG_Key3; "Employee No.", "Code Motif", Annee, Trimestre, Mois, Date)
         {
             SumIndexFields = "Points Sanctionees";
         }
-        key(Key4; "Filtre code Note", "Filtre Annee", "Filtre Trimestre", "Filtre Salarie", "Filtre Date")
+        key(STG_Key4; "Filtre code Note", "Filtre Annee", "Filtre Trimestre", "Filtre Salarie", "Filtre Date")
         {
             SumIndexFields = "Points Sanctionees";
         }

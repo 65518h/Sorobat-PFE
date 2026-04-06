@@ -755,29 +755,29 @@ TableExtension 50050 ResourceEXT extends Resource
     keys
     {
 
-        /* GL2024   key(Key10; Type, "Bal. Job No.", "No.")
+        /* GL2024   key(STG_Key10; Type, "Bal. Job No.", "No.")
             {
             }
     */
-        key(Key11; "Resource Group No.", "Search Name", "No.")
+        key(STG_Key11; "Resource Group No.", "Search Name", "No.")
         {
         }
 
-        /* GL2024   key(Key12; Type, "WT Allowed", Status, "No.")
+        /* GL2024   key(STG_Key12; Type, "WT Allowed", Status, "No.")
             {
                 MaintainSQLIndex = false;
             }*/
-        key(Key13; "WT Allowed")
+        key(STG_Key13; "WT Allowed")
         {
         }
-        key(Key14; "Tree Code")
+        key(STG_Key14; "Tree Code")
         {
         }
-        key(Key15; "User ID")
+        key(STG_Key15; "User ID")
         {
             MaintainSIFTIndex = false;
         }
-        key(Key16; Compteur)
+        key(STG_Key16; Compteur)
         {
         }
     }

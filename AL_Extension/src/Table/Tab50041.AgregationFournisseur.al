@@ -71,7 +71,7 @@ table 50041 "Agregation Fournisseur"
 
     keys
     {
-        key(Key1; "No. Article", "No. Fournisseur")
+        key(STG_Key1; "No. Article", "No. Fournisseur")
         {
             Clustered = true;
         }

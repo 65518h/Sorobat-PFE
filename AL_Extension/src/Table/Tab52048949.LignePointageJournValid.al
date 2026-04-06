@@ -391,7 +391,7 @@ Table 52048949 "Ligne Pointage Journ. Validé"
 
     keys
     {
-        key(Key1; Matricule, "Annee Attachement", "Mois Attachement", Affectation)
+        key(STG_Key1; Matricule, "Annee Attachement", "Mois Attachement", Affectation)
         {
             Clustered = true;
         }

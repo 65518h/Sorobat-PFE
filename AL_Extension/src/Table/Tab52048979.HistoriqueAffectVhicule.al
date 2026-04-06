@@ -32,7 +32,7 @@ table 52048979 "Historique Affect. Véhicule"
 
     keys
     {
-        key(Key1; Type, "Date Affectation", "N° Véhicule")
+        key(STG_Key1; Type, "Date Affectation", "N° Véhicule")
         {
             Clustered = true;
         }

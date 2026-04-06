@@ -82,7 +82,7 @@ Table 89243 "UPG Report List"
 
     keys
     {
-        key(Key1; "Line No.", "Menu ID")
+        key(STG_Key1; "Line No.", "Menu ID")
         {
             Clustered = true;
         }

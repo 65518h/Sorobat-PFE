@@ -31,7 +31,7 @@ Table 8001499 Upgrade
 
     keys
     {
-        key(Key1; "Version List")
+        key(STG_Key1; "Version List")
         {
             Clustered = true;
         }

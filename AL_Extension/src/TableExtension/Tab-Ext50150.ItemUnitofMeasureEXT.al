@@ -31,7 +31,7 @@ TableExtension 50150 "Item Unit of MeasureEXT" extends "Item Unit of Measure"
     }
     keys
     {
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

@@ -13,7 +13,7 @@ table 52049024 "Rubrique Cout"
 
     keys
     {
-        key(Key1; Rubrique)
+        key(STG_Key1; Rubrique)
         {
             Clustered = true;
         }

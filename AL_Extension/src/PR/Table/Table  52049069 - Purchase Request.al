@@ -2883,30 +2883,30 @@ Table 52049069 "Purchase Request"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
 
-        key(Key3; "Document Type", "Buy-from Vendor No.")
+        key(STG_Key3; "Document Type", "Buy-from Vendor No.")
         {
         }
-        key(Key4; "Document Type", "Pay-to Vendor No.")
+        key(STG_Key4; "Document Type", "Pay-to Vendor No.")
         {
         }
-        key(Key5; "Buy-from Vendor No.")
+        key(STG_Key5; "Buy-from Vendor No.")
         {
         }
-        key(Key6; "Incoming Document Entry No.")
+        key(STG_Key6; "Incoming Document Entry No.")
         {
         }
-        key(Key7; "Document Date")
+        key(STG_Key7; "Document Date")
         {
         }
-        key(Key8; Status, "Expected Receipt Date", "Location Code", "Responsibility Center")
+        key(STG_Key8; Status, "Expected Receipt Date", "Location Code", "Responsibility Center")
         {
         }
-        key(Key9; "Assigned User ID")
+        key(STG_Key9; "Assigned User ID")
         {
         }
     }

@@ -26,11 +26,11 @@ Table 50059 "Bilan Decompte"
 
     keys
     {
-        key(Key1; "Code Marché", Date, Designatiion)
+        key(STG_Key1; "Code Marché", Date, Designatiion)
         {
             Clustered = true;
         }
-        key(Key2; Niveau)
+        key(STG_Key2; Niveau)
         {
         }
     }

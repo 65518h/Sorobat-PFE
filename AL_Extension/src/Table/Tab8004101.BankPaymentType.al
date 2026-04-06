@@ -86,7 +86,7 @@ Table 8004101 "Bank Payment Type"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Payment Type")
+        key(STG_Key1; "Bank Account No.", "Payment Type")
         {
             Clustered = true;
         }

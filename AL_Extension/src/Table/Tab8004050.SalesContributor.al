@@ -157,17 +157,17 @@ Table 8004050 "Sales Contributor"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Job No.", "Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Job No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Document Type", "Document No.", Contributor)
+        key(STG_Key2; "Document Type", "Document No.", Contributor)
         {
         }
-        key(Key3; "Job No.")
+        key(STG_Key3; "Job No.")
         {
         }
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

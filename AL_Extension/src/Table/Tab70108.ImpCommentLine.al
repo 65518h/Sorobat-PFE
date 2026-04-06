@@ -32,7 +32,7 @@ Table 70108 "Imp Comment Line"
 
     keys
     {
-        key(Key1; "Table Name", "No.", "Line No.")
+        key(STG_Key1; "Table Name", "No.", "Line No.")
         {
             Clustered = true;
         }

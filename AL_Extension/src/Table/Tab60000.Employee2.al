@@ -34,11 +34,11 @@
 
 //     keys
 //     {
-//         key(Key1; matricule)
+//         key(STG_Key1; matricule)
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; nom)
+//         key(STG_Key2; nom)
 //         {
 //         }
 //     }

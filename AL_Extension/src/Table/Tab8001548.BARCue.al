@@ -40,7 +40,7 @@ Table 8001548 "BAR Cue"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

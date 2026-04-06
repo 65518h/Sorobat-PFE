@@ -64,11 +64,11 @@ table 52049021 "Equipe mission"
 
     keys
     {
-        key(Key1; "N° Demande", "Employee No.")
+        key(STG_Key1; "N° Demande", "Employee No.")
         {
             Clustered = true;
         }
-        key(Key2; "N° Sequence", "Employee No.")
+        key(STG_Key2; "N° Sequence", "Employee No.")
         {
         }
     }

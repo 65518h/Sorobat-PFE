@@ -276,44 +276,44 @@ Table 52048889 "Loan & Advance Header"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; Employee, Type, "Document type", Status, "No.", "Avance Sur Prime")
+        key(STG_Key2; Employee, Type, "Document type", Status, "No.", "Avance Sur Prime")
         {
         }
-        key(Key3; Employee)
+        key(STG_Key3; Employee)
         {
         }
-        key(Key4; Type)
+        key(STG_Key4; Type)
         {
         }
-        key(Key5; "Document type")
+        key(STG_Key5; "Document type")
         {
         }
-        key(Key6; Status)
+        key(STG_Key6; Status)
         {
         }
-        key(Key7; Employee, Type, Status, "No.", "Avance Sur Prime")
-        {
-            SumIndexFields = Amount;
-        }
-        key(Key8; Status, "Not include", "No.")
-        {
-        }
-        key(Key9; Employee, Type, "Date Comptabilisation")
+        key(STG_Key7; Employee, Type, Status, "No.", "Avance Sur Prime")
         {
             SumIndexFields = Amount;
         }
-        key(Key10; Employee, Type, "Date d'effet", Status)
+        key(STG_Key8; Status, "Not include", "No.")
+        {
+        }
+        key(STG_Key9; Employee, Type, "Date Comptabilisation")
         {
             SumIndexFields = Amount;
         }
-        /*  key(Key11; "Pret CNSS")
+        key(STG_Key10; Employee, Type, "Date d'effet", Status)
+        {
+            SumIndexFields = Amount;
+        }
+        /*  key(STG_Key11; "Pret CNSS")
           {
           }*/
-        key(Key11; "Date d'effet")
+        key(STG_Key11; "Date d'effet")
         {
         }
     }

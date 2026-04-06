@@ -15,7 +15,7 @@ Table 52048977 "Genre Véhicule"
 
     keys
     {
-        key(Key1; "Code Genre")
+        key(STG_Key1; "Code Genre")
         {
             Clustered = true;
         }

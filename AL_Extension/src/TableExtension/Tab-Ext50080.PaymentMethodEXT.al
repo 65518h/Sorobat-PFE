@@ -44,7 +44,7 @@ TableExtension 50080 "Payment MethodEXT" extends "Payment Method"
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

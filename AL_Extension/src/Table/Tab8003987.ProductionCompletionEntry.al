@@ -102,22 +102,22 @@ Table 8003987 "Production Completion Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", "Job Task No.", "Closing No.", "Document No.")
+        key(STG_Key2; "Job No.", "Job Task No.", "Closing No.", "Document No.")
         {
             SumIndexFields = "Completion Difference (%)", "Quantity Difference";
         }
-        key(Key3; "Job No.", "Closing No.")
+        key(STG_Key3; "Job No.", "Closing No.")
         {
         }
-        key(Key4; "Order No.", "Order Line No.", "Closing No.")
+        key(STG_Key4; "Order No.", "Order Line No.", "Closing No.")
         {
             SumIndexFields = "Completion Difference (%)", "Quantity Difference";
         }
-        key(Key5; "Posting Date", "Document No.")
+        key(STG_Key5; "Posting Date", "Document No.")
         {
         }
     }

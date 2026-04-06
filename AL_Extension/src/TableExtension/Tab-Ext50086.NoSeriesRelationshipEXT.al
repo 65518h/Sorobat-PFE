@@ -16,7 +16,7 @@ TableExtension 50086 "No. Series RelationshipEXT" extends "No. Series Relationsh
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

@@ -22,7 +22,7 @@ Table 8001547 "BAR : Setup Cash Flow"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

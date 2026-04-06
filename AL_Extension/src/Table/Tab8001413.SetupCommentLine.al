@@ -30,7 +30,7 @@ Table 8001413 "Setup Comment Line"
 
     keys
     {
-        key(Key1; "Table ID", "Language Code", "Line No.")
+        key(STG_Key1; "Table ID", "Language Code", "Line No.")
         {
             Clustered = true;
         }

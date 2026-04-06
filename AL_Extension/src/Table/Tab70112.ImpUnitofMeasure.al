@@ -16,7 +16,7 @@ Table 70112 "Imp Unit of Measure"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

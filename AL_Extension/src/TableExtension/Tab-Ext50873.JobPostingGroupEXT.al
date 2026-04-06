@@ -31,7 +31,7 @@ TableExtension 50873 "Job Posting GroupEXT" extends "Job Posting Group"
     keys
     {
 
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

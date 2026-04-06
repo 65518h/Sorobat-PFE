@@ -58,11 +58,11 @@ Table 8004131 "Planning Temp"
 
     keys
     {
-        key(Key1; Year, Week, "Group No.", "Line No.", Day)
+        key(STG_Key1; Year, Week, "Group No.", "Line No.", Day)
         {
             Clustered = true;
         }
-        key(Key2; "Prod. Posting Group")
+        key(STG_Key2; "Prod. Posting Group")
         {
         }
     }

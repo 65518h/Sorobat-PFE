@@ -108,7 +108,7 @@ Table 8004068 "Sales Overhead-Margin Archive"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", Type, "No.", "Line No.", "Purchasing Code")
+        key(STG_Key1; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", Type, "No.", "Line No.", "Purchasing Code")
         {
             Clustered = true;
             MaintainSIFTIndex = false;

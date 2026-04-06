@@ -16,7 +16,7 @@ Table 52049010 "Chargement - Dechargement"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

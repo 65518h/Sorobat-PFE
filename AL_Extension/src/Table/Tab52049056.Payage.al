@@ -24,7 +24,7 @@ table 52049056 "Payéage"
 
     keys
     {
-        key(Key1; Type, "Code")
+        key(STG_Key1; Type, "Code")
         {
             Clustered = true;
         }

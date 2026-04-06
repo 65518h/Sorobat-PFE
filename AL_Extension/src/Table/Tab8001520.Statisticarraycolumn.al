@@ -83,7 +83,7 @@ Table 8001520 "Statistic array column"
 
     keys
     {
-        key(Key1; "User ID", "Statistic code", "Colonne No. pos.")
+        key(STG_Key1; "User ID", "Statistic code", "Colonne No. pos.")
         {
             Clustered = true;
         }

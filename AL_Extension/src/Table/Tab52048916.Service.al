@@ -20,7 +20,7 @@ Table 52048916 Service
 
     keys
     {
-        key(Key1; Direction, Service)
+        key(STG_Key1; Direction, Service)
         {
             Clustered = true;
         }

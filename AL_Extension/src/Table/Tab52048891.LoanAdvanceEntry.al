@@ -127,23 +127,23 @@ Table 52048891 "Loan & Advance Entry"
 
     keys
     {
-        key(Key1; "No.", "Entry No.")
+        key(STG_Key1; "No.", "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; Status, Type, Employee, "Global dimension 1", "Global dimension 2")
+        key(STG_Key2; Status, Type, Employee, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = Amount;
         }
-        key(Key3; "Document type", "Employee Posting Group", Employee, "Global dimension 1", "Global dimension 2")
+        key(STG_Key3; "Document type", "Employee Posting Group", Employee, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = Amount;
         }
-        key(Key4; Status, Type, Employee, "Last Date Modified", "Global dimension 1", "Global dimension 2")
+        key(STG_Key4; Status, Type, Employee, "Last Date Modified", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = Amount;
         }
-        key(Key5; "No.", Employee, "Entry No.")
+        key(STG_Key5; "No.", Employee, "Entry No.")
         {
         }
     }

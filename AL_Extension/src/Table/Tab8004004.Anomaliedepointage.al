@@ -21,7 +21,7 @@ Table 8004004 "Anomalie de pointage"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

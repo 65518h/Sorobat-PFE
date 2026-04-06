@@ -128,20 +128,20 @@ Table 52049050 "Expenses to repay Header"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
             SumIndexFields = "Document amount";
         }
-        key(Key2; Status, Repaied, "Global dimension 1", "Global dimension 2")
+        key(STG_Key2; Status, Repaied, "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Document amount";
         }
-        key(Key3; Repaied, Status, "Payment year", "Payment month", "Employee No.", "Global dimension 1", "Global dimension 2")
+        key(STG_Key3; Repaied, Status, "Payment year", "Payment month", "Employee No.", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Document amount";
         }
-        key(Key4; "Employee Posting Group", "Employee No.", "Payment No.", "Global dimension 1", "Global dimension 2")
+        key(STG_Key4; "Employee Posting Group", "Employee No.", "Payment No.", "Global dimension 1", "Global dimension 2")
         {
             SumIndexFields = "Document amount";
         }

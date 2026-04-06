@@ -544,7 +544,7 @@ Table 52048896 "Salary Headers"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

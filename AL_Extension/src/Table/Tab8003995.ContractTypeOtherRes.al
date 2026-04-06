@@ -87,7 +87,7 @@ Table 8003995 "Contract Type - Other Res."
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

@@ -1,8 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "moduleResolution": "bundler", 
@@ -11,6 +10,7 @@
     "target": "ES2022",
     "lib": ["ES2022", "dom"],
     "skipLibCheck": true,
+    "experimentalDecorators": true,
     "types": ["node"], // <-- AJOUTEZ "vitest/globals" ICI
     "typeRoots": [
       "node_modules/@types"

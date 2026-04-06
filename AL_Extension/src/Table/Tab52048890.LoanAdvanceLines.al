@@ -172,55 +172,55 @@ Table 52048890 "Loan & Advance Lines"
 
     keys
     {
-        key(Key1; "No.", "Entry No.")
+        key(STG_Key1; "No.", "Entry No.")
         {
             Clustered = true;
             SumIndexFields = "Line Amount", "Line %";
         }
-        key(Key2; "Document type", "Employee Posting Group", "Payment No.", Status, Type, Employee, "Global dimension 1", "Global dimension 2", "Employee Statistic Group")
+        key(STG_Key2; "Document type", "Employee Posting Group", "Payment No.", Status, Type, Employee, "Global dimension 1", "Global dimension 2", "Employee Statistic Group")
         {
             SumIndexFields = "Line Amount", "Line %";
         }
-        key(Key3; "Payment No.", Status, Type, Employee)
+        key(STG_Key3; "Payment No.", Status, Type, Employee)
         {
             SumIndexFields = "Line Amount", "Line %";
         }
-        key(Key4; "No.", Status, Type, Employee)
+        key(STG_Key4; "No.", Status, Type, Employee)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key5; "Payment No.", Paid, Employee)
+        key(STG_Key5; "Payment No.", Paid, Employee)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key6; "No.", Status, Type, Employee, Paid)
+        key(STG_Key6; "No.", Status, Type, Employee, Paid)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key7; "Document type", "Global dimension 1", "Global dimension 2", Employee)
+        key(STG_Key7; "Document type", "Global dimension 1", "Global dimension 2", Employee)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key8; "No.", Employee, Paid)
+        key(STG_Key8; "No.", Employee, Paid)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key9; "No.", "Document type", Paid)
+        key(STG_Key9; "No.", "Document type", Paid)
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key10; "No.", Employee, Status, Type, Paid, "Entry No.")
+        key(STG_Key10; "No.", Employee, Status, Type, Paid, "Entry No.")
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key11; Type, "Payment No.", Employee, "Employee Posting Group", Month, Year, "Global dimension 1", "Global dimension 2", "Document type", "Employee Statistic Group")
+        key(STG_Key11; Type, "Payment No.", Employee, "Employee Posting Group", Month, Year, "Global dimension 1", "Global dimension 2", "Document type", "Employee Statistic Group")
         {
             SumIndexFields = "Line Amount", "Line %", "Principal Amount", "Interest Amount";
         }
-        key(Key12; Employee, Type, "Date comptabilisation")
+        key(STG_Key12; Employee, Type, "Date comptabilisation")
         {
         }
-        key(Key13; Year, Month)
+        key(STG_Key13; Year, Month)
         {
         }
     }

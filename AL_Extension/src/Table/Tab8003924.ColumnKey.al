@@ -27,7 +27,7 @@ Table 8003924 "Column Key"
 
     keys
     {
-        key(Key1; TableNo, ColumnKey)
+        key(STG_Key1; TableNo, ColumnKey)
         {
             Clustered = true;
         }

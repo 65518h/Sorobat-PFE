@@ -171,24 +171,24 @@ table 52048965 "Indemnities Prev1"
 
     keys
     {
-        key(Key1; "No.", "Employee No.", Indemnity)
+        key(STG_Key1; "No.", "Employee No.", Indemnity)
         {
             Clustered = true;
             SumIndexFields = "Real Amount";
         }
-        key(Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key2; "Employee Posting Group", Type, "No.", "Employee No.", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key3; Indemnity, "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
+        key(STG_Key3; Indemnity, "Employee Posting Group", "Global Dimension 1", "Global Dimension 2")
         {
             SumIndexFields = "Real Amount";
         }
-        key(Key4; "No.", "Employee No.", Type)
+        key(STG_Key4; "No.", "Employee No.", Type)
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }
-        key(Key5; "No.", "Employee No.", Type, "Non Inclis en AV NAt")
+        key(STG_Key5; "No.", "Employee No.", Type, "Non Inclis en AV NAt")
         {
             SumIndexFields = "Real Amount", "Real Amount PR";
         }

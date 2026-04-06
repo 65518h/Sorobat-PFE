@@ -120,7 +120,7 @@ Table 8004180 "Job WIP Buffer2"
 
     keys
     {
-        key(Key1; "Job No.", "Posting Group", Type, "G/L Account No.", "Dim Combination ID")
+        key(STG_Key1; "Job No.", "Posting Group", Type, "G/L Account No.", "Dim Combination ID")
         {
             Clustered = true;
         }

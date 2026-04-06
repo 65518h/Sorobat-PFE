@@ -31,11 +31,11 @@
 
 //     keys
 //     {
-//         key(Key1; "Code Gamme")
+//         key(STG_Key1; "Code Gamme")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "Code sous Famille Equipement", "Fréquence")
+//         key(STG_Key2; "Code sous Famille Equipement", "Fréquence")
 //         {
 //         }
 //     }

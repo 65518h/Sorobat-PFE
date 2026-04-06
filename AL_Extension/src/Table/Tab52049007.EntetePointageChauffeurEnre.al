@@ -26,11 +26,11 @@ Table 52049007 "Entete Pointage Chauffeur Enre"
 
     keys
     {
-        key(Key1; "N° Document")
+        key(STG_Key1; "N° Document")
         {
             Clustered = true;
         }
-        key(Key2; Journee)
+        key(STG_Key2; Journee)
         {
         }
     }

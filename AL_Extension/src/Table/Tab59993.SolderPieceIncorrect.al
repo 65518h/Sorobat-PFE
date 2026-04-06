@@ -23,7 +23,7 @@ table 59993 "Solder Piece Incorrect"
 
     keys
     {
-        key(Key1; Annee, Journal, "Numero Piece", Compteur)
+        key(STG_Key1; Annee, Journal, "Numero Piece", Compteur)
         {
             Clustered = true;
         }

@@ -28,7 +28,7 @@ TableExtension 50052 "Resource PriceEXT" extends "Resource Price"
     keys
     {
 
-        key(Key2; "Customer No.", "Cross-Reference No.")
+        key(STG_Key2; "Customer No.", "Cross-Reference No.")
         {
         }
     }

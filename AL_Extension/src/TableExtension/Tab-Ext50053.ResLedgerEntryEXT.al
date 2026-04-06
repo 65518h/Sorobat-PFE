@@ -62,42 +62,42 @@ TableExtension 50053 "Res. Ledger EntryEXT" extends "Res. Ledger Entry"
     keys
     {
 
-        key(Key9; "Resource No.", "Posting Date", "Job No.", "Work Type Code")
+        key(STG_Key9; "Resource No.", "Posting Date", "Job No.", "Work Type Code")
         {
         }
 
-        key(Key10; "Resource No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Unit of Measure Code", "Resource Group No.")
+        key(STG_Key10; "Resource No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Unit of Measure Code", "Resource Group No.")
         {
         }
 
-        key(Key11; "Entry Type", "Resource No.", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Resource Group No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Work Type Code", "Reason Code", "Posting Date")
+        key(STG_Key11; "Entry Type", "Resource No.", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Resource Group No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Work Type Code", "Reason Code", "Posting Date")
         {
             SumIndexFields = Quantity, "Total Cost", "Total Price";
         }
 
-        key(Key12; "Work Type Code", "Resource No.", "Entry Type", "Posting Date")
+        key(STG_Key12; "Work Type Code", "Resource No.", "Entry Type", "Posting Date")
         {
             SumIndexFields = "Quantity (Base)";
         }
 
-        /*GL2024   key(Key13;"Entry Type","Planning Source",Chargeable,"Unit of Measure Code","Resource Group No.","Resource No.","Planning Task No.","Posting Date")
+        /*GL2024   key(STG_Key13;"Entry Type","Planning Source",Chargeable,"Unit of Measure Code","Resource Group No.","Resource No.","Planning Task No.","Posting Date")
            {
            MaintainSIFTIndex = false;
            SumIndexFields = Quantity,"Total Cost","Total Price","Quantity (Base)";
            }
 
-           key(Key14;"Entry Type","Planning Source",Chargeable,"Unit of Measure Code","Resource No.","Planning Task No.","Posting Date")
+           key(STG_Key14;"Entry Type","Planning Source",Chargeable,"Unit of Measure Code","Resource No.","Planning Task No.","Posting Date")
            {
            MaintainSIFTIndex = false;
            SumIndexFields = Quantity,"Total Cost","Total Price","Quantity (Base)";
            }
 
-           key(Key15;"Project Header No.","Planning Task No.","Posting Date")
+           key(STG_Key15;"Project Header No.","Planning Task No.","Posting Date")
            {
            MaintainSIFTIndex = false;
            SumIndexFields = Quantity,"Total Cost","Total Price","Quantity (Base)";
            }*/
-        key(Key16; "Employee Absence Entry No.")
+        key(STG_Key16; "Employee Absence Entry No.")
         {
             MaintainSIFTIndex = false;
             //GL2024 SumIndexFields = Quantity, "Total Cost", "Total Price", "Quantity (Base)";

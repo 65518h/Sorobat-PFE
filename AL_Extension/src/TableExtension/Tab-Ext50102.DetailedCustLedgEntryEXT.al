@@ -34,27 +34,27 @@ TableExtension 50102 "Detailed Cust. Ledg. EntryEXT" extends "Detailed Cust. Led
     {
 
 
-        /*  GL204   key(Key18;"Customer No.","Posting Date","Entry Type","Currency Code","Sell-to Customer No.")
+        /*  GL204   key(STG_Key18;"Customer No.","Posting Date","Entry Type","Currency Code","Sell-to Customer No.")
              {
              SumIndexFields = Amount,"Amount (LCY)","Debit Amount","Debit Amount (LCY)","Credit Amount","Credit Amount (LCY)";
              }
 
-             key(Key19;"Customer No.","Value Date","Currency Code")
+             key(STG_Key19;"Customer No.","Value Date","Currency Code")
              {
              SumIndexFields = Amount,"Amount (LCY)","Debit Amount","Credit Amount","Debit Amount (LCY)","Credit Amount (LCY)";
              }*/
-        key(Key20; "Initial Document Type", "Customer No.", "Posting Date", "Currency Code", "Entry Type", "Initial Entry Global Dim. 1", "Initial Entry Global Dim. 2")
+        key(STG_Key20; "Initial Document Type", "Customer No.", "Posting Date", "Currency Code", "Entry Type", "Initial Entry Global Dim. 1", "Initial Entry Global Dim. 2")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key21; "Initial Document Type", "Customer No.", "Posting Date", "Currency Code", "Entry Type", "Initial Entry Due Date")
+        key(STG_Key21; "Initial Document Type", "Customer No.", "Posting Date", "Currency Code", "Entry Type", "Initial Entry Due Date")
         {
             SumIndexFields = Amount, "Amount (LCY)";
         }
-        key(Key22; "Cust. Ledger Entry No.")
+        key(STG_Key22; "Cust. Ledger Entry No.")
         {
         }
-        key(Key23; Lettre)
+        key(STG_Key23; Lettre)
         {
         }
     }

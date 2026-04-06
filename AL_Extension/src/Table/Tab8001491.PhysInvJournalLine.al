@@ -182,12 +182,12 @@ Table 8001491 "Phys. Inv. Journal Line"
 
     keys
     {
-        key(Key1; "Location Code", "Journal Batch Name", "Line No.")
+        key(STG_Key1; "Location Code", "Journal Batch Name", "Line No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Location Code", "Item No.", "Variant Code", "Bar Code")
+        key(STG_Key2; "Location Code", "Item No.", "Variant Code", "Bar Code")
         {
             SumIndexFields = "Quantity (Base)";
         }

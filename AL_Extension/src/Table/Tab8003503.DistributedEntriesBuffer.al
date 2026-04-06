@@ -32,11 +32,11 @@ Table 8003503 "Distributed Entries Buffer"
 
     keys
     {
-        key(Key1; Type, "Entry no.")
+        key(STG_Key1; Type, "Entry no.")
         {
             Clustered = true;
         }
-        key(Key2; "Document No.")
+        key(STG_Key2; "Document No.")
         {
         }
     }

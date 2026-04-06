@@ -30,7 +30,7 @@ Table 52048955 "Coef Gratification1"
 
     keys
     {
-        key(Key1; Prime, "Collège", Note)
+        key(STG_Key1; Prime, "Collège", Note)
         {
             Clustered = true;
         }

@@ -38,7 +38,7 @@ Table 52049058 "Assurance Véhicule"
 
     keys
     {
-        key(Key1; "N° Veh", "Date Document")
+        key(STG_Key1; "N° Veh", "Date Document")
         {
             Clustered = true;
             SumIndexFields = Tarif;

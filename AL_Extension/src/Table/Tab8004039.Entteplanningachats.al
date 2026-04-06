@@ -21,7 +21,7 @@ Table 8004039 "En-tête planning achats"
 
     keys
     {
-        key(Key1; No)
+        key(STG_Key1; No)
         {
             Clustered = true;
         }

@@ -126,7 +126,7 @@ Table 52048885 "Default Soc. Contribution"
 
     keys
     {
-        key(Key1; "Employment Contract Code", "Social Contribution Code", "Indemnity Code")
+        key(STG_Key1; "Employment Contract Code", "Social Contribution Code", "Indemnity Code")
         {
             Clustered = true;
         }

@@ -1496,25 +1496,25 @@ Table 8004165 "Job Journal Line2"
 
     keys
     {
-        key(Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
+        key(STG_Key1; "Journal Template Name", "Journal Batch Name", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Journal Template Name", "Journal Batch Name", Type, "No.", "Unit of Measure Code", "Work Type Code")
+        key(STG_Key2; "Journal Template Name", "Journal Batch Name", Type, "No.", "Unit of Measure Code", "Work Type Code")
         {
             MaintainSQLIndex = false;
         }
-        key(Key3; "Journal Template Name", "Journal Batch Name", "Attached to Line No.")
+        key(STG_Key3; "Journal Template Name", "Journal Batch Name", "Attached to Line No.")
         {
         }
-        key(Key4; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
+        key(STG_Key4; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
         {
         }
-        key(Key5; Type, "No.", "Work Type Code", "Posting Date", "Work Time Type", "Job No.")
+        key(STG_Key5; Type, "No.", "Work Type Code", "Posting Date", "Work Time Type", "Job No.")
         {
             SumIndexFields = "Quantity (Base)";
         }
-        key(Key6; "Journal Template Name", "Journal Batch Name", "Entry Type", "Job No.", "Posting Date", Type, "No.")
+        key(STG_Key6; "Journal Template Name", "Journal Batch Name", "Entry Type", "Job No.", "Posting Date", Type, "No.")
         {
         }
     }

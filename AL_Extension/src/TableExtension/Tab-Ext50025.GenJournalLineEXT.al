@@ -510,21 +510,21 @@ TableExtension 50025 "Gen. Journal LineEXT" extends "Gen. Journal Line"
     keys
     {
 
-        key(Key11; "Journal Template Name", "Journal Batch Name", "Due Date")
+        key(STG_Key11; "Journal Template Name", "Journal Batch Name", "Due Date")
         {
             MaintainSQLIndex = false;
         }
 
-        /*GL2024  key(Key12;"Journal Template Name","Account Type","Account No.","Value Date","Posting Date")
+        /*GL2024  key(STG_Key12;"Journal Template Name","Account Type","Account No.","Value Date","Posting Date")
           {
           SumIndexFields = "Amount (LCY)";
           }*/
 
-        key(Key13; "Applies-to Doc. No.", "Journal Template Name", "Journal Batch Name", "Posting Date", "Account Type", "Account No.", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Job No.", "Reason Code")
+        key(STG_Key13; "Applies-to Doc. No.", "Journal Template Name", "Journal Batch Name", "Posting Date", "Account Type", "Account No.", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code", "Job No.", "Reason Code")
         {
         }
 
-        key(Key14; "Source Code", "Document No.", "Posting Date")
+        key(STG_Key14; "Source Code", "Document No.", "Posting Date")
         {
         }
     }

@@ -51,7 +51,7 @@ Table 8001480 "Filter Header"
 
     keys
     {
-        key(Key1; "Table ID", "Code")
+        key(STG_Key1; "Table ID", "Code")
         {
             Clustered = true;
         }

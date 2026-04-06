@@ -59,7 +59,7 @@ Table 52049047 "Entête Frais de mission"
 
     keys
     {
-        key(Key1; "N° Frais")
+        key(STG_Key1; "N° Frais")
         {
             Clustered = true;
         }

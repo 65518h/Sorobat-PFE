@@ -140,7 +140,7 @@ Table 8001526 "Statistic Scheduler line"
 
     keys
     {
-        key(Key1; "Code treatment", "Line No.")
+        key(STG_Key1; "Code treatment", "Line No.")
         {
             Clustered = true;
         }

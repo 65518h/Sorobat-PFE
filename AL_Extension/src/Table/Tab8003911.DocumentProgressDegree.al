@@ -35,7 +35,7 @@ Table 8003911 "Document Progress Degree"
 
     keys
     {
-        key(Key1; "Code", "Document Type")
+        key(STG_Key1; "Code", "Document Type")
         {
             Clustered = true;
         }

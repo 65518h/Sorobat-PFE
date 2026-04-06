@@ -161,14 +161,14 @@ Table 52048953 "Carière Enreg"
 
     keys
     {
-        key(Key1; "N° Document Extr.")
+        key(STG_Key1; "N° Document Extr.")
         {
             Clustered = true;
         }
-        key(Key2; employee, "Date Décesion")
+        key(STG_Key2; employee, "Date Décesion")
         {
         }
-        key(Key3; employee, date)
+        key(STG_Key3; employee, date)
         {
         }
     }

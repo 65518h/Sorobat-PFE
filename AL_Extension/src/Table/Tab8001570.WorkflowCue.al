@@ -171,7 +171,7 @@ Table 8001570 "Workflow Cue"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

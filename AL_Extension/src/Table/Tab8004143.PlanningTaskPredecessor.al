@@ -94,7 +94,7 @@ Table 8004143 "Planning Task Predecessor"
 
     keys
     {
-        key(Key1; "Project Header", "Task No.", "Project Header Predecessor", "Task No. Predecessor")
+        key(STG_Key1; "Project Header", "Task No.", "Project Header Predecessor", "Task No. Predecessor")
         {
             Clustered = true;
         }

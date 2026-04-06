@@ -195,7 +195,7 @@ Table 8001426 "Sort Field"
 
     keys
     {
-        key(Key1; TableNo, SortKey, "Line No.")
+        key(STG_Key1; TableNo, SortKey, "Line No.")
         {
             Clustered = true;
         }

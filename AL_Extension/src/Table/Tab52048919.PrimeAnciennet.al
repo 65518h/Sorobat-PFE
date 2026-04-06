@@ -22,7 +22,7 @@ table 52048919 "Prime Ancienneté"
 
     keys
     {
-        key(Key1; "Plage Min")
+        key(STG_Key1; "Plage Min")
         {
             Clustered = true;
         }

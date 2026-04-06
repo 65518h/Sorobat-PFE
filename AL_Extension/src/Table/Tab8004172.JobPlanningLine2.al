@@ -820,62 +820,62 @@ Table 8004172 "Job Planning Line2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", "Line No.")
+        key(STG_Key1; "Job No.", "Job Task No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", "Job Task No.", "Schedule Line", "Planning Date")
+        key(STG_Key2; "Job No.", "Job Task No.", "Schedule Line", "Planning Date")
         {
             SumIndexFields = "Total Price (LCY)", "Total Cost (LCY)", "Line Amount (LCY)";
         }
-        key(Key3; "Job No.", "Job Task No.", "Contract Line", "Planning Date")
+        key(STG_Key3; "Job No.", "Job Task No.", "Contract Line", "Planning Date")
         {
             SumIndexFields = "Line Amount (LCY)", "Total Price (LCY)", "Total Cost (LCY)", "Invoiced Amount (LCY)", "Invoiced Cost Amount (LCY)";
         }
-        key(Key4; "Job No.", "Job Task No.", "Schedule Line", "Currency Date")
+        key(STG_Key4; "Job No.", "Job Task No.", "Schedule Line", "Currency Date")
         {
         }
-        key(Key5; "Job No.", "Job Task No.", "Contract Line", "Currency Date")
+        key(STG_Key5; "Job No.", "Job Task No.", "Contract Line", "Currency Date")
         {
         }
-        key(Key6; "Job No.", "Schedule Line", Type, "No.", "Planning Date")
-        {
-            SumIndexFields = "Quantity (Base)";
-        }
-        key(Key7; "Job No.", "Schedule Line", Type, "Resource Group No.", "Planning Date")
-        {
-            SumIndexFields = "Quantity (Base)", Quantity, "Total Cost";
-        }
-        key(Key8; Status, "Schedule Line", Type, "No.", "Planning Date")
+        key(STG_Key6; "Job No.", "Schedule Line", Type, "No.", "Planning Date")
         {
             SumIndexFields = "Quantity (Base)";
         }
-        key(Key9; Status, "Schedule Line", Type, "Resource Group No.", "Planning Date")
+        key(STG_Key7; "Job No.", "Schedule Line", Type, "Resource Group No.", "Planning Date")
         {
             SumIndexFields = "Quantity (Base)", Quantity, "Total Cost";
         }
-        key(Key10; "Job Contract Entry No.")
+        key(STG_Key8; Status, "Schedule Line", Type, "No.", "Planning Date")
+        {
+            SumIndexFields = "Quantity (Base)";
+        }
+        key(STG_Key9; Status, "Schedule Line", Type, "Resource Group No.", "Planning Date")
+        {
+            SumIndexFields = "Quantity (Base)", Quantity, "Total Cost";
+        }
+        key(STG_Key10; "Job Contract Entry No.")
         {
         }
-        key(Key11; Type, "No.")
+        key(STG_Key11; Type, "No.")
         {
         }
-        key(Key12; "Document Type", "Document No.")
+        key(STG_Key12; "Document Type", "Document No.")
         {
         }
-        key(Key13; "Job No.", Type, "Resource Type", "Gen. Prod. Posting Group", "Entry Type", "Planning Date")
+        key(STG_Key13; "Job No.", Type, "Resource Type", "Gen. Prod. Posting Group", "Entry Type", "Planning Date")
         {
             SumIndexFields = "Quantity (Base)", "Total Price (LCY)", "Total Cost (LCY)", "Line Amount (LCY)", "Gross Total Cost", Quantity, "Total Cost", "Total Price";
         }
-        key(Key14; "Job No.", Type, "No.", "Work Type Code", "Planning Date")
+        key(STG_Key14; "Job No.", Type, "No.", "Work Type Code", "Planning Date")
         {
             SumIndexFields = "Quantity (Base)";
         }
-        key(Key15; "Gen. Prod. Posting Group")
+        key(STG_Key15; "Gen. Prod. Posting Group")
         {
             SumIndexFields = "Total Price (LCY)";
         }
-        key(Key16; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "Resource Type", "No.", "Variant Code", "Entry Type", "Planning Date", "Order Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
+        key(STG_Key16; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "Resource Type", "No.", "Variant Code", "Entry Type", "Planning Date", "Order Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
         {
             SumIndexFields = Quantity, "Total Cost", "Total Cost (LCY)", "Total Price", "Gross Total Cost", "Quantity (Base)", "Line Amount (LCY)";
         }

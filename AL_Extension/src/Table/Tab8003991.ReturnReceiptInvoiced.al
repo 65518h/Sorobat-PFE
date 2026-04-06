@@ -59,14 +59,14 @@ Table 8003991 "Return Receipt Invoiced"
 
     keys
     {
-        key(Key1; "Credit Memo No.", "Cr. Memo Line No.", "Return Receipt. No.", "Return Receipt Line No.")
+        key(STG_Key1; "Credit Memo No.", "Cr. Memo Line No.", "Return Receipt. No.", "Return Receipt Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Return  Order No.", "Return Order Line No.")
+        key(STG_Key2; "Return  Order No.", "Return Order Line No.")
         {
         }
-        key(Key3; "Return Rcpt. Posting Date", "Cr. Memo Posting Date")
+        key(STG_Key3; "Return Rcpt. Posting Date", "Cr. Memo Posting Date")
         {
         }
     }

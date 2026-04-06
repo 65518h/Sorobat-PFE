@@ -148,7 +148,7 @@ Table 52048904 "Employee Posting Group2"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

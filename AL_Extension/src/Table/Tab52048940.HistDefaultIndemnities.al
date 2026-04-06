@@ -249,20 +249,20 @@ Table 52048940 "Hist. Default Indemnities"
 
     keys
     {
-        key(Key1; "Employment Contract Code", "Indemnity Code", "Code contrat archivé")
+        key(STG_Key1; "Employment Contract Code", "Indemnity Code", "Code contrat archivé")
         {
             Clustered = true;
             SumIndexFields = "Default amount", "Basis amount";
         }
-        key(Key2; "Type Indemnité", "Indemnity Code", "Employment Contract Code")
+        key(STG_Key2; "Type Indemnité", "Indemnity Code", "Employment Contract Code")
         {
             SumIndexFields = "Basis amount";
         }
-        key(Key3; "Employment Contract Code", "Evaluation mode", "Non Inclue en jours congé")
+        key(STG_Key3; "Employment Contract Code", "Evaluation mode", "Non Inclue en jours congé")
         {
             SumIndexFields = "Basis amount";
         }
-        key(Key4; "Code contrat archivé", "Employment Contract Code")
+        key(STG_Key4; "Code contrat archivé", "Employment Contract Code")
         {
         }
     }

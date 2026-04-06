@@ -60,7 +60,7 @@ Table 8004181 "Job Difference Buffer2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", Type, "Entry type", "No.", "Location Code", "Variant Code", "Unit of Measure code", "Work Type Code")
+        key(STG_Key1; "Job No.", "Job Task No.", Type, "Entry type", "No.", "Location Code", "Variant Code", "Unit of Measure code", "Work Type Code")
         {
             Clustered = true;
         }

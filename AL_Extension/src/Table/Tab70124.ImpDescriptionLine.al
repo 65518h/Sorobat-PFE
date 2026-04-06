@@ -42,7 +42,7 @@ Table 70124 "Imp Description Line"
 
     keys
     {
-        key(Key1; "Table ID", "Document Type", "Document No.", "Document Line No.", "Description Type", "Line No.")
+        key(STG_Key1; "Table ID", "Document Type", "Document No.", "Document Line No.", "Description Type", "Line No.")
         {
             Clustered = true;
         }

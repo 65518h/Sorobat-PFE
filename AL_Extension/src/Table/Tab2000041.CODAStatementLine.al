@@ -343,19 +343,19 @@ Table 2000041 "CODA Statement Line"
 
     keys
     {
-        key(Key1; "Bank Account No.", "Statement No.", "Statement Line No.")
+        key(STG_Key1; "Bank Account No.", "Statement No.", "Statement Line No.")
         {
             Clustered = true;
             SumIndexFields = "Statement Amount";
         }
-        key(Key2; "Bank Account No.", "Statement No.", "Attached to Line No.")
+        key(STG_Key2; "Bank Account No.", "Statement No.", "Attached to Line No.")
         {
         }
-        key(Key3; "Bank Account No.", "Statement No.", ID, "Attached to Line No.", Type)
+        key(STG_Key3; "Bank Account No.", "Statement No.", ID, "Attached to Line No.", Type)
         {
             SumIndexFields = "Statement Amount";
         }
-        key(Key4; "Bank Account No.", "Statement No.", "Application Status")
+        key(STG_Key4; "Bank Account No.", "Statement No.", "Application Status")
         {
             SumIndexFields = "Unapplied Amount", Amount, "Amount (LCY)";
         }

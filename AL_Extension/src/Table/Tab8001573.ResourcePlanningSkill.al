@@ -42,10 +42,10 @@ Table 8001573 "Resource / Planning Skill"
 
     keys
     {
-        key(Key1; "No.", "Skill Code")
+        key(STG_Key1; "No.", "Skill Code")
         {
         }
-        key(Key2; "Skill Code", "No.")
+        key(STG_Key2; "Skill Code", "No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;

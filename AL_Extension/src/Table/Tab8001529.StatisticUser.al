@@ -44,7 +44,7 @@ Table 8001529 "Statistic User"
 
     keys
     {
-        key(Key1; "Sheduler code", "Statistic code", "User ID")
+        key(STG_Key1; "Sheduler code", "Statistic code", "User ID")
         {
             Clustered = true;
         }

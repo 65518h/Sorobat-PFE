@@ -159,83 +159,83 @@ Table 52048892 "Heures sup. eregistrées m"
 
     keys
     {
-        key(Key1; "N° transaction", "N° Ligne", "N° Salarié")
+        key(STG_Key1; "N° transaction", "N° Ligne", "N° Salarié")
         {
             Clustered = true;
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key2; "N° Salarié", "Code departement", "Code dossier", Date, "Type Jours")
+        key(STG_Key2; "N° Salarié", "Code departement", "Code dossier", Date, "Type Jours")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key3; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.")
+        key(STG_Key3; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.")
         {
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }
-        key(Key4; "Taux de majoration")
+        key(STG_Key4; "Taux de majoration")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key5; "N° Salarié")
+        key(STG_Key5; "N° Salarié")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key6; "N° Salarié", "Taux de majoration", "Mois de paiement", "Année de paiement", Quinzaine)
+        key(STG_Key6; "N° Salarié", "Taux de majoration", "Mois de paiement", "Année de paiement", Quinzaine)
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key7; "N° Salarié", "Mois de paiement", "Année de paiement", "Type heure")
+        key(STG_Key7; "N° Salarié", "Mois de paiement", "Année de paiement", "Type heure")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key8; "N° Salarié", Date, "Type Jours", "Type heure", "Code departement", "Code dossier")
+        key(STG_Key8; "N° Salarié", Date, "Type Jours", "Type heure", "Code departement", "Code dossier")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key9; "Paiement No.", "Employee Posting Group", "N° transaction", "N° Salarié")
+        key(STG_Key9; "Paiement No.", "Employee Posting Group", "N° transaction", "N° Salarié")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key10; "Paiement No.", "Employee Posting Group", "Code departement", "Code dossier", "N° Salarié")
+        key(STG_Key10; "Paiement No.", "Employee Posting Group", "Code departement", "Code dossier", "N° Salarié")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key11; "Année de paiement", "Mois de paiement", "Paiement No.")
+        key(STG_Key11; "Année de paiement", "Mois de paiement", "Paiement No.")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key12; "Année de paiement", "Mois de paiement", "Paiement No.", "Code departement", "Code dossier", "Employee Posting Group")
+        key(STG_Key12; "Année de paiement", "Mois de paiement", "Paiement No.", "Code departement", "Code dossier", "Employee Posting Group")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key13; "N° Salarié", Date, "Type Jours", "Taux de majoration")
+        key(STG_Key13; "N° Salarié", Date, "Type Jours", "Taux de majoration")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key14; "N° Salarié", "Mois de paiement", Date, "Type Jours")
+        key(STG_Key14; "N° Salarié", "Mois de paiement", Date, "Type Jours")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key15; "N° Salarié", "Mois de paiement", Date, "Type Jours", "Taux de majoration")
+        key(STG_Key15; "N° Salarié", "Mois de paiement", Date, "Type Jours", "Taux de majoration")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key16; "Année de paiement", "Mois de paiement", "Date comptabilisation", "N° Salarié")
+        key(STG_Key16; "Année de paiement", "Mois de paiement", "Date comptabilisation", "N° Salarié")
         {
         }
-        key(Key17; "Employee Statistic Group", "Année de paiement", "Mois de paiement", "Paiement No.")
-        {
-            SumIndexFields = "Nombre d'heures", "Montant ligne";
-        }
-        key(Key18; "N° Salarié", "Mois de paiement", "Année de paiement", Quinzaine)
+        key(STG_Key17; "Employee Statistic Group", "Année de paiement", "Mois de paiement", "Paiement No.")
         {
             SumIndexFields = "Nombre d'heures", "Montant ligne";
         }
-        key(Key19; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.", "Type Jours")
+        key(STG_Key18; "N° Salarié", "Mois de paiement", "Année de paiement", Quinzaine)
+        {
+            SumIndexFields = "Nombre d'heures", "Montant ligne";
+        }
+        key(STG_Key19; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.", "Type Jours")
         {
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }
-        key(Key20; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.", "Type Jours", "Taux de majoration")
+        key(STG_Key20; "N° Salarié", "Mois de paiement", "Année de paiement", Date, "Paiement No.", "Type Jours", "Taux de majoration")
         {
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }

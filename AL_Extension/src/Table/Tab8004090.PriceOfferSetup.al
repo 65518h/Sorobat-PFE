@@ -110,7 +110,7 @@ Table 8004090 "Price Offer Setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

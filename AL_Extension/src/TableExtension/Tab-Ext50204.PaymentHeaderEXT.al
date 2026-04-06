@@ -539,13 +539,13 @@ TableExtension 50204 "Payment HeaderEXT" extends "Payment Header"
     keys
     {
 
-        key(Key3; "Payment Class", "Status No.", "No.")
+        key(STG_Key3; "Payment Class", "Status No.", "No.")
         {
         }
-        key(Key4; "N° Bordereau")
+        key(STG_Key4; "N° Bordereau")
         {
         }
-        key(Key5; "Créer par")
+        key(STG_Key5; "Créer par")
         {
         }
     }

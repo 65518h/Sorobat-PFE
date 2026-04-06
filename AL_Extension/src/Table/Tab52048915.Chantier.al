@@ -26,7 +26,7 @@ table 52048915 Chantier
 
     keys
     {
-        key(Key1; "Code Chantier")
+        key(STG_Key1; "Code Chantier")
         {
             Clustered = true;
         }

@@ -20,7 +20,7 @@ Table 50030 Synchronisation
 
     keys
     {
-        key(Key1; "Num Sequence")
+        key(STG_Key1; "Num Sequence")
         {
             Clustered = true;
         }

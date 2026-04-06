@@ -27,7 +27,7 @@ Table 2000003 "IBLC/BLWI Transaction Code"
 
     keys
     {
-        key(Key1; "Transaction Code")
+        key(STG_Key1; "Transaction Code")
         {
             Clustered = true;
         }

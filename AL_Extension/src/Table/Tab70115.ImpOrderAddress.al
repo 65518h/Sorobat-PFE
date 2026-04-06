@@ -64,7 +64,7 @@ Table 70115 "Imp Order Address"
 
     keys
     {
-        key(Key1; "Vendor No.", "Code")
+        key(STG_Key1; "Vendor No.", "Code")
         {
             Clustered = true;
         }

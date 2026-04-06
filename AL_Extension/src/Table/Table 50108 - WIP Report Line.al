@@ -1220,15 +1220,15 @@ table 50061 "WIP Report Line"
 
     keys
     {
-        key(Key1; "WIP Report No.", "Line No.")
+        key(STG_Key1; "WIP Report No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "WIP Report No.", Type, "No.", "Unit of Measure Code", "Work Type Code")
+        key(STG_Key2; "WIP Report No.", Type, "No.", "Unit of Measure Code", "Work Type Code")
         {
             MaintainSQLIndex = false;
         }
-        key(Key3; Type, "No.", "Variant Code")
+        key(STG_Key3; Type, "No.", "Variant Code")
         {
         }
     }

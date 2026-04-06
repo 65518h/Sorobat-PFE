@@ -28,7 +28,7 @@ namespace Soroubat.Api.Models
         public string Engin { get; set; }
 
         [JsonPropertyName("descriptionEngin")]
-        public string DescriptionEngin { get; set; }
+        public string? DescriptionEngin { get; set; } // on peut laisser cette propriété nullable car elle n'est pas obligatoire dans BC, et on peut ne pas vouloir l'afficher dans l'interface si elle est vide. De plus, cela évite les problèmes de désérialisation si BC ne la retourne pas systématiquement.
 
         [JsonPropertyName("orderDate")]
         public DateOnly? OrderDate { get; set; }

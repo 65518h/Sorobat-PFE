@@ -1,144 +1,295 @@
-// modules/projects/services/project.service.ts
+// src/app/modules/projects/services/project.service.ts
+
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
-import { JobTaskService } from './taskapi';
-import { JobTask } from '../models/task.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError, of, forkJoin } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { Project } from '../models/project.model';
+import { JobTaskService } from './job-task.service';
+import { JobTask } from '../../tasks/models/job-task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   
-  constructor(private jobTaskService: JobTaskService) {}
+  private baseUrl = 'http://localhost:5227/api';
+  private siteManagementUrl = `${this.baseUrl}/SiteManagement`;
 
-  // ✅ IMPLÉMENTATION CORRECTE DE DELETEPROJECT
-  deleteProject(id: string): Observable<boolean> {
-    console.log('🗑️ Suppression du projet:', id);
-    
-    // OPTION 1: Si vous avez une API pour supprimer les projets
-    // return this.http.delete<void>(`${this.apiUrl}/projects/${id}`).pipe(
-    //   map(() => true),
-    //   catchError(() => of(false))
-    // );
-    
-    // OPTION 2: Version mock (pour test)
-    // Simuler une suppression réussie
-    return of(true);
-    
-    // OPTION 3: Si vous devez supprimer via les tâches
-    // (attention: supprime toutes les tâches du projet)
-    // return this.jobTaskService.getTasksByProject(id).pipe(
-    //   switchMap(tasks => {
-    //     const deleteObservables = tasks.map(task => 
-    //       this.jobTaskService.deleteTask(task.id!)
-    //     );
-    //     return forkJoin(deleteObservables).pipe(map(() => true));
-    //   })
-    // );
-  }
+  constructor(
+    private http: HttpClient,
+    private jobTaskService: JobTaskService
+  ) {}
 
-  // Récupérer tous les projets
+  // =============== MÉTHODES PRINCIPALES ===============
+
+  /**
+   * GET /api/SiteManagement - Récupère tous les projets
+   */
   getProjects(): Observable<Project[]> {
-    return this.jobTaskService.getTasks().pipe(
-      map((tasks: JobTask[]) => {
-        const projectMap = new Map<string, any>();
-        
-        tasks.forEach((task: JobTask) => {
-          const jobNo = task.jobNo;
-          if (!projectMap.has(jobNo)) {
-            projectMap.set(jobNo, {
-              id: jobNo,
-              number: jobNo,
-              name: `Projet ${jobNo}`,
-              description: this.getProjectDescription(jobNo),
-              customerName: 'Client',
-              responsible: task.responsible || 'Non assigné',
-              startDate: task.dateDebut ? new Date(task.dateDebut) : new Date(),
-              endDate: task.dateFin ? new Date(task.dateFin) : new Date(),
-              progress: 0,
-              status: 'En cours',
-              tasks: [] as JobTask[]
-            });
-          }
-          
-          const project = projectMap.get(jobNo);
-          project.tasks.push(task);
-          
-          // Mettre à jour les dates
-          if (task.dateDebut && new Date(task.dateDebut) < project.startDate) {
-            project.startDate = new Date(task.dateDebut);
-          }
-          if (task.dateFin && new Date(task.dateFin) > project.endDate) {
-            project.endDate = new Date(task.dateFin);
-          }
-        });
+    console.log('📡 Récupération de tous les projets...');
+    
+    return this.http.get<any[]>(this.siteManagementUrl).pipe(
+      map(response => this.mapProjectsResponse(response)),
+      switchMap(projects => {
+        const projectsWithTasks$ = projects.map(project => 
+          this.jobTaskService.getTasksByProject(project.no).pipe(
+            map(tasks => {
+              project.taskCount = tasks.length;
+              project.progress = this.calculateProjectProgress(tasks);
+              return project;
+            }),
+            catchError(() => {
+              project.taskCount = 0;
+              project.progress = 0;
+              return of(project);
+            })
+          )
+        );
+        return forkJoin(projectsWithTasks$);
+      }),
+      catchError(this.handleError)
+    );
+  }
 
-        // Calculer l'avancement pour chaque projet
-        projectMap.forEach((project: any) => {
-          if (project.tasks.length > 0) {
-            const totalProgress = project.tasks.reduce((sum: number, t: JobTask) => 
-              sum + (t.progressPct || 0), 0);
-            project.progress = Math.round(totalProgress / project.tasks.length);
-            
-            const allCompleted = project.tasks.every((t: JobTask) => t.progressPct === 100);
-            const anyBlocked = project.tasks.some((t: JobTask) => t.isBlocked);
-            
-            if (allCompleted) {
-              project.status = 'Terminé';
-            } else if (anyBlocked) {
-              project.status = 'Suspendu';
-            } else {
-              project.status = 'En cours';
-            }
-          }
-          
-          project.taskCount = project.tasks.length;
-          delete project.tasks;
-        });
+  /**
+   * GET /api/SiteManagement/{id} - Récupère un projet par son ID
+   */
+  getProjectById(id: string): Observable<Project | null> {
+    console.log('📡 Récupération du projet par ID:', id);
+    
+    return this.http.get<any>(`${this.siteManagementUrl}/${id}`).pipe(
+      map(response => this.mapProjectResponse(response)),
+      switchMap(project => 
+        this.jobTaskService.getTasksByProject(project.no).pipe(
+          map(tasks => {
+            project.taskCount = tasks.length;
+            project.progress = this.calculateProjectProgress(tasks);
+            return project;
+          }),
+          catchError(() => {
+            project.taskCount = 0;
+            project.progress = 0;
+            return of(project);
+          })
+        )
+      ),
+      catchError(() => of(null))
+    );
+  }
 
-        return Array.from(projectMap.values());
+  /**
+   * Récupère les tâches d'un projet
+   */
+  getProjectTasks(jobNo: string): Observable<JobTask[]> {
+    console.log('📡 Récupération des tâches du projet:', jobNo);
+    return this.jobTaskService.getTasksByProject(jobNo);
+  }
+
+  /**
+   * Récupère un projet avec toutes ses tâches
+   */
+  getProjectWithTasks(id: string): Observable<{ project: Project; tasks: JobTask[] } | null> {
+    console.log('📡 Récupération du projet avec ses tâches:', id);
+    
+    return forkJoin({
+      project: this.getProjectById(id),
+      tasks: this.getProjectTasks(id).pipe(catchError(() => of([])))
+    }).pipe(
+      map(({ project, tasks }) => project ? { project, tasks } : null)
+    );
+  }
+
+  /**
+   * POST /api/SiteManagement - Crée un nouveau projet
+   */
+  createProject(project: Partial<Project>): Observable<Project> {
+    console.log('📡 Création d\'un nouveau projet:', project);
+    
+    return this.http.post<any>(this.siteManagementUrl, this.mapToApiProject(project)).pipe(
+      map(response => this.mapProjectResponse(response)),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * PUT /api/SiteManagement/{id} - Met à jour un projet
+   */
+  updateProject(id: string, changes: Partial<Project>): Observable<Project> {
+    console.log('📡 Mise à jour du projet:', id, changes);
+    
+    return this.http.put<any>(`${this.siteManagementUrl}/${id}`, this.mapToApiProject(changes)).pipe(
+      map(response => this.mapProjectResponse(response)),
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * DELETE /api/SiteManagement/{id} - Supprime un projet
+   */
+  deleteProject(id: string): Observable<boolean> {
+    console.log('📡 Suppression du projet:', id);
+    
+    return this.http.delete<void>(`${this.siteManagementUrl}/${id}`).pipe(
+      map(() => {
+        console.log('✅ Projet supprimé avec succès');
+        return true;
+      }),
+      catchError((error) => {
+        console.error('❌ Erreur lors de la suppression:', error);
+        return of(false);
       })
     );
   }
 
-  // Récupérer un projet avec ses tâches
-  getProjectById(projectId: string): Observable<{ project: Project; tasks: JobTask[] } | null> {
-    return this.jobTaskService.getTasks().pipe(
-      map((tasks: JobTask[]) => {
-        const projectTasks = tasks.filter(t => t.jobNo === projectId);
+  /**
+   * PATCH /api/SiteManagement/update-progress - Met à jour l'avancement d'un projet
+   */
+  updateProjectProgress(projectId: string, progress?: number): Observable<any> {
+    console.log('📡 Mise à jour avancement projet:', projectId, progress);
+    
+    if (progress === undefined) {
+      return this.jobTaskService.getTasksByProject(projectId).pipe(
+        switchMap(tasks => {
+          const avgProgress = this.calculateProjectProgress(tasks);
+          return this.http.patch<any>(`${this.siteManagementUrl}/update-progress`, {
+            id: projectId,
+            progress: avgProgress
+          });
+        })
+      );
+    }
+    
+    return this.http.patch<any>(`${this.siteManagementUrl}/update-progress`, {
+      id: projectId,
+      progress
+    });
+  }
+
+  /**
+   * Archive un projet
+   */
+  archiveProject(projectId: string): Observable<boolean> {
+    console.log('📡 Archivage du projet:', projectId);
+    
+    return this.updateProject(projectId, { status: 'Archivé' }).pipe(
+      map(() => true),
+      catchError(() => of(false))
+    );
+  }
+
+  /**
+   * Obtenir les statistiques globales des projets
+   */
+  getProjectsStats(): Observable<{
+    total: number;
+    active: number;
+    completed: number;
+    suspended: number;
+    averageProgress: number;
+    totalTasks: number;
+  }> {
+    return this.getProjects().pipe(
+      switchMap(projects => {
+        const tasks$ = projects.map(p => 
+          this.jobTaskService.getTasksByProject(p.no).pipe(catchError(() => of([])))
+        );
         
-        if (projectTasks.length === 0) return null;
-
-        const totalProgress = projectTasks.reduce((sum, t) => sum + (t.progressPct || 0), 0);
-        const avgProgress = Math.round(totalProgress / projectTasks.length);
-
-        const project: Project = {
-          id: projectId,
-          number: projectId,
-          name: `Projet ${projectId}`,
-          description: this.getProjectDescription(projectId),
-          customerName: 'Client',
-          responsible: projectTasks[0]?.responsible || 'Non assigné',
-          startDate: new Date(Math.min(...projectTasks.map(t => t.dateDebut ? new Date(t.dateDebut).getTime() : Infinity))),
-          endDate: new Date(Math.max(...projectTasks.map(t => t.dateFin ? new Date(t.dateFin).getTime() : -Infinity))),
-          progress: avgProgress,
-          status: avgProgress === 100 ? 'Terminé' : 
-                  projectTasks.some(t => t.isBlocked) ? 'Suspendu' : 'En cours',
-          taskCount: projectTasks.length
-        };
-
-        return { project, tasks: projectTasks };
+        return forkJoin(tasks$).pipe(
+          map(tasksArrays => {
+            const allTasks = tasksArrays.flat();
+            const totalTasks = allTasks.length;
+            
+            const active = projects.filter(p => p.status === 'En cours').length;
+            const completed = projects.filter(p => p.status === 'Terminé').length;
+            const suspended = projects.filter(p => p.status === 'Suspendu').length;
+            
+            const totalProgress = projects.reduce((sum, p) => sum + (p.progress || 0), 0);
+            const averageProgress = projects.length > 0 ? Math.round(totalProgress / projects.length) : 0;
+            
+            return { 
+              total: projects.length, 
+              active, 
+              completed, 
+              suspended, 
+              averageProgress,
+              totalTasks
+            };
+          })
+        );
       })
     );
   }
 
-  private getProjectDescription(jobNo: string): string {
-    const descriptions: { [key: string]: string } = {
-      'PRJ-2026-001': 'Installation 8 espaces travail',
-      'PRJ-2026-002': 'Rénovation complète bureaux',
-      'PRJ-2026-003': 'Construction local commercial'
+  // =============== MÉTHODES DE CALCUL ===============
+
+  private calculateProjectProgress(tasks: JobTask[]): number {
+    if (!tasks || tasks.length === 0) return 0;
+    const sum = tasks.reduce((acc, task) => acc + (task.progressPct || 0), 0);
+    return Math.round(sum / tasks.length);
+  }
+
+  // =============== MAPPING ===============
+
+  private mapProjectResponse(data: any): Project {
+    return {
+      id: data.id || data.Id || data.systemId || '',
+      no: data.no || data.No || data.jobNo || '',
+      description: data.description || '',
+      status: data.status || 'Open',
+      personResponsible: data.personResponsible || data.responsible || null,
+      projectManager: data.projectManager || data.manager || null,
+      affectationMagasin: data.affectationMagasin || data.magasin || null,
+      taskCount: data.taskCount || 0,
+      progress: data.progress || 0,
+      createdAt: data.createdAt || new Date().toISOString()
     };
-    return descriptions[jobNo] || 'Projet en cours';
+  }
+
+  private mapProjectsResponse(data: any[]): Project[] {
+    if (!Array.isArray(data)) {
+      console.warn('⚠️ La réponse API n\'est pas un tableau:', data);
+      return [];
+    }
+    return data.map(item => this.mapProjectResponse(item));
+  }
+
+  private mapToApiProject(project: Partial<Project>): any {
+    const apiProject: any = {};
+    
+    if (project.id !== undefined) apiProject.id = project.id;
+    if (project.no !== undefined) apiProject.no = project.no;
+    if (project.description !== undefined) apiProject.description = project.description;
+    if (project.status !== undefined) apiProject.status = project.status;
+    if (project.personResponsible !== undefined) apiProject.personResponsible = project.personResponsible;
+    if (project.projectManager !== undefined) apiProject.projectManager = project.projectManager;
+    if (project.affectationMagasin !== undefined) apiProject.affectationMagasin = project.affectationMagasin;
+    if (project.progress !== undefined) apiProject.progress = project.progress;
+    
+    return apiProject;
+  }
+
+  // =============== GESTION DES ERREURS ===============
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Erreur de communication avec le serveur';
+    
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Erreur: ${error.error.message}`;
+      console.error('❌ Erreur client:', error.error.message);
+    } else {
+      errorMessage = `Code: ${error.status}, Message: ${error.message}`;
+      console.error('❌ Erreur serveur:', error.status, error.message);
+      
+      if (error.status === 0) {
+        errorMessage = 'Impossible de contacter le serveur. Vérifiez que le backend est démarré.';
+      } else if (error.status === 404) {
+        errorMessage = 'Ressource non trouvée.';
+      } else if (error.status === 500) {
+        errorMessage = 'Erreur interne du serveur.';
+      }
+    }
+    
+    return throwError(() => new Error(errorMessage));
   }
 }

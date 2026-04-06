@@ -194,7 +194,7 @@ Table 70101 "Imp Salesperson/Purchaser"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

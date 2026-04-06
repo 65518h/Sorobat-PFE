@@ -85,7 +85,7 @@ Table 70114 "Imp Ship-to Address"
 
     keys
     {
-        key(Key1; "Customer No.", "Code")
+        key(STG_Key1; "Customer No.", "Code")
         {
             Clustered = true;
         }

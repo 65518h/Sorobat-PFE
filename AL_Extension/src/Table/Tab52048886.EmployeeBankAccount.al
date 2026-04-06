@@ -165,14 +165,14 @@ Table 52048886 "Employee Bank Account"
 
     keys
     {
-        key(Key1; "Employee No.", "Code")
+        key(STG_Key1; "Employee No.", "Code")
         {
             Clustered = true;
         }
-        key(Key2; "Code", "Employee No.")
+        key(STG_Key2; "Code", "Employee No.")
         {
         }
-        key(Key3; "Banque")
+        key(STG_Key3; "Banque")
         {
         }
     }

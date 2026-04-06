@@ -1609,46 +1609,46 @@ TableExtension 50020 "Purchase LineEXT" extends "Purchase Line"
     keys
     {
 
-        /* //GL2024    key(Key25;"Document Type","Gen. Prod. Posting Group","Job No.","Job Task No.","Work Type Code","Order Date","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
+        /* //GL2024    key(STG_Key25;"Document Type","Gen. Prod. Posting Group","Job No.","Job Task No.","Work Type Code","Order Date","Shortcut Dimension 1 Code","Shortcut Dimension 2 Code")
             {
             SumIndexFields = "Engaged Cost (LCY)","Outst. Amount Excl. VAT (LCY)","Ordered Not Invoiced (LCY)","Amt. Rcd. Not Invoiced (LCY)","Amt.Rcd. Not Inv.Excl. VAT LCY";
             }*/
-        key(Key26; "Attached to Doc. Type", "Attached to Doc. No.")
+        key(STG_Key26; "Attached to Doc. Type", "Attached to Doc. No.")
         {
             //GL2024   SumIndexFields = "Line Amount";
         }
-        key(Key27; "Job No.")
+        key(STG_Key27; "Job No.")
         {
         }
-        /* GL2024  key(Key28; "Attached to Doc. Type", "Attached to Doc. No.", Type, "No.")
+        /* GL2024  key(STG_Key28; "Attached to Doc. Type", "Attached to Doc. No.", Type, "No.")
           {
               SumIndexFields = "Quantity (Base)";
           }
 
-          key(Key28;"N° Dossier","Document Type","Document No.","Line No.",Type)
+          key(STG_Key28;"N° Dossier","Document Type","Document No.","Line No.",Type)
           {
           }*/
-        key(Key29; Synchronise)
+        key(STG_Key29; Synchronise)
         {
         }
 
-        key(Key30; "VAT %")
+        key(STG_Key30; "VAT %")
         {
         }
 
-        key(Key31; "Document No.", Description, "Posting Group")
+        key(STG_Key31; "Document No.", Description, "Posting Group")
         {
         }
 
-        key(Key32; Description, "Job No.")
+        key(STG_Key32; Description, "Job No.")
         {
         }
 
-        key(Key33; "VAT Prod. Posting Group")
+        key(STG_Key33; "VAT Prod. Posting Group")
         {
         }
 
-        key(Key34; "No.", "Quantity Received", "Outstanding Quantity", "Job No.")
+        key(STG_Key34; "No.", "Quantity Received", "Outstanding Quantity", "Job No.")
         {
             SumIndexFields = "Qty. Received (Base)", "Outstanding Qty. (Base)", "Outstanding Quantity";
         }

@@ -26,11 +26,11 @@
 
 //     keys
 //     {
-//         key(Key1; "Messenger User ID")
+//         key(STG_Key1; "Messenger User ID")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "Online/Offline", "Messenger User ID")
+//         key(STG_Key2; "Online/Offline", "Messenger User ID")
 //         {
 //         }
 //     }

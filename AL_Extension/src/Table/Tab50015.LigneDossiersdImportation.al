@@ -263,24 +263,24 @@ Table 50015 "Ligne Dossiers d'Importation"
 
     keys
     {
-        key(Key1; "N° dossier", "N° ligne", "N° réception", "N° article")
+        key(STG_Key1; "N° dossier", "N° ligne", "N° réception", "N° article")
         {
             Clustered = true;
             SumIndexFields = Montant, Volume, "Montant (dev soc)", "Quantité", "Quantité (base)";
         }
-        key(Key2; "N° commande", "N° ligne commande")
+        key(STG_Key2; "N° commande", "N° ligne commande")
         {
         }
-        key(Key3; "N° dossier", "N° article", "N° réception", "N° ligne réception")
+        key(STG_Key3; "N° dossier", "N° article", "N° réception", "N° ligne réception")
         {
         }
-        key(Key4; "N° article", "Date Déclaration", "N° dossier")
+        key(STG_Key4; "N° article", "Date Déclaration", "N° dossier")
         {
         }
-        key(Key5; "N° réception", "N° ligne réception", "N° article", "N° dossier")
+        key(STG_Key5; "N° réception", "N° ligne réception", "N° article", "N° dossier")
         {
         }
-        key(Key6; "N° article")
+        key(STG_Key6; "N° article")
         {
             SumIndexFields = Montant, Volume, "Montant (dev soc)", "Quantité", "Quantité (base)";
         }

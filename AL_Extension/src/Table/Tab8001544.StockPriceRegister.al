@@ -55,7 +55,7 @@ Table 8001544 "Stock Price Register"
 
     keys
     {
-        key(Key1; "Stock Code", Date)
+        key(STG_Key1; "Stock Code", Date)
         {
             Clustered = true;
         }

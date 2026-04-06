@@ -13,7 +13,7 @@
 
 //     keys
 //     {
-//         key(Key1; matricule)
+//         key(STG_Key1; matricule)
 //         {
 //             Clustered = true;
 //         }

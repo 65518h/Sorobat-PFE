@@ -19,7 +19,7 @@ Table 52048992 "Modéle véhicule"
 
     keys
     {
-        key(Key1; "Code Marque", "Code Modéle")
+        key(STG_Key1; "Code Marque", "Code Modéle")
         {
             Clustered = true;
         }

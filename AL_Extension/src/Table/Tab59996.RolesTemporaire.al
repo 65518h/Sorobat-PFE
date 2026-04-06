@@ -13,7 +13,7 @@ Table 59996 "Roles Temporaire"
 
     keys
     {
-        key(Key1; "Id Formulaire")
+        key(STG_Key1; "Id Formulaire")
         {
             Clustered = true;
         }

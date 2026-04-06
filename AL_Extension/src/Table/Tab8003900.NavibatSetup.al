@@ -768,7 +768,7 @@ Table 8003900 NavibatSetup
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

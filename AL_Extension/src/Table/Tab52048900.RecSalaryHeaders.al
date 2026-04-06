@@ -466,17 +466,17 @@ Table 52048900 "Rec. Salary Headers"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; Year, Month, "No.")
+        key(STG_Key2; Year, Month, "No.")
         {
         }
-        key(Key3; "Posting Date", "No.")
+        key(STG_Key3; "Posting Date", "No.")
         {
         }
-        key(Key4; "Posting Date", Month, "No.")
+        key(STG_Key4; "Posting Date", Month, "No.")
         {
         }
     }

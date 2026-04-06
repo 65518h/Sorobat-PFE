@@ -45,7 +45,7 @@ Table 8001569 "Workflow Document Comment"
 
     keys
     {
-        key(Key1; "Document Template", "No.", "Line No.")
+        key(STG_Key1; "Document Template", "No.", "Line No.")
         {
             Clustered = true;
         }

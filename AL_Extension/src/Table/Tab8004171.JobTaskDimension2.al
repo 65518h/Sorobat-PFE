@@ -51,7 +51,7 @@ Table 8004171 "Job Task Dimension2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", "Dimension Code")
+        key(STG_Key1; "Job No.", "Job Task No.", "Dimension Code")
         {
             Clustered = true;
         }

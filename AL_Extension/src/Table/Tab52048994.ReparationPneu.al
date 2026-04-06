@@ -76,7 +76,7 @@ Table 52048994 "Reparation Pneu"
 
     keys
     {
-        key(Key1; "N° Reparation", "N° Ligne", "N°Véhicule")
+        key(STG_Key1; "N° Reparation", "N° Ligne", "N°Véhicule")
         {
             Clustered = true;
             SumIndexFields = "Coût Opération";

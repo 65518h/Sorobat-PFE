@@ -15,7 +15,7 @@ Table 58989 "salarier nbr enfants"
 
     keys
     {
-        key(Key1; salarier)
+        key(STG_Key1; salarier)
         {
             Clustered = true;
         }

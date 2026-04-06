@@ -27,7 +27,7 @@
 
 //     keys
 //     {
-//         key(Key1; NUMSAGE)
+//         key(STG_Key1; NUMSAGE)
 //         {
 //             Clustered = true;
 //         }

@@ -484,7 +484,7 @@ TableExtension 50041 "Sales Cr.Memo HeaderEXT" extends "Sales Cr.Memo Header"
     keys
     {
 
-        /*GL2024  key(Key10;"Job No.","Prepayment Rank No.","Scheduler Origin","No.")
+        /*GL2024  key(STG_Key10;"Job No.","Prepayment Rank No.","Scheduler Origin","No.")
           {
           }*/
     }

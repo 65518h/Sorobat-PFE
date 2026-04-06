@@ -24,7 +24,7 @@ Table 8001470 "Role Profile"
 
     keys
     {
-        key(Key1; "Profile ID", "Role ID")
+        key(STG_Key1; "Profile ID", "Role ID")
         {
             Clustered = true;
         }

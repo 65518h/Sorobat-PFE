@@ -22,7 +22,7 @@ Table 84161 "UPG Job Ledger Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }

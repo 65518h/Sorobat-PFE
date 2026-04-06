@@ -55,7 +55,7 @@ Table 8004075 "Description Line"
 
     keys
     {
-        key(Key1; "Table ID", "Document Type", "Document No.", "Document Line No.", "Line No.")
+        key(STG_Key1; "Table ID", "Document Type", "Document No.", "Document Line No.", "Line No.")
         {
             Clustered = true;
         }

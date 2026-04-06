@@ -198,10 +198,10 @@ Table 8004031 "Resource / Resource Group"
 
     keys
     {
-        key(Key1; "Resource No.", "Resource Group No.")
+        key(STG_Key1; "Resource No.", "Resource Group No.")
         {
         }
-        key(Key2; "Resource Group No.", "Resource No.")
+        key(STG_Key2; "Resource Group No.", "Resource No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;

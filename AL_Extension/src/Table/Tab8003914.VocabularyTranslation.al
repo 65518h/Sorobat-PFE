@@ -53,7 +53,7 @@ Table 8003914 "Vocabulary Translation"
 
     keys
     {
-        key(Key1; "Caption No.", "Language ID")
+        key(STG_Key1; "Caption No.", "Language ID")
         {
             Clustered = true;
         }

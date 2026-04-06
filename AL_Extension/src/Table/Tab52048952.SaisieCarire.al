@@ -209,7 +209,7 @@ Table 52048952 "Saisie Carière"
 
     keys
     {
-        key(Key1; "N° Document Extr.")
+        key(STG_Key1; "N° Document Extr.")
         {
             Clustered = true;
         }

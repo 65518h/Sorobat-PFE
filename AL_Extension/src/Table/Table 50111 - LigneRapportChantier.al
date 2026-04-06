@@ -439,17 +439,17 @@ Table 50046 "Job Report Line"
 
     keys
     {
-        key(Key1; "Document No.", Line, "WIP Report No.")
+        key(STG_Key1; "Document No.", Line, "WIP Report No.")
         {
             Clustered = true;
         }
-        key(Key2; Date, Job, Equipment)
+        key(STG_Key2; Date, Job, Equipment)
         {
         }
-        key(Key3; Date, Job, Product)
+        key(STG_Key3; Date, Job, Product)
         {
         }
-        key(Key4; Date, Job, Labor)
+        key(STG_Key4; Date, Job, Labor)
         {
         }
     }

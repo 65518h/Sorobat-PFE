@@ -408,17 +408,17 @@ Table 52048888 "Loan & Advance"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }
-        key(Key2; Employee)
+        key(STG_Key2; Employee)
         {
         }
-        key(Key3; Type)
+        key(STG_Key3; Type)
         {
         }
-        key(Key4; "Document type")
+        key(STG_Key4; "Document type")
         {
         }
     }

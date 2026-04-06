@@ -60,29 +60,29 @@ Table 50203 "Tableau Comparatif"
 
     keys
     {
-        key(Key1; "Qualite Inverse", "Prix (DS)", "Date Comparatif", "Delai De Livraison", Fournisseurs)
+        key(STG_Key1; "Qualite Inverse", "Prix (DS)", "Date Comparatif", "Delai De Livraison", Fournisseurs)
         {
             Clustered = true;
         }
-        key(Key2; "Prix (DS)", Note, "Date Comparatif")
+        key(STG_Key2; "Prix (DS)", Note, "Date Comparatif")
         {
         }
-        key(Key3; "Prix (DS)", "Date Comparatif", "Note de trie")
+        key(STG_Key3; "Prix (DS)", "Date Comparatif", "Note de trie")
         {
         }
-        key(Key4; "Date Comparatif", "Prix (DS)", "Note de trie")
+        key(STG_Key4; "Date Comparatif", "Prix (DS)", "Note de trie")
         {
         }
-        key(Key5; "Date Comparatif", "Note de trie", "Prix (DS)")
+        key(STG_Key5; "Date Comparatif", "Note de trie", "Prix (DS)")
         {
         }
-        key(Key6; "Note de trie", "Date Comparatif", "Prix (DS)")
+        key(STG_Key6; "Note de trie", "Date Comparatif", "Prix (DS)")
         {
         }
-        key(Key7; "Note de trie", "Prix (DS)", "Date Comparatif")
+        key(STG_Key7; "Note de trie", "Prix (DS)", "Date Comparatif")
         {
         }
-        key(Key8; "N° Article", Fournisseurs)
+        key(STG_Key8; "N° Article", Fournisseurs)
         {
         }
     }

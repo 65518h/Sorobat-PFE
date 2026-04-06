@@ -1,5 +1,5 @@
-// auth/login/login.component.ts
-import { Component, OnInit, Inject, PLATFORM_ID, inject } from '@angular/core';
+// src/app/auth/login/login.ts
+import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -31,29 +31,25 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
-
-
 export class LoginComponent implements OnInit {
-  // Remplacez les injections du constructeur par ceci :
-  private platformId = inject(PLATFORM_ID);
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private router = inject(Router);
-
-  private isBrowser: boolean;
   loginForm!: FormGroup;
   hidePassword = true;
   isLoading = false;
   errorMessage = '';
+  private isBrowser: boolean;
 
-  constructor() {
-    // Le constructeur devient beaucoup plus propre
+  // ✅ CONSTRUCTEUR SIMPLIFIÉ - SUR UNE SEULE LIGNE
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
-  // ... reste du code
 
   ngOnInit(): void {
-    // Vérifier l'authentification UNIQUEMENT côté navigateur
     if (this.isBrowser && this.authService.isAuthenticated()) {
       this.router.navigate(['/dashboard']);
     }
@@ -64,41 +60,62 @@ export class LoginComponent implements OnInit {
       rememberMe: [false]
     });
 
-    // Charger les identifiants sauvegardés UNIQUEMENT côté navigateur
     if (this.isBrowser) {
       const savedCredentials = localStorage.getItem('remembered_credentials');
       if (savedCredentials) {
-        const { username, password } = JSON.parse(savedCredentials);
-        this.loginForm.patchValue({ username, password, rememberMe: true });
+        try {
+          const { username, password } = JSON.parse(savedCredentials);
+          this.loginForm.patchValue({ username, password, rememberMe: true });
+        } catch (e) {
+          console.error('Erreur de parsing localStorage', e);
+        }
       }
     }
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.markFormGroupTouched(this.loginForm);
+      return;
+    }
 
     this.isLoading = true;
     this.errorMessage = '';
+    this.cdr.detectChanges();
 
     const { username, password, rememberMe } = this.loginForm.value;
 
-    // Gérer "Se souvenir de moi" UNIQUEMENT côté navigateur
-    if (this.isBrowser && rememberMe) {
-      localStorage.setItem('remembered_credentials', JSON.stringify({ username, password }));
-    } else if (this.isBrowser) {
-      localStorage.removeItem('remembered_credentials');
-    }
-
     setTimeout(() => {
       const result = this.authService.login(username, password);
-      this.isLoading = false;
-
+      
       if (result.success) {
+        if (this.isBrowser && rememberMe) {
+          localStorage.setItem('remembered_credentials', JSON.stringify({ username, password }));
+        } else if (this.isBrowser) {
+          localStorage.removeItem('remembered_credentials');
+        }
         this.router.navigate(['/dashboard']);
       } else {
-        this.errorMessage = result.message || 'Erreur de connexion';
+        this.isLoading = false;
+        this.errorMessage = result.message || 'Nom d\'utilisateur ou mot de passe incorrect';
+        this.cdr.detectChanges();
+        this.shakeForm();
       }
     }, 1000);
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+    });
+  }
+
+  private shakeForm(): void {
+    const form = document.querySelector('form');
+    form?.classList.add('shake');
+    setTimeout(() => {
+      form?.classList.remove('shake');
+    }, 500);
   }
 
   setDemoCredentials(username: string, password: string): void {

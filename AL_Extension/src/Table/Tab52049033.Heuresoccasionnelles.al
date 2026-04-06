@@ -338,12 +338,12 @@ Table 52049033 "Heures occasionnelles"
 
     keys
     {
-        key(Key1; "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
+        key(STG_Key1; "N° Salarié", "N° Ligne", "Code departement", "Code dossier")
         {
             Clustered = true;
             SumIndexFields = "Montant ligne", "Nombre d'heures";
         }
-        key(Key2; "N° Ligne")
+        key(STG_Key2; "N° Ligne")
         {
         }
     }

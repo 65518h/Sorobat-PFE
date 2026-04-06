@@ -395,17 +395,17 @@ TableExtension 50875 "Job Journal LineEXT" extends "Job Journal Line"
     keys
     {
 
-        /*GL2024  key(Key3; "Journal Template Name", "Journal Batch Name", "Attached to Line No.")
+        /*GL2024  key(STG_Key3; "Journal Template Name", "Journal Batch Name", "Attached to Line No.")
           {
           }
-          key(Key4; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
+          key(STG_Key4; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
           {
           }
-          key(Key5; Type, "No.", "Work Type Code", "Posting Date", "Work Time Type", "Job No.")
+          key(STG_Key5; Type, "No.", "Work Type Code", "Posting Date", "Work Time Type", "Job No.")
           {
               SumIndexFields = "Quantity (Base)";
           }
-          key(Key6; "Journal Template Name", "Journal Batch Name", "Entry Type", "Job No.", "Posting Date", Type, "No.")
+          key(STG_Key6; "Journal Template Name", "Journal Batch Name", "Entry Type", "Job No.", "Posting Date", Type, "No.")
           {
           }*/
     }

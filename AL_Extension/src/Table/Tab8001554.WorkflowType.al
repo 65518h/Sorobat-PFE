@@ -56,7 +56,7 @@ Table 8001554 "Workflow Type"
 
     keys
     {
-        key(Key1; Type)
+        key(STG_Key1; Type)
         {
             Clustered = true;
         }

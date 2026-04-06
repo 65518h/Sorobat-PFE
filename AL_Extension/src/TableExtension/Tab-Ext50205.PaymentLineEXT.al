@@ -1397,159 +1397,159 @@ TableExtension 50205 "Payment LineEXT" extends "Payment Line"
     keys
     {
 
-        /*GL2024   key(Key2;"Copied To No.","Copied To Line",Caisse)
+        /*GL2024   key(STG_Key2;"Copied To No.","Copied To Line",Caisse)
             {
             }
 
-            key(Key6;"Header Account Type","Header Account No.","No.","Line No.","Copied To No.","Copied To Line")
+            key(STG_Key6;"Header Account Type","Header Account No.","No.","Line No.","Copied To No.","Copied To Line")
             {
             SumIndexFields = "Amount (LCY)";
             }
 
-            key(Key7;"Account Type","Account No.","Avance Valider")
+            key(STG_Key7;"Account Type","Account No.","Avance Valider")
             {
             SumIndexFields = "Amount (LCY)";
             }
     */
-        key(Key8; "Payment in Progress", "Status No.", "Account Type", "Account No.", "Payment Class", "Posting Date", IsCopy)
+        key(STG_Key8; "Payment in Progress", "Status No.", "Account Type", "Account No.", "Payment Class", "Posting Date", IsCopy)
         {
             SumIndexFields = "Amount (LCY)";
         }
 
-        key(Key9; "Payment Class", "Account Type", "Status No.", "No.")
+        key(STG_Key9; "Payment Class", "Account Type", "Status No.", "No.")
         {
             SumIndexFields = "Amount (LCY)";
         }
 
-        key(Key10; "Copied To Line", "Status No.", "Payment Class", "Account No.")
+        key(STG_Key10; "Copied To Line", "Status No.", "Payment Class", "Account No.")
         {
             SumIndexFields = "Amount (LCY)";
         }
 
-        key(Key11; "Copied To No.", "Status No.", "Payment Class", "Account No.", "Payment in Progress", "Account Type")
+        key(STG_Key11; "Copied To No.", "Status No.", "Payment Class", "Account No.", "Payment in Progress", "Account Type")
         {
             SumIndexFields = "Amount (LCY)";
         }
 
-        key(Key12; "Account No.", "Account Type", "Status No.", "Payment in Progress", "Due Date", "Copied To No.", "Copied To Line", "Payment Class")
+        key(STG_Key12; "Account No.", "Account Type", "Status No.", "Payment in Progress", "Due Date", "Copied To No.", "Copied To Line", "Payment Class")
         {
             SumIndexFields = "Amount (LCY)";
         }
 
-        key(Key13; "Account No.", "Account Type", "Payment in Progress", "Due Date")
+        key(STG_Key13; "Account No.", "Account Type", "Payment in Progress", "Due Date")
         {
             SumIndexFields = "Amount (LCY)", Amount;
         }
 
-        key(Key14; "Payment in Progress", "Account No.", "Account Type", "Payment Class", "Due Date")
+        key(STG_Key14; "Payment in Progress", "Account No.", "Account Type", "Payment Class", "Due Date")
         {
             SumIndexFields = "Amount (LCY)", Amount;
         }
 
-        key(Key15; "No.", "Copied To No.", "Copied To Line", "Line No.")
+        key(STG_Key15; "No.", "Copied To No.", "Copied To Line", "Line No.")
         {
         }
 
-        key(Key16; "Due Date", "Document No.")
+        key(STG_Key16; "Due Date", "Document No.")
         {
         }
 
-        key(Key17; "Copied To No.", "Status No.", "Payment Class", "Account Type", "Account No.")
-        {
-            SumIndexFields = "Amount (LCY)", Amount;
-        }
-
-        key(Key18; "Copied To Line", "Copied To No.", "Payment in Progress", "Account Type", "Account No.", "Payment Class")
+        key(STG_Key17; "Copied To No.", "Status No.", "Payment Class", "Account Type", "Account No.")
         {
             SumIndexFields = "Amount (LCY)", Amount;
         }
 
-        key(Key19; "Applies-to Doc. No.", "Account Type", "Account No.")
+        key(STG_Key18; "Copied To Line", "Copied To No.", "Payment in Progress", "Account Type", "Account No.", "Payment Class")
         {
             SumIndexFields = "Amount (LCY)", Amount;
         }
 
-        /*GL2024    key(Key20;"Payment Class","Account Type","Groupe Comptabilisation","Posting Date",Amount)
+        key(STG_Key19; "Applies-to Doc. No.", "Account Type", "Account No.")
+        {
+            SumIndexFields = "Amount (LCY)", Amount;
+        }
+
+        /*GL2024    key(STG_Key20;"Payment Class","Account Type","Groupe Comptabilisation","Posting Date",Amount)
             {
             SumIndexFields = "Amount (LCY)",Amount;
             }
 
-            key(Key21;"Type paiement","Copied To No.","Status No.","Payment in Progress","Account Type","Account No.","N° commande")
+            key(STG_Key21;"Type paiement","Copied To No.","Status No.","Payment in Progress","Account Type","Account No.","N° commande")
             {
             SumIndexFields = "Amount (LCY)",Amount;
             }
       */
-        key(Key22; "Account No.", "Due Date")
+        key(STG_Key22; "Account No.", "Due Date")
         {
         }
 
-        key(Key23; Amount, "No.")
+        key(STG_Key23; Amount, "No.")
         {
         }
-        key(Key24; "Code Retenue à la Source")
+        key(STG_Key24; "Code Retenue à la Source")
         {
         }
 
-        /* GL2024   key(Key25; "Payment Class", "Code Retenue à la Source")
+        /* GL2024   key(STG_Key25; "Payment Class", "Code Retenue à la Source")
             {
             }
     */
-        key(Key26; "Due Date")
+        key(STG_Key26; "Due Date")
         {
         }
 
-        key(Key27; "Copied To No.", "Account No.", "Account Type", "Status No.", "Payment Class", "Due Date")
+        key(STG_Key27; "Copied To No.", "Account No.", "Account Type", "Status No.", "Payment Class", "Due Date")
         {
             SumIndexFields = Amount;
         }
 
-        key(Key28; "Payment Class", "Due Date")
+        key(STG_Key28; "Payment Class", "Due Date")
         {
         }
 
-        /*GL2024  key(Key29; "Code Retenue à la Source", "Payment Class")
+        /*GL2024  key(STG_Key29; "Code Retenue à la Source", "Payment Class")
           {
           }
 
-          key(Key30; "Payment Class", "Annee Echeance", "Mois Echeance")
+          key(STG_Key30; "Payment Class", "Annee Echeance", "Mois Echeance")
           {
           }*/
-        key(Key31; Caisse, "Caisse Chantier", "N° Affaire")
+        key(STG_Key31; Caisse, "Caisse Chantier", "N° Affaire")
         {
             //GL2024 SumIndexFields = Amount;
         }
-        // key(Key32; "Code Opération", Benificiaire)
+        // key(STG_Key32; "Code Opération", Benificiaire)
         // {
         // }
-        key(Key33; Banque, "Compte Bancaire")
+        key(STG_Key33; Banque, "Compte Bancaire")
         {
         }
 
-        /*  GL2024   key(Key34; "Account No.", Appartement, "Date Loyer")
+        /*  GL2024   key(STG_Key34; "Account No.", Appartement, "Date Loyer")
              {
              }
 
-             key(Key35; "Due Date", Banque)
+             key(STG_Key35; "Due Date", Banque)
              {
              }*/
 
-        key(Key36; "Copied To No.", "Acc. No. Last Entry Debit", "Account No.", "Payment Class", "Status No.")
+        key(STG_Key36; "Copied To No.", "Acc. No. Last Entry Debit", "Account No.", "Payment Class", "Status No.")
         {
             SumIndexFields = "Amount (LCY)", Amount;
         }
-        key(Key37; "N° Decharge")
+        key(STG_Key37; "N° Decharge")
         {
         }
 
-        /*GL2024  key(Key38; "Code Opération", "Due Date", Benificiaire, Amount)
+        /*GL2024  key(STG_Key38; "Code Opération", "Due Date", Benificiaire, Amount)
           {
           }
 
-          key(Key39; Affect, "Code Opération", "Due Date", Benificiaire, Amount)
+          key(STG_Key39; Affect, "Code Opération", "Due Date", Benificiaire, Amount)
           {
           }
 
-          key(Key40; Benificiaire, "Due Date", "Document No.", "Code Opération", Amount)
+          key(STG_Key40; Benificiaire, "Due Date", "Document No.", "Code Opération", Amount)
           {
           }*/
     }

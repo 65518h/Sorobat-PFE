@@ -31,7 +31,7 @@ Table 8001902 "Subscr. Invoicing Period"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

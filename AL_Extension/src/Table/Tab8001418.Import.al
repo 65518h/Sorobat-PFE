@@ -153,7 +153,7 @@ table 8001418 Import
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

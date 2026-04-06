@@ -121,7 +121,7 @@ TableExtension 50192 "Purchase Line DiscountEXT" extends "Purchase Line Discount
     keys
     {
 
-        key(Key3; Synchronise)
+        key(STG_Key3; Synchronise)
         {
         }
     }

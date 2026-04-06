@@ -74,22 +74,22 @@ TableExtension 50878 "Job Planning LineEXT" extends "Job Planning Line"
     /*GL2024   keys
       {
 
-          key(Key12; "Document Type", "Document No.")
+          key(STG_Key12; "Document Type", "Document No.")
           {
           }
-          key(Key13; "Job No.", Type, "Resource Type", "Gen. Prod. Posting Group", "Entry Type", "Planning Date")
+          key(STG_Key13; "Job No.", Type, "Resource Type", "Gen. Prod. Posting Group", "Entry Type", "Planning Date")
           {
               SumIndexFields = "Quantity (Base)", "Total Price (LCY)", "Total Cost (LCY)", "Line Amount (LCY)", "Gross Total Cost", Quantity, "Total Cost", "Total Price";
           }
-          key(Key14; "Job No.", Type, "No.", "Work Type Code", "Planning Date")
+          key(STG_Key14; "Job No.", Type, "No.", "Work Type Code", "Planning Date")
           {
               SumIndexFields = "Quantity (Base)";
           }
-          key(Key15; "Gen. Prod. Posting Group")
+          key(STG_Key15; "Gen. Prod. Posting Group")
           {
               SumIndexFields = "Total Price (LCY)";
           }
-          key(Key16; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "Resource Type", "No.", "Variant Code", "Entry Type", "Planning Date", "Order Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
+          key(STG_Key16; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "Resource Type", "No.", "Variant Code", "Entry Type", "Planning Date", "Order Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
           {
               SumIndexFields = Quantity, "Total Cost", "Total Cost (LCY)", "Total Price", "Gross Total Cost", "Quantity (Base)", "Line Amount (LCY)";
           }

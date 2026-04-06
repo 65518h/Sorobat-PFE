@@ -175,19 +175,19 @@ Table 8003919 "Advanced Job Budget Entry"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Document Type", "Document No.", "Line No.", "Line Type")
+        key(STG_Key2; "Document Type", "Document No.", "Line No.", "Line Type")
         {
             SumIndexFields = Quantity, Cost, Price, "Gross Total Cost";
         }
-        key(Key3; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "No.", "Variant Code", "Line Type", Date, "Global Dimension 1 Code", "Global Dimension 2 Code")
+        key(STG_Key3; "Job No.", "Job Task No.", "Gen. Prod. Posting Group", Type, "No.", "Variant Code", "Line Type", Date, "Global Dimension 1 Code", "Global Dimension 2 Code")
         {
             SumIndexFields = Quantity, Cost, Price, "Gross Total Cost";
         }
-        key(Key4; "Shipment No.")
+        key(STG_Key4; "Shipment No.")
         {
         }
     }

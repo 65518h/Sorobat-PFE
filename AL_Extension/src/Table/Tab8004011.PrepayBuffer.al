@@ -172,11 +172,11 @@ Table 8004011 "Prepay Buffer"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Resource No.", "Job No.", "Absence Cause Code", Frequency, "Min Value", "Max Value", "Starting Date", "End Date", "Detail Key")
+        key(STG_Key2; "Resource No.", "Job No.", "Absence Cause Code", Frequency, "Min Value", "Max Value", "Starting Date", "End Date", "Detail Key")
         {
         }
     }

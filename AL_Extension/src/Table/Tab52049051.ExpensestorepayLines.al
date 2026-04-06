@@ -97,12 +97,12 @@ Table 52049051 "Expenses to repay Lines"
 
     keys
     {
-        key(Key1; "No.", "Entry No.")
+        key(STG_Key1; "No.", "Entry No.")
         {
             Clustered = true;
             SumIndexFields = "Line amount";
         }
-        key(Key2; Date)
+        key(STG_Key2; Date)
         {
             SumIndexFields = "Line amount";
         }

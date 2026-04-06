@@ -42,7 +42,7 @@ Table 8001541 "Stock Posting Group"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

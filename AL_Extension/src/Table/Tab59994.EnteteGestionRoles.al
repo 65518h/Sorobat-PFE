@@ -20,11 +20,11 @@ table 59994 "Entete Gestion Roles"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }
-        key(Key2; Ordre)
+        key(STG_Key2; Ordre)
         {
         }
     }

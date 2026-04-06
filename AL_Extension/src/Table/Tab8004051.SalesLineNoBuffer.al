@@ -15,7 +15,7 @@ Table 8004051 "Sales Line No. Buffer"
 
     keys
     {
-        key(Key1; "Old Line No.")
+        key(STG_Key1; "Old Line No.")
         {
             Clustered = true;
         }

@@ -61,11 +61,11 @@ Table 50042 "Solde Fournisseur II"
 
     keys
     {
-        key(Key1; "Code Fournisseur", User)
+        key(STG_Key1; "Code Fournisseur", User)
         {
             Clustered = true;
         }
-        key(Key2; Solde)
+        key(STG_Key2; Solde)
         {
         }
     }

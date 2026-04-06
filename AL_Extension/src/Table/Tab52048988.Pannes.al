@@ -21,7 +21,7 @@ Table 52048988 Pannes
 
     keys
     {
-        key(Key1; "Code reparation")
+        key(STG_Key1; "Code reparation")
         {
             Clustered = true;
         }

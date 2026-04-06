@@ -43,7 +43,7 @@ Table 70128 "Imp Purchase Price"
 
     keys
     {
-        key(Key1; "Item No.", "Vendor No.", "Starting Date", "Currency Code", "Variant Code", "Unit of Measure Code", "Minimum Quantity", "Resource No.")
+        key(STG_Key1; "Item No.", "Vendor No.", "Starting Date", "Currency Code", "Variant Code", "Unit of Measure Code", "Minimum Quantity", "Resource No.")
         {
             Clustered = true;
         }

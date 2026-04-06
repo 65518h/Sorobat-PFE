@@ -102,7 +102,7 @@ Table 70109 "Imp Resource Group"
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

@@ -424,92 +424,92 @@
 
 //     keys
 //     {
-//         key(Key1; "Entry No.")
+//         key(STG_Key1; "Entry No.")
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; "G/L Account No.", "Posting Date", "Entry Type")
+//         key(STG_Key2; "G/L Account No.", "Posting Date", "Entry Type")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }
-//         key(Key3; "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date")
+//         key(STG_Key3; "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }
-//         key(Key4; "G/L Account No.", "Business Unit Code", "Posting Date")
+//         key(STG_Key4; "G/L Account No.", "Business Unit Code", "Posting Date")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }
-//         key(Key5; "G/L Account No.", "Business Unit Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date")
+//         key(STG_Key5; "G/L Account No.", "Business Unit Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Posting Date")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }
-//         key(Key6; "Document No.", "Posting Date")
+//         key(STG_Key6; "Document No.", "Posting Date")
 //         {
 //         }
-//         key(Key7; "Transaction No.")
+//         key(STG_Key7; "Transaction No.")
 //         {
 //         }
-//         key(Key8; "IC Partner Code")
+//         key(STG_Key8; "IC Partner Code")
 //         {
 //         }
-//         key(Key9; "G/L Account No.", "Job No.", "Posting Date")
+//         key(STG_Key9; "G/L Account No.", "Job No.", "Posting Date")
 //         {
 //             SumIndexFields = Amount;
 //         }
-//         key(Key10; "G/L Account No.", Letter)
+//         key(STG_Key10; "G/L Account No.", Letter)
 //         {
 //         }
-//         key(Key11; "Subscription Entry No.")
+//         key(STG_Key11; "Subscription Entry No.")
 //         {
 //         }
-//         key(Key12; "Analytical Distribution", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Job No.", "Source Code", "Business Unit Code", "Posting Date")
+//         key(STG_Key12; "Analytical Distribution", "G/L Account No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Bus. Posting Group", "Gen. Prod. Posting Group", "Job No.", "Source Code", "Business Unit Code", "Posting Date")
 //         {
 //             MaintainSIFTIndex = false;
 //         }
-//         key(Key13; "G/L Account No.", "Posting Date", "Document Type")
+//         key(STG_Key13; "G/L Account No.", "Posting Date", "Document Type")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }
-//         key(Key14; "Source No.")
+//         key(STG_Key14; "Source No.")
 //         {
 //         }
-//         key(Key15; "Posting Date")
+//         key(STG_Key15; "Posting Date")
 //         {
 //         }
-//         key(Key16; "Source No.", "G/L Account No.", "Posting Date")
+//         key(STG_Key16; "Source No.", "G/L Account No.", "Posting Date")
 //         {
 //         }
-//         key(Key17; "Source Code", "Posting Date")
+//         key(STG_Key17; "Source Code", "Posting Date")
 //         {
 //         }
-//         key(Key18; "G/L Account No.", "Posting Date", "Source Code")
+//         key(STG_Key18; "G/L Account No.", "Posting Date", "Source Code")
 //         {
 //         }
-//         key(Key19; "Source Type", "Source No.")
-//         {
-//             SumIndexFields = Amount;
-//         }
-//         key(Key20; "Source Code", "Posting Date", "Document No.")
-//         {
-//         }
-//         key(Key21; "Applies-to ID")
-//         {
-//         }
-//         key(Key22; Letter, "Source No.", "External Document No.", "Posting Date", Amount, "G/L Account No.")
-//         {
-//         }
-//         key(Key23; "G/L Account No.", "Source No.")
-//         {
-//         }
-//         key(Key24; salarie)
-//         {
-//         }
-//         key(Key25; "Source No.", "Source Type", Lettre, "G/L Account No.")
+//         key(STG_Key19; "Source Type", "Source No.")
 //         {
 //             SumIndexFields = Amount;
 //         }
-//         key(Key26; "G/L Account No.", "Posting Date", "Source No.", "Entry Type", "Auxiliaire déb/créd1", "Auxiliaire déb/créd2")
+//         key(STG_Key20; "Source Code", "Posting Date", "Document No.")
+//         {
+//         }
+//         key(STG_Key21; "Applies-to ID")
+//         {
+//         }
+//         key(STG_Key22; Letter, "Source No.", "External Document No.", "Posting Date", Amount, "G/L Account No.")
+//         {
+//         }
+//         key(STG_Key23; "G/L Account No.", "Source No.")
+//         {
+//         }
+//         key(STG_Key24; salarie)
+//         {
+//         }
+//         key(STG_Key25; "Source No.", "Source Type", Lettre, "G/L Account No.")
+//         {
+//             SumIndexFields = Amount;
+//         }
+//         key(STG_Key26; "G/L Account No.", "Posting Date", "Source No.", "Entry Type", "Auxiliaire déb/créd1", "Auxiliaire déb/créd2")
 //         {
 //             SumIndexFields = Amount, "Debit Amount", "Credit Amount", "Additional-Currency Amount", "Add.-Currency Debit Amount", "Add.-Currency Credit Amount";
 //         }

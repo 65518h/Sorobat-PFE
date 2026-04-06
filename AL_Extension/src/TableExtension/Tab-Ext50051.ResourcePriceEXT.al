@@ -171,7 +171,7 @@ TableExtension 50051 "Work TypeEXT" extends "Work Type"
     }
     keys
     {
-        /* GL2024  key(Key2; "Work Time Type", "Code")
+        /* GL2024  key(STG_Key2; "Work Time Type", "Code")
            {
            }*/
     }

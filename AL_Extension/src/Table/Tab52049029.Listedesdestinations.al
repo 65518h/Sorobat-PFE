@@ -18,7 +18,7 @@ table 52049029 "Liste des destinations"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -107,11 +107,11 @@ Table 52048989 "Réparation Véhicule Enreg."
 
     keys
     {
-        key(Key1; "N° Reparation")
+        key(STG_Key1; "N° Reparation")
         {
             Clustered = true;
         }
-        key(Key2; "N° Véhicule")
+        key(STG_Key2; "N° Véhicule")
         {
         }
     }

@@ -16,7 +16,7 @@ TableExtension 50172 "Inventory Posting SetupEXT" extends "Inventory Posting Set
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

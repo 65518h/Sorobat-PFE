@@ -24,7 +24,7 @@ Table 8004062 "Dynalog - Type"
 
     keys
     {
-        key(Key1; "Code Type")
+        key(STG_Key1; "Code Type")
         {
             Clustered = true;
         }

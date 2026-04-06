@@ -16,7 +16,7 @@ Table 50054 "tep indemnity"
 
     keys
     {
-        key(Key1; "code indemnity")
+        key(STG_Key1; "code indemnity")
         {
             Clustered = true;
         }

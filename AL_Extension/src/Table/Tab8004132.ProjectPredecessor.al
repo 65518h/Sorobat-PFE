@@ -40,7 +40,7 @@ Table 8004132 "Project Predecessor"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Line No.", "Predecessor Document Type", "Predecessor Document No.", "Predecessor Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Line No.", "Predecessor Document Type", "Predecessor Document No.", "Predecessor Line No.")
         {
             Clustered = true;
         }

@@ -23,7 +23,7 @@ Table 89439 "UPG Handled IC Inbox Sales Lin"
 
     keys
     {
-        key(Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
+        key(STG_Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
         {
             Clustered = true;
         }

@@ -115,23 +115,23 @@ Table 8001519 "Statistic array line"
 
     keys
     {
-        key(Key1; "User ID", "Statistic code", "Line No.")
+        key(STG_Key1; "User ID", "Statistic code", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "User ID", "Statistic code", "Break 1", "Break 2", "Break 3", "Break 4", "Break 5", "Break 6", "Break 7", "Break 8", "Break 9", "Line No.")
+        key(STG_Key2; "User ID", "Statistic code", "Break 1", "Break 2", "Break 3", "Break 4", "Break 5", "Break 6", "Break 7", "Break 8", "Break 9", "Line No.")
         {
         }
-        key(Key3; "User ID", "Statistic code", "Section level", "Attached to Line No.", "Sort value", "Line No.")
+        key(STG_Key3; "User ID", "Statistic code", "Section level", "Attached to Line No.", "Sort value", "Line No.")
         {
         }
-        key(Key4; "User ID", "Statistic code", "Sort key by value")
+        key(STG_Key4; "User ID", "Statistic code", "Sort key by value")
         {
         }
-        key(Key5; "User ID", "Statistic code", "Code")
+        key(STG_Key5; "User ID", "Statistic code", "Code")
         {
         }
-        key(Key6; "User ID", "Section level", Open)
+        key(STG_Key6; "User ID", "Section level", Open)
         {
         }
     }

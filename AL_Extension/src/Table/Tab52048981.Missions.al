@@ -384,11 +384,11 @@ Table 52048981 Missions
 
     keys
     {
-        key(Key1; "N° Mission")
+        key(STG_Key1; "N° Mission")
         {
             Clustered = true;
         }
-        key(Key2; "N° Véhicule")
+        key(STG_Key2; "N° Véhicule")
         {
             SumIndexFields = "Km Parcourus";
         }

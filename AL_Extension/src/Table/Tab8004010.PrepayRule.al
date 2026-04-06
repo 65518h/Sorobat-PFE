@@ -136,11 +136,11 @@ Table 8004010 "Prepay Rule"
 
     keys
     {
-        key(Key1; "Rule Code", "Line No.")
+        key(STG_Key1; "Rule Code", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Cause of prepay code", "Rule Code", "Line No.")
+        key(STG_Key2; "Cause of prepay code", "Rule Code", "Line No.")
         {
         }
     }

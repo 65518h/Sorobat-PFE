@@ -458,25 +458,25 @@ TableExtension 50044 "Purch. Rcpt. LineEXT" extends "Purch. Rcpt. Line"
     keys
     {
 
-        key(Key9; "Sales Order No.", "Sales Order Line No.")
+        key(STG_Key9; "Sales Order No.", "Sales Order Line No.")
         {
             SumIndexFields = "Quantity (Base)";
         }
 
-        key(Key10; "Job No.", Type, "No.", "Posting Date")
+        key(STG_Key10; "Job No.", Type, "No.", "Posting Date")
         {
             SumIndexFields = "Qty. Rcd. Not Invoiced";
         }
-        key(Key11; Synchronise)
+        key(STG_Key11; Synchronise)
         {
         }
 
-        key(Key12; "Job No.", "Buy-from Vendor No.", "No.")
+        key(STG_Key12; "Job No.", "Buy-from Vendor No.", "No.")
         {
             SumIndexFields = Quantity;
         }
 
-        key(Key13; "No.", "Buy-from Vendor No.", "Posting Date")
+        key(STG_Key13; "No.", "Buy-from Vendor No.", "Posting Date")
         {
         }
     }

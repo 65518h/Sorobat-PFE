@@ -211,15 +211,15 @@ Table 8001580 "Planning Line Archive"
 
     keys
     {
-        key(Key1; "Task No.", "Version No.")
+        key(STG_Key1; "Task No.", "Version No.")
         {
             MaintainSIFTIndex = false;
         }
-        key(Key2; "Attached To Task No.")
+        key(STG_Key2; "Attached To Task No.")
         {
             MaintainSIFTIndex = false;
         }
-        key(Key3; "Project Header No.", "WBS Code", "Version No.")
+        key(STG_Key3; "Project Header No.", "WBS Code", "Version No.")
         {
             //GL2024  Clustered = true;
             MaintainSIFTIndex = false;

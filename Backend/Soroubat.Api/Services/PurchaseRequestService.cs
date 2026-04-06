@@ -56,16 +56,94 @@ namespace Soroubat.Api.Services
             return result; // on n'utilise pas .Value ici car on s'attend à un objet unique (comme racine ) et pas à une liste
         }
 
-        public async Task<PurchaseRequestDto> CreateFullRequestAsync(PurchaseRequestDto request)
-        {
-            var response = await _httpClient.PostAsJsonAsync("purchaseRequests", request);
-            if (!response.IsSuccessStatusCode) await HandleErrorResponse(response);
+        // public async Task<PurchaseRequestDto> CreateFullRequestAsync(PurchaseRequestDto request)
+        //{
+           //var response = await _httpClient.PostAsJsonAsync("purchaseRequests", request);
+            //if (!response.IsSuccessStatusCode) await HandleErrorResponse(response);
             
-            var result = await response.Content.ReadFromJsonAsync<PurchaseRequestDto>();
-            if (result == null) throw new Exception("La demande a été créée mais la réponse est illisible.");
+           // var result = await response.Content.ReadFromJsonAsync<PurchaseRequestDto>();
+            // if (result == null) throw new Exception("La demande a été créée mais la réponse est illisible.");
             
-            return result; // on retourne result ici pour s'assurer que le client reçoit bien toutes les données de la demande créée, y compris l'id généré par BC et les lignes associées si elles ont été créées en même temps
-        }
+            //return result; // on retourne result ici pour s'assurer que le client reçoit bien toutes les données de la demande créée, y compris l'id généré par BC et les lignes associées si elles ont été créées en même temps
+       // }
+
+       // Note : la méthode CreateFullRequestAsync a un probléme au niveau de ID lors de l'envoie request tel quel à Business Central avec ID.Request = NULL car il n'est pas génerer automatiquement par BC et il est requis pour la création d'une demande d'achat.
+
+       // la nouvelle méthode CreateFullRequestAsync génère un nouvel ID pour la demande d'achat avant de l'envoyer à Business Central, ce qui permet de contourner le problème de l'ID requis et de s'assurer que la demande est créée correctement avec un identifiant unique.
+
+
+
+                public async Task<PurchaseRequestDto> CreateFullRequestAsync(PurchaseRequestDto request)
+                {
+                    // 1️ Générer un ID pour l'en-tête si absent
+                    if (request.Id == null || request.Id == Guid.Empty)
+                        request.Id = Guid.NewGuid();
+
+                    // 2️ Préparer le header à envoyer (sans les lignes, car BC ne les accepte pas ici)
+                    var header = new
+                    {
+                        request.Id,
+                        request.JobNo,
+                        request.RequestType,
+                        request.Service,
+                        request.Engin,
+                        //request.DescriptionEngin,
+                        request.OrderDate,
+                        request.DueDate,
+                        request.Status,
+                        //request.Amount,
+                        request.RequesterId
+                    };
+
+                    // 3️ POST de l'en-tête
+                    var responseHeader = await _httpClient.PostAsJsonAsync("purchaseRequests", header);
+                    if (!responseHeader.IsSuccessStatusCode)
+                        await HandleErrorResponse(responseHeader);
+
+                    var createdHeader = await responseHeader.Content.ReadFromJsonAsync<PurchaseRequestDto>();
+                    if (createdHeader == null)
+                        throw new Exception("La demande a été créée mais la réponse de l'en-tête est illisible.");
+
+                    // 4️ Créer chaque ligne avec un ID et lier au header
+                    foreach (var line in request.PurchaseRequestLines)
+                    {
+                        if (line.Id == null || line.Id == Guid.Empty)
+                            line.Id = Guid.NewGuid();
+
+                        // S'assurer que la ligne référence le bon PurchaseRequestId
+                        var lineToSend = new
+                        {
+                            line.Id,
+                            DocumentNo = createdHeader.Id, // ID de l'en-tête comme référence
+                            line.LineNo,
+                            line.Transferer,
+                            line.Type,
+                            line.No,
+                            line.Description,
+                            line.Description2,
+                            line.Quantity,
+                            line.UnitOfMeasureCode,
+                            line.LocationCode,
+                            line.VariantCode,
+                            line.JobNo,
+                            line.JobTaskNo,
+                            line.Engin,
+                            line.LineAmount
+                        };
+
+                        var responseLine = await _httpClient.PostAsJsonAsync("purchaseRequestLines", lineToSend);
+                        if (!responseLine.IsSuccessStatusCode)
+                            await HandleErrorResponse(responseLine);
+                    }
+
+                    // 5️ Récupérer la demande complète avec les lignes pour retourner au client
+                    var fullRequest = await GetRequestByIdAsync(createdHeader.Id.Value);
+                    return fullRequest;
+                }
+
+
+
+
 
         public async Task<bool> UpdateHeaderAsync(Guid id, object partialUpdate)
         {

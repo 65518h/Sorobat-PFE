@@ -23,7 +23,7 @@ Table 89441 "UPG Handled IC Inbox Purch. Li"
 
     keys
     {
-        key(Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
+        key(STG_Key1; "Line No.", "IC Partner Code", "IC Transaction No.", "Transaction Source")
         {
             Clustered = true;
         }

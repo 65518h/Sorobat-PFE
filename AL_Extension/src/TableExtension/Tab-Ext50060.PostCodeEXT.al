@@ -26,7 +26,7 @@ TableExtension 50060 "Post CodeEXT" extends "Post Code"
     }
     keys
     {
-        key(Key5; Synchronise)
+        key(STG_Key5; Synchronise)
         {
         }
     }

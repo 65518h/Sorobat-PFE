@@ -43,7 +43,7 @@ Table 50028 Residants
 
     keys
     {
-        key(Key1; Chantier, Proprietaire, "Code Appartement", Residant)
+        key(STG_Key1; Chantier, Proprietaire, "Code Appartement", Residant)
         {
             Clustered = true;
         }

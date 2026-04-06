@@ -27,7 +27,7 @@ TableExtension 50210 "Production BOM HeaderEXT" extends "Production BOM Header"
     {
 
 
-        key(Key5; "Article Lié")
+        key(STG_Key5; "Article Lié")
         {
         }
     }

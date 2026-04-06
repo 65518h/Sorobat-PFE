@@ -222,10 +222,10 @@ TableExtension 50119 ContactEXT extends Contact
     keys
     {
 
-        key(Key17; "Company Name", "Company No.", Type, "Search Name")
+        key(STG_Key17; "Company Name", "Company No.", Type, "Search Name")
         {
         }
-        key(Key18; Synchronise)
+        key(STG_Key18; Synchronise)
         {
         }
     }

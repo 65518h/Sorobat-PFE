@@ -208,7 +208,7 @@ TableExtension 50079 "Vendor Bank AccountEXT" extends "Vendor Bank Account"
     }
     keys
     {
-        key(Key2; "ESR Account No.")
+        key(STG_Key2; "ESR Account No.")
         {
         }
     }

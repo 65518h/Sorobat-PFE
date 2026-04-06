@@ -394,12 +394,12 @@ Table 8001503 "Sales Disc. Commission Entry"
 
     keys
     {
-        key(Key1; "Disc. Commission Type", "Rule No.", "Salesperson Code", "Customer No.", "Location Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Cust. Posting Group", "Gen. Bus. Posting Group", "Inventory Posting Group", "Gen. Prod. Posting Group", "Price Group Code")
+        key(STG_Key1; "Disc. Commission Type", "Rule No.", "Salesperson Code", "Customer No.", "Location Code", "Global Dimension 1 Code", "Global Dimension 2 Code", "Cust. Posting Group", "Gen. Bus. Posting Group", "Inventory Posting Group", "Gen. Prod. Posting Group", "Price Group Code")
         {
             Clustered = true;
             SumIndexFields = "Discount Amount", "Discount Amount (LCY)";
         }
-        key(Key2; "Disc. Commission Type", "Salesperson Code", "Rule No.", "Inventory Posting Group", Type, "No.", "Ending Date")
+        key(STG_Key2; "Disc. Commission Type", "Salesperson Code", "Rule No.", "Inventory Posting Group", Type, "No.", "Ending Date")
         {
             SumIndexFields = "Discount Amount", "Discount Amount (LCY)";
         }

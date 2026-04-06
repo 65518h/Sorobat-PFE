@@ -46,7 +46,7 @@ TableExtension 50005 "Country/RegionEXT" extends "Country/Region"
     }
     keys
     {
-        key(Key5; Synchronise)
+        key(STG_Key5; Synchronise)
         {
         }
     }

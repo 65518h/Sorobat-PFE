@@ -40,11 +40,11 @@ Table 8004092 "Vendor Item Category Group"
 
     keys
     {
-        key(Key1; "Item Category Code", "Product Group Code", "Vendor No.")
+        key(STG_Key1; "Item Category Code", "Product Group Code", "Vendor No.")
         {
             Clustered = true;
         }
-        key(Key2; "Vendor No.", "Item Category Code", "Product Group Code")
+        key(STG_Key2; "Vendor No.", "Item Category Code", "Product Group Code")
         {
         }
     }

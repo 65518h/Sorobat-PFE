@@ -37,7 +37,7 @@ Table 8004184 "Formule Beton"
 
     keys
     {
-        key(Key1; "Code Formule")
+        key(STG_Key1; "Code Formule")
         {
             Clustered = true;
         }

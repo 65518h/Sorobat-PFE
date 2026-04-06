@@ -21,7 +21,7 @@ Table 80039 "UPG Purchase Line"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Line No.")
         {
             Clustered = true;
         }

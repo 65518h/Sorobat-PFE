@@ -79,7 +79,7 @@ Table 50037 "Référence Chèques"
 
     keys
     {
-        key(Key1; "Code banque", "Référence Chèques")
+        key(STG_Key1; "Code banque", "Référence Chèques")
         {
             Clustered = true;
         }

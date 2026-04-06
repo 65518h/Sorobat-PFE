@@ -85,7 +85,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N°", "Employé")
+//         key(STG_Key1; "N°", "Employé")
 //         {
 //             Clustered = true;
 //         }

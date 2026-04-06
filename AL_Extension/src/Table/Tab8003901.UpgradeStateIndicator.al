@@ -12,7 +12,7 @@ Table 8003901 "Upgrade State Indicator"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

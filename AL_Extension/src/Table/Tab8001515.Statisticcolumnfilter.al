@@ -1202,7 +1202,7 @@ Table 8001515 "Statistic column filter"
 
     keys
     {
-        key(Key1; "Code", "Line No.")
+        key(STG_Key1; "Code", "Line No.")
         {
             Clustered = true;
         }

@@ -1,1 +1,401 @@
-<p>request-form works!</p>
+<!-- src/app/models/purchases/pages/request-form/request-form.html -->
+
+<div class="request-form-container">
+  
+  <!-- ==================== HEADER AVEC GRADIENT ==================== -->
+  <div class="page-header-modern">
+    <div class="header-gradient-bg"></div>
+    <div class="header-content-modern">
+      <div class="header-left-modern">
+        <button class="back-button" mat-icon-button (click)="cancel()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title-section">
+          <div class="title-icon">
+            <mat-icon>{{ isEditMode ? 'edit' : 'add_circle' }}</mat-icon>
+          </div>
+          <div class="title-text">
+            <h1>{{ isEditMode ? 'Modifier la demande' : 'Nouvelle demande d\'achat' }}</h1>
+            <p *ngIf="requestNo" class="request-badge">N° {{ requestNo }}</p>
+            <p *ngIf="!requestNo" class="subtitle-modern">Remplissez les informations ci-dessous pour créer votre demande</p>
+          </div>
+        </div>
+      </div>
+      <div class="header-right-modern">
+        <button class="btn-cancel-modern" mat-button (click)="cancel()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-submit-modern" mat-raised-button (click)="onSubmit()" [disabled]="submitting">
+          <mat-icon>{{ isEditMode ? 'save' : 'check_circle' }}</mat-icon>
+          <span>{{ isEditMode ? 'Enregistrer' : 'Créer la demande' }}</span>
+          <div class="btn-loader" *ngIf="submitting"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING MODERN ==================== -->
+  <div *ngIf="loading" class="loading-state-modern">
+    <div class="loading-card">
+      <div class="loading-spinner-container">
+        <div class="loading-spinner-ring"></div>
+        <div class="loading-spinner-ring"></div>
+        <div class="loading-spinner-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement de la demande...</p>
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+    <div class="skeleton-form">
+      <div class="skeleton-line large"></div>
+      <div class="skeleton-grid">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== FORMULAIRE PRINCIPAL ==================== -->
+  <div *ngIf="!loading" class="form-container-modern">
+    
+    <!-- Stepper avec design moderne -->
+    <mat-horizontal-stepper #stepper linear class="modern-stepper">
+      
+      <!-- Étape 1: Informations générales -->
+      <mat-step [stepControl]="headerForm" class="step-modern">
+        <ng-template matStepLabel>
+          <div class="step-label">
+            <div class="step-icon" [class.active]="headerForm.valid">
+              <mat-icon>info</mat-icon>
+            </div>
+            <span>Informations générales</span>
+          </div>
+        </ng-template>
+        
+        <div class="step-content-modern">
+          <form [formGroup]="headerForm">
+            <div class="form-grid-modern">
+              
+              <!-- Projet -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>business</mat-icon>
+                  <span>Projet / Chantier <span class="required-star">*</span></span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <mat-select formControlName="jobNo" (selectionChange)="onProjectSelected($event.value)" panelClass="modern-select-panel">
+                    <mat-option *ngFor="let project of projects" [value]="project.no">
+                      <div class="project-option">
+                        <span class="project-code">{{ project.no }}</span>
+                        <span class="project-desc">{{ project.description }}</span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="headerForm.get('jobNo')?.hasError('required')">
+                    Le projet est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Libellé projet -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>description</mat-icon>
+                  <span>Libellé projet</span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <input matInput formControlName="jobDescription" readonly>
+                  <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+              </div>
+              
+              <!-- Demandeur -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>person</mat-icon>
+                  <span>Demandeur</span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <input matInput formControlName="requesterId" readonly>
+                  <mat-icon matSuffix>person_outline</mat-icon>
+                </mat-form-field>
+              </div>
+              
+              <!-- Type de demande -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>category</mat-icon>
+                  <span>Type de demande <span class="required-star">*</span></span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <mat-select formControlName="requestType">
+                    <mat-option *ngFor="let type of requestTypes" [value]="type">
+                      <div class="type-option">
+                        <mat-icon>label</mat-icon>
+                        <span>{{ type }}</span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="headerForm.get('requestType')?.hasError('required')">
+                    Le type est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Service -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>groups</mat-icon>
+                  <span>Service <span class="required-star">*</span></span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <mat-select formControlName="service">
+                    <mat-option *ngFor="let service of services" [value]="service">
+                      <div class="service-option">
+                        <mat-icon>apartment</mat-icon>
+                        <span>{{ service }}</span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="headerForm.get('service')?.hasError('required')">
+                    Le service est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Engin -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>construction</mat-icon>
+                  <span>Engin</span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <mat-select formControlName="engin" (selectionChange)="onEnginSelected($event.value)">
+                    <mat-option value="">Aucun</mat-option>
+                    <mat-option *ngFor="let eng of equipment" [value]="eng.code">
+                      <div class="engin-option">
+                        <mat-icon>hardware</mat-icon>
+                        <span>{{ eng.code }} - {{ eng.description }}</span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+              <!-- Désignation engin -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>description</mat-icon>
+                  <span>Désignation engin</span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <input matInput formControlName="descriptionEngin" readonly>
+                </mat-form-field>
+              </div>
+              
+              <!-- Date de commande -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>calendar_today</mat-icon>
+                  <span>Date de commande <span class="required-star">*</span></span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <input matInput [matDatepicker]="orderPicker" formControlName="orderDate">
+                  <mat-datepicker-toggle matSuffix [for]="orderPicker"></mat-datepicker-toggle>
+                  <mat-datepicker #orderPicker></mat-datepicker>
+                  <mat-error *ngIf="headerForm.get('orderDate')?.hasError('required')">
+                    La date est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Date d'échéance -->
+              <div class="form-field-modern">
+                <label class="field-label">
+                  <mat-icon>event</mat-icon>
+                  <span>Date d'échéance <span class="required-star">*</span></span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <input matInput [matDatepicker]="duePicker" formControlName="dueDate">
+                  <mat-datepicker-toggle matSuffix [for]="duePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #duePicker></mat-datepicker>
+                  <mat-error *ngIf="headerForm.get('dueDate')?.hasError('required')">
+                    La date d'échéance est obligatoire
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <!-- Observation -->
+              <div class="form-field-modern full-width">
+                <label class="field-label">
+                  <mat-icon>chat_bubble_outline</mat-icon>
+                  <span>Observation</span>
+                </label>
+                <mat-form-field appearance="outline" class="full-width-field">
+                  <textarea matInput formControlName="observation" rows="3" placeholder="Ajoutez une observation si nécessaire..."></textarea>
+                </mat-form-field>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        
+        <div class="step-actions-modern">
+          <button class="step-next" mat-button matStepperNext [disabled]="headerForm.invalid">
+            <span>Continuer</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </mat-step>
+      
+      <!-- Étape 2: Lignes de la demande -->
+      <mat-step class="step-modern">
+        <ng-template matStepLabel>
+          <div class="step-label">
+            <div class="step-icon">
+              <mat-icon>shopping_cart</mat-icon>
+            </div>
+            <span>Articles demandés</span>
+          </div>
+        </ng-template>
+        
+        <div class="step-content-modern">
+          
+          <!-- Actions lignes -->
+          <div class="lines-actions-modern">
+            <button class="btn-add-line" (click)="addLineToForm()">
+              <mat-icon>add_circle</mat-icon>
+              <span>Ajouter un article</span>
+            </button>
+            <div class="total-amount-modern">
+              <div class="total-label">
+                <mat-icon>attach_money</mat-icon>
+                <span>Montant total</span>
+              </div>
+              <div class="total-value">{{ formatAmount(getTotalAmount()) }}</div>
+            </div>
+          </div>
+          
+          <!-- Tableau des lignes modernisé -->
+          <div class="table-wrapper-modern" *ngIf="linesArray.length > 0">
+            <div class="table-header-modern">
+              <div class="table-row-header">
+                <div class="table-cell checkbox-col"> </div>
+                <div class="table-cell type-col">Type</div>
+                <div class="table-cell ref-col">Référence</div>
+                <div class="table-cell desc-col">Description</div>
+                <div class="table-cell qty-col">Qté</div>
+                <div class="table-cell unit-col">Unité</div>
+                <div class="table-cell loc-col">Magasin</div>
+                <div class="table-cell task-col">Tâche</div>
+                <div class="table-cell engin-col">Engin</div>
+                <div class="table-cell amount-col">Prix unit.</div>
+                <div class="table-cell total-col">Total</div>
+                <div class="table-cell actions-col">Actions</div>
+              </div>
+            </div>
+            <div class="table-body-modern">
+              <div class="table-row-modern" *ngFor="let lineControl of linesArray.controls; let i = index">
+                <div class="table-cell checkbox-col">
+                  <mat-checkbox color="primary" [formControl]="getLineControl(i, 'transferer')"></mat-checkbox>
+                </div>
+                <div class="table-cell type-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <mat-select [formControl]="getLineControl(i, 'type')" (selectionChange)="onItemSelected(i)">
+                      <mat-option *ngFor="let type of lineTypes" [value]="type">
+                        {{ type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="table-cell ref-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'no')" (blur)="onItemSelected(i)" placeholder="Référence">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell desc-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'description')" placeholder="Description">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell qty-col">
+                  <mat-form-field appearance="outline" class="inline-field number-field">
+                    <input matInput type="number" [formControl]="getLineControl(i, 'quantity')" (change)="onQuantityChange(i)">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell unit-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'unitOfMeasureCode')" placeholder="Unité">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell loc-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'locationCode')" (blur)="onItemSelected(i)" placeholder="Magasin">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell task-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'jobTaskNo')" placeholder="Tâche">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell engin-col">
+                  <mat-form-field appearance="outline" class="inline-field">
+                    <input matInput [formControl]="getLineControl(i, 'engin')" placeholder="Engin">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell amount-col">
+                  <mat-form-field appearance="outline" class="inline-field number-field">
+                    <input matInput type="number" [formControl]="getLineControl(i, 'unitCost')" (change)="onUnitCostChange(i)" placeholder="Prix">
+                  </mat-form-field>
+                </div>
+                <div class="table-cell total-col">
+                  <span class="line-total-modern">{{ formatAmount(getLineAmount(i)) }}</span>
+                </div>
+                <div class="table-cell actions-col">
+                  <button class="btn-remove-line" mat-icon-button (click)="removeLine(i)" matTooltip="Supprimer">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- État vide modernisé -->
+          <div *ngIf="linesArray.length === 0" class="empty-lines-modern">
+            <div class="empty-icon-wrapper">
+              <mat-icon>shopping_bag</mat-icon>
+            </div>
+            <h3>Aucun article ajouté</h3>
+            <p>Commencez par ajouter des articles à votre demande</p>
+            <button class="btn-add-first" (click)="addLineToForm()">
+              <mat-icon>add</mat-icon>
+              Ajouter un article
+            </button>
+          </div>
+          
+        </div>
+        
+        <div class="step-actions-modern">
+          <button class="step-prev" mat-button matStepperPrevious>
+            <mat-icon>arrow_back</mat-icon>
+            <span>Précédent</span>
+          </button>
+          <button class="step-submit" (click)="onSubmit()" [disabled]="submitting">
+            <mat-icon>{{ isEditMode ? 'save' : 'check_circle' }}</mat-icon>
+            <span>{{ isEditMode ? 'Enregistrer' : 'Créer la demande' }}</span>
+            <div class="btn-loader" *ngIf="submitting"></div>
+          </button>
+        </div>
+      </mat-step>
+      
+    </mat-horizontal-stepper>
+    
+  </div>
+  
+</div>

@@ -75,7 +75,7 @@ Table 52049019 "Equipe demande  mission"
 
     keys
     {
-        key(Key1; "N° Demande", "Employee No.")
+        key(STG_Key1; "N° Demande", "Employee No.")
         {
             Clustered = true;
         }

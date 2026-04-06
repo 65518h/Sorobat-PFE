@@ -75,7 +75,7 @@ Table 11301 "Manual VAT Correction"
 
     keys
     {
-        key(Key1; "Statement Template Name", "Statement Name", "Statement Line No.", "Posting Date")
+        key(STG_Key1; "Statement Template Name", "Statement Name", "Statement Line No.", "Posting Date")
         {
             Clustered = true;
             SumIndexFields = Amount, "Additional-Currency Amount";

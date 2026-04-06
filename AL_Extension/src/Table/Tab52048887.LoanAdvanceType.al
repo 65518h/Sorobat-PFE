@@ -193,7 +193,7 @@ Table 52048887 "Loan & Advance Type"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

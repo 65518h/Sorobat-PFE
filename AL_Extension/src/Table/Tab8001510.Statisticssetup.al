@@ -1819,7 +1819,7 @@ Table 8001510 "Statistics setup"
 
     keys
     {
-        key(Key1; "Primary Key")
+        key(STG_Key1; "Primary Key")
         {
             Clustered = true;
         }

@@ -167,18 +167,18 @@ Table 8004174 "Job WIP G/L Entry2"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", Reversed, "Job Complete", Type)
+        key(STG_Key2; "Job No.", Reversed, "Job Complete", Type)
         {
             SumIndexFields = "WIP Entry Amount";
         }
-        key(Key3; "Document No.", "Posting Date")
+        key(STG_Key3; "Document No.", "Posting Date")
         {
         }
-        key(Key4; "WIP Transaction No.")
+        key(STG_Key4; "WIP Transaction No.")
         {
         }
     }

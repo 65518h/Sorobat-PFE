@@ -21,11 +21,11 @@ Table 59995 "Ligne Gestion Roles"
 
     keys
     {
-        key(Key1; "Code", "Id Formulaire")
+        key(STG_Key1; "Code", "Id Formulaire")
         {
             Clustered = true;
         }
-        key(Key2; "Id Formulaire")
+        key(STG_Key2; "Id Formulaire")
         {
         }
     }

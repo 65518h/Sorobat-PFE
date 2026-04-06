@@ -43,7 +43,7 @@ TableExtension 50031 "Customer Posting GroupEXT" extends "Customer Posting Group
     }
     keys
     {
-        key(Key2; Synchronise)
+        key(STG_Key2; Synchronise)
         {
         }
     }

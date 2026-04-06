@@ -42,11 +42,11 @@ Table 8001465 "Export G/L Account"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Source Code")
+        key(STG_Key2; "Source Code")
         {
         }
     }

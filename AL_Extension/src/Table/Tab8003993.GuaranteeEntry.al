@@ -104,11 +104,11 @@ Table 8003993 "Guarantee Entry"
 
     keys
     {
-        key(Key1; "Document Type", "No.", "Line No.")
+        key(STG_Key1; "Document Type", "No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", Open, "Bank Account No.", "Closed Date", "Posting Date")
+        key(STG_Key2; "Job No.", Open, "Bank Account No.", "Closed Date", "Posting Date")
         {
             SumIndexFields = "Amount (LCY)";
         }

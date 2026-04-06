@@ -25,7 +25,7 @@ Table 52049023 "Sous Affectation Marche"
 
     keys
     {
-        key(Key1; "Code", Marche)
+        key(STG_Key1; "Code", Marche)
         {
             Clustered = true;
         }

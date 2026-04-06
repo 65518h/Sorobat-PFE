@@ -603,92 +603,92 @@ Table 8004161 "Job Ledger Entry2"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; "Job No.", "Job Task No.", "Entry Type", "Posting Date")
+        key(STG_Key2; "Job No.", "Job Task No.", "Entry Type", "Posting Date")
         {
             SumIndexFields = "Total Cost (LCY)", "Line Amount (LCY)";
         }
-        key(Key3; "Document No.", "Posting Date")
+        key(STG_Key3; "Document No.", "Posting Date")
         {
         }
-        key(Key4; "Job No.", "Posting Date")
+        key(STG_Key4; "Job No.", "Posting Date")
         {
         }
-        key(Key5; "Entry Type", Type, "No.", "Posting Date")
+        key(STG_Key5; "Entry Type", Type, "No.", "Posting Date")
         {
         }
-        key(Key6; "Service Order No.", "Posting Date")
+        key(STG_Key6; "Service Order No.", "Posting Date")
         {
         }
-        key(Key7; "Job No.", "Entry Type", Type, "No.")
+        key(STG_Key7; "Job No.", "Entry Type", Type, "No.")
         {
         }
-        key(Key8; Type, "Entry Type", "Country/Region Code", "Source Code", "Posting Date")
+        key(STG_Key8; Type, "Entry Type", "Country/Region Code", "Source Code", "Posting Date")
         {
         }
-        key(Key9; "Entry Type", Type, "No.", "Gen. Prod. Posting Group", "Resource Group No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Work Type Code", "Reason Code", "Posting Date")
+        key(STG_Key9; "Entry Type", Type, "No.", "Gen. Prod. Posting Group", "Resource Group No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Job No.", "Work Type Code", "Reason Code", "Posting Date")
         {
             SumIndexFields = "Total Cost";
         }
-        key(Key10; "Entry Type", Type, "Job No.", "Job Task No.", "Gen. Prod. Posting Group", "Work Time Type", "Work Type Code", "Resource Group No.", "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Posting Date")
+        key(STG_Key10; "Entry Type", Type, "Job No.", "Job Task No.", "Gen. Prod. Posting Group", "Work Time Type", "Work Type Code", "Resource Group No.", "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Posting Date")
         {
             SumIndexFields = Quantity, "Total Cost (LCY)", "Line Amount (LCY)", "Total Cost";
         }
-        key(Key11; Type, "No.", "Work Type Code", "Job No.", "Job Task No.", "Posting Date")
+        key(STG_Key11; Type, "No.", "Work Type Code", "Job No.", "Job Task No.", "Posting Date")
         {
             SumIndexFields = "Total Cost (LCY)", "Line Amount (LCY)", Quantity;
         }
-        key(Key12; Type, "No.", "Posting Date", "Job No.", "Work Type Code")
+        key(STG_Key12; Type, "No.", "Posting Date", "Job No.", "Work Type Code")
         {
         }
-        key(Key13; Type, "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Unit of Measure Code", "Location Code")
+        key(STG_Key13; Type, "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Unit of Measure Code", "Location Code")
         {
         }
-        key(Key14; "Vendor No.", "Job No.", Type, "No.", "Posting Date")
+        key(STG_Key14; "Vendor No.", "Job No.", Type, "No.", "Posting Date")
         {
         }
-        key(Key15; "Analytical Distribution", "Entry Type", Type, "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", "Source Code", "Job No.", "Resource Group No.", "Work Type Code", "Job Task No.", "Posting Date")
+        key(STG_Key15; "Analytical Distribution", "Entry Type", Type, "No.", "Global Dimension 1 Code", "Global Dimension 2 Code", "Reason Code", "Gen. Prod. Posting Group", "Gen. Bus. Posting Group", "Source Code", "Job No.", "Resource Group No.", "Work Type Code", "Job Task No.", "Posting Date")
         {
             SumIndexFields = "Total Cost";
         }
-        key(Key16; "Entry Type", "Bal. Created Entry", "Job Posting Group", "Job No.", "Gen. Prod. Posting Group", "Job Task No.", Type, "Resource Type", "Work Type Code", "Work Time Type", "No.", "Posting Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
+        key(STG_Key16; "Entry Type", "Bal. Created Entry", "Job Posting Group", "Job No.", "Gen. Prod. Posting Group", "Job Task No.", Type, "Resource Type", "Work Type Code", "Work Time Type", "No.", "Posting Date", "Global Dimension 1 Code", "Global Dimension 2 Code")
         {
             SumIndexFields = "Total Cost (LCY)", "Line Amount (LCY)", Quantity, "Overhead Amount";
         }
-        key(Key17; "Entry Type", Type, "Vendor No.", "Mission No.", "No.", "Work Type Code", "Bal. Job No.", "Posting Date")
+        key(STG_Key17; "Entry Type", Type, "Vendor No.", "Mission No.", "No.", "Work Type Code", "Bal. Job No.", "Posting Date")
         {
         }
-        key(Key18; "Pre-Assigned No.", "Line No.")
+        key(STG_Key18; "Pre-Assigned No.", "Line No.")
         {
         }
-        key(Key19; Balanced, "ID pointage")
+        key(STG_Key19; Balanced, "ID pointage")
         {
         }
-        key(Key20; "Job No.", "Gen. Prod. Posting Group", "Entry Type", "Work Type Code", Type, "Resource Type", "No.", "Posting Date", "Work Time Type", "Bal. Created Entry", "Job Posting Group", "Gen. Bus. Posting Group", "Sales Document No.")
+        key(STG_Key20; "Job No.", "Gen. Prod. Posting Group", "Entry Type", "Work Type Code", Type, "Resource Type", "No.", "Posting Date", "Work Time Type", "Bal. Created Entry", "Job Posting Group", "Gen. Bus. Posting Group", "Sales Document No.")
         {
             SumIndexFields = "Total Cost (LCY)", "Line Amount (LCY)", Quantity, "Quantity (Base)";
         }
-        key(Key21; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
+        key(STG_Key21; Type, "No.", "Job No.", "Work Type Code", "Posting Date")
         {
         }
-        key(Key22; "To Company", "IC Job Ledg. Entry No.")
+        key(STG_Key22; "To Company", "IC Job Ledg. Entry No.")
         {
         }
-        key(Key23; Type, "No.", "Work Type Code", "Job Task No.", "Posting Date", "Job No.")
+        key(STG_Key23; Type, "No.", "Work Type Code", "Job Task No.", "Posting Date", "Job No.")
         {
         }
-        key(Key24; "Job No.", "Gen. Prod. Posting Group", "Entry Type", "Resource Type", "Work Type Code", "Posting Date", "Work Time Type", "Bal. Created Entry", "Global Dimension 1 Code", "Global Dimension 2 Code")
+        key(STG_Key24; "Job No.", "Gen. Prod. Posting Group", "Entry Type", "Resource Type", "Work Type Code", "Posting Date", "Work Time Type", "Bal. Created Entry", "Global Dimension 1 Code", "Global Dimension 2 Code")
         {
             SumIndexFields = "Total Cost (LCY)", "Line Amount (LCY)", Quantity;
         }
-        key(Key25; "Posting Date", "Mission No.", "No.", "Work Type Code", Type)
+        key(STG_Key25; "Posting Date", "Mission No.", "No.", "Work Type Code", Type)
         {
             SumIndexFields = Quantity;
         }
-        key(Key26; "Job No.", "Project Header No.", "Entry Type", "Resource Group No.", Type, "No.", "Planning Task No.", "Posting Date")
+        key(STG_Key26; "Job No.", "Project Header No.", "Entry Type", "Resource Group No.", Type, "No.", "Planning Task No.", "Posting Date")
         {
             MaintainSQLIndex = false;
             SumIndexFields = "Quantity (Base)";

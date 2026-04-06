@@ -88,7 +88,7 @@ Table 8004144 "Job Task Standard"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -20,7 +20,7 @@ table 52048956 "Motif Mission"
 
     keys
     {
-        key(Key1; "Code Motif")
+        key(STG_Key1; "Code Motif")
         {
             Clustered = true;
         }

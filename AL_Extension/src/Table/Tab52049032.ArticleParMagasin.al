@@ -17,7 +17,7 @@ Table 52049032 "Article Par Magasin"
 
     keys
     {
-        key(Key1; Article, Magasin)
+        key(STG_Key1; Article, Magasin)
         {
             Clustered = true;
         }

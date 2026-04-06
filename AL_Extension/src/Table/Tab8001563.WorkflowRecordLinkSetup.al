@@ -48,7 +48,7 @@ Table 8001563 "Workflow RecordLink Setup"
 
     keys
     {
-        key(Key1; "Table ID")
+        key(STG_Key1; "Table ID")
         {
             Clustered = true;
         }

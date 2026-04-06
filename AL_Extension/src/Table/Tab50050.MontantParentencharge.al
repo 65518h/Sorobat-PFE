@@ -45,11 +45,11 @@ Table 50063 "Montant Parent en charge"
 
     keys
     {
-        key(Key1; Annee, "Employé")
+        key(STG_Key1; Annee, "Employé")
         {
             Clustered = true;
         }
-        key(Key2; "Employé")
+        key(STG_Key2; "Employé")
         {
             SumIndexFields = Montant;
         }

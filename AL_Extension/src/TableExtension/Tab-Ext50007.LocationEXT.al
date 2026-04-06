@@ -75,10 +75,10 @@ TableExtension 50007 LocationEXT extends Location
     {
 
         //  GL2024
-        /*  key(Key4; "Bal. Job No.", "Code")
+        /*  key(STG_Key4; "Bal. Job No.", "Code")
            {
            }*/
-        key(Key5; Synchronise)
+        key(STG_Key5; Synchronise)
         {
         }
     }

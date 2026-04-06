@@ -53,7 +53,7 @@
 
 //     keys
 //     {
-//         key(Key1; "N°")
+//         key(STG_Key1; "N°")
 //         {
 //             Clustered = true;
 //         }

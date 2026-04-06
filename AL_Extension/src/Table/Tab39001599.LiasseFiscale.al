@@ -84,11 +84,11 @@
 
 //     keys
 //     {
-//         key(Key1; Rubrique, Colum)
+//         key(STG_Key1; Rubrique, Colum)
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; Colum, Ligne)
+//         key(STG_Key2; Colum, Ligne)
 //         {
 //         }
 //     }

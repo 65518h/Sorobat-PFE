@@ -64,28 +64,28 @@ Table 52048957 "Chantier Enreg."
 
     keys
     {
-        key(Key1; Sequence)
+        key(STG_Key1; Sequence)
         {
             Clustered = true;
         }
-        key(Key2; Employee, Date)
+        key(STG_Key2; Employee, Date)
         {
             SumIndexFields = "Montant Repas";
         }
-        key(Key3; Employee, year, "Paie No.", Sequence)
+        key(STG_Key3; Employee, year, "Paie No.", Sequence)
         {
             SumIndexFields = "Montant Repas";
         }
-        key(Key4; Employee, year, month, "Jours du transport", Sequence)
+        key(STG_Key4; Employee, year, month, "Jours du transport", Sequence)
         {
         }
-        key(Key5; Employee, year, month, "a Payé", Sequence)
+        key(STG_Key5; Employee, year, month, "a Payé", Sequence)
         {
         }
-        key(Key6; month, year, Date, Employee)
+        key(STG_Key6; month, year, Date, Employee)
         {
         }
-        key(Key7; Employee, Date, month, year)
+        key(STG_Key7; Employee, Date, month, year)
         {
         }
     }

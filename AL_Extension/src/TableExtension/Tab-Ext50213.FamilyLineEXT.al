@@ -37,7 +37,7 @@ TableExtension 50213 "Family LineEXT" extends "Family Line"
     keys
     {
 
-        key(Key3; "Item No.")
+        key(STG_Key3; "Item No.")
         {
         }
     }

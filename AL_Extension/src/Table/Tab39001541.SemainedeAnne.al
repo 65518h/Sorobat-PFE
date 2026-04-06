@@ -22,7 +22,7 @@
 
 //     keys
 //     {
-//         key(Key1; Semaine, "Année")
+//         key(STG_Key1; Semaine, "Année")
 //         {
 //             Clustered = true;
 //         }

@@ -203,7 +203,7 @@ modify("No. Printed")
     keys
     {
 
-        /*GL2024    key(Key8;"Job No.","Posting Date")
+        /*GL2024    key(STG_Key8;"Job No.","Posting Date")
             {
             }*/
     }

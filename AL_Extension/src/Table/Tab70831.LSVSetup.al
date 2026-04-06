@@ -264,7 +264,7 @@ Table 70831 "LSV Setup"
 
     keys
     {
-        key(Key1; "Bank Code")
+        key(STG_Key1; "Bank Code")
         {
             Clustered = true;
         }

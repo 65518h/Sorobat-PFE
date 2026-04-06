@@ -34,7 +34,7 @@ Table 70127 "Imp Item Unit of Measure"
 
     keys
     {
-        key(Key1; "Item No.", "Code")
+        key(STG_Key1; "Item No.", "Code")
         {
             Clustered = true;
         }

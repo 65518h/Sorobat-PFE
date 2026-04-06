@@ -37,11 +37,11 @@ Table 8001538 "BAR : Import Errors"
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(STG_Key1; "Entry No.")
         {
             Clustered = true;
         }
-        key(Key2; Type, Filename, Date, "Entry No.")
+        key(STG_Key2; Type, Filename, Date, "Entry No.")
         {
         }
     }

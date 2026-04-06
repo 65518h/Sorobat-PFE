@@ -102,11 +102,11 @@ Table 8004056 "Sales Contributor Archive"
 
     keys
     {
-        key(Key1; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Line No.")
+        key(STG_Key1; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", "Line No.")
         {
             Clustered = true;
         }
-        key(Key2; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", Contributor)
+        key(STG_Key2; "Document Type", "Document No.", "Doc. No. Occurrence", "Version No.", Contributor)
         {
         }
     }

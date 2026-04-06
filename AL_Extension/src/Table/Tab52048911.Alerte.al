@@ -128,7 +128,7 @@ Table 52048911 Alerte
 
     keys
     {
-        key(Key1; "Type Alerte")
+        key(STG_Key1; "Type Alerte")
         {
             Clustered = true;
         }

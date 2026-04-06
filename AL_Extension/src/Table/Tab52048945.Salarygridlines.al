@@ -70,15 +70,15 @@ table 52048945 "Salary grid lines"
 
     keys
     {
-        key(Key1; "N° sequence")
+        key(STG_Key1; "N° sequence")
         {
             Clustered = true;
         }
-        key(Key2; "Code", "Collège", Grade, Echelle, Classe, Echelon)
+        key(STG_Key2; "Code", "Collège", Grade, Echelle, Classe, Echelon)
         {
             SumIndexFields = "Basis salary";
         }
-        key(Key3; "Code", Grade)
+        key(STG_Key3; "Code", Grade)
         {
         }
     }

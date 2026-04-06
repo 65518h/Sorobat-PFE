@@ -65,7 +65,7 @@ Table 8001525 "Statistic Scheduler header"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -21,7 +21,7 @@ Table 8003983 Free8003983
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

@@ -32,7 +32,7 @@ Table 52048990 "Détail Reparation Enreg."
 
     keys
     {
-        key(Key1; "N° Reparation", "N° Ligne")
+        key(STG_Key1; "N° Reparation", "N° Ligne")
         {
             Clustered = true;
             SumIndexFields = "Montant Reparation";

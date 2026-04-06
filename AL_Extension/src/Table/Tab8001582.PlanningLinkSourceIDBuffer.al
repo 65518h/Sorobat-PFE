@@ -27,7 +27,7 @@ Table 8001582 "Planning Link Source ID Buffer"
 
     keys
     {
-        key(Key1; "Planning Task No.", "Source Record ID", "Source Line No.")
+        key(STG_Key1; "Planning Task No.", "Source Record ID", "Source Line No.")
         {
             Clustered = true;
             MaintainSIFTIndex = false;

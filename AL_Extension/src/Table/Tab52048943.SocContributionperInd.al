@@ -63,12 +63,12 @@ table 52048943 "Soc. Contribution per Ind."
 
     keys
     {
-        key(Key1; "Indemnity Code", "Social Contribution Code")
+        key(STG_Key1; "Indemnity Code", "Social Contribution Code")
         {
             Clustered = true;
             SumIndexFields = "Employer's part", "Employee's part";
         }
-        key(Key2; "Deductible of taxable basis")
+        key(STG_Key2; "Deductible of taxable basis")
         {
             SumIndexFields = "Employer's part", "Employee's part";
         }

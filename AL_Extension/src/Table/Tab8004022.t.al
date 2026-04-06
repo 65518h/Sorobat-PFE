@@ -10,7 +10,7 @@ Table 8004022 t
 
     keys
     {
-        key(Key1; bi7)
+        key(STG_Key1; bi7)
         {
             Clustered = true;
         }

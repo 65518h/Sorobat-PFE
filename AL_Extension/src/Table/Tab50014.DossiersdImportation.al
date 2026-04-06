@@ -753,17 +753,17 @@ Table 50014 "Dossiers d'Importation"
 
     keys
     {
-        key(Key1; "N° Dossier")
+        key(STG_Key1; "N° Dossier")
         {
             Clustered = true;
         }
-        key(Key2; "Date d'ouverture")
+        key(STG_Key2; "Date d'ouverture")
         {
         }
-        key(Key3; "N° Transitaire", "Date Déclaration", "N° Dossier")
+        key(STG_Key3; "N° Transitaire", "Date Déclaration", "N° Dossier")
         {
         }
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

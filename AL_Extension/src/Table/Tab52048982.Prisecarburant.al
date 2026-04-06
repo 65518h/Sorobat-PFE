@@ -221,10 +221,10 @@ Table 52048982 "Prise carburant"
 
     keys
     {
-        key(Key1; Sequence, "N° Véhicule", "N° Mission", "N° Affaire")
+        key(STG_Key1; Sequence, "N° Véhicule", "N° Mission", "N° Affaire")
         {
         }
-        key(Key2; "N° Véhicule", "N° Mission", "N° Bon Gasoil")
+        key(STG_Key2; "N° Véhicule", "N° Mission", "N° Bon Gasoil")
         {
             Clustered = true;
             SumIndexFields = "Gasoil Consommé", "Coût Réel Mission";

@@ -23,7 +23,7 @@ Table 8001420 Bitmap
 
     keys
     {
-        key(Key1; "No.")
+        key(STG_Key1; "No.")
         {
             Clustered = true;
         }

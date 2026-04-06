@@ -16,7 +16,7 @@ table 50013 "Autorisation Types Réglement2"
 
     keys
     {
-        key(Key1; Utilisateur, "Type réglement")
+        key(STG_Key1; Utilisateur, "Type réglement")
         {
             Clustered = true;
         }

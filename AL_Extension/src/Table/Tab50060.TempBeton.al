@@ -21,7 +21,7 @@ Table 50060 "Temp Beton"
 
     keys
     {
-        key(Key1; CodeBeton)
+        key(STG_Key1; CodeBeton)
         {
             Clustered = true;
         }

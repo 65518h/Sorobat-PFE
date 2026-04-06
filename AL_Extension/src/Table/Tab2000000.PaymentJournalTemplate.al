@@ -74,7 +74,7 @@ Table 2000000 "Payment Journal Template"
 
     keys
     {
-        key(Key1; Name)
+        key(STG_Key1; Name)
         {
             Clustered = true;
         }

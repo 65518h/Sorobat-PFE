@@ -176,11 +176,11 @@
 
 //     keys
 //     {
-//         key(Key1; "Année", Matricule)
+//         key(STG_Key1; "Année", Matricule)
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; Affectation, "Année", Matricule)
+//         key(STG_Key2; Affectation, "Année", Matricule)
 //         {
 //         }
 //     }

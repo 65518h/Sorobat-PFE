@@ -13,7 +13,7 @@ Table 50053 "temp correction laila compta"
 
     keys
     {
-        key(Key1; "Num Document")
+        key(STG_Key1; "Num Document")
         {
             Clustered = true;
         }

@@ -85,23 +85,23 @@ Table 52048951 "Note Remplacement Enreg"
 
     keys
     {
-        key(Key1; "N° Sequence")
+        key(STG_Key1; "N° Sequence")
         {
             Clustered = true;
         }
-        key(Key2; "N° Remplacant", "Date Remplacement", "Heure Début", "Heure Fin")
+        key(STG_Key2; "N° Remplacant", "Date Remplacement", "Heure Début", "Heure Fin")
         {
         }
-        key(Key3; "N° Salariée", "N° Remplacant", "Date Remplacement")
+        key(STG_Key3; "N° Salariée", "N° Remplacant", "Date Remplacement")
         {
         }
-        key(Key4; Type, "N° Salariée", "Date Remplacement")
+        key(STG_Key4; Type, "N° Salariée", "Date Remplacement")
         {
         }
-        key(Key5; "N° Salariée", "Date Remplacement", "N° Sequence")
+        key(STG_Key5; "N° Salariée", "Date Remplacement", "N° Sequence")
         {
         }
-        key(Key6; System, "N° Sequence")
+        key(STG_Key6; System, "N° Sequence")
         {
         }
     }

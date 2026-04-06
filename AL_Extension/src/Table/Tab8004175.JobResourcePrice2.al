@@ -142,7 +142,7 @@ Table 8004175 "Job Resource Price2"
 
     keys
     {
-        key(Key1; "Job No.", "Job Task No.", Type, "Code", "Work Type Code", "Currency Code")
+        key(STG_Key1; "Job No.", "Job Task No.", Type, "Code", "Work Type Code", "Currency Code")
         {
             Clustered = true;
         }

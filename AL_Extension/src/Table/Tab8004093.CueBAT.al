@@ -25,7 +25,7 @@ Table 8004093 "Cue BAT"
 
     keys
     {
-        key(Key1; Clef)
+        key(STG_Key1; Clef)
         {
             Clustered = true;
         }

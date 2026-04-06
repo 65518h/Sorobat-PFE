@@ -157,7 +157,7 @@ Table 50008 "Bureau Ordre"
 
     keys
     {
-        key(Key1; "Document N°")
+        key(STG_Key1; "Document N°")
         {
             Clustered = true;
         }

@@ -16,7 +16,7 @@ table 52048935 "REC-Themes"
 
     keys
     {
-        key(Key1; "Code theme")
+        key(STG_Key1; "Code theme")
         {
             Clustered = true;
         }

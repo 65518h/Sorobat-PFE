@@ -38,14 +38,14 @@
 
 //     keys
 //     {
-//         key(Key1; Con_ID, Num_BL)
+//         key(STG_Key1; Con_ID, Num_BL)
 //         {
 //             Clustered = true;
 //         }
-//         key(Key2; Mat_Code)
+//         key(STG_Key2; Mat_Code)
 //         {
 //         }
-//         key(Key3; Mat_Code, Num_BL)
+//         key(STG_Key3; Mat_Code, Num_BL)
 //         {
 //             SumIndexFields = "Quantité";
 //         }

@@ -313,7 +313,7 @@ Table 8004000 "Setup Job Journal Line"
 
     keys
     {
-        key(Key1; "Journal Template Name", "Journal Batch Name")
+        key(STG_Key1; "Journal Template Name", "Journal Batch Name")
         {
             Clustered = true;
         }

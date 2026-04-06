@@ -103,11 +103,11 @@ Table 52048905 "Line grid"
 
     keys
     {
-        key(Key1; "Code", "Catégorie", Echelons, Echelle, Classe)
+        key(STG_Key1; "Code", "Catégorie", Echelons, Echelle, Classe)
         {
             Clustered = true;
         }
-        key(Key2; "Code", "Catégorie", Echelle)
+        key(STG_Key2; "Code", "Catégorie", Echelle)
         {
         }
     }

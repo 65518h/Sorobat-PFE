@@ -112,11 +112,11 @@ Table 52048941 "Hist. Soc. Contribution"
 
     keys
     {
-        key(Key1; "Employment Contract Code", "Social Contribution Code", "Indemnity Code", "Code contrat archivé")
+        key(STG_Key1; "Employment Contract Code", "Social Contribution Code", "Indemnity Code", "Code contrat archivé")
         {
             Clustered = true;
         }
-        key(Key2; "Code contrat archivé", "Employment Contract Code")
+        key(STG_Key2; "Code contrat archivé", "Employment Contract Code")
         {
         }
     }

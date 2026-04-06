@@ -26,7 +26,7 @@ Table 8001932 "Subscr. Review Value"
 
     keys
     {
-        key(Key1; "Index Code", "Starting Date")
+        key(STG_Key1; "Index Code", "Starting Date")
         {
             Clustered = true;
         }

@@ -35,7 +35,7 @@ Table 8001521 "Statistic cell"
 
     keys
     {
-        key(Key1; "User ID", "Statistic code", "Line No.", "Column No.")
+        key(STG_Key1; "User ID", "Statistic code", "Line No.", "Column No.")
         {
             Clustered = true;
             SumIndexFields = "Computed result";

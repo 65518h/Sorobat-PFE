@@ -44,7 +44,7 @@ Table 52048950 "Entete Pointage Journ. Validé"
 
     keys
     {
-        key(Key1; Affecation, Annee, "Mois Attachement")
+        key(STG_Key1; Affecation, Annee, "Mois Attachement")
         {
             Clustered = true;
         }

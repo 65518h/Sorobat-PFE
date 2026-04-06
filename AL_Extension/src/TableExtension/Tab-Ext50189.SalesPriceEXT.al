@@ -16,7 +16,7 @@ TableExtension 50189 "Sales PriceEXT" extends "Sales Price"
     }
     keys
     {
-        key(Key4; Synchronise)
+        key(STG_Key4; Synchronise)
         {
         }
     }

@@ -81,7 +81,7 @@ Table 70116 "Imp Gen. Prod. Posting Gro"
 
     keys
     {
-        key(Key1; "Code")
+        key(STG_Key1; "Code")
         {
             Clustered = true;
         }

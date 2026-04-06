@@ -1111,22 +1111,22 @@ TableExtension 50221 JobEXT extends Job
     keys
     {
         /*GL2024
-                key(Key5; Status, "Person Responsible", "No.")
+                key(STG_Key5; Status, "Person Responsible", "No.")
                 {
                 }
-                key(Key6; "Person Responsible", "No.", Status)
+                key(STG_Key6; "Person Responsible", "No.", Status)
                 {
                 }
-                key(Key7; Status, "Global Dimension 1 Code", "Global Dimension 2 Code", "No.")
+                key(STG_Key7; Status, "Global Dimension 1 Code", "Global Dimension 2 Code", "No.")
                 {
                 }
-                key(Key8; "Global Dimension 1 Code", "Global Dimension 2 Code", "No.", Status)
+                key(STG_Key8; "Global Dimension 1 Code", "Global Dimension 2 Code", "No.", Status)
                 {
                 }
-                key(Key9; Status, "No.")
+                key(STG_Key9; Status, "No.")
                 {
                 }
-                key(Key10; Synchronise)
+                key(STG_Key10; Synchronise)
                 {
                 }*/
     }
