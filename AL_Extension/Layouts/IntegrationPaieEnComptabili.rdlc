@@ -1,0 +1,1967 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.1.30001.02</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.1.30001.02</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-11-07T13:38:25.0051548Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:DataSourceID>0d168a7d-170b-4ade-91ee-a0902475e124</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="SBaseInitial1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!SBaseInitial.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.421cm</Top>
+            <Left>5.23861cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.82868cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Sursalaire1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Sursalaire.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.00874cm</Top>
+            <Left>5.23861cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.82868cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Prime_Control10000000641">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Prime_Control1000000064.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.59648cm</Top>
+            <Left>5.23861cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.82868cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="HSupp_Control10000000651">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!HSupp_Control1000000065.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.25478cm</Top>
+            <Left>5.23861cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.82868cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Numero_PaieCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Numero_PaieCaption.Value</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.422cm</Top>
+            <Left>0.16917cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>1.8cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Salairs_NetCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Salairs_NetCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.133cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.635cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="AvanceCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!AvanceCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.58653cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.54647cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="PretCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PretCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.00478cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.54647cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="CNSSCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CNSSCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.80328cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.54547cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Salaire_Base___SursalaireCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Salaire_Base___SursalaireCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.537cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="ChargeSocial1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!ChargeSocial.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.38775cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.57292cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Heures_suplementaireCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Heures_suplementaireCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.15403cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="RisqueCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!RisqueCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.98442cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="PrestationCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PrestationCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.40267cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="AssuranceCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!AssuranceCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.56617cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.56411cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="ChargeCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!ChargeCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.38775cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="PrimeCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PrimeCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.77106cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.61669cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Libellé_écritureCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Libellé_écritureCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.54056cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.57344cm</Height>
+            <Width>4.22583cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Mvts_débitCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Mvts_débitCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.54056cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.57344cm</Height>
+            <Width>2.42625cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Mvts_créditCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Mvts_créditCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.54056cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.57344cm</Height>
+            <Width>2.24104cm</Width>
+            <ZIndex>19</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Numero_PaieCaption_Control10000000411">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Numero_PaieCaption_Control1000000041.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.54056cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.57344cm</Height>
+            <Width>2.49688cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="JourCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!JourCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.54056cm</Top>
+            <Left>0.55334cm</Left>
+            <Height>0.57344cm</Height>
+            <Width>1.35cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Salaire_BaseCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Salaire_BaseCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.421cm</Top>
+            <Left>1.45334cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="SursalaireCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!SursalaireCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.00874cm</Top>
+            <Left>1.45334cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="IUTSCaption1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!IUTSCaption.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.13028cm</Top>
+            <Left>6.6775cm</Left>
+            <Height>0.59939cm</Height>
+            <Width>5.12583cm</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000551">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000055.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.13028cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.59939cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000541">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000054.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.56617cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.56411cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No__1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No__.Value</Value>
+                    <Style>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.422cm</Top>
+            <Left>2.03972cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3cm</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="SNet1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!SNet.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.16861cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.59939cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Avance1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Avance.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.55125cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="SBase1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!SBase.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.537cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.57292cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="HSupp1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!HSupp.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.15403cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.57292cm</Width>
+            <ZIndex>31</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Pret1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Pret.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.00478cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.54647cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="CNSSsalarial1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!CNSSsalarial.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.80328cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.54547cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="IUTS1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!IUTS.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.13028cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.59939cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Debiteur1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Debiteur.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>10.37532cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.57292cm</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Crediteur1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Crediteur.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>10.37532cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="RISQUE1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!RISQUE.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.98442cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Prestation1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Prestation.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.40267cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Assurance1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Assurance.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.56617cm</Top>
+            <Left>16.5323cm</Left>
+            <Height>0.56411cm</Height>
+            <Width>3.17995cm</Width>
+            <ZIndex>39</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Prime1">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Prime.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.77106cm</Top>
+            <Left>12.39459cm</Left>
+            <Height>0.61669cm</Height>
+            <Width>3.57292cm</Width>
+            <ZIndex>40</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000441">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000044.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.537cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>41</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000451">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000045.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.15403cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>42</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000461">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000046.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.77106cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.61669cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>43</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000471">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000047.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.38775cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000481">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000048.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.00478cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.54647cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000491">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000049.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.55125cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000501">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000050.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.16861cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.59939cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000511">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000051.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.80328cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.54547cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000521">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000052.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.40267cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>49</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Rec__Salary_Headers__No___Control10000000531">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Rec__Salary_Headers__No___Control1000000053.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.98442cm</Top>
+            <Left>2.40646cm</Left>
+            <Height>0.58175cm</Height>
+            <Width>2.79688cm</Width>
+            <ZIndex>50</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="PrimeCaption_Control10000000631">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!PrimeCaption_Control1000000063.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.59648cm</Top>
+            <Left>1.45334cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>51</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Heures_suplementaireCaption_Control10000000661">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!Heures_suplementaireCaption_Control1000000066.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.25478cm</Top>
+            <Left>1.45334cm</Left>
+            <Height>0.58774cm</Height>
+            <Width>3.75cm</Width>
+            <ZIndex>52</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Line Name="Line1">
+            <Top>1.36417cm</Top>
+            <Left>0.16917cm</Left>
+            <Height>0cm</Height>
+            <Width>19.54308cm</Width>
+            <ZIndex>53</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line2">
+            <Top>2.29039cm</Top>
+            <Left>0.16917cm</Left>
+            <Height>0cm</Height>
+            <Width>19.54308cm</Width>
+            <ZIndex>54</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line3">
+            <Top>10.23421cm</Top>
+            <Left>0.16917cm</Left>
+            <Height>0cm</Height>
+            <Width>19.59292cm</Width>
+            <ZIndex>55</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line4">
+            <Top>11.06889cm</Top>
+            <Left>0.16917cm</Left>
+            <Height>0cm</Height>
+            <Width>19.59292cm</Width>
+            <ZIndex>56</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+        </ReportItems>
+        <Height>14.0655cm</Height>
+        <Style />
+      </Body>
+      <Width>20.02584cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.49557cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="UserIdTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=User!UserID</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.64957cm</Top>
+              <Left>14.77584cm</Left>
+              <Height>0.58175cm</Height>
+              <Width>5.25cm</Width>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="ExecutionTimeTextBox">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>d MMMM yyyy</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.424cm</Top>
+              <Left>14.77584cm</Left>
+              <Height>0.58175cm</Height>
+              <Width>5.25cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox3">
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Page : "+CSTR(Globals!PageNumber)</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.00575cm</Top>
+              <Left>14.77584cm</Left>
+              <Height>0.61703cm</Height>
+              <Width>5.25cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Salary_HeadersCaption1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!Salary_HeadersCaption.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.424cm</Top>
+              <Left>0.13625cm</Left>
+              <Height>0.58175cm</Height>
+              <Width>5.06709cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="Prime_Control10000000211">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!Prime_Control1000000021.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>=Fields!Prime_Control1000000021Format.Value.Format</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.424cm</Top>
+              <Left>5.23861cm</Left>
+              <Height>0.58175cm</Height>
+              <Width>2.25cm</Width>
+              <ZIndex>4</ZIndex>
+              <Visibility>
+                <Hidden>true</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+            <Textbox Name="COMPANYNAME1">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!COMPANYNAME.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.18214cm</Top>
+              <Left>0.13625cm</Left>
+              <Height>0.58175cm</Height>
+              <Width>7.35236cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <VerticalAlign>Middle</VerticalAlign>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No__">
+          <DataField>Rec__Salary_Headers__No__</DataField>
+        </Field>
+        <Field Name="SNet">
+          <DataField>SNet</DataField>
+        </Field>
+        <Field Name="SNetFormat">
+          <DataField>SNetFormat</DataField>
+        </Field>
+        <Field Name="Avance">
+          <DataField>Avance</DataField>
+        </Field>
+        <Field Name="AvanceFormat">
+          <DataField>AvanceFormat</DataField>
+        </Field>
+        <Field Name="SBase">
+          <DataField>SBase</DataField>
+        </Field>
+        <Field Name="SBaseFormat">
+          <DataField>SBaseFormat</DataField>
+        </Field>
+        <Field Name="HSupp">
+          <DataField>HSupp</DataField>
+        </Field>
+        <Field Name="HSuppFormat">
+          <DataField>HSuppFormat</DataField>
+        </Field>
+        <Field Name="Pret">
+          <DataField>Pret</DataField>
+        </Field>
+        <Field Name="PretFormat">
+          <DataField>PretFormat</DataField>
+        </Field>
+        <Field Name="CNSSsalarial">
+          <DataField>CNSSsalarial</DataField>
+        </Field>
+        <Field Name="CNSSsalarialFormat">
+          <DataField>CNSSsalarialFormat</DataField>
+        </Field>
+        <Field Name="IUTS">
+          <DataField>IUTS</DataField>
+        </Field>
+        <Field Name="IUTSFormat">
+          <DataField>IUTSFormat</DataField>
+        </Field>
+        <Field Name="Debiteur">
+          <DataField>Debiteur</DataField>
+        </Field>
+        <Field Name="DebiteurFormat">
+          <DataField>DebiteurFormat</DataField>
+        </Field>
+        <Field Name="Crediteur">
+          <DataField>Crediteur</DataField>
+        </Field>
+        <Field Name="CrediteurFormat">
+          <DataField>CrediteurFormat</DataField>
+        </Field>
+        <Field Name="RISQUE">
+          <DataField>RISQUE</DataField>
+        </Field>
+        <Field Name="RISQUEFormat">
+          <DataField>RISQUEFormat</DataField>
+        </Field>
+        <Field Name="Prestation">
+          <DataField>Prestation</DataField>
+        </Field>
+        <Field Name="PrestationFormat">
+          <DataField>PrestationFormat</DataField>
+        </Field>
+        <Field Name="Assurance">
+          <DataField>Assurance</DataField>
+        </Field>
+        <Field Name="AssuranceFormat">
+          <DataField>AssuranceFormat</DataField>
+        </Field>
+        <Field Name="Prime">
+          <DataField>Prime</DataField>
+        </Field>
+        <Field Name="PrimeFormat">
+          <DataField>PrimeFormat</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000044">
+          <DataField>Rec__Salary_Headers__No___Control1000000044</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000045">
+          <DataField>Rec__Salary_Headers__No___Control1000000045</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000046">
+          <DataField>Rec__Salary_Headers__No___Control1000000046</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000047">
+          <DataField>Rec__Salary_Headers__No___Control1000000047</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000048">
+          <DataField>Rec__Salary_Headers__No___Control1000000048</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000049">
+          <DataField>Rec__Salary_Headers__No___Control1000000049</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000050">
+          <DataField>Rec__Salary_Headers__No___Control1000000050</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000051">
+          <DataField>Rec__Salary_Headers__No___Control1000000051</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000052">
+          <DataField>Rec__Salary_Headers__No___Control1000000052</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000053">
+          <DataField>Rec__Salary_Headers__No___Control1000000053</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000054">
+          <DataField>Rec__Salary_Headers__No___Control1000000054</DataField>
+        </Field>
+        <Field Name="Rec__Salary_Headers__No___Control1000000055">
+          <DataField>Rec__Salary_Headers__No___Control1000000055</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000021">
+          <DataField>Prime_Control1000000021</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000021Format">
+          <DataField>Prime_Control1000000021Format</DataField>
+        </Field>
+        <Field Name="ChargeSocial">
+          <DataField>ChargeSocial</DataField>
+        </Field>
+        <Field Name="ChargeSocialFormat">
+          <DataField>ChargeSocialFormat</DataField>
+        </Field>
+        <Field Name="SBaseInitial">
+          <DataField>SBaseInitial</DataField>
+        </Field>
+        <Field Name="SBaseInitialFormat">
+          <DataField>SBaseInitialFormat</DataField>
+        </Field>
+        <Field Name="Sursalaire">
+          <DataField>Sursalaire</DataField>
+        </Field>
+        <Field Name="SursalaireFormat">
+          <DataField>SursalaireFormat</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000064">
+          <DataField>Prime_Control1000000064</DataField>
+        </Field>
+        <Field Name="Prime_Control1000000064Format">
+          <DataField>Prime_Control1000000064Format</DataField>
+        </Field>
+        <Field Name="HSupp_Control1000000065">
+          <DataField>HSupp_Control1000000065</DataField>
+        </Field>
+        <Field Name="HSupp_Control1000000065Format">
+          <DataField>HSupp_Control1000000065Format</DataField>
+        </Field>
+        <Field Name="Salary_HeadersCaption">
+          <DataField>Salary_HeadersCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Numero_PaieCaption">
+          <DataField>Numero_PaieCaption</DataField>
+        </Field>
+        <Field Name="Salairs_NetCaption">
+          <DataField>Salairs_NetCaption</DataField>
+        </Field>
+        <Field Name="AvanceCaption">
+          <DataField>AvanceCaption</DataField>
+        </Field>
+        <Field Name="PretCaption">
+          <DataField>PretCaption</DataField>
+        </Field>
+        <Field Name="CNSSCaption">
+          <DataField>CNSSCaption</DataField>
+        </Field>
+        <Field Name="Salaire_Base___SursalaireCaption">
+          <DataField>Salaire_Base___SursalaireCaption</DataField>
+        </Field>
+        <Field Name="Heures_suplementaireCaption">
+          <DataField>Heures_suplementaireCaption</DataField>
+        </Field>
+        <Field Name="IUTSCaption">
+          <DataField>IUTSCaption</DataField>
+        </Field>
+        <Field Name="RisqueCaption">
+          <DataField>RisqueCaption</DataField>
+        </Field>
+        <Field Name="PrestationCaption">
+          <DataField>PrestationCaption</DataField>
+        </Field>
+        <Field Name="AssuranceCaption">
+          <DataField>AssuranceCaption</DataField>
+        </Field>
+        <Field Name="ChargeCaption">
+          <DataField>ChargeCaption</DataField>
+        </Field>
+        <Field Name="PrimeCaption">
+          <DataField>PrimeCaption</DataField>
+        </Field>
+        <Field Name="Libellé_écritureCaption">
+          <DataField>Libellé_écritureCaption</DataField>
+        </Field>
+        <Field Name="Mvts_débitCaption">
+          <DataField>Mvts_débitCaption</DataField>
+        </Field>
+        <Field Name="Mvts_créditCaption">
+          <DataField>Mvts_créditCaption</DataField>
+        </Field>
+        <Field Name="Numero_PaieCaption_Control1000000041">
+          <DataField>Numero_PaieCaption_Control1000000041</DataField>
+        </Field>
+        <Field Name="JourCaption">
+          <DataField>JourCaption</DataField>
+        </Field>
+        <Field Name="Salaire_BaseCaption">
+          <DataField>Salaire_BaseCaption</DataField>
+        </Field>
+        <Field Name="SursalaireCaption">
+          <DataField>SursalaireCaption</DataField>
+        </Field>
+        <Field Name="PrimeCaption_Control1000000063">
+          <DataField>PrimeCaption_Control1000000063</DataField>
+        </Field>
+        <Field Name="Heures_suplementaireCaption_Control1000000066">
+          <DataField>Heures_suplementaireCaption_Control1000000066</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

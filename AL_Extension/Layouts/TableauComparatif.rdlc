@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>1e493d66-6bc9-4106-aa9c-cfdcb6154adf</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Date__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Date__Caption.Value)</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.423cm</Top>
+            <Left>19.4115cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.578cm</Width>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="WORKDATE">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!WORKDATE.Value)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.423cm</Top>
+            <Left>23.09533cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.45467cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Impr__par__Caption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Impr__par__Caption.Value)</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.88128cm</Top>
+            <Left>19.4115cm</Left>
+            <Height>0.423cm</Height>
+            <Width>3.50745cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="USERID">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!USERID.Value)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.846cm</Top>
+            <Left>23.09533cm</Left>
+            <Height>0.423cm</Height>
+            <Width>2.81967cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="DA_N________N__Demande_d_achat_">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!DA_N________N__Demande_d_achat_.Value)</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.269cm</Top>
+            <Left>6.44517cm</Left>
+            <Height>0.423cm</Height>
+            <Width>12.00483cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="Comparatif_Offres_de_PrixCaption">
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Comparatif_Offres_de_PrixCaption.Value)</Value>
+                    <Style>
+                      <FontSize>15pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.423cm</Top>
+            <Left>6.44517cm</Left>
+            <Height>0.846cm</Height>
+            <Width>12.00483cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <VerticalAlign>Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>4.953cm</Height>
+        <Style />
+      </Body>
+      <Width>26.55cm</Width>
+      <Page>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>28.3cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.1cm</RightMargin>
+        <TopMargin>0.1cm</TopMargin>
+        <BottomMargin>0.1cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="RecG_CompanyInfo_Picture">
+          <DataField>RecG_CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="WORKDATE">
+          <DataField>WORKDATE</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="DA_N________N__Demande_d_achat_">
+          <DataField>DA_N________N__Demande_d_achat_</DataField>
+        </Field>
+        <Field Name="Signature_">
+          <DataField>Signature_</DataField>
+        </Field>
+        <Field Name="Date__Caption">
+          <DataField>Date__Caption</DataField>
+        </Field>
+        <Field Name="Impr__par__Caption">
+          <DataField>Impr__par__Caption</DataField>
+        </Field>
+        <Field Name="Comparatif_Offres_de_PrixCaption">
+          <DataField>Comparatif_Offres_de_PrixCaption</DataField>
+        </Field>
+        <Field Name="Entete_Document_Type">
+          <DataField>Entete_Document_Type</DataField>
+        </Field>
+        <Field Name="Entete_No_">
+          <DataField>Entete_No_</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns1">
+          <DataField>TxtG_NomFrns1</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns2">
+          <DataField>TxtG_NomFrns2</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns3">
+          <DataField>TxtG_NomFrns3</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns4">
+          <DataField>TxtG_NomFrns4</DataField>
+        </Field>
+        <Field Name="TxtG_NomFrns5">
+          <DataField>TxtG_NomFrns5</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Description">
+          <DataField>Purchase_Line_Description</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Unit_of_Measure_">
+          <DataField>Purchase_Line__Unit_of_Measure_</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns2">
+          <DataField>DecG_PrixFrns2</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns2Format">
+          <DataField>DecG_PrixFrns2Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns3">
+          <DataField>DecG_PrixFrns3</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns3Format">
+          <DataField>DecG_PrixFrns3Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns4">
+          <DataField>DecG_PrixFrns4</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns4Format">
+          <DataField>DecG_PrixFrns4Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns5">
+          <DataField>DecG_PrixFrns5</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns5Format">
+          <DataField>DecG_PrixFrns5Format</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns1">
+          <DataField>DecG_PrixFrns1</DataField>
+        </Field>
+        <Field Name="DecG_PrixFrns1Format">
+          <DataField>DecG_PrixFrns1Format</DataField>
+        </Field>
+        <Field Name="TxtG_NomLastFrns">
+          <DataField>TxtG_NomLastFrns</DataField>
+        </Field>
+        <Field Name="DecG_PrixLastFrns">
+          <DataField>DecG_PrixLastFrns</DataField>
+        </Field>
+        <Field Name="DecG_PrixLastFrnsFormat">
+          <DataField>DecG_PrixLastFrnsFormat</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Quantity">
+          <DataField>Purchase_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Purchase_Line_QuantityFormat">
+          <DataField>Purchase_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="DescriptionCaption">
+          <DataField>DescriptionCaption</DataField>
+        </Field>
+        <Field Name="UnitéCaption">
+          <DataField>UnitéCaption</DataField>
+        </Field>
+        <Field Name="QtéCaption">
+          <DataField>QtéCaption</DataField>
+        </Field>
+        <Field Name="Prix_Proposés_HTCaption">
+          <DataField>Prix_Proposés_HTCaption</DataField>
+        </Field>
+        <Field Name="Dernier_AchatCaption">
+          <DataField>Dernier_AchatCaption</DataField>
+        </Field>
+        <Field Name="Dernier_Prix_AchatCaption">
+          <DataField>Dernier_Prix_AchatCaption</DataField>
+        </Field>
+        <Field Name="FournisseurCaption">
+          <DataField>FournisseurCaption</DataField>
+        </Field>
+        <Field Name="ChoixCaption">
+          <DataField>ChoixCaption</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_Type">
+          <DataField>Purchase_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_No_">
+          <DataField>Purchase_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Line_No_">
+          <DataField>Purchase_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

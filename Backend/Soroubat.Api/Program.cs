@@ -1,0 +1,205 @@
+using Soroubat.Api.Interfaces;
+using Soroubat.Api.Services;
+using Soroubat.Api.Data;
+using System.Text;
+using System.Text.Json;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// ── 1. CONFIGURATION BUSINESS CENTRAL ────────────────────────────────────────
+
+var bcConfig = builder.Configuration.GetSection("BusinessCentral");
+
+string rawUrl      = bcConfig.GetValue<string>("BaseUrl")     ?? throw new InvalidOperationException("'BusinessCentral:BaseUrl' est absent de appsettings.json.");
+string companyName = bcConfig.GetValue<string>("CompanyName") ?? throw new InvalidOperationException("'BusinessCentral:CompanyName' est absent de appsettings.json.");
+
+// Extraction de la racine BC (avant /api/ ou /ODataV4)
+string baseUrl = rawUrl.Split("/api/")[0].Split("/ODataV4")[0].TrimEnd('/');
+
+// URI Custom API — groupe siteManagement (pointage, gasoil, demandes d'achat, transferts…)
+string siteManagementUri = $"{baseUrl}/api/soroubat/siteManagement/v1.0/companies(name='{Uri.EscapeDataString(companyName)}')/";
+
+// URI Custom API — groupe lookups (listes de référence : projets, articles, emplacements…)
+// Toutes les pages lookup sont déclarées en PageType = API avec APIGroup = 'lookups'.
+// Cette approche remplace l'ancienne configuration OData Web Services (/ODataV4/Company(...)/),
+// conformément aux recommandations Microsoft depuis BC 2020 wave 2.
+string lookupsUri = $"{baseUrl}/api/soroubat/lookups/v1.0/companies(name='{Uri.EscapeDataString(companyName)}')/";
+
+// ── 2. AUTHENTIFICATION JWT ───────────────────────────────────────────────────
+
+var jwtKey = builder.Configuration["Jwt:Key"]
+    ?? throw new InvalidOperationException("La clé JWT 'Jwt:Key' est absente de appsettings.json.");
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer           = true,
+            ValidateAudience         = true,
+            ValidateLifetime         = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer              = builder.Configuration["Jwt:Issuer"],
+            ValidAudience            = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey         = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            ClockSkew                = TimeSpan.FromMinutes(1)
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+// ── 3. BASE DE DONNÉES LOCALE (SQLite) ────────────────────────────────────────
+
+builder.Services.AddDbContext<AuthDbContext>(opt =>
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? "Data Source=auth.db"));
+
+// ── 4. CONTROLLERS + JSON ─────────────────────────────────────────────────────
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
+
+// ── 5. SWAGGER ────────────────────────────────────────────────────────────────
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title   = "Soroubat API",
+        Version = "v1",
+        Description = "API de pilotage des chantiers — Intégrée à Microsoft Dynamics 365 Business Central"
+    });
+
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name         = "Authorization",
+        Type         = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme       = "Bearer",
+        BearerFormat = "JWT",
+        In           = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description  = "Entrez 'Bearer' suivi d'un espace et de votre jeton JWT.\n\nExemple : \"Bearer eyJhbGci...\""
+    });
+
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id   = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
+
+// ── 6. INJECTION DE DÉPENDANCES — CLIENTS HTTP BC ────────────────────────────
+
+static HttpClientHandler WindowsAuthHandler() =>
+    new HttpClientHandler { UseDefaultCredentials = true };
+
+// Configuration partagée pour tous les services siteManagement
+void ConfigureSiteManagementClient(HttpClient client)
+{
+    client.BaseAddress = new Uri(siteManagementUri);
+    client.DefaultRequestHeaders.Accept.Clear();
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue("application/json"));
+}
+
+// Configuration partagée pour tous les services lookups
+void ConfigureLookupClient(HttpClient client)
+{
+    client.BaseAddress = new Uri(lookupsUri);
+    client.DefaultRequestHeaders.Accept.Clear();
+    client.DefaultRequestHeaders.Accept.Add(
+        new MediaTypeWithQualityHeaderValue("application/json"));
+}
+
+// ── Services siteManagement ───────────────────────────────────────────────────
+
+builder.Services
+    .AddHttpClient<ISiteManagementService, SiteManagementService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IPurchaseRequestService, PurchaseRequestService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<ITransferService, TransferService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IStockService, StockService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IChefChantierService, ChefChantierService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IVehiculeService, VehiculeService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IGasoilService, GasoilService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IEmpAttendanceService, AttendanceService>(ConfigureSiteManagementClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+// ── Services lookups ──────────────────────────────────────────────────────────
+
+builder.Services
+    .AddHttpClient<ILookupService, LookupService>(ConfigureLookupClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+builder.Services
+    .AddHttpClient<IEmployeeService, EmployeeService>(ConfigureLookupClient)
+    .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
+
+// ── Services scoped (pas de HttpClient dédié) ─────────────────────────────────
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAlertService, AlertService>();
+
+// ── 7. CORS ───────────────────────────────────────────────────────────────────
+
+builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", p =>
+    p.WithOrigins("http://localhost:4200", "http://localhost:4201", "http://127.0.0.1:4201")
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowCredentials()));
+
+// ── 8. PIPELINE HTTP ──────────────────────────────────────────────────────────
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+app.MapGet("/api/auth/ping", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
+app.UseCors("AllowAngular");
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+Console.WriteLine("🚀 Backend démarré sur http://localhost:5227");
+Console.WriteLine("📚 Swagger disponible sur http://localhost:5227/swagger");
+
+app.Run();
