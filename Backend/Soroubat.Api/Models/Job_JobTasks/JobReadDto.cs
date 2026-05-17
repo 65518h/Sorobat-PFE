@@ -19,12 +19,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
 
-        [JsonPropertyName("personResponsible")]
-        public string PersonResponsible { get; set; } = string.Empty;
-
-        [JsonPropertyName("projectManager")]
-        public string ProjectManager { get; set; } = string.Empty;
-
         [JsonPropertyName("affectationMagasin")]
         public string AffectationMagasin { get; set; } = string.Empty;
 

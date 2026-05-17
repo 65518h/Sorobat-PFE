@@ -20,9 +20,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;
 
-        [JsonPropertyName("dateDebut")]
-        public DateTime? DateDebut { get; set; }
-
         [JsonPropertyName("dateFin")]
         public DateTime? DateFin { get; set; }
 
@@ -30,26 +27,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("progressPct")]
         public decimal ProgressPct { get; set; }
 
-        /// <summary>Avancement calculé automatiquement depuis les quantités réalisées (lecture seule).</summary>
-        [JsonPropertyName("taskProgressPct")]
-        public decimal TaskProgressPct { get; set; }
-
-        [JsonPropertyName("quantityShipped")]
-        public decimal QuantityShipped { get; set; }
-
-        [JsonPropertyName("initialQuantity")]
-        public decimal InitialQuantity { get; set; }
-
-        [JsonPropertyName("initialUoM")]
-        public string InitialUoM { get; set; } = string.Empty;
-
-        [JsonPropertyName("initialAmount")]
-        public decimal InitialAmount { get; set; }
-
-        [JsonPropertyName("usageTotalCost")]
-        public decimal UsageTotalCost { get; set; }
-
-        [JsonPropertyName("isBlocked")]
-        public bool IsBlocked { get; set; }
+        
     }
 }

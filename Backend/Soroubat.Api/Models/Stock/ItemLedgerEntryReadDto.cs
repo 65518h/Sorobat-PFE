@@ -11,15 +11,18 @@ namespace Soroubat.Api.Models
     /// </summary>
     public class ItemLedgerEntryReadDto
     {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
+
         [JsonPropertyName("entryNo")]
         public int EntryNo { get; set; }
 
         [JsonPropertyName("itemNo")]
         public string ItemNo { get; set; } = string.Empty;
 
-        /// <summary>Désignation article — FlowField calculé par BC (Designation Article).</summary>
-        [JsonPropertyName("itemDescription")]
-        public string ItemDescription { get; set; } = string.Empty;
+        /// <summary>Désignation article — champ natif BC Description.</summary>
+        [JsonPropertyName("description")]
+        public string Description { get; set; } = string.Empty;
 
         [JsonPropertyName("locationCode")]
         public string LocationCode { get; set; } = string.Empty;

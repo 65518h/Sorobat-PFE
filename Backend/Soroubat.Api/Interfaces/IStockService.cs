@@ -11,7 +11,9 @@ namespace Soroubat.Api.Interfaces
     public interface IStockService
     {
         /// <summary>
-        /// Retourne le stock agrégé de tous les articles du chantier correspondant au projet.
+        /// Retourne le stock agrégé de tous les articles du chantier correspondant au projet,
+        /// groupé par article et par emplacement, enrichi du nom complet du magasin.
+        /// Le frontend peut filtrer ou grouper par locationCode / locationName librement.
         /// Les articles avec un stock nul (entrées = sorties) sont exclus du résultat.
         /// Les articles avec un stock négatif sont inclus — ils sont détectés par AlertService.
         /// </summary>

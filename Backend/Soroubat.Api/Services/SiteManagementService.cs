@@ -46,6 +46,8 @@ namespace Soroubat.Api.Services
         }
 
 
+        // ─── TÂCHES ───────────────────────────────────────────────────────────
+
         public async Task<List<JobTaskReadDto>> GetMyTasksAsync(string projectNo)
         {
             var url = $"jobTasks?$filter=jobNo eq '{projectNo}'";
@@ -84,7 +86,7 @@ namespace Soroubat.Api.Services
             if (!task.JobNo.Equals(authorizedProjectNo, StringComparison.OrdinalIgnoreCase))
             {
                 _logger.LogWarning("[SiteManagement] Accès refusé : tâche {TaskId} appartient au projet {TaskProject}, " +
-                    "chef connecté au projet {UserProject}", 
+                    "chef connecté au projet {UserProject}",
                     taskId, task.JobNo, authorizedProjectNo);
                 throw new UnauthorizedAccessException(
                     "Vous n'avez pas le droit de modifier une tâche d'un autre chantier.");
@@ -92,14 +94,14 @@ namespace Soroubat.Api.Services
 
             // 2. EXÉCUTION : envoi du PATCH avec l'avancement
             var patchData = new { progressPct = progress };
-            var json = JsonSerializer.Serialize(patchData); // ca change le dictionnaire c# en json 
+            var json = JsonSerializer.Serialize(patchData); // sérialise l'objet anonyme en JSON
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"jobTasks({taskId})")
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"jobTasks({taskId})")
             {
                 Content = content
             };
-            // ne pas vérifier l'accés concurrent aux ressources
+            // If-Match: * — désactive la vérification de concurrence optimiste (ETag) côté BC
             request.Headers.TryAddWithoutValidation("If-Match", "*");
 
             var patchResponse = await _httpClient.SendAsync(request);

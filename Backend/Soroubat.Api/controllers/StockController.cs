@@ -21,9 +21,9 @@ namespace Soroubat.Api.Controllers
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
         /// <summary>
-        /// Retourne le stock agrégé de tous les articles du chantier du chef connecté.
-        /// Le stock est calculé par agrégation des écritures comptables articles Business Central,
-        /// groupées par article et par emplacement.
+        /// Retourne le stock agrégé de tous les articles du chantier du chef connecté,
+        /// groupé par article et par emplacement, enrichi du nom complet du magasin.
+        /// Le frontend peut filtrer ou grouper par locationCode / locationName librement.
         /// Une liste vide indique que le chantier n'a aucun article en stock.
         /// </summary>
         [HttpGet("my-stock")]

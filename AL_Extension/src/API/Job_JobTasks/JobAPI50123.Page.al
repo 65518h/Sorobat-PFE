@@ -36,7 +36,7 @@ page 50123 "JobAPI"
                     Caption = 'Description';
                     Editable = false;
                 }
-                field(status; Rec.Status)
+                field(status; Rec.Status) // planning , devis , ouvert , terminé 
                 {
                     Caption = 'Statut';
                     Editable = false;
@@ -51,19 +51,7 @@ page 50123 "JobAPI"
                     Caption = 'Date de fin';
                     Editable = false;
                 }
-                // Personne opérationnelle responsable du chantier sur le terrain
-                field(personResponsible; Rec."Person Responsible")
-                {
-                    Caption = 'Person Responsible';
-                    Editable = false;
-                }
-                // Responsable administratif du chantier
-                field(projectManager; Rec."Project Manager")
-                {
-                    Caption = 'Project Manager';
-                    Editable = false;
-                }
-                // Magasin d'approvisionnement principal — utilisé pour filtrer les demandes d'achat
+                // magasin principal 
                 field(affectationMagasin; Rec."Affectation Magasin")
                 {
                     Caption = 'Affectation Magasin';

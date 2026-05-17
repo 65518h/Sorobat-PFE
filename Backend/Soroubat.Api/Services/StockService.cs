@@ -5,8 +5,9 @@ using Soroubat.Api.Models;
 namespace Soroubat.Api.Services
 {
     /// <summary>
-    /// Interagit avec l'API Business Central ItemLedgerEntryAPI (page 50145)
-    /// pour calculer le stock réel d'un chantier par agrégation des écritures comptables articles.
+    /// Interagit avec les APIs Business Central ItemLedgerEntryAPI (page 50145)
+    /// et LocationAPI (page 50177) pour calculer le stock réel d'un chantier
+    /// par agrégation des écritures comptables articles.
     /// </summary>
     public class StockService : BaseService, IStockService
     {
@@ -21,51 +22,99 @@ namespace Soroubat.Api.Services
 
         public async Task<List<StockChantierReadDto>> GetStockByProjectAsync(string projectNo)
         {
-            var url = $"itemLedgerEntries?$filter=jobNo eq '{projectNo}'";
-            _logger.LogInformation("[Stock] Récupération des écritures pour le projet {ProjectNo}", projectNo);
+            _logger.LogInformation("[Stock] Récupération du stock pour le projet {ProjectNo}", projectNo);
 
-            var response = await _httpClient.GetAsync(url);
+            // Les deux appels BC sont indépendants — on les lance en parallèle
+            var locationsTask = FetchLocationsByProjectAsync(projectNo);
+            var entriesTask   = FetchItemLedgerEntriesByProjectAsync(projectNo);
 
-            if (!response.IsSuccessStatusCode)
-                await HandleErrorResponseAsync(response);
+            await Task.WhenAll(locationsTask, entriesTask);
 
+            var locations = locationsTask.Result;
+            var entries   = entriesTask.Result;
 
-            var data = await response.Content.ReadFromJsonAsync<BCResponse<ItemLedgerEntryReadDto>>();
-
-            if (data?.Value == null || !data.Value.Any())
+            if (entries.Count == 0)
             {
                 _logger.LogInformation("[Stock] Aucune écriture trouvée pour le projet {ProjectNo}", projectNo);
                 return new List<StockChantierReadDto>();
             }
 
+            // Index locationCode → locationName pour enrichir sans appel supplémentaire
+            var locationIndex = locations.ToDictionary(
+                loc => loc.Code,
+                loc => loc.Name,
+                StringComparer.OrdinalIgnoreCase);
+
             // AGRÉGATION : groupement par article et emplacement pour obtenir le stock réel.
             // La somme des quantités (entrées positives + sorties négatives) donne le stock courant.
             // Les articles avec un stock nul (mouvements équilibrés) sont exclus du résultat.
             // Les articles avec un stock négatif sont conservés : AlertService les détecte comme anomalie.
-            var stockAgrege = data.Value
+            var stockAgrege = entries
                 .GroupBy(entry => new
                 {
                     entry.ItemNo,
                     entry.LocationCode,
-                    entry.ItemDescription
+                    entry.Description
                 })
-                .Select(groupe => new StockChantierReadDto // chaque groupe agrégé devient un objet StockChantierReadDto
+                .Select(groupe => new StockChantierReadDto
                 {
                     ItemNo          = groupe.Key.ItemNo,
-                    ItemDescription = groupe.Key.ItemDescription,
+                    ItemDescription = groupe.Key.Description,
                     LocationCode    = groupe.Key.LocationCode,
+                    LocationName    = locationIndex.GetValueOrDefault(groupe.Key.LocationCode, string.Empty),
                     Quantity        = groupe.Sum(entry => entry.Quantity),
                     JobNo           = projectNo,
-                    LastPostingDate = groupe.Max(entry => entry.PostingDate) // pour affichier la date du dernier mouvement de l'article
+                    LastPostingDate = groupe.Max(entry => entry.PostingDate)
                 })
-                .Where(stock => stock.Quantity != 0) // on elimine les stocks nuls mais on garde les stocks négatifs ( peut étre utile pour les alertes )
-                .OrderBy(stock => stock.ItemDescription) // plus lisible pour le chef de chantier que le itemNo
+                .Where(stock => stock.Quantity != 0)
+                .OrderBy(stock => stock.LocationCode)
+                .ThenBy(stock => stock.ItemDescription)
                 .ToList();
 
             _logger.LogInformation("[Stock] {Count} article(s) en stock pour le projet {ProjectNo}",
                 stockAgrege.Count, projectNo);
 
             return stockAgrege;
+        }
+
+        // ─── MÉTHODES PRIVÉES ─────────────────────────────────────────────────
+
+        /// <summary>
+        /// Récupère les magasins BC rattachés à un projet (Affaire = projectNo).
+        /// </summary>
+        private async Task<List<LocationReadDto>> FetchLocationsByProjectAsync(string projectNo)
+        {
+            var encodedProjectNo = Uri.EscapeDataString(projectNo);
+            var url = $"locations?$filter=affaire eq '{encodedProjectNo}'";
+
+            _logger.LogInformation("[Stock] Récupération des magasins pour le projet {ProjectNo}", projectNo);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
+
+            var data = await response.Content.ReadFromJsonAsync<BCResponse<LocationReadDto>>();
+            return data?.Value ?? new List<LocationReadDto>();
+        }
+
+        /// <summary>
+        /// Récupère les écritures comptables articles BC filtrées par numéro de projet.
+        /// </summary>
+        private async Task<List<ItemLedgerEntryReadDto>> FetchItemLedgerEntriesByProjectAsync(string projectNo)
+        {
+            var encodedProjectNo = Uri.EscapeDataString(projectNo);
+            var url = $"itemLedgerEntries?$filter=jobNo eq '{encodedProjectNo}'";
+
+            _logger.LogInformation("[Stock] Récupération des écritures articles pour le projet {ProjectNo}", projectNo);
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
+
+            var data = await response.Content.ReadFromJsonAsync<BCResponse<ItemLedgerEntryReadDto>>();
+            return data?.Value ?? new List<ItemLedgerEntryReadDto>();
         }
     }
 }

@@ -20,9 +20,10 @@ namespace Soroubat.Api.Controllers
         /// <summary>
         /// Propriété centralisée pour lire le claim "projectNo" depuis le JWT.
         /// Retourne null si le claim est absent (compte non assigné à un projet).
+        /// User provient de ControllerBase et est automatiquement peuplé par le middleware
+        /// d'authentification ASP.NET Core à partir du token JWT de l'utilisateur connecté.
         /// </summary>
-        // User représente un groupement d'informations dans le token JWT de l'utilisateur authentifié qui effectue les requêtes http , ca provient de ControllerBase et est automatiquement peuplé par le middleware d'authentification de ASP.NET Core.
-        private string? UserProjectNo => User.FindFirst("projectNo")?.Value; 
+        private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
 
         /// <summary>Retourne le projet Business Central assigné au chef de chantier connecté.</summary>
@@ -51,6 +52,7 @@ namespace Soroubat.Api.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
 
         /// <summary>Retourne la liste des tâches du projet du chef de chantier connecté.</summary>
         [HttpGet("my-tasks")]
@@ -81,7 +83,7 @@ namespace Soroubat.Api.Controllers
         /// </summary>
         [HttpPatch("tasks/{id:guid}/progress")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)] // pour les erreurs de validation du DTO
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -92,7 +94,7 @@ namespace Soroubat.Api.Controllers
 
             var projectNo = UserProjectNo;
             if (string.IsNullOrEmpty(projectNo))
-                return Unauthorized(new { message = "Aucun projet assigné dans votre profil." });
+                return BadRequest(new { message = "Aucun projet assigné dans votre profil." });
 
             try
             {
