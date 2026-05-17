@@ -1,3 +1,5 @@
+using Soroubat.Api.Models;
+
 namespace Soroubat.Api.Interfaces
 {
     /// <summary>
@@ -6,9 +8,9 @@ namespace Soroubat.Api.Interfaces
     public interface IChefChantierService
     {
         /// <summary>
-        /// Retourne le numéro de projet (JobNo) associé à l'adresse e-mail fournie.
-        /// Retourne null si aucun chef de chantier actif n'est trouvé dans BC.
+        /// Vérifie le statut BC d'un chef de chantier et retourne son numéro de projet si actif.
+        /// Un seul appel BC — retourne à la fois le statut et le projectNo.
         /// </summary>
-        Task<string?> GetJobNoByEmailAsync(string email);
+        Task<ChefChantierCheckResult> CheckChefAsync(string email);
     }
 }

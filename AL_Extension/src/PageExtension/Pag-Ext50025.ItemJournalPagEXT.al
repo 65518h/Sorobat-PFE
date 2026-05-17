@@ -534,7 +534,7 @@ PageExtension 50025 "Item Journal_PagEXT" extends "Item Journal"
         }*/
         // RB SORO 18/04/2015
         // HJ SORO 06/10/2015
-        IF RecItemJournalTemplate."Affecter Utilisateur" <> UPPERCASE(USERID) THEN ERROR(Text008);
+      //  IF RecItemJournalTemplate."Affecter Utilisateur" <> UPPERCASE(USERID) THEN ERROR(Text008);
         // HJ SORO 06/10/2015
 
     end;

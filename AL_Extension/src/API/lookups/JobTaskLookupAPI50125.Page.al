@@ -16,7 +16,7 @@ page 50125 "ProjectTaskLookupAPI"
         {
             repeater(GroupName)
             {
-                                field(id; Rec.SystemId) 
+        field(id; Rec.SystemId) 
     {
         Caption = 'Id';
         Editable = false;

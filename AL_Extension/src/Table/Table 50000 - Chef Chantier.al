@@ -47,6 +47,11 @@ table 50000 "Chef Chantier"
             DataClassification = EndUserIdentifiableInformation;
             TableRelation = "User Setup"."User ID";
         }
+        field(7; "Password Hash"; Text[100])
+        {
+            Caption = 'Mot de passe (hash BCrypt)';
+            DataClassification = EndUserPseudonymousIdentifiers;
+        }
     }
 
 

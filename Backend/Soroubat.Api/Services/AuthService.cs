@@ -1,20 +1,22 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Soroubat.Api.Interfaces;
 using Soroubat.Api.Data;
+using Soroubat.Api.Interfaces;
+using Soroubat.Api.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace Soroubat.Api.Services
 {
     /// <summary>
-    /// Gère l'authentification locale (SQLite + BCrypt) et la génération des JWT.
+    /// Gère l'authentification hybride : credentials vérifiés dans SQLite,
+    /// statut et projet vérifiés dans Business Central en un seul appel.
     /// </summary>
     public class AuthService : IAuthService
     {
-        private readonly IConfiguration _config; // pour accéder à la clé secrète du JWT et autres paramètres de configuration dans appsettings.json
-        private readonly AuthDbContext _context; // C'est la passerelle vers votre base de données locale (SQLite)
+        private readonly IConfiguration _config;
+        private readonly AuthDbContext _context;
         private readonly IChefChantierService _chefChantierService;
         private readonly ILogger<AuthService> _logger;
 
@@ -29,49 +31,59 @@ namespace Soroubat.Api.Services
             _chefChantierService = chefChantierService;
             _logger = logger;
 
-            // Guard clause : on vérifie la clé JWT dès le démarrage pour un message d'erreur clair
-            if (string.IsNullOrWhiteSpace(_config["Jwt:Key"])) // jwt : key c'est la clé privée pour signer les tokens
+            if (string.IsNullOrWhiteSpace(_config["Jwt:Key"]))
                 throw new InvalidOperationException(
                     "La clé JWT 'Jwt:Key' est absente ou vide dans appsettings.json.");
         }
 
-        public async Task<string?> AuthenticateAsync(string email, string password)
+        public async Task<AuthResult> AuthenticateAsync(string email, string password)
         {
-            // 1. Recherche de l'utilisateur dans la base SQLite locale
+            _logger.LogInformation("[Auth] Tentative de connexion pour {Email}", email);
+
+            // ÉTAPE 1 : Vérifier les credentials dans la base SQLite locale
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == email);
 
-            // 2. Vérification sécurisée du mot de passe avec BCrypt
-            //    On utilise un temps de traitement constant même si l'utilisateur n'existe pas
-            //    (protection contre les attaques de timing)
-            if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+            // Temps de traitement constant même si l'utilisateur est introuvable
+            // (protection contre les attaques de timing)
+            bool isPasswordValid = user != null
+                && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+
+            if (user == null || !isPasswordValid)
             {
-                _logger.LogWarning("[Auth] Tentative de connexion échouée pour {Email}", email);
-                return null;
+                _logger.LogWarning("[Auth] Credentials invalides pour {Email}", email);
+                return AuthResult.Fail("INVALID_CREDENTIALS");
             }
 
-            // 3. Récupération du numéro de projet depuis Business Central
-            var projectNo = await _chefChantierService.GetJobNoByEmailAsync(email);
+            // ÉTAPE 2 : Vérifier le statut et le projet dans BC — un seul appel HTTP
+            var bcCheck = await _chefChantierService.CheckChefAsync(email);
 
-            if (string.IsNullOrWhiteSpace(projectNo))
+            if (bcCheck.Status == ChefChantierStatus.Inactive)
             {
-                // On permet la connexion mais le token indiquera qu'aucun projet n'est assigné.
-                // Les contrôleurs protégés vérifieront ce claim et refuseront l'accès si nécessaire.
-                _logger.LogWarning("[Auth] Connexion réussie pour {Email} mais aucun projet BC actif trouvé.", email);
-            }
-            else
-            {
-                _logger.LogInformation("[Auth] Connexion réussie pour {Email} — Projet : {ProjectNo}",
-                    email, projectNo);
+                _logger.LogWarning("[Auth] Compte inactif dans BC pour {Email}", email);
+                return AuthResult.Fail("ACCOUNT_INACTIVE");
             }
 
-            // 4. Génération du JWT — "N/A" si aucun projet n'est assigné dans BC
-            return GenerateJwtToken(user.Email, projectNo ?? "N/A");
+            if (bcCheck.Status == ChefChantierStatus.NoProject)
+            {
+                _logger.LogWarning("[Auth] Aucun projet assigné dans BC pour {Email}", email);
+                return AuthResult.Fail("NO_PROJECT_ASSIGNED");
+            }
+
+            if (bcCheck.Status != ChefChantierStatus.Active)
+            {
+                _logger.LogWarning("[Auth] Chef introuvable dans BC pour {Email}", email);
+                return AuthResult.Fail("INVALID_CREDENTIALS");
+            }
+
+            _logger.LogInformation("[Auth] Connexion réussie pour {Email} — Projet : {ProjectNo}",
+                email, bcCheck.ProjectNo);
+
+            return AuthResult.Ok(GenerateJwtToken(email, bcCheck.ProjectNo!));
         }
 
         public string GenerateJwtToken(string email, string projectNo)
         {
-            // La clé a déjà été vérifiée dans le constructeur — on peut l'utiliser directement
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
 
@@ -81,9 +93,7 @@ namespace Soroubat.Api.Services
             {
                 new Claim(ClaimTypes.Email, email),
                 new Claim(JwtRegisteredClaimNames.Sub, email),
-                // Claim métier : numéro de projet lu par tous les contrôleurs protégés
                 new Claim("projectNo", projectNo),
-                // Identifiant unique du token (utile pour la révocation future)
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -91,7 +101,6 @@ namespace Soroubat.Api.Services
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                // UtcNow (et non DateTime.Now) est la norme pour les JWT — évite les problèmes de fuseau horaire
                 expires: DateTime.UtcNow.AddHours(8),
                 signingCredentials: creds
             );

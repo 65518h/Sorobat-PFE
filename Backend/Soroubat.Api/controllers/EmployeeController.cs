@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Soroubat.Api.Interfaces;
 using Soroubat.Api.Models;
-using System.Security.Claims;
 
 namespace Soroubat.Api.Controllers
 {
@@ -12,12 +11,10 @@ namespace Soroubat.Api.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
-        private readonly IChefChantierService _chefChantierService;
 
-        public EmployeeController(IEmployeeService employeeService, IChefChantierService chefChantierService)
+        public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
-            _chefChantierService = chefChantierService;
         }
 
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
@@ -41,11 +38,9 @@ namespace Soroubat.Api.Controllers
                 string? numProjet = null;
                 if (useProjectFilter)
                 {
-                    var email = User.FindFirstValue(ClaimTypes.Email);
-                    if (string.IsNullOrEmpty(email))
-                        return Unauthorized(new { message = "Email introuvable dans le token." });
-
-                    numProjet = await _chefChantierService.GetJobNoByEmailAsync(email);
+                    numProjet = UserProjectNo;
+                    if (string.IsNullOrEmpty(numProjet))
+                        return BadRequest(new { message = "Aucun projet n'est assigné à votre compte." });
                 }
 
                 var data = await _employeeService.GetEmployeesAsync(numProjet, filter, top);

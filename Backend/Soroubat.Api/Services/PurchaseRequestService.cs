@@ -16,12 +16,12 @@ namespace Soroubat.Api.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<PurchaseRequestService> _logger;
 
+        // paramétres de sérialisation write et read 
         private static readonly JsonSerializerOptions SerializerOptionsWrite = new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
-        /// <summary>Désérialisation BC (tolérante à la casse des noms de propriété).</summary>
         private static readonly JsonSerializerOptions SerializerOptionsRead = new()
         {
             PropertyNameCaseInsensitive = true,
@@ -34,11 +34,14 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── HELPERS JSON (jobNo / lineNo imposés côté serveur) ───────────────
+        // on a 3 méthodes helpers sérialisation 
 
+        //  ToJsonObject : transforme un dto en JsonObject pour manipulation avant sérialisation finale.( dto , json object , json sérializé (string))
         private static JsonObject ToJsonObject<T>(T dto, JsonSerializerOptions o) =>
             (JsonSerializer.SerializeToNode(dto, o) as JsonObject) ?? new JsonObject();
 
+        // MergeJobNoAndSerialize : ajoute le jobNo au JsonObject puis le sérialise en json string prét 
+        // on utilise le type générique T car ca peut étre remplacé par le dto de création ou de patch 
         private static string MergeJobNoAndSerialize<T>(T dto, string projectNo)
         {
             var root = ToJsonObject(dto, SerializerOptionsWrite);
@@ -46,6 +49,7 @@ namespace Soroubat.Api.Services
             return root.ToJsonString();
         }
 
+        // on n'utilise pas un type générique ici car la création de ligne nécessite l'ajout du lineNo qui n'existe pas dans le dto de patch
         private static string MergeJobNoLineNoAndSerialize(PurchaseRequestLineCreateDto dto, string projectNo, int lineNo)
         {
             var root = ToJsonObject(dto, SerializerOptionsWrite);
@@ -54,17 +58,11 @@ namespace Soroubat.Api.Services
             return root.ToJsonString();
         }
 
-        private static string MergeJobNoLinePatchAndSerialize(PurchaseRequestLinePatchDto dto, string projectNo)
-        {
-            var root = ToJsonObject(dto, SerializerOptionsWrite);
-            root["jobNo"] = projectNo;
-            return root.ToJsonString();
-        }
 
-        // ── HELPERS PRIVÉS ────────────────────────────────────────────────────
+        // on a 2 méthode helpers pour vérifier l'appartenance au projet du chef chantier connecté et récupérer l'etag pour les opérations de patch
 
-        private async Task<(PurchaseRequestReadDto Header, string? ETag)> GetAndVerifyHeaderAsync(
-            Guid id, string projectNo)
+        // on vérifie si le header appartient au projet du chef chantier connecté + on récupère l'etag pour les opérations de patch
+        private async Task<(PurchaseRequestReadDto Header, string? ETag)> GetAndVerifyHeaderAsync(Guid id, string projectNo)
         {
             var response = await _httpClient.GetAsync($"purchaseRequests({id})");
 
@@ -73,7 +71,7 @@ namespace Soroubat.Api.Services
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
-
+            // on utilise les regles de désérialisation de SerializerOptionsRead
             var header = await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
 
             if (header == null)
@@ -87,10 +85,11 @@ namespace Soroubat.Api.Services
                 throw new UnauthorizedAccessException(
                     "Accès refusé : cette demande n'appartient pas à votre projet.");
             }
-
-            var etag = response.Headers.ETag?.ToString();
+            // l'etag contient la version de la ressource , ca sert pour les opérations de mise à jour (PATCH) pour éviter les conflits de version
+            var etag = response.Headers.ETag?.ToString(); 
             return (header, etag);
         }
+
 
         private async Task<(PurchaseRequestLineReadDto Line, string? ETag)> GetAndVerifyLineAsync(
             Guid lineId, string projectNo)
@@ -121,8 +120,29 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
+         
+        private async Task<int> GetLastLineNoAsync(string documentNo)
+        {
+            var url = $"purchaseRequestLines?$filter=documentNo eq '{documentNo}'" +
+                      "&$orderby=lineNo desc&$top=1";
 
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                return 0;
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            using var doc = JsonDocument.Parse(content); // charge content en mémoire pour manipulation 
+            var root      = doc.RootElement.GetProperty("value"); // on accéde à la propriété "value" qui contient la liste des lignes retournées par BC
+
+            if (root.GetArrayLength() > 0)
+                return root[0].GetProperty("lineNo").GetInt32(); // on extrait le lineNo le plus élevé 
+
+            return 0;
+        }
+        
+        // ici commencent les méthodes métiers de l'interface IPurchaseRequestService
         public async Task<IEnumerable<PurchaseRequestReadDto>> GetAllRequestsAsync(string projectNo)
         {
             var url = $"purchaseRequests?$filter=jobNo eq '{projectNo}'";
@@ -150,6 +170,7 @@ namespace Soroubat.Api.Services
 
             var request = await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
 
+            // appartenance de la demande au projet du chef chantier connecté
             if (request != null &&
                 !string.Equals(request.JobNo, projectNo, StringComparison.OrdinalIgnoreCase))
             {
@@ -171,6 +192,7 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
+            // le ! sert à indiquer au compilateur que l'on est sûr que le résultat ne sera pas null , n'afficher pas un warning
             return (await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead))!;
         }
 
@@ -178,7 +200,7 @@ namespace Soroubat.Api.Services
         {
             if (lines == null || !lines.Any()) return false;
 
-            var firstDocNo = lines.First().DocumentNo;
+            var firstDocNo = lines.First().DocumentNo; // documentNo est le no du header 
 
             if (string.IsNullOrWhiteSpace(firstDocNo))
                 throw new ArgumentException(
@@ -238,8 +260,9 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     $"Statut actuel '{currentStatut}' — seule une demande 'Open' peut être soumise.");
 
-            var json = """{"statut": "To Approve"}""";
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})")
+            var json = """{"statut": "To Approve"}"""; // on échappe les guillemets internes du json
+            // on utilise patch car pour l'erp c'est une mise à jour d'une partie de la ressource (le statut) 
+            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})") 
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -254,11 +277,15 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        public async Task<bool> DeleteRequestAsync(Guid id, string projectNo)
+        // le comportement de suppression des lignes en casecade est géré par BC , dans la table header dans le trigger onDelete 
+        public async Task<bool> DeleteRequestAsync(Guid id, string projectNo) 
         {
-            await GetAndVerifyHeaderAsync(id, projectNo);
+            var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
-            var response = await _httpClient.DeleteAsync($"purchaseRequests({id})");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"purchaseRequests({id})");
+            request.Headers.TryAddWithoutValidation("If-Match", etag ?? "*");
+
+            var response = await _httpClient.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
@@ -267,13 +294,12 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         public async Task<bool> PatchLineAsync(Guid lineId, PurchaseRequestLinePatchDto lineDto, string projectNo)
         {
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            var json    = MergeJobNoLinePatchAndSerialize(lineDto, projectNo);
+            var json    = MergeJobNoAndSerialize(lineDto, projectNo);
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequestLines({lineId})")
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
@@ -301,25 +327,6 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        private async Task<int> GetLastLineNoAsync(string documentNo)
-        {
-            var url = $"purchaseRequestLines?$filter=documentNo eq '{documentNo}'" +
-                      "&$orderby=lineNo desc&$top=1";
 
-            var response = await _httpClient.GetAsync(url);
-
-            if (!response.IsSuccessStatusCode)
-                return 0;
-
-            var content = await response.Content.ReadAsStringAsync();
-
-            using var doc = JsonDocument.Parse(content);
-            var root      = doc.RootElement.GetProperty("value");
-
-            if (root.GetArrayLength() > 0)
-                return root[0].GetProperty("lineNo").GetInt32();
-
-            return 0;
-        }
     }
 }

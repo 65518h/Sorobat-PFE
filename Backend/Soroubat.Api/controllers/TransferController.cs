@@ -20,7 +20,6 @@ namespace Soroubat.Api.Controllers
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         /// <summary>Retourne tous les ordres de transfert destinés au chantier du chef connecté.</summary>
         [HttpGet]
@@ -80,7 +79,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         /// <summary>
         /// Met à jour les champs de réception d'une ligne de transfert.

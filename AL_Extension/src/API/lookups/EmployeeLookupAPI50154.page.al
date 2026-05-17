@@ -25,7 +25,6 @@ layout
                 field(fonction; Rec.Fonction) { }
                 field(chantier; Rec.Chantier) { }
                 
-                // MODIFICATION ICI : On n'expose plus Rec.Image directement
                 // On utilise une variable qui contiendra le Base64
                 field(imageBase64; GetImageAsBase64()) 
                 { 
@@ -35,7 +34,6 @@ layout
         }
     }
 
-    // AJOUTEZ CETTE PROCÉDURE EN BAS DU FICHIER AL
     procedure GetImageAsBase64(): Text
     var
         TenantMedia: Record "Tenant Media";

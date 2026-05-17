@@ -29,8 +29,7 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            // Désérialisation sur le DTO interne qui contient postingDate —
-            // ce champ technique n'est jamais exposé au client dans StockChantierReadDto.
+
             var data = await response.Content.ReadFromJsonAsync<BCResponse<ItemLedgerEntryReadDto>>();
 
             if (data?.Value == null || !data.Value.Any())
@@ -50,17 +49,17 @@ namespace Soroubat.Api.Services
                     entry.LocationCode,
                     entry.ItemDescription
                 })
-                .Select(groupe => new StockChantierReadDto
+                .Select(groupe => new StockChantierReadDto // chaque groupe agrégé devient un objet StockChantierReadDto
                 {
                     ItemNo          = groupe.Key.ItemNo,
                     ItemDescription = groupe.Key.ItemDescription,
                     LocationCode    = groupe.Key.LocationCode,
                     Quantity        = groupe.Sum(entry => entry.Quantity),
                     JobNo           = projectNo,
-                    LastPostingDate = groupe.Max(entry => entry.PostingDate)
+                    LastPostingDate = groupe.Max(entry => entry.PostingDate) // pour affichier la date du dernier mouvement de l'article
                 })
-                .Where(stock => stock.Quantity != 0)
-                .OrderBy(stock => stock.ItemDescription)
+                .Where(stock => stock.Quantity != 0) // on elimine les stocks nuls mais on garde les stocks négatifs ( peut étre utile pour les alertes )
+                .OrderBy(stock => stock.ItemDescription) // plus lisible pour le chef de chantier que le itemNo
                 .ToList();
 
             _logger.LogInformation("[Stock] {Count} article(s) en stock pour le projet {ProjectNo}",

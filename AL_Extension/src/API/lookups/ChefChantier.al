@@ -1,19 +1,20 @@
-page 50146 "ChefChantierAPI"
+page 50155 "ChefChantierLookup"
 {
     PageType = API;
     Caption = 'chefChantierApi';
     APIPublisher = 'soroubat';
-    APIGroup = 'siteManagement';
+    APIGroup = 'lookups';
     APIVersion = 'v1.0';
     EntityName = 'chefChantier';
     EntitySetName = 'chefsChantier';
     SourceTable = "Chef Chantier";
     DelayedInsert = true;
+    // SystemId est la clé OData standard — garantit des URLs stables et cohérentes
+    // avec les autres pages API du projet (jobTasks, purchaseRequests, etc.)
     ODataKeyFields = SystemId;
-    InsertAllowed = false;
-    ModifyAllowed = false;
-    DeleteAllowed = false;
-
+    InsertAllowed = true;
+    ModifyAllowed = true;
+    DeleteAllowed = false; 
     layout
     {
         area(Content)
@@ -28,27 +29,10 @@ page 50146 "ChefChantierAPI"
                 field(nomEtPrenom; Rec."Nom et Prenom")
                 {
                     Caption = 'Nom et Prénom';
-                    Editable = false;
                 }
                 field(email; Rec."Adresse Email")
                 {
                     Caption = 'Email';
-                    Editable = false;
-                }
-                field(actif; Rec.Actif)
-                {
-                    Caption = 'Actif';
-                    Editable = false;
-                }
-                field(numProjet; Rec."Num Projet")
-                {
-                    Caption = 'N° Projet géré';
-                    Editable = false;
-                }
-                field(idApprobateur; Rec."Id Approbateur")
-                {
-                    Caption = 'Id Approbateur';
-                    Editable = false;
                 }
             }
         }

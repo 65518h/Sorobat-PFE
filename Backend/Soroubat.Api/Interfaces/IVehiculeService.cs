@@ -17,11 +17,11 @@ namespace Soroubat.Api.Interfaces
         Task<IEnumerable<VehiculePointageHeaderReadDto>> GetAllHeadersAsync(string projectNo);
 
         /// <summary>
-        /// Retourne un pointage avec ses lignes ($expand=vehiculePointageLines).
+        /// Retourne un pointage spécifique avec ses lignes via un appel ciblé ($expand=vehiculePointageLines).
         /// Lève <see cref="KeyNotFoundException"/> si le pointage est introuvable.
         /// Lève <see cref="UnauthorizedAccessException"/> si le pointage n'appartient pas au projet.
         /// </summary>
-        Task<VehiculePointageHeaderReadDto> GetHeaderByIdAsync(Guid id, string projectNo);
+        Task<VehiculePointageHeaderReadDto> GetHeaderByIdWithLinesAsync(Guid id, string projectNo);
 
         /// <summary>
         /// Crée un nouvel en-tête de pointage en forçant le jobNo depuis le JWT.

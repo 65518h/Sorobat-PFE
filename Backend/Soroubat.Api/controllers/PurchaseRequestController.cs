@@ -20,14 +20,13 @@ namespace Soroubat.Api.Controllers
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         /// <summary>Retourne toutes les demandes d'achat du projet du chef connecté.</summary>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<PurchaseRequestReadDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<PurchaseRequestReadDto>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PurchaseRequestReadDto>>> GetAll() //IEnumerable permet de retouner n'importe quel type de collection (List, Array...)
         {
             var projectNo = UserProjectNo;
             if (string.IsNullOrEmpty(projectNo))
@@ -78,6 +77,7 @@ namespace Soroubat.Api.Controllers
 
         /// <summary>Crée l'en-tête d'une nouvelle demande d'achat.</summary>
         [HttpPost]
+        // typeof transforme la classe en un type décrivant la structure de la réponse
         [ProducesResponseType(typeof(PurchaseRequestReadDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -163,7 +163,7 @@ namespace Soroubat.Api.Controllers
         /// Soumet une demande d'achat pour approbation.
         /// La demande doit être au statut "Open".
         /// </summary>
-        [HttpPost("{id:guid}/submit")]
+        [HttpPost("{id:guid}/submit")] // on utilie post et non pas patch ici car on change le statut de la demande et pas une partie de son contenu
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -230,7 +230,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         /// <summary>Met à jour partiellement une ligne de demande d'achat.</summary>
         [HttpPatch("lines/{id:guid}")]

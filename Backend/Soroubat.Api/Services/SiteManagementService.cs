@@ -30,7 +30,6 @@ namespace Soroubat.Api.Services
 
             var response = await _httpClient.GetAsync(url);
 
-            // HandleErrorResponseAsync lève une exception — le code suivant ne s'exécute pas en cas d'erreur
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
@@ -46,7 +45,6 @@ namespace Soroubat.Api.Services
             return job;
         }
 
-        // ─── TÂCHES ───────────────────────────────────────────────────────────
 
         public async Task<List<JobTaskReadDto>> GetMyTasksAsync(string projectNo)
         {
@@ -62,7 +60,6 @@ namespace Soroubat.Api.Services
             return data?.Value ?? new List<JobTaskReadDto>();
         }
 
-        // ─── MISE À JOUR AVANCEMENT ───────────────────────────────────────────
 
         public async Task<bool> UpdateTaskProgressAsync(Guid taskId, decimal progress, string authorizedProjectNo)
         {
@@ -86,9 +83,8 @@ namespace Soroubat.Api.Services
             // Vérification que la tâche appartient bien au projet du chef connecté
             if (!task.JobNo.Equals(authorizedProjectNo, StringComparison.OrdinalIgnoreCase))
             {
-                _logger.LogWarning(
-                    "[SiteManagement] Accès refusé : tâche {TaskId} appartient au projet {TaskProject}, " +
-                    "chef connecté au projet {UserProject}",
+                _logger.LogWarning("[SiteManagement] Accès refusé : tâche {TaskId} appartient au projet {TaskProject}, " +
+                    "chef connecté au projet {UserProject}", 
                     taskId, task.JobNo, authorizedProjectNo);
                 throw new UnauthorizedAccessException(
                     "Vous n'avez pas le droit de modifier une tâche d'un autre chantier.");
@@ -96,14 +92,14 @@ namespace Soroubat.Api.Services
 
             // 2. EXÉCUTION : envoi du PATCH avec l'avancement
             var patchData = new { progressPct = progress };
-            var json = JsonSerializer.Serialize(patchData);
+            var json = JsonSerializer.Serialize(patchData); // ca change le dictionnaire c# en json 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"jobTasks({taskId})")
             {
                 Content = content
             };
-            // TryAddWithoutValidation évite une exception si le header If-Match existe déjà
+            // ne pas vérifier l'accés concurrent aux ressources
             request.Headers.TryAddWithoutValidation("If-Match", "*");
 
             var patchResponse = await _httpClient.SendAsync(request);

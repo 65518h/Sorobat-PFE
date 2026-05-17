@@ -1,13 +1,12 @@
 using System.Net.Http.Json;
-using System.Text.Json;
 using Soroubat.Api.Models;
 using Soroubat.Api.Interfaces;
 
 namespace Soroubat.Api.Services
 {
     /// <summary>
-    /// Interroge l'API Business Central pour retrouver le numéro de projet
-    /// d'un chef de chantier à partir de son adresse e-mail.
+    /// Interroge l'API Business Central pour vérifier le statut d'un chef de chantier
+    /// et récupérer son numéro de projet en un seul appel.
     /// </summary>
     public class ChefChantierService : IChefChantierService
     {
@@ -20,45 +19,49 @@ namespace Soroubat.Api.Services
             _logger = logger;
         }
 
-        public async Task<string?> GetJobNoByEmailAsync(string email)
+        public async Task<ChefChantierCheckResult> CheckChefAsync(string email)
         {
-            // Encodage de l'email pour éviter toute injection OData
-            // (ex : un email contenant ' pourrait terminer le filtre prématurément)
             var encodedEmail = Uri.EscapeDataString(email);
             var url = $"chefsChantier?$filter=email eq '{encodedEmail}'";
 
-            _logger.LogInformation("[ChefChantier] Recherche du projet pour : {Email}", email);
+            _logger.LogInformation("[ChefChantier] Vérification BC pour : {Email}", email);
 
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
-                _logger.LogWarning("[ChefChantier] BC a répondu {StatusCode} pour l'email {Email}",
+                _logger.LogWarning("[ChefChantier] BC a répondu {StatusCode} pour {Email}",
                     (int)response.StatusCode, email);
-                return null;
+                return ChefChantierCheckResult.Fail(ChefChantierStatus.NotFound);
             }
 
             var result = await response.Content
                 .ReadFromJsonAsync<BCResponse<ChefChantierReadDto>>();
 
-            var chefChantier = result?.Value?.FirstOrDefault(); // FirstOrDefault retourne le premier élément ou null si la liste value est vide
+            var chef = result?.Value?.FirstOrDefault();
 
-            if (chefChantier == null)
+            if (chef == null)
             {
                 _logger.LogWarning("[ChefChantier] Aucun chef de chantier trouvé pour {Email}", email);
-                return null;
+                return ChefChantierCheckResult.Fail(ChefChantierStatus.NotFound);
             }
 
-            if (!chefChantier.Actif)
+            if (!chef.Actif)
             {
                 _logger.LogWarning("[ChefChantier] Compte inactif dans BC pour {Email}", email);
-                return null;
+                return ChefChantierCheckResult.Fail(ChefChantierStatus.Inactive);
             }
 
-            _logger.LogInformation("[ChefChantier] Projet trouvé : {ProjectNo} pour {Email}",
-                chefChantier.NumProjet, email);
+            if (string.IsNullOrWhiteSpace(chef.NumProjet))
+            {
+                _logger.LogWarning("[ChefChantier] Aucun projet assigné dans BC pour {Email}", email);
+                return ChefChantierCheckResult.Fail(ChefChantierStatus.NoProject);
+            }
 
-            return string.IsNullOrWhiteSpace(chefChantier.NumProjet) ? null : chefChantier.NumProjet;
+            _logger.LogInformation("[ChefChantier] Vérification réussie pour {Email} — Projet : {ProjectNo}",
+                email, chef.NumProjet);
+
+            return ChefChantierCheckResult.Active(chef.NumProjet);
         }
     }
 }

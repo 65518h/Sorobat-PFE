@@ -20,7 +20,6 @@ namespace Soroubat.Api.Controllers
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         /// <summary>Retourne tous les pointages véhicule du chantier du chef connecté.</summary>
         [HttpGet]
@@ -59,7 +58,7 @@ namespace Soroubat.Api.Controllers
 
             try
             {
-                var header = await _vehiculeService.GetHeaderByIdAsync(id, projectNo);
+                var header = await _vehiculeService.GetHeaderByIdWithLinesAsync(id, projectNo);
                 return Ok(header);
             }
             catch (KeyNotFoundException ex)

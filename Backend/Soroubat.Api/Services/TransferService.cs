@@ -29,7 +29,6 @@ namespace Soroubat.Api.Services
             _logger = logger;
         }
 
-        // ── HELPERS PRIVÉS ────────────────────────────────────────────────────
 
         /// <summary>
         /// Récupère une ligne et vérifie qu'elle appartient au projet du chef connecté
@@ -40,7 +39,6 @@ namespace Soroubat.Api.Services
         private async Task<(TransferLineReadDto Line, string? ETag)> GetAndVerifyLineAsync(
             Guid lineId, string projectNo)
         {
-            // 1. Récupérer la ligne et son ETag pour la gestion de concurrence BC
             var lineResponse = await _httpClient.GetAsync($"transferLines({lineId})");
 
             if (lineResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -54,7 +52,6 @@ namespace Soroubat.Api.Services
             if (line == null || string.IsNullOrEmpty(line.DocumentNo))
                 throw new KeyNotFoundException($"La ligne de transfert '{lineId}' est introuvable dans Business Central.");
 
-            // 2. SÉCURITÉ : Récupérer le header parent pour valider le chantierDestination
             var headerFilter = $"$filter=no eq '{line.DocumentNo}'";
             var headerResponse = await _httpClient.GetAsync($"transferHeaders?{headerFilter}");
 
@@ -80,7 +77,6 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         public async Task<IEnumerable<TransferHeaderReadDto>> GetAllTransfersAsync(string projectNo)
         {
@@ -125,11 +121,9 @@ namespace Soroubat.Api.Services
             return transfer;
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         public async Task<bool> PatchLineAsync(Guid lineId, TransferLinePatchDto lineDto, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance + récupérer ETag
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
             var json = JsonSerializer.Serialize(lineDto, _serializerOptions);
@@ -153,8 +147,7 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── USAGE INTERNE (AlertService) ──────────────────────────────────────
-
+        // méthode pour alertService
         public async Task<IEnumerable<TransferHeaderReadDto>> GetAllTransfersWithLinesAsync(string projectNo)
         {
             var url = $"transferHeaders?$filter=chantierDestination eq '{projectNo}'&$expand=transferLines";

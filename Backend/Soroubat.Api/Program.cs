@@ -1,11 +1,11 @@
 using Soroubat.Api.Interfaces;
 using Soroubat.Api.Services;
-using Soroubat.Api.Data;
 using System.Text;
 using System.Text.Json;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Soroubat.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,16 +17,10 @@ var bcConfig = builder.Configuration.GetSection("BusinessCentral");
 string rawUrl      = bcConfig.GetValue<string>("BaseUrl")     ?? throw new InvalidOperationException("'BusinessCentral:BaseUrl' est absent de appsettings.json.");
 string companyName = bcConfig.GetValue<string>("CompanyName") ?? throw new InvalidOperationException("'BusinessCentral:CompanyName' est absent de appsettings.json.");
 
-// Extraction de la racine BC (avant /api/ ou /ODataV4)
 string baseUrl = rawUrl.Split("/api/")[0].Split("/ODataV4")[0].TrimEnd('/');
 
-// URI Custom API — groupe siteManagement (pointage, gasoil, demandes d'achat, transferts…)
 string siteManagementUri = $"{baseUrl}/api/soroubat/siteManagement/v1.0/companies(name='{Uri.EscapeDataString(companyName)}')/";
 
-// URI Custom API — groupe lookups (listes de référence : projets, articles, emplacements…)
-// Toutes les pages lookup sont déclarées en PageType = API avec APIGroup = 'lookups'.
-// Cette approche remplace l'ancienne configuration OData Web Services (/ODataV4/Company(...)/),
-// conformément aux recommandations Microsoft depuis BC 2020 wave 2.
 string lookupsUri = $"{baseUrl}/api/soroubat/lookups/v1.0/companies(name='{Uri.EscapeDataString(companyName)}')/";
 
 // ── 2. AUTHENTIFICATION JWT ───────────────────────────────────────────────────
@@ -53,11 +47,13 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
-// ── 3. BASE DE DONNÉES LOCALE (SQLite) ────────────────────────────────────────
+// ── 3. BASE DE DONNÉES SQLITE (credentials locaux) ────────────────────────────
 
-builder.Services.AddDbContext<AuthDbContext>(opt =>
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
         ?? "Data Source=auth.db"));
+
 
 // ── 4. CONTROLLERS + JSON ─────────────────────────────────────────────────────
 
@@ -193,10 +189,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapGet("/api/auth/ping", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
+
 app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapGet("/api/auth/ping", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow }));
 app.MapControllers();
 
 Console.WriteLine("🚀 Backend démarré sur http://localhost:5227");

@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Soroubat.Api.Models;
 using Soroubat.Api.Interfaces;
-// on n'ajoute pas de using pour les services d'authentification spécifiques pour assurer le principe d'injection de dépendances et de séparation des préoccupations. Le contrôleur ne doit pas connaître les détails d'implémentation du service d'authentification, il doit juste appeler une interface.
 
 namespace Soroubat.Api.Controllers
 {
-    [ApiController] // permet la validation auto , gestion des erreurs ...
+    [ApiController]
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
@@ -18,25 +17,38 @@ namespace Soroubat.Api.Controllers
 
         /// <summary>
         /// Authentifie un chef de chantier et retourne un JWT signé.
+        /// Codes d'erreur retournés :
+        ///   401 INVALID_CREDENTIALS — email/mot de passe invalides ou email inconnu dans BC.
+        ///   403 ACCOUNT_INACTIVE    — compte existant mais désactivé dans BC.
+        ///   403 NO_PROJECT_ASSIGNED — compte actif mais sans projet assigné dans BC.
         /// </summary>
         [HttpPost("login")]
-        // utilent pour documenter les réponses possibles de l'endpoint, notamment pour Swagger/OpenAPI. Cela aide les développeurs à comprendre ce que l'endpoint retourne et dans quelles conditions.
         [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> Login([FromBody] LoginPostDto loginDto)
         {
-            // ModelState vérifie automatiquement les [Required] et [EmailAddress] du LoginDTO.
-            // Si le JSON est malformé ou qu'un champ obligatoire manque, on retourne 400.
             if (!ModelState.IsValid)
                 return ValidationProblem(ModelState);
 
-            var token = await _authService.AuthenticateAsync(loginDto.Email, loginDto.Password);
+            var result = await _authService.AuthenticateAsync(loginDto.Email, loginDto.Password);
 
-            if (token == null)
-                return Unauthorized(new { message = "Email ou mot de passe incorrect." });
+            if (!result.Success)
+            {
+                return result.ErrorCode switch
+                {
+                    "ACCOUNT_INACTIVE" => StatusCode(StatusCodes.Status403Forbidden,
+                        new { message = "Votre compte est désactivé. Contactez votre administrateur." }),
 
-            return Ok(new { token });
+                    "NO_PROJECT_ASSIGNED" => StatusCode(StatusCodes.Status403Forbidden,
+                        new { message = "Votre compte n'est associé à aucun projet. Contactez votre administrateur." }),
+
+                    _ => Unauthorized(new { message = "Email ou mot de passe incorrect." })
+                };
+            }
+
+            return Ok(new { token = result.Token });
         }
     }
 }

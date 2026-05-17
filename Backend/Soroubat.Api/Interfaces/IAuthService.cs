@@ -1,3 +1,5 @@
+using Soroubat.Api.Models;
+
 namespace Soroubat.Api.Interfaces
 {
     /// <summary>
@@ -6,10 +8,10 @@ namespace Soroubat.Api.Interfaces
     public interface IAuthService
     {
         /// <summary>
-        /// Vérifie les identifiants dans la base locale et retourne un JWT si valides.
-        /// Retourne null si l'email ou le mot de passe est incorrect.
+        /// Vérifie les identifiants dans la base SQLite locale, puis valide le statut BC.
+        /// Retourne un AuthResult avec le JWT en cas de succès, ou un code d'erreur précis en cas d'échec.
         /// </summary>
-        Task<string?> AuthenticateAsync(string email, string password);
+        Task<AuthResult> AuthenticateAsync(string email, string password);
 
         /// <summary>
         /// Génère un jeton JWT signé contenant l'email et le numéro de projet du chef de chantier.

@@ -21,9 +21,9 @@ namespace Soroubat.Api.Controllers
         /// Propriété centralisée pour lire le claim "projectNo" depuis le JWT.
         /// Retourne null si le claim est absent (compte non assigné à un projet).
         /// </summary>
-        private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
+        // User représente un groupement d'informations dans le token JWT de l'utilisateur authentifié qui effectue les requêtes http , ca provient de ControllerBase et est automatiquement peuplé par le middleware d'authentification de ASP.NET Core.
+        private string? UserProjectNo => User.FindFirst("projectNo")?.Value; 
 
-        // ─── PROJET ───────────────────────────────────────────────────────────
 
         /// <summary>Retourne le projet Business Central assigné au chef de chantier connecté.</summary>
         [HttpGet("my-project")]
@@ -52,8 +52,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ─── TÂCHES ───────────────────────────────────────────────────────────
-
         /// <summary>Retourne la liste des tâches du projet du chef de chantier connecté.</summary>
         [HttpGet("my-tasks")]
         [ProducesResponseType(typeof(IEnumerable<JobTaskReadDto>), StatusCodes.Status200OK)]
@@ -76,7 +74,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ─── MISE À JOUR AVANCEMENT ───────────────────────────────────────────
 
         /// <summary>
         /// Met à jour le pourcentage d'avancement d'une tâche identifiée par son SystemId BC.
@@ -84,13 +81,13 @@ namespace Soroubat.Api.Controllers
         /// </summary>
         [HttpPatch("tasks/{id:guid}/progress")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)] // pour les erreurs de validation du DTO
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateProgress(Guid id, [FromBody] JobTaskProgressPatchDto dto)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) // validation automatique du DTO (ex : range 0-100 pour Progress)
                 return ValidationProblem(ModelState);
 
             var projectNo = UserProjectNo;

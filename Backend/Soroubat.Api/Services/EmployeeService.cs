@@ -26,7 +26,6 @@ namespace Soroubat.Api.Services
             _modelsPath = Path.Combine(env.ContentRootPath, "Models", "FaceRef");
         }
 
-        // ── SALARIÉS ──────────────────────────────────────────────────────────
 
         public async Task<JsonElement> GetEmployeesAsync(
             string? numProjet = null, string? filter = null, int? top = null)
@@ -60,7 +59,6 @@ namespace Soroubat.Api.Services
             return await response.Content.ReadFromJsonAsync<JsonElement>();
         }
 
-        // ── RECONNAISSANCE FACIALE ────────────────────────────────────────────
 
         public async Task<bool> VerifyFaceAsync(FaceVerificationPostDto request, string? numProjet)
         {

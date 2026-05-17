@@ -39,8 +39,8 @@ namespace Soroubat.Api.Services
         private async Task<(VehiculePointageHeaderReadDto Header, string? ETag)> GetAndVerifyHeaderAsync(
             Guid id, string projectNo)
         {
-            var response = await _httpClient.GetAsync($"vehiculePointageHeaders({id})?$expand=vehiculePointageLines");
-
+            // var response = await _httpClient.GetAsync($"vehiculePointageHeaders({id})?$expand=vehiculePointageLines");
+            var response = await _httpClient.GetAsync($"vehiculePointageHeaders({id})");
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 throw new KeyNotFoundException($"Le pointage '{id}' est introuvable dans Business Central.");
 
@@ -114,8 +114,7 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
-
+        // ici commencent les méthodes métiers de l'interface IVehiculeService
         public async Task<IEnumerable<VehiculePointageHeaderReadDto>> GetAllHeadersAsync(string projectNo)
         {
             var url = $"vehiculePointageHeaders?$filter=jobNo eq '{projectNo}'";
@@ -130,10 +129,24 @@ namespace Soroubat.Api.Services
             return result?.Value ?? Enumerable.Empty<VehiculePointageHeaderReadDto>();
         }
 
-        public async Task<VehiculePointageHeaderReadDto> GetHeaderByIdAsync(Guid id, string projectNo)
+        // public async Task<VehiculePointageHeaderReadDto> GetHeaderByIdAsync(Guid id, string projectNo)
+        // {
+        //     var (header, _) = await GetAndVerifyHeaderAsync(id, projectNo);
+        //     return header;
+        // }
+        public async Task<VehiculePointageHeaderReadDto> GetHeaderByIdWithLinesAsync(Guid id, string projectNo)
         {
-            var (header, _) = await GetAndVerifyHeaderAsync(id, projectNo);
-            return header;
+            // On fait la vérification de sécurité standard (sans expand)
+            await GetAndVerifyHeaderAsync(id, projectNo);
+
+            // On fait l'appel ciblé avec l'expand uniquement pour CE pointage
+            var url = $"vehiculePointageHeaders({id})?$expand=vehiculePointageLines";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
+
+            return (await response.Content.ReadFromJsonAsync<VehiculePointageHeaderReadDto>())!;
         }
 
         public async Task<VehiculePointageHeaderReadDto> CreateHeaderAsync(
@@ -183,12 +196,12 @@ namespace Soroubat.Api.Services
                 await HandleErrorResponseAsync(patchResponse);
 
             // Retourner le header complet avec ses lignes générées par BC
-            return await GetHeaderByIdAsync(createdHeader.Id.Value, projectNo);
+            // return await GetHeaderByIdAsync(createdHeader.Id.Value, projectNo);
+            return await GetHeaderByIdWithLinesAsync(createdHeader.Id.Value, projectNo);
         }
 
         public async Task<bool> DeleteHeaderAsync(Guid id, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance avant suppression
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"vehiculePointageHeaders({id})");
@@ -272,5 +285,7 @@ namespace Soroubat.Api.Services
             var result = await response.Content.ReadFromJsonAsync<BCResponse<VehiculePointageHeaderReadDto>>();
             return result?.Value ?? Enumerable.Empty<VehiculePointageHeaderReadDto>();
         }
+
+
     }
 }
