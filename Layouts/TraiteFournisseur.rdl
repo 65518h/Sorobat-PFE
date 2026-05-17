@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Header_No_">
+          <DataField>Payment_Header_No_</DataField>
+        </Field>
+        <Field Name="STR____">
+          <DataField>STR____</DataField>
+        </Field>
+        <Field Name="FORMAT__TOT_0___Precision_3___Standard_format_0________">
+          <DataField>FORMAT__TOT_0___Precision_3___Standard_format_0________</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_">
+          <DataField>Payment_Line__Due_Date_</DataField>
+        </Field>
+        <Field Name="FORMAT__TOT_0___Precision_3___Standard_format_0_________Control1000000011">
+          <DataField>FORMAT__TOT_0___Precision_3___Standard_format_0_________Control1000000011</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name_______CompanyInfo_Address_______CompanyInfo__Address_2_">
+          <DataField>CompanyInfo_Name_______CompanyInfo_Address_______CompanyInfo__Address_2_</DataField>
+        </Field>
+        <Field Name="Frs_Name">
+          <DataField>Frs_Name</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date__Control1000000023">
+          <DataField>Payment_Line__Due_Date__Control1000000023</DataField>
+        </Field>
+        <Field Name="Payment_Header___Document_Date_">
+          <DataField>Payment_Header___Document_Date_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Currency_Code_">
+          <DataField>Payment_Line__Currency_Code_</DataField>
+        </Field>
+        <Field Name="AdresseB">
+          <DataField>AdresseB</DataField>
+        </Field>
+        <Field Name="Frs_Name_Control1000000028">
+          <DataField>Frs_Name_Control1000000028</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="Payment_Header___Document_Date__Control1000000031">
+          <DataField>Payment_Header___Document_Date__Control1000000031</DataField>
+        </Field>
+        <Field Name="designation">
+          <DataField>designation</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_1_2_">
+          <DataField>COPYSTR_CompBank_RIB_1_2_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_6_13_">
+          <DataField>COPYSTR_CompBank_RIB_6_13_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_3_3_">
+          <DataField>COPYSTR_CompBank_RIB_3_3_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_19_2_">
+          <DataField>COPYSTR_CompBank_RIB_19_2_</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_6_13__Control1000000003">
+          <DataField>COPYSTR_CompBank_RIB_6_13__Control1000000003</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_19_2__Control1000000006">
+          <DataField>COPYSTR_CompBank_RIB_19_2__Control1000000006</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_3_3__Control1000000008">
+          <DataField>COPYSTR_CompBank_RIB_3_3__Control1000000008</DataField>
+        </Field>
+        <Field Name="COPYSTR_CompBank_RIB_1_2__Control1000000013">
+          <DataField>COPYSTR_CompBank_RIB_1_2__Control1000000013</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name_Control1000000002">
+          <DataField>CompanyInfo_Name_Control1000000002</DataField>
+        </Field>
+        <Field Name="Adresse2B">
+          <DataField>Adresse2B</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

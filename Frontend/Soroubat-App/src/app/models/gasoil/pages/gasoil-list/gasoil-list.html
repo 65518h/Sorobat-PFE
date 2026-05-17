@@ -1,0 +1,403 @@
+<!-- src/app/modules/gasoil/pages/gasoil-list/gasoil-list.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="gasoil-container">
+  
+  <!-- Hero Section Premium -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="gradient-orb orb-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <div class="icon-pulse"></div>
+          <mat-icon>local_gas_station</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Gestion Gasoil</h1>
+          <p>Suivez et gérez les consommations de carburant de votre parc</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <!-- ✅ Bouton Alertes - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="alerts-btn" [class.has-alerts]="alertCount > 0" (click)="navigateToAlerts()" matTooltip="Voir les alertes gasoil">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Alertes</span>
+          </button>
+        </div>
+        
+        <!-- ✅ Bouton Nouvelle fiche - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-primary-glass" (click)="createNew()">
+            <mat-icon>add</mat-icon>
+            <span>Nouvelle fiche</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistiques Premium -->
+  <div class="stats-grid" *ngIf="!loading">
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper">
+          <mat-icon>description</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalDocuments }}</span>
+          <span class="stat-title">Fiches totales</span>
+        </div>
+        <div class="stat-trend up">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper">
+          <mat-icon>local_gas_station</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalQuantity | number }} L</span>
+          <span class="stat-title">Total consommé</span>
+        </div>
+        <div class="stat-trend stable">
+          <mat-icon>trending_flat</mat-icon>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.pendingCount }}</span>
+          <span class="stat-title">En attente</span>
+        </div>
+        <div class="stat-trend down">
+          <mat-icon>trending_down</mat-icon>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper">
+          <mat-icon>verified</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.validatedCount }}</span>
+          <span class="stat-title">Validées</span>
+        </div>
+        <div class="stat-trend up">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+  </div>
+
+  <!-- Loading State Premium -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement des fiches gasoil...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State Premium -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Oups ! Une erreur est survenue</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="loadGasoil()">
+        <mat-icon>refresh</mat-icon>
+        <span>Réessayer</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Section Recherche -->
+  <div class="search-section" *ngIf="!loading && !errorMessage">
+    <div class="search-container">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input 
+        type="text" 
+        class="search-input-premium" 
+        placeholder="Rechercher par n° document, dossier ou magasin..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()">
+      <button class="clear-search" *ngIf="searchTerm" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="filter-actions">
+      <button class="btn-filter" (click)="toggleFilters()">
+        <mat-icon>filter_alt</mat-icon>
+        <span>Filtres</span>
+        <mat-icon class="chevron" [class.rotated]="filtersExpanded">expand_more</mat-icon>
+      </button>
+      <!-- ✅ Bouton Rafraîchir - CACHÉ OFFLINE -->
+      <div *appOfflineHideActions>
+        <button class="btn-refresh" (click)="refresh()" matTooltip="Rafraîchir">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtres Panel Premium -->
+  <div class="filters-panel" [class.expanded]="filtersExpanded" *ngIf="!loading && !errorMessage">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label>Statut</label>
+        <div class="filter-select">
+          <mat-icon>flag</mat-icon>
+          <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+            <option value="all">Tous les statuts</option>
+            <option value="En cours">📋 En cours</option>
+            <option value="Valider">✅ Validé</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Date début</label>
+        <div class="filter-date">
+          <mat-icon>calendar_today</mat-icon>
+          <input type="date" [(ngModel)]="dateFrom" (change)="applyFilters()">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Date fin</label>
+        <div class="filter-date">
+          <mat-icon>event</mat-icon>
+          <input type="date" [(ngModel)]="dateTo" (change)="applyFilters()">
+        </div>
+      </div>
+      <div class="filter-actions-footer">
+        <button class="btn-reset-premium" (click)="resetFilters()">
+          <mat-icon>clear_all</mat-icon>
+          <span>Réinitialiser</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau Premium -->
+  <div class="table-premium" *ngIf="!loading && !errorMessage && filteredHeaders.length > 0">
+    <div class="table-header">
+      <div class="table-row header">
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>receipt</mat-icon>
+            <span>N° document</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>calendar_month</mat-icon>
+            <span>Date</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>folder</mat-icon>
+            <span>Dossier</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>store</mat-icon>
+            <span>Magasin</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>local_gas_station</mat-icon>
+            <span>Quantité (L)</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>flag</mat-icon>
+            <span>Statut</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>settings</mat-icon>
+            <span>Actions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-body">
+      <div *ngFor="let item of paginatedItems" class="table-row" (click)="viewDetail(item)">
+        <div class="td" data-label="N° document">
+          <div class="document-badge">
+            <mat-icon>receipt_long</mat-icon>
+            <span>{{ item.documentNo || '—' }}</span>
+          </div>
+        </div>
+        <div class="td" data-label="Date">
+          <div class="date-chip">
+            <mat-icon>today</mat-icon>
+            <div class="date-info">
+              <span class="date-day">{{ (formatDate(item.date) | date:'dd') || '—' }}</span>
+              <span class="date-month">{{ (formatDate(item.date) | date:'MMM') || '' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="td" data-label="Dossier">
+          <div class="folder-chip">
+            <mat-icon>folder_open</mat-icon>
+            <span>{{ item.fileNo || '—' }}</span>
+          </div>
+        </div>
+        <div class="td" data-label="Magasin">
+          <div class="location-chip">
+            <mat-icon>location_on</mat-icon>
+            <span>{{ item.locationCode || '—' }}</span>
+          </div>
+        </div>
+        <div class="td" data-label="Quantité">
+          <div class="quantity-badge">
+            <mat-icon>local_gas_station</mat-icon>
+            <span class="quantity-value">{{ getTotalQuantity(item) | number }}</span>
+            <span class="quantity-unit">L</span>
+          </div>
+        </div>
+        <div class="td" data-label="Statut">
+          <div class="status-chip" [class]="getStatusClass(item.status)">
+            <div class="status-dot"></div>
+            <mat-icon>{{ getStatusIcon(item.status) }}</mat-icon>
+            <span>{{ getStatusLabel(item.status) }}</span>
+          </div>
+        </div>
+        <div class="td" data-label="Actions">
+          <div class="action-group" (click)="$event.stopPropagation()">
+            <button class="action-icon view" (click)="viewDetail(item)" matTooltip="Voir détails">
+              <mat-icon>visibility</mat-icon>
+              <span class="action-tooltip">Voir</span>
+            </button>
+            
+            <!-- ✅ Boutons d'action - CACHÉS OFFLINE -->
+            <div *appOfflineHideActions>
+              <button class="action-icon edit" *ngIf="item.status !== 'Valider'" (click)="editGasoil(item)" matTooltip="Modifier">
+                <mat-icon>edit</mat-icon>
+                <span class="action-tooltip">Modifier</span>
+              </button>
+              <button class="action-icon validate" *ngIf="item.status !== 'Valider'" (click)="validateGasoil(item)" matTooltip="Valider">
+                <mat-icon>check_circle</mat-icon>
+                <span class="action-tooltip">Valider</span>
+              </button>
+              <button class="action-icon delete" *ngIf="item.status !== 'Valider'" (click)="deleteGasoil(item)" matTooltip="Supprimer">
+                <mat-icon>delete_outline</mat-icon>
+                <span class="action-tooltip">Supprimer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Premium -->
+    <div class="pagination-premium">
+      <div class="pagination-info">
+        Affichage de {{ (pageIndex * pageSize) + 1 }} à {{ (pageIndex * pageSize + pageSize) > totalItems ? totalItems : (pageIndex * pageSize + pageSize) }} sur {{ totalItems }} fiches
+      </div>
+      <div class="pagination-controls">
+        <button class="page-btn" (click)="firstPage()" [disabled]="pageIndex === 0">
+          <mat-icon>first_page</mat-icon>
+        </button>
+        <button class="page-btn" (click)="previousPage()" [disabled]="pageIndex === 0">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div class="page-numbers">
+          <button *ngFor="let page of getVisiblePages()" 
+                  class="page-num" 
+                  [class.active]="page === pageIndex + 1"
+                  (click)="goToPage(page - 1)">
+            <span *ngIf="page !== -1">{{ page }}</span>
+            <span *ngIf="page === -1">...</span>
+          </button>
+        </div>
+        <button class="page-btn" (click)="nextPage()" [disabled]="pageIndex >= getTotalPages() - 1">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button class="page-btn" (click)="lastPage()" [disabled]="pageIndex >= getTotalPages() - 1">
+          <mat-icon>last_page</mat-icon>
+        </button>
+      </div>
+      <div class="page-size-selector">
+        <span>Afficher</span>
+        <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+          <option [value]="10">10</option>
+          <option [value]="25">25</option>
+          <option [value]="50">50</option>
+          <option [value]="100">100</option>
+        </select>
+        <span>par page</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State Premium -->
+  <div class="empty-state-premium" *ngIf="!loading && !errorMessage && filteredHeaders.length === 0">
+    <div class="empty-card">
+      <div class="empty-illustration">
+        <mat-icon>local_gas_station</mat-icon>
+      </div>
+      <h3>Aucune fiche gasoil</h3>
+      <p>Commencez par créer votre première fiche de consommation</p>
+      <div class="empty-actions">
+        <button class="btn-primary-premium" (click)="createNew()">
+          <mat-icon>add</mat-icon>
+          <span>Nouvelle fiche</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredHeaders.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+  </div>
+
+</div>

@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_Amount">
+          <DataField>Loan___Advance_Header_Amount</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_AmountFormat">
+          <DataField>Loan___Advance_Header_AmountFormat</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__N__document_Extr__">
+          <DataField>Loan___Advance_Header__N__document_Extr__</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Date_d_effet_">
+          <DataField>Loan___Advance_Header__Date_d_effet_</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_Name">
+          <DataField>Loan___Advance_Header_Name</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Document_type_">
+          <DataField>Loan___Advance_Header__Document_type_</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Interest___">
+          <DataField>Loan___Advance_Header__Interest___</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Interest___Format">
+          <DataField>Loan___Advance_Header__Interest___Format</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Repayment_slices_">
+          <DataField>Loan___Advance_Header__Repayment_slices_</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_Employee">
+          <DataField>Loan___Advance_Header_Employee</DataField>
+        </Field>
+        <Field Name="Loan___AdvanceCaption">
+          <DataField>Loan___AdvanceCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Montant_Prêt__Caption">
+          <DataField>Montant_Prêt__Caption</DataField>
+        </Field>
+        <Field Name="Date_décision__Caption">
+          <DataField>Date_décision__Caption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__N__document_Extr__Caption">
+          <DataField>Loan___Advance_Header__N__document_Extr__Caption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Document_type_Caption">
+          <DataField>Loan___Advance_Header__Document_type_Caption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Interest___Caption">
+          <DataField>Loan___Advance_Header__Interest___Caption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header__Repayment_slices_Caption">
+          <DataField>Loan___Advance_Header__Repayment_slices_Caption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_EmployeeCaption">
+          <DataField>Loan___Advance_Header_EmployeeCaption</DataField>
+        </Field>
+        <Field Name="Loan___Advance_Header_No_">
+          <DataField>Loan___Advance_Header_No_</DataField>
+        </Field>
+        <Field Name="DateEch">
+          <DataField>DateEch</DataField>
+        </Field>
+        <Field Name="MntRest">
+          <DataField>MntRest</DataField>
+        </Field>
+        <Field Name="MntRestFormat">
+          <DataField>MntRestFormat</DataField>
+        </Field>
+        <Field Name="MntRet">
+          <DataField>MntRet</DataField>
+        </Field>
+        <Field Name="MntRetFormat">
+          <DataField>MntRetFormat</DataField>
+        </Field>
+        <Field Name="MntInt">
+          <DataField>MntInt</DataField>
+        </Field>
+        <Field Name="MntIntFormat">
+          <DataField>MntIntFormat</DataField>
+        </Field>
+        <Field Name="MntRet_MntInt">
+          <DataField>MntRet_MntInt</DataField>
+        </Field>
+        <Field Name="MntRet_MntIntFormat">
+          <DataField>MntRet_MntIntFormat</DataField>
+        </Field>
+        <Field Name="TotMntRet_TotMntInt">
+          <DataField>TotMntRet_TotMntInt</DataField>
+        </Field>
+        <Field Name="TotMntRet_TotMntIntFormat">
+          <DataField>TotMntRet_TotMntIntFormat</DataField>
+        </Field>
+        <Field Name="TotMntInt">
+          <DataField>TotMntInt</DataField>
+        </Field>
+        <Field Name="TotMntIntFormat">
+          <DataField>TotMntIntFormat</DataField>
+        </Field>
+        <Field Name="TotMntRet">
+          <DataField>TotMntRet</DataField>
+        </Field>
+        <Field Name="TotMntRetFormat">
+          <DataField>TotMntRetFormat</DataField>
+        </Field>
+        <Field Name="DateEchCaption">
+          <DataField>DateEchCaption</DataField>
+        </Field>
+        <Field Name="MntRestCaption">
+          <DataField>MntRestCaption</DataField>
+        </Field>
+        <Field Name="MntRetCaption">
+          <DataField>MntRetCaption</DataField>
+        </Field>
+        <Field Name="MntIntCaption">
+          <DataField>MntIntCaption</DataField>
+        </Field>
+        <Field Name="MntRet_MntIntCaption">
+          <DataField>MntRet_MntIntCaption</DataField>
+        </Field>
+        <Field Name="TOTAL__Caption">
+          <DataField>TOTAL__Caption</DataField>
+        </Field>
+        <Field Name="Integer_Number">
+          <DataField>Integer_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

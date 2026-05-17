@@ -1,0 +1,697 @@
+<!-- src/app/modules/dashboard/pages/dashboard-home/dashboard-home.html -->
+<div class="dashboard-wrapper">
+
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════ -->
+  <div class="dashboard-header">
+    <div class="header-left">
+      <div>
+        <h1 class="dashboard-title">Tableau de bord</h1>
+        <p class="dashboard-subtitle">Vue globale de votre chantier en cours</p>
+        <div class="last-update" *ngIf="lastUpdate">
+          <mat-icon>schedule</mat-icon>
+          Dernière mise à jour : {{ lastUpdate | date:'HH:mm:ss' }}
+        </div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-refresh" (click)="refresh()" [disabled]="isLoading">
+        <span class="refresh-icon" [class.spinning]="isLoading">↻</span>
+        Actualiser
+      </button>
+    </div>
+  </div>
+
+  <!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+  <div *ngIf="!isOnline" class="offline-banner">
+    <mat-icon>cloud_off</mat-icon>
+    <span> Mode hors ligne - Données en cache du {{ lastUpdate | date:'dd/MM/yyyy à HH:mm' }}</span>
+    <button class="btn-retry" (click)="refresh()">
+      <mat-icon>refresh</mat-icon> Réessayer
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement des données...</p>
+  </div>
+
+  <!-- ERREUR -->
+  <div *ngIf="hasError && !isLoading" class="error-state">
+    <span class="error-icon">⚠️</span>
+    <p>Impossible de charger les données. Vérifiez la connexion au serveur.</p>
+    <button class="btn-retry" (click)="refresh()">Réessayer</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       CONTENU PRINCIPAL
+  ═══════════════════════════════════════ -->
+  <div *ngIf="!isLoading && !hasError" class="dashboard-content">
+
+    <!-- ───────────────────────────────────
+         SECTION 1 — KPI CARDS
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <mat-icon>analytics</mat-icon>
+          Indicateurs clés
+        </h2>
+        <div class="section-actions">
+          <span class="period-badge">Temps réel</span>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <!-- Projets actifs -->
+        <div class="kpi-card" [routerLink]="['/projects']">
+          <div class="kpi-icon-wrapper blue">
+            <mat-icon>business</mat-icon>
+          </div>
+          <div class="kpi-content">
+            <div class="kpi-value">{{ kpi.activeProjects }}</div>
+            <div class="kpi-label">Projets actifs</div>
+            <div class="kpi-trend">
+              <span class="trend-value">{{ kpi.totalProjects }} au total</span>
+            </div>
+          </div>
+          <div class="kpi-progress">
+            <div class="progress-bar">
+              <div class="progress-fill blue-fill" 
+                   [style.width]="kpi.totalProjects > 0 ? (kpi.activeProjects / kpi.totalProjects) * 100 + '%' : '0%'"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tâches en cours -->
+        <div class="kpi-card" [routerLink]="['/tasks']">
+          <div class="kpi-icon-wrapper amber">
+            <mat-icon>assignment</mat-icon>
+          </div>
+          <div class="kpi-content">
+            <div class="kpi-value">{{ kpi.tasksInProgress }}</div>
+            <div class="kpi-label">Tâches en cours</div>
+            <div class="kpi-trend">
+              <span class="trend-value">{{ kpi.tasksCompleted }} terminées</span>
+              <span class="trend-separator">•</span>
+              <span class="trend-total">{{ kpi.tasksTotal }} total</span>
+            </div>
+          </div>
+          <div class="kpi-progress">
+            <div class="progress-bar">
+              <div class="progress-fill amber-fill" 
+                   [style.width]="kpi.tasksTotal > 0 ? (kpi.tasksCompleted / kpi.tasksTotal) * 100 + '%' : '0%'"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tâches bloquées -->
+        <div class="kpi-card" [routerLink]="['/tasks']">
+          <div class="kpi-icon-wrapper red">
+            <mat-icon>lock</mat-icon>
+          </div>
+          <div class="kpi-content">
+            <div class="kpi-value">{{ kpi.tasksBlocked }}</div>
+            <div class="kpi-label">Tâches bloquées</div>
+            <div class="kpi-trend">
+              <span class="trend-value">{{ kpi.tasksOverdue }} en retard</span>
+            </div>
+          </div>
+          <div class="kpi-badge" [class.badge-danger]="kpi.tasksBlocked > 0" [class.badge-success]="kpi.tasksBlocked === 0">
+            <mat-icon>{{ kpi.tasksBlocked > 0 ? 'warning' : 'check_circle' }}</mat-icon>
+            <span>{{ kpi.tasksBlocked > 0 ? 'Action requise' : 'OK' }}</span>
+          </div>
+        </div>
+
+        <!-- Engins actifs -->
+        <div class="kpi-card" [routerLink]="['/vehicules/pointage']">
+          <div class="kpi-icon-wrapper teal">
+            <mat-icon>construction</mat-icon>
+          </div>
+          <div class="kpi-content">
+            <div class="kpi-value">{{ kpi.activeEngines }}</div>
+            <div class="kpi-label">Engins actifs</div>
+            <div class="kpi-trend">
+              <span class="trend-value">30 derniers jours</span>
+            </div>
+          </div>
+          <div class="kpi-progress">
+            <div class="progress-bar">
+              <div class="progress-fill teal-fill" [style.width]="validationRate + '%'"></div>
+            </div>
+            <div class="progress-label">Taux validation {{ validationRate }}%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 2 — AVANCEMENT RÉEL PAR TÂCHE
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>trending_up</mat-icon>
+          Avancement réel des tâches
+        </h3>
+        <a [routerLink]="['/tasks']" class="link-all">Voir toutes →</a>
+      </div>
+
+      <div class="chart-card" *ngIf="tasksDetail.length > 0; else noTasksDetail">
+        <div class="task-progress-list">
+          <div class="task-progress-row" *ngFor="let t of tasksDetail">
+            <div class="task-status-dot" [class]="getTaskStatusClass(t)"></div>
+            <div class="task-info">
+              <span class="task-name">{{ t.description || t.taskNo }}</span>
+              <div class="task-meta">
+                <span class="task-tag">{{ t.taskNo }}</span>
+                <span *ngIf="t.dateFin" class="task-due" [class.overdue]="isOverdue(t)">
+                  <mat-icon>event</mat-icon>
+                  {{ formatDate(t.dateFin) }}
+                </span>
+                <span *ngIf="t.isBlocked" class="task-blocked-badge">
+                  <mat-icon>block</mat-icon> Bloquée
+                </span>
+              </div>
+            </div>
+            <div class="task-bar-wrap">
+              <div class="task-bar-track">
+                <div class="task-bar-fill" [style.width]="pct(t.progressPct)" [style.background]="taskProgressColor(t)"></div>
+              </div>
+              <span class="task-pct">{{ t.progressPct }}%</span>
+            </div>
+            <span class="task-status-badge" [class]="getTaskStatusClass(t)">
+              {{ getTaskStatusLabel(t) }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <ng-template #noTasksDetail>
+        <div class="empty-state-card">
+          <mat-icon>inbox</mat-icon>
+          <p>Aucune tâche disponible pour ce projet</p>
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 3 — DONUT TÂCHES + AVANCEMENT PROJET
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>pie_chart</mat-icon>
+          Analyses
+        </h3>
+      </div>
+      <div class="charts-grid">
+        <!-- Donut tâches -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Répartition des tâches</h3>
+            <span class="chart-count">{{ totalTasksForDonut }} tâche(s)</span>
+          </div>
+          <div class="donut-wrapper" *ngIf="tasksByStatus.length > 0; else noTasks">
+            <svg viewBox="0 0 42 42" class="donut-svg">
+              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke-width="5" stroke="#e2e8f0"/>
+              <circle *ngFor="let s of tasksByStatus; let i = index"
+                      cx="21" cy="21" r="15.91549430918954"
+                      fill="transparent" stroke-width="5"
+                      [attr.stroke]="donutColors[i]"
+                      [attr.stroke-dasharray]="donutArc(i)"
+                      [attr.stroke-dashoffset]="donutOffset(i)"/>
+              <text x="21" y="20" text-anchor="middle" class="donut-center-val">{{ totalTasksForDonut }}</text>
+              <text x="21" y="24" text-anchor="middle" class="donut-center-lbl">total</text>
+            </svg>
+            <div class="donut-legend">
+              <div class="legend-item" *ngFor="let s of tasksByStatus; let i = index">
+                <span class="legend-dot" [style.background]="donutColors[i]"></span>
+                <span class="legend-name">{{ s.name }}</span>
+                <span class="legend-val">{{ s.value }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #noTasks>
+            <div class="empty-chart">Aucune donnée de tâches</div>
+          </ng-template>
+        </div>
+
+        <!-- Avancement global du projet -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Avancement global du projet</h3>
+            <span class="chart-count">{{ projectsProgress.length }} projet(s)</span>
+          </div>
+          <div class="bar-list" *ngIf="projectsProgress.length > 0; else noProjects">
+            <div class="bar-row" *ngFor="let p of projectsProgress">
+              <div class="bar-label">
+                <span class="bar-name">{{ p.name }}</span>
+                <span class="bar-pct">{{ p.progress }}%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" [style.width]="pct(p.progress)" [style.background]="progressColor(p.progress)"></div>
+              </div>
+              <span class="bar-status" [class]="statusColor(p.status)">{{ p.status }}</span>
+            </div>
+          </div>
+          <div class="progress-legend" *ngIf="projectsProgress.length > 0">
+            <span class="prog-legend-item"><span style="background:#10B981" class="prog-dot"></span>≥ 75% Bon</span>
+            <span class="prog-legend-item"><span style="background:#3B82F6" class="prog-dot"></span>≥ 40% En cours</span>
+            <span class="prog-legend-item"><span style="background:#F59E0B" class="prog-dot"></span>≥ 20% Lent</span>
+            <span class="prog-legend-item"><span style="background:#EF4444" class="prog-dot"></span>&lt; 20% Critique</span>
+          </div>
+          <ng-template #noProjects>
+            <div class="empty-chart">Aucun projet disponible</div>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 4 — TÂCHES EN RETARD
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>warning</mat-icon>
+          Tâches en retard
+        </h3>
+        <a [routerLink]="['/tasks']" class="link-all">Voir toutes →</a>
+      </div>
+
+      <div class="chart-card" *ngIf="overdueTasks.length > 0; else noOverdue">
+        <div class="table-responsive">
+          <table class="overdue-table">
+            <thead>
+              <tr><th>Projet</th><th>Tâche</th><th>Échéance</th><th>Retard</th><th>Avancement</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of overdueTasks">
+                <td><span class="tag-project">{{ t.jobNo }}</span></td>
+                <td class="task-desc">{{ t.description || t.taskNo }}</td>
+                <td class="text-red">{{ formatDate(t.dateFin) }}</td>
+                <td><span class="badge-danger-sm">{{ daysOverdue(t.dateFin) }}j</span></td>
+                <td>
+                  <div class="mini-bar-track">
+                    <div class="mini-bar-fill" [style.width]="pct(t.progressPct)" style="background:#EF4444"></div>
+                  </div>
+                  <span class="mini-pct">{{ t.progressPct }}%</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noOverdue>
+        <div class="empty-state-card success">
+          <mat-icon>check_circle</mat-icon>
+          <p>✅ Aucune tâche en retard</p>
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 5 — STOCK CRITIQUE
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>inventory</mat-icon>
+          Articles en alerte stock
+        </h3>
+        <div class="stock-tabs">
+          <button class="stock-tab" [class.active]="activeStockTab === 'outOfStock'" (click)="activeStockTab = 'outOfStock'">
+            <mat-icon>error</mat-icon> Rupture
+            <span class="tab-count danger">{{ stockCritical.outOfStock.length }}</span>
+          </button>
+          <button class="stock-tab" [class.active]="activeStockTab === 'lowStock'" (click)="activeStockTab = 'lowStock'">
+            <mat-icon>warning</mat-icon> Stock faible
+            <span class="tab-count warning">{{ stockCritical.lowStock.length }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <!-- Rupture -->
+        <div *ngIf="activeStockTab === 'outOfStock'">
+          <div *ngIf="stockCritical.outOfStock.length > 0; else noStockAlert" class="table-responsive">
+            <table class="overdue-table">
+              <thead><tr><th>Code</th><th>Description</th><th>Magasin</th><th class="text-right">Quantité</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let a of stockCritical.outOfStock">
+                  <td><span class="tag-project">{{ a.code }}</span></td>
+                  <td>{{ a.description }}</td>
+                  <td>{{ a.location }}</td>
+                  <td class="text-right text-red"><strong>{{ a.quantity }}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Stock faible -->
+        <div *ngIf="activeStockTab === 'lowStock'">
+          <div *ngIf="stockCritical.lowStock.length > 0; else noStockAlert" class="table-responsive">
+            <table class="overdue-table">
+              <thead><tr><th>Code</th><th>Description</th><th>Magasin</th><th class="text-right">Quantité</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let a of stockCritical.lowStock">
+                  <td><span class="tag-project">{{ a.code }}</span></td>
+                  <td>{{ a.description }}</td>
+                  <td>{{ a.location }}</td>
+                  <td class="text-right text-warning"><strong>{{ a.quantity }}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <ng-template #noStockAlert>
+          <div class="empty-state-card success">
+            <mat-icon>check_circle</mat-icon>
+            <p>✅ Aucun article dans cette catégorie</p>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 6 — STOCK PAR MAGASIN
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>store</mat-icon>
+          Stock par magasin
+        </h3>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Quantités par magasin (Top 8)</h3>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas #stockEvolutionChart></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Distribution : Normal / Faible / Rupture</h3>
+            <span class="chart-count">{{ stockStats?.totalItems || 0 }} articles</span>
+          </div>
+          <div class="chart-canvas-container small">
+            <canvas #stockDistributionChart></canvas>
+          </div>
+          <div class="stock-stats" *ngIf="stockStats">
+            <div class="stat-row"><span>📦 Total articles</span><strong>{{ stockStats.totalItems | number }}</strong></div>
+            <div class="stat-row"><span>🔢 Quantité totale</span><strong>{{ stockStats.totalQuantity | number }}</strong></div>
+            <div class="stat-row"><span>⚠️ Stock faible (≤10)</span><strong class="text-warning">{{ stockStats.lowStockCount }}</strong></div>
+            <div class="stat-row"><span>🔴 Rupture (≤0)</span><strong class="text-red">{{ stockStats.outOfStockCount }}</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 7 — POINTAGE VÉHICULES
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>directions_car</mat-icon>
+          Pointage des véhicules
+        </h3>
+        <div class="validation-rate-badge" [class.good]="validationRate >= 80" [class.warning-rate]="validationRate >= 50 && validationRate < 80" [class.bad]="validationRate < 50">
+          <mat-icon>verified</mat-icon>
+          Taux de validation : {{ validationRate | number:'1.0-0' }}%
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Évolution mensuelle des pointages</h3>
+            <span class="chart-count">6 derniers mois</span>
+          </div>
+          <div class="chart-canvas-container"><canvas #vehiclePointageChart></canvas></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Statuts relevés dans les pointages</h3>
+          </div>
+          <div class="chart-canvas-container small"><canvas #vehicleStatusChart></canvas></div>
+        </div>
+      </div>
+
+      <!-- Pointages non validés -->
+      <div class="chart-card pending-card" *ngIf="pendingPointages.length > 0">
+        <div class="card-header">
+          <h3 class="card-title"><mat-icon>pending</mat-icon> Pointages en attente de validation</h3>
+          <span class="badge-pending">{{ pendingPointages.length }} en attente</span>
+        </div>
+        <div class="table-responsive">
+          <table class="overdue-table">
+            <thead><tr><th>N° document</th><th>Date</th><th>Jours ouverts</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let p of pendingPointages">
+                <td><span class="tag-project">{{ p.documentNo }}</span></td>
+                <td>{{ formatDate(p.date) }}</td>
+                <td><span class="badge-danger-sm">{{ daysOverdue(p.date) }}j</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 8 — POINTAGE DES EMPLOYÉS
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>badge</mat-icon>
+          Pointage des employés
+        </h3>
+        <div class="current-period-badge" *ngIf="currentAttendance">
+          <mat-icon>calendar_today</mat-icon>
+          {{ currentAttendance.month }} {{ currentAttendance.year }}
+        </div>
+      </div>
+
+      <!-- Stats principales pointage employés -->
+      <div class="attendance-stats-grid" *ngIf="currentAttendance; else noAttendanceData">
+        <div class="attendance-stat-card present">
+          <div class="attendance-stat-icon">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <div class="attendance-stat-info">
+            <span class="attendance-stat-value">{{ attendanceStats.totalPresent }}</span>
+            <span class="attendance-stat-label">Jours présents</span>
+          </div>
+        </div>
+        
+        <div class="attendance-stat-card absent">
+          <div class="attendance-stat-icon">
+            <mat-icon>block</mat-icon>
+          </div>
+          <div class="attendance-stat-info">
+            <span class="attendance-stat-value">{{ attendanceStats.totalAbsent }}</span>
+            <span class="attendance-stat-label">Jours absents</span>
+          </div>
+        </div>
+        
+        <div class="attendance-stat-card rate">
+          <div class="attendance-stat-icon">
+            <mat-icon>trending_up</mat-icon>
+          </div>
+          <div class="attendance-stat-info">
+            <span class="attendance-stat-value">{{ attendanceStats.attendanceRate }}%</span>
+            <span class="attendance-stat-label">Taux présence</span>
+          </div>
+          <div class="attendance-stat-progress">
+            <div class="progress-track">
+              <div class="progress-fill-rate" [style.width]="attendanceStats.attendanceRate + '%'"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="attendance-stat-card employees">
+          <div class="attendance-stat-icon">
+            <mat-icon>groups</mat-icon>
+          </div>
+          <div class="attendance-stat-info">
+            <span class="attendance-stat-value">{{ attendanceStats.totalEmployees }}</span>
+            <span class="attendance-stat-label">Employés</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 5 employés présents -->
+      <div class="chart-card" *ngIf="topEmployeesPresent.length > 0">
+        <div class="chart-header">
+          <h3 class="chart-title">
+            Les 5 - Employés les plus présents
+          </h3>
+          <span class="chart-count">{{ currentAttendance?.month }} {{ currentAttendance?.year }}</span>
+        </div>
+        <div class="top-employees-list">
+          <div *ngFor="let emp of topEmployeesPresent; let i = index" class="employee-rank-row">
+            <div class="rank-badge" [class]="getRankClass(i)">
+              {{ i + 1 }}
+            </div>
+            <div class="employee-rank-info">
+              <div class="employee-rank-name">{{ emp.name }}</div>
+              <div class="employee-rank-no">Mat. {{ emp.no }}</div>
+            </div>
+            <div class="employee-rank-stats">
+              <div class="rank-progress">
+                <div class="rank-progress-track">
+                  <div class="rank-progress-fill" [style.width]="(emp.presentDays / maxPresentDays) * 100 + '%'"></div>
+                </div>
+                <span class="rank-days">{{ emp.presentDays }}j</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau récapitulatif des présences -->
+      <div class="chart-card" *ngIf="currentAttendance && currentAttendance.lines && currentAttendance.lines.length > 0">
+        <div class="chart-header">
+          <h3 class="chart-title">
+            <mat-icon>table_chart</mat-icon>
+            Récapitulatif des présences
+          </h3>
+          <span class="chart-count">{{ currentAttendance.lines.length }} employés</span>
+        </div>
+        
+        <div class="attendance-summary-table">
+          <div class="table-responsive">
+            <table class="presence-table">
+              <thead>
+                <tr>
+                  <th class="col-employee">Employé</th>
+                  <th class="col-total">Prés.</th>
+                  <th *ngFor="let day of attendanceDays" class="col-day" [class.weekend]="isAttendanceWeekend(day)">
+                    {{ day }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let line of currentAttendance.lines | slice:0:5">
+                  <td class="col-employee">
+                    <div class="employee-mini-info">
+                      <div class="employee-mini-avatar">
+                        {{ (line.employeeName | slice:0:2).toUpperCase() }}
+                      </div>
+                      <div class="employee-mini-details">
+                        <span class="employee-mini-name">{{ line.employeeName }}</span>
+                        <span class="employee-mini-no">Mat. {{ line.employeeNo }}</span>
+                      </div>
+                    </div>
+                   </td>
+                  <td class="col-total">
+                    <div class="total-presence-badge" [class]="getTotalPresentClass(line.totalPresentDays ?? 0)">
+                      {{ line.totalPresentDays ?? 0 }}
+                    </div>
+                   </td>
+                  <td *ngFor="let day of attendanceDays" class="col-day">
+                    <div class="presence-cell" 
+                         [class]="getPresenceStatusClass(getDayAttendanceValue(line, day))">
+                      {{ getDayAttendanceValue(line, day) || '—' }}
+                    </div>
+                   </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="view-all-link" *ngIf="(currentAttendance.lines.length || 0) > 5">
+            <a [routerLink]="['/attendance', currentAttendance.id]" class="link-all">
+              Voir tous les {{ currentAttendance.lines.length }} employés →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Légende des statuts -->
+      <div class="attendance-legend">
+        <div class="legend-title">Statuts :</div>
+        <div class="legend-item"><span class="legend-dot present-dot"></span>Présent (P, AU, P-R)</div>
+        <div class="legend-item"><span class="legend-dot leave-dot"></span>Congé (C, C1/2, CEXP)</div>
+        <div class="legend-item"><span class="legend-dot holiday-dot"></span>Férié (F)</div>
+        <div class="legend-item"><span class="legend-dot absent-dot"></span>Absent (A)</div>
+        <div class="legend-item"><span class="legend-dot empty-dot"></span>Non renseigné</div>
+      </div>
+
+      <div class="view-detail-link">
+        <a [routerLink]="['/attendance']" class="link-all">
+          Voir tous les pointages →
+        </a>
+      </div>
+
+      <ng-template #noAttendanceData>
+        <div class="empty-state-card">
+          <mat-icon>event_busy</mat-icon>
+          <p>Aucun pointage pour le mois en cours</p>
+          <button class="btn-create-attendance" [routerLink]="['/attendance/create']">
+            <mat-icon>add</mat-icon> Créer un pointage
+          </button>
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- ───────────────────────────────────
+         SECTION 9 — ALERTES PAR DOMAINE
+    ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="section-header">
+        <h3 class="section-title">
+          <mat-icon>notifications_active</mat-icon>
+          Alertes par domaine
+        </h3>
+        <a [routerLink]="['/alerts']" class="link-all">Voir toutes →</a>
+      </div>
+
+      <div class="alerts-domains-grid">
+        <div class="alert-domain-card" *ngFor="let domain of alertDomains">
+          <div class="domain-header">
+            <div class="domain-icon" [style.background]="domain.gradient">
+              <mat-icon>{{ domain.icon }}</mat-icon>
+            </div>
+            <div class="domain-info">
+              <h4 class="domain-name">{{ domain.label }}</h4>
+              <span class="domain-badge" [class.has-alerts]="recentAlerts[domain.key].length > 0">
+                {{ recentAlerts[domain.key].length }} alerte(s)
+              </span>
+            </div>
+            <button class="view-all-domain" (click)="navigateToDomainAlerts(domain.key)" matTooltip="Voir toutes les alertes">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+          <div class="domain-alerts-list" *ngIf="recentAlerts[domain.key].length > 0; else noDomainAlert">
+            <div *ngFor="let alert of recentAlerts[domain.key]" class="domain-alert-item" [class]="getAlertSeverityClass(alert.severity)" (click)="onAlertClick(alert)">
+              <div class="alert-mini-icon">{{ getAlertTypeIcon(alert.type) }}</div>
+              <div class="alert-mini-content">
+                <div class="alert-mini-title">{{ alert.title | slice:0:42 }}{{ alert.title.length > 42 ? '…' : '' }}</div>
+                <div class="alert-mini-time">{{ alert.detectedAt | date:'dd/MM HH:mm' }}</div>
+              </div>
+              <span class="status-dot" [class.dot-critical]="alert.severity === 'Critical'" [class.dot-warning]="alert.severity === 'Warning'"></span>
+            </div>
+          </div>
+          <ng-template #noDomainAlert>
+            <div class="no-domain-alerts">
+              <mat-icon>check_circle</mat-icon>
+              <span>Aucune alerte</span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>

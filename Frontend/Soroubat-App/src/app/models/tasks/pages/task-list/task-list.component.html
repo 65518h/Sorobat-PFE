@@ -1,0 +1,572 @@
+<!-- src/app/modules/tasks/pages/task-list/task-list.component.html -->
+
+<!-- BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+
+ <div class="tasks-container">
+  <!-- En-tête avec titre et barre d'outils -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Liste des tâches</h1>
+      <p class="subtitle">Gérez et suivez l'avancement de vos chantiers</p>
+    </div>
+    
+    <div class="header-right">
+      <!-- BOUTON ALERTES AVEC BADGE - À GAUCHE DANS LA BARRE D'OUTILS -->
+      <button class="alerts-btn" 
+              [class.has-alerts]="alertCount > 0" 
+              (click)="navigateToAlerts()" 
+              matTooltip="Voir les alertes chantier">
+        <mat-icon>notifications_active</mat-icon>
+        <span>Alertes</span>
+       
+      </button>
+      
+      <!-- Zone de recherche à droite -->
+      <div class="search-wrapper">
+        <div class="search-bar">
+          <mat-icon>search</mat-icon>
+          <input 
+            type="text" 
+            [(ngModel)]="searchTerm"
+            (input)="applyFilter()"
+            placeholder="Rechercher par projet, tâche, description ou statut..."
+            class="search-input"
+            #searchInput>
+          <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        
+        <!-- Filtres rapides -->
+        <div class="filter-chips">
+          <button class="filter-chip" 
+                  [class.active]="selectedStatusFilter === 'all'" 
+                  (click)="filterByStatus('all')">
+            Tous
+          </button>
+          <button class="filter-chip" 
+                  [class.active]="selectedStatusFilter === 'en-cours'" 
+                  (click)="filterByStatus('en-cours')">
+            En cours
+          </button>
+          <button class="filter-chip" 
+                  [class.active]="selectedStatusFilter === 'termine'" 
+                  (click)="filterByStatus('termine')">
+            Terminées
+          </button>
+          <button class="filter-chip" 
+                  [class.active]="selectedStatusFilter === 'bloque'" 
+                  (click)="filterByStatus('bloque')">
+            Bloquées
+          </button>
+          <button class="filter-chip" 
+                  [class.active]="selectedStatusFilter === 'retard'" 
+                  (click)="filterByStatus('retard')">
+            En retard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Statistiques avec barres de progression -->
+
+ <div class="stats-grid">
+  <mat-card class="stat-card total" (click)="scrollToTableAndFilterByStatus('all')">
+    <mat-card-content>
+      <div class="stat-icon">
+        <mat-icon>assignment</mat-icon>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ tasks.length }}</div>
+        <div class="stat-label">Total tâches</div>
+      </div>
+      <div class="stat-trend neutral">
+        <mat-icon>list</mat-icon>
+        <span>Total</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card completed" (click)="scrollToTableAndFilterByStatus('termine')">
+    <mat-card-content>
+      <div class="stat-icon">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ getCompletedTasksCount() }}</div>
+        <div class="stat-label">Terminées</div>
+      </div>
+      <div class="stat-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" 
+               [style.width.%]="getCompletedPercentage()">
+          </div>
+        </div>
+        <span class="progress-text">{{ getCompletedPercentage().toFixed(1) }}%</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card in-progress" (click)="scrollToTableAndFilterByStatus('en-cours')">
+    <mat-card-content>
+      <div class="stat-icon">
+        <mat-icon>pending_actions</mat-icon>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ getInProgressTasksCount() }}</div>
+        <div class="stat-label">En cours</div>
+      </div>
+      <div class="stat-progress">
+        <div class="progress-bar">
+          <div class="progress-fill in-progress-fill" 
+               [style.width.%]="getInProgressPercentage()">
+          </div>
+        </div>
+        <span class="progress-text">{{ getInProgressPercentage().toFixed(1) }}%</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="stat-card blocked" (click)="scrollToTableAndFilterByStatus('bloque')">
+    <mat-card-content>
+      <div class="stat-icon">
+        <mat-icon>block</mat-icon>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ getBlockedTasksCount() }}</div>
+        <div class="stat-label">Bloquées</div>
+      </div>
+      <div class="stat-progress">
+        <div class="progress-bar">
+          <div class="progress-fill blocked-fill" 
+               [style.width.%]="getBlockedPercentage()">
+          </div>
+        </div>
+        <span class="progress-text">{{ getBlockedPercentage().toFixed(1) }}%</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Tableau Material avec référence #tasksTable -->
+<mat-card class="tasks-table-card" #tasksTable>
+  <mat-card-header class="table-header">
+    <mat-card-title>
+      <mat-icon>list_alt</mat-icon>
+      Détail des tâches
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ dataSource.filteredData.length }} tâche(s) affichée(s) sur {{ tasks.length }} au total
+    </mat-card-subtitle>
+  </mat-card-header>
+
+    <mat-card-content class="p-0">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="tasks-table" matSort>
+
+          <!-- Colonne Projet -->
+          <ng-container matColumnDef="jobNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+              <div class="header-content">
+                <mat-icon>folder</mat-icon>
+                Projet
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <span class="project-badge" [matTooltip]="'Projet ' + task.jobNo">
+                {{ task.jobNo }}
+              </span>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Tâche -->
+          <ng-container matColumnDef="taskNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>task</mat-icon>
+                Tâche
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task"> 
+              <strong class="task-number">{{ task.taskNo }}</strong>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Description -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>description</mat-icon>
+                Description
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="description-cell" [matTooltip]="task.description">
+                <span class="description-text">{{ task.description }}</span>
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Début -->
+          <ng-container matColumnDef="dateDebut">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>play_circle</mat-icon>
+                Début
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="date-cell">
+                <mat-icon class="date-icon">event</mat-icon>
+                {{ task.dateDebut ? (task.dateDebut | date:'dd/MM/yyyy') : 'Non définie' }}
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Fin -->
+          <ng-container matColumnDef="dateFin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>event</mat-icon>
+                Fin
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="date-cell" [class.overdue]="isOverdue(task)" [matTooltip]="isOverdue(task) ? 'Tâche en retard' : ''">
+                <mat-icon class="date-icon">event</mat-icon>
+                {{ task.dateFin ? (task.dateFin | date:'dd/MM/yyyy') : 'Non définie' }}
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Quantité -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>inventory</mat-icon>
+                Quantité
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="quantity-wrapper">
+                <div class="quantity-initial" [matTooltip]="'Quantité initiale: ' + (task.initialQuantity | number) + ' ' + task.initialUoM">
+                  <span class="quantity-label">Init:</span>
+                  <span class="quantity-value">{{ task.initialQuantity | number }}</span>
+                  <span class="quantity-uom">{{ task.initialUoM }}</span>
+                </div>
+                
+                <div class="quantity-shipped" 
+                    [class.exceeded]="task.quantityShipped > task.initialQuantity"
+                    [matTooltip]="getQuantityShippedTooltip(task)">
+                  <span class="quantity-label">Liv:</span>
+                  <span class="quantity-value">{{ task.quantityShipped | number }}</span>
+                  <span class="quantity-uom">{{ task.initialUoM }}</span>
+                  
+                  <mat-icon *ngIf="task.quantityShipped > task.initialQuantity" 
+                            class="exceed-icon" 
+                            [matTooltip]="'Dépassement de ' + (task.quantityShipped - task.initialQuantity | number) + ' ' + task.initialUoM">
+                    warning
+                  </mat-icon>
+                </div>
+                
+                <div class="consumption-bar" *ngIf="task.initialQuantity > 0">
+                  <div class="consumption-fill" 
+                      [style.width.%]="getConsumptionPercentage(task)"
+                      [style.background]="getConsumptionBarColor(task)">
+                  </div>
+                  <span class="consumption-text">{{ getConsumptionPercentage(task).toFixed(1) }}%</span>
+                </div>
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Montant -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>payments</mat-icon>
+                Montant
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="amount-cell">
+                {{ task.initialAmount | number:'1.2-2' }} €
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Statut -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>circle</mat-icon>
+                Statut
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="status-wrapper">
+                <div class="status-badge" 
+                     [ngClass]="getStatusClass(task)"
+                     [matTooltip]="getDetailedStatusTooltip(task)">
+                  <div class="status-icon-container">
+                    <mat-icon class="status-icon" *ngIf="task.isBlocked" [inline]="true">block</mat-icon>
+                    <mat-icon class="status-icon" *ngIf="!task.isBlocked && task.progressPct === 100" [inline]="true">check_circle</mat-icon>
+                    <mat-icon class="status-icon rotating" *ngIf="!task.isBlocked && task.progressPct > 0 && task.progressPct < 100" [inline]="true">pending</mat-icon>
+                    <mat-icon class="status-icon" *ngIf="!task.isBlocked && task.progressPct === 0" [inline]="true">schedule</mat-icon>
+                  </div>
+                  <span class="status-text">{{ getStatusText(task) }}</span>
+                </div>
+
+                <div class="status-progress" *ngIf="!task.isBlocked && task.progressPct > 0 && task.progressPct < 100">
+                  <div class="status-progress-bar">
+                    <div class="status-progress-fill" [style.width.%]="task.progressPct"></div>
+                  </div>
+                  <span class="status-progress-text">{{ task.progressPct }}%</span>
+                </div>
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Avancement -->
+          <ng-container matColumnDef="progress">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              <div class="header-content">
+                <mat-icon>trending_up</mat-icon>
+                Avancement
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="progress-wrapper">
+                <div class="progress-item manual">
+                  <div class="progress-label-container">
+                    <span class="progress-type">Saisi:</span>
+                    <span class="progress-value">{{ task.progressPct }}%</span>
+                  </div>
+                  <div class="progress-bar-container small">
+                    <mat-progress-bar mode="determinate" [value]="task.progressPct" color="primary"></mat-progress-bar>
+                  </div>
+                </div>
+
+                <div class="progress-item theoretical">
+                  <div class="progress-label-container">
+                    <span class="progress-type">Théo:</span>
+                    <span class="progress-value">{{ task.taskProgressPct?.toFixed(1) || 0 }}%</span>
+                    
+                    <div class="comparison-badge" 
+                         *ngIf="task.progressPct !== task.taskProgressPct"
+                         [class.ahead]="task.progressPct > task.taskProgressPct"
+                         [class.behind]="task.progressPct < task.taskProgressPct"
+                         [matTooltip]="getComparisonTooltip(task)">
+                      <mat-icon *ngIf="task.progressPct > task.taskProgressPct">trending_up</mat-icon>
+                      <mat-icon *ngIf="task.progressPct < task.taskProgressPct">trending_down</mat-icon>
+                      <span>{{ getComparisonText(task) }}</span>
+                    </div>
+                  </div>
+                  <div class="progress-bar-container small">
+                    <mat-progress-bar mode="determinate" [value]="task.taskProgressPct || 0" color="accent"></mat-progress-bar>
+                  </div>
+                </div>
+              </div>
+             </td>
+          </ng-container>
+
+          <!-- Colonne Actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> 
+              <div class="header-content">
+                <mat-icon>settings</mat-icon>
+                Actions
+              </div>
+            </th>
+            <td mat-cell *matCellDef="let task">
+              <div class="actions-container">
+                <div class="current-progress-badge" (click)="$event.stopPropagation()">
+                  <mat-icon class="progress-icon">trending_up</mat-icon>
+                  <span>{{ task.progressPct }}%</span>
+                </div>
+                
+                <div *appOfflineHideActions>
+                  <button mat-icon-button 
+                          [matMenuTriggerFor]="progressMenu" 
+                          matTooltip="Mettre à jour l'avancement" 
+                          class="main-action-button" 
+                          (click)="$event.stopPropagation()">
+                    <mat-icon>speed</mat-icon>
+                  </button>
+                </div>
+                
+                <!-- Menu de mise à jour de l'avancement - Version Premium -->
+<mat-menu #progressMenu="matMenu" class="progress-menu-premium" [overlapTrigger]="false" xPosition="before">
+  <div class="progress-premium-container" (click)="$event.stopPropagation()">
+    
+    <!-- En-tête avec effet glassmorphisme -->
+    <div class="premium-header">
+      <div class="header-glow"></div>
+      <div class="header-content">
+        <div class="header-icon">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+        <div class="header-text">
+          <span class="header-title">Mettre à jour l'avancement</span>
+          <span class="header-subtitle">Ajustez le pourcentage de complétion</span>
+        </div>
+        <div class="current-progress-premium">
+          <span class="progress-value">{{ task.progressPct }}%</span>
+          <span class="progress-label">actuel</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Slider avec effet néon -->
+    <div class="premium-slider-section">
+      <div class="slider-labels">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="slider-wrapper">
+        <input type="range" 
+               min="0" 
+               max="100" 
+               step="5"
+               [value]="task.progressPct"
+               (input)="onSliderChange(task, $event)"  
+               (click)="$event.stopPropagation()"
+               class="premium-slider"
+               [style.background]="getSliderBackground(task)">
+        <div class="slider-tooltip" [style.left]="task.progressPct + '%'">
+          <span>{{ task.progressPct }}%</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Boutons rapides avec animation -->
+    <div class="premium-quick-buttons">
+      <button class="premium-quick-btn" 
+              [class.active]="task.progressPct === 25"
+              (click)="quickUpdateProgress(task, 25, $event)">
+        <span class="btn-value">25</span>
+        <span class="btn-unit">%</span>
+        <span class="btn-label">Début</span>
+      </button>
+      <button class="premium-quick-btn" 
+              [class.active]="task.progressPct === 50"
+              (click)="quickUpdateProgress(task, 50, $event)">
+        <span class="btn-value">50</span>
+        <span class="btn-unit">%</span>
+        <span class="btn-label">Mi-parcours</span>
+      </button>
+      <button class="premium-quick-btn" 
+              [class.active]="task.progressPct === 75"
+              (click)="quickUpdateProgress(task, 75, $event)">
+        <span class="btn-value">75</span>
+        <span class="btn-unit">%</span>
+        <span class="btn-label">Avancé</span>
+      </button>
+      <button class="premium-quick-btn complete" 
+              [class.active]="task.progressPct === 100"
+              (click)="quickUpdateProgress(task, 100, $event)">
+        <span class="btn-value">100</span>
+        <span class="btn-unit">%</span>
+        <span class="btn-label">Terminé</span>
+        <span class="btn-check" *ngIf="task.progressPct === 100">✓</span>
+      </button>
+    </div>
+    
+    <!-- Zone de saisie personnalisée -->
+    <div class="premium-custom-section" *ngIf="editingTaskId === task.id">
+      <div class="custom-input-wrapper">
+        <div class="custom-input-icon">
+          <mat-icon>edit_note</mat-icon>
+        </div>
+        <div class="custom-input-field">
+          <input #progressInput 
+                 type="number" 
+                 min="0" 
+                 max="100" 
+                 step="1"
+                 [(ngModel)]="tempProgressValue"  
+                 (keyup.enter)="saveProgressWithValue(task, tempProgressValue, $event)"
+                 (keyup.escape)="cancelProgressEdit($event)"
+                 (click)="$event.stopPropagation()"
+                 class="premium-number-input"
+                 placeholder="0">
+         
+        </div>
+        <div class="custom-input-actions">
+          <button class="premium-action-btn save" (click)="saveProgressWithValue(task, tempProgressValue, $event)">
+            <mat-icon>check</mat-icon>
+            <span>Valider</span>
+          </button>
+          <button class="premium-action-btn cancel" (click)="cancelProgressEdit($event)">
+            <mat-icon>close</mat-icon>
+            <span>Annuler</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lien pour ouvrir la saisie personnalisée -->
+    <div class="premium-custom-link" *ngIf="editingTaskId !== task.id" (click)="startProgressEdit(task, $event)">
+      <div class="link-icon">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </div>
+      <div class="link-text">
+        <span class="link-title">Saisir un pourcentage personnalisé</span>
+        <span class="link-hint">Entrez une valeur entre 0 et 100</span>
+      </div>
+      <div class="link-arrow">
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+</mat-menu>
+              </div>
+             </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewTask(row)"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell no-data" [attr.colspan]="displayedColumns.length">
+              <div class="no-data-content">
+                <mat-icon>search_off</mat-icon>
+                <h3>Aucune tâche trouvée</h3>
+               
+              </div>
+             </td>
+           </tr>
+         </table>
+      </div>
+
+      <mat-paginator 
+        [pageSizeOptions]="[5, 10, 25, 50, 100]" 
+        [pageSize]="10"
+        showFirstLastButtons
+        aria-label="Choisir la page">
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && tasks.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span>Données en cache (mode hors ligne)</span>
+  </div>
+</div>

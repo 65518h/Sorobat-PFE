@@ -1,0 +1,393 @@
+<!-- src/app/modules/attendance/pages/attendance-form/attendance-form.html -->
+
+<div class="form-container">
+  
+  <!-- Hero Section Gradient Moderne -->
+  <div class="hero-section-gradient">
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="hero-content-gradient">
+      <div class="hero-left-gradient">
+        <button class="back-btn-gradient" (click)="goBack()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="hero-text-gradient">
+          <h1>{{ isEditMode ? 'Modifier le pointage' : 'Nouveau pointage' }}</h1>
+          <p>{{ isEditMode ? 'Modifiez les présences des employés' : 'Créez un nouveau pointage mensuel' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire Header -->
+  <div class="form-card">
+    <form [formGroup]="attendanceForm">
+      
+      <div class="form-grid">
+        
+        <!-- Mois -->
+        <div class="form-field">
+          <label>
+            <mat-icon>calendar_month</mat-icon>
+            Mois
+            <span class="required">*</span>
+          </label>
+          <div class="custom-select">
+            <select formControlName="month" class="custom-select-input">
+              <option value="" disabled>Sélectionnez un mois</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.label }}
+              </option>
+            </select>
+            <mat-icon class="select-icon">expand_more</mat-icon>
+          </div>
+        </div>
+
+        <!-- Année -->
+        <div class="form-field">
+          <label>
+            <mat-icon>calendar_today</mat-icon>
+            Année
+            <span class="required">*</span>
+          </label>
+          <div class="input-wrapper">
+            <input type="number" 
+                   formControlName="year" 
+                   class="custom-input"
+                   placeholder="2025"
+                   min="2020"
+                   max="2030"
+                   step="1">
+            <mat-icon class="input-icon">edit_calendar</mat-icon>
+          </div>
+        </div>
+
+        <!-- Chantier -->
+        <div class="form-field">
+          <label>
+            <mat-icon>business_center</mat-icon>
+            Chantier / Projet
+            <span class="required">*</span>
+          </label>
+          <div class="readonly-field">
+            <input type="text" 
+                   [value]="currentJobNo" 
+                   class="readonly-input"
+                   readonly
+                   disabled>
+            <mat-icon class="field-icon">lock</mat-icon>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- Section des employés (seulement en mode édition) -->
+  <div class="employees-section" *ngIf="isEditMode && !loading">
+    <div class="section-header">
+      <h3>
+        <mat-icon>groups</mat-icon>
+        Présences des employés
+      </h3>
+      <div class="legend-container">
+      <div class="legend-title">Légende :</div>
+      <div class="legend-item present"><span class="legend-dot"></span>Présent (P, AU, P-R)</div>
+      <div class="legend-item leave"><span class="legend-dot"></span>Congé (C, C1/2, CEXP)</div>
+      <div class="legend-item holiday"><span class="legend-dot"></span>Férié (F)</div>
+      <div class="legend-item absent"><span class="legend-dot"></span>Absent (A)</div>
+     
+      <div class="legend-item empty"><span class="legend-dot"></span>Non renseigné</div>
+    </div>
+    </div>
+
+    <!-- Boutons d'action groupés -->
+    <div class="action-buttons-group">
+      <button type="button" class="btn-add-employee" (click)="addNewEmptyLine()">
+        <mat-icon>add</mat-icon>
+        Ajouter un employé
+      </button>
+      
+      <!-- ✅ NOUVEAU BOUTON SCAN FACIAL GLOBAL -->
+      <button type="button" class="btn-scan-global" (click)="openGlobalFaceScan()" [disabled]="attendanceLines.length === 0">
+        <mat-icon>face</mat-icon>
+        Scanner un visage
+        
+      </button>
+    </div>
+
+    <!-- Tableau des présences modifiable -->
+    <div class="table-container">
+      <div class="table-wrapper">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th class="col-employee">Employé</th>
+              <th class="col-total">Prés.</th>
+              <th *ngFor="let day of daysInMonth" class="col-day" [class.weekend]="isWeekend(day)">
+                {{ day }}
+              </th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let line of attendanceLines; let idx = index">
+              <td class="col-employee">
+                <div class="employee-info">
+                  <div class="employee-avatar">
+                    <span>{{ (line.employeeName | slice:0:2).toUpperCase() }}</span>
+                  </div>
+                  <div class="employee-details">
+                    <div class="employee-select-field" (click)="openEmployeeSearch(line, idx)">
+                      <span *ngIf="line.employeeName" class="employee-name">{{ line.employeeName }}</span>
+                      <span *ngIf="!line.employeeName" class="employee-placeholder">Cliquer pour sélectionner</span>
+                      <span *ngIf="line.employeeNo" class="employee-no">Mat. {{ line.employeeNo }}</span>
+                      <mat-icon class="select-icon">search</mat-icon>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-total">
+                <div class="total-badge" [class]="getTotalPresentClass(calculateLineTotalPresent(line))">
+                  {{ calculateLineTotalPresent(line) }}
+                </div>
+              </td>
+              <td *ngFor="let day of daysInMonth" class="col-day" [class.weekend]="isWeekend(day)">
+                <select class="status-select" 
+                        [value]="getDayValue(line, day)"
+                        (change)="updateDayValue(line, day, $event)"
+                        [class]="getStatusClass(getDayValue(line, day))">
+                  <option value="">—</option>
+                  <option value="P">P (Présent)</option>
+                  <option value="C">C (Congé)</option>
+                  <option value="CEXP">CEXP (Congé exceptionnel)</option>
+                  <option value="C1/2">C1/2 (Demi-journée)</option>
+                  <option value="F">F (Férié)</option>
+                  <option value="A">A (Absent)</option>
+                </select>
+              </td>
+              <td class="col-actions">
+                <button type="button" class="btn-icon-delete" (click)="deleteLine(line)" matTooltip="Supprimer l'employé">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="section-actions">
+      <button type="button" class="btn-save-all" (click)="saveAllChanges()" [disabled]="saving">
+        <mat-icon>save</mat-icon>
+        {{ saving ? 'Enregistrement...' : 'Enregistrer toutes les modifications' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Boutons footer -->
+  <div class="form-actions" *ngIf="!isEditMode">
+    <button type="button" class="btn-cancel" (click)="goBack()">
+      <mat-icon>close</mat-icon> Annuler
+    </button>
+    <button type="button" class="btn-submit" (click)="onSubmit()" [disabled]="loading || attendanceForm.invalid">
+      <mat-icon>add</mat-icon>
+      <span>{{ loading ? 'Chargement...' : 'Créer le pointage' }}</span>
+    </button>
+  </div>
+
+  <div class="form-actions footer-actions" *ngIf="isEditMode && !loading">
+    <button type="button" class="btn-cancel" (click)="goBack()">
+      <mat-icon>close</mat-icon> Retour
+    </button>
+    <button type="button" class="btn-delete" (click)="deleteAttendance()">
+      <mat-icon>delete</mat-icon> Supprimer
+    </button>
+  </div>
+</div>
+
+<!-- Dialogue pour rechercher un employé avec pagination -->
+<ng-template #employeeSearchDialog>
+  <div class="dialog-container">
+    <div class="dialog-header">
+      <h2>Rechercher un employé</h2>
+      <button class="dialog-close" (click)="closeEmployeeDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="dialog-content">
+      
+      <div class="search-field">
+        <div class="search-input-wrapper">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input type="text" 
+                 [(ngModel)]="searchTerm" 
+                 (ngModelChange)="onSearchInput($event)"
+                 placeholder="Nom, prénom ou matricule..."
+                 class="search-input"
+                 autocomplete="off"
+                 autofocus>
+          <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()" type="button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-info" *ngIf="filteredEmployees.length > 0">
+        📋 {{ filteredEmployees.length }} employé(s) trouvé(s) - Page {{ currentPage }} / {{ totalPages }}
+      </div>
+
+      <div class="search-results" *ngIf="getPaginatedEmployees().length > 0">
+        <div class="results-header">
+          <span>Matricule</span>
+          <span>Nom et prénom</span>
+          <span>Fonction</span>
+        </div>
+        <div class="results-list">
+          <div *ngFor="let emp of getPaginatedEmployees()" 
+               class="result-item" 
+               (click)="selectEmployeeForCurrentLine(emp)">
+            <div class="result-matricule">{{ emp.matricule }}</div>
+            <div class="result-name">{{ emp.lastName }} {{ emp.firstName }}</div>
+            <div class="result-fonction">{{ emp.fonction || '-' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-container" *ngIf="totalPages > 1">
+        <div class="pagination-controls">
+          <button class="pagination-btn" (click)="goToPage(1)" [disabled]="currentPage === 1" matTooltip="Première page">
+            <mat-icon>first_page</mat-icon>
+          </button>
+          <button class="pagination-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" matTooltip="Page précédente">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <span class="pagination-current">{{ currentPage }}</span>
+          <button class="pagination-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" matTooltip="Page suivante">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+          <button class="pagination-btn" (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages" matTooltip="Dernière page">
+            <mat-icon>last_page</mat-icon>
+          </button>
+        </div>
+        <div class="pagination-info">
+          Page {{ currentPage }} / {{ totalPages }}
+        </div>
+      </div>
+
+      <div class="loading-results" *ngIf="loadingEmployees">
+        <mat-icon class="spinner">refresh</mat-icon>
+        <span>Chargement des employés...</span>
+      </div>
+
+      <div class="no-results" *ngIf="!loadingEmployees && filteredEmployees.length === 0 && searchTerm">
+        <mat-icon>person_off</mat-icon>
+        <span>Aucun employé trouvé pour "{{ searchTerm }}"</span>
+      </div>
+
+      <div class="initial-message" *ngIf="!loadingEmployees && filteredEmployees.length === 0 && !searchTerm">
+        <mat-icon>search</mat-icon>
+        <span>Saisissez un nom ou matricule pour rechercher un employé</span>
+      </div>
+      
+    </div>
+    <div class="dialog-footer">
+      <button class="btn-dialog-cancel" (click)="closeEmployeeDialog()">Fermer</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Dans attendance-form.html, modifiez le dialogue globalFaceScanDialog -->
+<ng-template #globalFaceScanDialog>
+  <div class="dialog-container" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>Scanner un visage</h2>
+      <button class="dialog-close" (click)="closeGlobalScanDialog()" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="dialog-content">
+      
+      <div class="scan-icon-large">
+        <mat-icon>face</mat-icon>
+      </div>
+      
+      <div class="scan-description">
+        <p>Scannez le visage de l'employé pour marquer sa présence automatiquement.</p>
+      </div>
+      
+      <!-- Champ Matricule -->
+      <div class="form-field-dialog">
+        <label>Matricule employé</label>
+        <div class="input-wrapper-dialog">
+          <mat-icon class="field-icon-left">badge</mat-icon>
+          <input type="text" 
+                 [(ngModel)]="scanMatricule"
+                 (ngModelChange)="onMatriculeChange()"
+                 placeholder="Ex: 1000, 0511..."
+                 class="dialog-input"
+                 autocomplete="off"
+                 (keyup.enter)="startGlobalFaceScan()"
+                 #matriculeInput>
+          <mat-icon class="field-icon-right" *ngIf="scanMatricule && foundEmployee">verified</mat-icon>
+          <mat-icon class="field-icon-right error" *ngIf="scanMatricule && !foundEmployee">error</mat-icon>
+        </div>
+        <div class="field-hint success" *ngIf="foundEmployee">
+          ✅ Employé trouvé : {{ foundEmployee.lastName }} {{ foundEmployee.firstName }}
+        </div>
+        <div class="field-hint error" *ngIf="scanMatricule && !foundEmployee">
+          ❌ Aucun employé trouvé avec ce matricule
+        </div>
+      </div>
+      
+      <!-- Sélection du Jour -->
+      <div class="form-field-dialog">
+        <label>Jour du mois</label>
+        <div class="day-selector">
+          <button class="day-nav-btn" (click)="decrementDay()" type="button" [disabled]="selectedDay <= 1">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <div class="day-display">
+            <span class="day-number">{{ selectedDay }}</span>
+            <span class="day-month">{{ attendanceForm.get('month')?.value }} {{ attendanceForm.get('year')?.value }}</span>
+          </div>
+          <button class="day-nav-btn" (click)="incrementDay()" type="button" [disabled]="selectedDay >= daysInMonth.length">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Informations employé trouvé -->
+      <div class="employee-found-info" *ngIf="foundEmployee">
+        <div class="found-avatar">
+          <span>{{ (foundEmployee.lastName | slice:0:2).toUpperCase() }}</span>
+        </div>
+        <div class="found-details">
+          <strong>{{ foundEmployee.lastName }} {{ foundEmployee.firstName }}</strong>
+          <span>Matricule: {{ foundEmployee.matricule }}</span>
+          <span>{{ foundEmployee.fonction || 'Employé' }}</span>
+        </div>
+        <mat-icon class="check-icon">check_circle</mat-icon>
+      </div>
+      
+    </div>
+    <div class="dialog-footer">
+      <button class="btn-dialog-cancel" (click)="closeGlobalScanDialog()">Annuler</button>
+      <button class="btn-dialog-submit" 
+              (click)="startGlobalFaceScan()" 
+              [disabled]="!foundEmployee || !selectedDay || selectedDay < 1 || selectedDay > daysInMonth.length">
+        <mat-icon>face</mat-icon>
+        Scanner le visage
+      </button>
+    </div>
+  </div>
+</ng-template>

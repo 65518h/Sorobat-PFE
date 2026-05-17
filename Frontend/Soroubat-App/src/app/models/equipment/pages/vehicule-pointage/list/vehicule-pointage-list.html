@@ -1,0 +1,432 @@
+<!-- src/app/modules/equipment/pages/vehicule-pointage/list/vehicule-pointage-list.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="vehicule-pointage-container">
+  
+  <!-- Hero Section avec effet glassmorphism -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <div class="icon-pulse"></div>
+          <mat-icon>construction</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Pointage des véhicules</h1>
+          <p>Suivez et gérez l'utilisation de votre parc engins</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <!-- BOUTON ALERTES AVEC BADGE - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="alerts-btn" [class.has-alerts]="alertCount > 0" (click)="navigateToAlerts()" matTooltip="Voir les alertes engins">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Alertes</span>
+          </button>
+        </div>
+        
+        <!-- BOUTON NOUVEAU POINTAGE - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-primary-glass" (click)="createNewPointage()">
+            <mat-icon>add</mat-icon>
+            <span>Nouveau pointage</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cartes de statistiques premium -->
+  <div class="stats-grid" *ngIf="!loading">
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper total">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalPointages }}</span>
+          <span class="stat-title">Pointages</span>
+        </div>
+        <div class="stat-trend positive">
+          <mat-icon>trending_up</mat-icon>
+          <span>+23%</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper vehicules">
+          <mat-icon>directions_car</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalVehicules }}</span>
+          <span class="stat-title">Véhicules pointés</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper hours">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalHours }}</span>
+          <span class="stat-title">Heures totales</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper distance">
+          <mat-icon>straighten</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ stats.totalDistance | number }}</span>
+          <span class="stat-title">Kilomètres</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+  </div>
+
+  <!-- Loading state amélioré -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement des pointages...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Oups ! Une erreur s'est produite</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="loadPointages()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Onglets premium -->
+  <div class="tabs-container" *ngIf="!loading && !errorMessage">
+    <div class="tabs-wrapper">
+      <button class="tab-btn" [class.active]="selectedTab === 0" (click)="onTabChange(0)">
+        <mat-icon>list_alt</mat-icon>
+        <span>Tous</span>
+        <span class="tab-badge">{{ stats.totalPointages }}</span>
+      </button>
+      <button class="tab-btn draft" [class.active]="selectedTab === 1" (click)="onTabChange(1)">
+        <mat-icon>edit_note</mat-icon>
+        <span>Actifs</span>
+        <span class="tab-badge">{{ stats.draftCount + stats.openCount }}</span>
+      </button>
+      <button class="tab-btn validated" [class.active]="selectedTab === 2" (click)="onTabChange(2)">
+        <mat-icon>check_circle</mat-icon>
+        <span>Validés</span>
+        <span class="tab-badge">{{ stats.validatedCount }}</span>
+      </button>
+      <button class="tab-btn closed" [class.active]="selectedTab === 3" (click)="onTabChange(3)">
+        <mat-icon>lock</mat-icon>
+        <span>Clôturés</span>
+        <span class="tab-badge">{{ stats.closedCount }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Barre de recherche et filtres -->
+  <div class="search-section" *ngIf="!loading && !errorMessage">
+    <div class="search-container">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="applyFilters()"
+        placeholder="Rechercher par numéro de document ou projet..."
+        class="search-input-premium"
+        autocomplete="off"
+      >
+      <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="filter-actions">
+      <button class="btn-filter" (click)="toggleFilters()">
+        <mat-icon>filter_alt</mat-icon>
+        <span>Filtres</span>
+        <mat-icon class="chevron">{{ filtersExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </button>
+      <!-- BOUTON ACTUALISER - CACHÉ OFFLINE -->
+      <div *appOfflineHideActions>
+        <button class="btn-refresh" (click)="refresh()" matTooltip="Actualiser">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panneau de filtres -->
+  <div class="filters-panel" [class.expanded]="filtersExpanded" *ngIf="!loading && !errorMessage">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label>Statut</label>
+        <div class="filter-select">
+          <mat-icon>label</mat-icon>
+          <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+            <option value="all">Tous les statuts</option>
+            <option value="Brouillon">Brouillon</option>
+            <option value="Ouvert">Ouvert</option>
+            <option value="Validé">Validé</option>
+            <option value="Clôturé">Clôturé</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Date début</label>
+        <div class="filter-date">
+          <mat-icon>calendar_today</mat-icon>
+          <input type="date" [(ngModel)]="dateFrom" (change)="applyFilters()">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Date fin</label>
+        <div class="filter-date">
+          <mat-icon>calendar_today</mat-icon>
+          <input type="date" [(ngModel)]="dateTo" (change)="applyFilters()">
+        </div>
+      </div>
+      <div class="filter-actions-footer">
+        <button class="btn-reset-premium" (click)="resetFilters()">
+          <mat-icon>clear_all</mat-icon>
+          Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau Premium Moderne -->
+  <div class="table-premium" *ngIf="!loading && !errorMessage && filteredPointages.length > 0">
+    <div class="table-header">
+      <div class="table-row header">
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>receipt</mat-icon>
+            <span>N° document</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>event</mat-icon>
+            <span>Date</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>flag</mat-icon>
+            <span>Statut</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>directions_car</mat-icon>
+            <span>Véhicules</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>schedule</mat-icon>
+            <span>Heures</span>
+          </div>
+        </div>
+        <div class="th">
+          <div class="header-content">
+            <mat-icon>more_horiz</mat-icon>
+            <span>Actions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-body">
+      <div class="table-row" 
+           *ngFor="let pointage of filteredPointages | slice: (pageIndex * pageSize):((pageIndex + 1) * pageSize); let i = index" 
+           [style.animation-delay]="i * 0.05 + 's'">
+        
+        <!-- N° document -->
+        <div class="td document-cell" data-label="N° document">
+          <div class="document-badge">
+            <mat-icon>receipt_long</mat-icon>
+            <span>{{ pointage.documentNo || '—' }}</span>
+          </div>
+        </div>
+        
+        <!-- Date -->
+        <div class="td date-cell" data-label="Date">
+          <div class="date-chip">
+            <mat-icon>calendar_today</mat-icon>
+            <div class="date-info">
+              <ng-container *ngIf="getFormattedDate(pointage.date) as dateObj">
+                <span class="date-day">{{ dateObj | date:'dd' }}</span>
+                <span class="date-month">{{ dateObj | date:'MMM' }}</span>
+              </ng-container>
+              <span *ngIf="!getFormattedDate(pointage.date)" class="date-placeholder">—</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Statut -->
+        <div class="td status-cell" data-label="Statut">
+          <div class="status-chip" [ngClass]="getStatusClass(pointage.status)">
+            <mat-icon>{{ getStatusIcon(pointage.status) }}</mat-icon>
+            <span>{{ pointage.status || '—' }}</span>
+          </div>
+        </div>
+        
+        <!-- Véhicules -->
+        <div class="td vehicules-cell" data-label="Véhicules">
+          <div class="vehicule-chip">
+            <div class="vehicule-avatars">
+              <div class="avatar-stack">
+                <span class="avatar">{{ getVehiculesCount(pointage) }}</span>
+              </div>
+            </div>
+            <span>{{ getVehiculesCount(pointage) }} véhicule(s)</span>
+          </div>
+        </div>
+        
+        <!-- Heures -->
+        <div class="td hours-cell" data-label="Heures">
+          <div class="hours-chip">
+            <mat-icon>timer</mat-icon>
+            <span class="hours-value">{{ getTotalHours(pointage) }}</span>
+            <span class="hours-unit">h</span>
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="td actions-cell" data-label="Actions">
+          <div class="action-group">
+            <!-- Bouton Voir - toujours visible -->
+            <button class="action-icon view" (click)="viewPointage(pointage)" matTooltip="Voir détails">
+              <mat-icon>visibility</mat-icon>
+              <span class="action-tooltip">Détails</span>
+            </button>
+            
+        
+            
+            <!-- BOUTON VALIDER - CACHÉ OFFLINE -->
+            <div *appOfflineHideActions>
+              <button class="action-icon validate" *ngIf="canValidate(pointage)" (click)="validatePointage(pointage)" matTooltip="Valider">
+                <mat-icon>check_circle</mat-icon>
+                <span class="action-tooltip">Valider</span>
+              </button>
+            </div>
+            
+            <!-- BOUTON SUPPRIMER - CACHÉ OFFLINE -->
+            <div *appOfflineHideActions>
+              <button class="action-icon delete" *ngIf="canDelete(pointage)" (click)="deletePointage(pointage)" matTooltip="Supprimer">
+                <mat-icon>delete_outline</mat-icon>
+                <span class="action-tooltip">Supprimer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state amélioré -->
+  <div class="empty-state-premium" *ngIf="!loading && !errorMessage && filteredPointages.length === 0">
+    <div class="empty-card">
+      <div class="empty-illustration">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+      <h3>Aucun pointage trouvé</h3>
+      <p *ngIf="hasActiveFilters()">Aucun pointage ne correspond à vos critères de recherche.</p>
+      <p *ngIf="!hasActiveFilters()">Commencez par créer votre premier pointage de véhicule.</p>
+      <div class="empty-actions">
+        <div *appOfflineHideActions>
+          <button class="btn-primary-premium" (click)="createNewPointage()" *ngIf="!hasActiveFilters()">
+            <mat-icon>add</mat-icon>
+            Nouveau pointage
+          </button>
+        </div>
+        <button class="btn-outline-premium" (click)="resetFilters()" *ngIf="hasActiveFilters()">
+          <mat-icon>clear_all</mat-icon>
+          Réinitialiser les filtres
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-premium" *ngIf="!loading && !errorMessage && filteredPointages.length > 0">
+    <div class="pagination-info">
+      <span>{{ (pageIndex * pageSize) + 1 }} - {{ Math.min((pageIndex + 1) * pageSize, filteredPointages.length) }} sur {{ filteredPointages.length }} pointages</span>
+    </div>
+    <div class="pagination-controls">
+      <button class="page-btn" [disabled]="pageIndex === 0" (click)="previousPage()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="page-numbers">
+        <button *ngFor="let page of getPageNumbers()" class="page-num" [class.active]="page === pageIndex + 1" (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </div>
+      <button class="page-btn" [disabled]="(pageIndex + 1) * pageSize >= filteredPointages.length" (click)="nextPage()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+    <div class="page-size-selector">
+      <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+      </select>
+      <span>par page</span>
+    </div>
+  </div>
+  
+  <!-- ✅ INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredPointages.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+  </div>
+  
+</div>

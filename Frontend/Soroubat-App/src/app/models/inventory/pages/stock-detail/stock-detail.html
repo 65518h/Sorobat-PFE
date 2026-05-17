@@ -1,0 +1,170 @@
+<!-- src/app/models/inventory/components/stock-detail/stock-detail.component.html -->
+
+<div class="stock-detail-container">
+  
+  <!-- ==================== EN-TÊTE ==================== -->
+  <div class="detail-header">
+    <div class="header-left">
+      <div class="item-icon" [ngClass]="getQuantityClass(data.quantity)">
+        <mat-icon>inventory_2</mat-icon>
+        <div class="icon-glow"></div>
+      </div>
+      <div class="item-info">
+        <h2>{{ data.itemNo }}</h2>
+        <p>{{ data.itemDescription }}</p>
+        <div class="item-badges">
+          <span class="badge location">
+            <mat-icon>store</mat-icon>
+            {{ data.locationCode }}
+          </span>
+          <span class="badge job" *ngIf="data.jobNo">
+            <mat-icon>business</mat-icon>
+            {{ data.jobNo }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button class="close-btn" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- ==================== STATUT CARD ==================== -->
+  <div class="status-card" [ngClass]="getStatusClass()">
+    <div class="status-icon">
+      <mat-icon>{{ getStatusIcon() }}</mat-icon>
+    </div>
+    <div class="status-info">
+      <span class="status-label">Statut actuel</span>
+      <span class="status-value">{{ getStatusText() }}</span>
+    </div>
+    <div class="status-quantity">
+      <span class="quantity-number">{{ formatQuantity(data.quantity) }}</span>
+      <span class="quantity-unit">unités</span>
+    </div>
+  </div>
+
+  <!-- ==================== ONGLETS ==================== -->
+  <mat-tab-group class="detail-tabs" animationDuration="300ms">
+    
+    <!-- Onglet Informations -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>info</mat-icon>
+        <span>Informations</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>qr_code</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Code article</span>
+              <span class="info-value">{{ data.itemNo }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>description</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Description</span>
+              <span class="info-value">{{ data.itemDescription }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>store</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Magasin</span>
+              <span class="info-value">{{ data.locationCode }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>business</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Chantier</span>
+              <span class="info-value">{{ data.jobNo || 'Non assigné' }}</span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>inventory</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Quantité</span>
+              <span class="info-value" [ngClass]="getQuantityClass(data.quantity)">
+                {{ formatQuantity(data.quantity) }} unités
+                <mat-icon *ngIf="data.quantity <= 10 && data.quantity > 0" class="warning-icon">warning</mat-icon>
+                <mat-icon *ngIf="data.quantity <= 0" class="danger-icon">error</mat-icon>
+              </span>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon>update</mat-icon>
+            <div class="info-details">
+              <span class="info-label">Dernière mise à jour</span>
+              <span class="info-value">{{ lastUpdate | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+   
+
+    <!-- Onglet Alertes -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>notifications</mat-icon>
+        <span>Alertes</span>
+        <span class="tab-badge" *ngIf="hasAlert">!</span>
+      </ng-template>
+      
+      <div class="tab-content">
+        <div class="alerts-list">
+          <div class="alert-item warning" *ngIf="data.quantity <= 10 && data.quantity > 0">
+            <div class="alert-icon">
+              <mat-icon>warning</mat-icon>
+              <div class="alert-pulse"></div>
+            </div>
+            <div class="alert-details">
+              <span class="alert-title">Stock faible</span>
+              <span class="alert-description">Il ne reste que {{ data.quantity }} unités. Pensez à réapprovisionner.</span>
+              
+            </div>
+          </div>
+          
+          <div class="alert-item danger" *ngIf="data.quantity <= 0">
+            <div class="alert-icon">
+              <mat-icon>error</mat-icon>
+              <div class="alert-pulse"></div>
+            </div>
+            <div class="alert-details">
+              <span class="alert-title">Rupture de stock</span>
+              <span class="alert-description">Article épuisé. Réapprovisionnement urgent nécessaire.</span>
+              <button class="alert-action urgent" (click)="urgentRequest()">
+                <mat-icon>priority_high</mat-icon>
+                Réapprovisionnement urgent
+              </button>
+            </div>
+          </div>
+          
+          <div class="alert-item success" *ngIf="data.quantity > 10">
+            <div class="alert-icon">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+            <div class="alert-details">
+              <span class="alert-title">Stock normal</span>
+              <span class="alert-description">Le niveau de stock est satisfaisant.</span>
+              <span class="alert-info">Seuil d'alerte : 10 unités</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+   
+  </mat-tab-group>
+
+</div>

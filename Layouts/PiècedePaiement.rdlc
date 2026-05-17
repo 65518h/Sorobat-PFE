@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Header_No_">
+          <DataField>Payment_Header_No_</DataField>
+        </Field>
+        <Field Name="Payment_Posting_Date">
+          <DataField>Payment_Posting_Date</DataField>
+        </Field>
+        <Field Name="Payment_Amount">
+          <DataField>Payment_Amount</DataField>
+        </Field>
+        <Field Name="Payment_AmountFormat">
+          <DataField>Payment_AmountFormat</DataField>
+        </Field>
+        <Field Name="picture">
+          <DataField>picture</DataField>
+        </Field>
+        <Field Name="PaymentH_No_">
+          <DataField>PaymentH_No_</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO___1_Le___2__InfoSoc_City_WORKDATE_">
+          <DataField>STRSUBSTNO___1_Le___2__InfoSoc_City_WORKDATE_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="Payment_Class">
+          <DataField>Payment_Class</DataField>
+        </Field>
+        <Field Name="Payment_Currency">
+          <DataField>Payment_Currency</DataField>
+        </Field>
+        <Field Name="Payment_AmountLCY">
+          <DataField>Payment_AmountLCY</DataField>
+        </Field>
+        <Field Name="Payment_AmountLCYFormat">
+          <DataField>Payment_AmountLCYFormat</DataField>
+        </Field>
+        <Field Name="Payment_ExternalDocument">
+          <DataField>Payment_ExternalDocument</DataField>
+        </Field>
+        <Field Name="InfoSocEntetedepage">
+          <DataField>InfoSocEntetedepage</DataField>
+        </Field>
+        <Field Name="Commentaires">
+          <DataField>Commentaires</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line__Amount">
+          <DataField>Payment_Line__Payment_Line__Amount</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line__AmountFormat">
+          <DataField>Payment_Line__Payment_Line__AmountFormat</DataField>
+        </Field>
+        <Field Name="BankAccountRIB">
+          <DataField>BankAccountRIB</DataField>
+        </Field>
+        <Field Name="BankAccountNomBanqueEtat">
+          <DataField>BankAccountNomBanqueEtat</DataField>
+        </Field>
+        <Field Name="MatriculeFiscal">
+          <DataField>MatriculeFiscal</DataField>
+        </Field>
+        <Field Name="NomVend">
+          <DataField>NomVend</DataField>
+        </Field>
+        <Field Name="Payment_Line_Libellé">
+          <DataField>Payment_Line_Libellé</DataField>
+        </Field>
+        <Field Name="EmptyString">
+          <DataField>EmptyString</DataField>
+        </Field>
+        <Field Name="DocLettrage">
+          <DataField>DocLettrage</DataField>
+        </Field>
+        <Field Name="TextGMnt">
+          <DataField>TextGMnt</DataField>
+        </Field>
+        <Field Name="N________No__">
+          <DataField>N________No__</DataField>
+        </Field>
+        <Field Name="NumDoc">
+          <DataField>NumDoc</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO___1___Due_Date__">
+          <DataField>STRSUBSTNO___1___Due_Date__</DataField>
+        </Field>
+        <Field Name="Payment_Line_Banque">
+          <DataField>Payment_Line_Banque</DataField>
+        </Field>
+        <Field Name="ModePaiement___N____">
+          <DataField>ModePaiement___N____</DataField>
+        </Field>
+        <Field Name="InfoSoc_Address">
+          <DataField>InfoSoc_Address</DataField>
+        </Field>
+        <Field Name="TextDocument">
+          <DataField>TextDocument</DataField>
+        </Field>
+        <Field Name="Payment_Line_Commentaires">
+          <DataField>Payment_Line_Commentaires</DataField>
+        </Field>
+        <Field Name="NomBanque2">
+          <DataField>NomBanque2</DataField>
+        </Field>
+        <Field Name="TextGMnt_Control1000000062">
+          <DataField>TextGMnt_Control1000000062</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO___1_Le___2__InfoSoc_City_WORKDATE__Control1000000091">
+          <DataField>STRSUBSTNO___1_Le___2__InfoSoc_City_WORKDATE__Control1000000091</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line__Amount_Control1000000095">
+          <DataField>Payment_Line__Payment_Line__Amount_Control1000000095</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line__Amount_Control1000000095Format">
+          <DataField>Payment_Line__Payment_Line__Amount_Control1000000095Format</DataField>
+        </Field>
+        <Field Name="Payment_Line_Libellé_Control1000000098">
+          <DataField>Payment_Line_Libellé_Control1000000098</DataField>
+        </Field>
+        <Field Name="DocLettrage_Control1000000013">
+          <DataField>DocLettrage_Control1000000013</DataField>
+        </Field>
+        <Field Name="N________No___Control1102752004">
+          <DataField>N________No___Control1102752004</DataField>
+        </Field>
+        <Field Name="NumDoc_Control1102752007">
+          <DataField>NumDoc_Control1102752007</DataField>
+        </Field>
+        <Field Name="STRSUBSTNO___1___Due_Date___Control1102752011">
+          <DataField>STRSUBSTNO___1___Due_Date___Control1102752011</DataField>
+        </Field>
+        <Field Name="Payment_Line_Banque_Control1000000069">
+          <DataField>Payment_Line_Banque_Control1000000069</DataField>
+        </Field>
+        <Field Name="ModePaiement___N_____Control1000000025">
+          <DataField>ModePaiement___N_____Control1000000025</DataField>
+        </Field>
+        <Field Name="NomBanque2_Control1000000018">
+          <DataField>NomBanque2_Control1000000018</DataField>
+        </Field>
+        <Field Name="ORDRE_DE_PAIEMENTCaption">
+          <DataField>ORDRE_DE_PAIEMENTCaption</DataField>
+        </Field>
+        <Field Name="La_Direction_Générale_autorise_le_paiement_designé_ci_après__Caption">
+          <DataField>La_Direction_Générale_autorise_le_paiement_designé_ci_après__Caption</DataField>
+        </Field>
+        <Field Name="TotalCaption">
+          <DataField>TotalCaption</DataField>
+        </Field>
+        <Field Name="BENEFICIAIRECaption">
+          <DataField>BENEFICIAIRECaption</DataField>
+        </Field>
+        <Field Name="PAIEMENT_EFFECTUE_PAR__Caption">
+          <DataField>PAIEMENT_EFFECTUE_PAR__Caption</DataField>
+        </Field>
+        <Field Name="DIRECTEUR_FINANCIERCaption">
+          <DataField>DIRECTEUR_FINANCIERCaption</DataField>
+        </Field>
+        <Field Name="SERVICE_FINANCIERCaption">
+          <DataField>SERVICE_FINANCIERCaption</DataField>
+        </Field>
+        <Field Name="BENEFICIAIRECaption_Control1000000052">
+          <DataField>BENEFICIAIRECaption_Control1000000052</DataField>
+        </Field>
+        <Field Name="LA_SOMME_DE_Caption">
+          <DataField>LA_SOMME_DE_Caption</DataField>
+        </Field>
+        <Field Name="BANQUE__Caption">
+          <DataField>BANQUE__Caption</DataField>
+        </Field>
+        <Field Name="Echéance__Caption">
+          <DataField>Echéance__Caption</DataField>
+        </Field>
+        <Field Name="Observations_Caption">
+          <DataField>Observations_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="CONTROLEUR_FINANCIERCaption">
+          <DataField>CONTROLEUR_FINANCIERCaption</DataField>
+        </Field>
+        <Field Name="ORDRE_DE_PAIEMENTCaption_Control1000000093">
+          <DataField>ORDRE_DE_PAIEMENTCaption_Control1000000093</DataField>
+        </Field>
+        <Field Name="La_Direction_Générale_autorise_le_paiement_designé_ci_après__Caption_Control1000000094">
+          <DataField>La_Direction_Générale_autorise_le_paiement_designé_ci_après__Caption_Control1000000094</DataField>
+        </Field>
+        <Field Name="TotalCaption_Control1000000096">
+          <DataField>TotalCaption_Control1000000096</DataField>
+        </Field>
+        <Field Name="BENEFICIAIRECaption_Control1000000099">
+          <DataField>BENEFICIAIRECaption_Control1000000099</DataField>
+        </Field>
+        <Field Name="PAIEMENT_EFFECTUE_PAR__Caption_Control1000000100">
+          <DataField>PAIEMENT_EFFECTUE_PAR__Caption_Control1000000100</DataField>
+        </Field>
+        <Field Name="LA_SOMME_DE_Caption_Control1000000063">
+          <DataField>LA_SOMME_DE_Caption_Control1000000063</DataField>
+        </Field>
+        <Field Name="BANQUE__Caption_Control1000000068">
+          <DataField>BANQUE__Caption_Control1000000068</DataField>
+        </Field>
+        <Field Name="Echéance__Caption_Control1000000046">
+          <DataField>Echéance__Caption_Control1000000046</DataField>
+        </Field>
+        <Field Name="CONTROLEUR_FINANCIERCaption_Control1000000032">
+          <DataField>CONTROLEUR_FINANCIERCaption_Control1000000032</DataField>
+        </Field>
+        <Field Name="DIRECTEUR_FINANCIERCaption_Control1000000034">
+          <DataField>DIRECTEUR_FINANCIERCaption_Control1000000034</DataField>
+        </Field>
+        <Field Name="SERVICE_FINANCIERCaption_Control1000000036">
+          <DataField>SERVICE_FINANCIERCaption_Control1000000036</DataField>
+        </Field>
+        <Field Name="BENEFICIAIRECaption_Control1000000038">
+          <DataField>BENEFICIAIRECaption_Control1000000038</DataField>
+        </Field>
+        <Field Name="Payment_Line_No_">
+          <DataField>Payment_Line_No_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

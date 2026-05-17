@@ -1,0 +1,178 @@
+<!-- src/app/modules/help/pages/help/help.component.html -->
+
+<div class="help-container">
+  <div class="help-header">
+    <div class="header-badge">
+      <mat-icon>help_outline</mat-icon>
+    </div>
+    <h1>Centre d'aide</h1>
+    <p>Guide d'utilisation de l'application Soroubat</p>
+  </div>
+
+  <div class="help-grid">
+    
+    <!-- Guide rapide -->
+    <mat-card class="help-card guide-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon guide-icon">
+          <mat-icon>rocket_launch</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Démarrage rapide</mat-card-title>
+          <mat-card-subtitle>Les étapes essentielles</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="help-item" *ngFor="let step of quickStartSteps; let i = index">
+          <div class="step-number">{{ step.num }}</div>
+          <div class="step-content">
+            <strong>{{ step.title }}</strong>
+            <p>{{ step.desc }}</p>
+          </div>
+          <div class="step-status" *ngIf="step.completed">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- FAQ -->
+    <mat-card class="help-card faq-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon faq-icon">
+          <mat-icon>quiz</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Foire aux questions</mat-card-title>
+          <mat-card-subtitle>Les questions fréquentes</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index" (click)="toggleFaq(i)">
+          <div class="faq-question">
+            <mat-icon class="faq-icon-expand">{{ expandedFaq === i ? 'remove' : 'add' }}</mat-icon>
+            <span>{{ faq.question }}</span>
+            <mat-icon class="faq-arrow">{{ expandedFaq === i ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+          </div>
+          <div class="faq-answer" [class.expanded]="expandedFaq === i">
+            <div class="answer-content">
+              <mat-icon>answer</mat-icon>
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Support -->
+    <mat-card class="help-card support-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon support-icon">
+          <mat-icon>support_agent</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Support</mat-card-title>
+          <mat-card-subtitle>Nous contacter</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="support-options">
+          <a href="mailto:support@soroubat.com" class="support-link email-link">
+            <div class="link-icon">
+              <mat-icon>email</mat-icon>
+            </div>
+            <div class="link-info">
+              <span class="link-label">Email</span>
+              <span class="link-value">support@soroubat.com</span>
+            </div>
+            <mat-icon class="link-arrow">arrow_forward</mat-icon>
+          </a>
+          <a href="tel:+221771234567" class="support-link phone-link">
+            <div class="link-icon">
+              <mat-icon>phone</mat-icon>
+            </div>
+            <div class="link-info">
+              <span class="link-label">Téléphone</span>
+              <span class="link-value">+221 77 123 45 67</span>
+            </div>
+            <mat-icon class="link-arrow">arrow_forward</mat-icon>
+          </a>
+          <div class="support-hours">
+            <div class="hours-icon">
+              <mat-icon>schedule</mat-icon>
+            </div>
+            <div class="hours-info">
+              <span class="hours-label">Horaires d'ouverture</span>
+              <span class="hours-value">Lun - Ven: 8h00 - 18h00</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Ressources -->
+    <mat-card class="help-card resources-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon resources-icon">
+          <mat-icon>menu_book</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Ressources</mat-card-title>
+          <mat-card-subtitle>Documentation et guides</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="resources-list">
+          <div class="resource-item" *ngFor="let resource of resources">
+            <div class="resource-icon">{{ resource.icon }}</div>
+            <div class="resource-info">
+              <span class="resource-title">{{ resource.title }}</span>
+              <span class="resource-desc">{{ resource.desc }}</span>
+            </div>
+            <button class="resource-btn" (click)="openResource(resource.link)">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- À propos -->
+    <mat-card class="help-card version-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon version-icon">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>À propos</mat-card-title>
+          <mat-card-subtitle>Informations sur l'application</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="about-info">
+          <div class="app-logo">
+            <div class="logo-icon">🏗️</div>
+          </div>
+          <div class="app-name">SOROUBAT</div>
+          <div class="app-badge">
+            <span class="version-badge">Version 2.0.0</span>
+          </div>
+          <div class="app-description">Gestion de chantiers intelligente</div>
+          <div class="app-copyright">© 2024 - 2025 Soroubat</div>
+          <div class="tech-stack">
+            <span class="tech-tag">Angular 18</span>
+            <span class="tech-tag">.NET 8</span>
+            <span class="tech-tag">Material Design</span>
+            <span class="tech-tag">TypeScript</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

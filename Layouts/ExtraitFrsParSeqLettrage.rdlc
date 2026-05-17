@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Vendor_Name">
+          <DataField>Vendor_Name</DataField>
+        </Field>
+        <Field Name="Vendor_Address">
+          <DataField>Vendor_Address</DataField>
+        </Field>
+        <Field Name="Vendor__VAT_Registration_No__">
+          <DataField>Vendor__VAT_Registration_No__</DataField>
+        </Field>
+        <Field Name="Vendor__No__">
+          <DataField>Vendor__No__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Entry_No__">
+          <DataField>VendorLedgerEntry1__Entry_No__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Posting_Date_">
+          <DataField>VendorLedgerEntry1__Posting_Date_</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Document_Type_">
+          <DataField>VendorLedgerEntry1__Document_Type_</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Due_Date_">
+          <DataField>VendorLedgerEntry1__Due_Date_</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__External_Document_No__">
+          <DataField>VendorLedgerEntry1__External_Document_No__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1_Lettre">
+          <DataField>VendorLedgerEntry1_Lettre</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Document_No__">
+          <DataField>VendorLedgerEntry1__Document_No__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Debit_Amount__LCY__">
+          <DataField>VendorLedgerEntry1__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Debit_Amount__LCY__Format">
+          <DataField>VendorLedgerEntry1__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Credit_Amount__LCY__">
+          <DataField>VendorLedgerEntry1__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="VendorLedgerEntry1__Credit_Amount__LCY__Format">
+          <DataField>VendorLedgerEntry1__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Cumul">
+          <DataField>Cumul</DataField>
+        </Field>
+        <Field Name="CumulFormat">
+          <DataField>CumulFormat</DataField>
+        </Field>
+        <Field Name="Let">
+          <DataField>Let</DataField>
+        </Field>
+        <Field Name="N_Caption">
+          <DataField>N_Caption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="PiéceCaption">
+          <DataField>PiéceCaption</DataField>
+        </Field>
+        <Field Name="N__PieceCaption">
+          <DataField>N__PieceCaption</DataField>
+        </Field>
+        <Field Name="LettrageCaption">
+          <DataField>LettrageCaption</DataField>
+        </Field>
+        <Field Name="CreditCaption">
+          <DataField>CreditCaption</DataField>
+        </Field>
+        <Field Name="SoldeCaption">
+          <DataField>SoldeCaption</DataField>
+        </Field>
+        <Field Name="N__DOC_EXTERNECaption">
+          <DataField>N__DOC_EXTERNECaption</DataField>
+        </Field>
+        <Field Name="EcheanceCaption">
+          <DataField>EcheanceCaption</DataField>
+        </Field>
+        <Field Name="DébitCaption">
+          <DataField>DébitCaption</DataField>
+        </Field>
+        <Field Name="EXTRAIT_DE_COMPTECaption">
+          <DataField>EXTRAIT_DE_COMPTECaption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

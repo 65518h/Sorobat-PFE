@@ -1,0 +1,186 @@
+<!-- src/app/pages/auth/login/login.component.html -->
+
+<div class="login-grid">
+  
+  <!-- Colonne gauche - Branding Soroubat+ -->
+  <div class="brand-section">
+    <div class="brand-content">
+      <!-- Image avec titre superposé -->
+      <div class="brand-image-container">
+        <div class="brand-image-wrapper">
+          <img src="chantier2.avif" alt="Chantier">
+          <div class="image-overlay"></div>
+          <div class="image-title-overlay">
+            <h1 class="brand-name">SOROUBAT</h1>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tagline en dessous de l'image -->
+      <div class="brand-tagline-wrapper">
+        <p class="brand-tagline">Votre partenaire gestion de chantiers</p>
+      </div>
+      
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <mat-icon>assignment</mat-icon>
+          </div>
+          <div class="feature-text">
+            <strong>Gestion de projets & tâches</strong>
+            <span>Suivi complet de vos chantiers</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <mat-icon>shopping_cart</mat-icon>
+          </div>
+          <div class="feature-text">
+            <strong>Demandes d'achat simplifiées</strong>
+            <span>Processus d'approvisionnement optimisé</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <mat-icon>inventory</mat-icon>
+          </div>
+          <div class="feature-text">
+            <strong>Gestion de stock par chantier</strong>
+            <span>Inventaire en temps réel</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <mat-icon>construction</mat-icon>
+          </div>
+          <div class="feature-text">
+            <strong>Pointage main-d'œuvre & engins</strong>
+            <span>Suivi des ressources en temps réel</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Information sur la session offline -->
+      <div class="offline-info" *ngIf="hasOfflineSession">
+        <div class="offline-info-content">
+          <mat-icon>cloud_queue</mat-icon>
+          <div class="offline-info-text">
+            <strong>Session hors ligne disponible</strong>
+            <span>Dernière connexion: {{ lastLoginDate | date:'dd/MM/yyyy à HH:mm' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Colonne droite - Formulaire de connexion -->
+  <div class="form-section">
+    <div class="form-card">
+
+      <!-- ✅ BANDEAU MODE OFFLINE -->
+      <div class="offline-banner" *ngIf="isOffline && !isLoading">
+        <div class="offline-banner-content">
+          <mat-icon>cloud_off</mat-icon>
+          <div class="offline-text">
+            <strong>Mode hors ligne</strong>
+            <span>Connexion avec les identifiants sauvegardés</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ✅ ALERTE PAS DE SESSION OFFLINE -->
+      <div class="offline-warning" *ngIf="isOffline && !hasOfflineSession && !isLoading">
+        <mat-icon>warning</mat-icon>
+        <div class="warning-text">
+          <strong>⚠️ Aucune session hors ligne disponible</strong>
+          <span>Veuillez vous connecter en ligne une première fois pour activer le mode hors ligne.</span>
+        </div>
+      </div>
+
+      <!-- ✅ INFORMATION SESSION OFFLINE VALIDE -->
+      <div class="offline-success" *ngIf="isOffline && hasOfflineSession && !isLoading">
+        <mat-icon>check_circle</mat-icon>
+        <div class="success-text">
+          <strong>✓ Session hors ligne disponible</strong>
+          <span>Vous pouvez vous connecter même sans internet</span>
+        </div>
+      </div>
+
+      <div class="form-header">
+        <h2>Bienvenue</h2>
+        <p>Connectez-vous à votre espace sécurisé</p>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage && !isLoading">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <!-- ✅ INDICATEUR DE CHARGEMENT -->
+      <div class="loading-message" *ngIf="isLoading">
+        <div class="loading-spinner"></div>
+        <span>{{ loadingMessage || 'Connexion en cours...' }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" *ngIf="!isLoading">
+        
+        <div class="input-field">
+          <label>Adresse Email</label>
+          <div class="input-wrapper">
+            <input 
+              type="email" 
+              formControlName="email" 
+              placeholder="exemple@email.com"
+              autocomplete="email"
+              [class.has-saved]="hasSavedCredentials"
+            >
+            <div class="saved-credentials-badge" *ngIf="hasSavedCredentials && loginForm.get('email')?.value">
+              <mat-icon>history</mat-icon>
+            </div>
+          </div>
+          <div class="input-error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+            <span *ngIf="loginForm.get('email')?.hasError('required')">Email requis</span>
+            <span *ngIf="loginForm.get('email')?.hasError('email')">Email invalide</span>
+          </div>
+        </div>
+
+        <div class="input-field">
+          <label>Mot de passe</label>
+          <div class="input-wrapper password-wrapper">
+            <input 
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password" 
+              placeholder="Entrez votre mot de passe"
+              autocomplete="current-password"
+            >
+            <button type="button" class="password-toggle" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+          <div class="input-error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            <span *ngIf="loginForm.get('password')?.hasError('required')">Mot de passe requis</span>
+            <span *ngIf="loginForm.get('password')?.hasError('minlength')">Minimum 4 caractères</span>
+          </div>
+        </div>
+
+        
+
+        <button type="submit" class="login-btn" [disabled]="loginForm.invalid">
+       
+          <span>Se connecter</span>
+        </button>
+
+      </form>
+
+      <!-- ✅ Message hors ligne pour la tentative de connexion -->
+      <div class="offline-attempt-message" *ngIf="offlineAttempt && !hasOfflineSession && isOffline">
+        <mat-icon>error</mat-icon>
+        <div class="attempt-text">
+          <strong>Connexion impossible</strong>
+          <span>Aucune session sauvegardée trouvée. Connectez-vous en ligne pour créer une session hors ligne.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

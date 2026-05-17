@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_QuantityCaption">
+          <DataField>Item_Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Quantity">
+          <DataField>Item_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_QuantityFormat">
+          <DataField>Item_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Item_Ledger_EntryCaption">
+          <DataField>Item_Ledger_EntryCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Lieu_Livraison___Provenance_Caption">
+          <DataField>Item_Ledger_Entry__Lieu_Livraison___Provenance_Caption</DataField>
+        </Field>
+        <Field Name="TODAY_0_4">
+          <DataField>TODAY_0_4</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryFIELDCAPTION_PostingDate">
+          <DataField>ItemLedgerEntryFIELDCAPTION_PostingDate</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryFIELDCAPTION_Quantity">
+          <DataField>ItemLedgerEntryFIELDCAPTION_Quantity</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryFIELDCAPTION_Description">
+          <DataField>ItemLedgerEntryFIELDCAPTION_Description</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryFIELDCAPTION_ItemNo">
+          <DataField>ItemLedgerEntryFIELDCAPTION_ItemNo</DataField>
+        </Field>
+        <Field Name="ItemLedgerEntryFIELDCAPTION_DocumentNo">
+          <DataField>ItemLedgerEntryFIELDCAPTION_DocumentNo</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__N__Véhicule_Caption">
+          <DataField>Item_Ledger_Entry__N__Véhicule_Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__N__Véhicule_">
+          <DataField>Item_Ledger_Entry__N__Véhicule_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Posting_Date_">
+          <DataField>Item_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Document_No___">
+          <DataField>Item_Ledger_Entry__Document_No___</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Item_No__">
+          <DataField>Item_Ledger_Entry__Item_No__</DataField>
+        </Field>
+        <Field Name="escriptionItem">
+          <DataField>escriptionItem</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Location_Code_">
+          <DataField>Item_Ledger_Entry__Location_Code_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Lieu_Livraison___Provenance_">
+          <DataField>Item_Ledger_Entry__Lieu_Livraison___Provenance_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Quantité_Caption">
+          <DataField>Item_Ledger_Entry__Quantité_Caption</DataField>
+        </Field>
+        <Field Name="ValeurCaption">
+          <DataField>ValeurCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Quantity_">
+          <DataField>Item_Ledger_Entry__Quantity_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Quantity_Format">
+          <DataField>Item_Ledger_Entry__Quantity_Format</DataField>
+        </Field>
+        <Field Name="DescriptionItem_Control1000000000">
+          <DataField>DescriptionItem_Control1000000000</DataField>
+        </Field>
+        <Field Name="Numserie">
+          <DataField>Numserie</DataField>
+        </Field>
+        <Field Name="N_Vehicule">
+          <DataField>N_Vehicule</DataField>
+        </Field>
+        <Field Name="Benificiaire">
+          <DataField>Benificiaire</DataField>
+        </Field>
+        <Field Name="ItemLastDirectCost_Quantity">
+          <DataField>ItemLastDirectCost_Quantity</DataField>
+        </Field>
+        <Field Name="ItemLastDirectCost_QuantityFormat">
+          <DataField>ItemLastDirectCost_QuantityFormat</DataField>
+        </Field>
+        <Field Name="CoutTotal">
+          <DataField>CoutTotal</DataField>
+        </Field>
+        <Field Name="CoutTotalFormat">
+          <DataField>CoutTotalFormat</DataField>
+        </Field>
+        <Field Name="TOTALVEHICULEN__N_Vehicule">
+          <DataField>TOTALVEHICULEN__N_Vehicule</DataField>
+        </Field>
+        <Field Name="Date_BLCaption">
+          <DataField>Date_BLCaption</DataField>
+        </Field>
+        <Field Name="Posting_Date">
+          <DataField>Posting_Date</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Document_No__">
+          <DataField>Item_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Item_Ledger_EntryCaption_Description">
+          <DataField>Item_Ledger_EntryCaption_Description</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Document_No__Caption">
+          <DataField>Item_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Item_No__Caption">
+          <DataField>Item_Ledger_Entry__Item_No__Caption</DataField>
+        </Field>
+        <Field Name="N__BlCaption">
+          <DataField>N__BlCaption</DataField>
+        </Field>
+        <Field Name="MagasinCaption">
+          <DataField>MagasinCaption</DataField>
+        </Field>
+        <Field Name="DescriptionItem">
+          <DataField>DescriptionItem</DataField>
+        </Field>
+        <Field Name="DescriptionCaption">
+          <DataField>DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__External_Document_No__">
+          <DataField>Item_Ledger_Entry__External_Document_No__</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,614 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= LOADING SCREEN ================= */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: #dcfce7;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.loader-logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #22c55e;
+  border-radius: 50%;
+  margin: 20px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader-content p {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* ================= GRID ================= */
+.login-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+  background: #f5f7fa;
+}
+
+/* ================= PARTIE GAUCHE ================= */
+.brand-section {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  overflow-y: auto;
+}
+
+.brand-content {
+  max-width: 450px;
+  width: 100%;
+}
+
+/* ================= IMAGE AVEC TITRE SUPERPOSÉ ================= */
+.brand-image-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.brand-image-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-image-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 40px -12px rgba(34, 197, 94, 0.25);
+}
+
+.brand-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.brand-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* Overlay vert comme tu l'as défini */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 101, 52, 0.3) 100%);
+  pointer-events: none;
+}
+
+/* Titre superposé sur l'image (en bas) */
+.image-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px 16px;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.brand-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.brand-name span {
+  color: #22c55e;
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+}
+
+/* Tagline en dessous de l'image */
+.brand-tagline-wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.brand-tagline {
+  font-size: 15px;
+  color: #166534;
+  font-weight: 500;
+  margin: 0;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateX(8px);
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #22c55e;
+}
+
+.feature-text strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.feature-text span {
+  font-size: 13px;
+  color: #166534;
+}
+
+/* ================= PARTIE DROITE ================= */
+.form-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #f5f7fa;
+}
+
+.form-card {
+  background: white;
+  padding: 48px 40px;
+  border-radius: 32px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.08);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.error-message {
+  background: #fef2f2;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-message mat-icon {
+  color: #ef4444;
+  font-size: 18px;
+}
+
+.error-message span {
+  color: #991b1b;
+  font-size: 13px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.input-wrapper {
+  padding: 14px 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  background: white;
+}
+
+.input-wrapper input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.input-wrapper input::placeholder {
+  color: #cbd5e1;
+}
+
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.password-wrapper input {
+  flex: 1;
+}
+
+.password-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.password-toggle:hover {
+  color: #22c55e;
+}
+
+.input-error {
+  margin-top: 4px;
+}
+
+.input-error span {
+  font-size: 11px;
+  color: #ef4444;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: -8px;
+}
+
+.forgot-link {
+  font-size: 12px;
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.forgot-link:hover {
+  color: #16a34a;
+  text-decoration: underline;
+}
+
+.captcha-container {
+  margin: 8px 0 4px;
+}
+
+.checkbox-captcha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.checkbox-captcha input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #22c55e;
+}
+
+.checkbox-captcha label {
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background: #22c55e;
+  border: none;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.login-btn:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.3);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: spin 0.8s linear infinite;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.signup-link p {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.create-account {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.create-account:hover {
+  color: #16a34a;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .login-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .brand-section {
+    padding: 50px 32px;
+  }
+  
+  .brand-content {
+    max-width: 100%;
+  }
+  
+  .features {
+    align-items: center;
+  }
+  
+  .feature-item {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .form-section {
+    padding: 40px 24px;
+  }
+  
+  .form-card {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-section {
+    padding: 40px 24px;
+  }
+  
+  .brand-image-wrapper {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .brand-name {
+    font-size: 22px;
+  }
+  
+  .brand-tagline {
+    font-size: 13px;
+  }
+  
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .feature-icon mat-icon {
+    font-size: 20px;
+  }
+  
+  .form-card {
+    padding: 32px 24px;
+  }
+  
+  .form-header h2 {
+    font-size: 24px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* styles pour la connexion offline */
+
+.offline-banner {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.offline-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offline-banner-content mat-icon {
+  color: #d97706;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.offline-text strong {
+  display: block;
+  font-size: 13px;
+  color: #92400e;
+}
+
+.offline-text span {
+  font-size: 11px;
+  color: #78350f;
+}
+
+.offline-warning {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border-left: 4px solid #ef4444;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.offline-warning {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.offline-warning mat-icon {
+  color: #dc2626;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.warning-text strong {
+  display: block;
+  font-size: 13px;
+  color: #991b1b;
+}
+
+.warning-text span {
+  font-size: 11px;
+  color: #7f1d1d;
+}
+
+
+
+

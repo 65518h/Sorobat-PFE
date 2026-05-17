@@ -1,0 +1,236 @@
+<!-- src/app/modules/attendance/pages/attendance-list/attendance-list.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="attendance-container">
+  
+  <!-- Hero Section -->
+  <div class="hero-section-gradient">
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="hero-content-gradient">
+      <div class="hero-left-gradient">
+        <div class="icon-container-gradient">
+          <mat-icon>groups</mat-icon>
+          <div class="icon-glow"></div>
+        </div>
+        <div class="hero-text-gradient">
+          <h1>Pointage des employés</h1>
+          <p>Suivi des présences et absences par mois</p>
+        </div>
+      </div>
+      <div class="hero-actions-gradient">
+         <!-- ✅ Bouton Reconnaissance facial - CACHÉ OFFLINE -->
+  <div *appOfflineHideActions>
+    <button class="btn-face" (click)="goToFaceRecognition()" matTooltip="Pointage facial">
+      <mat-icon>face</mat-icon>
+      Reconnaissance
+    </button>
+  </div>
+
+  <!-- ✅ Bouton NOUVEAU pointage - CACHÉ OFFLINE -->
+  <div *appOfflineHideActions>
+    <button class="btn-gradient" (click)="goToNew()">
+      <mat-icon>add</mat-icon>
+      <span>Nouveau pointage</span>
+    </button>
+  </div>
+  
+  <!-- ✅ Bouton ACTUALISER - CACHÉ OFFLINE -->
+  <div *appOfflineHideActions>
+    <button class="btn-gradient-icon" (click)="refresh()" [disabled]="loading">
+      <mat-icon [class.spinning]="loading">refresh</mat-icon>
+    </button>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cartes de statistiques -->
+  <div class="stats-grid" *ngIf="!loading">
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper total">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ attendanceHeaders.length }}</span>
+          <span class="stat-title">Pointages</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper employees">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ getTotalEmployees() }}</span>
+          <span class="stat-title">Employés</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper present">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ getAverageAttendanceRate() }}%</span>
+          <span class="stat-title">Taux présence</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper months">
+          <mat-icon>calendar_month</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ getUniqueMonthsCount() }}</span>
+          <span class="stat-title">Mois concernés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info projet -->
+  <div class="project-info" *ngIf="currentJobNo">
+    <div class="info-card">
+      <mat-icon>business_center</mat-icon>
+      <div class="info-details">
+        <span class="info-label">Chantier / Projet</span>
+        <span class="info-value">{{ currentJobNo }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement des pointages...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Oups ! Une erreur s'est produite</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="retry()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Liste des pointages -->
+  <div class="cards-grid" *ngIf="!loading && !errorMessage && attendanceHeaders.length > 0">
+    <div class="attendance-card" *ngFor="let attendance of attendanceHeaders; let i = index">
+      <div class="card-header">
+        <div class="header-left">
+          <div class="month-badge">
+            <mat-icon>calendar_month</mat-icon>
+            <span>{{ getMonthName(attendance.month) }} {{ attendance.year }}</span>
+          </div>
+          <div class="offline-badge" *ngIf="attendance.isOffline">
+            <mat-icon>cloud_off</mat-icon>
+            <span>Hors ligne</span>
+          </div>
+          <div class="document-badge" *ngIf="attendance.no">
+            <mat-icon>receipt</mat-icon>
+            <span class="document-number">{{ attendance.no }}</span>
+          </div>
+        </div>
+        <div class="staff-count">
+          <mat-icon>groups</mat-icon>
+          <span>{{ attendance.totalStaff }} employés</span>
+        </div>
+      </div>
+      
+      <div class="card-footer">
+        <div class="card-actions">
+          <!-- ✅ Bouton Modifier - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="btn-edit-card" (click)="$event.stopPropagation(); goToEdit(attendance)" matTooltip="Modifier le pointage">
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+            </button>
+          </div>
+          
+          <!-- ✅ Bouton Supprimer - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="btn-delete-card" (click)="$event.stopPropagation(); deleteAttendance(attendance)" matTooltip="Supprimer le pointage">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </div>
+          
+          <!-- ✅ Bouton Voir détails - TOUJOURS VISIBLE -->
+          <button class="btn-view-card" (click)="$event.stopPropagation(); viewDetail(attendance)">
+            <mat-icon>visibility</mat-icon>
+            <span>Détails</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state-premium" *ngIf="!loading && !errorMessage && attendanceHeaders.length === 0 && currentJobNo">
+    <div class="empty-card">
+      <div class="empty-illustration">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+      <h3>Aucun pointage</h3>
+      <p>Aucun pointage n'a été trouvé pour ce chantier.</p>
+      <div class="empty-actions">
+        <button class="btn-primary-premium" (click)="goToNew()" [class.btn-disabled]="isReadOnly">
+          <mat-icon>add</mat-icon>
+          Nouveau pointage
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && attendanceHeaders.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span>📱 Données en cache (mode hors ligne)</span>
+  </div>
+
+</div>

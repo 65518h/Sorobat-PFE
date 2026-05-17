@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="DernierIndex">
+          <DataField>DernierIndex</DataField>
+        </Field>
+        <Field Name="DernierVidange">
+          <DataField>DernierVidange</DataField>
+        </Field>
+        <Field Name="User_ID">
+          <DataField>User_ID</DataField>
+        </Field>
+        <Field Name="Choix_1">
+          <DataField>Choix_1</DataField>
+        </Field>
+        <Field Name="Choix_2">
+          <DataField>Choix_2</DataField>
+        </Field>
+        <Field Name="Choix_3">
+          <DataField>Choix_3</DataField>
+        </Field>
+        <Field Name="Choix_4">
+          <DataField>Choix_4</DataField>
+        </Field>
+        <Field Name="SousFamilleEngin">
+          <DataField>SousFamilleEngin</DataField>
+        </Field>
+        <Field Name="Serial_No_">
+          <DataField>Serial_No_</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="N________Sales_Header___No__">
+          <DataField>N________Sales_Header___No__</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header___Document_Date_">
+          <DataField>Sales_Header__Sales_Header___Document_Date_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header__Service">
+          <DataField>Sales_Header__Sales_Header__Service</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header___Requester_ID_">
+          <DataField>Sales_Header__Sales_Header___Requester_ID_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header___Description_Engin_">
+          <DataField>Sales_Header__Sales_Header___Description_Engin_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header__Engin_">
+          <DataField>Sales_Header__Sales_Header__Engin_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header___User_ID_">
+          <DataField>Sales_Header__Sales_Header___User_ID_</DataField>
+        </Field>
+        <Field Name="ShippingAgent_Name">
+          <DataField>ShippingAgent_Name</DataField>
+        </Field>
+        <Field Name="UserName">
+          <DataField>UserName</DataField>
+        </Field>
+        <Field Name="PageConst_________FORMAT_CurrReport_PAGENO_">
+          <DataField>PageConst_________FORMAT_CurrReport_PAGENO_</DataField>
+        </Field>
+        <Field Name="Marque_______marque">
+          <DataField>Marque_______marque</DataField>
+        </Field>
+        <Field Name="No_Chassis_______chassis">
+          <DataField>No_Chassis_______chassis</DataField>
+        </Field>
+        <Field Name="Type_______Type">
+          <DataField>Type_______Type</DataField>
+        </Field>
+        <Field Name="Dernier_Index__________DernierIndex">
+          <DataField>Dernier_Index__________DernierIndex</DataField>
+        </Field>
+        <Field Name="Sales_Header__Job_No__">
+          <DataField>Sales_Header__Job_No__</DataField>
+        </Field>
+        <Field Name="DEMANDE_D_APPROVISIONNEMENTCaption">
+          <DataField>DEMANDE_D_APPROVISIONNEMENTCaption</DataField>
+        </Field>
+        <Field Name="Agent_Saisie__Caption">
+          <DataField>Agent_Saisie__Caption</DataField>
+        </Field>
+        <Field Name="Affectation__Caption">
+          <DataField>Affectation__Caption</DataField>
+        </Field>
+        <Field Name="Demandeur_DA__Caption">
+          <DataField>Demandeur_DA__Caption</DataField>
+        </Field>
+        <Field Name="Véhicule__Caption">
+          <DataField>Véhicule__Caption</DataField>
+        </Field>
+        <Field Name="Date_DA__Caption">
+          <DataField>Date_DA__Caption</DataField>
+        </Field>
+        <Field Name="Demarcheur__Caption">
+          <DataField>Demarcheur__Caption</DataField>
+        </Field>
+        <Field Name="Numéro_DA__Caption">
+          <DataField>Numéro_DA__Caption</DataField>
+        </Field>
+        <Field Name="N__affaire__Caption">
+          <DataField>N__affaire__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Header_Document_Type">
+          <DataField>Sales_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Header_No_">
+          <DataField>Sales_Header_No_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Observation">
+          <DataField>Sales_Header__Observation</DataField>
+        </Field>
+        <Field Name="TxtApprobation">
+          <DataField>TxtApprobation</DataField>
+        </Field>
+        <Field Name="Observation__Caption">
+          <DataField>Observation__Caption</DataField>
+        </Field>
+        <Field Name="Chef_DirectCaption">
+          <DataField>Chef_DirectCaption</DataField>
+        </Field>
+        <Field Name="Agent_De_Saisie___DemandeurCaption">
+          <DataField>Agent_De_Saisie___DemandeurCaption</DataField>
+        </Field>
+        <Field Name="ResponsableCaption">
+          <DataField>ResponsableCaption</DataField>
+        </Field>
+        <Field Name="Sales_Line__No__">
+          <DataField>Sales_Line__No__</DataField>
+        </Field>
+        <Field Name="StockMagasin">
+          <DataField>StockMagasin</DataField>
+        </Field>
+        <Field Name="StockMagasinFormat">
+          <DataField>StockMagasinFormat</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="Sales_Line_Quantity">
+          <DataField>Sales_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Description________Description_2_">
+          <DataField>Description________Description_2_</DataField>
+        </Field>
+        <Field Name="Description_2">
+          <DataField>Description_2</DataField>
+        </Field>
+        <Field Name="Sales_Line__Unit_of_Measure_">
+          <DataField>Sales_Line__Unit_of_Measure_</DataField>
+        </Field>
+        <Field Name="Référence_ArticleCaption">
+          <DataField>Référence_ArticleCaption</DataField>
+        </Field>
+        <Field Name="DésignationCaption">
+          <DataField>DésignationCaption</DataField>
+        </Field>
+        <Field Name="Quantité_DACaption">
+          <DataField>Quantité_DACaption</DataField>
+        </Field>
+        <Field Name="Sales_Line__Unit_of_Measure_Caption">
+          <DataField>Sales_Line__Unit_of_Measure_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_Type">
+          <DataField>Sales_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

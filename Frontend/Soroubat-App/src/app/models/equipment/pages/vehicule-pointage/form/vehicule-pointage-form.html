@@ -1,0 +1,133 @@
+<div class="pointage-form-container">
+  
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <button class="back-btn" (click)="cancel()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="hero-text">
+          <h1>{{ isCreateMode ? 'Nouveau pointage' : 'Modifier le pointage' }}</h1>
+          <p>{{ isCreateMode ? 'Créez un nouveau pointage de véhicules' : 'Détail du pointage' }}</p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <button class="btn-cancel" (click)="cancel()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-submit" (click)="onSubmit()" [disabled]="submitting" *ngIf="isCreateMode">
+          <mat-icon>check_circle</mat-icon>
+          <span>Créer le pointage</span>
+          <div class="btn-glow"></div>
+          <div class="btn-spinner" *ngIf="submitting"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <p>Chargement...</p>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-icon">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Erreur de chargement</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="loadPointage()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulaire de création -->
+  <form [formGroup]="pointageForm" (ngSubmit)="onSubmit()" *ngIf="!loading && !errorMessage && isCreateMode">
+    
+    <!-- Date Card -->
+    <div class="form-card date-card">
+      <div class="card-glow"></div>
+      <div class="card-header">
+        <div class="header-icon-wrapper">
+          <mat-icon>event</mat-icon>
+        </div>
+        <div class="header-text">
+          <h2>Date du pointage</h2>
+          <p>Sélectionnez la date à laquelle le pointage a été effectué</p>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="date-picker-wrapper">
+  <mat-form-field appearance="outline" class="premium-datepicker">
+    <mat-label>Date du pointage</mat-label>
+    <input matInput [matDatepicker]="datePicker" formControlName="date" placeholder="JJ/MM/AAAA">
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+  </mat-form-field>
+</div>
+        
+        <!-- Date preview -->
+        <div class="date-preview" *ngIf="pointageForm.get('date')?.value">
+          <div class="preview-card">
+            <div class="preview-day">{{ formatDatePreview(pointageForm.get('date')?.value) }}</div>
+            <div class="preview-info">
+              <span class="preview-weekday">{{ getWeekday(pointageForm.get('date')?.value) }}</span>
+              <span class="preview-month">{{ getMonthYear(pointageForm.get('date')?.value) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Information Card -->
+    <div class="info-card-modern">
+      <div class="info-icon">
+        <mat-icon>info_outline</mat-icon>
+      </div>
+      <div class="info-content">
+        <strong>Ajout des véhicules</strong>
+        <p>Après la création du pointage, vous serez redirigé vers la page de détail pour ajouter les véhicules pointés.</p>
+      </div>
+      <div class="info-decoration">
+        <div class="decoration-dot"></div>
+        <div class="decoration-dot"></div>
+        <div class="decoration-dot"></div>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Affichage en mode édition -->
+  <div class="edit-mode-card" *ngIf="!loading && !errorMessage && isEditMode">
+    <div class="edit-icon">
+      <mat-icon>visibility</mat-icon>
+    </div>
+    <div class="edit-content">
+      <h3>Mode consultation</h3>
+      <p>Pour modifier ce pointage, veuillez consulter la page de détail.</p>
+    </div>
+    <button class="btn-view-detail" (click)="cancel()">
+      <mat-icon>arrow_forward</mat-icon>
+      Voir le détail
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,383 @@
+<!-- src/app/modules/purchases/pages/request-list/request-list.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="request-list-container">
+  
+  <!-- ==================== HEADER ==================== -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <mat-icon class="item-icon">shopping_cart</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Demandes d'achat</h1>
+          <p>Gérez l'ensemble de vos processus d'approvisionnement</p>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <!-- ✅ Bouton Alertes - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="alerts-btn" [class.has-alerts]="alertCount > 0" (click)="navigateToAlerts()" matTooltip="Voir les alertes demandes d'achat">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Alertes</span>
+          </button>
+        </div>
+
+        <!-- ✅ Bouton Nouvelle demande - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-primary" (click)="createNewRequest()">
+            <mat-icon>add</mat-icon>
+            <span>Nouvelle demande</span>
+          </button>
+        </div>
+        
+        <!-- ✅ Bouton Actualiser - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-icon" (click)="refresh()" matTooltip="Actualiser">
+            <mat-icon>sync</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== STATISTIQUES ==================== -->
+  <div class="stats-row">
+    <div class="stat-item" *ngFor="let stat of statsData; let i = index" (click)="scrollToRequestsList(i)">
+      <div class="stat-item-left">
+        <div class="stat-icon" [style.background]="stat.gradient">
+          <mat-icon>{{ stat.icon }}</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-number">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+      <div class="stat-item-right">
+        <div *ngIf="stat.trend" class="stat-trend" [class.negative]="stat.trend < 0">
+          <mat-icon>{{ stat.trend > 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+          <span>{{ stat.trend > 0 ? '+' : '' }}{{ stat.trend }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== FILTRES ==================== -->
+  <div class="filters-container">
+    <div class="filters-header" (click)="toggleFilters()">
+      <div class="filters-title">
+        <mat-icon>filter_alt</mat-icon>
+        <span>Filtres avancés</span>
+        <span class="active-filters-count" *ngIf="activeFiltersCount > 0">{{ activeFiltersCount }}</span>
+      </div>
+      <div class="filters-actions-header">
+        <div class="result-badge">
+          <span class="result-text">Total : </span>
+          <span class="result-number">{{ totalItems }}</span>
+        </div>
+        <mat-icon class="chevron">{{ filtersExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+      </div>
+    </div>
+    
+    <div class="filters-body" [class.expanded]="filtersExpanded">
+      <div class="filters-panel-content">
+        <form [formGroup]="filterForm">
+          <div class="filters-grid">
+            <div class="filter-field">
+              <label>Projet</label>
+              <div class="input-group">
+                <mat-icon>business</mat-icon>
+                <input type="text" formControlName="jobNo" placeholder="N° de projet..." (keyup.enter)="applyFilters()">
+                <button type="button" *ngIf="filterForm.get('jobNo')?.value" class="clear-input" (click)="filterForm.patchValue({ jobNo: '' }); applyFilters()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+            
+            <div class="filter-field date-range">
+              <label>Période</label>
+              <div class="date-group">
+                <div class="input-group">
+                  <mat-icon>today</mat-icon>
+                  <input type="date" formControlName="dateFrom">
+                </div>
+                <span class="separator">—</span>
+                <div class="input-group">
+                  <mat-icon>today</mat-icon>
+                  <input type="date" formControlName="dateTo">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-field full-width">
+            <label class="mot">Recherche</label>
+            <div class="recherche">
+              <mat-icon>search</mat-icon>
+              <input type="text" formControlName="search" placeholder="Rechercher par mots-clés..." (keyup.enter)="applyFilters()">
+              <button type="button" *ngIf="filterForm.get('search')?.value" class="clear-input" (click)="filterForm.patchValue({ search: '' }); applyFilters()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+          
+          <div class="filters-footer">
+            <button type="button" class="btn-outline" (click)="resetFilters()">
+              <mat-icon>clear_all</mat-icon>
+              Réinitialiser
+            </button>
+            <button type="button" class="btn-primary" (click)="applyFilters()">
+              <mat-icon>search</mat-icon>
+              Appliquer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== FILTRES ACTIFS ==================== -->
+  <div class="active-filters-bar" *ngIf="hasActiveFilters()">
+    <div class="active-filters-container">
+      <span class="active-filters-label">Filtres actifs :</span>
+      <div class="filter-chips">
+        <div *ngIf="filterForm.get('jobNo')?.value" class="filter-chip">
+          <mat-icon>business</mat-icon>
+          <span>Projet: {{ filterForm.get('jobNo')?.value }}</span>
+          <button class="chip-remove" (click)="removeFilter('jobNo')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="filterForm.get('dateFrom')?.value" class="filter-chip">
+          <mat-icon>event</mat-icon>
+          <span>À partir du: {{ formatDateShort(filterForm.get('dateFrom')?.value) }}</span>
+          <button class="chip-remove" (click)="removeFilter('dateFrom')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="filterForm.get('dateTo')?.value" class="filter-chip">
+          <mat-icon>event</mat-icon>
+          <span>Jusqu'au: {{ formatDateShort(filterForm.get('dateTo')?.value) }}</span>
+          <button class="chip-remove" (click)="removeFilter('dateTo')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="filterForm.get('search')?.value" class="filter-chip">
+          <mat-icon>search</mat-icon>
+          <span>Recherche: {{ filterForm.get('search')?.value }}</span>
+          <button class="chip-remove" (click)="removeFilter('search')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <button class="clear-all-filters" (click)="resetFilters()">
+          <mat-icon>clear_all</mat-icon>
+          Tout effacer
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-cards">
+      <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6]">
+        <div class="skeleton-header">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton-line w-60"></div>
+            <div class="skeleton-line w-40"></div>
+          </div>
+        </div>
+        <div class="skeleton-body">
+          <div class="skeleton-line w-80"></div>
+          <div class="skeleton-line w-50"></div>
+          <div class="skeleton-line w-70"></div>
+        </div>
+      </div>
+    </div>
+    <div class="loading-overlay">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+      <p>Chargement des demandes...</p>
+    </div>
+  </div>
+  
+  <!-- ==================== ERROR ==================== -->
+  <div class="error-state" *ngIf="error && !loading">
+    <div class="error-content">
+      <div class="error-icon">
+        <mat-icon>error</mat-icon>
+      </div>
+      <h3>Oops ! Une erreur s'est produite</h3>
+      <p>{{ error }}</p>
+      <button class="btn-primary" (click)="loadRequests()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+  </div>
+  
+  <!-- ==================== LISTE DES DEMANDES ==================== -->
+  <div class="requests-list" #requestsListSection id="requests-list-section" *ngIf="!loading && !error">
+    
+    <div class="cards-grid">
+      <div class="request-card" 
+         *ngFor="let request of paginatedRequests"
+         [class.selected]="selectedRequests.has(request.id || '')"
+         [class.card-open]="request.status === 'Open'"
+         [class.card-released]="request.status === 'Released'"
+         [class.card-pending]="request.status === 'Pending_Approval'"
+         [class.card-rejected]="request.status === 'Rejected'"
+         [class.card-complete]="request.status === 'Completed'">
+        
+        <div class="card-header">
+          <mat-icon>shopping_cart</mat-icon>
+          <div class="request-number" (click)="viewRequest(request)">
+            <span class="number">{{ request.no || '—' }}</span>
+            <mat-icon class="arrow">arrow_forward</mat-icon>
+          </div>
+          <div class="status-badge" [class]="'status-' + getStatusClassForBadge(request.status)">
+            <span class="dot"></span>
+            <span>{{ getStatusLabelForBadge(request.status) }}</span>
+          </div>
+        </div>
+        
+        <div class="card-body" (click)="viewRequest(request)">
+          <div class="info-row">
+            <div class="info-item">
+              <mat-icon>business</mat-icon>
+              <div class="info-content">
+                <span class="label">Projet</span>
+                <span class="value">{{ request.jobNo || '—' }}</span>
+                <span class="sub" *ngIf="request.jobDescription">{{ request.jobDescription }}</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <mat-icon>person</mat-icon>
+              <div class="info-content">
+                <span class="label">Demandeur</span>
+                <span class="value">{{ request.requesterId || '—' }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-item">
+              <mat-icon>category</mat-icon>
+              <div class="info-content">
+                <span class="label">Type</span>
+                <span class="value type-value">{{ request.requestType || 'Standard' }}</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <mat-icon>attach_money</mat-icon>
+              <div class="info-content">
+                <span class="label">Montant</span>
+                <span class="value amount">{{ formatAmount(request.amount || 0) }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-row">
+            <div class="info-item">
+              <mat-icon>calendar_today</mat-icon>
+              <div class="info-content">
+                <span class="label">Date de commande</span>
+                <span class="value">{{ formatDate(request.orderDate || '') }}</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <mat-icon>event</mat-icon>
+              <div class="info-content">
+                <span class="label">Échéance</span>
+                <span class="value" [class.overdue]="isOverdue(request.dueDate || '')">
+                  {{ formatDate(request.dueDate || '') }}
+                  <span class="overdue-badge" *ngIf="isOverdue(request.dueDate || '')">Retard</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ==================== ACTIONS DES CARTES ==================== -->
+        <div class="card-footer">
+          <!-- ✅ Bouton Voir détails - TOUJOURS VISIBLE -->
+          <button class="action-btn view" (click)="viewRequest(request)" matTooltip="Voir détails">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          
+          <!-- ✅ Bouton Modifier - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="action-btn edit" *ngIf="canEdit(request)" (click)="editRequest(request)" matTooltip="Modifier la demande">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          
+          <!-- ✅ Bouton Supprimer - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="action-btn delete" *ngIf="canDelete(request)" (click)="deleteRequest(request)" matTooltip="Supprimer la demande">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          
+          <!-- ✅ Bouton Lancer - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="action-btn release" *ngIf="canRelease(request)" (click)="releaseRequest(request)" matTooltip="Lancer la demande">
+              <span class="btn-text">Lancer</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="empty-state" *ngIf="filteredRequests.length === 0">
+      <div class="empty-content">
+        <div class="empty-icon">
+          <mat-icon>inbox</mat-icon>
+        </div>
+        <h3>Aucune demande d'achat</h3>
+        <p *ngIf="!hasActiveFilters()">Commencez par créer votre première demande d'achat</p>
+        <p *ngIf="hasActiveFilters()">Aucune demande ne correspond à vos critères de recherche</p>
+        <button class="btn-primary" (click)="hasActiveFilters() ? resetFilters() : createNewRequest()">
+          <mat-icon>{{ hasActiveFilters() ? 'clear_all' : 'add' }}</mat-icon>
+          {{ hasActiveFilters() ? 'Réinitialiser les filtres' : 'Créer une demande' }}
+        </button>
+      </div>
+    </div>
+    
+    <mat-paginator 
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      [pageIndex]="currentPage - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+    
+  </div>
+  
+  <!-- ✅ INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredRequests.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+  </div>
+  
+</div>

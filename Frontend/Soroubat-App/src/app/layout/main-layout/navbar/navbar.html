@@ -1,0 +1,171 @@
+<!-- src/app/layout/main-layout/navbar/navbar.html -->
+
+<mat-toolbar class="navbar">
+  <!-- Bande décorative supérieure animée -->
+  <div class="navbar-decoration"></div>
+
+  <div class="navbar-container">
+    <!-- Section Gauche -->
+    <div class="navbar-left">
+      <button 
+        mat-icon-button 
+        class="menu-button" 
+        (click)="toggleMenu()" 
+        matTooltip="Menu principal"
+        matTooltipPosition="right"
+        [class.menu-active]="isSidebarOpen">
+        <div class="menu-icon-wrapper">
+          <mat-icon [class.rotated]="isSidebarOpen">menu</mat-icon>
+          <div class="menu-pulse"></div>
+        </div>
+        <div class="menu-ripple"></div>
+      </button>
+
+      <div class="navbar-brand" routerLink="/dashboard">
+        <div class="logo-wrapper">
+          <img src="chantier2.avif" alt="SOROUBAT" class="logo">
+          <div class="logo-glow"></div>
+          <div class="logo-shine"></div>
+          <div class="logo-ring"></div>
+        </div>
+        <div class="brand-text">
+          <span class="app-title">
+            SOROUBAT
+            <span class="title-dot"></span>
+          </span>
+          <span class="app-subtitle">Gestion de chantiers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Espace flexible -->
+    <span class="spacer"></span>
+
+    <!-- Section Droite -->
+    <div class="navbar-right">
+      
+      <!-- Groupe d'actions rapides -->
+      <div class="actions-group">
+        <button mat-icon-button class="action-btn tasks-btn" matBadgeColor="accent" routerLink="/tasks">
+          <mat-icon>assignment</mat-icon>
+          <span class="btn-tooltip">
+            <span class="tooltip-icon">📋</span>
+            Tâches
+          </span>
+          <span class="btn-ripple"></span>
+        </button>
+
+        <!-- Composant de notification -->
+        <app-notification-bell></app-notification-bell>
+
+        <!-- ✅ INDICATEUR DE CONNECTIVITÉ PREMIUM -->
+        <div class="connectivity-badge" [class.offline]="!isOnlineDirect" 
+             [matTooltip]="isOnlineDirect ? 'Connecté au serveur' : 'Mode hors ligne - Données locales'"
+             matTooltipPosition="below">
+          <div class="conn-icon-wrapper">
+            <mat-icon class="conn-icon">{{ isOnlineDirect ? 'wifi' : 'signal_wifi_off' }}</mat-icon>
+            <div class="conn-pulse" *ngIf="isOnlineDirect"></div>
+            <div class="conn-wave" *ngIf="isOnlineDirect"></div>
+          </div>
+          <span class="conn-text">{{ isOnlineDirect ? 'Connecté' : 'Hors ligne' }}</span>
+          
+        </div>
+
+        <!-- Indicateur de synchronisation -->
+        <div class="sync-indicator" *ngIf="pendingCount > 0" (click)="openSyncModal()">
+          <div class="sync-icon-wrapper">
+            <mat-icon class="sync-icon">sync</mat-icon>
+            <div class="sync-pulse-ring"></div>
+          </div>
+          <span class="sync-badge">{{ pendingCount }}</span>
+          <span class="sync-text">En attente</span>
+          <div class="sync-progress">
+            <div class="sync-progress-bar"></div>
+          </div>
+          <div class="sync-tooltip">{{ pendingCount }} document(s) en attente de synchronisation</div>
+        </div>
+
+        <!-- Bouton Pointage employés -->
+        <button mat-icon-button class="action-btn attendance-btn" (click)="goToAttendance()">
+          <mat-icon>groups</mat-icon>
+          <span class="btn-tooltip">
+            <span class="tooltip-icon">👥</span>
+            Pointage
+          </span>
+          <span class="btn-ripple"></span>
+        </button>
+
+        <!-- Bouton Calendrier -->
+        <button mat-icon-button class="action-btn calendar-btn" (click)="goToCalendar()">
+          <mat-icon>calendar_today</mat-icon>
+          <span class="btn-tooltip">
+            <span class="tooltip-icon">📅</span>
+            Calendrier
+          </span>
+          <span class="btn-ripple"></span>
+        </button>
+      </div>
+
+      <!-- Section Utilisateur Premium -->
+      <div class="user-section">
+        <button mat-button [matMenuTriggerFor]="menu" class="user-button modern-user">
+          <div class="account-wrapper">
+            <div class="user-avatar modern-avatar">
+              <span class="avatar-initials">{{ userInitials }}</span>
+              <div class="status-indicator online"></div>
+            </div>
+            <div class="user-info modern-user-info">
+              <span class="user-name">{{ userName }}</span>
+              <span class="user-role">{{ userRole }}</span>
+            </div>
+          </div>
+        </button>
+        
+        <mat-menu #menu="matMenu" class="user-menu" xPosition="before">
+          <div class="user-menu-header">
+            <div class="menu-user-avatar">
+              <mat-icon>account_circle</mat-icon>
+              <div class="avatar-status online"></div>
+              <div class="avatar-glow"></div>
+            </div>
+            <div class="menu-user-info">
+              <div class="menu-user-name">{{ userName }}</div>
+              <div class="menu-user-email">{{ userEmail || 'admin@soroubat.com' }}</div>
+            </div>
+          </div>
+          
+          <mat-divider></mat-divider>
+          
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>Mon profil</span>
+          </button>
+          
+          <button mat-menu-item routerLink="/settings">
+            <mat-icon>settings</mat-icon>
+            <span>Paramètres</span>
+          </button>
+          
+          <button mat-menu-item routerLink="/help">
+            <mat-icon>help_outline</mat-icon>
+            <span>Centre d'aide</span>
+          </button>
+          
+          <mat-divider></mat-divider>
+          
+          <!-- BOUTON DÉCONNEXION - Utilise isOnlineDirect -->
+          <button *ngIf="isOnlineDirect" mat-menu-item (click)="logout()" class="logout-item">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Déconnexion</span>
+          </button>
+          
+          <!-- Message affiché en offline -->
+          <div *ngIf="!isOnlineDirect" class="offline-logout-message">
+            <mat-icon>cloud_off</mat-icon>
+            <span>Déconnexion indisponible hors ligne</span>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
