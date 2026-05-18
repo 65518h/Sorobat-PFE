@@ -41,10 +41,9 @@ page 50137 "TransferLineAPI"
                 }
                 field(unitOfMeasure; Rec."Unit of Measure Code") { Caption = 'Unit of Measure'; Editable = false; }
 
-                field(stock; Rec.Stock) { Caption = 'Stock'; Editable = false; } 
-                field(numVehicule; Rec."N° vehicule") { Caption = 'N° Véhicule'; } 
-                field(affaire; Rec.Affaire) { Caption = 'Affaire/Projet'; Editable = false; } 
-                field(descriptionSoroubat; Rec."Description Soroubat") { Caption = 'Description Soroubat'; Editable = false; }
+                field(numVehicule; Rec."N° vehicule") { Caption = 'N° Véhicule'; Editable= false; } 
+
+
             }
         }
     }

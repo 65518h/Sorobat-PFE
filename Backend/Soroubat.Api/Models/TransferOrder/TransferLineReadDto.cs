@@ -45,21 +45,11 @@ namespace Soroubat.Api.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? UnitOfMeasure { get; set; }
 
-        [JsonPropertyName("stock")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public decimal? Stock { get; set; }
 
         [JsonPropertyName("numVehicule")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? NumVehicule { get; set; }
 
-        [JsonPropertyName("affaire")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Affaire { get; set; }
-
-        [JsonPropertyName("descriptionSoroubat")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? DescriptionSoroubat { get; set; }
     }
 
  

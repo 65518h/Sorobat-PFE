@@ -59,19 +59,15 @@ namespace Soroubat.Api.Controllers
             try
             {
                 var transfer = await _service.GetTransferByIdAsync(id, projectNo);
-
-                if (transfer == null)
-                    return NotFound(new { message = "Ordre de transfert introuvable." });
-
                 return Ok(transfer);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return StatusCode(StatusCodes.Status403Forbidden, new { message = ex.Message });
             }
             catch (KeyNotFoundException ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = ex.Message });
             }
             catch (Exception ex)
             {
@@ -79,6 +75,41 @@ namespace Soroubat.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Met à jour la date de réception d'un ordre de transfert.
+        /// Seul <c>receiptDate</c> est modifiable
+        /// (Editable = true côté AL TransferHeaderAPI50136).
+        /// </summary>
+        [HttpPatch("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PatchHeader(Guid id, [FromBody] TransferHeaderPatchDto headerDto)
+        {
+            var projectNo = UserProjectNo;
+            if (string.IsNullOrEmpty(projectNo))
+                return BadRequest(new { message = "Aucun projet n'est assigné à votre compte." });
+
+            try
+            {
+                await _service.PatchHeaderAsync(id, headerDto, projectNo);
+                return Ok(new { message = "Date de réception mise à jour avec succès." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
 
         /// <summary>
         /// Met à jour les champs de réception d'une ligne de transfert.
