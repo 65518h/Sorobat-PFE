@@ -14,8 +14,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("lineNo")]
         public int LineNo { get; set; }
 
-        [JsonPropertyName("transferer")]
-        public bool? Transferer { get; set; }
 
         [JsonPropertyName("type")]
         public string? Type { get; set; }
@@ -26,8 +24,8 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        [JsonPropertyName("description2")]
-        public string? Description2 { get; set; }
+        [JsonPropertyName("observation")]
+        public string? Observation { get; set; }
 
         [JsonPropertyName("quantity")]
         public decimal? Quantity { get; set; }
@@ -38,8 +36,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("locationCode")]
         public string? LocationCode { get; set; }
 
-        [JsonPropertyName("variantCode")]
-        public string? VariantCode { get; set; }
 
         [JsonPropertyName("jobNo")]
         public string? JobNo { get; set; }
@@ -47,11 +43,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("jobTaskNo")]
         public string? JobTaskNo { get; set; }
 
-        [JsonPropertyName("engin")]
-        public string? Engin { get; set; }
-
-        [JsonPropertyName("lineAmount")]
-        public decimal? LineAmount { get; set; }
     }
 
 

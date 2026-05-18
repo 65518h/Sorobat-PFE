@@ -8,8 +8,7 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("observation")]
         public string? Observation { get; set; }
 
-        [JsonPropertyName("requesterId")]
-        public string? RequesterId { get; set; }
+   
 
         [JsonPropertyName("requestType")]
         public string? RequestType { get; set; }
@@ -20,13 +19,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("locationCode")]
         public string? LocationCode { get; set; }
 
-        [JsonPropertyName("orderDate")]
-        public string? OrderDate { get; set; }
 
-        [JsonPropertyName("dueDate")]
-        public string? DueDate { get; set; }
-
-        [JsonPropertyName("service")]
-        public string? Service { get; set; }
     }
 }

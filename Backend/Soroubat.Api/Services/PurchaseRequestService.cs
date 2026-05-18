@@ -16,16 +16,19 @@ namespace Soroubat.Api.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<PurchaseRequestService> _logger;
 
-        // paramétres de sérialisation write et read 
+        // ── Options de sérialisation ──────────────────────────────────────────
+
+        /// <summary>Sérialisation en écriture : ignore les propriétés null pour ne pas écraser les valeurs BC.</summary>
         private static readonly JsonSerializerOptions SerializerOptionsWrite = new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
         };
 
+        /// <summary>Désérialisation en lecture : insensible à la casse, nommage camelCase.</summary>
         private static readonly JsonSerializerOptions SerializerOptionsRead = new()
         {
-            PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy             = JsonNamingPolicy.CamelCase
+            PropertyNameCaseInsensitive  = true,
+            PropertyNamingPolicy         = JsonNamingPolicy.CamelCase
         };
 
         public PurchaseRequestService(HttpClient httpClient, ILogger<PurchaseRequestService> logger)
@@ -34,48 +37,67 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // on a 3 méthodes helpers sérialisation 
+        // ── Méthodes helper de sérialisation ─────────────────────────────────
 
-        //  ToJsonObject : transforme un dto en JsonObject pour manipulation avant sérialisation finale.( dto , json object , json sérializé (string))
-        private static JsonObject ToJsonObject<T>(T dto, JsonSerializerOptions o) =>
-            (JsonSerializer.SerializeToNode(dto, o) as JsonObject) ?? new JsonObject();
+        /// <summary>
+        /// Sérialise un DTO en JsonObject pour permettre l'injection de champs supplémentaires
+        /// avant la sérialisation finale (ex : jobNo forcé depuis le JWT).
+        /// </summary>
+        private static JsonObject ToJsonObject<T>(T dto)
+        {
+            var node = JsonSerializer.SerializeToNode(dto, SerializerOptionsWrite);
+            return (node as JsonObject) ?? new JsonObject();
+        }
 
-        // MergeJobNoAndSerialize : ajoute le jobNo au JsonObject puis le sérialise en json string prét 
-        // on utilise le type générique T car ca peut étre remplacé par le dto de création ou de patch 
+        /// <summary>
+        /// Ajoute jobNo au DTO sérialisé et retourne le JSON final prêt à envoyer à BC.
+        /// Utilisé pour la création et la modification d'en-têtes et de lignes.
+        /// </summary>
         private static string MergeJobNoAndSerialize<T>(T dto, string projectNo)
         {
-            var root = ToJsonObject(dto, SerializerOptionsWrite);
+            var root = ToJsonObject(dto);
             root["jobNo"] = projectNo;
             return root.ToJsonString();
         }
 
-        // on n'utilise pas un type générique ici car la création de ligne nécessite l'ajout du lineNo qui n'existe pas dans le dto de patch
+        /// <summary>
+        /// Ajoute jobNo et lineNo au DTO de ligne et retourne le JSON final.
+        /// Un type non générique est nécessaire ici car lineNo n'existe pas dans PatchDto.
+        /// </summary>
         private static string MergeJobNoLineNoAndSerialize(PurchaseRequestLineCreateDto dto, string projectNo, int lineNo)
         {
-            var root = ToJsonObject(dto, SerializerOptionsWrite);
+            var root = ToJsonObject(dto);
             root["jobNo"]  = projectNo;
             root["lineNo"] = lineNo;
             return root.ToJsonString();
         }
 
+        // ── Méthodes helper de vérification ──────────────────────────────────
 
-        // on a 2 méthode helpers pour vérifier l'appartenance au projet du chef chantier connecté et récupérer l'etag pour les opérations de patch
-
-        // on vérifie si le header appartient au projet du chef chantier connecté + on récupère l'etag pour les opérations de patch
-        private async Task<(PurchaseRequestReadDto Header, string? ETag)> GetAndVerifyHeaderAsync(Guid id, string projectNo)
+        /// <summary>
+        /// Récupère un en-tête de demande d'achat depuis BC, vérifie qu'il appartient au projet
+        /// du chef connecté et retourne l'ETag pour les opérations PATCH / DELETE suivantes.
+        /// Lève <see cref="KeyNotFoundException"/> si introuvable.
+        /// Lève <see cref="UnauthorizedAccessException"/> si le projet ne correspond pas.
+        /// </summary>
+        private async Task<(PurchaseRequestReadDto Header, string? ETag)> GetAndVerifyHeaderAsync(
+            Guid id, string projectNo)
         {
             var response = await _httpClient.GetAsync($"purchaseRequests({id})");
 
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException($"La demande d'achat '{id}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La demande d'achat '{id}' est introuvable dans Business Central.");
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
-            // on utilise les regles de désérialisation de SerializerOptionsRead
-            var header = await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
+
+            var header = await response.Content
+                .ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
 
             if (header == null)
-                throw new KeyNotFoundException($"La demande d'achat '{id}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La demande d'achat '{id}' est introuvable dans Business Central.");
 
             if (!string.Equals(header.JobNo, projectNo, StringComparison.OrdinalIgnoreCase))
             {
@@ -85,27 +107,37 @@ namespace Soroubat.Api.Services
                 throw new UnauthorizedAccessException(
                     "Accès refusé : cette demande n'appartient pas à votre projet.");
             }
-            // l'etag contient la version de la ressource , ca sert pour les opérations de mise à jour (PATCH) pour éviter les conflits de version
-            var etag = response.Headers.ETag?.ToString(); 
+
+            // L'ETag contient la version de la ressource — obligatoire pour PATCH et DELETE
+            // afin d'éviter les conflits de concurrence (optimistic concurrency).
+            var etag = response.Headers.ETag?.ToString();
             return (header, etag);
         }
 
-
+        /// <summary>
+        /// Récupère une ligne de demande d'achat depuis BC, vérifie qu'elle appartient au projet
+        /// du chef connecté et retourne l'ETag pour les opérations PATCH / DELETE suivantes.
+        /// Lève <see cref="KeyNotFoundException"/> si introuvable.
+        /// Lève <see cref="UnauthorizedAccessException"/> si le projet ne correspond pas.
+        /// </summary>
         private async Task<(PurchaseRequestLineReadDto Line, string? ETag)> GetAndVerifyLineAsync(
             Guid lineId, string projectNo)
         {
             var response = await _httpClient.GetAsync($"purchaseRequestLines({lineId})");
 
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException($"La ligne '{lineId}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La ligne '{lineId}' est introuvable dans Business Central.");
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var line = await response.Content.ReadFromJsonAsync<PurchaseRequestLineReadDto>(SerializerOptionsRead);
+            var line = await response.Content
+                .ReadFromJsonAsync<PurchaseRequestLineReadDto>(SerializerOptionsRead);
 
             if (line == null)
-                throw new KeyNotFoundException($"La ligne '{lineId}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La ligne '{lineId}' est introuvable dans Business Central.");
 
             if (!string.Equals(line.JobNo, projectNo, StringComparison.OrdinalIgnoreCase))
             {
@@ -120,7 +152,11 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-         
+        /// <summary>
+        /// Retourne le numéro de ligne le plus élevé pour un document donné.
+        /// Utilisé pour calculer le prochain lineNo lors de la création de lignes (Max + 10 000).
+        /// Retourne 0 si aucune ligne n'existe encore.
+        /// </summary>
         private async Task<int> GetLastLineNoAsync(string documentNo)
         {
             var url = $"purchaseRequestLines?$filter=documentNo eq '{documentNo}'" +
@@ -133,16 +169,17 @@ namespace Soroubat.Api.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
-            using var doc = JsonDocument.Parse(content); // charge content en mémoire pour manipulation 
-            var root      = doc.RootElement.GetProperty("value"); // on accéde à la propriété "value" qui contient la liste des lignes retournées par BC
+            using var doc = JsonDocument.Parse(content);
+            var root      = doc.RootElement.GetProperty("value");
 
             if (root.GetArrayLength() > 0)
-                return root[0].GetProperty("lineNo").GetInt32(); // on extrait le lineNo le plus élevé 
+                return root[0].GetProperty("lineNo").GetInt32();
 
             return 0;
         }
-        
-        // ici commencent les méthodes métiers de l'interface IPurchaseRequestService
+
+        // ── Méthodes métier ───────────────────────────────────────────────────
+
         public async Task<IEnumerable<PurchaseRequestReadDto>> GetAllRequestsAsync(string projectNo)
         {
             var url = $"purchaseRequests?$filter=jobNo eq '{projectNo}'";
@@ -153,13 +190,16 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var result = await response.Content.ReadFromJsonAsync<BCResponse<PurchaseRequestReadDto>>(SerializerOptionsRead);
+            var result = await response.Content
+                .ReadFromJsonAsync<BCResponse<PurchaseRequestReadDto>>(SerializerOptionsRead);
+
             return result?.Value ?? Enumerable.Empty<PurchaseRequestReadDto>();
         }
 
         public async Task<PurchaseRequestReadDto?> GetRequestByIdAsync(Guid id, string projectNo)
         {
-            var url = $"purchaseRequests({id})?$expand=purchaseRequestLines";
+            // $expand inclut les lignes directement dans la réponse de l'en-tête
+            var url      = $"purchaseRequests({id})?$expand=purchaseRequestLines";
             var response = await _httpClient.GetAsync(url);
 
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -168,19 +208,24 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var request = await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
+            var request = await response.Content
+                .ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead);
 
-            // appartenance de la demande au projet du chef chantier connecté
             if (request != null &&
                 !string.Equals(request.JobNo, projectNo, StringComparison.OrdinalIgnoreCase))
             {
-                throw new UnauthorizedAccessException("Accès refusé : cette demande n'appartient pas à votre projet.");
+                _logger.LogWarning(
+                    "[PR] Accès refusé : demande {Id} appartient au projet {HeaderProject}, " +
+                    "chef connecté au projet {UserProject}", id, request.JobNo, projectNo);
+                throw new UnauthorizedAccessException(
+                    "Accès refusé : cette demande n'appartient pas à votre projet.");
             }
 
             return request;
         }
 
-        public async Task<PurchaseRequestReadDto> CreateHeaderAsync(PurchaseRequestCreateDto header, string projectNo)
+        public async Task<PurchaseRequestReadDto> CreateHeaderAsync(
+            PurchaseRequestCreateDto header, string projectNo)
         {
             var json    = MergeJobNoAndSerialize(header, projectNo);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -192,15 +237,18 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            // le ! sert à indiquer au compilateur que l'on est sûr que le résultat ne sera pas null , n'afficher pas un warning
-            return (await response.Content.ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead))!;
+            // Le ! indique au compilateur que la réponse ne sera jamais null après un succès BC
+            return (await response.Content
+                .ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead))!;
         }
 
-        public async Task<bool> CreateLinesAsync(List<PurchaseRequestLineCreateDto> lines, string projectNo)
+        public async Task<bool> CreateLinesAsync(
+            List<PurchaseRequestLineCreateDto> lines, string projectNo)
         {
-            if (lines == null || !lines.Any()) return false;
+            if (lines == null || !lines.Any())
+                return false;
 
-            var firstDocNo = lines.First().DocumentNo; // documentNo est le no du header 
+            var firstDocNo = lines.First().DocumentNo;
 
             if (string.IsNullOrWhiteSpace(firstDocNo))
                 throw new ArgumentException(
@@ -227,12 +275,13 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        public async Task<bool> PatchHeaderAsync(Guid id, PurchaseRequestPatchDto header, string projectNo)
+        public async Task<bool> PatchHeaderAsync(
+            Guid id, PurchaseRequestPatchDto header, string projectNo)
         {
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
             var json = JsonSerializer.Serialize(header, SerializerOptionsWrite);
-            _logger.LogInformation("[PR] PATCH en-tête {Id} — Body: {Json}", id, json);
+            _logger.LogInformation("[PR] PATCH en-tête {Id}", id);
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})")
             {
@@ -245,7 +294,7 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            _logger.LogInformation("[PR] PATCH en-tête {Id} — Réponse: {Status}",
+            _logger.LogInformation("[PR] PATCH en-tête {Id} — Réponse : {Status}",
                 id, (int)response.StatusCode);
 
             return true;
@@ -260,9 +309,9 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     $"Statut actuel '{currentStatut}' — seule une demande 'Open' peut être soumise.");
 
-            var json = """{"statut": "To Approve"}"""; // on échappe les guillemets internes du json
-            // on utilise patch car pour l'erp c'est une mise à jour d'une partie de la ressource (le statut) 
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})") 
+            // On ne modifie que le statut — les autres champs ne sont pas envoyés
+            var json    = """{"statut": "To Approve"}""";
+            var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})")
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
@@ -277,9 +326,9 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // le comportement de suppression des lignes en casecade est géré par BC , dans la table header dans le trigger onDelete 
-        public async Task<bool> DeleteRequestAsync(Guid id, string projectNo) 
+        public async Task<bool> DeleteRequestAsync(Guid id, string projectNo)
         {
+            // La suppression des lignes en cascade est gérée par le trigger OnDelete dans BC
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"purchaseRequests({id})");
@@ -294,12 +343,13 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-
-        public async Task<bool> PatchLineAsync(Guid lineId, PurchaseRequestLinePatchDto lineDto, string projectNo)
+        public async Task<bool> PatchLineAsync(
+            Guid lineId, PurchaseRequestLinePatchDto lineDto, string projectNo)
         {
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            var json    = MergeJobNoAndSerialize(lineDto, projectNo);
+            // jobNo n'est pas envoyé dans le PATCH ligne : BC interdit sa modification via OnModifyRecord
+            var json    = JsonSerializer.Serialize(lineDto, SerializerOptionsWrite);
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequestLines({lineId})")
             {
                 Content = new StringContent(json, Encoding.UTF8, "application/json")
@@ -311,14 +361,20 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
+            _logger.LogInformation("[PR] PATCH ligne {LineId} — Réponse : {Status}",
+                lineId, (int)response.StatusCode);
+
             return true;
         }
 
         public async Task<bool> DeleteLineAsync(Guid lineId, string projectNo)
         {
-            await GetAndVerifyLineAsync(lineId, projectNo);
+            var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            var response = await _httpClient.DeleteAsync($"purchaseRequestLines({lineId})");
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"purchaseRequestLines({lineId})");
+            request.Headers.TryAddWithoutValidation("If-Match", etag ?? "*");
+
+            var response = await _httpClient.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
@@ -326,7 +382,5 @@ namespace Soroubat.Api.Services
             _logger.LogInformation("[PR] Ligne {LineId} supprimée.", lineId);
             return true;
         }
-
-
     }
 }

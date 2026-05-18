@@ -26,7 +26,7 @@ namespace Soroubat.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<PurchaseRequestReadDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<PurchaseRequestReadDto>>> GetAll() //IEnumerable permet de retouner n'importe quel type de collection (List, Array...)
+        public async Task<ActionResult<IEnumerable<PurchaseRequestReadDto>>> GetAll()
         {
             var projectNo = UserProjectNo;
             if (string.IsNullOrEmpty(projectNo))
@@ -77,11 +77,11 @@ namespace Soroubat.Api.Controllers
 
         /// <summary>Crée l'en-tête d'une nouvelle demande d'achat.</summary>
         [HttpPost]
-        // typeof transforme la classe en un type décrivant la structure de la réponse
         [ProducesResponseType(typeof(PurchaseRequestReadDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PurchaseRequestReadDto>> CreateHeader([FromBody] PurchaseRequestCreateDto requestDto)
+        public async Task<ActionResult<PurchaseRequestReadDto>> CreateHeader(
+            [FromBody] PurchaseRequestCreateDto requestDto)
         {
             var projectNo = UserProjectNo;
             if (string.IsNullOrEmpty(projectNo))
@@ -160,10 +160,10 @@ namespace Soroubat.Api.Controllers
         }
 
         /// <summary>
-        /// Soumet une demande d'achat pour approbation.
-        /// La demande doit être au statut "Open".
+        /// Soumet une demande d'achat pour approbation (Open → To Approve).
+        /// POST et non PATCH car il s'agit d'une transition de statut métier, pas d'une modification de champ.
         /// </summary>
-        [HttpPost("{id:guid}/submit")] // on utilie post et non pas patch ici car on change le statut de la demande et pas une partie de son contenu
+        [HttpPost("{id:guid}/submit")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -198,7 +198,7 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        /// <summary>Supprime une demande d'achat.</summary>
+        /// <summary>Supprime une demande d'achat et ses lignes (cascade gérée par BC).</summary>
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -229,7 +229,6 @@ namespace Soroubat.Api.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
-
 
         /// <summary>Met à jour partiellement une ligne de demande d'achat.</summary>
         [HttpPatch("lines/{id:guid}")]

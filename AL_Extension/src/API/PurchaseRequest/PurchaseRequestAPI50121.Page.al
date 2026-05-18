@@ -10,17 +10,15 @@ page 50121 "PurchaseRequestAPI"
     SourceTable = "Purchase Request";
     DelayedInsert = true;
     ODataKeyFields = SystemId;
-    InsertAllowed = true;  // Le chef de chantier peut créer une demande
-    ModifyAllowed = true;  // Le chef peut modifier les champs autorisés
-    DeleteAllowed = true;  // Le chef peut supprimer une demande "Open"
-
+    InsertAllowed = true;  
+    ModifyAllowed = true;  
+    DeleteAllowed = true;  
     layout
     {
         area(Content)
         {
             repeater(GroupName)
             {
-                // ── Identifiants (lecture seule) ──────────────────────────────
                 field(id; Rec.SystemId) // rec est la ligne courante, xRec est la valeur avant modification
                 {
                     Caption = 'Id';
@@ -32,7 +30,6 @@ page 50121 "PurchaseRequestAPI"
                     Editable = false; // Auto-incrémenté par BC
                 }
 
-                // ── Champs modifiables par le chef de chantier ────────────────
                 field(observation; Rec.Observation)
                 {
                     Caption = 'Observation';
@@ -47,12 +44,9 @@ page 50121 "PurchaseRequestAPI"
                 field(jobDescription; Rec."Job Description")
                 {
                     Caption = 'Libellé Projet';
-                    Editable = false; // Calculé par BC depuis jobNo
+                    Editable = false; 
                 }
-                field(requesterId; Rec."Requester ID")
-                {
-                    Caption = 'Demandeur';
-                }
+
                 field(requestType; Rec."Request Type")
                 {
                     Caption = 'Type de demande';
@@ -63,38 +57,27 @@ page 50121 "PurchaseRequestAPI"
                 }
                 field(descriptionEngin; Rec."Description Engin")
                 {
-                    Caption = 'Désignation Engin';
-                    Editable = false; // Calculé par BC depuis engin
+                    Caption = 'Description Engin';
+                    Editable = false; 
                 }
                 field(locationCode; Rec."Location Code")
                 {
                     Caption = 'Code Magasin';
                 }
-                field(orderDate; Rec."Order Date")
-                {
-                    Caption = 'Date Commande';
+
+                field( "DateSaisie";Rec."Date saisie")
+                { 
+                    caption = 'Date de saisie'; // auto remplis par bc lors de la création, non modifiable
                 }
-                field(dueDate; Rec."Due Date")
-                {
-                    Caption = 'Date d''échéance';
-                }
-                // statut non modifiable directement depuis l'API :
-                // seule l'action /submit (PATCH dédié) peut changer Open → To Approve.
-                // Cela évite qu'un chef bypasse le workflow d'approbation.
+
+
                 field(statut; Rec.Statut)
                 {
                     Caption = 'Statut';
                     Editable = true;
                 }
-                field(amount; Rec.Amount)
-                {
-                    Caption = 'Montant';
-                    Editable = false; // Calculé par BC depuis les lignes
-                }
-                field(service; Rec.Service)
-                {
-                    Caption = 'Service';
-                }
+
+
             }
 
             part(purchaseRequestLines; "PurchaseRequestLineAPI")

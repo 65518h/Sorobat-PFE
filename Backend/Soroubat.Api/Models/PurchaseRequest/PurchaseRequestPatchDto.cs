@@ -14,13 +14,5 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("locationCode")]
         public string? LocationCode { get; set; }
 
-        [JsonPropertyName("orderDate")]
-        public string? OrderDate { get; set; }
-
-        [JsonPropertyName("dueDate")]
-        public string? DueDate { get; set; }
-
-        [JsonPropertyName("service")]
-        public string? Service { get; set; }
     }
 }
