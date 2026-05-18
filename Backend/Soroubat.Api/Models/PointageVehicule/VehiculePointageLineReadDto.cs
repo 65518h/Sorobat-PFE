@@ -2,15 +2,17 @@ using System.Text.Json.Serialization;
 
 namespace Soroubat.Api.Models
 {
-    /// <summary>GET — ligne pointage véhicule BC (page 50149).</summary>
+    /// <summary>
+    /// GET — ligne pointage véhicule BC (page 50149).
+    /// Le champ <c>marche</c> (jobNo de la ligne) n'est pas exposé au client —
+    /// il est forcé par le backend depuis le JWT lors de la création/modification.
+    /// </summary>
     public class VehiculePointageLineReadDto
     {
         [JsonPropertyName("id")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Guid? Id { get; set; }
 
         [JsonPropertyName("documentNo")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? DocumentNo { get; set; }
 
         [JsonPropertyName("vehiculeNo")]
@@ -19,8 +21,8 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
+        /// <summary>Statut de la ligne — calculé/géré par BC, non modifiable directement.</summary>
         [JsonPropertyName("status")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? Status { get; set; }
 
         [JsonPropertyName("hoursWorked")]
@@ -34,14 +36,5 @@ namespace Soroubat.Api.Models
 
         [JsonPropertyName("fuelConsumed")]
         public decimal? FuelConsumed { get; set; }
-
-        [JsonPropertyName("breakdownMotiv")]
-        public string? BreakdownMotiv { get; set; }
-
-        [JsonPropertyName("marche")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? Marche { get; set; }
     }
-
-
 }
