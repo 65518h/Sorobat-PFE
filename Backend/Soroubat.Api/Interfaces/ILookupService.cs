@@ -15,14 +15,17 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         /// <param name="entitySetName">
         /// Nom de l'entity set BC à interroger. Valeurs supportées :
-        /// "projects"     — projets (filtrés sur le projet du chef connecté)
-        /// "projectTasks" — tâches projet (filtrées sur le projet du chef connecté)
-        /// "locations"    — emplacements/magasins (pas de filtre projet)
-        /// "items"        — articles (pas de filtre projet)
-        /// "vehicules"    — véhicules/engins (pas de filtre projet)
-        /// "requesters"   — demandeurs (pas de filtre projet)
-        /// "fixedAssets"  — immobilisations (pas de filtre projet)
-        /// "employees"    — salariés (pas de filtre projet — utiliser EmployeeService pour un filtre par chantier)
+        /// "projects"       — projets (filtrés sur le projet du chef connecté)          — page 50124
+        /// "projectTasks"   — tâches projet (filtrées sur le projet du chef connecté)   — page 50125
+        /// "locations"      — emplacements/magasins (pas de filtre projet)              — page 50126
+        /// "items"          — articles (pas de filtre projet)                           — page 50133
+        /// "vehicules"      — véhicules/engins (pas de filtre projet)                   — page 50134
+        /// "requesters"     — demandeurs (pas de filtre projet)                         — page 50140
+        /// "fixedAssets"    — immobilisations (pas de filtre projet)                    — page 50144
+        /// "employees"      — salariés (pas de filtre projet)                           — page 50154
+        /// "chefsChantier"  — chefs de chantier (pas de filtre projet)                  — page 50155
+        /// "shippingAgents" — transporteurs/chauffeurs (pas de filtre projet)           — page 50181
+        /// "postCodes"      — codes postaux/destinations (pas de filtre projet)         — page 50182
         /// </param>
         /// <param name="projectNo">Numéro de projet du chef connecté — utilisé pour filtrer projects et projectTasks.</param>
         /// <param name="additionalFilter">Filtre OData additionnel libre (ex : "status eq 'Open'").</param>

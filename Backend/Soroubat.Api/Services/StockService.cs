@@ -39,11 +39,7 @@ namespace Soroubat.Api.Services
                 return new List<StockChantierReadDto>();
             }
 
-            // Index locationCode → locationName pour enrichir sans appel supplémentaire
-            var locationIndex = locations.ToDictionary(
-                loc => loc.Code,
-                loc => loc.Name,
-                StringComparer.OrdinalIgnoreCase);
+
 
             // AGRÉGATION : groupement par article et emplacement pour obtenir le stock réel.
             // La somme des quantités (entrées positives + sorties négatives) donne le stock courant.
@@ -61,7 +57,6 @@ namespace Soroubat.Api.Services
                     ItemNo          = groupe.Key.ItemNo,
                     ItemDescription = groupe.Key.Description,
                     LocationCode    = groupe.Key.LocationCode,
-                    LocationName    = locationIndex.GetValueOrDefault(groupe.Key.LocationCode, string.Empty),
                     Quantity        = groupe.Sum(entry => entry.Quantity),
                     JobNo           = projectNo,
                     LastPostingDate = groupe.Max(entry => entry.PostingDate)

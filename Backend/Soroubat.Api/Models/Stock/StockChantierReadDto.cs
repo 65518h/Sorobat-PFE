@@ -18,10 +18,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("locationCode")]
         public string LocationCode { get; set; } = string.Empty;
 
-        /// <summary>Nom complet du magasin — résolu depuis LocationAPI en un seul appel partagé.</summary>
-        [JsonPropertyName("locationName")]
-        public string LocationName { get; set; } = string.Empty;
-
         /// <summary>
         /// Stock réel = somme de toutes les écritures de l'article sur l'emplacement.
         /// Peut être négatif en cas d'incohérence dans BC (détecté par AlertService).

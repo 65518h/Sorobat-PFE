@@ -11,10 +11,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("locationCode")]
         public string? LocationCode { get; set; }
 
-        [JsonPropertyName("startIndex")]
-        public decimal? StartIndex { get; set; }
 
-        [JsonPropertyName("endIndex")]
-        public decimal? EndIndex { get; set; }
     }
 }

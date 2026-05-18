@@ -40,10 +40,7 @@ page 50120 "JobTaskAPI"
                     Caption = 'Description';
                     Editable = false;
                 }
-                field(dateFin; Rec."Date Fin")
-                {
-                    Caption = 'Date Fin';
-                }
+
 
                 // avancement manuel par le chef de chantier
                 field(progressPct; Rec."Progress %")
