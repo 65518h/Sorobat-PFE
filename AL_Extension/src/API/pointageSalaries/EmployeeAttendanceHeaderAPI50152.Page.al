@@ -27,11 +27,6 @@ page 50152 "EmpAttendanceHeaderAPI"
                 field(year; Rec."Année") { Caption = 'Year'; }
                 field(jobNo; Rec.Chantier) { Caption = 'Job No'; }
                 field(totalStaff; Rec."Total Effectif") { Caption = 'Total Staff'; }
-                field(totalPresent; Rec."Total Present") { Caption = 'Total Present'; }
-                field(attendanceRate; Rec."Taux Present") { Caption = 'Attendance Rate'; }
-                field(totalAbsentJustified; Rec."Total Absent Justifie") { Caption = 'Total Absent Justified'; }
-                field(absenceRate; Rec."Taux Absence") { Caption = 'Absence Rate'; }
-                field(thresholdDays; Rec."Seuil Jours de Pointage") { Caption = 'Threshold Days'; }
             }
             part(employeeAttendanceLines; "EmpAttendanceLineAPI")
             {

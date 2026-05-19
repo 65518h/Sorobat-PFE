@@ -15,8 +15,8 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("assignment")]
         public string? Assignment { get; set; }
 
-        [JsonPropertyName("qualification")]
-        public string? Qualification { get; set; }
+        [JsonPropertyName("assignmentDescription")]
+        public string? AssignmentDescription { get; set; }
 
         [JsonPropertyName("day1")]  public string? Day1  { get; set; }
         [JsonPropertyName("day2")]  public string? Day2  { get; set; }

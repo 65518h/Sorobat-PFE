@@ -35,9 +35,8 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("assignment")]
         public string? Assignment { get; set; }
 
-        /// <summary>Qualification du salarié.</summary>
-        [JsonPropertyName("qualification")]
-        public string? Qualification { get; set; }
+        [JsonPropertyName("assignmentDescription")]
+        public string? AssignmentDescription { get; set; }
 
         // ── Pointage journalier 1 à 31 ────────────────────────────────────────
         [JsonPropertyName("day1")]  public string? Day1  { get; set; }
@@ -86,6 +85,18 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("totalHours")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public decimal? TotalHours { get; set; }
+
+                [JsonPropertyName("totalCong")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public decimal? TotalCong { get; set; }
+
+                [JsonPropertyName("totalCongExp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public decimal? TotalCongExp { get; set; }
+
+                [JsonPropertyName("totalFerier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public decimal? TotalFerier { get; set; }
     }
 
 

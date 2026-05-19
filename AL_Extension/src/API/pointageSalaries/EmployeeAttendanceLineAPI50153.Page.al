@@ -26,7 +26,7 @@ page 50153 "EmpAttendanceLineAPI"
                 field(employeeNo; Rec.Matricule) { Caption = 'Employee No'; }
                 field(employeeName; Rec.Nom) { Caption = 'Employee Name'; }
                 field(assignment; Rec.Affectation) { Caption = 'Assignment'; }
-                field(qualification; Rec.Qualification) { Caption = 'Qualification'; }
+                field(assignmentDescription; Rec."Description affectation") { Caption = 'assignmentDescription'; }
                 
                 // Pointage journalier 1 à 31
                 field(day1; Rec."1") { Caption = 'Day 1'; }
@@ -64,6 +64,9 @@ page 50153 "EmpAttendanceLineAPI"
                 field(totalPresentDays; Rec."Nbre Jours Present") { Caption = 'Total Present Days'; }
                 field(totalAbsentDays; Rec."Nbre Jours Absent") { Caption = 'Total Absent Days'; }
                 field(totalHours; Rec."Nbre Total Heures Presnt") { Caption = 'Total Hours'; }
+                field(totalCong; Rec."Nbre Jours Congé") { Caption = 'Total Congé'; }
+                field(totalCongExp; Rec."Nbre Jours congé EXP") { Caption = 'Total congé EXP'; }
+                field(totalFerier; Rec."Nbre Jours Ferier") { Caption = 'Total Ferier'; }
             }
         }
     }
