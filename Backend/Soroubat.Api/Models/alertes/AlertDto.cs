@@ -13,12 +13,13 @@ namespace Soroubat.Api.Models
 
         /// <summary>
         /// Catégorie de l'alerte.
-        /// SiteManagement   : "TaskBlocked" | "TaskDelay" | "TaskNotStarted" | "BudgetOverrun"
-        /// PurchaseRequest  : "PurchaseRequestRejected" | "PurchaseRequestPendingTooLong" | "PurchaseRequestOverdue" | "PurchaseRequestEmpty"
+        /// SiteManagement   : "TaskDelay" | "TaskNotStarted"
+        /// PurchaseRequest  : "PurchaseRequestRejected" | "PurchaseRequestPendingTooLong" | "PurchaseRequestEmpty"
         /// Transfer         : "TransferStuckInTransit" | "TransferNotShipped" | "TransferPartialReceipt" | "TransferNoVehicle"
-        /// Stock            : "StockNégatif" | "StockCritique" | "StockDormant"
-        /// Véhicule         : "PointageNonValidé" | "VehiculeSurutilisé" | "IndexIncohérent" | "PanneSansMotif" | "ConsommationAnormale"
-        /// Gasoil           : "GasoilFicheNonValidée" | "GasoilIndexIncohérent" | "GasoilConsommationTotaleAnormale" | "GasoilLigneSansVéhicule" | "GasoilQuantitéLigneAnormale"
+        /// Stock            : "StockNegatif" | "StockCritique" | "StockDormant"
+        /// Vehicule         : "PointageNonValide" | "VehiculeSurutilise" | "IndexIncoherent" | "ConsommationAnormale"
+        /// Gasoil           : "GasoilFicheNonValidee" | "GasoilConsommationTotaleAnormale" | "GasoilLigneSansVehicule" | "GasoilQuantiteLigneAnormale"
+        /// Attendance       : "AttendanceFicheSansLignes" | "AttendanceSalarieNonPointe"
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
