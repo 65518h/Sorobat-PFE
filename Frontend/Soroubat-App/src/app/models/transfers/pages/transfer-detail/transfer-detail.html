@@ -1,0 +1,352 @@
+<!-- src/app/models/transfers/pages/transfer-detail/transfer-detail.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="transfer-detail-container">
+  
+  <!-- ==================== HEADER ==================== -->
+  <div class="page-header-modern">
+    <div class="header-gradient-bg"></div>
+    <div class="header-content-modern">
+      <div class="header-left-modern">
+        <button class="back-button" mat-icon-button (click)="goBack()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title-section">
+          <div class="title-icon">
+            <mat-icon>local_shipping</mat-icon>
+          </div>
+          <div class="title-text">
+            <h1>Détail du transfert</h1>
+            <p class="subtitle">N° {{ transfer?.no || '—' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge" [class]="getStatusClass(transfer?.status)">
+        <mat-icon>{{ getStatusIcon(transfer?.status) }}</mat-icon>
+        <span>{{ getStatusLabel(transfer?.status) }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement du transfert...</p>
+  </div>
+  
+  <!-- ==================== ERROR ==================== -->
+  <div *ngIf="error && !loading" class="error-state">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Une erreur est survenue</h3>
+    <p>{{ error }}</p>
+    <button class="btn-retry" (click)="loadTransfer()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+  
+  <!-- ==================== CONTENU ==================== -->
+  <div *ngIf="!loading && !error && transfer" class="main-content">
+    
+    <!-- Cartes d'informations -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon primary">
+          <mat-icon>warehouse</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Magasin origine</span>
+          <span class="value">{{ transfer.transferFromCode || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon success">
+          <mat-icon>warehouse</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Magasin destination</span>
+          <span class="value">{{ transfer.transferToCode || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon info">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Chantier origine</span>
+          <span class="value">{{ transfer.chantierOrigine || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon info">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Chantier destination</span>
+          <span class="value">{{ transfer.chantierDestination || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon warning">
+          <mat-icon>calendar_today</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Date de transfert</span>
+          <span class="value">{{ formatDate(transfer.postingDate) }}</span>
+        </div>
+      </div>
+      
+      <!-- Carte Date de réception complète -->
+      <div class="info-card receipt-date-card">
+        <div class="info-icon success">
+          <mat-icon>event_available</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">
+            Date de réception
+            <mat-icon class="info-tooltip" 
+                      *ngIf="canEditReceiptDate()"
+                      matTooltip="Vous pouvez modifier la date de réception tant que le transfert est à l'état 'Ouvert'">
+              info
+            </mat-icon>
+          </span>
+          
+          <!-- Mode édition -->
+          <div *ngIf="canEditReceiptDate() && isEditingReceiptDate" class="receipt-date-edit">
+            <input type="date" 
+                   class="date-input"
+                   [value]="editableReceiptDate"
+                   (change)="onReceiptDateChange($event)"
+                   [disabled]="updatingReceiptDate">
+            
+            <button class="edit-validate-btn" 
+                    (click)="validateReceiptDate()"
+                    [disabled]="updatingReceiptDate"
+                    matTooltip="Valider la date">
+              <mat-icon>check</mat-icon>
+            </button>
+            
+            <button class="edit-cancel-btn" 
+                    (click)="cancelEditReceiptDate()"
+                    [disabled]="updatingReceiptDate"
+                    matTooltip="Annuler">
+              <mat-icon>close</mat-icon>
+            </button>
+            
+            <mat-icon *ngIf="updatingReceiptDate" class="spinner-icon">autorenew</mat-icon>
+          </div>
+          
+          <!-- Mode affichage -->
+          <div *ngIf="!canEditReceiptDate() || !isEditingReceiptDate" class="receipt-date-display">
+            <span class="value">{{ formatReceiptDate(transfer.receiptDate) }}</span>
+            <button *ngIf="canEditReceiptDate()" 
+                    class="edit-date-btn"
+                    (click)="startEditReceiptDate()"
+                    matTooltip="Modifier la date de réception">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="info-card" *ngIf="transfer.idExpediteur">
+        <div class="info-icon primary">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Expéditeur</span>
+          <span class="value">{{ transfer.idExpediteur }}</span>
+        </div>
+      </div>
+      <div class="info-card" *ngIf="transfer.numMateriel">
+        <div class="info-icon warning">
+          <mat-icon>build</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">N° Matériel</span>
+          <span class="value">{{ transfer.numMateriel }}</span>
+        </div>
+      </div>
+      <div class="info-card" *ngIf="transfer.idReceptionneur">
+        <div class="info-icon success">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Réceptionneur</span>
+          <span class="value">{{ transfer.idReceptionneur }}</span>
+        </div>
+      </div>
+      <div class="info-card" *ngIf="transfer.observation">
+        <div class="info-icon info">
+          <mat-icon>chat_bubble_outline</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Observation</span>
+          <span class="value">{{ transfer.observation }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Message si transfert déjà réceptionné -->
+    <div *ngIf="transfer.status === 'Received'" class="alert alert-success">
+      <mat-icon>check_circle</mat-icon>
+      <div class="alert-content">
+        <strong>Transfert réceptionné</strong>
+        <p>Ce transfert a déjà été complètement réceptionné.</p>
+      </div>
+    </div>
+    
+    <!-- Message si transfert annulé -->
+    <div *ngIf="transfer.status === 'Cancelled'" class="alert alert-danger">
+      <mat-icon>cancel</mat-icon>
+      <div class="alert-content">
+        <strong>Transfert annulé</strong>
+        <p>Ce transfert a été annulé. Aucune action possible.</p>
+      </div>
+    </div>
+    
+    <!-- Section articles -->
+    <div class="articles-section">
+      <div class="section-header">
+        <div class="header-left">
+          <mat-icon>shopping_cart</mat-icon>
+          <h3>Articles du transfert</h3>
+        </div>
+        <div class="reception-summary" *ngIf="transfer.status === 'Released'">
+          <span class="summary-label">Total à réceptionner :</span>
+          <span class="summary-value">{{ getTotalToReceive() }}</span>
+        </div>
+      </div>
+      
+      <div class="table-wrapper">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th class="col-item">Article</th>
+              <th class="col-desc">Description</th>
+              <th class="col-qty text-right">Quantité</th>
+              <th class="col-shipped text-right">Expédié</th>
+              <th class="col-received text-right">Reçu</th>
+              <th class="col-remaining text-right">Restant</th>
+              <th class="col-stock text-right">Stock</th>
+              <th class="col-unit">Unité</th>
+              <th class="col-vehicule">N° Véhicule</th>
+              <th class="col-to-receive text-center" *ngIf="transfer.status === 'Released'">À réceptionner</th>
+              <th class="col-action text-center" *ngIf="transfer.status === 'Released'">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let line of transfer.transferLines; let i = index">
+              <td class="col-item">
+                <span class="item-badge">{{ line.itemNo || '—' }}</span>
+              </td>
+              <td class="col-desc">
+                <span class="item-desc">{{ line.description || '—' }}</span>
+              </td>
+              <td class="col-qty text-right">
+                <span class="quantity-badge">{{ line.quantity || 0 }}</span>
+              </td>
+              <td class="col-shipped text-right">
+                <span class="shipped-badge">{{ line.quantityShipped || 0 }}</span>
+              </td>
+              <td class="col-received text-right">
+                <span class="received-badge">{{ line.quantityReceived || 0 }}</span>
+              </td>
+              <td class="col-remaining text-right">
+                <span class="remaining-badge">{{ getRemainingQuantity(line) }}</span>
+              </td>
+              <td class="col-stock text-right">
+                <span class="stock-badge">{{ line.stock || 0 }}</span>
+              </td>
+              <td class="col-unit">
+                {{ line.unitOfMeasure || '—' }}
+              </td>
+              <td class="col-vehicule">
+                <span class="vehicule-badge">{{ line.numVehicule || '—' }}</span>
+              </td>
+              <td class="col-to-receive text-center" *ngIf="transfer.status === 'Released'">
+                <div class="quantity-input-wrapper" *ngIf="canReceiveLine(line); else receivedInfo">
+                  <input type="number" 
+                         class="quantity-input"
+                         [value]="getQuantityToReceive(line.id ||'')"
+                         (input)="onQuantityInputChange($event, line)"
+                         min="0"
+                         [max]="getRemainingQuantity(line)"
+                         step="1"
+                         placeholder="0">
+                </div>
+                <ng-template #receivedInfo>
+                  <span class="received-complete" *ngIf="getRemainingQuantity(line) === 0">
+                    <mat-icon>check_circle</mat-icon> Complet
+                  </span>
+                </ng-template>
+              </td>
+              <td class="col-action text-center" *ngIf="transfer.status === 'Released'">
+                <button class="action-btn receive" 
+                        (click)="receiveLine(line, i)"
+                        [disabled]="getQuantityToReceive(line.id ||'') <= 0 || submitting || getRemainingQuantity(line) === 0"
+                        matTooltip="Réceptionner cette ligne">
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Message si aucune ligne -->
+      <div *ngIf="!transfer.transferLines || transfer.transferLines.length === 0" class="empty-lines">
+        <mat-icon>inbox</mat-icon>
+        <p>Aucun article dans ce transfert</p>
+      </div>
+      
+      <!-- Actions de réception (chef de chantier) -->
+      <div class="reception-actions" *ngIf="transfer.status === 'Released' && !isAdmin">
+        <div *appOfflineHideActions>
+          <button class="btn-receive-all" 
+                  (click)="receiveAll()" 
+                  [disabled]="getTotalToReceive() === 0 || submitting">
+            <mat-icon>check_circle</mat-icon>
+            <span>Valider la réception complète</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Actions administrateur -->
+      <div class="admin-actions" *ngIf="isAdmin && (transfer.status === 'Open' || transfer.status === 'Released')">
+        <div *appOfflineHideActions>
+          <button class="btn-edit" (click)="editTransfer()" *ngIf="transfer.status === 'Open'">
+            <mat-icon>edit</mat-icon>
+            <span>Modifier</span>
+          </button>
+          <button class="btn-delete" (click)="deleteTransfer()" *ngIf="transfer.status === 'Open'">
+            <mat-icon>delete</mat-icon>
+            <span>Supprimer</span>
+          </button>
+          <button class="btn-release" (click)="releaseTransfer()" *ngIf="transfer.status === 'Open'">
+            <mat-icon>local_shipping</mat-icon>
+            <span>Expédier</span>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</div>
+
+<!-- ✅ INDICATEUR MODE OFFLINE -->
+<div class="offline-data-indicator" *ngIf="isReadOnly && transfer">
+  <mat-icon>cloud_off</mat-icon>
+  <span>📱 Mode hors ligne - Consultation uniquement</span>
+</div>

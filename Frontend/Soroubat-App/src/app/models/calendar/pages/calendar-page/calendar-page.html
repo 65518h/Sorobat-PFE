@@ -1,0 +1,421 @@
+<div class="calendar-container">
+  
+  <!-- Hero Section -->
+  <div class="hero-gradient">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="logo-wrapper">
+          <mat-icon>event_note</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Mon Calendrier</h1>
+          <p>Gérez vos événements et tâches en toute simplicité</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="today-btn" (click)="goToToday()">
+          <mat-icon>today</mat-icon>
+          Aujourd'hui
+        </button>
+        <button class="notif-btn" (click)="toggleNotifications()" [class.has-notif]="hasPendingNotifications">
+          <mat-icon>notifications{{ hasPendingNotifications ? '_active' : '' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre d'outils -->
+  <div class="toolbar">
+    <div class="view-toggle">
+      <button [class.active]="currentView === 'month'" (click)="setView('month')">
+        <mat-icon>calendar_month</mat-icon>
+        Mois
+      </button>
+      <button [class.active]="currentView === 'week'" (click)="setView('week')">
+        <mat-icon>view_week</mat-icon>
+        Semaine
+      </button>
+    </div>
+    
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <input type="text" 
+             [(ngModel)]="searchTerm" 
+             (input)="onSearch()"
+             placeholder="Rechercher un événement...">
+      <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <button class="add-event-toolbar" (click)="openAddEventDialog()">
+      <mat-icon>add</mat-icon>
+      Nouvel événement
+    </button>
+  </div>
+
+  <!-- Statistiques -->
+  <div class="stats-wrapper">
+    <div class="stat-card" (click)="filterByType('task')">
+      <div class="stat-icon purple">
+        <mat-icon>assignment_turned_in</mat-icon>
+      </div>
+      <div class="stat-data">
+        <h4>{{ totalTasks }}</h4>
+        <p>Tâches</p>
+      </div>
+    </div>
+    <div class="stat-card" (click)="filterByType('attendance')">
+      <div class="stat-icon green">
+        <mat-icon>people</mat-icon>
+      </div>
+      <div class="stat-data">
+        <h4>{{ totalAttendance }}</h4>
+        <p>Présences</p>
+      </div>
+    </div>
+    <div class="stat-card" (click)="filterByType('purchase')">
+      <div class="stat-icon orange">
+        <mat-icon>shopping_bag</mat-icon>
+      </div>
+      <div class="stat-data">
+        <h4>{{ totalPurchases }}</h4>
+        <p>Commandes</p>
+      </div>
+    </div>
+    <div class="stat-card" (click)="filterByType('overdue')">
+      <div class="stat-icon red">
+        <mat-icon>priority_high</mat-icon>
+      </div>
+      <div class="stat-data">
+        <h4>{{ totalOverdue }}</h4>
+        <p>Urgences</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vue Mois -->
+  <div class="calendar-glass" *ngIf="currentView === 'month'">
+    <div class="calendar-nav">
+      <button class="nav-btn" (click)="previousMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="month-year">
+        <span class="month">{{ currentMonthName }}</span>
+        <span class="year">{{ currentYear }}</span>
+      </div>
+      <button class="nav-btn" (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="weekdays">
+      <div *ngFor="let day of weekDays" class="weekday">{{ day }}</div>
+    </div>
+
+    <div class="calendar-grid">
+      <div *ngFor="let day of calendarDays" 
+           class="calendar-cell"
+           [class.empty]="!day.date"
+           [class.today]="day.isToday"
+           [class.selected]="selectedDate === day.date"
+           [class.has-events]="day.events.length > 0"
+           (click)="selectDate(day)">
+        
+        <div class="date-badge" *ngIf="day.date">
+          {{ day.date.getDate() }}
+        </div>
+        
+        <div class="events-preview" *ngIf="day.events.length > 0">
+          <div *ngFor="let event of day.events | slice:0:2" 
+               class="event-chip"
+               [attr.data-type]="event.type">
+            <mat-icon>{{ getEventIcon(event.type) }}</mat-icon>
+            <span>{{ event.title | slice:0:12 }}</span>
+          </div>
+          <div class="event-more" *ngIf="day.events.length > 2">
+            +{{ day.events.length - 2 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vue Semaine -->
+  <div class="calendar-glass week-view" *ngIf="currentView === 'week'">
+    <div class="calendar-nav">
+      <button class="nav-btn" (click)="previousWeek()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="month-year">
+        <span class="month">Semaine du {{ getWeekRange() }}</span>
+      </div>
+      <button class="nav-btn" (click)="nextWeek()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="week-header">
+      <div class="week-time-column">Heure</div>
+      <div *ngFor="let day of weekDays" class="week-day-header">
+        <div class="week-day-name">{{ day }}</div>
+        <div class="week-day-date">{{ getWeekDayDate(day) }}</div>
+      </div>
+    </div>
+
+    <div class="week-grid">
+      <div class="time-slots">
+        <div *ngFor="let hour of hourSlots" class="time-slot">{{ hour }}h</div>
+      </div>
+      <div class="week-events-grid">
+        <div *ngFor="let day of weekDays; let i = index" class="week-day-column">
+          <div *ngFor="let hour of hourSlots" class="week-hour-cell" 
+               (click)="openAddEventAtSlot(getWeekDate(i, hour))">
+            <div *ngFor="let event of getEventsAtSlot(getWeekDate(i, hour))" 
+                 class="week-event"
+                 [attr.data-type]="event.type"
+                 (click)="$event.stopPropagation(); editEvent(event)">
+              <div class="week-event-title">{{ event.title }}</div>
+              <div class="week-event-time">{{ getEventTime(event) }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panneau des événements -->
+  <div class="events-sidebar" *ngIf="selectedDate">
+    <div class="sidebar-header">
+      <div class="date-info">
+        <mat-icon>calendar_today</mat-icon>
+        <div>
+          <h3>{{ formatDate(selectedDate) }}</h3>
+          <span>{{ getDayInfo(selectedDate) }}</span>
+        </div>
+      </div>
+      <div class="sidebar-actions">
+        <button class="icon-btn" (click)="openAddEventDialog()" matTooltip="Ajouter">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Résultats de recherche -->
+    <div class="search-results" *ngIf="searchTerm && searchResults.length > 0">
+      <div class="search-results-header">
+        <mat-icon>search</mat-icon>
+        <span>{{ searchResults.length }} résultat(s) pour "{{ searchTerm }}"</span>
+        <button (click)="clearSearch()">Fermer</button>
+      </div>
+      <div class="search-results-list">
+        <div *ngFor="let event of searchResults" class="search-result-item" (click)="goToEventDate(event)">
+          <div class="search-result-icon" [attr.data-type]="event.type">
+            <mat-icon>{{ getEventIcon(event.type) }}</mat-icon>
+          </div>
+          <div class="search-result-info">
+            <div class="search-result-title">{{ event.title }}</div>
+            <div class="search-result-date">{{ formatDate(event.date) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="events-list" *ngIf="selectedDateEvents.length > 0 && !(searchTerm && searchResults.length > 0)">
+      <div *ngFor="let event of selectedDateEvents" 
+           class="event-card-modern"
+           [attr.data-type]="event.type">
+        <div class="event-indicator"></div>
+        <div class="event-content">
+          <div class="event-header">
+            <mat-icon>{{ getEventIcon(event.type) }}</mat-icon>
+            <h4>{{ event.title }}</h4>
+          </div>
+          <p class="event-desc" *ngIf="event.description">{{ event.description }}</p>
+          <div class="event-meta">
+            <span class="event-type-badge">{{ getEventTypeLabel(event.type) }}</span>
+            <span class="event-time" *ngIf="event.time">{{ event.time }}</span>
+          </div>
+        </div>
+        <div class="event-actions">
+          <button class="edit-event-btn" (click)="editEvent(event)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="delete-event-btn" (click)="deleteEvent(event)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-sidebar" *ngIf="selectedDateEvents.length === 0 && !(searchTerm && searchResults.length > 0)">
+      <div class="empty-icon">
+        <mat-icon>event_available</mat-icon>
+      </div>
+      <p>Aucun événement prévu</p>
+      <button class="primary-btn" (click)="openAddEventDialog()">
+        <mat-icon>add_circle</mat-icon>
+        Créer un événement
+      </button>
+    </div>
+  </div>
+
+  <!-- Panneau des notifications -->
+  <div class="notifications-panel" *ngIf="showNotifications" (click)="$event.stopPropagation()">
+    <div class="notifications-header">
+      <h3>
+        <mat-icon>notifications</mat-icon>
+        Rappels
+      </h3>
+      <button class="close-notif" (click)="toggleNotifications()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="notifications-list">
+      <div *ngFor="let notif of pendingNotifications" class="notification-item">
+        <div class="notif-icon" [attr.data-type]="notif.event.type">
+          <mat-icon>{{ getEventIcon(notif.event.type) }}</mat-icon>
+        </div>
+        <div class="notif-content">
+          <div class="notif-title">{{ notif.event.title }}</div>
+          <div class="notif-date">{{ getRelativeDate(notif.event.date) }}</div>
+        </div>
+        <button class="notif-action" (click)="goToEvent(notif.event)">
+          Voir
+        </button>
+      </div>
+      <div class="no-notif" *ngIf="pendingNotifications.length === 0">
+        <mat-icon>notifications_off</mat-icon>
+        <p>Aucun rappel pour le moment</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal d'ajout/modification - Version améliorée -->
+<div class="modal-modern" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-modern-content" (click)="$event.stopPropagation()">
+    <div class="modal-modern-header">
+      <div class="modal-header-left">
+        <div class="modal-icon" [class]="editingEvent ? 'edit-mode' : 'create-mode'">
+          <mat-icon>{{ editingEvent ? 'edit' : 'add' }}</mat-icon>
+        </div>
+        <div class="modal-header-text">
+          <h3>{{ editingEvent ? 'Modifier l\'événement' : 'Nouvel événement' }}</h3>
+          <p>{{ editingEvent ? 'Modifiez les détails de votre événement' : 'Créez un nouvel événement dans votre calendrier' }}</p>
+        </div>
+      </div>
+      <button class="modal-close" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="modal-modern-body">
+      <!-- Champ Titre avec effet glassmorphism -->
+      <div class="input-group floating">
+        <input 
+          type="text" 
+          [(ngModel)]="formData.title" 
+          id="eventTitle"
+          [class.filled]="formData.title"
+          required>
+        <label for="eventTitle">
+          <mat-icon>title</mat-icon>
+          <span>Titre de l'événement</span>
+        </label>
+        <div class="input-border"></div>
+      </div>
+      
+      <!-- Date et Heure en ligne -->
+      <div class="row-group">
+        <div class="input-group date-group">
+          <label>
+            <mat-icon>calendar_today</mat-icon>
+            <span>Date</span>
+          </label>
+          <input 
+            type="date" 
+            [(ngModel)]="formData.date" 
+            class="date-input modern-input">
+        </div>
+        
+        <div class="input-group time-group">
+          <label>
+            <mat-icon>schedule</mat-icon>
+            <span>Heure (optionnel)</span>
+          </label>
+          <input 
+            type="time" 
+            [(ngModel)]="formData.time" 
+            class="time-input modern-input">
+        </div>
+      </div>
+      
+      <!-- Sélecteur de type avec meilleur design -->
+      <div class="input-group">
+        <label>
+          <mat-icon>category</mat-icon>
+          <span>Type d'événement</span>
+        </label>
+        <div class="type-selector-modern">
+          <div 
+            *ngFor="let type of eventTypes" 
+            class="type-option-modern"
+            [class.active]="formData.type === type.value"
+            [class]="type.value"
+            (click)="formData.type = type.value">
+            <div class="type-option-icon">
+              <mat-icon>{{ type.icon }}</mat-icon>
+            </div>
+            <span class="type-option-label">{{ type.label }}</span>
+            <div class="type-option-check" *ngIf="formData.type === type.value">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Description avec style moderne -->
+      <div class="input-group">
+        <label>
+          <mat-icon>description</mat-icon>
+          <span>Description</span>
+        </label>
+        <textarea 
+          [(ngModel)]="formData.description" 
+          rows="4" 
+          placeholder="Décrivez votre événement..."
+          class="modern-textarea"></textarea>
+      </div>
+
+      <!-- Option notification avec toggle style -->
+      <div class="input-group notification-group">
+        <div class="notification-toggle">
+          <div class="toggle-info">
+            <div class="toggle-icon">
+              <mat-icon>notifications_active</mat-icon>
+            </div>
+            <div class="toggle-text">
+              <span class="toggle-title">Rappel 1 jour avant</span>
+              <span class="toggle-subtitle">Recevez une notification la veille de l'événement</span>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" [(ngModel)]="formData.notification">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-modern-footer">
+      <button class="btn-cancel" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+        Annuler
+      </button>
+      <button class="btn-save" (click)="saveEvent()">
+        <mat-icon>{{ editingEvent ? 'check' : 'add_circle' }}</mat-icon>
+        {{ editingEvent ? 'Mettre à jour' : 'Créer' }}
+      </button>
+    </div>
+  </div>
+</div>

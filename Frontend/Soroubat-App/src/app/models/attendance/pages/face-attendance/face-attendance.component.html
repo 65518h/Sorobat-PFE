@@ -1,0 +1,166 @@
+<!-- src/app/modules/attendance/pages/face-attendance/face-attendance.component.html -->
+
+<div class="face-attendance-container">
+  
+  <!-- Header -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <mat-icon>face</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Pointage facial</h1>
+          <p>Marquez votre présence par reconnaissance faciale</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-close" (click)="close()" matTooltip="Fermer">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 1 : SAISIE DU MATRICULE -->
+  <div class="matricule-step" *ngIf="!matriculeVerified && !cameraStarted">
+    <div class="input-card">
+      <div class="step-icon">
+        <mat-icon>badge</mat-icon>
+      </div>
+      <div class="step-title">Saisissez votre matricule</div>
+      
+      <div class="form-field-group">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Matricule employé</mat-label>
+          <input matInput 
+                 [(ngModel)]="employeeMatricule" 
+                 placeholder="Ex: 1000" 
+                 autocomplete="off" 
+                 (keyup.enter)="verifyMatricule()">
+          <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+      </div>
+      
+      <button class="btn-verify-matricule" (click)="verifyMatricule()" [disabled]="isVerifyingMatricule || !employeeMatricule">
+        <mat-icon>check_circle</mat-icon>
+        {{ isVerifyingMatricule ? 'Vérification...' : 'Continuer' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- ERREUR MATRICULE INVALIDE -->
+  <div class="error-state" *ngIf="matriculeError && !matriculeVerified">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Matricule invalide</h3>
+    <p>{{ matriculeErrorMessage }}</p>
+    <button class="btn-retry" (click)="resetMatricule()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+
+  <!-- ÉTAPE 2 : CAMÉRA ET RECONNAISSANCE -->
+  <div *ngIf="matriculeVerified && !cameraErrorMessage && !recognitionResult">
+    
+    <!-- Info employé -->
+    <div class="employee-info-card" *ngIf="verifiedEmployee">
+      <div class="employee-avatar">
+        <span>{{ (verifiedEmployee.lastName | slice:0:2)?.toUpperCase() || '??' }}</span>
+      </div>
+      <div class="employee-info-details">
+        <span class="employee-name">{{ verifiedEmployee.lastName }} {{ verifiedEmployee.firstName }}</span>
+        <span class="employee-no">Matricule: {{ verifiedEmployee.matricule }}</span>
+      </div>
+    </div>
+
+    <!-- Conteneur caméra -->
+    <div class="camera-container">
+      <div class="video-wrapper">
+        <video #videoElement 
+               autoplay 
+               muted 
+               playsinline 
+               class="camera-preview"
+               [style.display]="isCameraActive ? 'block' : 'none'">
+        </video>
+        
+        <!-- Message chargement -->
+        <div class="loading-overlay" *ngIf="isLoading">
+          <div class="loading-spinner"></div>
+          <p>{{ loadingMessage }}</p>
+        </div>
+        
+        <!-- Message caméra active -->
+        <div class="camera-active-message" *ngIf="isCameraActive && !isLoading">
+          <mat-icon>videocam</mat-icon>
+          Caméra active
+        </div>
+        
+        <!-- Overlay de guidage -->
+        <div class="face-guide" *ngIf="showGuide && !recognitionResult && isCameraActive">
+          <div class="face-circle">
+            <mat-icon>face</mat-icon>
+            <span>Placez votre visage dans le cercle</span>
+          </div>
+        </div>
+        
+        <!-- Indicateur de reconnaissance -->
+        <div class="recognition-indicator" *ngIf="isRecognizing">
+          <div class="scanning-wave"></div>
+          <div class="scanning-text">Vérification en cours...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Erreur caméra -->
+    <div class="error-state" *ngIf="cameraErrorMessage">
+      <mat-icon>videocam_off</mat-icon>
+      <h3>Erreur d'accès à la caméra</h3>
+      <p>{{ cameraErrorMessage }}</p>
+      <button class="btn-retry" (click)="retryCamera()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+      <button class="btn-retry" (click)="resetMatricule()" style="margin-left: 12px; background: #64748b;">
+        <mat-icon>arrow_back</mat-icon>
+        Changer de matricule
+      </button>
+    </div>
+
+    <!-- Bouton vérification -->
+    <div class="verification-area" *ngIf="!recognitionResult && isCameraActive && !cameraErrorMessage && !isLoading">
+      <button class="btn-verify" (click)="verifyFace()" [disabled]="isRecognizing">
+        <mat-icon>verified</mat-icon>
+        {{ isRecognizing ? 'Vérification...' : 'Vérifier mon visage' }}
+      </button>
+    </div>
+
+  </div>
+
+  <!-- RÉSULTAT - Affiché après reconnaissance -->
+  <div class="recognition-result" *ngIf="recognitionResult">
+    <div class="result-card" [class.success]="recognitionResult.success">
+      <mat-icon class="result-icon">{{ recognitionResult.success ? 'check_circle' : 'error' }}</mat-icon>
+      <div class="result-content">
+        <h3>{{ recognitionResult.success ? 'Visage reconnu !' : 'Reconnaissance échouée' }}</h3>
+        <p *ngIf="recognitionResult.success">
+          Pointage enregistré pour {{ verifiedEmployee?.lastName }} {{ verifiedEmployee?.firstName }}
+        </p>
+        <p *ngIf="!recognitionResult.success">{{ recognitionResult.message }}</p>
+      </div>
+      <div class="result-actions">
+        <!-- Bouton Réessayer toujours disponible -->
+        <button *ngIf="!recognitionResult.success" class="btn-retry" (click)="retryFace()">
+          <mat-icon>refresh</mat-icon>
+          Réessayer
+        </button>
+        <button *ngIf="recognitionResult.success" class="btn-retry" (click)="close()" style="background: #10b981;">
+          <mat-icon>done_all</mat-icon>
+          Terminer
+        </button>
+      </div>
+    </div>
+  </div>
+  
+</div>

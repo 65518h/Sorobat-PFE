@@ -1,0 +1,375 @@
+<!-- src/app/modules/gasoil/pages/gasoil-detail/gasoil-detail.html -->
+
+<!-- BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="gasoil-detail-container">
+  
+  <!-- Loading State Premium -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement de la fiche gasoil...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Content -->
+  <div *ngIf="!loading && header">
+    
+    <!-- Hero Section Premium -->
+    <div class="hero-section">
+      <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-left">
+          <div class="icon-container">
+            <div class="icon-pulse"></div>
+            <mat-icon>local_gas_station</mat-icon>
+          </div>
+          <div class="hero-text">
+            <h1>{{ header.documentNo || 'Fiche gasoil' }}</h1>
+            <p>Créée le {{ formatDate(header.date) }}</p>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-secondary-glass" (click)="goBack()" matTooltip="Retour à la liste">
+            <mat-icon>arrow_back</mat-icon>
+            <span>Retour</span>
+          </button>
+          
+          <!-- Bouton Modifier - CACHE OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="btn-primary-glass" *ngIf="canEdit()" (click)="editHeader()" matTooltip="Modifier">
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+              <div class="btn-glow"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Stats Cards Premium -->
+    <div class="stats-grid">
+      <div class="stat-card premium">
+        <div class="stat-card-inner">
+          <div class="stat-icon-wrapper blue">
+            <mat-icon>receipt_long</mat-icon>
+          </div>
+          <div class="stat-details">
+            <span class="stat-value">{{ header.documentNo || '—' }}</span>
+            <span class="stat-title">N° Document</span>
+          </div>
+        </div>
+        <div class="stat-progress"></div>
+      </div>
+      
+      <div class="stat-card premium">
+        <div class="stat-card-inner">
+          <div class="stat-icon-wrapper green">
+            <mat-icon>local_gas_station</mat-icon>
+          </div>
+          <div class="stat-details">
+            <span class="stat-value">{{ getTotalQuantity() | number:'1.2-2' }} L</span>
+            <span class="stat-title">Quantité totale</span>
+          </div>
+        </div>
+        <div class="stat-progress"></div>
+      </div>
+      
+      <div class="stat-card premium">
+        <div class="stat-card-inner">
+          <div class="stat-icon-wrapper purple">
+            <mat-icon>list_alt</mat-icon>
+          </div>
+          <div class="stat-details">
+            <span class="stat-value">{{ getLineCount() }}</span>
+            <span class="stat-title">Lignes</span>
+          </div>
+        </div>
+        <div class="stat-progress"></div>
+      </div>
+      
+      <div class="stat-card premium">
+        <div class="stat-card-inner">
+          <div class="stat-icon-wrapper orange">
+            <mat-icon>flag</mat-icon>
+          </div>
+          <div class="stat-details">
+            <div class="status-chip" [class]="getStatusClass()">
+              <div class="status-dot"></div>
+              <mat-icon>{{ getStatusIcon() }}</mat-icon>
+              <span>{{ getStatusLabel() }}</span>
+            </div>
+            <span class="stat-title">Statut</span>
+          </div>
+        </div>
+        <div class="stat-progress"></div>
+      </div>
+    </div>
+    
+    <!-- Informations générales -->
+    <div class="info-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <mat-icon>info_outline</mat-icon>
+        </div>
+        <h2>Informations générales</h2>
+        <div class="card-header-line"></div>
+      </div>
+      
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>receipt</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">N° Document</span>
+            <span class="info-value">{{ header.documentNo || '—' }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Date</span>
+            <span class="info-value">{{ formatDate(header.date) }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>store</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">Magasin / Site</span>
+            <span class="info-value">{{ header.locationCode || '—' }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>folder</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">N° Fiche</span>
+            <span class="info-value">{{ header.fileNo || '—' }}</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <mat-icon>business</mat-icon>
+          </div>
+          <div class="info-content">
+            <span class="info-label">N° Projet</span>
+            <span class="info-value">{{ header.jobNo || '—' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lignes de consommation -->
+    <div class="lines-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <mat-icon>list_alt</mat-icon>
+        </div>
+        <h2>Détail des consommations</h2>
+        <div class="card-header-line"></div>
+        <span class="lines-count" *ngIf="header.gasoilLines && header.gasoilLines.length">
+          <mat-icon>local_gas_station</mat-icon>
+          {{ header.gasoilLines.length }} ligne(s)
+        </span>
+      </div>
+      
+      <div class="table-wrapper" *ngIf="header.gasoilLines && header.gasoilLines.length > 0">
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>
+                <div class="th-content">
+                  <mat-icon>format_list_numbered</mat-icon>
+                  <span>#</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>directions_car</mat-icon>
+                  <span>Véhicule / Engin</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>local_gas_station</mat-icon>
+                  <span>Quantité (L)</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>speed</mat-icon>
+                  <span>Type index</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>straighten</mat-icon>
+                  <span>Valeur compteur</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>person</mat-icon>
+                  <span>Chauffeur</span>
+                </div>
+              </th>
+              <th>
+                <div class="th-content">
+                  <mat-icon>flag</mat-icon>
+                  <span>Destination</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let line of header.gasoilLines; let i = index" class="premium-row">
+              <td class="line-number-cell">
+                <div class="number-badge">{{ line.lineNo || i + 1 }}</div>
+               </td>
+              <td class="vehicle-cell">
+                <div class="vehicle-badge">
+                  <mat-icon>directions_car</mat-icon>
+                  <span>{{ line.vehicleNo || '—' }}</span>
+                </div>
+               </td>
+              <td class="quantity-cell">
+                <div class="quantity-badge">
+                  <mat-icon>local_gas_station</mat-icon>
+                  <span class="quantity-value">{{ formatDecimal(line.quantity) }}</span>
+                  <span class="quantity-unit">L</span>
+                </div>
+               </td>
+              <td>
+                <span class="index-badge" [class]="line.indexType === 'Horaire' ? 'hour' : 'km'">
+                  <mat-icon>{{ line.indexType === 'Horaire' ? 'schedule' : 'speed' }}</mat-icon>
+                  {{ getIndexTypeLabel(line.indexType) }}
+                </span>
+               </td>
+              <td>
+                <div class="index-value">
+                  {{ formatNumber(line.valeurCompteur) }}
+                  <span class="index-unit">{{ line.indexType === 'Horaire' ? 'h' : 'km' }}</span>
+                </div>
+               </td>
+              <td>
+                <div class="driver-badge">
+                  <mat-icon>person</mat-icon>
+                  <span>{{ line.driver || '—' }}</span>
+                </div>
+               </td>
+              <td>
+                <div class="destination-badge">
+                  <mat-icon>location_on</mat-icon>
+                  <span>{{ line.destination || '—' }}</span>
+                </div>
+               </td>
+             </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="2" class="total-label">
+                <mat-icon>summarize</mat-icon>
+                <span>TOTAL</span>
+                </td>
+              <td class="total-value">
+                <div class="total-quantity">
+                  <mat-icon>local_gas_station</mat-icon>
+                  <span>{{ getTotalQuantity() | number:'1.2-2' }}</span>
+                  <span class="total-unit">Litres</span>
+                </div>
+                </td>
+              <td colspan="4"></td>
+             </tr>
+          </tfoot>
+        </table>
+      </div>
+      
+      <div class="empty-lines" *ngIf="!header.gasoilLines || header.gasoilLines.length === 0">
+        <div class="empty-illustration">
+          <mat-icon>inbox</mat-icon>
+        </div>
+        <h3>Aucune ligne de consommation</h3>
+        <p>Ajoutez des lignes en modifiant la fiche</p>
+        <div *appOfflineHideActions>
+          <button class="btn-edit-small" (click)="editHeader()" *ngIf="canEdit()">
+            <mat-icon>edit</mat-icon>
+            <span>Modifier la fiche</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Actions Footer (si non validé) -->
+    <div class="actions-footer" *ngIf="canEdit()">
+      <!-- Boutons d'action - CACHES OFFLINE -->
+      <div *appOfflineHideActions>
+        <button class="btn-validate" (click)="validateHeader()" [disabled]="validating">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ validating ? 'Validation...' : 'Valider la fiche' }}</span>
+          <div class="btn-glow" *ngIf="!validating"></div>
+        </button>
+        <button class="btn-delete" (click)="deleteHeader()" [disabled]="deleting">
+          <mat-icon>delete_outline</mat-icon>
+          <span>{{ deleting ? 'Suppression...' : 'Supprimer' }}</span>
+        </button>
+      </div>
+      
+      <!-- Message offline -->
+      <div *ngIf="isReadOnly" class="offline-readonly-message">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode hors ligne - Consultation uniquement</span>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Not Found -->
+  <div class="not-found" *ngIf="!loading && !header">
+    <div class="not-found-card">
+      <div class="not-found-icon">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Fiche introuvable</h3>
+      <p>La fiche gasoil que vous recherchez n'existe pas ou a été supprimée.</p>
+      <button class="btn-primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Retour à la liste</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && header">
+    <mat-icon>cloud_off</mat-icon>
+    <span>Mode hors ligne - Consultation uniquement</span>
+  </div>
+  
+</div>

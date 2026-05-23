@@ -1,0 +1,842 @@
+<!-- src/app/modules/purchases/pages/request-form/request-form.html -->
+
+<div class="request-form-container">
+  
+  <!-- ==================== HEADER LUXE ==================== -->
+  <div class="page-header-luxe">
+    <div class="header-bg-particles"></div>
+    <div class="header-content-luxe">
+      <div class="header-left-luxe">
+        <button class="back-button-luxe" mat-icon-button (click)="cancel()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title-luxe">
+          <div class="title-icon-luxe">
+            <mat-icon>{{ isEditMode ? 'edit_note' : 'shopping_cart' }}</mat-icon>
+            <div class="icon-glow"></div>
+          </div>
+          <div class="title-text-luxe">
+            <h1>{{ isEditMode ? 'Modifier la demande' : 'Nouvelle demande d\'achat' }}</h1>
+            <div class="title-decoration"></div>
+            <p *ngIf="requestNo" class="request-badge-luxe">
+              <mat-icon>verified</mat-icon>
+              <span>N° {{ requestNo }}</span>
+            </p>
+            <p *ngIf="!requestNo" class="subtitle-luxe">
+              <span class="dot"></span>
+              Formulaire de création de demande d'achat
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="header-right-luxe">
+        <button class="btn-cancel-luxe" mat-button (click)="cancel()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-submit-luxe" mat-raised-button (click)="onSubmit()" [disabled]="submitting" *ngIf="isEditMode">
+          <mat-icon>save</mat-icon>
+          <span>Enregistrer</span>
+          <div class="btn-loader" *ngIf="submitting"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div *ngIf="loading" class="loading-state-luxe">
+    <div class="loading-card-luxe">
+      <div class="loading-animation">
+        <svg class="loading-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="75">
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4361ee"/>
+              <stop offset="100%" stop-color="#06d6a0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="loading-pulse"></div>
+      </div>
+      <div class="loading-text-luxe">
+        <p>Chargement de la demande</p>
+        <div class="loading-progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== FORMULAIRE PRINCIPAL ==================== -->
+  <div *ngIf="!loading && isFormReady" class="form-container-luxe">
+    
+    <!-- Message si aucun projet associé -->
+    <div *ngIf="!autoProject && !isLoadingProject && !isEditMode" class="error-card-luxe">
+      <div class="error-icon-large">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Aucun projet associé</h3>
+      <p>Aucun projet n'est associé à votre compte chef de chantier.</p>
+      <p>Veuillez contacter l'administrateur pour vous assigner un projet.</p>
+      <button class="btn-back-luxe" (click)="cancel()">
+        <mat-icon>arrow_back</mat-icon>
+        Retour
+      </button>
+    </div>
+    
+    <!-- Mode CRÉATION - Stepper -->
+    <mat-horizontal-stepper #stepper linear class="luxe-stepper" *ngIf="!isEditMode && autoProject">
+      
+      <!-- Étape 1 -->
+      <mat-step [stepControl]="headerForm" class="step-luxe">
+        <ng-template matStepLabel>
+          <div class="step-label-luxe">
+            <div class="step-number" [class.active]="headerForm.valid">
+             
+            </div>
+            <div class="step-info">
+              <span class="step-title">Informations générales</span>
+              <span class="step-subtitle">  Projet & dates</span>
+            </div>
+          </div>
+        </ng-template>
+        
+        <div class="step-content-luxe">
+          <form [formGroup]="headerForm">
+            <div class="form-grid-luxe">
+              
+              <!-- Projet automatique -->
+              <div class="form-field-luxe full-width">
+                <label class="field-label-luxe">
+                  <mat-icon>business_center</mat-icon>
+                  <span>Projet / Chantier</span>
+                  <span class="auto-badge">Automatique</span>
+                </label>
+                <div class="custom-input-wrapper">
+                  <input type="text" formControlName="jobNo" placeholder="Chargement du projet..." readonly class="custom-input">
+                  <mat-icon class="input-icon">lock_outline</mat-icon>
+                  <mat-spinner *ngIf="isLoadingProject" diameter="20" class="field-spinner"></mat-spinner>
+                </div>
+                <div class="field-hint" *ngIf="autoProject">
+                  <mat-icon>verified</mat-icon>
+                  <span>Projet associé : <strong>{{ autoProject.no }}</strong> - {{ autoProject.description }}</span>
+                </div>
+              </div>
+              
+              <!-- Type de demande -->
+              <div class="form-field-luxe">
+                <label class="field-label-luxe">
+                  <mat-icon>category</mat-icon>
+                  <span>Type de demande</span>
+                  <span class="required-badge">Obligatoire</span>
+                </label>
+                <div class="custom-select-wrapper clickable" (click)="openRequestTypeDialog()">
+                  <div class="custom-select-display">
+                    <span [class.placeholder]="!headerForm.get('requestType')?.value">
+                      {{ getRequestTypeLabel(headerForm.get('requestType')?.value) || 'Sélectionner un type' }}
+                    </span>
+                  </div>
+                  <mat-icon class="chevron">expand_more</mat-icon>
+                </div>
+                <div class="error-message" *ngIf="headerForm.get('requestType')?.hasError('required') && headerForm.get('requestType')?.touched">
+                  Le type est obligatoire
+                </div>
+              </div>
+              
+              <!-- Engin -->
+              <div class="form-field-luxe">
+                <label class="field-label-luxe">
+                  <mat-icon>construction</mat-icon>
+                  <span>Engin</span>
+                  <span class="optional-badge-luxe">Optionnel</span>
+                </label>
+                <div class="custom-select-wrapper clickable" (click)="openEnginDialog()">
+                  <div class="custom-select-display">
+                    <span [class.placeholder]="!headerForm.get('engin')?.value">
+                      {{ headerForm.get('engin')?.value || 'Sélectionner un engin' }}
+                    </span>
+                  </div>
+                  <mat-icon class="chevron">expand_more</mat-icon>
+                </div>
+              </div>
+              
+              <!-- Désignation engin -->
+              <div class="form-field-luxe">
+                <label class="field-label-luxe">
+                  <mat-icon>info_outline</mat-icon>
+                  <span>Désignation engin</span>
+                </label>
+                <div class="custom-input-wrapper readonly">
+                  <input type="text" formControlName="descriptionEngin" readonly placeholder="Sélectionnez un engin" class="custom-input">
+                  <mat-icon class="input-icon">lock_outline</mat-icon>
+                </div>
+              </div>
+              
+              <!-- Code magasin -->
+              <div class="form-field-luxe">
+                <label class="field-label-luxe">
+                  <mat-icon>store</mat-icon>
+                  <span>Code magasin</span>
+                  <span class="optional-badge-luxe">Optionnel</span>
+                </label>
+                <div class="custom-select-wrapper clickable" (click)="openLocationDialog()">
+                  <div class="custom-select-display">
+                    <span [class.placeholder]="!headerForm.get('locationCode')?.value">
+                      {{ headerForm.get('locationCode')?.value || 'Sélectionner un magasin' }}
+                    </span>
+                  </div>
+                  <mat-icon class="chevron">expand_more</mat-icon>
+                </div>
+              </div>
+              
+              <!-- Observation -->
+              <div class="form-field-luxe full-width">
+                <label class="field-label-luxe">
+                  <mat-icon>chat_bubble_outline</mat-icon>
+                  <span>Observation</span>
+                  <span class="optional-badge-luxe">Optionnel</span>
+                </label>
+                <div class="custom-textarea-wrapper">
+                  <textarea formControlName="observation" placeholder="Ajouter une observation..." rows="3" class="custom-textarea"></textarea>
+                  <mat-icon class="textarea-icon">edit_note</mat-icon>
+                </div>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        
+        <div class="step-actions-luxe">
+          <button class="step-next-luxe" (click)="createHeaderAndContinue()" [disabled]="headerForm.invalid || creatingHeader">
+            <span>{{ creatingHeader ? 'Création en cours...' : 'Créer l\'en-tête' }}</span>
+            <mat-icon *ngIf="!creatingHeader">arrow_forward</mat-icon>
+            <div class="button-spinner" *ngIf="creatingHeader"></div>
+          </button>
+        </div>
+      </mat-step>
+      
+      <!-- Étape 2 - Tableau -->
+      <mat-step class="step-luxe">
+        <ng-template matStepLabel>
+          <div class="step-label-luxe">
+           
+            <div class="step-info">
+              <span class="step-title">Articles demandés  </span>
+              <span class="step-subtitle">Sélection des produits</span>
+            </div>
+          </div>
+        </ng-template>
+        
+        <div class="step-content-luxe">
+          
+          <div class="articles-section">
+            <!-- BOUTON AJOUTER UN ARTICLE -->
+            <div class="articles-header">
+              <div class="header-actions">
+                <button class="btn-add-main" type="button" (click)="addLineToForm()">
+                  <mat-icon>add</mat-icon>
+                  <span>Ajouter un article</span>
+                </button>
+              </div>
+            </div>
+            
+            <div class="table-wrapper">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th class="th-type">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">category</mat-icon>
+                        <span>Type</span>
+                      </div>
+                    </th>
+                    <th class="th-ref-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">qr_code</mat-icon>
+                        <span>Référence</span>
+                      </div>
+                    </th>
+                    <th class="th-desc-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">description</mat-icon>
+                        <span>Description</span>
+                      </div>
+                    </th>
+                    <th class="th-qty-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">inventory_2</mat-icon>
+                        <span>Quantité</span>
+                      </div>
+                    </th>
+                    <th class="th-unit-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">straighten</mat-icon>
+                        <span>Unité</span>
+                      </div>
+                    </th>
+                    <th class="th-loc-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">store</mat-icon>
+                        <span>Magasin</span>
+                      </div>
+                    </th>
+                    <th class="th-task-wide">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">assignment</mat-icon>
+                        <span>Tâche</span>
+                      </div>
+                    </th>
+                    <th class="th-actions">
+                      <div class="th-content">
+                        <mat-icon class="th-icon">build</mat-icon>
+                        <span>Actions</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let lineControl of linesArray.controls; let i = index" class="data-row">
+                    <td class="td-type">
+                      <div class="cell-select-wrapper">
+                        <select [formControl]="getLineControl(i, 'type')" class="cell-select">
+                          <option value="Item">Article</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="td-ref-wide">
+                      <div class="ref-input-wrapper">
+                        <div class="cell-input-wrapper clickable" (click)="openArticleDialog(i)">
+                          <input [formControl]="getLineControl(i, 'no')" placeholder="Code article" readonly class="cell-input">
+                          <mat-icon class="search-icon-small">search</mat-icon>
+                        </div>
+                        <button class="barcode-btn" mat-icon-button (click)="openBarcodeScanner(i)" matTooltip="Scanner">
+                          <mat-icon>qr_code_scanner</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                    <!-- ✅ Colonne Description - READONLY en création -->
+                    <td class="td-desc-wide">
+                      <div class="cell-input-wrapper readonly">
+                        <input [formControl]="getLineControl(i, 'description')" 
+                               placeholder="Description" 
+                               readonly
+                               class="cell-input">
+                        <mat-icon class="locked-icon-small">lock_outline</mat-icon>
+                      </div>
+                    </td>
+                    <td class="td-qty-wide">
+                      <div class="quantity-control">
+                        <button class="qty-btn" (click)="adjustQuantity(i, -1)" [disabled]="getLineControl(i, 'quantity').value <= 0.01">
+                          <mat-icon>remove</mat-icon>
+                        </button>
+                        <div class="cell-input-wrapper">
+                          <input type="number" [formControl]="getLineControl(i, 'quantity')" min="0.01" step="1" placeholder="0" class="cell-input quantity-input">
+                        </div>
+                        <button class="qty-btn" (click)="adjustQuantity(i, 1)">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="td-unit-wide">
+                      <div class="cell-input-wrapper readonly">
+                        <input [formControl]="getLineControl(i, 'unitOfMeasureCode')" 
+                              placeholder="Unité" 
+                              readonly
+                              class="cell-input">
+                        <mat-icon class="locked-icon-small">straighten</mat-icon>
+                      </div>
+                    </td>
+                    <td class="td-loc-wide">
+                      <div class="cell-input-wrapper clickable" (click)="openLocationDialog(i)">
+                        <input [formControl]="getLineControl(i, 'locationCode')" placeholder="Magasin" readonly class="cell-input">
+                        <mat-icon class="search-icon-small">search</mat-icon>
+                      </div>
+                      <div class="field-error" *ngIf="getLineControl(i, 'locationCode').hasError('required') && getLineControl(i, 'locationCode').touched">
+                        Magasin requis
+                      </div>
+                    </td>
+                    <td class="td-task-wide">
+                      <div class="cell-input-wrapper clickable" (click)="openTaskDialog(i)">
+                        <input [formControl]="getLineControl(i, 'jobTaskNo')" placeholder="Tâche" readonly class="cell-input">
+                        <mat-icon class="search-icon-small">search</mat-icon>
+                      </div>
+                    </td>
+                    <td class="td-actions">
+                      <div class="actions-group">
+                        <button class="action-btn duplicate" mat-icon-button (click)="duplicateLine(i)" matTooltip="Dupliquer">
+                          <mat-icon>content_copy</mat-icon>
+                        </button>
+                        <button class="action-btn delete" mat-icon-button (click)="removeLine(i)" matTooltip="Supprimer">
+                          <mat-icon>delete_outline</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!linesArray.length || linesArray.length === 0">
+                    <td colspan="8" class="empty-cell">
+                      <div class="empty-state-inline">
+                        <mat-icon>inbox</mat-icon>
+                        <p>Aucun article ajouté</p>
+                        
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- BOUTON AJOUTER EN BAS DU TABLEAU -->
+            <div class="add-line-bottom" *ngIf="linesArray.length && linesArray.length > 0">
+              <button class="btn-add-bottom" (click)="addLineToForm()">
+                <mat-icon>add_circle_outline</mat-icon>
+                <span>Ajouter une autre ligne</span>
+              </button>
+            </div>
+            
+            <div class="lines-summary" *ngIf="linesArray.length && linesArray.length > 0">
+              <div class="summary-stats">
+                <div class="stat-item">
+                  <mat-icon>inventory_2</mat-icon>
+                  <div class="stat-info">
+                    <span class="stat-label">Total articles</span>
+                    <span class="stat-value">{{ linesArray.length || 0 }}</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <mat-icon>category</mat-icon>
+                  <div class="stat-info">
+                    <span class="stat-label">Types différents</span>
+                    <span class="stat-value">{{ getUniqueTypesCount() }}</span>
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <mat-icon>store</mat-icon>
+                  <div class="stat-info">
+                    <span class="stat-label">Magasins</span>
+                    <span class="stat-value">{{ getUniqueLocationsCount() }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="summary-actions">
+                <button class="btn-clear-all" (click)="clearAllLines()">
+                  <mat-icon>clear_all</mat-icon> Tout supprimer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="step-actions-luxe">
+          <button class="step-prev-luxe" mat-button matStepperPrevious>
+            <mat-icon>arrow_back</mat-icon><span>Précédent</span>
+          </button>
+          <button class="step-submit-luxe" (click)="createLinesAndFinish()" [disabled]="submitting || !linesArray.length || linesArray.length === 0">
+            <mat-icon>check_circle</mat-icon><span>Finaliser la demande</span>
+            <div class="btn-loader" *ngIf="submitting"></div>
+          </button>
+        </div>
+      </mat-step>
+      
+    </mat-horizontal-stepper>
+    
+    <!-- MODE ÉDITION -->
+    <div *ngIf="isEditMode && autoProject" class="edit-mode-luxe">
+      
+      <div class="form-card-luxe">
+        <div class="card-header-luxe">
+          <mat-icon>info_outline</mat-icon>
+          <h3>Informations générales</h3>
+          <div class="card-header-line"></div>
+        </div>
+        <form [formGroup]="headerForm">
+          <div class="form-grid-luxe">
+            <div class="form-field-luxe full-width">
+              <label class="field-label-luxe">
+                <mat-icon>business_center</mat-icon>
+                <span>Projet / Chantier</span>
+                <span class="auto-badge">Non modifiable</span>
+              </label>
+              <div class="custom-input-wrapper readonly">
+                <input type="text" formControlName="jobNo" placeholder="Projet automatique" readonly class="custom-input">
+                <mat-icon class="input-icon">lock_outline</mat-icon>
+              </div>
+            </div>
+            
+            <div class="form-field-luxe">
+              <label class="field-label-luxe"><mat-icon>category</mat-icon><span>Type de demande</span></label>
+              <div class="custom-select-wrapper clickable" (click)="openRequestTypeDialog()">
+                <div class="custom-select-display">
+                  <span [class.placeholder]="!headerForm.get('requestType')?.value">
+                    {{ getRequestTypeLabel(headerForm.get('requestType')?.value) || 'Sélectionner un type' }}
+                  </span>
+                </div>
+                <mat-icon class="chevron">expand_more</mat-icon>
+              </div>
+            </div>
+            
+            <div class="form-field-luxe">
+              <label class="field-label-luxe"><mat-icon>construction</mat-icon><span>Engin</span></label>
+              <div class="custom-select-wrapper clickable" (click)="openEnginDialog()">
+                <div class="custom-select-display">
+                  <span [class.placeholder]="!headerForm.get('engin')?.value">
+                    {{ headerForm.get('engin')?.value || 'Sélectionner un engin' }}
+                  </span>
+                </div>
+                <mat-icon class="chevron">expand_more</mat-icon>
+              </div>
+            </div>
+            
+            <div class="form-field-luxe">
+              <label class="field-label-luxe"><mat-icon>info_outline</mat-icon><span>Désignation engin</span></label>
+              <div class="custom-input-wrapper readonly">
+                <input type="text" formControlName="descriptionEngin" readonly class="custom-input">
+              </div>
+            </div>
+            
+            <div class="form-field-luxe">
+              <label class="field-label-luxe"><mat-icon>store</mat-icon><span>Code magasin</span></label>
+              <div class="custom-select-wrapper clickable" (click)="openLocationDialog()">
+                <div class="custom-select-display">
+                  <span [class.placeholder]="!headerForm.get('locationCode')?.value">
+                    {{ headerForm.get('locationCode')?.value || 'Sélectionner un magasin' }}
+                  </span>
+                </div>
+                <mat-icon class="chevron">expand_more</mat-icon>
+              </div>
+            </div>
+            
+            <div class="form-field-luxe full-width">
+              <label class="field-label-luxe"><mat-icon>chat_bubble_outline</mat-icon><span>Observation</span></label>
+              <div class="custom-textarea-wrapper">
+                <textarea formControlName="observation" placeholder="Ajouter une observation..." rows="3" class="custom-textarea"></textarea>
+                <mat-icon class="textarea-icon">edit_note</mat-icon>
+              </div>
+            </div>
+            
+          </div>
+        </form>
+      </div>
+      
+      <div class="form-card-luxe">
+        <div class="card-header-luxe">
+          <mat-icon>shopping_cart</mat-icon>
+          <h3>Articles demandés</h3>
+          <div class="card-header-line"></div>
+        </div>
+        
+        <!-- BOUTON AJOUTER UN ARTICLE EN MODE ÉDITION -->
+        <div class="articles-header">
+          <div class="header-actions">
+            <button class="btn-add-main" type="button" (click)="addLineToForm()">
+              <mat-icon>add</mat-icon>
+              <span>Ajouter un article</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="table-wrapper">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th class="th-type">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">category</mat-icon>
+                    <span>Type</span>
+                  </div>
+                </th>
+                <th class="th-ref-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">qr_code</mat-icon>
+                    <span>Référence</span>
+                  </div>
+                </th>
+                <th class="th-desc-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">description</mat-icon>
+                    <span>Description</span>
+                  </div>
+                </th>
+                <th class="th-qty-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">inventory_2</mat-icon>
+                    <span>Quantité</span>
+                  </div>
+                </th>
+                <th class="th-unit-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">straighten</mat-icon>
+                    <span>Unité</span>
+                  </div>
+                </th>
+                <th class="th-loc-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">store</mat-icon>
+                    <span>Magasin</span>
+                  </div>
+                </th>
+                <th class="th-task-wide">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">assignment</mat-icon>
+                    <span>Tâche</span>
+                  </div>
+                </th>
+                <th class="th-actions">
+                  <div class="th-content">
+                    <mat-icon class="th-icon">build</mat-icon>
+                    <span>Actions</span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let lineControl of linesArray.controls; let i = index" class="data-row">
+                <td class="td-type">
+                  <div class="cell-select-wrapper">
+                    <select [formControl]="getLineControl(i, 'type')" class="cell-select">
+                      <option value="Item">Article</option>
+                    </select>
+                  </div>
+                </td>
+                <td class="td-ref-wide">
+                  <div class="ref-input-wrapper">
+                    <div class="cell-input-wrapper clickable" (click)="openArticleDialog(i)">
+                      <input [formControl]="getLineControl(i, 'no')" placeholder="Code article" readonly class="cell-input">
+                      <mat-icon class="search-icon-small">search</mat-icon>
+                    </div>
+                    <button class="barcode-btn" mat-icon-button (click)="openBarcodeScanner(i)" matTooltip="Scanner">
+                      <mat-icon>qr_code_scanner</mat-icon>
+                    </button>
+                  </div>
+                </td>
+                <!-- ✅ Colonne Description MODIFIABLE en mode édition -->
+                <td class="td-desc-wide">
+                  <div class="cell-input-wrapper">
+                    <input [formControl]="getLineControl(i, 'description')" 
+                           placeholder="Description" 
+                           class="cell-input"
+                           autocomplete="off">
+                  </div>
+                </td>
+                <td class="td-qty-wide">
+                  <div class="quantity-control">
+                    <button class="qty-btn" (click)="adjustQuantity(i, -1)" [disabled]="getLineControl(i, 'quantity').value <= 0.01">
+                      <mat-icon>remove</mat-icon>
+                    </button>
+                    <div class="cell-input-wrapper">
+                      <input type="number" [formControl]="getLineControl(i, 'quantity')" min="0.01" step="1" placeholder="0" class="cell-input quantity-input">
+                    </div>
+                    <button class="qty-btn" (click)="adjustQuantity(i, 1)">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                </td>
+                <td class="td-unit-wide">
+                  <div class="cell-input-wrapper readonly">
+                    <input [formControl]="getLineControl(i, 'unitOfMeasureCode')" 
+                          placeholder="Unité" 
+                          readonly
+                          class="cell-input">
+                    <mat-icon class="locked-icon-small">straighten</mat-icon>
+                  </div>
+                </td>
+                <td class="td-loc-wide">
+                  <div class="cell-input-wrapper clickable" (click)="openLocationDialog(i)">
+                    <input [formControl]="getLineControl(i, 'locationCode')" placeholder="Magasin" readonly class="cell-input">
+                    <mat-icon class="search-icon-small">search</mat-icon>
+                  </div>
+                </td>
+                <td class="td-task-wide">
+                  <div class="cell-input-wrapper clickable" (click)="openTaskDialog(i)">
+                    <input [formControl]="getLineControl(i, 'jobTaskNo')" placeholder="Tâche" readonly class="cell-input">
+                    <mat-icon class="search-icon-small">search</mat-icon>
+                  </div>
+                </td>
+                <td class="td-actions">
+                  <div class="actions-group">
+                    <button class="action-btn duplicate" mat-icon-button (click)="duplicateLine(i)" matTooltip="Dupliquer">
+                      <mat-icon>content_copy</mat-icon>
+                    </button>
+                    <button class="action-btn delete" mat-icon-button (click)="removeLine(i)" matTooltip="Supprimer">
+                      <mat-icon>delete_outline</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="!linesArray.length || linesArray.length === 0">
+                <td colspan="8" class="empty-cell">
+                  <div class="empty-state-inline">
+                    <mat-icon>inbox</mat-icon>
+                    <p>Aucun article ajouté</p>
+                    
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- BOUTON AJOUTER EN BAS DU TABLEAU EN MODE ÉDITION -->
+        <div class="add-line-bottom" *ngIf="linesArray.length && linesArray.length > 0">
+          <button class="btn-add-bottom" (click)="addLineToForm()">
+            <mat-icon>add_circle_outline</mat-icon>
+            <span>Ajouter une autre ligne</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="edit-actions-luxe">
+        <button class="btn-save-luxe" (click)="updateRequest()" [disabled]="submitting">
+          <mat-icon>save</mat-icon><span>Enregistrer</span>
+          <div class="btn-loader" *ngIf="submitting"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DIALOGUES ==================== -->
+
+<!-- Dialogue Article -->
+<ng-template #articleDialog>
+  <div class="article-dialog-container">
+    <div class="dialog-header"><h2>Sélectionner un article</h2><button class="close-btn" (click)="closeArticleDialog()"><mat-icon>close</mat-icon></button></div>
+    <div class="dialog-search">
+      <div class="custom-search-field">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="articleSearchTerm" (input)="filterArticles()" placeholder="Code ou description..." autofocus>
+      </div>
+    </div>
+    <div class="dialog-pagination" *ngIf="totalFilteredArticles > pageSize">
+      <button class="pagination-btn" (click)="previousPage()" [disabled]="currentPage === 1"><mat-icon>chevron_left</mat-icon><span>Précédent</span></button>
+      <div class="pagination-info"><span class="page-current">{{ currentPage }}</span><span> / </span><span class="page-total">{{ totalPages }} pages</span></div>
+      <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages"><span>Suivant</span><mat-icon>chevron_right</mat-icon></button>
+    </div>
+    <div class="articles-list">
+      <div class="articles-header"><span class="col-code">Code</span><span class="col-description">Description</span><span class="col-unit">Unité</span><span class="col-action"></span></div>
+      <div class="articles-scroll">
+        <div *ngIf="allItems.length === 0" class="loading-articles"><mat-icon>hourglass_empty</mat-icon><p>Chargement des articles...</p></div>
+        <div *ngFor="let item of filteredArticles; trackBy: trackByArticleCode" class="article-item" (click)="selectArticle(item)" [class.selected]="selectedArticle === item">
+          <span class="col-code">{{ item.number }}</span>
+          <span class="col-description">{{ item.displayName }}</span>
+          <span class="col-unit">{{ item.baseUnitOfMeasure || 'PIECE' }}</span>
+          <span class="col-action"><button class="select-btn"><mat-icon>add_circle</mat-icon></button></span>
+        </div>
+        <div *ngIf="allItems.length > 0 && filteredArticles.length === 0" class="empty-articles"><mat-icon>inbox</mat-icon><p>Aucun article trouvé</p></div>
+      </div>
+    </div>
+    <div class="dialog-footer"><button class="btn-cancel" (click)="closeArticleDialog()">Fermer</button></div>
+  </div>
+</ng-template>
+
+<!-- Dialogue Engin -->
+<ng-template #enginDialog>
+  <div class="simple-dialog-container">
+    <div class="dialog-header"><h2>Sélectionner un engin</h2><button class="close-btn" (click)="closeEnginDialog()"><mat-icon>close</mat-icon></button></div>
+    <div class="dialog-search">
+      <div class="custom-search-field">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="enginSearchTerm" (input)="filterEngins()" placeholder="Code ou désignation...">
+      </div>
+    </div>
+    <div class="simple-list">
+      <div class="simple-list-scroll">
+        <div *ngIf="equipment.length === 0" class="loading-simple"><mat-icon>hourglass_empty</mat-icon><p>Chargement des engins...</p></div>
+        <div *ngFor="let engin of filteredEngins" class="simple-item" (click)="selectEngin(engin)">
+          <div class="item-content">
+            <div class="item-info"><span class="item-code">{{ engin.code }}</span><span class="item-name">{{ engin.designation }}</span></div>
+            <button class="select-simple-btn"><mat-icon>add_circle</mat-icon></button>
+          </div>
+        </div>
+        <div *ngIf="equipment.length > 0 && filteredEngins.length === 0" class="empty-simple"><mat-icon>search_off</mat-icon><p>Aucun engin trouvé</p></div>
+      </div>
+    </div>
+    <div class="dialog-footer"><button class="btn-cancel" (click)="closeEnginDialog()">Fermer</button></div>
+  </div>
+</ng-template>
+
+<!-- Dialogue Magasin -->
+<ng-template #locationDialog>
+  <div class="simple-dialog-container">
+    <div class="dialog-header"><h2>Sélectionner un magasin</h2><button class="close-btn" (click)="closeLocationDialog()"><mat-icon>close</mat-icon></button></div>
+    <div class="dialog-search">
+      <div class="custom-search-field">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="locationSearchTerm" (input)="filterLocations()" placeholder="Code ou nom...">
+      </div>
+    </div>
+    <div class="simple-list">
+      <div class="simple-list-scroll">
+        <div *ngIf="locations.length === 0" class="loading-simple"><mat-icon>hourglass_empty</mat-icon><p>Chargement des magasins...</p></div>
+        <div *ngFor="let location of filteredLocations" class="simple-item" (click)="selectLocation(location)">
+          <div class="item-content">
+            <div class="item-info"><span class="item-code">{{ location.code }}</span><span class="item-name">{{ location.name }}</span></div>
+            <button class="select-simple-btn"><mat-icon>add_circle</mat-icon></button>
+          </div>
+        </div>
+        <div *ngIf="locations.length > 0 && filteredLocations.length === 0" class="empty-simple"><mat-icon>search_off</mat-icon><p>Aucun magasin trouvé</p></div>
+      </div>
+    </div>
+    <div class="dialog-footer"><button class="btn-cancel" (click)="closeLocationDialog()">Fermer</button></div>
+  </div>
+</ng-template>
+
+<!-- Dialogue Tâche -->
+<ng-template #taskDialog>
+  <div class="simple-dialog-container">
+    <div class="dialog-header"><h2>Sélectionner une tâche</h2><button class="close-btn" (click)="closeTaskDialog()"><mat-icon>close</mat-icon></button></div>
+    <div class="dialog-search">
+      <div class="custom-search-field">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="taskSearchTerm" (input)="filterTasks()" placeholder="Numéro ou description...">
+      </div>
+    </div>
+    <div class="simple-list">
+      <div class="simple-list-scroll">
+        <div *ngIf="currentProjectTasks.length === 0" class="loading-simple"><mat-icon>hourglass_empty</mat-icon><p>Chargement des tâches...</p></div>
+        <div *ngFor="let task of filteredTasks" class="simple-item" (click)="selectTask(task)">
+          <div class="item-content">
+            <div class="item-info"><span class="item-code">{{ task.taskNo }}</span><span class="item-name">{{ task.description }}</span></div>
+            <button class="select-simple-btn"><mat-icon>add_circle</mat-icon></button>
+          </div>
+        </div>
+        <div *ngIf="currentProjectTasks.length > 0 && filteredTasks.length === 0" class="empty-simple"><mat-icon>search_off</mat-icon><p>Aucune tâche trouvée</p></div>
+      </div>
+    </div>
+    <div class="dialog-footer"><button class="btn-cancel" (click)="closeTaskDialog()">Fermer</button></div>
+  </div>
+</ng-template>
+
+<!-- Dialogue Type de demande -->
+<ng-template #requestTypeDialog>
+  <div class="simple-dialog-container">
+    <div class="dialog-header"><h2>Sélectionner un type de demande</h2><button class="close-btn" (click)="closeRequestTypeDialog()"><mat-icon>close</mat-icon></button></div>
+    <div class="simple-list">
+      <div class="simple-list-scroll">
+        <div *ngFor="let type of requestTypeList" class="simple-item" (click)="selectRequestType(type)">
+          <div class="item-content">
+            <div class="item-info">
+              <div class="request-type-badge" [ngClass]="getRequestTypeClassForBadge(type)">
+                <mat-icon>{{ getRequestTypeIcon(type) }}</mat-icon>
+                <span class="item-code">{{ getRequestTypeLabel(type) }}</span>
+              </div>
+              <span class="item-name">{{ getRequestTypeDescription(type) }}</span>
+            </div>
+            <button class="select-simple-btn"><mat-icon>add_circle</mat-icon></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Dialogue Scanner -->
+<ng-template #barcodeScannerDialog>
+  <div class="barcode-scanner-dialog">
+    <div class="dialog-header"><h2>Scanner un code-barres</h2><button class="close-btn" (click)="closeBarcodeScanner()"><mat-icon>close</mat-icon></button></div>
+    <div class="scanner-container"><div id="scanner-reader" class="scanner-viewport"></div></div>
+    <div class="scanner-loading" *ngIf="scannerLoading"><div class="loading-spinner"></div><p>Recherche de l'article...</p></div>
+    <div class="scanner-info"><mat-icon>qr_code</mat-icon><p>Placez le code-barres devant la caméra</p></div>
+  </div>
+</ng-template>

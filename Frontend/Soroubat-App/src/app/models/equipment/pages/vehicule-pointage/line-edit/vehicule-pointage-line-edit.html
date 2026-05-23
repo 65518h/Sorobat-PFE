@@ -1,0 +1,159 @@
+<!-- src/app/modules/equipment/pages/vehicule-pointage-line-edit/vehicule-pointage-line-edit.html -->
+
+<div class="line-edit-container">
+  
+  <!-- Header -->
+  <div class="form-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="back-btn" (click)="cancel()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title">
+          <h1>Modifier le véhicule</h1>
+          <p>Modifiez les informations du véhicule pointé</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-cancel" (click)="cancel()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-submit" (click)="onSubmit()" [disabled]="submitting || !isFormValid()">
+          <mat-icon>save</mat-icon>
+          <span>Enregistrer</span>
+          <div class="btn-spinner" *ngIf="submitting"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <!-- Formulaire -->
+  <form [formGroup]="lineForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+    <div class="form-card">
+      <div class="card-header">
+        <mat-icon>directions_car</mat-icon>
+        <h2>Informations du véhicule</h2>
+      </div>
+      <div class="card-body">
+        <div class="form-grid">
+          
+          <!-- Code véhicule (lecture seule) -->
+          <div class="form-field">
+            <label>Code véhicule</label>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="vehiculeNo">
+            </mat-form-field>
+          </div>
+          
+          <!-- Description (lecture seule) -->
+          <div class="form-field">
+            <label>Description</label>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="description">
+            </mat-form-field>
+          </div>
+          
+          <!-- Statut -->
+          <div class="form-field">
+            <label>Statut</label>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="status" (selectionChange)="onStatusChange()">
+                <mat-option value="Fonctionnel"> Fonctionnel</mat-option>
+                <mat-option value="Disponible"> Disponible</mat-option>
+                <mat-option value="Panne"> En panne</mat-option>
+                <mat-option value="Accident"> Accident</mat-option>
+                <mat-option value="Mauvais Temps"> Mauvais Temps</mat-option>
+                <mat-option value="Réformé"> Réformé</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <!-- Heures travaillées -->
+          <div class="form-field">
+            <label>Heures travaillées *</label>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" formControlName="hoursWorked" step="0.5" 
+                     [disabled]="!isOperational()"
+                     (change)="updateDistance()">
+              <mat-error *ngIf="lineForm.get('hoursWorked')?.hasError('required')">
+                Heures travaillées requises
+              </mat-error>
+              <mat-error *ngIf="lineForm.get('hoursWorked')?.hasError('min')">
+                Les heures ne peuvent pas être négatives
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <!-- Index départ -->
+          <div class="form-field">
+            <label>Index départ *</label>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" formControlName="startIndex" 
+                     [disabled]="isReformed()"
+                     (change)="validateIndexes()">
+              <mat-error *ngIf="lineForm.get('startIndex')?.hasError('required')">
+                Index départ requis
+              </mat-error>
+              <mat-error *ngIf="lineForm.get('startIndex')?.hasError('min')">
+                L'index ne peut pas être négatif
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <!-- Index fin -->
+          <div class="form-field">
+            <label>Index fin *</label>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" formControlName="endIndex" 
+                     [disabled]="isReformed()"
+                     (change)="validateIndexes()">
+              <mat-error *ngIf="lineForm.get('endIndex')?.hasError('required')">
+                Index fin requis
+              </mat-error>
+              <mat-error *ngIf="lineForm.get('endIndex')?.hasError('min')">
+                L'index ne peut pas être négatif
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <!-- Message d'erreur index -->
+          <div class="form-field full-width" *ngIf="indexError">
+            <div class="error-message-box">
+              <mat-icon>error_outline</mat-icon>
+              <span>L'index fin doit être supérieur ou égal à l'index départ</span>
+            </div>
+          </div>
+          
+          <!-- Distance (calculée automatiquement) -->
+          <div class="form-field">
+            <label>Distance (km)</label>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" [value]="getDistance()" disabled>
+              <span matSuffix class="suffix-unit">km</span>
+            </mat-form-field>
+          </div>
+          
+          <!-- Carburant (Lecture seule) -->
+          <div class="form-field">
+              <label>Carburant (L)</label>
+              <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="fuelConsumed" step="0.1" [disabled]="true">
+                <span matSuffix class="suffix-unit">L</span>
+              </mat-form-field>
+            </div>
+          
+          
+          
+        </div>
+      </div>
+    </div>
+  </form>
+  
+</div>

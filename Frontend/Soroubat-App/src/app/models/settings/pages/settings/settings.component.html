@@ -1,0 +1,133 @@
+<!-- src/app/modules/settings/pages/settings/settings.component.html -->
+
+<div class="settings-container">
+  <div class="settings-header">
+    <div class="header-badge">
+      <mat-icon>tune</mat-icon>
+    </div>
+    <h1>Paramètres</h1>
+    <p>Personnalisez votre expérience</p>
+  </div>
+
+  <div class="settings-grid">
+    
+    <!-- Profile / Informations utilisateur -->
+    <mat-card class="settings-card profile-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon profile-icon">
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Profil utilisateur</mat-card-title>
+          <mat-card-subtitle>Vos informations personnelles</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="profile-info">
+          <div class="profile-avatar">
+            <div class="avatar-initials" [style.background]="getRoleColor()">
+              {{ getUserInitials() }}
+            </div>
+          </div>
+          <div class="profile-details">
+            <div class="detail-item">
+              <mat-icon>person</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Nom complet</span>
+                <span class="detail-value">{{ currentUser?.name || 'Non défini' }}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon>email</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">{{ currentUser?.email || currentUser?.username || 'Non défini' }}</span>
+              </div>
+            </div>
+            <div class="detail-item" *ngIf="currentUser?.projet">
+              <mat-icon>business</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Chantier</span>
+                <span class="detail-value">{{ currentUser?.projet }}</span>
+              </div>
+            </div>
+            <div class="detail-item" *ngIf="currentUser?.magasin">
+              <mat-icon>store</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Magasin</span>
+                <span class="detail-value">{{ currentUser?.magasin }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Notifications sonores -->
+    <mat-card class="settings-card sound-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon sound-icon">
+          <mat-icon>volume_up</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>Notifications sonores</mat-card-title>
+          <mat-card-subtitle>Gérer les alertes sonores</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="setting-item">
+          <div class="setting-info">
+            <span class="setting-label">Activer les sons</span>
+            <span class="setting-desc">Jouer un son pour les alertes et notifications</span>
+          </div>
+          <mat-slide-toggle 
+            class="custom-toggle"
+            [(ngModel)]="isSoundEnabled" 
+            (change)="onSoundToggleChange()">
+            <span class="toggle-label">{{ isSoundEnabled ? 'Activé' : 'Désactivé' }}</span>
+          </mat-slide-toggle>
+        </div>
+        
+        <div class="sound-visualizer" *ngIf="isSoundEnabled">
+          <div class="wave"></div>
+          <button class="btn-test" (click)="playTestSound()">
+            <mat-icon>play_arrow</mat-icon>
+            <span>Tester le son</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    
+
+    <!-- Informations -->
+    <mat-card class="settings-card about-card">
+      <div class="card-glow"></div>
+      <mat-card-header>
+        <div class="card-icon about-icon">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="card-header-text">
+          <mat-card-title>À propos</mat-card-title>
+          <mat-card-subtitle>Informations sur l'application</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="about-info">
+          <div class="app-logo">
+            <div class="logo-icon">🏗️</div>
+          </div>
+          <div class="app-name">SOROUBAT</div>
+          <div class="app-badge">
+            <span class="version-badge">v2.0.0</span>
+          </div>
+          <div class="app-description">Gestion de chantiers intelligente</div>
+          <div class="app-copyright">© 2024 - 2025 Soroubat</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

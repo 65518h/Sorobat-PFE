@@ -1,0 +1,28 @@
+<!-- src/app/modules/attendance/components/confirm-dialog/confirm-dialog.component.html -->
+
+<div class="confirm-dialog-container">
+  <div class="confirm-dialog-header" [class.header-warn]="data.confirmColor === 'warn'" [class.header-primary]="data.confirmColor !== 'warn'">
+    <div class="header-icon">
+      <mat-icon>{{ data.confirmColor === 'warn' ? 'warning' : 'help_outline' }}</mat-icon>
+    </div>
+    <h2>{{ data.title }}</h2>
+    <button class="close-btn" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="confirm-dialog-content">
+    <p>{{ data.message }}</p>
+  </div>
+  
+  <div class="confirm-dialog-footer">
+    <button class="btn-cancel" (click)="onCancel()">
+      <mat-icon>close</mat-icon>
+      {{ data.cancelText || 'Annuler' }}
+    </button>
+    <button class="btn-confirm" [class.btn-warn]="data.confirmColor === 'warn'" (click)="onConfirm()">
+      <mat-icon>check</mat-icon>
+      {{ data.confirmText || 'Confirmer' }}
+    </button>
+  </div>
+</div>

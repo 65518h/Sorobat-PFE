@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "moduleResolution": "bundler", 
+    "module": "ESNext",
+    "importHelpers": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "dom"],
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "types": ["node"], // <-- AJOUTEZ "vitest/globals" ICI
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

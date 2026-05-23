@@ -1,0 +1,361 @@
+<!-- src/app/modules/attendance/pages/attendance-list/attendance-list.html -->
+
+<!-- ✅ BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span>📱 Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="attendance-container">
+  
+  <!-- Hero Section -->
+  <div class="hero-section-gradient">
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="hero-content-gradient">
+      <div class="hero-left-gradient">
+        <div class="icon-container-gradient">
+          <mat-icon>groups</mat-icon>
+          <div class="icon-glow"></div>
+        </div>
+        <div class="hero-text-gradient">
+          <h1>Pointage des employés</h1>
+          <p>Suivi des présences et absences par mois</p>
+        </div>
+      </div>
+      <div class="hero-actions-gradient">
+
+
+         <!-- ✅ BOUTON ALERTES - Ajouté ici -->
+        <div *appOfflineHideActions>
+          <app-alerts-button 
+            domain="attendance" 
+            label="Alertes"
+            [showToast]="true">
+          </app-alerts-button>
+        </div>
+
+
+        
+        <!-- ✅ Bouton NOUVEAU pointage - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-gradient" (click)="goToNew()">
+            <mat-icon>add</mat-icon>
+            <span>Nouveau pointage</span>
+          </button>
+        </div>
+        
+        <!-- ✅ Bouton ACTUALISER - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-gradient-icon" (click)="refresh()" [disabled]="loading">
+            <mat-icon [class.spinning]="loading">refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="search-bar-container">
+    <div class="search-input-wrapper">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input type="text" 
+             [(ngModel)]="searchTerm"
+             (input)="applyFilters()"
+             placeholder="Rechercher par numéro de pointage, mois ou année..."
+             class="search-input"
+             autocomplete="off">
+      <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtres avancés -->
+  <div class="filters-container">
+    <button class="filter-toggle-btn" (click)="toggleFilters()" [class.active]="filtersExpanded">
+      <mat-icon>filter_alt</mat-icon>
+      <span>Filtres avancés</span>
+      <mat-icon class="chevron" [class.rotated]="filtersExpanded">expand_more</mat-icon>
+    </button>
+    
+    <div class="filters-panel" [class.expanded]="filtersExpanded">
+      <div class="filters-grid">
+        <!-- Filtre par mois -->
+        <div class="filter-group">
+          <label>
+            <mat-icon>calendar_month</mat-icon>
+            Mois
+          </label>
+          <select [(ngModel)]="filterMonth" (change)="applyFilters()">
+            <option value="all">Tous les mois</option>
+            <option value="Janvier">Janvier</option>
+            <option value="Février">Février</option>
+            <option value="Mars">Mars</option>
+            <option value="Avril">Avril</option>
+            <option value="Mai">Mai</option>
+            <option value="Juin">Juin</option>
+            <option value="Juillet">Juillet</option>
+            <option value="Août">Août</option>
+            <option value="Septembre">Septembre</option>
+            <option value="Octobre">Octobre</option>
+            <option value="Novembre">Novembre</option>
+            <option value="Décembre">Décembre</option>
+          </select>
+        </div>
+        
+        <!-- Filtre par année -->
+        <div class="filter-group">
+          <label>
+            <mat-icon>calendar_today</mat-icon>
+            Année
+          </label>
+          <select [(ngModel)]="filterYear" (change)="applyFilters()">
+            <option value="all">Toutes les années</option>
+            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+        
+        <!-- Filtre par nombre d'employés -->
+        <div class="filter-group">
+          <label>
+            <mat-icon>groups</mat-icon>
+            Nombre d'employés
+          </label>
+          <div class="filter-range">
+            <input type="number" 
+                   [(ngModel)]="filterMinEmployees" 
+                   (input)="applyFilters()"
+                   placeholder="Min"
+                   class="filter-range-input">
+            <span class="range-separator">-</span>
+            <input type="number" 
+                   [(ngModel)]="filterMaxEmployees" 
+                   (input)="applyFilters()"
+                   placeholder="Max"
+                   class="filter-range-input">
+          </div>
+        </div>
+        
+        <!-- Filtre par numéro de document -->
+        <div class="filter-group">
+          <label>
+            <mat-icon>receipt</mat-icon>
+            N° document
+          </label>
+          <input type="text" 
+                 [(ngModel)]="filterDocumentNo"
+                 (input)="applyFilters()"
+                 placeholder="Numéro de pointage..."
+                 class="filter-input">
+        </div>
+      </div>
+      
+      <div class="filter-actions">
+        <button class="btn-reset-filters" (click)="resetFilters()">
+          <mat-icon>clear_all</mat-icon>
+          Réinitialiser les filtres
+        </button>
+        <div class="filter-results-count" *ngIf="hasActiveFilters()">
+          {{ filteredHeaders.length }} résultat(s)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cartes de statistiques -->
+  <div class="stats-grid" *ngIf="!loading">
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper total">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ filteredHeaders.length }}</span>
+          <span class="stat-title">Pointages</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper employees">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ getTotalEmployees() }}</span>
+          <span class="stat-title">Employés</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-card premium">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper months">
+          <mat-icon>calendar_month</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ getUniqueMonthsCount() }}</span>
+          <span class="stat-title">Mois concernés</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info projet -->
+  <div class="project-info" *ngIf="currentJobNo">
+    <div class="info-card">
+      <mat-icon>business_center</mat-icon>
+      <div class="info-details">
+        <span class="info-label">Chantier / Projet</span>
+        <span class="info-value">{{ currentJobNo }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement des pointages...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Oups ! Une erreur s'est produite</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="retry()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Tags des filtres actifs -->
+  <div class="active-filters" *ngIf="hasActiveFilters()">
+    <span class="filter-tag" *ngIf="filterMonth !== 'all'">
+      Mois: {{ filterMonth }}
+      <mat-icon (click)="filterMonth = 'all'; applyFilters()">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterYear !== 'all'">
+      Année: {{ filterYear }}
+      <mat-icon (click)="filterYear = 'all'; applyFilters()">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterDocumentNo">
+      N° document: {{ filterDocumentNo }}
+      <mat-icon (click)="filterDocumentNo = ''; applyFilters()">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterMinEmployees !== null || filterMaxEmployees !== null">
+      Employés: {{ filterMinEmployees || 0 }} - {{ filterMaxEmployees || '∞' }}
+      <mat-icon (click)="filterMinEmployees = null; filterMaxEmployees = null; applyFilters()">close</mat-icon>
+    </span>
+    <button class="clear-all-filters" (click)="resetFilters()">
+      <mat-icon>clear_all</mat-icon>
+      Tout effacer
+    </button>
+  </div>
+
+  <!-- Liste des pointages -->
+  <div class="cards-grid" *ngIf="!loading && !errorMessage && filteredHeaders.length > 0">
+    <div class="attendance-card" *ngFor="let attendance of filteredHeaders; let i = index">
+      <div class="card-header">
+        <div class="header-left">
+          <div class="month-badge">
+            <mat-icon>calendar_month</mat-icon>
+            <span>{{ getMonthName(attendance.month) }} {{ attendance.year }}</span>
+          </div>
+          <div class="offline-badge" *ngIf="attendance.isOffline">
+         
+          </div>
+          <div class="document-badge" *ngIf="attendance.no">
+            <mat-icon>receipt</mat-icon>
+            <span class="document-number">{{ attendance.no }}</span>
+          </div>
+        </div>
+        <div class="staff-count">
+          <mat-icon>groups</mat-icon>
+          <span>{{ attendance.totalStaff }} employés</span>
+        </div>
+      </div>
+      
+      <div class="card-footer">
+        <div class="card-actions">
+          <!--  Bouton Modifier - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="btn-edit-card" (click)="$event.stopPropagation(); goToEdit(attendance)" matTooltip="Modifier le pointage">
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+            </button>
+          </div>
+          
+          <!--  Bouton Supprimer - CACHÉ OFFLINE -->
+          <div *appOfflineHideActions>
+            <button class="btn-delete-card" (click)="$event.stopPropagation(); deleteAttendance(attendance)" matTooltip="Supprimer le pointage">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </div>
+          
+          <!-- ✅ Bouton Voir détails - TOUJOURS VISIBLE -->
+          <button class="btn-view-card" (click)="$event.stopPropagation(); viewDetail(attendance)">
+            <mat-icon>visibility</mat-icon>
+            <span>Détails</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state-premium" *ngIf="!loading && !errorMessage && filteredHeaders.length === 0 && currentJobNo">
+    <div class="empty-card">
+      <div class="empty-illustration">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+      <h3>Aucun pointage</h3>
+      <p *ngIf="hasActiveFilters()">Aucun pointage ne correspond à vos critères de recherche.</p>
+      <p *ngIf="!hasActiveFilters()">Commencez par créer votre premier pointage de présence.</p>
+      <div class="empty-actions">
+        <button class="btn-primary-premium" (click)="goToNew()" [class.btn-disabled]="isReadOnly">
+          <mat-icon>add</mat-icon>
+          Nouveau pointage
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--  INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredHeaders.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span> Données en cache (mode hors ligne)</span>
+  </div>
+
+</div>

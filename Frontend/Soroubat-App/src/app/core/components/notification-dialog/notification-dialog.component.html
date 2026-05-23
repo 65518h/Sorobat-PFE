@@ -1,0 +1,192 @@
+<!-- src/app/core/components/notification-dialog/notification-dialog.component.html -->
+
+<div class="notification-dialog">
+  <!-- En-tête -->
+  <div class="dialog-header">
+    <div class="header-icon">
+      <mat-icon>notifications_active</mat-icon>
+    </div>
+    <div class="header-title">
+      <h2>Notifications</h2>
+      <p>Alertes et rapports</p>
+    </div>
+    <div class="header-stats">
+      <div class="stat-badge critical" *ngIf="criticalCount > 0">
+        <mat-icon>error</mat-icon>
+        <span>{{ criticalCount }}</span>
+      </div>
+      <div class="stat-badge warning" *ngIf="warningCount > 0">
+        <mat-icon>warning</mat-icon>
+        <span>{{ warningCount }}</span>
+      </div>
+      <div class="stat-badge info" *ngIf="infoCount > 0">
+        <mat-icon>info</mat-icon>
+        <span>{{ infoCount }}</span>
+      </div>
+    </div>
+    <button class="close-btn" (click)="onClose()" matTooltip="Fermer">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Corps -->
+  <div class="dialog-body">
+    
+    <!-- Alertes Critiques -->
+    <div *ngIf="criticalAlerts.length > 0" class="alert-section">
+      <div class="section-header critical">
+        <div class="section-icon">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <span class="section-title">Urgent</span>
+        <span class="section-count">{{ criticalAlerts.length }}</span>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="alerts-list">
+        <div *ngFor="let alert of criticalAlerts" 
+             class="alert-item critical"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status"></div>
+          <div class="alert-icon">
+            <mat-icon>error</mat-icon>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-time">{{ getTimeAgo(alert.detectedAt) }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo || '—' }}
+              </span>
+            </div>
+          </div>
+          <button class="mark-read-btn" (click)="markAsRead($event, alert.id)" matTooltip="Marquer comme lu">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alertes Avertissements -->
+    <div *ngIf="warningAlerts.length > 0" class="alert-section">
+      <div class="section-header warning">
+        <div class="section-icon">
+          <mat-icon>warning_amber</mat-icon>
+        </div>
+        <span class="section-title">À surveiller</span>
+        <span class="section-count">{{ warningAlerts.length }}</span>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="alerts-list">
+        <div *ngFor="let alert of warningAlerts" 
+             class="alert-item warning"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status"></div>
+          <div class="alert-icon">
+            <mat-icon>warning</mat-icon>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-time">{{ getTimeAgo(alert.detectedAt) }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo || '—' }}
+              </span>
+            </div>
+          </div>
+          <button class="mark-read-btn" (click)="markAsRead($event, alert.id)" matTooltip="Marquer comme lu">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alertes Informations -->
+    <div *ngIf="infoAlerts.length > 0" class="alert-section">
+      <div class="section-header info">
+        <div class="section-icon">
+          <mat-icon>info_outline</mat-icon>
+        </div>
+        <span class="section-title">Informations</span>
+        <span class="section-count">{{ infoAlerts.length }}</span>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="alerts-list">
+        <div *ngFor="let alert of infoAlerts" 
+             class="alert-item info"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status"></div>
+          <div class="alert-icon">
+            <mat-icon>info</mat-icon>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-time">{{ getTimeAgo(alert.detectedAt) }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo || '—' }}
+              </span>
+            </div>
+          </div>
+          <button class="mark-read-btn" (click)="markAsRead($event, alert.id)" matTooltip="Marquer comme lu">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aucune alerte -->
+    <div *ngIf="criticalAlerts.length === 0 && warningAlerts.length === 0 && infoAlerts.length === 0" 
+         class="empty-state">
+      <mat-icon class="empty-icon">notifications_off</mat-icon>
+      <h3>Tout est tranquille</h3>
+      <p>Aucune alerte à signaler pour le moment</p>
+      <div class="empty-checkmark">
+        <mat-icon>check_circle</mat-icon>
+        <span>Système opérationnel</span>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Pied de page -->
+  <div class="dialog-footer">
+    <button class="btn-mark-all" (click)="markAllAsRead()">
+      <mat-icon>done_all</mat-icon>
+      <span>Tout marquer comme lu</span>
+    </button>
+    <button class="btn-view-all" (click)="viewAllAlerts()">
+      <span>Voir toutes les alertes</span>
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</div>
