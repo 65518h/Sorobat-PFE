@@ -1,0 +1,88 @@
+@startuml
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceGroupBorderColor #2E74B5
+skinparam sequenceGroupHeaderFontColor #1F4D78
+skinparam sequenceGroupBackgroundColor #EEF4FB
+skinparam participantBackgroundColor #D5E8F0
+skinparam participantBorderColor #2E74B5
+skinparam participantFontColor #1F4D78
+skinparam noteBorderColor #2E74B5
+skinparam noteBackgroundColor #EEF4FB
+skinparam backgroundColor white
+
+actor "Chef de chantier" as chef
+participant "Angular\n(TransferDetailComponent)" as ng
+participant "ASP.NET Core\n(TransferController)" as api
+participant "TransferService" as svc
+participant "Business Central\n(OData API)" as bc
+
+== Chargement du détail du transfert ==
+
+chef -> ng : Sélectionne un transfert
+ng -> api : GET /api/Transfer/{id}
+api -> svc : GetTransferByIdAsync(id, projectNo)
+svc -> bc : GET transferHeaders({id})?$expand=transferLines
+bc --> svc : TransferHeaderReadDto\n{ status, chantierDestination, transferLines[] }
+
+alt chantierDestination ≠ projectNo
+  svc --> api : UnauthorizedAccessException
+  api --> ng : 403 Forbidden
+else chantierDestination = projectNo
+  svc --> api : TransferHeaderReadDto
+  api --> ng : 200 OK
+  ng --> chef : Affiche détail + lignes\n(article, qté expédiée, reste à recevoir)
+end
+
+== Saisie de la date de réception ==
+
+chef -> ng : Clique "Modifier date"\n(date du jour préremplie)
+chef -> ng : Valide la date
+ng -> api : PATCH /api/Transfer/{id}\n{ receiptDate: "YYYY-MM-DD" }
+api -> svc : PatchHeaderAsync(id, dto, projectNo)
+svc -> bc : GET transferHeaders({id})
+bc --> svc : { chantierDestination, ETag }
+svc -> bc : PATCH transferHeaders({id})\nIf-Match: ETag\n{ receiptDate }
+bc --> svc : 200 OK
+svc --> api : true
+api --> ng : 200 OK { message }
+ng --> chef : Date de réception enregistrée
+
+== Réception des lignes ==
+
+loop Pour chaque ligne (statut Released)
+  chef -> ng : Saisit qtyToReceive\n(validation : 0 ≤ qty ≤ reste)
+end
+
+chef -> ng : Clique "Valider réception"
+ng --> chef : Dialogue de confirmation
+
+chef -> ng : Confirme
+
+loop Pour chaque ligne avec qtyToReceive > 0
+  ng -> api : PATCH /api/Transfer/lines/{lineId}\n{ qtyToReceive }
+  api -> svc : PatchLineAsync(lineId, dto, projectNo)
+  svc -> bc : GET transferLines({lineId})
+  bc --> svc : { documentNo, ETag }
+  svc -> bc : GET transferHeaders\n?$filter=no eq '{documentNo}'
+  bc --> svc : { chantierDestination }
+  note right of svc
+    Double vérification :
+    la ligne ne contient pas
+    directement le chantier →
+    passage par l'en-tête parent
+  end note
+  alt chantierDestination ≠ projectNo
+    svc --> api : UnauthorizedAccessException
+    api --> ng : 403 Forbidden
+  else
+    svc -> bc : PATCH transferLines({lineId})\nIf-Match: ETag\n{ qtyToReceive }
+    bc --> svc : 200 OK
+    svc --> api : true
+    api --> ng : 200 OK
+  end
+end
+
+ng -> api : GET /api/Transfer/{id}
+api --> ng : Transfert rechargé
+ng --> chef : Réception enregistrée\nQuantités mises à jour
+@enduml

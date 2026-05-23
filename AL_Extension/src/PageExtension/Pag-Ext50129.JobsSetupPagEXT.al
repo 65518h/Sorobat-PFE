@@ -8,6 +8,8 @@ PageExtension 50129 "Jobs Setup_PagEXT" extends "Jobs Setup"
             field("WIP Report Nos."; Rec."WIP Report Nos.") { ApplicationArea = all; }
             field("Journal Template Name"; Rec."Journal Template Name") { ApplicationArea = all; }
             field("Job Journal Batch"; Rec."Job Journal Batch") { ApplicationArea = all; }
+            field(Energie; Rec.Energie) { ApplicationArea = all; }
+            field("Article resource"; Rec."Article resource") { ApplicationArea = all; }
 
         }
         addbefore(Archiving)

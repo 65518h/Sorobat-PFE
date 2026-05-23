@@ -1,0 +1,100 @@
+@startuml
+!define ACCENT_BLUE #2E74B5
+!define LIGHT_BLUE #D5E8F0
+!define DARK_BLUE #1F4D78
+!define ORANGE #E8A000
+
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor LIGHT_BLUE
+  BorderColor ACCENT_BLUE
+  FontColor DARK_BLUE
+  FontSize 13
+  ArrowColor ACCENT_BLUE
+}
+skinparam actor {
+  BackgroundColor #EBF5FB
+  BorderColor ACCENT_BLUE
+  FontColor DARK_BLUE
+}
+skinparam rectangle {
+  BackgroundColor #F8FBFE
+  BorderColor ACCENT_BLUE
+  FontColor DARK_BLUE
+}
+skinparam note {
+  BackgroundColor #FFFBE6
+  BorderColor ORANGE
+}
+
+left to right direction
+
+actor "Chef de chantier" as CC
+
+rectangle "Plateforme — Mode hors ligne" {
+
+  package "Consultation (lecture seule)" {
+    usecase "Consulter le dashboard" as UC1
+    usecase "Consulter les tâches\net l'avancement" as UC2
+    usecase "Consulter le stock\ndu chantier" as UC3
+    usecase "Consulter les demandes\nd'achat" as UC4
+    usecase "Consulter les ordres\nde transfert" as UC5
+    usecase "Consulter l'historique\nde pointage" as UC6
+  }
+
+  package "Feedback visuel" {
+    usecase "Voir l'indicateur\nhors ligne (navbar)" as UC7
+    usecase "Voir le compteur\nde docs en attente" as UC8
+  }
+
+  package "Système — Automatique" {
+    usecase "Détecter perte /\nretour de réseau" as UC9
+    usecase "Charger données\ndepuis cache Dexie" as UC10
+    usecase "Masquer les actions\nd'écriture (directives)" as UC11
+    usecase "Synchroniser\nautomatiquement" as UC12
+  }
+}
+
+CC --> UC1
+CC --> UC2
+CC --> UC3
+CC --> UC4
+CC --> UC5
+CC --> UC6
+CC --> UC7
+CC --> UC8
+
+UC1 ..> UC10 : <>
+UC2 ..> UC10 : <>
+UC3 ..> UC10 : <>
+UC4 ..> UC10 : <>
+UC5 ..> UC10 : <>
+UC6 ..> UC10 : <>
+
+UC1 ..> UC11 : <>
+UC3 ..> UC11 : <>
+UC4 ..> UC11 : <>
+
+UC9 ..> UC12 : <>\n[retour réseau]
+
+note right of UC10
+  Stratégie cache-aside
+  via CacheService
+  (Dexie IndexedDB)
+  Expiration : 24h
+end note
+
+note right of UC11
+  Directives Angular :
+  [appOfflineHideActions]
+  [appShowOfflineMessage]
+  [appOfflineHide]
+end note
+
+note bottom of UC12
+  syncAll() déclenché
+  automatiquement
+  au retour réseau
+end note
+
+@enduml

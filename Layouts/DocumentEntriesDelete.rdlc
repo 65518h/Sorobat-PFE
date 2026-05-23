@@ -1,0 +1,2222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Text001___FORMAT_DocNoFilter_">
+          <DataField>Text001___FORMAT_DocNoFilter_</DataField>
+        </Field>
+        <Field Name="Text002___PostingDateFilter">
+          <DataField>Text002___PostingDateFilter</DataField>
+        </Field>
+        <Field Name="DocEntry__No__of_Records_">
+          <DataField>DocEntry__No__of_Records_</DataField>
+        </Field>
+        <Field Name="DocEntry__Table_Name_">
+          <DataField>DocEntry__Table_Name_</DataField>
+        </Field>
+        <Field Name="PrintAmountsInLCY">
+          <DataField>PrintAmountsInLCY</DataField>
+        </Field>
+        <Field Name="CurrencyCaptionRBC">
+          <DataField>CurrencyCaptionRBC</DataField>
+        </Field>
+        <Field Name="Document_EntriesCaption">
+          <DataField>Document_EntriesCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Navigate_FiltersCaption">
+          <DataField>Navigate_FiltersCaption</DataField>
+        </Field>
+        <Field Name="DocEntry__No__of_Records_Caption">
+          <DataField>DocEntry__No__of_Records_Caption</DataField>
+        </Field>
+        <Field Name="DocEntry__Table_Name_Caption">
+          <DataField>DocEntry__Table_Name_Caption</DataField>
+        </Field>
+        <Field Name="Integer_Number">
+          <DataField>Integer_Number</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Posting_Date_">
+          <DataField>Service_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Document_No__">
+          <DataField>Service_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry_Description">
+          <DataField>Service_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Amount__LCY__">
+          <DataField>Service_Ledger_Entry__Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Amount__LCY__Format">
+          <DataField>Service_Ledger_Entry__Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Entry_No__">
+          <DataField>Service_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Service_Contract_No__">
+          <DataField>Service_Ledger_Entry__Service_Contract_No__</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Entry_No__Caption">
+          <DataField>Service_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Service_Contract_No__Caption">
+          <DataField>Service_Ledger_Entry__Service_Contract_No__Caption</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Amount__LCY__Caption">
+          <DataField>Service_Ledger_Entry__Amount__LCY__Caption</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry_DescriptionCaption">
+          <DataField>Service_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Document_No__Caption">
+          <DataField>Service_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Service_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Service_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Entry_No__">
+          <DataField>Warranty_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Posting_Date_">
+          <DataField>Warranty_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Document_No__">
+          <DataField>Warranty_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry_Description">
+          <DataField>Warranty_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry_Amount">
+          <DataField>Warranty_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry_AmountFormat">
+          <DataField>Warranty_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Entry_No__Caption">
+          <DataField>Warranty_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry_AmountCaption">
+          <DataField>Warranty_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry_DescriptionCaption">
+          <DataField>Warranty_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Document_No__Caption">
+          <DataField>Warranty_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Warranty_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Warranty_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption">
+          <DataField>CurrencyCaption</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__Posting_Date_">
+          <DataField>Service_Shipment_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__No__">
+          <DataField>Service_Shipment_Header__No__</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header_Description">
+          <DataField>Service_Shipment_Header_Description</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__Currency_Code_">
+          <DataField>Service_Shipment_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__Posting_Date__Control299">
+          <DataField>Service_Shipment_Header__Posting_Date__Control299</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__No___Control304">
+          <DataField>Service_Shipment_Header__No___Control304</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header_Description_Control418">
+          <DataField>Service_Shipment_Header_Description_Control418</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header_DescriptionCaption">
+          <DataField>Service_Shipment_Header_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__No__Caption">
+          <DataField>Service_Shipment_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Service_Shipment_Header__Posting_Date_Caption">
+          <DataField>Service_Shipment_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control49">
+          <DataField>CurrencyCaption_Control49</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Date_">
+          <DataField>Sales_Shipment_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__No__">
+          <DataField>Sales_Shipment_Header__No__</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Sell_to_Customer_No__">
+          <DataField>Sales_Shipment_Header__Sell_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Bill_to_Customer_No__">
+          <DataField>Sales_Shipment_Header__Bill_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Description_">
+          <DataField>Sales_Shipment_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Currency_Code_">
+          <DataField>Sales_Shipment_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Date__Control431">
+          <DataField>Sales_Shipment_Header__Posting_Date__Control431</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__No___Control432">
+          <DataField>Sales_Shipment_Header__No___Control432</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Sell_to_Customer_No___Control433">
+          <DataField>Sales_Shipment_Header__Sell_to_Customer_No___Control433</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Bill_to_Customer_No___Control483">
+          <DataField>Sales_Shipment_Header__Bill_to_Customer_No___Control483</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Description__Control485">
+          <DataField>Sales_Shipment_Header__Posting_Description__Control485</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Bill_to_Customer_No__Caption">
+          <DataField>Sales_Shipment_Header__Bill_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Sell_to_Customer_No__Caption">
+          <DataField>Sales_Shipment_Header__Sell_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Description_Caption">
+          <DataField>Sales_Shipment_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__No__Caption">
+          <DataField>Sales_Shipment_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Shipment_Header__Posting_Date_Caption">
+          <DataField>Sales_Shipment_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control116">
+          <DataField>CurrencyCaption_Control116</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Date_">
+          <DataField>Sales_Invoice_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__No__">
+          <DataField>Sales_Invoice_Header__No__</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Description_">
+          <DataField>Sales_Invoice_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Sell_to_Customer_No__">
+          <DataField>Sales_Invoice_Header__Sell_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Bill_to_Customer_No__">
+          <DataField>Sales_Invoice_Header__Bill_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header_Amount">
+          <DataField>Sales_Invoice_Header_Amount</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header_AmountFormat">
+          <DataField>Sales_Invoice_Header_AmountFormat</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Amount_Including_VAT_">
+          <DataField>Sales_Invoice_Header__Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Amount_Including_VAT_Format">
+          <DataField>Sales_Invoice_Header__Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Currency_Code_">
+          <DataField>Sales_Invoice_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Date__Control430">
+          <DataField>Sales_Invoice_Header__Posting_Date__Control430</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__No___Control499">
+          <DataField>Sales_Invoice_Header__No___Control499</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Description__Control515">
+          <DataField>Sales_Invoice_Header__Posting_Description__Control515</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Sell_to_Customer_No___Control520">
+          <DataField>Sales_Invoice_Header__Sell_to_Customer_No___Control520</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Bill_to_Customer_No___Control522">
+          <DataField>Sales_Invoice_Header__Bill_to_Customer_No___Control522</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header_Amount_Control536">
+          <DataField>Sales_Invoice_Header_Amount_Control536</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header_Amount_Control536Format">
+          <DataField>Sales_Invoice_Header_Amount_Control536Format</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Amount_Including_VAT__Control537">
+          <DataField>Sales_Invoice_Header__Amount_Including_VAT__Control537</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Amount_Including_VAT__Control537Format">
+          <DataField>Sales_Invoice_Header__Amount_Including_VAT__Control537Format</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Bill_to_Customer_No__Caption">
+          <DataField>Sales_Invoice_Header__Bill_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Sell_to_Customer_No__Caption">
+          <DataField>Sales_Invoice_Header__Sell_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Description_Caption">
+          <DataField>Sales_Invoice_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__No__Caption">
+          <DataField>Sales_Invoice_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Posting_Date_Caption">
+          <DataField>Sales_Invoice_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header_AmountCaption">
+          <DataField>Sales_Invoice_Header_AmountCaption</DataField>
+        </Field>
+        <Field Name="Sales_Invoice_Header__Amount_Including_VAT_Caption">
+          <DataField>Sales_Invoice_Header__Amount_Including_VAT_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control118">
+          <DataField>CurrencyCaption_Control118</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Date_">
+          <DataField>Return_Receipt_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__No__">
+          <DataField>Return_Receipt_Header__No__</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Description_">
+          <DataField>Return_Receipt_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Sell_to_Customer_No__">
+          <DataField>Return_Receipt_Header__Sell_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Bill_to_Customer_No__">
+          <DataField>Return_Receipt_Header__Bill_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Currency_Code_">
+          <DataField>Return_Receipt_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Date__Control543">
+          <DataField>Return_Receipt_Header__Posting_Date__Control543</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__No___Control544">
+          <DataField>Return_Receipt_Header__No___Control544</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Description__Control545">
+          <DataField>Return_Receipt_Header__Posting_Description__Control545</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Sell_to_Customer_No___Control546">
+          <DataField>Return_Receipt_Header__Sell_to_Customer_No___Control546</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Bill_to_Customer_No___Control547">
+          <DataField>Return_Receipt_Header__Bill_to_Customer_No___Control547</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Bill_to_Customer_No__Caption">
+          <DataField>Return_Receipt_Header__Bill_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Sell_to_Customer_No__Caption">
+          <DataField>Return_Receipt_Header__Sell_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Description_Caption">
+          <DataField>Return_Receipt_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__No__Caption">
+          <DataField>Return_Receipt_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Receipt_Header__Posting_Date_Caption">
+          <DataField>Return_Receipt_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control162">
+          <DataField>CurrencyCaption_Control162</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Date_">
+          <DataField>Sales_Cr_Memo_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__No__">
+          <DataField>Sales_Cr_Memo_Header__No__</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Description_">
+          <DataField>Sales_Cr_Memo_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Sell_to_Customer_No__">
+          <DataField>Sales_Cr_Memo_Header__Sell_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Bill_to_Customer_No__">
+          <DataField>Sales_Cr_Memo_Header__Bill_to_Customer_No__</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header_Amount">
+          <DataField>Sales_Cr_Memo_Header_Amount</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header_AmountFormat">
+          <DataField>Sales_Cr_Memo_Header_AmountFormat</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Amount_Including_VAT_">
+          <DataField>Sales_Cr_Memo_Header__Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Amount_Including_VAT_Format">
+          <DataField>Sales_Cr_Memo_Header__Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Currency_Code_">
+          <DataField>Sales_Cr_Memo_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Amount_Including_VAT__Control550">
+          <DataField>Sales_Cr_Memo_Header__Amount_Including_VAT__Control550</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Amount_Including_VAT__Control550Format">
+          <DataField>Sales_Cr_Memo_Header__Amount_Including_VAT__Control550Format</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header_Amount_Control551">
+          <DataField>Sales_Cr_Memo_Header_Amount_Control551</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header_Amount_Control551Format">
+          <DataField>Sales_Cr_Memo_Header_Amount_Control551Format</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Bill_to_Customer_No___Control552">
+          <DataField>Sales_Cr_Memo_Header__Bill_to_Customer_No___Control552</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Sell_to_Customer_No___Control553">
+          <DataField>Sales_Cr_Memo_Header__Sell_to_Customer_No___Control553</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Description__Control554">
+          <DataField>Sales_Cr_Memo_Header__Posting_Description__Control554</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__No___Control555">
+          <DataField>Sales_Cr_Memo_Header__No___Control555</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Date__Control556">
+          <DataField>Sales_Cr_Memo_Header__Posting_Date__Control556</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Bill_to_Customer_No__Caption">
+          <DataField>Sales_Cr_Memo_Header__Bill_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Sell_to_Customer_No__Caption">
+          <DataField>Sales_Cr_Memo_Header__Sell_to_Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Description_Caption">
+          <DataField>Sales_Cr_Memo_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__No__Caption">
+          <DataField>Sales_Cr_Memo_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Posting_Date_Caption">
+          <DataField>Sales_Cr_Memo_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header__Amount_Including_VAT_Caption">
+          <DataField>Sales_Cr_Memo_Header__Amount_Including_VAT_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Cr_Memo_Header_AmountCaption">
+          <DataField>Sales_Cr_Memo_Header_AmountCaption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control163">
+          <DataField>CurrencyCaption_Control163</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Date_">
+          <DataField>Issued_Reminder_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__No__">
+          <DataField>Issued_Reminder_Header__No__</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Description_">
+          <DataField>Issued_Reminder_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Currency_Code_">
+          <DataField>Issued_Reminder_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__VAT_Amount_">
+          <DataField>Issued_Reminder_Header__VAT_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__VAT_Amount_Format">
+          <DataField>Issued_Reminder_Header__VAT_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Additional_Fee_">
+          <DataField>Issued_Reminder_Header__Additional_Fee_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Additional_Fee_Format">
+          <DataField>Issued_Reminder_Header__Additional_Fee_Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Interest_Amount_">
+          <DataField>Issued_Reminder_Header__Interest_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Interest_Amount_Format">
+          <DataField>Issued_Reminder_Header__Interest_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Remaining_Amount_">
+          <DataField>Issued_Reminder_Header__Remaining_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Remaining_Amount_Format">
+          <DataField>Issued_Reminder_Header__Remaining_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Date__Control557">
+          <DataField>Issued_Reminder_Header__Posting_Date__Control557</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__No___Control558">
+          <DataField>Issued_Reminder_Header__No___Control558</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Description__Control559">
+          <DataField>Issued_Reminder_Header__Posting_Description__Control559</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__VAT_Amount__Control561">
+          <DataField>Issued_Reminder_Header__VAT_Amount__Control561</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__VAT_Amount__Control561Format">
+          <DataField>Issued_Reminder_Header__VAT_Amount__Control561Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Additional_Fee__Control562">
+          <DataField>Issued_Reminder_Header__Additional_Fee__Control562</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Additional_Fee__Control562Format">
+          <DataField>Issued_Reminder_Header__Additional_Fee__Control562Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Interest_Amount__Control563">
+          <DataField>Issued_Reminder_Header__Interest_Amount__Control563</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Interest_Amount__Control563Format">
+          <DataField>Issued_Reminder_Header__Interest_Amount__Control563Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Remaining_Amount__Control564">
+          <DataField>Issued_Reminder_Header__Remaining_Amount__Control564</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Remaining_Amount__Control564Format">
+          <DataField>Issued_Reminder_Header__Remaining_Amount__Control564Format</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Description_Caption">
+          <DataField>Issued_Reminder_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__No__Caption">
+          <DataField>Issued_Reminder_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Posting_Date_Caption">
+          <DataField>Issued_Reminder_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Remaining_Amount_Caption">
+          <DataField>Issued_Reminder_Header__Remaining_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Interest_Amount_Caption">
+          <DataField>Issued_Reminder_Header__Interest_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__Additional_Fee_Caption">
+          <DataField>Issued_Reminder_Header__Additional_Fee_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Reminder_Header__VAT_Amount_Caption">
+          <DataField>Issued_Reminder_Header__VAT_Amount_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control164">
+          <DataField>CurrencyCaption_Control164</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Date_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__No__">
+          <DataField>Issued_Fin__Charge_Memo_Header__No__</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Description_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Remaining_Amount_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Remaining_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Remaining_Amount_Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Remaining_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Interest_Amount_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Interest_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Interest_Amount_Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Interest_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Additional_Fee_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Additional_Fee_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Additional_Fee_Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Additional_Fee_Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__VAT_Amount_">
+          <DataField>Issued_Fin__Charge_Memo_Header__VAT_Amount_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__VAT_Amount_Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__VAT_Amount_Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Currency_Code_">
+          <DataField>Issued_Fin__Charge_Memo_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Date__Control565">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Date__Control565</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__No___Control566">
+          <DataField>Issued_Fin__Charge_Memo_Header__No___Control566</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Description__Control567">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Description__Control567</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Remaining_Amount__Control568">
+          <DataField>Issued_Fin__Charge_Memo_Header__Remaining_Amount__Control568</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Remaining_Amount__Control568Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Remaining_Amount__Control568Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Interest_Amount__Control569">
+          <DataField>Issued_Fin__Charge_Memo_Header__Interest_Amount__Control569</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Interest_Amount__Control569Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Interest_Amount__Control569Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Additional_Fee__Control570">
+          <DataField>Issued_Fin__Charge_Memo_Header__Additional_Fee__Control570</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Additional_Fee__Control570Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__Additional_Fee__Control570Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__VAT_Amount__Control571">
+          <DataField>Issued_Fin__Charge_Memo_Header__VAT_Amount__Control571</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__VAT_Amount__Control571Format">
+          <DataField>Issued_Fin__Charge_Memo_Header__VAT_Amount__Control571Format</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__VAT_Amount_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__VAT_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Additional_Fee_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__Additional_Fee_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Interest_Amount_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__Interest_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Remaining_Amount_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__Remaining_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Description_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__No__Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Issued_Fin__Charge_Memo_Header__Posting_Date_Caption">
+          <DataField>Issued_Fin__Charge_Memo_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control165">
+          <DataField>CurrencyCaption_Control165</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Date_">
+          <DataField>Purch__Rcpt__Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__No__">
+          <DataField>Purch__Rcpt__Header__No__</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Description_">
+          <DataField>Purch__Rcpt__Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Buy_from_Vendor_No__">
+          <DataField>Purch__Rcpt__Header__Buy_from_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Pay_to_Vendor_No__">
+          <DataField>Purch__Rcpt__Header__Pay_to_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Currency_Code_">
+          <DataField>Purch__Rcpt__Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Date__Control573">
+          <DataField>Purch__Rcpt__Header__Posting_Date__Control573</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__No___Control574">
+          <DataField>Purch__Rcpt__Header__No___Control574</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Description__Control575">
+          <DataField>Purch__Rcpt__Header__Posting_Description__Control575</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Buy_from_Vendor_No___Control576">
+          <DataField>Purch__Rcpt__Header__Buy_from_Vendor_No___Control576</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Pay_to_Vendor_No___Control577">
+          <DataField>Purch__Rcpt__Header__Pay_to_Vendor_No___Control577</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Pay_to_Vendor_No__Caption">
+          <DataField>Purch__Rcpt__Header__Pay_to_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Buy_from_Vendor_No__Caption">
+          <DataField>Purch__Rcpt__Header__Buy_from_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Description_Caption">
+          <DataField>Purch__Rcpt__Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__No__Caption">
+          <DataField>Purch__Rcpt__Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header__Posting_Date_Caption">
+          <DataField>Purch__Rcpt__Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control172">
+          <DataField>CurrencyCaption_Control172</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Date_">
+          <DataField>Purch__Inv__Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__No__">
+          <DataField>Purch__Inv__Header__No__</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Description_">
+          <DataField>Purch__Inv__Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Buy_from_Vendor_No__">
+          <DataField>Purch__Inv__Header__Buy_from_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Pay_to_Vendor_No__">
+          <DataField>Purch__Inv__Header__Pay_to_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header_Amount">
+          <DataField>Purch__Inv__Header_Amount</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header_AmountFormat">
+          <DataField>Purch__Inv__Header_AmountFormat</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Currency_Code_">
+          <DataField>Purch__Inv__Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Amount_Including_VAT_">
+          <DataField>Purch__Inv__Header__Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Amount_Including_VAT_Format">
+          <DataField>Purch__Inv__Header__Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Date__Control579">
+          <DataField>Purch__Inv__Header__Posting_Date__Control579</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__No___Control580">
+          <DataField>Purch__Inv__Header__No___Control580</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Description__Control581">
+          <DataField>Purch__Inv__Header__Posting_Description__Control581</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Buy_from_Vendor_No___Control582">
+          <DataField>Purch__Inv__Header__Buy_from_Vendor_No___Control582</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Pay_to_Vendor_No___Control583">
+          <DataField>Purch__Inv__Header__Pay_to_Vendor_No___Control583</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header_Amount_Control584">
+          <DataField>Purch__Inv__Header_Amount_Control584</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header_Amount_Control584Format">
+          <DataField>Purch__Inv__Header_Amount_Control584Format</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Amount_Including_VAT__Control586">
+          <DataField>Purch__Inv__Header__Amount_Including_VAT__Control586</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Amount_Including_VAT__Control586Format">
+          <DataField>Purch__Inv__Header__Amount_Including_VAT__Control586Format</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header_AmountCaption">
+          <DataField>Purch__Inv__Header_AmountCaption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Pay_to_Vendor_No__Caption">
+          <DataField>Purch__Inv__Header__Pay_to_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Buy_from_Vendor_No__Caption">
+          <DataField>Purch__Inv__Header__Buy_from_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Description_Caption">
+          <DataField>Purch__Inv__Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__No__Caption">
+          <DataField>Purch__Inv__Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Posting_Date_Caption">
+          <DataField>Purch__Inv__Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Purch__Inv__Header__Amount_Including_VAT_Caption">
+          <DataField>Purch__Inv__Header__Amount_Including_VAT_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control173">
+          <DataField>CurrencyCaption_Control173</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Date_">
+          <DataField>Return_Shipment_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__No__">
+          <DataField>Return_Shipment_Header__No__</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Description_">
+          <DataField>Return_Shipment_Header__Posting_Description_</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Buy_from_Vendor_No__">
+          <DataField>Return_Shipment_Header__Buy_from_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Pay_to_Vendor_No__">
+          <DataField>Return_Shipment_Header__Pay_to_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Currency_Code_">
+          <DataField>Return_Shipment_Header__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Date__Control595">
+          <DataField>Return_Shipment_Header__Posting_Date__Control595</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__No___Control596">
+          <DataField>Return_Shipment_Header__No___Control596</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Description__Control597">
+          <DataField>Return_Shipment_Header__Posting_Description__Control597</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Buy_from_Vendor_No___Control598">
+          <DataField>Return_Shipment_Header__Buy_from_Vendor_No___Control598</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Pay_to_Vendor_No___Control599">
+          <DataField>Return_Shipment_Header__Pay_to_Vendor_No___Control599</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Pay_to_Vendor_No__Caption">
+          <DataField>Return_Shipment_Header__Pay_to_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Buy_from_Vendor_No__Caption">
+          <DataField>Return_Shipment_Header__Buy_from_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Description_Caption">
+          <DataField>Return_Shipment_Header__Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__No__Caption">
+          <DataField>Return_Shipment_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Return_Shipment_Header__Posting_Date_Caption">
+          <DataField>Return_Shipment_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control297">
+          <DataField>CurrencyCaption_Control297</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Date_">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Date_</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___No__">
+          <DataField>Purch__Cr__Memo_Hdr___No__</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Description_">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Description_</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Buy_from_Vendor_No__">
+          <DataField>Purch__Cr__Memo_Hdr___Buy_from_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Pay_to_Vendor_No__">
+          <DataField>Purch__Cr__Memo_Hdr___Pay_to_Vendor_No__</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr__Amount">
+          <DataField>Purch__Cr__Memo_Hdr__Amount</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr__AmountFormat">
+          <DataField>Purch__Cr__Memo_Hdr__AmountFormat</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Currency_Code_">
+          <DataField>Purch__Cr__Memo_Hdr___Currency_Code_</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Amount_Including_VAT_">
+          <DataField>Purch__Cr__Memo_Hdr___Amount_Including_VAT_</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Amount_Including_VAT_Format">
+          <DataField>Purch__Cr__Memo_Hdr___Amount_Including_VAT_Format</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Date__Control601">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Date__Control601</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___No___Control602">
+          <DataField>Purch__Cr__Memo_Hdr___No___Control602</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Description__Control603">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Description__Control603</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Buy_from_Vendor_No___Control604">
+          <DataField>Purch__Cr__Memo_Hdr___Buy_from_Vendor_No___Control604</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Pay_to_Vendor_No___Control605">
+          <DataField>Purch__Cr__Memo_Hdr___Pay_to_Vendor_No___Control605</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr__Amount_Control606">
+          <DataField>Purch__Cr__Memo_Hdr__Amount_Control606</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr__Amount_Control606Format">
+          <DataField>Purch__Cr__Memo_Hdr__Amount_Control606Format</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Amount_Including_VAT__Control608">
+          <DataField>Purch__Cr__Memo_Hdr___Amount_Including_VAT__Control608</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Amount_Including_VAT__Control608Format">
+          <DataField>Purch__Cr__Memo_Hdr___Amount_Including_VAT__Control608Format</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr__AmountCaption">
+          <DataField>Purch__Cr__Memo_Hdr__AmountCaption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Pay_to_Vendor_No__Caption">
+          <DataField>Purch__Cr__Memo_Hdr___Pay_to_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Buy_from_Vendor_No__Caption">
+          <DataField>Purch__Cr__Memo_Hdr___Buy_from_Vendor_No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Description_Caption">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Description_Caption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___No__Caption">
+          <DataField>Purch__Cr__Memo_Hdr___No__Caption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Posting_Date_Caption">
+          <DataField>Purch__Cr__Memo_Hdr___Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Purch__Cr__Memo_Hdr___Amount_Including_VAT_Caption">
+          <DataField>Purch__Cr__Memo_Hdr___Amount_Including_VAT_Caption</DataField>
+        </Field>
+        <Field Name="Production_Order__No__">
+          <DataField>Production_Order__No__</DataField>
+        </Field>
+        <Field Name="Production_Order_Status">
+          <DataField>Production_Order_Status</DataField>
+        </Field>
+        <Field Name="Production_Order_Description">
+          <DataField>Production_Order_Description</DataField>
+        </Field>
+        <Field Name="Production_Order__Source_Type_">
+          <DataField>Production_Order__Source_Type_</DataField>
+        </Field>
+        <Field Name="Production_Order__Source_No__">
+          <DataField>Production_Order__Source_No__</DataField>
+        </Field>
+        <Field Name="Production_Order__Unit_Cost_">
+          <DataField>Production_Order__Unit_Cost_</DataField>
+        </Field>
+        <Field Name="Production_Order__Unit_Cost_Format">
+          <DataField>Production_Order__Unit_Cost_Format</DataField>
+        </Field>
+        <Field Name="Production_Order__Cost_Amount_">
+          <DataField>Production_Order__Cost_Amount_</DataField>
+        </Field>
+        <Field Name="Production_Order__Cost_Amount_Format">
+          <DataField>Production_Order__Cost_Amount_Format</DataField>
+        </Field>
+        <Field Name="Production_Order__Cost_Amount_Caption">
+          <DataField>Production_Order__Cost_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Production_Order__Unit_Cost_Caption">
+          <DataField>Production_Order__Unit_Cost_Caption</DataField>
+        </Field>
+        <Field Name="Production_Order__Source_No__Caption">
+          <DataField>Production_Order__Source_No__Caption</DataField>
+        </Field>
+        <Field Name="Production_Order__Source_Type_Caption">
+          <DataField>Production_Order__Source_Type_Caption</DataField>
+        </Field>
+        <Field Name="Production_Order_DescriptionCaption">
+          <DataField>Production_Order_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Production_Order__No__Caption">
+          <DataField>Production_Order__No__Caption</DataField>
+        </Field>
+        <Field Name="Production_Order_StatusCaption">
+          <DataField>Production_Order_StatusCaption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Posting_Date_">
+          <DataField>Transfer_Shipment_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__No__">
+          <DataField>Transfer_Shipment_Header__No__</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_from_Code_">
+          <DataField>Transfer_Shipment_Header__Transfer_from_Code_</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_from_Name_">
+          <DataField>Transfer_Shipment_Header__Transfer_from_Name_</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_to_Code_">
+          <DataField>Transfer_Shipment_Header__Transfer_to_Code_</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_to_Name_">
+          <DataField>Transfer_Shipment_Header__Transfer_to_Name_</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_to_Name_Caption">
+          <DataField>Transfer_Shipment_Header__Transfer_to_Name_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_to_Code_Caption">
+          <DataField>Transfer_Shipment_Header__Transfer_to_Code_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_from_Name_Caption">
+          <DataField>Transfer_Shipment_Header__Transfer_from_Name_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Transfer_from_Code_Caption">
+          <DataField>Transfer_Shipment_Header__Transfer_from_Code_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__No__Caption">
+          <DataField>Transfer_Shipment_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Shipment_Header__Posting_Date_Caption">
+          <DataField>Transfer_Shipment_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Posting_Date_">
+          <DataField>Transfer_Receipt_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__No__">
+          <DataField>Transfer_Receipt_Header__No__</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_from_Code_">
+          <DataField>Transfer_Receipt_Header__Transfer_from_Code_</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_from_Name_">
+          <DataField>Transfer_Receipt_Header__Transfer_from_Name_</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_to_Code_">
+          <DataField>Transfer_Receipt_Header__Transfer_to_Code_</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_to_Name_">
+          <DataField>Transfer_Receipt_Header__Transfer_to_Name_</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_to_Name_Caption">
+          <DataField>Transfer_Receipt_Header__Transfer_to_Name_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_to_Code_Caption">
+          <DataField>Transfer_Receipt_Header__Transfer_to_Code_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_from_Name_Caption">
+          <DataField>Transfer_Receipt_Header__Transfer_from_Name_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Transfer_from_Code_Caption">
+          <DataField>Transfer_Receipt_Header__Transfer_from_Code_Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__No__Caption">
+          <DataField>Transfer_Receipt_Header__No__Caption</DataField>
+        </Field>
+        <Field Name="Transfer_Receipt_Header__Posting_Date_Caption">
+          <DataField>Transfer_Receipt_Header__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posting_Date_">
+          <DataField>Posted_Whse__Shipment_Line__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Item_No__">
+          <DataField>Posted_Whse__Shipment_Line__Item_No__</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_Quantity">
+          <DataField>Posted_Whse__Shipment_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_QuantityFormat">
+          <DataField>Posted_Whse__Shipment_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Unit_of_Measure_Code_">
+          <DataField>Posted_Whse__Shipment_Line__Unit_of_Measure_Code_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_Description">
+          <DataField>Posted_Whse__Shipment_Line_Description</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posted_Source_Document_">
+          <DataField>Posted_Whse__Shipment_Line__Posted_Source_Document_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posted_Source_No__">
+          <DataField>Posted_Whse__Shipment_Line__Posted_Source_No__</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_QuantityCaption">
+          <DataField>Posted_Whse__Shipment_Line_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Unit_of_Measure_Code_Caption">
+          <DataField>Posted_Whse__Shipment_Line__Unit_of_Measure_Code_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_DescriptionCaption">
+          <DataField>Posted_Whse__Shipment_Line_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Item_No__Caption">
+          <DataField>Posted_Whse__Shipment_Line__Item_No__Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posting_Date_Caption">
+          <DataField>Posted_Whse__Shipment_Line__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posted_Source_No__Caption">
+          <DataField>Posted_Whse__Shipment_Line__Posted_Source_No__Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line__Posted_Source_Document_Caption">
+          <DataField>Posted_Whse__Shipment_Line__Posted_Source_Document_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_No_">
+          <DataField>Posted_Whse__Shipment_Line_No_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Shipment_Line_Line_No_">
+          <DataField>Posted_Whse__Shipment_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posting_Date_">
+          <DataField>Posted_Whse__Receipt_Line__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_Description">
+          <DataField>Posted_Whse__Receipt_Line_Description</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Item_No__">
+          <DataField>Posted_Whse__Receipt_Line__Item_No__</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Unit_of_Measure_Code_">
+          <DataField>Posted_Whse__Receipt_Line__Unit_of_Measure_Code_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_Quantity">
+          <DataField>Posted_Whse__Receipt_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_QuantityFormat">
+          <DataField>Posted_Whse__Receipt_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posted_Source_Document_">
+          <DataField>Posted_Whse__Receipt_Line__Posted_Source_Document_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posted_Source_No__">
+          <DataField>Posted_Whse__Receipt_Line__Posted_Source_No__</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_QuantityCaption">
+          <DataField>Posted_Whse__Receipt_Line_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Unit_of_Measure_Code_Caption">
+          <DataField>Posted_Whse__Receipt_Line__Unit_of_Measure_Code_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_DescriptionCaption">
+          <DataField>Posted_Whse__Receipt_Line_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Item_No__Caption">
+          <DataField>Posted_Whse__Receipt_Line__Item_No__Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posting_Date_Caption">
+          <DataField>Posted_Whse__Receipt_Line__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posted_Source_No__Caption">
+          <DataField>Posted_Whse__Receipt_Line__Posted_Source_No__Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line__Posted_Source_Document_Caption">
+          <DataField>Posted_Whse__Receipt_Line__Posted_Source_Document_Caption</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_No_">
+          <DataField>Posted_Whse__Receipt_Line_No_</DataField>
+        </Field>
+        <Field Name="Posted_Whse__Receipt_Line_Line_No_">
+          <DataField>Posted_Whse__Receipt_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Posting_Date_">
+          <DataField>G_L_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Document_No__">
+          <DataField>G_L_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="G_L_Entry_Description">
+          <DataField>G_L_Entry_Description</DataField>
+        </Field>
+        <Field Name="G_L_Entry__VAT_Amount_">
+          <DataField>G_L_Entry__VAT_Amount_</DataField>
+        </Field>
+        <Field Name="G_L_Entry__VAT_Amount_Format">
+          <DataField>G_L_Entry__VAT_Amount_Format</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Debit_Amount_">
+          <DataField>G_L_Entry__Debit_Amount_</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Debit_Amount_Format">
+          <DataField>G_L_Entry__Debit_Amount_Format</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Credit_Amount_">
+          <DataField>G_L_Entry__Credit_Amount_</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Credit_Amount_Format">
+          <DataField>G_L_Entry__Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Entry_No__">
+          <DataField>G_L_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="G_L_Entry_Quantity">
+          <DataField>G_L_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="G_L_Entry_QuantityFormat">
+          <DataField>G_L_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="G_L_Entry__G_L_Account_No__">
+          <DataField>G_L_Entry__G_L_Account_No__</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Entry_No__Caption">
+          <DataField>G_L_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Credit_Amount_Caption">
+          <DataField>G_L_Entry__Credit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Debit_Amount_Caption">
+          <DataField>G_L_Entry__Debit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__VAT_Amount_Caption">
+          <DataField>G_L_Entry__VAT_Amount_Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry_DescriptionCaption">
+          <DataField>G_L_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Document_No__Caption">
+          <DataField>G_L_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__Posting_Date_Caption">
+          <DataField>G_L_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="G_L_Entry_QuantityCaption">
+          <DataField>G_L_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="G_L_Entry__G_L_Account_No__Caption">
+          <DataField>G_L_Entry__G_L_Account_No__Caption</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Posting_Date_">
+          <DataField>VAT_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Document_No__">
+          <DataField>VAT_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="VAT_Entry_Amount">
+          <DataField>VAT_Entry_Amount</DataField>
+        </Field>
+        <Field Name="VAT_Entry_AmountFormat">
+          <DataField>VAT_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Entry_No__">
+          <DataField>VAT_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Entry_No__Caption">
+          <DataField>VAT_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="VAT_Entry_AmountCaption">
+          <DataField>VAT_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Document_No__Caption">
+          <DataField>VAT_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="VAT_Entry__Posting_Date_Caption">
+          <DataField>VAT_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control329">
+          <DataField>CurrencyCaption_Control329</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Entry_No__">
+          <DataField>Cust__Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_Amount">
+          <DataField>Cust__Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_AmountFormat">
+          <DataField>Cust__Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Posting_Date_">
+          <DataField>Cust__Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Document_No__">
+          <DataField>Cust__Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_Description">
+          <DataField>Cust__Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Remaining_Amount_">
+          <DataField>Cust__Ledger_Entry__Remaining_Amount_</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Remaining_Amount_Format">
+          <DataField>Cust__Ledger_Entry__Remaining_Amount_Format</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Currency_Code_">
+          <DataField>Cust__Ledger_Entry__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Customer_No__">
+          <DataField>Cust__Ledger_Entry__Customer_No__</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Posting_Date__Control652">
+          <DataField>Cust__Ledger_Entry__Posting_Date__Control652</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Document_No___Control654">
+          <DataField>Cust__Ledger_Entry__Document_No___Control654</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_Description_Control656">
+          <DataField>Cust__Ledger_Entry_Description_Control656</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Amount__LCY__">
+          <DataField>Cust__Ledger_Entry__Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Amount__LCY__Format">
+          <DataField>Cust__Ledger_Entry__Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Remaining_Amt___LCY__">
+          <DataField>Cust__Ledger_Entry__Remaining_Amt___LCY__</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Remaining_Amt___LCY__Format">
+          <DataField>Cust__Ledger_Entry__Remaining_Amt___LCY__Format</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Customer_No___Control666">
+          <DataField>Cust__Ledger_Entry__Customer_No___Control666</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Entry_No___Control560">
+          <DataField>Cust__Ledger_Entry__Entry_No___Control560</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Entry_No__Caption">
+          <DataField>Cust__Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Remaining_Amount_Caption">
+          <DataField>Cust__Ledger_Entry__Remaining_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_AmountCaption">
+          <DataField>Cust__Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry_DescriptionCaption">
+          <DataField>Cust__Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Document_No__Caption">
+          <DataField>Cust__Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Posting_Date_Caption">
+          <DataField>Cust__Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Cust__Ledger_Entry__Customer_No__Caption">
+          <DataField>Cust__Ledger_Entry__Customer_No__Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control398">
+          <DataField>CurrencyCaption_Control398</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Posting_Date_">
+          <DataField>Detailed_Cust__Ledg__Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_No__">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount_">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount_Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount_">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount_Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Entry_No__">
+          <DataField>Detailed_Cust__Ledg__Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_Type_">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_Type_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Currency_Code_">
+          <DataField>Detailed_Cust__Ledg__Entry__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Posting_Date__Control496">
+          <DataField>Detailed_Cust__Ledg__Entry__Posting_Date__Control496</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_No___Control498">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_No___Control498</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_Type__Control668">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_Type__Control668</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__Format">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Entry_No___Control549">
+          <DataField>Detailed_Cust__Ledg__Entry__Entry_No___Control549</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Entry_No__Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Credit_Amount_Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Credit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Debit_Amount_Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Debit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_No__Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Posting_Date_Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Cust__Ledg__Entry__Document_Type_Caption">
+          <DataField>Detailed_Cust__Ledg__Entry__Document_Type_Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Entry_No__">
+          <DataField>Reminder_Fin__Charge_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Posting_Date_">
+          <DataField>Reminder_Fin__Charge_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Document_No__">
+          <DataField>Reminder_Fin__Charge_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Reminder_Level_">
+          <DataField>Reminder_Fin__Charge_Entry__Reminder_Level_</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Interest_Amount_">
+          <DataField>Reminder_Fin__Charge_Entry__Interest_Amount_</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Interest_Amount_Format">
+          <DataField>Reminder_Fin__Charge_Entry__Interest_Amount_Format</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Remaining_Amount_">
+          <DataField>Reminder_Fin__Charge_Entry__Remaining_Amount_</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Remaining_Amount_Format">
+          <DataField>Reminder_Fin__Charge_Entry__Remaining_Amount_Format</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Entry_No__Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Interest_Amount_Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Interest_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Reminder_Level_Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Reminder_Level_Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Document_No__Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Posting_Date_Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Reminder_Fin__Charge_Entry__Remaining_Amount_Caption">
+          <DataField>Reminder_Fin__Charge_Entry__Remaining_Amount_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control305">
+          <DataField>CurrencyCaption_Control305</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Entry_No__">
+          <DataField>Vendor_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Posting_Date_">
+          <DataField>Vendor_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Document_No__">
+          <DataField>Vendor_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_Description">
+          <DataField>Vendor_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_Amount">
+          <DataField>Vendor_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_AmountFormat">
+          <DataField>Vendor_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Remaining_Amount_">
+          <DataField>Vendor_Ledger_Entry__Remaining_Amount_</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Remaining_Amount_Format">
+          <DataField>Vendor_Ledger_Entry__Remaining_Amount_Format</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Currency_Code_">
+          <DataField>Vendor_Ledger_Entry__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Posting_Date__Control674">
+          <DataField>Vendor_Ledger_Entry__Posting_Date__Control674</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Document_No___Control676">
+          <DataField>Vendor_Ledger_Entry__Document_No___Control676</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_Description_Control678">
+          <DataField>Vendor_Ledger_Entry_Description_Control678</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Amount__LCY__">
+          <DataField>Vendor_Ledger_Entry__Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Amount__LCY__Format">
+          <DataField>Vendor_Ledger_Entry__Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Remaining_Amt___LCY__">
+          <DataField>Vendor_Ledger_Entry__Remaining_Amt___LCY__</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Remaining_Amt___LCY__Format">
+          <DataField>Vendor_Ledger_Entry__Remaining_Amt___LCY__Format</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Entry_No___Control541">
+          <DataField>Vendor_Ledger_Entry__Entry_No___Control541</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Entry_No__Caption">
+          <DataField>Vendor_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Remaining_Amount_Caption">
+          <DataField>Vendor_Ledger_Entry__Remaining_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_AmountCaption">
+          <DataField>Vendor_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry_DescriptionCaption">
+          <DataField>Vendor_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Document_No__Caption">
+          <DataField>Vendor_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Vendor_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Vendor_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control328">
+          <DataField>CurrencyCaption_Control328</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Posting_Date_">
+          <DataField>Detailed_Vendor_Ledg__Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Debit_Amount_">
+          <DataField>Detailed_Vendor_Ledg__Entry__Debit_Amount_</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Debit_Amount_Format">
+          <DataField>Detailed_Vendor_Ledg__Entry__Debit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Credit_Amount_">
+          <DataField>Detailed_Vendor_Ledg__Entry__Credit_Amount_</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Credit_Amount_Format">
+          <DataField>Detailed_Vendor_Ledg__Entry__Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Entry_No__">
+          <DataField>Detailed_Vendor_Ledg__Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_Type_">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_Type_</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_No__">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Currency_Code_">
+          <DataField>Detailed_Vendor_Ledg__Entry__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Posting_Date__Control682">
+          <DataField>Detailed_Vendor_Ledg__Entry__Posting_Date__Control682</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_Type__Control686">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_Type__Control686</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_No___Control688">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_No___Control688</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Debit_Amount__LCY__">
+          <DataField>Detailed_Vendor_Ledg__Entry__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Debit_Amount__LCY__Format">
+          <DataField>Detailed_Vendor_Ledg__Entry__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Credit_Amount__LCY__">
+          <DataField>Detailed_Vendor_Ledg__Entry__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Credit_Amount__LCY__Format">
+          <DataField>Detailed_Vendor_Ledg__Entry__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Entry_No___Control548">
+          <DataField>Detailed_Vendor_Ledg__Entry__Entry_No___Control548</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Entry_No__Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Credit_Amount_Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Credit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Debit_Amount_Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Debit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_No__Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Posting_Date_Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Detailed_Vendor_Ledg__Entry__Document_Type_Caption">
+          <DataField>Detailed_Vendor_Ledg__Entry__Document_Type_Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Entry_No__">
+          <DataField>Item_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Posting_Date_">
+          <DataField>Item_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Document_No__">
+          <DataField>Item_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Description">
+          <DataField>Item_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Quantity">
+          <DataField>Item_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_QuantityFormat">
+          <DataField>Item_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Remaining_Quantity_">
+          <DataField>Item_Ledger_Entry__Remaining_Quantity_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Remaining_Quantity_Format">
+          <DataField>Item_Ledger_Entry__Remaining_Quantity_Format</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Open">
+          <DataField>Item_Ledger_Entry_Open</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Entry_No__Caption">
+          <DataField>Item_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Remaining_Quantity_Caption">
+          <DataField>Item_Ledger_Entry__Remaining_Quantity_Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_QuantityCaption">
+          <DataField>Item_Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_DescriptionCaption">
+          <DataField>Item_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Document_No__Caption">
+          <DataField>Item_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Item_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_OpenCaption">
+          <DataField>Item_Ledger_Entry_OpenCaption</DataField>
+        </Field>
+        <Field Name="Value_Entry__Posting_Date_">
+          <DataField>Value_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Value_Entry__Document_No__">
+          <DataField>Value_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Value_Entry_Description">
+          <DataField>Value_Entry_Description</DataField>
+        </Field>
+        <Field Name="Value_Entry__Entry_No__">
+          <DataField>Value_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Value_Entry__Valued_Quantity_">
+          <DataField>Value_Entry__Valued_Quantity_</DataField>
+        </Field>
+        <Field Name="Value_Entry__Valued_Quantity_Format">
+          <DataField>Value_Entry__Valued_Quantity_Format</DataField>
+        </Field>
+        <Field Name="Value_Entry__Invoiced_Quantity_">
+          <DataField>Value_Entry__Invoiced_Quantity_</DataField>
+        </Field>
+        <Field Name="Value_Entry__Invoiced_Quantity_Format">
+          <DataField>Value_Entry__Invoiced_Quantity_Format</DataField>
+        </Field>
+        <Field Name="Value_Entry__Entry_No__Caption">
+          <DataField>Value_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Value_Entry__Invoiced_Quantity_Caption">
+          <DataField>Value_Entry__Invoiced_Quantity_Caption</DataField>
+        </Field>
+        <Field Name="Value_Entry__Valued_Quantity_Caption">
+          <DataField>Value_Entry__Valued_Quantity_Caption</DataField>
+        </Field>
+        <Field Name="Value_Entry_DescriptionCaption">
+          <DataField>Value_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Value_Entry__Document_No__Caption">
+          <DataField>Value_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Value_Entry__Posting_Date_Caption">
+          <DataField>Value_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Entry_No__">
+          <DataField>Phys__Inventory_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Posting_Date_">
+          <DataField>Phys__Inventory_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Document_No__">
+          <DataField>Phys__Inventory_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_Description">
+          <DataField>Phys__Inventory_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_Quantity">
+          <DataField>Phys__Inventory_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_QuantityFormat">
+          <DataField>Phys__Inventory_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Amount_">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Amount_</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Amount_Format">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Cost_">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Cost_</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Cost_Format">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Cost_Format</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_Amount">
+          <DataField>Phys__Inventory_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_AmountFormat">
+          <DataField>Phys__Inventory_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Entry_No__Caption">
+          <DataField>Phys__Inventory_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_AmountCaption">
+          <DataField>Phys__Inventory_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Cost_Caption">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Cost_Caption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Unit_Amount_Caption">
+          <DataField>Phys__Inventory_Ledger_Entry__Unit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_QuantityCaption">
+          <DataField>Phys__Inventory_Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry_DescriptionCaption">
+          <DataField>Phys__Inventory_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Document_No__Caption">
+          <DataField>Phys__Inventory_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Phys__Inventory_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Phys__Inventory_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Posting_Date_">
+          <DataField>Res__Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry_Description">
+          <DataField>Res__Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Document_No__">
+          <DataField>Res__Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Entry_No__">
+          <DataField>Res__Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry_Quantity">
+          <DataField>Res__Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry_QuantityFormat">
+          <DataField>Res__Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Cost_">
+          <DataField>Res__Ledger_Entry__Unit_Cost_</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Cost_Format">
+          <DataField>Res__Ledger_Entry__Unit_Cost_Format</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Price_">
+          <DataField>Res__Ledger_Entry__Unit_Price_</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Price_Format">
+          <DataField>Res__Ledger_Entry__Unit_Price_Format</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Entry_No__Caption">
+          <DataField>Res__Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Price_Caption">
+          <DataField>Res__Ledger_Entry__Unit_Price_Caption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Unit_Cost_Caption">
+          <DataField>Res__Ledger_Entry__Unit_Cost_Caption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry_QuantityCaption">
+          <DataField>Res__Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry_DescriptionCaption">
+          <DataField>Res__Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Document_No__Caption">
+          <DataField>Res__Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Res__Ledger_Entry__Posting_Date_Caption">
+          <DataField>Res__Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Posting_Date_">
+          <DataField>Job_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Document_No__">
+          <DataField>Job_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry_Description">
+          <DataField>Job_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry_Quantity">
+          <DataField>Job_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry_QuantityFormat">
+          <DataField>Job_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Cost__LCY__">
+          <DataField>Job_Ledger_Entry__Unit_Cost__LCY__</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Cost__LCY__Format">
+          <DataField>Job_Ledger_Entry__Unit_Cost__LCY__Format</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Price__LCY__">
+          <DataField>Job_Ledger_Entry__Unit_Price__LCY__</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Price__LCY__Format">
+          <DataField>Job_Ledger_Entry__Unit_Price__LCY__Format</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Entry_No__">
+          <DataField>Job_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Entry_No__Caption">
+          <DataField>Job_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Price__LCY__Caption">
+          <DataField>Job_Ledger_Entry__Unit_Price__LCY__Caption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Unit_Cost__LCY__Caption">
+          <DataField>Job_Ledger_Entry__Unit_Cost__LCY__Caption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry_QuantityCaption">
+          <DataField>Job_Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry_DescriptionCaption">
+          <DataField>Job_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Document_No__Caption">
+          <DataField>Job_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Job_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Job_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="CurrencyCaption_Control503">
+          <DataField>CurrencyCaption_Control503</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Entry_No__">
+          <DataField>Bank_Account_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Posting_Date_">
+          <DataField>Bank_Account_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Document_No__">
+          <DataField>Bank_Account_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry_Description">
+          <DataField>Bank_Account_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Debit_Amount_">
+          <DataField>Bank_Account_Ledger_Entry__Debit_Amount_</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Debit_Amount_Format">
+          <DataField>Bank_Account_Ledger_Entry__Debit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Credit_Amount_">
+          <DataField>Bank_Account_Ledger_Entry__Credit_Amount_</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Credit_Amount_Format">
+          <DataField>Bank_Account_Ledger_Entry__Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Currency_Code_">
+          <DataField>Bank_Account_Ledger_Entry__Currency_Code_</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Entry_No___Control399">
+          <DataField>Bank_Account_Ledger_Entry__Entry_No___Control399</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Posting_Date__Control469">
+          <DataField>Bank_Account_Ledger_Entry__Posting_Date__Control469</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Document_No___Control471">
+          <DataField>Bank_Account_Ledger_Entry__Document_No___Control471</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry_Description_Control481">
+          <DataField>Bank_Account_Ledger_Entry_Description_Control481</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Debit_Amount__LCY__">
+          <DataField>Bank_Account_Ledger_Entry__Debit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Debit_Amount__LCY__Format">
+          <DataField>Bank_Account_Ledger_Entry__Debit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Credit_Amount__LCY__">
+          <DataField>Bank_Account_Ledger_Entry__Credit_Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Credit_Amount__LCY__Format">
+          <DataField>Bank_Account_Ledger_Entry__Credit_Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Entry_No__Caption">
+          <DataField>Bank_Account_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Credit_Amount_Caption">
+          <DataField>Bank_Account_Ledger_Entry__Credit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Debit_Amount_Caption">
+          <DataField>Bank_Account_Ledger_Entry__Debit_Amount_Caption</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry_DescriptionCaption">
+          <DataField>Bank_Account_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Document_No__Caption">
+          <DataField>Bank_Account_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Bank_Account_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Bank_Account_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Document_No__">
+          <DataField>Check_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Posting_Date_">
+          <DataField>Check_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_Description">
+          <DataField>Check_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_Amount">
+          <DataField>Check_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_AmountFormat">
+          <DataField>Check_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_Open">
+          <DataField>Check_Ledger_Entry_Open</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Entry_No__">
+          <DataField>Check_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_Date_">
+          <DataField>Check_Ledger_Entry__Check_Date_</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_No__">
+          <DataField>Check_Ledger_Entry__Check_No__</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_Type_">
+          <DataField>Check_Ledger_Entry__Check_Type_</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_OpenCaption">
+          <DataField>Check_Ledger_Entry_OpenCaption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_AmountCaption">
+          <DataField>Check_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry_DescriptionCaption">
+          <DataField>Check_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Document_No__Caption">
+          <DataField>Check_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Check_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Entry_No__Caption">
+          <DataField>Check_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_Type_Caption">
+          <DataField>Check_Ledger_Entry__Check_Type_Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_No__Caption">
+          <DataField>Check_Ledger_Entry__Check_No__Caption</DataField>
+        </Field>
+        <Field Name="Check_Ledger_Entry__Check_Date_Caption">
+          <DataField>Check_Ledger_Entry__Check_Date_Caption</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Posting_Date_">
+          <DataField>FA_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Document_No__">
+          <DataField>FA_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_Description">
+          <DataField>FA_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Entry_No__">
+          <DataField>FA_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_Amount">
+          <DataField>FA_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_AmountFormat">
+          <DataField>FA_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Posting_Date__Control505">
+          <DataField>FA_Ledger_Entry__Posting_Date__Control505</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Document_No___Control509">
+          <DataField>FA_Ledger_Entry__Document_No___Control509</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_Description_Control511">
+          <DataField>FA_Ledger_Entry_Description_Control511</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Entry_No___Control513">
+          <DataField>FA_Ledger_Entry__Entry_No___Control513</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Amount__LCY__">
+          <DataField>FA_Ledger_Entry__Amount__LCY__</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Amount__LCY__Format">
+          <DataField>FA_Ledger_Entry__Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Entry_No__Caption">
+          <DataField>FA_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_DescriptionCaption">
+          <DataField>FA_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Document_No__Caption">
+          <DataField>FA_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry__Posting_Date_Caption">
+          <DataField>FA_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="FA_Ledger_Entry_AmountCaption">
+          <DataField>FA_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Entry_No__">
+          <DataField>Maintenance_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Posting_Date_">
+          <DataField>Maintenance_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Document_No__">
+          <DataField>Maintenance_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_Description">
+          <DataField>Maintenance_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_Amount">
+          <DataField>Maintenance_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_AmountFormat">
+          <DataField>Maintenance_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Entry_No___Control523">
+          <DataField>Maintenance_Ledger_Entry__Entry_No___Control523</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Posting_Date__Control530">
+          <DataField>Maintenance_Ledger_Entry__Posting_Date__Control530</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Document_No___Control531">
+          <DataField>Maintenance_Ledger_Entry__Document_No___Control531</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_Description_Control540">
+          <DataField>Maintenance_Ledger_Entry_Description_Control540</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Amount__LCY__">
+          <DataField>Maintenance_Ledger_Entry__Amount__LCY__</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Amount__LCY__Format">
+          <DataField>Maintenance_Ledger_Entry__Amount__LCY__Format</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Entry_No__Caption">
+          <DataField>Maintenance_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_DescriptionCaption">
+          <DataField>Maintenance_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Document_No__Caption">
+          <DataField>Maintenance_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Maintenance_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Maintenance_Ledger_Entry_AmountCaption">
+          <DataField>Maintenance_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Posting_Date_">
+          <DataField>Ins__Coverage_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Document_No__">
+          <DataField>Ins__Coverage_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry_Description">
+          <DataField>Ins__Coverage_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry_Amount">
+          <DataField>Ins__Coverage_Ledger_Entry_Amount</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry_AmountFormat">
+          <DataField>Ins__Coverage_Ledger_Entry_AmountFormat</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Entry_No__">
+          <DataField>Ins__Coverage_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Insurance_No__">
+          <DataField>Ins__Coverage_Ledger_Entry__Insurance_No__</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Entry_No__Caption">
+          <DataField>Ins__Coverage_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry_AmountCaption">
+          <DataField>Ins__Coverage_Ledger_Entry_AmountCaption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry_DescriptionCaption">
+          <DataField>Ins__Coverage_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Insurance_No__Caption">
+          <DataField>Ins__Coverage_Ledger_Entry__Insurance_No__Caption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Document_No__Caption">
+          <DataField>Ins__Coverage_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Ins__Coverage_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Ins__Coverage_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Entry_No__">
+          <DataField>Capacity_Ledger_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Posting_Date_">
+          <DataField>Capacity_Ledger_Entry__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Document_No__">
+          <DataField>Capacity_Ledger_Entry__Document_No__</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry_Description">
+          <DataField>Capacity_Ledger_Entry_Description</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry_Quantity">
+          <DataField>Capacity_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry_QuantityFormat">
+          <DataField>Capacity_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Entry_No__Caption">
+          <DataField>Capacity_Ledger_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry_QuantityCaption">
+          <DataField>Capacity_Ledger_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry_DescriptionCaption">
+          <DataField>Capacity_Ledger_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Document_No__Caption">
+          <DataField>Capacity_Ledger_Entry__Document_No__Caption</DataField>
+        </Field>
+        <Field Name="Capacity_Ledger_Entry__Posting_Date_Caption">
+          <DataField>Capacity_Ledger_Entry__Posting_Date_Caption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Entry_No__">
+          <DataField>Warehouse_Entry__Entry_No__</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Registering_Date_">
+          <DataField>Warehouse_Entry__Registering_Date_</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Item_No__">
+          <DataField>Warehouse_Entry__Item_No__</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry_Description">
+          <DataField>Warehouse_Entry_Description</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry_Quantity">
+          <DataField>Warehouse_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry_QuantityFormat">
+          <DataField>Warehouse_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Reference_No__">
+          <DataField>Warehouse_Entry__Reference_No__</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Unit_of_Measure_Code_">
+          <DataField>Warehouse_Entry__Unit_of_Measure_Code_</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Entry_No__Caption">
+          <DataField>Warehouse_Entry__Entry_No__Caption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry_QuantityCaption">
+          <DataField>Warehouse_Entry_QuantityCaption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry_DescriptionCaption">
+          <DataField>Warehouse_Entry_DescriptionCaption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Item_No__Caption">
+          <DataField>Warehouse_Entry__Item_No__Caption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Reference_No__Caption">
+          <DataField>Warehouse_Entry__Reference_No__Caption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Registering_Date_Caption">
+          <DataField>Warehouse_Entry__Registering_Date_Caption</DataField>
+        </Field>
+        <Field Name="Warehouse_Entry__Unit_of_Measure_Code_Caption">
+          <DataField>Warehouse_Entry__Unit_of_Measure_Code_Caption</DataField>
+        </Field>
+        <Field Name="No_PaymentHeader">
+          <DataField>No_PaymentHeader</DataField>
+        </Field>
+        <Field Name="PaymentHeaderLbl">
+          <DataField>PaymentHeaderLbl</DataField>
+        </Field>
+        <Field Name="Posting_DatePayment_Header">
+          <DataField>Posting_DatePayment_Header</DataField>
+        </Field>
+        <Field Name="PaymentHeaderPosting_Date">
+          <DataField>PaymentHeaderPosting_Date</DataField>
+        </Field>
+        <Field Name="No_PaymentLine">
+          <DataField>No_PaymentLine</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="PaymentHeaderLineLbl">
+          <DataField>PaymentHeaderLineLbl</DataField>
+        </Field>
+        <Field Name="Posting_DatePayment_line">
+          <DataField>Posting_DatePayment_line</DataField>
+        </Field>
+        <Field Name="Posting_DateLine">
+          <DataField>Posting_DateLine</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

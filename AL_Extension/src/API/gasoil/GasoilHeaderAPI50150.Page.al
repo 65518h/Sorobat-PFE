@@ -10,6 +10,9 @@ page 50150 "GasoilHeaderAPI"
     SourceTable = "Entete Fiche Gasoil";
     ODataKeyFields = SystemId;
     DelayedInsert = true;
+    InsertAllowed = true;   // Création par le chef de chantier via le backend
+    ModifyAllowed = true;   // PATCH date, locationCode et validation du statut
+    DeleteAllowed = true;   // Suppression autorisée uniquement si statut "En Cours"
 
     layout
     {
@@ -17,15 +20,40 @@ page 50150 "GasoilHeaderAPI"
         {
             repeater(GroupName)
             {
-                field(id; Rec.SystemId) { Caption = 'Id'; }
-                field(documentNo; Rec."No.") { Caption = 'Document No.'; }
-                field(jobNo; Rec.Chantier) { Caption = 'Job No'; }
-                field(date; Rec.Journee) { Caption = 'Date'; }
-                field(locationCode; Rec.Cuve) { Caption = 'Location Code'; }
-                field(status; Rec.Statut) { Caption = 'Status'; }
-                field(startIndex; Rec."Index Depart") { Caption = 'Start Index'; }
-                field(endIndex; Rec."Index Final") { Caption = 'End Index'; }
-                field(fileNo; Rec."N° Fiche") { Caption = 'File No.'; }
+                field(id; Rec.SystemId)
+                {
+                    Caption = 'Id';
+                    Editable = false;
+                }
+                field(documentNo; Rec."No.")
+                {
+                    Caption = 'Document No.';
+                    Editable = false; // Auto-incrémenté par BC
+                }
+                // jobNo forcé par le backend (JWT) — non modifiable directement
+                // pour empêcher un chef de lier une fiche à un autre chantier
+                field(jobNo; Rec.Chantier)
+                {
+                    Caption = 'Job No.';
+                    Editable = true; // Doit rester Editable pour que le backend puisse le forcer à l'insertion
+                }
+                field(date; Rec.Journee)
+                {
+                    Caption = 'Date';
+                }
+                field(locationCode; Rec.Cuve)
+                {
+                    Caption = 'Location Code';
+                }
+                field(status; Rec.Statut)
+                {
+                    Caption = 'Status';
+                    // Editable = true (défaut) — modifié par le backend pour la validation
+                }
+                field(fileNo; Rec."N° Fiche")
+                {
+                    Caption = 'File No.';
+                }
 
                 part(gasoilLines; "GasoilLinesAPI")
                 {
@@ -37,4 +65,14 @@ page 50150 "GasoilHeaderAPI"
             }
         }
     }
+
+    trigger OnModifyRecord(): Boolean
+    var
+        CannotChangeProjectErr: Label 'Vous ne pouvez pas modifier le numéro de chantier d''une fiche existante.';
+    begin
+        if Rec.Chantier <> xRec.Chantier then
+            Error(CannotChangeProjectErr);
+
+        exit(true);
+    end;
 }

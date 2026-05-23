@@ -1,0 +1,77 @@
+@startuml
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceGroupBorderColor #2E74B5
+skinparam sequenceGroupHeaderFontColor #1F4D78
+skinparam sequenceGroupBackgroundColor #EEF4FB
+skinparam participantBackgroundColor #D5E8F0
+skinparam participantBorderColor #2E74B5
+skinparam participantFontColor #1F4D78
+skinparam noteBorderColor #2E74B5
+skinparam noteBackgroundColor #EEF4FB
+skinparam backgroundColor white
+
+actor "Chef de chantier" as chef
+participant "Angular\n(RequestForm)" as ng
+participant "ASP.NET Core\n(PurchaseRequestController)" as api
+participant "PurchaseRequestService" as svc
+participant "Business Central\n(OData API)" as bc
+
+== Étape 1 : Création de l'en-tête ==
+
+chef -> ng : Remplit le formulaire\n(type, engin, magasin, observation)
+ng -> api : POST /api/PurchaseRequest\n{ requestType, engin, locationCode, observation }
+api -> svc : CreateHeaderAsync(dto, projectNo)
+note right of svc
+  projectNo extrait du claim JWT
+  Fusion via MergeJobNoAndSerialize()
+end note
+svc -> bc : POST purchaseRequests\n{ jobNo (JWT), requestType, engin, ... }
+bc --> svc : 201 Created\n{ id, no, statut: "Ouvert", ... }
+svc --> api : PurchaseRequestReadDto
+api --> ng : 201 Created { id, no }
+ng --> chef : Affiche N° de demande\nPassage à l'étape 2
+
+== Étape 2 : Ajout des lignes ==
+
+loop Pour chaque article à ajouter
+  chef -> ng : Sélectionne article\n(dialogue ou scanner)
+  ng --> chef : Article sélectionné\n(no, description, unitOfMeasure)
+end
+
+ng -> api : POST /api/PurchaseRequest/lines\n[{ documentNo, type, no, quantity, locationCode, jobTaskNo }]
+api -> svc : CreateLinesAsync(lines, projectNo)
+
+loop Pour chaque ligne
+  svc -> bc : GET purchaseRequestLines\n?$filter=documentNo eq '...'&$orderby=lineNo desc&$top=1
+  bc --> svc : Dernier lineNo (ex: 10000)
+  note right of svc
+    lineNo = dernierLineNo + 10000
+    jobNo forcé depuis JWT
+  end note
+  svc -> bc : POST purchaseRequestLines\n{ documentNo, lineNo, jobNo, type, no, quantity, ... }
+  bc --> svc : 201 Created
+end
+
+svc --> api : true
+api --> ng : 200 OK { message: "Lignes créées" }
+ng --> chef : Confirmation\nRedirection vers la liste
+
+== Étape 3 : Soumission pour approbation ==
+
+chef -> ng : Clique sur "Soumettre"
+ng -> api : POST /api/PurchaseRequest/{id}/submit
+api -> svc : SubmitForApprovalAsync(id, projectNo)
+svc -> bc : GET purchaseRequests({id})
+bc --> svc : { statut: "Ouvert", ETag }
+note right of svc
+  Vérifie statut = 'Open' (Ouvert)
+  Lève InvalidOperationException sinon
+end note
+svc -> bc : PATCH purchaseRequests({id})\nIf-Match: ETag\n{ statut: "To Approve" }
+bc --> svc : 200 OK
+svc --> api : true
+api --> ng : 200 OK { message: "Soumis" }
+ng -> api : GET /api/PurchaseRequest/{id}
+api --> ng : PurchaseRequestReadDto\n{ statut: "Released" }
+ng --> chef : Statut mis à jour :\n"Released" (À approuver)
+@enduml

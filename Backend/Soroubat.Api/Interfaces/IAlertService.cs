@@ -13,44 +13,46 @@ namespace Soroubat.Api.Interfaces
     {
         /// <summary>
         /// Retourne les alertes liées aux tâches du projet
-        /// (retards, tâches bloquées, non démarrées, dépassements budget).
+        /// (retards sur date de fin, tâches non démarrées après leur date de début).
         /// </summary>
-        Task<List<AlertDto>> GetSiteManagementAlertsAsync(string projectNo);
+        // Task<List<AlertDto>> GetSiteManagementAlertsAsync(string projectNo);
 
         /// <summary>
         /// Retourne les alertes liées aux demandes d'achat du projet
-        /// (rejetées, en attente trop longtemps, échéance dépassée, demandes vides).
+        /// (rejetées, en attente d'approbation trop longtemps, demandes sans lignes).
         /// </summary>
         Task<List<AlertDto>> GetPurchaseRequestAlertsAsync(string projectNo);
 
         /// <summary>
         /// Retourne les alertes liées aux ordres de transfert du projet
-        /// (transit bloqué, non expédié, réception partielle, véhicule non assigné).
+        /// (transit bloqué trop longtemps, non expédié, réception partielle, véhicule non assigné).
         /// </summary>
         Task<List<AlertDto>> GetTransferAlertsAsync(string projectNo);
 
         /// <summary>
         /// Retourne les alertes liées au stock du projet
-        /// (stock négatif, stock critique, stock dormant).
+        /// (stock négatif, stock critique faible, stock dormant sans mouvement récent).
         /// </summary>
         Task<List<AlertDto>> GetStockAlertsAsync(string projectNo);
 
         /// <summary>
         /// Retourne les alertes liées aux pointages véhicule du projet
-        /// (pointage non validé, surutilisation, index incohérent, panne sans motif, consommation anormale).
+        /// (pointage non validé trop longtemps, surutilisation horaire,
+        /// index kilométrique/horaire incohérent, consommation carburant anormale).
         /// </summary>
         Task<List<AlertDto>> GetVehiculeAlertsAsync(string projectNo);
 
         /// <summary>
-        /// Retourne les alertes liées aux fiches de pointage salarié du projet
-        /// (fiche sans lignes, taux de présence faible, taux d'absence élevé, salarié sans pointage).
-        /// </summary>
-        Task<List<AlertDto>> GetAttendanceAlertsAsync(string projectNo);
-
-        /// <summary>
         /// Retourne les alertes liées aux fiches gasoil du projet
-        /// (fiche non validée, index incohérent, consommation totale anormale, ligne sans véhicule, quantité anormale).
+        /// (fiche non validée trop longtemps, consommation totale journalière anormale,
+        /// ligne sans véhicule assigné, quantité par ligne anormalement élevée).
         /// </summary>
         Task<List<AlertDto>> GetGasoilAlertsAsync(string projectNo);
+
+        /// <summary>
+        /// Retourne les alertes liées aux fiches de pointage salarié du projet
+        /// (fiche sans lignes de pointage, salarié présent dans la fiche sans aucun jour saisi).
+        /// </summary>
+        Task<List<AlertDto>> GetAttendanceAlertsAsync(string projectNo);
     }
 }

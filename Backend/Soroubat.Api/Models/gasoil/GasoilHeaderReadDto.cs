@@ -31,12 +31,6 @@ namespace Soroubat.Api.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? FileNo { get; set; }
 
-        [JsonPropertyName("startIndex")]
-        public decimal? StartIndex { get; set; }
-
-        [JsonPropertyName("endIndex")]
-        public decimal? EndIndex { get; set; }
-
         [JsonPropertyName("gasoilLines")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<GasoilLineReadDto>? Lines { get; set; }

@@ -1,0 +1,157 @@
+@startuml Figure4_Seq_Dashboard_Ultimate
+!theme plain
+skinparam backgroundColor #FAFCFF
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceArrowColor #1A73E8
+skinparam sequenceGroupBorderColor #1A73E8
+skinparam sequenceGroupBodyBackgroundColor #F0F6FF
+
+skinparam participant {
+  BackgroundColor #EBF3FB
+  BorderColor #1A73E8
+  FontName Arial
+  FontSize 11
+  FontColor #2E4057
+}
+
+skinparam actor {
+  BackgroundColor #2E4057
+  FontColor #2E4057
+  FontName Arial
+  FontSize 12
+}
+
+skinparam note {
+  BackgroundColor #FFFDE7
+  BorderColor #F59E0B
+  FontName Arial
+  FontSize 10
+}
+
+skinparam LifeLineBorderColor #1A73E8
+skinparam ActivationBackgroundColor #D6E8FA
+skinparam ActivationBorderColor #1A73E8
+
+title Diagramme de séquence — Chargement Optimal et Complet du Tableau de bord
+
+actor "Chef de chantier" as Chef
+participant "DashboardHome\nComponent" as Comp
+participant "DashboardService" as DSvc
+participant "CacheService" as Cache
+participant "API Gateway / .NET\nControllers" as NET
+participant "Business Central\n(API AL)" as BC
+
+Chef -> Comp : Accède au Tableau de bord
+activate Comp
+
+Comp -> Comp : ngOnInit() / Initialisation de l'état\n(isLoading=true, chartsInitialized=false)
+Comp -> Comp : Nettoyage de la mémoire :\nDestruction des instances Chart.js existantes
+
+alt L'application est Hors-ligne (isOnline == false)
+  Comp -> Cache : getFromCache('dashboard-data')
+  activate Cache
+  Cache --> Comp : Données mémorisées (KPIs, Tâches, Stocks, Présences)
+  deactivate Cache
+  Comp -> Comp : applyDashboardData() (Restauration immédiate)
+
+else L'application est En ligne (isOnline == true)
+  Comp -> DSvc : getDashboardData(projectNo)
+  activate DSvc
+  
+  note over DSvc, NET : Orchestration parallèle via forkJoin (RxJS)
+  
+  par Appels Simultanés Asynchrones (forkJoin)
+    DSvc -> NET : GET /api/projects/{projectNo} (avec timeout 10s)
+    activate NET
+    NET -> BC : GET /jobTasks
+    activate BC
+    BC --> NET : Données tâches
+    deactivate BC
+    NET --> DSvc : HTTP 200 OK (Project & Tasks)
+    deactivate NET
+    
+  else
+    DSvc -> NET : GET /api/inventory/stock (avec timeout 10s)
+    activate NET
+    NET -> BC : GET /stockEntries
+    activate BC
+    BC --> NET : Journal des stocks
+    deactivate BC
+    NET --> DSvc : HTTP 200 OK (Stock entries)
+    deactivate NET
+    
+  else
+    DSvc -> NET : GET /api/equipment/pointages (avec timeout 10s)
+    activate NET
+    NET -> BC : GET /vehiculePointageHeaders
+    activate BC
+    BC --> NET : Lignes d'engins
+    deactivate BC
+    NET --> DSvc : HTTP 200 OK (Pointages véhicules)
+    deactivate NET
+
+  else
+    DSvc -> NET : GET /api/dashboard/attendance (avec timeout 10s)
+    activate NET
+    NET -> BC : GET /attendanceHeaders?$expand=employeeAttendanceLines
+    activate BC
+    BC --> NET : Entêtes + Lignes employés
+    deactivate BC
+    NET --> DSvc : HTTP 200 OK (Présences employés)
+    deactivate NET
+  end
+
+  note over DSvc
+    **Traitement, Filtrage & Robustesse :**
+    - Si une API dépasse 10s -> Fallback (catchError)
+    - Calcul des KPIs (criticalStockCount, activeEngines...)
+    - Filtrage local des présences (Mois/Année courant)
+  end note
+
+  DSvc --> Comp : Flux combiné unifié (Dashboard Data Object)
+  deactivate DSvc
+
+  Comp -> Cache : saveToCache('dashboard-data', data)
+  Comp -> Comp : applyDashboardData(data)
+end
+
+== Rendu Graphique Optimisé (NgZone & Chart.js) ==
+
+note over Comp
+  **Optimisation de l'affichage :**
+  Pour ne pas surcharger le cycle principal d'Angular, 
+  le composant délègue à **NgZone** l'initialisation des graphiques.
+end note
+
+Comp -> Comp : ngZone.runOutsideAngular(() => initAllCharts())
+activate Comp
+Comp -> Comp : Création et rendu des instances Chart.js (Tâches, Véhicules, Stocks)
+deactivate Comp
+
+== Chargement et Notification des Alertes ==
+
+Comp -> DSvc : loadAlertsByDomain()
+activate DSvc
+DSvc -> NET : HTTP GET /api/alerts/summary
+activate NET
+NET --> BC : Récupération des seuils et anomalies
+activate BC
+BC --> NET : Alertes brutes
+deactivate BC
+NET --> DSvc : HTTP 200 OK (Alertes par domaine)
+deactivate NET
+DSvc --> Comp : alertes[]
+deactivate DSvc
+
+Comp -> Comp : checkAndShowAlertsNotification() -> Notification Toastr
+
+Comp -> Comp : isLoading = false / cdr.detectChanges()
+Comp --> Chef : Affichage complet du Tableau de bord (Temps réel ou Cache)
+
+== Processus d'Arrière-plan : Auto-Refresh ==
+
+loop Toutes les 5 minutes (si isOnline == true)
+  Comp -> Comp : loadDashboard() (Mise à jour transparente des données)
+end
+
+@enduml

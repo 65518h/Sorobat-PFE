@@ -40,31 +40,6 @@ namespace Soroubat.Api.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? TotalStaff { get; set; }
 
-        /// <summary>Nombre total de présents — calculé par BC, ignoré à l'envoi.</summary>
-        [JsonPropertyName("totalPresent")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public int? TotalPresent { get; set; }
-
-        /// <summary>Taux de présence — calculé par BC, ignoré à l'envoi.</summary>
-        [JsonPropertyName("attendanceRate")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public decimal? AttendanceRate { get; set; }
-
-        /// <summary>Nombre total d'absences justifiées — calculé par BC, ignoré à l'envoi.</summary>
-        [JsonPropertyName("totalAbsentJustified")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public int? TotalAbsentJustified { get; set; }
-
-        /// <summary>Taux d'absence — calculé par BC, ignoré à l'envoi.</summary>
-        [JsonPropertyName("absenceRate")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public decimal? AbsenceRate { get; set; }
-
-        /// <summary>Seuil de jours de pointage — calculé par BC, ignoré à l'envoi.</summary>
-        [JsonPropertyName("thresholdDays")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public int? ThresholdDays { get; set; }
-
         /// <summary>
         /// Lignes du pointage — ignorées à l'envoi (gérées séparément).
         /// Présentes uniquement dans les réponses GET avec $expand=employeeAttendanceLines.

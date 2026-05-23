@@ -43,26 +43,22 @@ page 50122 "PurchaseRequestLineAPI"
                     Editable = true;
                 }
 
-                // ── Champs fonctionnels ───────────────────────────────────────
-                field(transferer; Rec."Transférer")
-                {
-                    Caption = 'Transférer';
-                }
+
                 field(type; Rec.Type)
                 {
                     Caption = 'Type';
                 }
                 field(no; Rec."No.")
                 {
-                    Caption = 'N° Article/Compte';
+                    Caption = 'N° Article';
                 }
                 field(description; Rec.Description)
                 {
                     Caption = 'Description';
                 }
-                field(description2; Rec."Description 2")
+                field(observation; Rec."Description 2")
                 {
-                    Caption = 'Description 2';
+                    Caption = 'Observation';
                 }
                 field(quantity; Rec.Quantity)
                 {
@@ -76,10 +72,7 @@ page 50122 "PurchaseRequestLineAPI"
                 {
                     Caption = 'Code Magasin';
                 }
-                field(variantCode; Rec."Variant Code")
-                {
-                    Caption = 'Code Variante';
-                }
+
                 // jobNo forcé par le backend (JWT) — non modifiable directement
                 field(jobNo; Rec."Job No.")
                 {
@@ -90,15 +83,7 @@ page 50122 "PurchaseRequestLineAPI"
                 {
                     Caption = 'N° Tâche Projet';
                 }
-                field(engin; Rec.Engin)
-                {
-                    Caption = 'Code Engin';
-                }
-                field(lineAmount; Rec."Line Amount")
-                {
-                    Caption = 'Montant Ligne';
-                    Editable = false; // Calculé par BC
-                }
+
             }
         }
     }

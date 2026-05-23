@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_RECENTETSALAIRE_Description_________FORMAT_RECENTETSALAIRE_Month___________FORMAT_RECENTETSALAIRE_Year___">
+          <DataField>FORMAT_RECENTETSALAIRE_Description_________FORMAT_RECENTETSALAIRE_Month___________FORMAT_RECENTETSALAIRE_Year___</DataField>
+        </Field>
+        <Field Name="Page_____FORMAT__CurrReport_PAGENO_">
+          <DataField>Page_____FORMAT__CurrReport_PAGENO_</DataField>
+        </Field>
+        <Field Name="Company_Information__Company_Information___Name_2_">
+          <DataField>Company_Information__Company_Information___Name_2_</DataField>
+        </Field>
+        <Field Name="Adresse________Company_Information___Address_2_">
+          <DataField>Adresse________Company_Information___Address_2_</DataField>
+        </Field>
+        <Field Name="Journal_de_Paie_Caption">
+          <DataField>Journal_de_Paie_Caption</DataField>
+        </Field>
+        <Field Name="Company_Information_Primary_Key">
+          <DataField>Company_Information_Primary_Key</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Salary_basis_total_">
+          <DataField>Salary_Headers__Salary_basis_total_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Salary_basis_total_Format">
+          <DataField>Salary_Headers__Salary_basis_total_Format</DataField>
+        </Field>
+        <Field Name="TOTGINDTRANS">
+          <DataField>TOTGINDTRANS</DataField>
+        </Field>
+        <Field Name="TOTGINDTRANSFormat">
+          <DataField>TOTGINDTRANSFormat</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Loans_repaiment_total_">
+          <DataField>Salary_Headers__Loans_repaiment_total_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Loans_repaiment_total_Format">
+          <DataField>Salary_Headers__Loans_repaiment_total_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Advances_repaiment_total_">
+          <DataField>Salary_Headers__Advances_repaiment_total_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Advances_repaiment_total_Format">
+          <DataField>Salary_Headers__Advances_repaiment_total_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Taxes_total_">
+          <DataField>Salary_Headers__Taxes_total_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Taxes_total_Format">
+          <DataField>Salary_Headers__Taxes_total_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Net_salary_total_">
+          <DataField>Salary_Headers__Net_salary_total_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Net_salary_total_Format">
+          <DataField>Salary_Headers__Net_salary_total_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Net_salary_cashed_">
+          <DataField>Salary_Headers__Net_salary_cashed_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Net_salary_cashed_Format">
+          <DataField>Salary_Headers__Net_salary_cashed_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_Gross_salary_">
+          <DataField>Salary_Headers__Total_Gross_salary_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_Gross_salary_Format">
+          <DataField>Salary_Headers__Total_Gross_salary_Format</DataField>
+        </Field>
+        <Field Name="TOTGASSGPE">
+          <DataField>TOTGASSGPE</DataField>
+        </Field>
+        <Field Name="TOTGASSGPEFormat">
+          <DataField>TOTGASSGPEFormat</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_Supp__Hours_">
+          <DataField>Salary_Headers__Total_Supp__Hours_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_Supp__Hours_Format">
+          <DataField>Salary_Headers__Total_Supp__Hours_Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__No__">
+          <DataField>Salary_Headers__No__</DataField>
+        </Field>
+        <Field Name="Salary_Headers_Month">
+          <DataField>Salary_Headers_Month</DataField>
+        </Field>
+        <Field Name="Salary_Headers_Year">
+          <DataField>Salary_Headers_Year</DataField>
+        </Field>
+        <Field Name="TOTGCNS">
+          <DataField>TOTGCNS</DataField>
+        </Field>
+        <Field Name="TOTGCNSFormat">
+          <DataField>TOTGCNSFormat</DataField>
+        </Field>
+        <Field Name="TOTGINDPRESENCE">
+          <DataField>TOTGINDPRESENCE</DataField>
+        </Field>
+        <Field Name="TOTGINDPRESENCEFormat">
+          <DataField>TOTGINDPRESENCEFormat</DataField>
+        </Field>
+        <Field Name="TOTGINDENCOURAGE">
+          <DataField>TOTGINDENCOURAGE</DataField>
+        </Field>
+        <Field Name="TOTGINDENCOURAGEFormat">
+          <DataField>TOTGINDENCOURAGEFormat</DataField>
+        </Field>
+        <Field Name="TOTGINDLOGEMENT">
+          <DataField>TOTGINDLOGEMENT</DataField>
+        </Field>
+        <Field Name="TOTGINDLOGEMENTFormat">
+          <DataField>TOTGINDLOGEMENTFormat</DataField>
+        </Field>
+        <Field Name="TOTGINDFONCTION">
+          <DataField>TOTGINDFONCTION</DataField>
+        </Field>
+        <Field Name="TOTGINDFONCTIONFormat">
+          <DataField>TOTGINDFONCTIONFormat</DataField>
+        </Field>
+        <Field Name="TOTGINDPANIER">
+          <DataField>TOTGINDPANIER</DataField>
+        </Field>
+        <Field Name="TOTGINDPANIERFormat">
+          <DataField>TOTGINDPANIERFormat</DataField>
+        </Field>
+        <Field Name="TOTGICP">
+          <DataField>TOTGICP</DataField>
+        </Field>
+        <Field Name="TOTGICPFormat">
+          <DataField>TOTGICPFormat</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Report_en___">
+          <DataField>Salary_Headers__Report_en___</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Report_en___Format">
+          <DataField>Salary_Headers__Report_en___Format</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Ajout_en___">
+          <DataField>Salary_Headers__Ajout_en___</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Ajout_en___Format">
+          <DataField>Salary_Headers__Ajout_en___Format</DataField>
+        </Field>
+        <Field Name="TOTGCONGE">
+          <DataField>TOTGCONGE</DataField>
+        </Field>
+        <Field Name="TOTGCONGEFormat">
+          <DataField>TOTGCONGEFormat</DataField>
+        </Field>
+        <Field Name="TOTGPRLOG">
+          <DataField>TOTGPRLOG</DataField>
+        </Field>
+        <Field Name="TOTGPRLOGFormat">
+          <DataField>TOTGPRLOGFormat</DataField>
+        </Field>
+        <Field Name="TOTGPRREND">
+          <DataField>TOTGPRREND</DataField>
+        </Field>
+        <Field Name="TOTGPRRENDFormat">
+          <DataField>TOTGPRRENDFormat</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_taxable_">
+          <DataField>Salary_Headers__Total_taxable_</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Total_taxable_Format">
+          <DataField>Salary_Headers__Total_taxable_Format</DataField>
+        </Field>
+        <Field Name="Salaire_de_baseCaption">
+          <DataField>Salaire_de_baseCaption</DataField>
+        </Field>
+        <Field Name="Prime_de_TransportCaption">
+          <DataField>Prime_de_TransportCaption</DataField>
+        </Field>
+        <Field Name="PrêtsCaption">
+          <DataField>PrêtsCaption</DataField>
+        </Field>
+        <Field Name="AvancesCaption">
+          <DataField>AvancesCaption</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Taxes_total_Caption">
+          <DataField>Salary_Headers__Taxes_total_Caption</DataField>
+        </Field>
+        <Field Name="NetCaption">
+          <DataField>NetCaption</DataField>
+        </Field>
+        <Field Name="Salary_Headers__Net_salary_cashed_Caption">
+          <DataField>Salary_Headers__Net_salary_cashed_Caption</DataField>
+        </Field>
+        <Field Name="Salaire_BrutCaption">
+          <DataField>Salaire_BrutCaption</DataField>
+        </Field>
+        <Field Name="Assurance_GroupeCaption">
+          <DataField>Assurance_GroupeCaption</DataField>
+        </Field>
+        <Field Name="Heures_Sup_Caption">
+          <DataField>Heures_Sup_Caption</DataField>
+        </Field>
+        <Field Name="TotalisationCaption">
+          <DataField>TotalisationCaption</DataField>
+        </Field>
+        <Field Name="Salary_Headers__No__Caption">
+          <DataField>Salary_Headers__No__Caption</DataField>
+        </Field>
+        <Field Name="Salary_Headers_MonthCaption">
+          <DataField>Salary_Headers_MonthCaption</DataField>
+        </Field>
+        <Field Name="Salary_Headers_YearCaption">
+          <DataField>Salary_Headers_YearCaption</DataField>
+        </Field>
+        <Field Name="C_N_S_SCaption">
+          <DataField>C_N_S_SCaption</DataField>
+        </Field>
+        <Field Name="Prime_de_PrésenceCaption">
+          <DataField>Prime_de_PrésenceCaption</DataField>
+        </Field>
+        <Field Name="Prime_d_encouragementCaption">
+          <DataField>Prime_d_encouragementCaption</DataField>
+        </Field>
+        <Field Name="RappelCaption">
+          <DataField>RappelCaption</DataField>
+        </Field>
+        <Field Name="Ind__fonctionCaption">
+          <DataField>Ind__fonctionCaption</DataField>
+        </Field>
+        <Field Name="Prime_de_PanierCaption">
+          <DataField>Prime_de_PanierCaption</DataField>
+        </Field>
+        <Field Name="I_C_PCaption">
+          <DataField>I_C_PCaption</DataField>
+        </Field>
+        <Field Name="Report_en__Caption">
+          <DataField>Report_en__Caption</DataField>
+        </Field>
+        <Field Name="Report_en__Caption_Control1120100">
+          <DataField>Report_en__Caption_Control1120100</DataField>
+        </Field>
+        <Field Name="CONGECaption">
+          <DataField>CONGECaption</DataField>
+        </Field>
+        <Field Name="Ind__LogementCaption">
+          <DataField>Ind__LogementCaption</DataField>
+        </Field>
+        <Field Name="pr__RendementCaption">
+          <DataField>pr__RendementCaption</DataField>
+        </Field>
+        <Field Name="Salaires_imposablesCaption">
+          <DataField>Salaires_imposablesCaption</DataField>
+        </Field>
+        <Field Name="Département_____________Statistics_Group_Code__________CodDepartement">
+          <DataField>Département_____________Statistics_Group_Code__________CodDepartement</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Name">
+          <DataField>Salary_Lines_Name</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Supp__hours_">
+          <DataField>Salary_Lines__Supp__hours_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Supp__hours_Format">
+          <DataField>Salary_Lines__Supp__hours_Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Real_basis_salary_">
+          <DataField>Salary_Lines__Real_basis_salary_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Real_basis_salary_Format">
+          <DataField>Salary_Lines__Real_basis_salary_Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Gross_Salary_">
+          <DataField>Salary_Lines__Gross_Salary_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Gross_Salary_Format">
+          <DataField>Salary_Lines__Gross_Salary_Format</DataField>
+        </Field>
+        <Field Name="CNS">
+          <DataField>CNS</DataField>
+        </Field>
+        <Field Name="CNSFormat">
+          <DataField>CNSFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxable_salary_">
+          <DataField>Salary_Lines__Taxable_salary_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxable_salary_Format">
+          <DataField>Salary_Lines__Taxable_salary_Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month__">
+          <DataField>Salary_Lines__Taxe__Month__</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month__Format">
+          <DataField>Salary_Lines__Taxe__Month__Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Loans">
+          <DataField>Salary_Lines_Loans</DataField>
+        </Field>
+        <Field Name="Salary_Lines_LoansFormat">
+          <DataField>Salary_Lines_LoansFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Advances">
+          <DataField>Salary_Lines_Advances</DataField>
+        </Field>
+        <Field Name="Salary_Lines_AdvancesFormat">
+          <DataField>Salary_Lines_AdvancesFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Employee">
+          <DataField>Salary_Lines_Employee</DataField>
+        </Field>
+        <Field Name="NBJOURS">
+          <DataField>NBJOURS</DataField>
+        </Field>
+        <Field Name="NBJOURSFormat">
+          <DataField>NBJOURSFormat</DataField>
+        </Field>
+        <Field Name="INDTRANS">
+          <DataField>INDTRANS</DataField>
+        </Field>
+        <Field Name="INDTRANSFormat">
+          <DataField>INDTRANSFormat</DataField>
+        </Field>
+        <Field Name="INDPRESENCE">
+          <DataField>INDPRESENCE</DataField>
+        </Field>
+        <Field Name="INDPRESENCEFormat">
+          <DataField>INDPRESENCEFormat</DataField>
+        </Field>
+        <Field Name="INDENCOURAGE">
+          <DataField>INDENCOURAGE</DataField>
+        </Field>
+        <Field Name="INDENCOURAGEFormat">
+          <DataField>INDENCOURAGEFormat</DataField>
+        </Field>
+        <Field Name="INDLOGEMENT">
+          <DataField>INDLOGEMENT</DataField>
+        </Field>
+        <Field Name="INDLOGEMENTFormat">
+          <DataField>INDLOGEMENTFormat</DataField>
+        </Field>
+        <Field Name="INDFONCTION">
+          <DataField>INDFONCTION</DataField>
+        </Field>
+        <Field Name="INDFONCTIONFormat">
+          <DataField>INDFONCTIONFormat</DataField>
+        </Field>
+        <Field Name="INDPANIER">
+          <DataField>INDPANIER</DataField>
+        </Field>
+        <Field Name="INDPANIERFormat">
+          <DataField>INDPANIERFormat</DataField>
+        </Field>
+        <Field Name="ICP">
+          <DataField>ICP</DataField>
+        </Field>
+        <Field Name="ICPFormat">
+          <DataField>ICPFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1120071">
+          <DataField>Salary_Lines__Taxe__Month___Control1120071</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1120071Format">
+          <DataField>Salary_Lines__Taxe__Month___Control1120071Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1120072">
+          <DataField>Salary_Lines__Taxe__Month___Control1120072</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1120072Format">
+          <DataField>Salary_Lines__Taxe__Month___Control1120072Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Ajout__en___">
+          <DataField>Salary_Lines__Ajout__en___</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Ajout__en___Format">
+          <DataField>Salary_Lines__Ajout__en___Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Report_en___">
+          <DataField>Salary_Lines__Report_en___</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Report_en___Format">
+          <DataField>Salary_Lines__Report_en___Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Net_salary_cashed_">
+          <DataField>Salary_Lines__Net_salary_cashed_</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Net_salary_cashed_Format">
+          <DataField>Salary_Lines__Net_salary_cashed_Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Real_basis_salary__Control1180250088">
+          <DataField>Salary_Lines__Real_basis_salary__Control1180250088</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Real_basis_salary__Control1180250088Format">
+          <DataField>Salary_Lines__Real_basis_salary__Control1180250088Format</DataField>
+        </Field>
+        <Field Name="TOTCNS">
+          <DataField>TOTCNS</DataField>
+        </Field>
+        <Field Name="TOTCNSFormat">
+          <DataField>TOTCNSFormat</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Supp__hours__Control1180250093">
+          <DataField>Salary_Lines__Supp__hours__Control1180250093</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Supp__hours__Control1180250093Format">
+          <DataField>Salary_Lines__Supp__hours__Control1180250093Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxable_salary__Control1180250096">
+          <DataField>Salary_Lines__Taxable_salary__Control1180250096</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxable_salary__Control1180250096Format">
+          <DataField>Salary_Lines__Taxable_salary__Control1180250096Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1180250103">
+          <DataField>Salary_Lines__Taxe__Month___Control1180250103</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Taxe__Month___Control1180250103Format">
+          <DataField>Salary_Lines__Taxe__Month___Control1180250103Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Loans_Control1180250106">
+          <DataField>Salary_Lines_Loans_Control1180250106</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Loans_Control1180250106Format">
+          <DataField>Salary_Lines_Loans_Control1180250106Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Advances_Control1180250107">
+          <DataField>Salary_Lines_Advances_Control1180250107</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Advances_Control1180250107Format">
+          <DataField>Salary_Lines_Advances_Control1180250107Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Net_salary_cashed__Control1180250109">
+          <DataField>Salary_Lines__Net_salary_cashed__Control1180250109</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Net_salary_cashed__Control1180250109Format">
+          <DataField>Salary_Lines__Net_salary_cashed__Control1180250109Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Gross_Salary__Control1180250110">
+          <DataField>Salary_Lines__Gross_Salary__Control1180250110</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Gross_Salary__Control1180250110Format">
+          <DataField>Salary_Lines__Gross_Salary__Control1180250110Format</DataField>
+        </Field>
+        <Field Name="Total_Département_____________Statistics_Group_Code__________CodDepartement">
+          <DataField>Total_Département_____________Statistics_Group_Code__________CodDepartement</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Ajout__en____Control1120012">
+          <DataField>Salary_Lines__Ajout__en____Control1120012</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Ajout__en____Control1120012Format">
+          <DataField>Salary_Lines__Ajout__en____Control1120012Format</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Report_en____Control1120015">
+          <DataField>Salary_Lines__Report_en____Control1120015</DataField>
+        </Field>
+        <Field Name="Salary_Lines__Report_en____Control1120015Format">
+          <DataField>Salary_Lines__Report_en____Control1120015Format</DataField>
+        </Field>
+        <Field Name="TOTINDTRANS">
+          <DataField>TOTINDTRANS</DataField>
+        </Field>
+        <Field Name="TOTINDTRANSFormat">
+          <DataField>TOTINDTRANSFormat</DataField>
+        </Field>
+        <Field Name="TOTINDENCOURAGE">
+          <DataField>TOTINDENCOURAGE</DataField>
+        </Field>
+        <Field Name="TOTINDENCOURAGEFormat">
+          <DataField>TOTINDENCOURAGEFormat</DataField>
+        </Field>
+        <Field Name="TOTINDPRESENCE">
+          <DataField>TOTINDPRESENCE</DataField>
+        </Field>
+        <Field Name="TOTINDPRESENCEFormat">
+          <DataField>TOTINDPRESENCEFormat</DataField>
+        </Field>
+        <Field Name="TOTINDLOGEMENT">
+          <DataField>TOTINDLOGEMENT</DataField>
+        </Field>
+        <Field Name="TOTINDLOGEMENTFormat">
+          <DataField>TOTINDLOGEMENTFormat</DataField>
+        </Field>
+        <Field Name="TOTINDFONCTION">
+          <DataField>TOTINDFONCTION</DataField>
+        </Field>
+        <Field Name="TOTINDFONCTIONFormat">
+          <DataField>TOTINDFONCTIONFormat</DataField>
+        </Field>
+        <Field Name="TOTICP">
+          <DataField>TOTICP</DataField>
+        </Field>
+        <Field Name="TOTICPFormat">
+          <DataField>TOTICPFormat</DataField>
+        </Field>
+        <Field Name="TOTINDPANIER">
+          <DataField>TOTINDPANIER</DataField>
+        </Field>
+        <Field Name="TOTINDPANIERFormat">
+          <DataField>TOTINDPANIERFormat</DataField>
+        </Field>
+        <Field Name="EmployeeCaption">
+          <DataField>EmployeeCaption</DataField>
+        </Field>
+        <Field Name="EmployeeCaption_Control1120008">
+          <DataField>EmployeeCaption_Control1120008</DataField>
+        </Field>
+        <Field Name="Salaire_de_baseCaption_Control1120010">
+          <DataField>Salaire_de_baseCaption_Control1120010</DataField>
+        </Field>
+        <Field Name="Heures_supplém_Caption">
+          <DataField>Heures_supplém_Caption</DataField>
+        </Field>
+        <Field Name="C_N_S_SCaption_Control1120018">
+          <DataField>C_N_S_SCaption_Control1120018</DataField>
+        </Field>
+        <Field Name="Salaire_ImposableCaption">
+          <DataField>Salaire_ImposableCaption</DataField>
+        </Field>
+        <Field Name="Impôt__mois_Caption">
+          <DataField>Impôt__mois_Caption</DataField>
+        </Field>
+        <Field Name="PrêtsCaption_Control1120032">
+          <DataField>PrêtsCaption_Control1120032</DataField>
+        </Field>
+        <Field Name="AvancesCaption_Control1120034">
+          <DataField>AvancesCaption_Control1120034</DataField>
+        </Field>
+        <Field Name="Salaire_Net_PerçuCaption">
+          <DataField>Salaire_Net_PerçuCaption</DataField>
+        </Field>
+        <Field Name="Prime_de_TransportCaption_Control1120005">
+          <DataField>Prime_de_TransportCaption_Control1120005</DataField>
+        </Field>
+        <Field Name="Salaire_BrutCaption_Control1120028">
+          <DataField>Salaire_BrutCaption_Control1120028</DataField>
+        </Field>
+        <Field Name="NB_Heure_JourCaption">
+          <DataField>NB_Heure_JourCaption</DataField>
+        </Field>
+        <Field Name="Prime_de_PrésenceCaption_Control1120043">
+          <DataField>Prime_de_PrésenceCaption_Control1120043</DataField>
+        </Field>
+        <Field Name="RappelCaption_Control1120044">
+          <DataField>RappelCaption_Control1120044</DataField>
+        </Field>
+        <Field Name="Prime_d__Encourag_Caption">
+          <DataField>Prime_d__Encourag_Caption</DataField>
+        </Field>
+        <Field Name="I_C_PCaption_Control1120050">
+          <DataField>I_C_PCaption_Control1120050</DataField>
+        </Field>
+        <Field Name="PanierCaption">
+          <DataField>PanierCaption</DataField>
+        </Field>
+        <Field Name="Indemnité_de_FonctionCaption">
+          <DataField>Indemnité_de_FonctionCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1120075">
+          <DataField>EmptyStringCaption_Control1120075</DataField>
+        </Field>
+        <Field Name="Salary_Lines_No_">
+          <DataField>Salary_Lines_No_</DataField>
+        </Field>
+        <Field Name="Salary_Lines_Statistics_Group_Code">
+          <DataField>Salary_Lines_Statistics_Group_Code</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

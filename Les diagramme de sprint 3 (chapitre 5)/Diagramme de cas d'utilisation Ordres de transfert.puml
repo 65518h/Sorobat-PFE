@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam backgroundColor white
+skinparam usecase {
+  BackgroundColor #EEF4FB
+  BorderColor #2E74B5
+  FontColor #1F4D78
+  FontSize 12
+}
+skinparam actor {
+  BackgroundColor #D5E8F0
+  BorderColor #2E74B5
+  FontColor #1F4D78
+}
+
+actor "Chef de chantier" as chef
+
+rectangle "Module Ordres de transfert" {
+  usecase "Consulter la liste\ndes transferts" as UC1
+  usecase "Filtrer par statut /\ndate / chantier" as UC1a
+  usecase "Consulter le détail\nd'un transfert" as UC2
+  usecase "Saisir la quantité\nà réceptionner" as UC3
+  usecase "Valider la réception\n(ligne)" as UC4
+  usecase "Saisir la date\nde réception" as UC5
+  usecase "Valider la réception\nglobale" as UC6
+}
+
+chef --> UC1
+chef --> UC2
+chef --> UC3
+chef --> UC5
+
+UC1 ..> UC1a : <<extend>>
+UC2 ..> UC3 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC2 ..> UC5 : <<extend>>
+UC4 ..> UC6 : <<extend>>
+
+note right of UC3
+  Disponible uniquement si
+  statut = 'Released'
+end note
+
+note right of UC5
+  Date du jour préremplie
+  automatiquement
+  Disponible si statut = 'Open'
+end note
+
+note bottom of UC6
+  Condition : toutes les lignes
+  ont une qtyToReceive > 0
+end note
+@enduml

@@ -6,25 +6,22 @@ namespace Soroubat.Api.Models
     public class GasoilLineReadDto
     {
         [JsonPropertyName("id")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Guid? Id { get; set; }
 
         [JsonPropertyName("documentNo")]
         public string? DocumentNo { get; set; }
 
         [JsonPropertyName("lineNo")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public int? LineNo { get; set; }
 
         [JsonPropertyName("vehicleNo")]
         public string? VehicleNo { get; set; }
 
-        [JsonPropertyName("vehiclePlate")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public string? VehiclePlate { get; set; }
-
         [JsonPropertyName("quantity")]
         public decimal? Quantity { get; set; }
+
+        [JsonPropertyName("maxConsommation")]
+        public decimal? MaxConsommation { get; set; }
 
         [JsonPropertyName("time")]
         public string? Time { get; set; }
@@ -32,21 +29,19 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("indexType")]
         public string? IndexType { get; set; }
 
-        [JsonPropertyName("hourIndex")]
-        public decimal? HourIndex { get; set; }
-
-        [JsonPropertyName("kmIndex")]
-        public decimal? KmIndex { get; set; }
+        [JsonPropertyName("valeurCompteur")]
+        public decimal? ValeurCompteur { get; set; }
 
         [JsonPropertyName("driver")]
         public string? Driver { get; set; }
 
+        [JsonPropertyName("destination")]
+        public string? Destination { get; set; }
+
         [JsonPropertyName("projectNo")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ProjectNo { get; set; }
+
+        [JsonPropertyName("observation")]
+        public string? Observation { get; set; }
     }
-
-    
-
-
 }

@@ -23,6 +23,8 @@ namespace Soroubat.Api.Controllers
         /// Retourne les données de référence d'une entité BC pour alimenter une liste déroulante.
         /// Le projet du chef connecté est appliqué automatiquement comme filtre pour les entités
         /// "projects" et "projectTasks". Un filtre OData additionnel peut être passé en query string.
+        /// Entités supportées : projects, projectTasks, locations, items, vehicules, requesters,
+        /// fixedAssets, employees, chefsChantier, shippingAgents, postCodes.
         /// </summary>
         [HttpGet("{entityName}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -40,6 +42,10 @@ namespace Soroubat.Api.Controllers
             {
                 var content = await _lookupService.GetLookupDataAsync(entityName, projectNo, filter);
                 return Ok(content);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
             catch (HttpRequestException ex)
             {

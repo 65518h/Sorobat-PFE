@@ -1,0 +1,145 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam sequenceArrowThickness 2
+skinparam sequenceArrowColor #2E75B6
+skinparam sequenceLifeLineBorderColor #2E75B6
+skinparam sequenceLifeLineBackgroundColor #D6E4F0
+skinparam participantBackgroundColor #1F4E79
+skinparam participantFontColor #FFFFFF
+skinparam participantFontName Arial
+skinparam participantFontSize 12
+skinparam participantBorderColor #1F4E79
+skinparam noteFontName Arial
+skinparam noteFontSize 11
+skinparam noteBackgroundColor #FFF9C4
+skinparam noteBorderColor #F0C040
+skinparam sequenceGroupBackgroundColor #EBF3FB
+skinparam sequenceGroupBorderColor #2E75B6
+skinparam sequenceGroupFontName Arial
+skinparam sequenceGroupFontSize 11
+
+actor "Chef de chantier" as CHEF
+participant "RequestListComponent\n(Angular)" as LIST_COMP
+participant "RequestDetailComponent\n(Angular)" as DETAIL_COMP
+participant "AppModeService" as AMS
+participant "PurchaseRequestService" as PRS
+participant "CacheService" as CS
+participant "Dexie\n(IndexedDB)" as DEXIE
+participant "API Backend" as API
+
+== Navigation vers le module Demandes d'achat (mode offline-readonly) ==
+
+CHEF -> LIST_COMP : Accéder à la liste\ndes demandes d'achat
+LIST_COMP -> AMS : Vérifier currentMode
+AMS --> LIST_COMP : 'offline-readonly'
+
+LIST_COMP -> LIST_COMP : Appliquer directives\noffline sur le template
+
+note right of LIST_COMP
+  OfflineHideActionsDirective
+  → masque le bouton
+    "Nouvelle demande"
+  ShowOfflineMessageDirective
+  → affiche le bandeau
+    "Mode hors ligne –
+     Consultation uniquement"
+end note
+
+== Chargement de la liste des demandes depuis le cache ==
+
+LIST_COMP -> PRS : getAllPurchaseRequests()
+PRS -> CS : getOrFetch(\n  'purchase-requests',\n  '/api/PurchaseRequest'\n)
+
+CS -> DEXIE : cache.where('key')\n.equals('purchase-requests')\n.first()
+DEXIE --> CS : CacheItem { data, timestamp, expiresIn }
+
+CS -> CS : Vérifier expiration\n(Date.now() - timestamp < expiresIn)
+
+alt Données en cache valides (< 24h)
+  CS --> PRS : PurchaseRequestReadDto[]
+  note right of CS
+    Cache HIT
+    Retour immédiat
+    sans appel réseau
+  end note
+else Données expirées ou absentes
+  CS -> API : GET /api/PurchaseRequest
+  API --> CS : ✗ Erreur réseau\n(hors ligne)
+  CS -> DEXIE : Fallback stale :\ncache.where('key')\n.equals('purchase-requests')\n.first()
+  DEXIE --> CS : CacheItem (données expirées)
+  note right of CS
+    Stratégie stale-while-revalidate :
+    les données expirées sont
+    retournées en fallback
+  end note
+  CS --> PRS : PurchaseRequestReadDto[] (stale)
+end
+
+PRS --> LIST_COMP : PurchaseRequestReadDto[]
+
+== Affichage de la liste ==
+
+LIST_COMP -> LIST_COMP : Calculer statistiques\n(total, en attente,\nen cours, traités,\nmontant total)
+LIST_COMP -> LIST_COMP : Afficher liste paginée\navec filtres actifs\n(lecture seule)
+
+LIST_COMP --> CHEF : Liste des demandes affichée\n(sans bouton "Nouvelle demande")
+
+== Consultation du détail d'une demande ==
+
+CHEF -> LIST_COMP : Cliquer sur une demande
+LIST_COMP -> DETAIL_COMP : Naviguer vers le détail\n(id de la demande)
+
+DETAIL_COMP -> AMS : Vérifier currentMode
+AMS --> DETAIL_COMP : 'offline-readonly'
+
+DETAIL_COMP -> PRS : getPurchaseRequestById(id)
+PRS -> CS : getOrFetch(\n  'purchase-request-{id}',\n  '/api/PurchaseRequest/{id}'\n)
+
+CS -> DEXIE : cache.where('key')\n.equals('purchase-request-{id}')\n.first()
+DEXIE --> CS : CacheItem { data, timestamp, expiresIn }
+
+alt Détail en cache
+  CS --> PRS : PurchaseRequestReadDto\n(avec lignes)
+else Détail absent du cache
+  CS -> API : GET /api/PurchaseRequest/{id}
+  API --> CS : ✗ Erreur réseau
+  CS --> PRS : null
+  PRS --> DETAIL_COMP : Données indisponibles
+  DETAIL_COMP --> CHEF : Message :\n"Détail non disponible\nhors ligne"
+  note right of DETAIL_COMP
+    Seules les demandes
+    préchargées lors
+    de la dernière session
+    en ligne sont accessibles
+  end note
+end
+
+PRS --> DETAIL_COMP : PurchaseRequestReadDto\n(en-tête + lignes)
+
+DETAIL_COMP -> DETAIL_COMP : Appliquer directives\noffline sur le template
+
+note right of DETAIL_COMP
+  OfflineHideActionsDirective
+  → masque les boutons :
+    "Modifier", "Supprimer",
+    "Soumettre pour approbation"
+  ShowOfflineMessageDirective
+  → affiche le bandeau
+    informatif hors ligne
+end note
+
+DETAIL_COMP -> DETAIL_COMP : Afficher en-tête\n+ lignes de la demande\n(lecture seule)
+
+DETAIL_COMP --> CHEF : Détail de la demande affiché\n(sans actions de modification)
+
+note over CHEF, API
+  En mode hors ligne, la recherche et les filtres
+  (statut, date, texte) restent fonctionnels
+  car ils opèrent sur les données déjà chargées
+  en mémoire côté Angular.
+  Seul le préchargement effectué lors
+  des sessions en ligne détermine
+  quelles demandes sont accessibles.
+end note
+
+@enduml

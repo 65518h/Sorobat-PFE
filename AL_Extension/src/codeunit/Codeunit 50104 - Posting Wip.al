@@ -14,6 +14,7 @@ codeunit 52048899 "Posting Wip"
         Text004: Label 'You must enter the Quantity Consumed for the item %1';
         CduTypeHelper: Codeunit "Type Helper";
         CduJobJnlPost: Codeunit "Job Jnl.-Post";
+        CopyDescription: Text[50];
     begin
         //  CduTypeHelper.TransferFieldsWithValidate(WipReportHeader, JobJournalLine);
 
@@ -25,7 +26,10 @@ codeunit 52048899 "Posting Wip"
                 if WipReportLine.FindSet() then begin
                     repeat
                         JobJournalLine.Init();
+                        CopyDescription := CopyStr(WipReportLine."Description 2", 1, 50);
+                        WipReportLine."Description 2" := CopyDescription;
                         JobJournalLine.TransferFields(WipReportLine);
+                        JobJournalLine."Description 2" := CopyStr(WipReportLine."Description 2", 1, 50);
                         //  JobJournalLine.Validate("No.", WipReportLine."No.");
                         JobJournalLine."Journal Template Name" := JobSetup."Journal Template Name";
                         JobJournalLine."Journal Batch Name" := JobSetup."Job Journal Batch";
@@ -143,7 +147,9 @@ codeunit 52048899 "Posting Wip"
                 JobRepLine.SetRange(Resource, JobRepLine.Resource::Equipment);
                 if JobRepLine.FindSet() then begin
                     repeat
-                        JobJournalLine.Init();
+                        InsertGasoilLine(JobRepLine, WipReportHeader);
+                        InsertResourceLine(JobRepLine, WipReportHeader);
+                    /*    JobJournalLine.Init();
                         JobJournalLine."Journal Template Name" := JobSetup."Journal Template Name";
                         JobJournalLine."Journal Batch Name" := JobSetup."Job Journal Batch";
                         JobJournalLine."Document No." := WipReportHeader."No.";
@@ -212,16 +218,26 @@ codeunit 52048899 "Posting Wip"
                                 JobJournalLine.Validate("Remaining Qty.", 0);
 
                         end;
-                        JobJournalLine.CheckItemAvailable();
-                        /*  if JobJournalLine.Type = JobJournalLine.Type::Item then
-                              if Item."Item Tracking Code" <> '' then
-                                  ReserveJobJnlLine.VerifyQuantity(Rec, xRec);*/
-                        ////////////////////////////////////////////////////////////////////////
-                        if JobRepLine."Total Hours" = 0 then
-                            Error(Text003, JobRepLine.Equipment)
-                        else
-                            JobJournalLine.Insert(true);
-                        IntLineNo := IntLineNo + 10000;
+                        JobJournalLine.CheckItemAvailable();*/
+                    /*  if JobJournalLine.Type = JobJournalLine.Type::Item then
+                          if Item."Item Tracking Code" <> '' then
+                              ReserveJobJnlLine.VerifyQuantity(Rec, xRec);*/
+                    ////////////////////////////////////////////////////////////////////////
+                    /*   if JobRepLine."Total Hours" = 0 then
+                           Error(Text003, JobRepLine.Equipment)
+                       else
+                           JobJournalLine.Insert(true);
+                       IntLineNo := IntLineNo + 10000;*/
+                    until JobRepLine.Next() = 0;
+                end;
+                JobRepLine.Reset();
+                JobRepLine.SetAutoCalcFields("Resource No.");
+                JobRepLine.SetRange("WIP Report No.", WipReportHeader."No.");
+                JobRepLine.SetRange(Resource, JobRepLine.Resource::Supply);
+                if JobRepLine.FindSet() then begin
+                    repeat
+                        InsertAR(JobRepLine, WipReportHeader);
+
                     until JobRepLine.Next() = 0;
                 end;
             end;
@@ -229,6 +245,289 @@ codeunit 52048899 "Posting Wip"
             WipReportHeader.Status := WipReportHeader.Status::Released;
             WipReportHeader.Modify();
         end;
+    end;
+
+
+    procedure InsertResourceLine(var JobRepLine: Record "Job Report Line"; var WipReportHeader: Record "WIP Report Header");
+    var
+        RecVehicle: Record "Véhicule";
+
+    begin
+        RecVehicle.Get(JobRepLine.Equipment);
+        JobRepLine.CalcFields("Resource No.");
+        JobJournalLine.Init();
+        JobJournalLine."Journal Template Name" := JobSetup."Journal Template Name";
+        JobJournalLine."Journal Batch Name" := JobSetup."Job Journal Batch";
+        JobJournalLine."Document No." := WipReportHeader."No.";
+        JobJournalLine."Posting Date" := WipReportHeader."Ending date";
+        JobJournalLine."Document Date" := Today();
+        JobJournalLine."Line No." := IntLineNo;
+        JobJournalLine.Validate("Job No.", WipReportHeader."Job No.");
+        JobJournalLine.Validate("Job Task No.", WipReportHeader."Job Task No.");
+        JobJournalLine.Type := JobJournalLine.Type::Resource;
+        JobJournalLine."From WIP" := true;
+        JobJournalLine.Validate("No.", JobRepLine."Resource No.");
+        // JobJournalLine."Machine No." := JobRepLine.Equipment;
+        JobJournalLine."Executed measurement" := JobRepLine."Qté exécutées";
+        //JobJournalLine.Validate("Job Planning Line No.", JobRepLine."Job Planning Line No.");
+        JobJournalLine."Job Planning Line No." := JobRepLine."Job Planning Line No.";
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+           JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+            JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+            JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+            JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+            JobPlanningLine.TestField(Type, JobJournalLine.Type);
+            // JobPlanningLine.TestField("No.", "No.");
+            JobPlanningLine.TestField("Usage Link", true);
+            JobPlanningLine.TestField("System-Created Entry", false);
+            JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+            if (JobPlanningLine."Location Code" <> '') then
+                JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+            if (JobPlanningLine."Bin Code" <> '') then
+                JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+            JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+            JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+            if JobJournalLine.Quantity > 0 then
+                JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        end else
+            JobJournalLine.Validate("Remaining Qty.", 0);
+        // end;
+        //JobJournalLine.Validate(Quantity, JobRepLine."Total Hours");
+        JobJournalLine.Quantity := JobRepLine."Total Hours";
+        JobJournalLine.Quantity := UOMMgt.RoundAndValidateQty(JobJournalLine.Quantity, JobJournalLine."Qty. Rounding Precision", JobJournalLine.FieldCaption(Quantity));
+        JobJournalLine."Quantity (Base)" := CalcBaseQty(JobJournalLine.Quantity, JobJournalLine.FieldCaption(Quantity), JobJournalLine.FieldCaption("Quantity (Base)"), JobJournalLine);
+
+        JobJournalLine.UpdateAllAmounts();
+        JobJournalLine.Validate("Unit Cost", RecVehicle."Cout Journalier");
+        JobJournalLine.Validate("Unit Price", 0);
+        JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            if JobJournalLine."Job Planning Line No." <> 0 then begin
+                ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+               JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+                JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+                JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+                JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+                JobPlanningLine.TestField(Type, JobJournalLine.Type);
+                // JobPlanningLine.TestField("No.", "No.");
+                JobPlanningLine.TestField("Usage Link", true);
+                JobPlanningLine.TestField("System-Created Entry", false);
+                JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+                if (JobPlanningLine."Location Code" <> '') then
+                    JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+                if (JobPlanningLine."Bin Code" <> '') then
+                    JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+                JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+                JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+                if JobJournalLine.Quantity > 0 then
+                    JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+            end else
+                JobJournalLine.Validate("Remaining Qty.", 0);
+
+        end;
+        JobJournalLine.CheckItemAvailable();
+        /*  if JobJournalLine.Type = JobJournalLine.Type::Item then
+              if Item."Item Tracking Code" <> '' then
+                  ReserveJobJnlLine.VerifyQuantity(Rec, xRec);*/
+        ////////////////////////////////////////////////////////////////////////
+        if JobRepLine."Total Hours" = 0 then
+            Error(Text003, JobRepLine.Equipment)
+        else
+            JobJournalLine.Insert(true);
+        IntLineNo := IntLineNo + 10000;
+    end;
+
+    procedure InsertAR(var JobRepLine: Record "Job Report Line"; var WipReportHeader: Record "WIP Report Header");
+    var
+        RecInventorySetup: Record "Inventory Setup";
+        JobSetup: Record "Jobs Setup";
+        RecItem: Record Item;
+    begin
+
+        JobSetup.Get();
+        RecItem.Get(JobRepLine.Product);
+        RecInventorySetup.Get();
+        JobJournalLine.Init();
+        JobJournalLine."Journal Template Name" := JobSetup."Journal Template Name";
+        JobJournalLine."Journal Batch Name" := JobSetup."Job Journal Batch";
+        JobJournalLine."Document No." := WipReportHeader."No.";
+        JobJournalLine."Posting Date" := WipReportHeader."Ending date";
+        JobJournalLine."Document Date" := Today();
+        JobJournalLine."Line No." := IntLineNo;
+        JobJournalLine.Validate("Job No.", WipReportHeader."Job No.");
+        JobJournalLine.Validate("Job Task No.", WipReportHeader."Job Task No.");
+        JobJournalLine.Type := JobJournalLine.Type::Resource;
+        JobJournalLine."From WIP" := true;
+        JobJournalLine.Validate("No.", JobSetup."Article resource");
+        JobRepLine.Description := RecItem.Description;
+        // JobJournalLine."Executed measurement" := JobRepLine."Qté exécutées";
+        // JobJournalLine.Validate("Location Code", WipReportHeader."Location Code");
+        //
+        //JobJournalLine.Validate("Job Planning Line No.", JobRepLine."Job Planning Line No.");
+        JobJournalLine."Job Planning Line No." := JobRepLine."Job Planning Line No.";
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+           JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+            JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+            JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+            JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+            JobPlanningLine.TestField(Type, JobJournalLine.Type);
+            // JobPlanningLine.TestField("No.", "No.");
+            JobPlanningLine.TestField("Usage Link", true);
+            JobPlanningLine.TestField("System-Created Entry", false);
+            JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+            if (JobPlanningLine."Location Code" <> '') then
+                JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+            if (JobPlanningLine."Bin Code" <> '') then
+                JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+            JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+            JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+            if JobJournalLine.Quantity > 0 then
+                JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        end else
+            JobJournalLine.Validate("Remaining Qty.", 0);
+        // end;
+        //JobJournalLine.Validate(Quantity, JobRepLine."Total Hours");
+        JobJournalLine.Quantity := JobRepLine."Quantity Consumed";
+        JobJournalLine.Quantity := UOMMgt.RoundAndValidateQty(JobJournalLine.Quantity, JobJournalLine."Qty. Rounding Precision", JobJournalLine.FieldCaption(Quantity));
+        JobJournalLine."Quantity (Base)" := CalcBaseQty(JobJournalLine.Quantity, JobJournalLine.FieldCaption(Quantity), JobJournalLine.FieldCaption("Quantity (Base)"), JobJournalLine);
+        JobJournalLine.UpdateAllAmounts();
+        JobJournalLine.Validate("Unit Cost", RecItem."Unit Cost");
+        JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            if JobJournalLine."Job Planning Line No." <> 0 then begin
+                ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+               JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+                JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+                JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+                JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+                JobPlanningLine.TestField(Type, JobJournalLine.Type);
+                // JobPlanningLine.TestField("No.", "No.");
+                JobPlanningLine.TestField("Usage Link", true);
+                JobPlanningLine.TestField("System-Created Entry", false);
+                JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+                if (JobPlanningLine."Location Code" <> '') then
+                    JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+                if (JobPlanningLine."Bin Code" <> '') then
+                    JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+                JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+                JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+                if JobJournalLine.Quantity > 0 then
+                    JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+            end else
+                JobJournalLine.Validate("Remaining Qty.", 0);
+
+        end;
+        JobJournalLine.CheckItemAvailable();
+        /*  if JobJournalLine.Type = JobJournalLine.Type::Item then
+              if Item."Item Tracking Code" <> '' then
+                  ReserveJobJnlLine.VerifyQuantity(Rec, xRec);*/
+        ////////////////////////////////////////////////////////////////////////
+        JobJournalLine.Description := RecItem.Description;
+        if JobRepLine."Quantity Consumed" = 0 then
+            Error(Text004, JobRepLine.Product)
+        else
+            JobJournalLine.Insert(true);
+        IntLineNo := IntLineNo + 10000;
+    end;
+
+    procedure InsertGasoilLine(var JobRepLine: Record "Job Report Line"; var WipReportHeader: Record "WIP Report Header");
+    var
+        RecInventorySetup: Record "Inventory Setup";
+        JobSetup: Record "Jobs Setup";
+        RecItem: Record Item;
+    begin
+
+        JobSetup.Get();
+        RecItem.Get(JobSetup.Energie);
+        RecInventorySetup.Get();
+        JobJournalLine.Init();
+        JobJournalLine."Journal Template Name" := JobSetup."Journal Template Name";
+        JobJournalLine."Journal Batch Name" := JobSetup."Job Journal Batch";
+        JobJournalLine."Document No." := WipReportHeader."No.";
+        JobJournalLine."Posting Date" := WipReportHeader."Ending date";
+        JobJournalLine."Document Date" := Today();
+        JobJournalLine."Line No." := IntLineNo;
+        JobJournalLine.Validate("Job No.", WipReportHeader."Job No.");
+        JobJournalLine.Validate("Job Task No.", WipReportHeader."Job Task No.");
+        JobJournalLine.Type := JobJournalLine.Type::Resource;
+        JobJournalLine."From WIP" := true;
+        JobJournalLine.Validate("No.", JobSetup.Energie);
+        JobJournalLine."Executed measurement" := JobRepLine."Qté exécutées";
+        // JobJournalLine.Validate("Location Code", WipReportHeader."Location Code");
+        //
+        //JobJournalLine.Validate("Job Planning Line No.", JobRepLine."Job Planning Line No.");
+        JobJournalLine."Job Planning Line No." := JobRepLine."Job Planning Line No.";
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+           JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+            JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+            JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+            JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+            JobPlanningLine.TestField(Type, JobJournalLine.Type);
+            // JobPlanningLine.TestField("No.", "No.");
+            JobPlanningLine.TestField("Usage Link", true);
+            JobPlanningLine.TestField("System-Created Entry", false);
+            JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+            if (JobPlanningLine."Location Code" <> '') then
+                JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+            if (JobPlanningLine."Bin Code" <> '') then
+                JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+            JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+            JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+            if JobJournalLine.Quantity > 0 then
+                JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        end else
+            JobJournalLine.Validate("Remaining Qty.", 0);
+        // end;
+        //JobJournalLine.Validate(Quantity, JobRepLine."Total Hours");
+        JobJournalLine.Quantity := JobRepLine."Qty Gasoil";
+        JobJournalLine.Quantity := UOMMgt.RoundAndValidateQty(JobJournalLine.Quantity, JobJournalLine."Qty. Rounding Precision", JobJournalLine.FieldCaption(Quantity));
+        JobJournalLine."Quantity (Base)" := CalcBaseQty(JobJournalLine.Quantity, JobJournalLine.FieldCaption(Quantity), JobJournalLine.FieldCaption("Quantity (Base)"), JobJournalLine);
+        JobJournalLine.UpdateAllAmounts();
+        JobJournalLine.Validate("Unit Cost", RecItem."Last Direct Cost");
+        JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+        if JobJournalLine."Job Planning Line No." <> 0 then begin
+            if JobJournalLine."Job Planning Line No." <> 0 then begin
+                ValidateJobPlanningLineLink(WipReportHeader."Job No.", WipReportHeader."Job Task No.",
+               JobRepLine."Job Planning Line No.", JobSetup."Journal Template Name", JobSetup."Job Journal Batch", IntLineNo);
+                JobPlanningLine.Get(WipReportHeader."Job No.", WipReportHeader."Job Task No.", JobRepLine."Job Planning Line No.");
+                JobPlanningLine.TestField("Job No.", JobJournalLine."Job No.");
+                JobPlanningLine.TestField("Job Task No.", JobJournalLine."Job Task No.");
+                JobPlanningLine.TestField(Type, JobJournalLine.Type);
+                // JobPlanningLine.TestField("No.", "No.");
+                JobPlanningLine.TestField("Usage Link", true);
+                JobPlanningLine.TestField("System-Created Entry", false);
+                JobPlanningLine."Line Type" := JobPlanningLine.ConvertToJobLineType();
+
+                if (JobPlanningLine."Location Code" <> '') then
+                    JobJournalLine."Location Code" := JobPlanningLine."Location Code";
+                if (JobPlanningLine."Bin Code" <> '') then
+                    JobJournalLine."Bin Code" := JobPlanningLine."Bin Code";
+                JobJournalLine.Validate("Remaining Qty.", CalcQtyFromBaseQty(JobPlanningLine."Remaining Qty. (Base)" - JobJournalLine."Quantity (Base)", JobJournalLine));
+                JobJournalLine."Assemble to Order" := JobPlanningLine."Assemble to Order";
+                if JobJournalLine.Quantity > 0 then
+                    JobJnlLineVerifyChangeForWhsePick(JobJournalLine);
+            end else
+                JobJournalLine.Validate("Remaining Qty.", 0);
+
+        end;
+        JobJournalLine.CheckItemAvailable();
+        /*  if JobJournalLine.Type = JobJournalLine.Type::Item then
+              if Item."Item Tracking Code" <> '' then
+                  ReserveJobJnlLine.VerifyQuantity(Rec, xRec);*/
+        ////////////////////////////////////////////////////////////////////////
+        if JobRepLine."Total Hours" = 0 then
+            Error(Text003, JobRepLine.Equipment)
+        else
+            JobJournalLine.Insert(true);
+        IntLineNo := IntLineNo + 10000;
     end;
 
     [EventSubscriber(ObjectType::Codeunit, codeunit::"Job Jnl.-Post", OnCodeOnBeforeConfirm, '', false, false)]
@@ -328,6 +627,10 @@ codeunit 52048899 "Posting Wip"
 
 
     var
+        Text001: Label 'Do you want to post the project report?';
+        Text002: Label 'You must enter the quantity for the line %1';
+        Text003: Label 'You must enter the Number of days for the equipment %1';
+        Text004: Label 'You must enter the Quantity Consumed for the item %1';
         JobSetup: Record "Jobs Setup";
         JobJournalLine: Record "Job Journal Line";
         WipReportLine: Record "WIP Report Line";

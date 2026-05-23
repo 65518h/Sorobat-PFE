@@ -1,0 +1,81 @@
+@startuml
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceGroupBorderColor #2E74B5
+skinparam sequenceGroupHeaderFontColor #1F4D78
+skinparam sequenceGroupBackgroundColor #EEF4FB
+skinparam participantBackgroundColor #D5E8F0
+skinparam participantBorderColor #2E74B5
+skinparam participantFontColor #1F4D78
+skinparam noteBorderColor #2E74B5
+skinparam noteBackgroundColor #EEF4FB
+skinparam backgroundColor white
+
+actor "Chef de chantier" as chef
+participant "Angular\n(RequestForm)" as ng
+participant "ASP.NET Core\n(PurchaseRequestController)" as api
+participant "PurchaseRequestService" as svc
+participant "Business Central\n(OData API)" as bc
+
+== Modification de l'en-tête (PATCH) ==
+
+chef -> ng : Modifie engin / magasin / observation
+ng -> api : PATCH /api/PurchaseRequest/{id}\n{ engin, locationCode, observation }
+api -> svc : PatchHeaderAsync(id, dto, projectNo)
+svc -> bc : GET purchaseRequests({id})
+bc --> svc : { jobNo, statut, ETag }
+
+alt jobNo ≠ projectNo (JWT)
+  svc --> api : UnauthorizedAccessException
+  api --> ng : 403 Forbidden
+  ng --> chef : Erreur : accès refusé
+else jobNo = projectNo
+  svc -> bc : PATCH purchaseRequests({id})\nIf-Match: ETag\n{ engin, locationCode, observation }
+  bc --> svc : 200 OK
+  svc --> api : true
+  api --> ng : 200 OK { message }
+  ng --> chef : Modifications enregistrées
+end
+
+== Modification d'une ligne (PATCH) ==
+
+chef -> ng : Modifie quantité / magasin / tâche
+ng -> api : PATCH /api/PurchaseRequest/lines/{lineId}\n{ quantity, locationCode, jobTaskNo }
+api -> svc : PatchLineAsync(lineId, dto, projectNo)
+svc -> bc : GET purchaseRequestLines({lineId})
+bc --> svc : { jobNo, ETag }
+
+alt jobNo ≠ projectNo
+  svc --> api : UnauthorizedAccessException
+  api --> ng : 403 Forbidden
+else
+  svc -> bc : PATCH purchaseRequestLines({lineId})\nIf-Match: ETag\n{ quantity, locationCode, jobTaskNo }
+  bc --> svc : 200 OK
+  svc --> api : true
+  api --> ng : 200 OK
+  ng --> chef : Ligne mise à jour
+end
+
+== Suppression d'une demande (DELETE) ==
+
+chef -> ng : Confirme la suppression
+ng -> api : DELETE /api/PurchaseRequest/{id}
+api -> svc : DeleteRequestAsync(id, projectNo)
+svc -> bc : GET purchaseRequests({id})
+bc --> svc : { jobNo, statut, ETag }
+
+alt statut ≠ 'Ouvert'
+  svc --> api : InvalidOperationException
+  api --> ng : 400 Bad Request
+  ng --> chef : Erreur : demande non supprimable
+else statut = 'Ouvert' et jobNo = projectNo
+  svc -> bc : DELETE purchaseRequests({id})\nIf-Match: ETag
+  note right of bc
+    Suppression en cascade des lignes
+    gérée par le trigger AL OnDelete
+  end note
+  bc --> svc : 204 No Content
+  svc --> api : true
+  api --> ng : 204 No Content
+  ng --> chef : Demande supprimée\nRedirection vers la liste
+end
+@enduml

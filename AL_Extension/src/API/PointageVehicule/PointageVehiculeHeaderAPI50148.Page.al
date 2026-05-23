@@ -10,6 +10,9 @@ page 50148 "APIVehiculePointageHeader"
     SourceTable = "Entete Pointage Vehicule";
     DelayedInsert = true;
     ODataKeyFields = SystemId;
+    InsertAllowed = true;  // Création par le chef de chantier via le backend
+    ModifyAllowed = true;  // PATCH date (étape 2 création) et validation du statut
+    DeleteAllowed = true;  // Suppression autorisée uniquement si statut "Ouvert"
 
     layout
     {
@@ -17,18 +20,41 @@ page 50148 "APIVehiculePointageHeader"
         {
             repeater(GroupName)
             {
-                field(id; Rec.SystemId) { Caption = 'Id'; }
-                field(documentNo; Rec."N° Document") { Caption = 'Document No'; }
-                field(jobNo; Rec.Marche) { Caption = 'Job No'; } // Lien avec le chantier 
-                field(date; Rec.Journee) { Caption = 'Date'; }
-                field(status; Rec.Statut) { Caption = 'Status'; }
+                field(id; Rec.SystemId)
+                {
+                    Caption = 'Id';
+                    Editable = false;
+                }
+                field(documentNo; Rec."N° Document")
+                {
+                    Caption = 'Document No';
+                    Editable = false; // Auto-incrémenté par BC
+                }
+                // jobNo forcé par le backend (JWT) — non modifiable directement
+                // pour empêcher un chef de lier un pointage à un autre chantier
+                field(jobNo; Rec.Marche)
+                {
+                    Caption = 'Job No';
+                    Editable = true; // Doit rester Editable pour que le backend puisse le forcer à l'insertion
+                }
+                field(date; Rec.Journee)
+                {
+                    Caption = 'Date';
+                    // Editable = true (défaut) — envoyé dans le PATCH étape 2 pour déclencher
+                    // le trigger OnValidate qui génère les lignes véhicule
+                }
+                field(status; Rec.Statut)
+                {
+                    Caption = 'Status';
+                    // Editable = true (défaut) — modifié par le backend pour la validation
+                }
             }
             part(vehiculePointageLines; "APIVehiculePointageLines")
             {
                 Caption = 'Lines';
                 EntityName = 'vehiculePointageLine';
                 EntitySetName = 'vehiculePointageLines';
-                SubPageLink = "Document N°" = field("N° Document"); // Lien entre Header et Lines
+                SubPageLink = "Document N°" = field("N° Document");
             }
         }
     }

@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam backgroundColor white
+skinparam usecase {
+    BackgroundColor #EFF6FF
+  BorderColor #2E75B6
+  ArrowColor #1F3864
+}
+
+actor "Chef de chantier" as Chef
+
+rectangle "Système d'alertes intelligentes" {
+
+    usecase "Consulter la cloche de notification" as UC1
+    usecase "Consulter la page des alertes" as UC2
+    usecase "Filtrer les alertes" as UC3
+    usecase "Marquer une alerte comme lue" as UC4
+    usecase "Naviguer vers l'entité concernée" as UC5
+    usecase "Recevoir une notification sonore" as UC6
+}
+
+Chef --> UC1
+Chef --> UC2
+Chef --> UC3
+Chef --> UC4
+Chef --> UC5
+Chef --> UC6
+
+UC2 .> UC3 : <<include>>
+UC1 .> UC5 : <<include>>
+UC1 .> UC6 : <<extend>>
+
+@enduml

@@ -1,0 +1,79 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipant underline
+skinparam backgroundColor white
+skinparam fontName Arial
+skinparam sequence {
+  ActorBorderColor #2E74B5
+  ParticipantBackgroundColor #EBF3FB
+  ParticipantBorderColor #2E74B5
+  ArrowColor #2E74B5
+  LifeLineBorderColor #2E74B5
+}
+
+actor "Chef de chantier" as CC
+participant "LoginComponent\n(Angular)" as LC
+participant "AuthService\n(Angular)" as AS
+participant "API .NET\nAuthController" as API
+participant "AuthService\n(.NET)" as AUTH
+database "SQLite\n(Users)" as DB
+participant "ChefChantierService\n(.NET)" as CCS
+participant "Business Central\n(AL API)" as BC
+
+CC -> LC : Saisit email + mot de passe
+LC -> LC : Validation formulaire\n(Validators.required, email)
+LC -> AS : login(email, password)
+AS -> API : POST /api/auth/login\n{ email, password }
+
+API -> AUTH : AuthenticateAsync(email, password)
+AUTH -> DB : SELECT WHERE email = ?
+DB --> AUTH : User (email, passwordHash)
+
+alt Utilisateur introuvable
+  AUTH --> API : AuthResult.Fail("INVALID_CREDENTIALS")
+  API --> AS : 401 Unauthorized
+  AS --> LC : HttpErrorResponse (status 401)
+  LC --> CC : Affiche "Email ou mot de passe incorrect"
+else Utilisateur trouvé
+  AUTH -> AUTH : BCrypt.Verify(password, hash)
+  alt Mot de passe invalide
+    AUTH --> API : AuthResult.Fail("INVALID_CREDENTIALS")
+    API --> AS : 401 Unauthorized
+    AS --> LC : HttpErrorResponse (status 401)
+    LC --> CC : Affiche "Email ou mot de passe incorrect"
+  else Mot de passe valide
+    AUTH -> CCS : CheckChefAsync(email)
+    CCS -> BC : GET chefsChantier?$filter=email eq '...'
+    BC --> CCS : ChefChantier { actif, numProjet }
+
+    alt Compte inactif (Actif = false)
+      CCS --> AUTH : ChefChantierCheckResult.Fail(Inactive)
+      AUTH --> API : AuthResult.Fail("ACCOUNT_INACTIVE")
+      API --> AS : 403 Forbidden
+      AS --> LC : HttpErrorResponse (status 403)
+      LC --> CC : Affiche "Compte désactivé"
+    else Aucun projet assigné
+      CCS --> AUTH : ChefChantierCheckResult.Fail(NoProject)
+      AUTH --> API : AuthResult.Fail("NO_PROJECT_ASSIGNED")
+      API --> AS : 403 Forbidden
+      AS --> LC : HttpErrorResponse (status 403)
+      LC --> CC : Affiche "Aucun projet assigné"
+    else Chef actif avec projet
+      CCS --> AUTH : ChefChantierCheckResult.Active(numProjet)
+      AUTH -> AUTH : GenerateJwtToken(email, projectNo)\n[HMAC-SHA256, 8h]
+      AUTH --> API : AuthResult.Ok(token)
+      API --> AS : 200 OK { token }
+      AS -> AS : Décoder token (projectNo)
+      AS -> AS : Appeler LookupService\n(récupérer nomEtPrenom)
+      AS -> AS : Sauvegarder session offline\n(localStorage)
+      AS --> LC : LoginResponse { token }
+      LC --> CC : Redirection vers /dashboard
+    end
+  end
+end
+@enduml
+
+
+
+
+

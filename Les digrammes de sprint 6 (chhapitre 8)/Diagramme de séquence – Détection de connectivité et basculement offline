@@ -1,0 +1,82 @@
+@startuml
+!define ACCENT #2E74B5
+!define DARK   #1F4D78
+!define ORANGE #CC7A00
+!define GREEN  #1A7A4A
+!define RED    #A32D2D
+
+skinparam sequence {
+  ArrowColor         #2E74B5
+  LifeLineBorderColor #2E74B5
+  LifeLineBackgroundColor #EBF5FB
+  ParticipantBackgroundColor #D5E8F0
+  ParticipantBorderColor #2E74B5
+  ParticipantFontColor #1F4D78
+  ParticipantFontSize 13
+  ActorBackgroundColor #EBF5FB
+  ActorBorderColor #2E74B5
+  GroupBorderColor #2E74B5
+  GroupBackgroundColor #F0F8FF
+  NoteBackgroundColor #FFFBE6
+  NoteBorderColor #CC7A00
+}
+skinparam defaultFontSize 13
+
+actor "Chef de\nchantier" as USER
+participant "NavbarComponent" as NAV
+participant "OfflineSyncService" as OSS
+participant "AppModeService" as AMS
+participant "Backend\n/api/auth/ping" as API
+participant "NavbarComponent\n(badge)" as BADGE
+
+== Démarrage — état initial ==
+
+OSS -> OSS : startPingCheck()\nintervalle 15s (online)
+OSS -> API : GET /api/auth/ping\n[AbortController, timeout 5s]
+API --> OSS : HTTP 200 OK
+OSS -> OSS : isOnlineSubject.next(true)
+AMS <-- OSS : isOnline$ = true
+AMS -> AMS : mode = 'online'\nbody.class = 'online-mode'
+
+== Perte de connexion ==
+
+OSS -> API : GET /api/auth/ping
+API --> OSS : timeout / ECONNREFUSED
+note right of OSS #FFE0E0
+  AbortController : timeout 5s
+  Erreur -> offline
+end note
+OSS -> OSS : isOnlineSubject.next(false)
+OSS -> OSS : startPingCheck()\nintervalle 60s (offline)
+
+AMS <-- OSS : isOnline$ = false
+AMS -> AMS : detectMode(isOnline=false)
+AMS -> AMS : mode = 'offline-readonly'\nbody.class = 'offline-readonly'
+AMS -> AMS : modeSubject.next(\n'offline-readonly')
+
+NAV <-- OSS : isOnline$ = false
+NAV -> NAV : isBackendOnline = false
+BADGE <-- OSS : pendingCount$\n(badge mis à jour)
+
+USER <-- NAV : affiche indicateur\n"Hors ligne" (navbar)
+USER <-- AMS : directives activées\n[appOfflineHideActions]\nmasquent les actions
+
+== Retour de la connexion ==
+
+OSS -> API : GET /api/auth/ping\n[intervalle 60s]
+API --> OSS : HTTP 200 OK
+OSS -> OSS : isOnlineSubject.next(true)
+OSS -> OSS : startPingCheck()\nintervalle 15s (online)
+note right of OSS #E0FFE8
+  Retour réseau détecté
+  syncAll() déclenché
+end note
+
+OSS -> OSS : syncAll()\n→ syncAttendances()\n→ syncPointages()\n→ syncGasoil()\n→ syncPurchases()
+OSS --> USER : Toastr :\n"X doc(s) synchronisé(s)"
+
+AMS <-- OSS : isOnline$ = true
+AMS -> AMS : mode = 'online'\nbody.class = 'online-mode'
+USER <-- NAV : indicateur hors ligne\ndisparaît
+
+@enduml

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Soroubat.Api.Interfaces;
 using Soroubat.Api.Models;
-using System.Security.Claims;
 
 namespace Soroubat.Api.Controllers
 {
@@ -16,7 +15,7 @@ namespace Soroubat.Api.Controllers
 
         public AttendanceController(IEmpAttendanceService service, IEmployeeService employeeService)
         {
-            _service = service;
+            _service         = service;
             _employeeService = employeeService;
         }
 
@@ -197,7 +196,7 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        /// <summary>Met à jour partiellement une ligne de pointage (jours, matricule, affectation, qualification).</summary>
+        /// <summary>Met à jour partiellement une ligne de pointage.</summary>
         [HttpPatch("lines/{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -265,6 +264,7 @@ namespace Soroubat.Api.Controllers
 
         /// <summary>
         /// Marque la présence d'un salarié après vérification par reconnaissance faciale.
+        /// La vérification et le marquage sont effectués en un seul appel.
         /// </summary>
         [HttpPost("scan-presence")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -284,8 +284,8 @@ namespace Soroubat.Api.Controllers
             // ÉTAPE 1 : Vérification de l'identité par reconnaissance faciale
             var faceRequest = new FaceVerificationPostDto
             {
-                Matricule            = request.Matricule,
-                CapturedImageBase64  = request.CapturedImageBase64
+                Matricule           = request.Matricule,
+                CapturedImageBase64 = request.CapturedImageBase64
             };
 
             var isVerified = await _employeeService.VerifyFaceAsync(faceRequest, projectNo);

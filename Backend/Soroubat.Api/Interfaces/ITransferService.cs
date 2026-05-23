@@ -4,8 +4,9 @@ namespace Soroubat.Api.Interfaces
 {
     /// <summary>
     /// Contrat du service de gestion des ordres de transfert Business Central.
-    /// Le chef de chantier peut consulter les transferts qui lui sont destinés
-    /// et enregistrer la réception (qtyToReceive, numVehicule) sur les lignes.
+    /// Le chef de chantier peut consulter les transferts qui lui sont destinés,
+    /// enregistrer la réception (qtyToReceive, numVehicule) sur les lignes,
+    /// et mettre à jour la date de réception sur l'en-tête.
     /// </summary>
     public interface ITransferService
     {
@@ -19,11 +20,17 @@ namespace Soroubat.Api.Interfaces
 
         /// <summary>
         /// Retourne un ordre de transfert avec ses lignes ($expand=transferLines).
-        /// Retourne null si introuvable ou si le chantier de destination ne correspond pas.
         /// Lève <see cref="KeyNotFoundException"/> si l'ID n'existe pas dans BC.
         /// Lève <see cref="UnauthorizedAccessException"/> si le transfert n'appartient pas au projet.
         /// </summary>
-        Task<TransferHeaderReadDto?> GetTransferByIdAsync(Guid id, string projectNo);
+        Task<TransferHeaderReadDto> GetTransferByIdAsync(Guid id, string projectNo);
+
+        /// <summary>
+        /// Met à jour la date de réception d'un ordre de transfert.
+        /// Lève <see cref="KeyNotFoundException"/> si l'ID n'existe pas dans BC.
+        /// Lève <see cref="UnauthorizedAccessException"/> si le transfert n'appartient pas au projet.
+        /// </summary>
+        Task<bool> PatchHeaderAsync(Guid id, TransferHeaderPatchDto headerDto, string projectNo);
 
         // ── Lignes ───────────────────────────────────────────────────────────
 
@@ -39,7 +46,7 @@ namespace Soroubat.Api.Interfaces
 
         /// <summary>
         /// Retourne tous les ordres de transfert avec leurs lignes ($expand=transferLines).
-        /// Utilisé exclusivement par <see cref="AlertService"/> pour l'analyse des alertes.
+        /// Utilisé exclusivement par AlertService pour l'analyse des alertes.
         /// Ne pas exposer directement via un endpoint HTTP.
         /// </summary>
         Task<IEnumerable<TransferHeaderReadDto>> GetAllTransfersWithLinesAsync(string projectNo);

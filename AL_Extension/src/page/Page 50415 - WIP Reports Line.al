@@ -4,9 +4,9 @@ page 52049052 "WIP Report Line"
     //ApplicationArea = All;
     //UsageCategory = Lists;
     SourceTable = "WIP Report Line";
-    AutoSplitKey = true;
-    RefreshOnActivate = true;
-    // DelayedInsert = true;
+    // AutoSplitKey = true;
+    //  RefreshOnActivate = true;
+    DelayedInsert = true;
 
     layout
     {
@@ -20,11 +20,11 @@ page 52049052 "WIP Report Line"
                     Editable = false;
                     Visible = false;
                 }
-                field("Job Task No."; Rec."Job Task No.")
-                {
-                    ApplicationArea = All;
+                // field("Job Task No."; Rec."Job Task No.")
+                // {
+                //     ApplicationArea = All;
 
-                }
+                // }
                 field("DysJob Planning Line No."; Rec."DysJob Planning Line No.") { ApplicationArea = all; Visible = false; }
                 field("Job Planning Line No."; Rec."Job Planning Line No.")
                 {
@@ -45,9 +45,15 @@ page 52049052 "WIP Report Line"
                 {
                     ApplicationArea = All;
                 }
+                field("Job Task No."; Rec."Job Task No.")
+                {
+                    ApplicationArea = All;
+
+                }
                 field("Description 2"; Rec."Description 2")
                 {
                     ApplicationArea = All;
+                    Caption = 'Description Tâche';
                 }
                 field(Bin; Rec.Bin) { ApplicationArea = all; Visible = false; }
                 field(Quantity; Rec.Quantity)
@@ -105,7 +111,7 @@ page 52049052 "WIP Report Line"
                     trigger OnValidate()
                     var
                     begin
-                        CurrPage.Update();
+                        //CurrPage.Update();
                     end;
                 }
                 field("Wip Total Line"; Rec."Wip Total Line")
@@ -133,9 +139,26 @@ page 52049052 "WIP Report Line"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
-        RecLWipReportHeader: record "WIP Report Header";
+        WIPReportLine: Record "WIP Report Line";
+        WipReportHeader: Record "WIP Report Header";
     begin
-        RecLWipReportHeader.get(rec."WIP Report No.");
-        rec."Job Task No." := RecLWipReportHeader."Job Task No.";
+        WIPReportLine.SetRange("WIP Report No.", Rec."WIP Report No.");
+        if WIPReportLine.FindLast() then
+            Rec."Line No." := WIPReportLine."Line No." + 10000
+        else
+            Rec."Line No." := 10000;
+
+        WipReportHeader.Get(Rec."WIP Report No.");
+        Rec."Job No." := WipReportHeader."Job No.";
+        Rec."Job Task No." := WipReportHeader."Job Task No.";
+        Rec."Description 2" := WipReportHeader."Project Task No. description";
+        Rec."Posting Date" := WipReportHeader."Ending date";
     end;
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        exit(true);
+    end;
+
+
 }

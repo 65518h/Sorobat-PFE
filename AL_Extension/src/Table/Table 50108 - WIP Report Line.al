@@ -45,9 +45,10 @@ table 50061 "WIP Report Line"
 
     fields
     {
-        field(1; "WIP Report No."; Code[20])
+        field(800001; "WIP Report No."; Code[20])
         {
             Caption = 'WIP Report No.';
+
         }
         field(2; "Line No."; Integer)
         {
@@ -79,7 +80,7 @@ table 50061 "WIP Report Line"
                 GetJob();
                 Job.TestBlocked();
                 IsHandled := false;
-                //OnValidateJobNoOnBeforeCheckJob(Rec, xRec, Cust, IsHandled);
+                //OnValidateJobNoOnBeforeCheckJob(Rec, xRec, Cust, IsHandled); 
                 if not IsHandled then begin
                     Job.TestField("Bill-to Customer No.");
                     Cust.Get(Job."Bill-to Customer No.");
@@ -145,10 +146,20 @@ table 50061 "WIP Report Line"
             var
                 IsHandled: Boolean;
                 gg210: Record 210;
-            begin
+                RecResource: Record Resource;
+                RecLWipReportHeader: record "WIP Report Header";
 
+            begin
+                //  Rec.Validate(Quantity, 0);
+                // RecLWipReportHeader.get(rec."WIP Report No.");
+                // Rec."Job No." := RecLWipReportHeader."Job No.";
+                // rec."Job Task No." := RecLWipReportHeader."Job Task No.";
+                // Rec."Description 2" := RecLWipReportHeader."Project Task No. description";
+
+                RecResource.Get("No.");
+                Description := RecResource.Name;
                 if ("No." = '') or ("No." <> xRec."No.") then begin
-                    "Description 2" := '';
+                    //   "Description 2" := '';
                     "Unit of Measure Code" := '';
                     "Qty. per Unit of Measure" := 1;
                     "Variant Code" := '';
@@ -194,6 +205,7 @@ table 50061 "WIP Report Line"
         field(9; Description; Text[100])
         {
             Caption = 'Description';
+            Editable = false;
         }
         field(10; Quantity; Decimal)
         {
@@ -697,16 +709,16 @@ table 50061 "WIP Report Line"
                 if IsHandled then
                     exit;
 
-                if ("Job Task No." = '') or (("Job Task No." <> xRec."Job Task No.") and (xRec."Job Task No." <> '')) then begin
-                    Validate("No.", '');
-                    exit;
-                end;
+                // HS if ("Job Task No." = '') or (("Job Task No." <> xRec."Job Task No.") and (xRec."Job Task No." <> '')) then begin
+                //     Validate("No.", '');
+                //     exit;
+                // end;
 
                 TestField("Job No.");
                 JobTask.Get("Job No.", "Job Task No.");
                 JobTask.TestField("Job Task Type", JobTask."Job Task Type"::Posting);
                 //OnValidateJobTaskNoOnAfterTestJobTaskType(Rec, xRec, JobTask);
-                rec.Description := JobTask.Description;
+                rec."Description 2" := JobTask.Description;
                 UpdateDimensions();
 
             end;
@@ -881,9 +893,10 @@ table 50061 "WIP Report Line"
             Caption = 'Cost Factor';
             Editable = false;
         }
-        field(1016; "Description 2"; Text[50])
+        field(1016; "Description 2"; Text[100])
         {
             Caption = 'Description 2';
+            Editable = false;
         }
         field(1017; "Ledger Entry Type"; Enum "Job Ledger Entry Type")
         {
@@ -1220,15 +1233,15 @@ table 50061 "WIP Report Line"
 
     keys
     {
-        key(STG_Key1; "WIP Report No.", "Line No.")
+        key(Key1; "WIP Report No.", "Line No.")
         {
             Clustered = true;
         }
-        key(STG_Key2; "WIP Report No.", Type, "No.", "Unit of Measure Code", "Work Type Code")
+        key(Key2; "WIP Report No.", Type, "No.", "Unit of Measure Code", "Work Type Code")
         {
             MaintainSQLIndex = false;
         }
-        key(STG_Key3; Type, "No.", "Variant Code")
+        key(Key3; Type, "No.", "Variant Code")
         {
         }
     }
@@ -1266,12 +1279,14 @@ table 50061 "WIP Report Line"
     var
         WipReportHeader: Record "WIP Report Header";
     begin
+        // Rec.Validate(Quantity, 0);  
+        LockTable();
         WipReportHeader.Get(Rec."WIP Report No.");
         Rec."Job No." := WipReportHeader."Job No.";
         Rec."Job Task No." := WipReportHeader."Job Task No.";
         Rec."Posting Date" := WipReportHeader."Ending date";
 
-        LockTable();
+
 
         // if ("Journal Template Name" <> '') then begin
         //     JobJnlTemplate.Get("Journal Template Name");
@@ -1418,7 +1433,7 @@ table 50061 "WIP Report Line"
             Item.TestField(Blocked, false);
             //OnCopyFromItemOnAfterCheckItem(Rec, Item);
             Description := Item.Description;
-            "Description 2" := Item."Description 2";
+            //  "Description 2" := Item."Description 2";
             GetJob();
             if Job."Language Code" <> '' then
                 GetItemTranslation();

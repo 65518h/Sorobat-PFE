@@ -1,0 +1,60 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam backgroundColor white
+
+skinparam usecase {
+  BackgroundColor #EEF4FB
+  BorderColor #2E74B5
+  FontColor #1F4D78
+  FontSize 12
+}
+
+skinparam actor {
+  BackgroundColor #D5E8F0
+  BorderColor #2E74B5
+  FontColor #1F4D78
+}
+
+actor "Chef de chantier" as chef
+
+rectangle "Module Demandes d'achat" {
+  usecase "Consulter la liste\ndes demandes" as UC1
+  usecase "Créer une demande\nd'achat" as UC2
+  usecase "Créer l'en-tête\n(Étape 1 - Obligatoire)" as UC2a
+  usecase "Ajouter des lignes\n(Étape 2 - Facultatif)" as UC2b
+  usecase "Sélectionner un article\nvia dialogue" as UC2c
+  usecase "Scanner un\ncode-barres" as UC2d
+  usecase "Soumettre pour\napprobation" as UC3
+  usecase "Modifier une\ndemande" as UC4
+  usecase "Supprimer une\ndemande" as UC5
+  usecase "Consulter le détail\nd'une demande" as UC6
+}
+
+chef --> UC1
+chef --> UC2
+chef --> UC3
+chef --> UC4
+chef --> UC5
+chef --> UC6
+
+' Relations d'inclusion et d'extension
+UC2 ..> UC2a : <<include>>
+UC2b ..> UC2 : <<extend>>
+UC2c ..> UC2b : <<extend>>
+UC2d ..> UC2b : <<extend>>
+
+note right of UC3
+  Statut : Ouvert → Released
+  Condition : statut = 'Ouvert'
+end note
+
+note right of UC4
+  Uniquement si statut = 'Ouvert'
+end note
+
+note right of UC5
+  Uniquement si statut = 'Ouvert'
+end note
+@enduml

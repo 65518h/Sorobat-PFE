@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+skinparam backgroundColor white
+
+skinparam usecase {
+  BackgroundColor #EBF3FB
+  BorderColor #2E74B5
+  FontName Arial
+}
+skinparam actor {
+  BackgroundColor #2E74B5
+  FontColor #2E74B5
+  FontName Arial
+}
+
+actor "Chef de chantier" as CC
+
+rectangle "Module : Tableau de bord (Dashboard)" {
+  usecase "Consulter le tableau de bord\n(KPIs, Tâches, Alertes, Stock, Présences)" as UC_DASH
+  usecase "Charger les données\ndepuis le cache (hors ligne)" as UC_CACHE
+  usecase "Afficher données par défaut\n(timeout API)" as UC_TIMEOUT
+}
+
+CC --> UC_DASH
+
+UC_CACHE .> UC_DASH : <<extend>>
+UC_TIMEOUT .> UC_DASH : <<extend>>
+
+@enduml

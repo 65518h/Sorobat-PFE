@@ -90,6 +90,17 @@ TableExtension 50091 "Jobs SetupEXT" extends "Jobs Setup"
             Caption = 'Default Sub-Job Status';
             TableRelation = "Job Status";
         }
+
+        field(8003912; "Energie"; Code[30])
+        {
+            Caption = 'Energie';
+            TableRelation = Resource;
+        }
+        field(8003913; "Article resource"; Code[30])
+        {
+            Caption = 'Article resource';
+            TableRelation = Resource;
+        }
     }
 }
 

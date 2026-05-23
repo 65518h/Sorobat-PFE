@@ -22,16 +22,17 @@ page 50136 "TransferHeaderAPI"
                 field(status; Rec.Status) { Caption = 'Status'; } 
                 field(transferFromCode; Rec."Transfer-from Code") { Caption = 'Transfer-from Code'; Editable = false; }
                 field(transferToCode; Rec."Transfer-to Code") { Caption = 'Transfer-to Code'; Editable = false; }
-                field(inTransitCode; Rec."In-Transit Code") { Caption = 'In-Transit Code'; Editable = false; } 
                 field(postingDate; Rec."Posting Date") { Caption = 'Posting Date'; }
                 
                 field(observation; Rec.Observation) { Caption = 'Observation'; } 
                 field(chantierOrigine; Rec."Chantier Origine") { Caption = 'Chantier Origine'; Editable = false; } 
                 field(chantierDestination; Rec."Chantier Destination") { Caption = 'Chantier Destination'; Editable = false; } 
-                field(idExpediteur; Rec."Id Expediteur") { Caption = 'Id Expediteur'; } 
-                field(idReceptionneur; Rec."Id Receptioneur") { Caption = 'Id Receptioneur'; } 
-                field(numMateriel; Rec."N° Materiel") { Caption = 'N° Materiel'; Editable = false; } 
-                field(numDemandeAchat; Rec."N° Demande Achat") { Caption = 'N° Demande Achat'; Editable = false; }
+
+
+                field ("receiptDate";Rec."Receipt Date") 
+                {
+                    caption = 'Date de réception'; 
+                }
 
                 part(transferLines; "TransferLineAPI")
                 {

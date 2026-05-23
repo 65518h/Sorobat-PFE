@@ -1,0 +1,107 @@
+@startuml
+
+!theme plain
+
+skinparam backgroundColor #FAFCFF
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceArrowColor #1A73E8
+skinparam sequenceGroupBorderColor #1A73E8
+skinparam sequenceGroupBodyBackgroundColor #F0F6FF
+
+skinparam participant {
+  BackgroundColor #EBF3FB
+  BorderColor #1A73E8
+  FontName Arial
+  FontSize 12
+  FontColor #2E4057
+}
+
+skinparam actor {
+  BackgroundColor #2E4057
+  BorderColor #1F1F1F
+  FontColor #FFFFFF
+  FontName Arial
+  FontSize 12
+}
+
+skinparam note {
+  BackgroundColor #FFFDE7
+  BorderColor #F59E0B
+  FontName Arial
+  FontSize 11
+}
+
+skinparam LifeLineBorderColor #1A73E8
+skinparam LifeLineBackgroundColor #FFFFFF
+
+skinparam ActivationBackgroundColor #D6E8FA
+skinparam ActivationBorderColor #1A73E8
+
+title Diagramme de séquence — Marquer comme lue et naviguer
+
+actor "Chef de chantier" as User
+
+participant "NotificationDialog\n/ AlertsPageComponent" as Dialog
+participant "AlertService\n(Angular)" as Service
+participant "Angular Router\n+ localStorage" as Router
+
+== Consultation d'une alerte ==
+
+User -> Dialog : 1. Clic sur l’alerte
+activate Dialog
+
+Dialog -> Service : 2. markAsRead(alert.id)
+activate Service
+
+Service -> Service : 3. readAlertIds.add(alert.id)
+
+Service -> Router : 4. localStorage.setItem(...)
+
+Router --> Service : Confirmation sauvegarde
+
+Service -> Service : 5. alertsSubject.next(...)\nBadge recalculé
+
+== Navigation vers l'entité ==
+
+Dialog -> Service : 6. navigateToAlert(alert)
+
+Service -> Service : 7. routes[alert.type] -> route
+
+Service -> Router : 8. router.navigate([route], {highlight})
+
+Router --> User : 9. Navigation vers composant cible
+
+Dialog --> User : 10. dialogRef.close()
+
+deactivate Service
+deactivate Dialog
+
+== Action optionnelle ==
+
+opt Marquer toutes les alertes comme lues
+
+    Dialog -> Service : markAllAsRead()
+    activate Service
+
+    Service -> Service : Toutes les alertes\najoutées à readAlertIds
+
+    Service -> Router : localStorage.setItem(...)
+
+    Router --> Service : Confirmation
+
+    Service -> Service : alertsSubject.next(...)\nBadge = 0
+
+    deactivate Service
+
+end
+
+note right of Service
+Le service :
+- conserve les IDs lus
+- met à jour le badge
+- déclenche la navigation
+- persiste les données
+dans localStorage
+end note
+
+@enduml

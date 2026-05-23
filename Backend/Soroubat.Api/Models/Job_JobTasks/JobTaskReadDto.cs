@@ -20,8 +20,7 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;
 
-        [JsonPropertyName("dateFin")]
-        public DateTime? DateFin { get; set; }
+        
 
         /// <summary>Avancement saisi manuellement par le chef de chantier (0–100 %).</summary>
         [JsonPropertyName("progressPct")]

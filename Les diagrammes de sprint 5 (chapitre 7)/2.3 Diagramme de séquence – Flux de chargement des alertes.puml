@@ -1,0 +1,106 @@
+@startuml
+
+!theme plain
+
+skinparam backgroundColor #FAFCFF
+skinparam sequenceArrowThickness 1.5
+skinparam sequenceArrowColor #1A73E8
+skinparam sequenceGroupBorderColor #1A73E8
+skinparam sequenceGroupBodyBackgroundColor #F0F6FF
+
+skinparam participant {
+  BackgroundColor #EBF3FB
+  BorderColor #1A73E8
+  FontName Arial
+  FontSize 12
+  FontColor #2E4057
+}
+
+skinparam actor {
+  BackgroundColor #2E4057
+  BorderColor #1F1F1F
+  FontColor #FFFFFF
+  FontName Arial
+  FontSize 12
+}
+
+skinparam note {
+  BackgroundColor #FFFDE7
+  BorderColor #F59E0B
+  FontName Arial
+  FontSize 11
+}
+
+skinparam LifeLineBorderColor #1A73E8
+skinparam LifeLineBackgroundColor #FFFFFF
+
+skinparam ActivationBackgroundColor #D6E8FA
+skinparam ActivationBorderColor #1A73E8
+
+title Diagramme de séquence — Chargement des alertes
+
+actor "Chef de chantier" as User
+
+participant "Angular\n(NotificationBell)" as Bell
+participant "AlertService\n(Angular)" as Service
+participant ".NET API\nAlertsController" as API
+participant "Business Central" as BC
+
+== Consultation des alertes ==
+
+User -> Bell : 1. Clic sur la cloche
+activate Bell
+
+Bell -> Service : 2. loadRecentAlertsForNavbar()
+activate Service
+
+Service -> API : 3. GET /api/Alerts/all
+activate API
+
+group Appels Business Central
+    API -> BC : 4a. GetSiteManagement(...)
+    API -> BC : 4b. GetPurchaseRequest(...)
+    API -> BC : 4c. GetTransfer(...)
+    API -> BC : 4d. GetStock(...)
+    API -> BC : 4e. GetVehicule(...)
+    API -> BC : 4f. GetGasoil(...)
+end
+
+BC --> API : 5. List<AlertDto>[] (x6)
+
+API -> API : 6. Agrégation + tri par sévérité
+
+API --> Service : 7. Alert[] triés
+deactivate API
+
+Service -> Service : 8. Tri top 10\nalertsSubject.next(...)
+
+Service --> Bell : 9. alerts$ (Observable)
+deactivate Service
+
+Bell -> Bell : 10. getUnreadCount()\n+ mise à jour badge
+
+alt Alerte critique détectée
+    Bell -> Bell : 11. playNotificationSound()
+end
+
+Bell --> User : 12. Badge mis à jour
+deactivate Bell
+
+== Polling automatique ==
+
+loop Toutes les 3 minutes
+    Bell -> Service : reloadAlerts()
+    Service -> API : GET /api/Alerts/all
+    API --> Service : nouvelles alertes
+    Service --> Bell : alerts$ mis à jour
+end
+
+note right of Service
+Les alertes sont :
+- agrégées
+- triées par sévérité
+- limitées au top 10
+end note
+
+@enduml

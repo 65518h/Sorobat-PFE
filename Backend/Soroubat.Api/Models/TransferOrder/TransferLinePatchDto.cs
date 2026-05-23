@@ -1,4 +1,4 @@
-   using System.Text.Json.Serialization;
+  using System.Text.Json.Serialization;
 
 namespace Soroubat.Api.Models
 {
@@ -8,7 +8,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("qtyToReceive")]
         public decimal? QtyToReceive { get; set; }
 
-        // [JsonPropertyName("numVehicule")]
-        // public string? NumVehicule { get; set; }
+        
     }
 }

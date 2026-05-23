@@ -16,16 +16,23 @@ namespace Soroubat.Api.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<AttendanceService> _logger;
 
-        // Options partagées : on n'envoie jamais de champs nuls à BC
-        private static readonly JsonSerializerOptions _serializerOptions = new()
+        /// <summary>Sérialisation en écriture : ignore les propriétés null pour ne pas écraser les valeurs BC.</summary>
+        private static readonly JsonSerializerOptions SerializerOptionsWrite = new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        /// <summary>Désérialisation en lecture : insensible à la casse, nommage camelCase.</summary>
+        private static readonly JsonSerializerOptions SerializerOptionsRead = new()
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy        = JsonNamingPolicy.CamelCase
         };
 
         public AttendanceService(HttpClient httpClient, ILogger<AttendanceService> logger)
         {
             _httpClient = httpClient;
-            _logger = logger;
+            _logger     = logger;
         }
 
         // ── HELPERS PRIVÉS ────────────────────────────────────────────────────
@@ -41,15 +48,18 @@ namespace Soroubat.Api.Services
             var response = await _httpClient.GetAsync($"employeeAttendanceHeaders({id})");
 
             if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException($"La fiche de pointage '{id}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La fiche de pointage '{id}' est introuvable dans Business Central.");
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var header = await response.Content.ReadFromJsonAsync<EmpAttendanceReadDto>();
+            var header = await response.Content
+                .ReadFromJsonAsync<EmpAttendanceReadDto>(SerializerOptionsRead);
 
             if (header == null)
-                throw new KeyNotFoundException($"La fiche de pointage '{id}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La fiche de pointage '{id}' est introuvable dans Business Central.");
 
             if (!string.Equals(header.JobNo?.Trim(), projectNo?.Trim(), StringComparison.OrdinalIgnoreCase))
             {
@@ -73,32 +83,37 @@ namespace Soroubat.Api.Services
         private async Task<(EmpAttendanceLineReadDto Line, string? ETag)> GetAndVerifyLineAsync(
             Guid lineId, string projectNo)
         {
-            // 1. Récupérer la ligne et son ETag
             var lineResponse = await _httpClient.GetAsync($"employeeAttendanceLines({lineId})");
 
             if (lineResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException($"La ligne de pointage '{lineId}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La ligne de pointage '{lineId}' est introuvable dans Business Central.");
 
             if (!lineResponse.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(lineResponse);
 
-            var line = await lineResponse.Content.ReadFromJsonAsync<EmpAttendanceLineReadDto>();
+            var line = await lineResponse.Content
+                .ReadFromJsonAsync<EmpAttendanceLineReadDto>(SerializerOptionsRead);
 
             if (line == null || string.IsNullOrEmpty(line.DocumentNo))
-                throw new KeyNotFoundException($"La ligne de pointage '{lineId}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La ligne de pointage '{lineId}' est introuvable dans Business Central.");
 
-            // 2. SÉCURITÉ : Récupérer le header parent via le numéro de document pour valider le jobNo
-            var headerFilter = $"$filter=no eq '{line.DocumentNo}'";
-            var headerResponse = await _httpClient.GetAsync($"employeeAttendanceHeaders?{headerFilter}");
+            // Vérification de sécurité via l'en-tête parent
+            var headerUrl      = $"employeeAttendanceHeaders?$filter=no eq '{line.DocumentNo}'";
+            var headerResponse = await _httpClient.GetAsync(headerUrl);
 
             if (!headerResponse.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(headerResponse);
 
-            var headerResult = await headerResponse.Content.ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>();
+            var headerResult = await headerResponse.Content
+                .ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>(SerializerOptionsRead);
+
             var header = headerResult?.Value?.FirstOrDefault();
 
             if (header == null)
-                throw new KeyNotFoundException($"La fiche parente '{line.DocumentNo}' est introuvable dans Business Central.");
+                throw new KeyNotFoundException(
+                    $"La fiche parente '{line.DocumentNo}' est introuvable dans Business Central.");
 
             if (!string.Equals(header.JobNo?.Trim(), projectNo?.Trim(), StringComparison.OrdinalIgnoreCase))
             {
@@ -125,7 +140,9 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var result = await response.Content.ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>();
+            var result = await response.Content
+                .ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>(SerializerOptionsRead);
+
             return result?.Value ?? Enumerable.Empty<EmpAttendanceReadDto>();
         }
 
@@ -142,7 +159,8 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var header = await response.Content.ReadFromJsonAsync<EmpAttendanceReadDto>();
+            var header = await response.Content
+                .ReadFromJsonAsync<EmpAttendanceReadDto>(SerializerOptionsRead);
 
             if (header == null)
                 return null;
@@ -150,10 +168,10 @@ namespace Soroubat.Api.Services
             if (!string.Equals(header.JobNo?.Trim(), projectNo?.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 _logger.LogWarning(
-                    "[Attendance] Accès refusé : fiche {Id} — BC: '{BCProject}', Token: '{TokenProject}'",
-                    id, header.JobNo, projectNo);
+                    "[Attendance] Accès refusé : fiche {Id} appartient au projet {HeaderProject}, " +
+                    "chef connecté au projet {UserProject}", id, header.JobNo, projectNo);
                 throw new UnauthorizedAccessException(
-                    $"Accès refusé : la fiche ({header.JobNo}) n'appartient pas à votre projet ({projectNo}).");
+                    "Accès refusé : cette fiche de pointage n'appartient pas à votre projet.");
             }
 
             return header;
@@ -161,24 +179,23 @@ namespace Soroubat.Api.Services
 
         public async Task<EmpAttendanceReadDto> CreateHeaderAsync(EmpAttendanceHeaderCreateDto dto, string projectNo)
         {
-            // Payload minimal — job forcé JWT (ignore tout jobNo envoyé par erreur par le client)
-            var payload = new EmpAttendanceHeaderCreateDto
-            {
-                JobNo   = projectNo,
-                Month   = dto.Month,
-                Year    = dto.Year
-            };
+            // Construire le payload en forçant jobNo depuis le JWT (ignore toute valeur cliente)
+            // On utilise un JsonObject pour injecter jobNo sans l'exposer dans le DTO client
+            var node = System.Text.Json.JsonSerializer.SerializeToNode(dto, SerializerOptionsWrite)                as System.Text.Json.Nodes.JsonObject
+                ?? new System.Text.Json.Nodes.JsonObject();
 
-            var json = JsonSerializer.Serialize(payload, _serializerOptions);
-            _logger.LogInformation("[Attendance] Création fiche — Payload: {Json}", json);
+            node["jobNo"] = projectNo;
+            var json = node.ToJsonString();
 
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            _logger.LogInformation("[Attendance] Création fiche pour projet {ProjectNo}", projectNo);
+
+            var content  = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("employeeAttendanceHeaders", content);
 
             if (!response.IsSuccessStatusCode)
             {
                 var errorDetail = await response.Content.ReadAsStringAsync();
-                _logger.LogError("[Attendance] Erreur POST BC: {Error}", errorDetail);
+                _logger.LogError("[Attendance] Erreur POST BC — Code : {StatusCode}", (int)response.StatusCode);
 
                 // Détecter le doublon BC et lever une exception métier explicite
                 if (errorDetail.Contains("Deja saisie") || errorDetail.Contains("DialogException"))
@@ -187,17 +204,16 @@ namespace Soroubat.Api.Services
                 await HandleErrorResponseAsync(response);
             }
 
-            return (await response.Content.ReadFromJsonAsync<EmpAttendanceReadDto>())!;
+            return (await response.Content
+                .ReadFromJsonAsync<EmpAttendanceReadDto>(SerializerOptionsRead))!;
         }
 
         public async Task<bool> PatchHeaderAsync(Guid id, EmpAttendanceHeaderPatchDto dto, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance + récupérer ETag
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
-            var json = JsonSerializer.Serialize(dto, _serializerOptions);
-
-            _logger.LogInformation("[Attendance] PATCH en-tête {Id} — Body: {Json}", id, json);
+            var json = JsonSerializer.Serialize(dto, SerializerOptionsWrite);
+            _logger.LogInformation("[Attendance] PATCH en-tête {Id}", id);
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"employeeAttendanceHeaders({id})")
             {
@@ -210,12 +226,14 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
+            _logger.LogInformation("[Attendance] PATCH en-tête {Id} — Réponse : {Status}",
+                id, (int)response.StatusCode);
+
             return true;
         }
 
         public async Task<bool> DeleteHeaderAsync(Guid id, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance avant suppression
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"employeeAttendanceHeaders({id})");
@@ -239,8 +257,8 @@ namespace Soroubat.Api.Services
 
             foreach (var line in lines)
             {
-                var json = JsonSerializer.Serialize(line, _serializerOptions);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json     = JsonSerializer.Serialize(line, SerializerOptionsWrite);
+                var content  = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("employeeAttendanceLines", content);
 
                 if (!response.IsSuccessStatusCode)
@@ -252,12 +270,10 @@ namespace Soroubat.Api.Services
 
         public async Task<bool> PatchLineAsync(Guid lineId, EmpAttendanceLinePatchDto lineDto, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance + récupérer ETag
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            var json = JsonSerializer.Serialize(lineDto, _serializerOptions);
-
-            _logger.LogInformation("[Attendance] PATCH ligne {LineId} — Body: {Json}", lineId, json);
+            var json = JsonSerializer.Serialize(lineDto, SerializerOptionsWrite);
+            _logger.LogInformation("[Attendance] PATCH ligne {LineId}", lineId);
 
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"employeeAttendanceLines({lineId})")
             {
@@ -270,12 +286,14 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
+            _logger.LogInformation("[Attendance] PATCH ligne {LineId} — Réponse : {Status}",
+                lineId, (int)response.StatusCode);
+
             return true;
         }
 
         public async Task<bool> DeleteLineAsync(Guid lineId, string projectNo)
         {
-            // SÉCURITÉ : vérifier appartenance avant suppression
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"employeeAttendanceLines({lineId})");
@@ -302,7 +320,9 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var result = await response.Content.ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>();
+            var result = await response.Content
+                .ReadFromJsonAsync<BCResponse<EmpAttendanceReadDto>>(SerializerOptionsRead);
+
             return result?.Value ?? Enumerable.Empty<EmpAttendanceReadDto>();
         }
 
@@ -311,35 +331,37 @@ namespace Soroubat.Api.Services
         public async Task<bool> MarkPresenceAsync(Guid headerId, string employeeNo, int day, string projectNo)
         {
             if (day < 1 || day > 31)
-                throw new ArgumentException($"Numéro de jour invalide : {day}. Doit être compris entre 1 et 31.");
+                throw new ArgumentException(
+                    $"Numéro de jour invalide : {day}. Doit être compris entre 1 et 31.");
 
-            // 1. Récupérer la fiche avec ses lignes (vérifie l'appartenance au projet)
+            // Récupérer la fiche avec ses lignes (vérifie également l'appartenance au projet)
             var header = await GetHeaderByIdAsync(headerId, projectNo);
+
             if (header == null)
                 return false;
 
-            // 2. Trouver la ligne du salarié
             var line = header.Lines?.FirstOrDefault(l =>
                 string.Equals(l.EmployeeNo, employeeNo, StringComparison.OrdinalIgnoreCase));
 
             if (line == null)
-                throw new KeyNotFoundException($"Le salarié '{employeeNo}' n'est pas dans cette fiche de pointage.");
+                throw new KeyNotFoundException(
+                    $"Le salarié '{employeeNo}' n'est pas dans cette fiche de pointage.");
 
             if (line.Id == null)
-                throw new InvalidOperationException("La ligne de pointage ne possède pas d'identifiant valide.");
+                throw new InvalidOperationException(
+                    "La ligne de pointage ne possède pas d'identifiant valide.");
 
-            // 3. Construire un DTO de PATCH avec uniquement le jour à marquer
-            // Un switch explicite est préféré à la réflexion — plus sûr, plus lisible, pas de risque
-            // de casse si un nom de propriété est renommé lors d'une refactorisation.
+            // Construire un DTO de PATCH avec uniquement le jour à marquer ("P" = Présent)
             var patchDto = BuildDayPatch(day, "P");
 
-            // 4. Sauvegarder via la méthode PATCH existante
             return await PatchLineAsync(line.Id.Value, patchDto, projectNo);
         }
 
         /// <summary>
         /// Construit un <see cref="EmpAttendanceLinePatchDto"/> avec uniquement le jour spécifié renseigné.
         /// Tous les autres jours restent null et ne seront pas envoyés à BC.
+        /// Un switch explicite est utilisé — plus sûr qu'une approche par réflexion,
+        /// et résistant aux renommages de propriétés lors d'une refactorisation.
         /// </summary>
         private static EmpAttendanceLinePatchDto BuildDayPatch(int day, string value)
         {

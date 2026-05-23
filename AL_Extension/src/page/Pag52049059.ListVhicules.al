@@ -369,6 +369,8 @@ page 52049059 "List Véhicules"
 
         RecLResource."Type" := RecLResource."Type"::Machine;
         RecLResource."Resource Group No." := 'MATERIEL';
+        RecLResource.Validate("Unit Cost", RecLVehicule."Cout Journalier" / 8);
+        RecLResource."WT Allowed" := true;
         IF RecLResource.Insert(true) then;
         RecLResource.validate("Base Unit of Measure", 'HEURE');
         RecLResource.Modify(true);

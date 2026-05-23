@@ -17,11 +17,9 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("jobNo")]
         public string? JobNo { get; set; }
 
+        /// <summary>Libellé du projet — calculé automatiquement par BC, non modifiable.</summary>
         [JsonPropertyName("jobDescription")]
         public string? JobDescription { get; set; }
-
-        [JsonPropertyName("requesterId")]
-        public string? RequesterId { get; set; }
 
         [JsonPropertyName("requestType")]
         public string? RequestType { get; set; }
@@ -29,30 +27,21 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("engin")]
         public string? Engin { get; set; }
 
+        /// <summary>Description de l'engin — calculée automatiquement par BC, non modifiable.</summary>
         [JsonPropertyName("descriptionEngin")]
         public string? DescriptionEngin { get; set; }
 
         [JsonPropertyName("locationCode")]
         public string? LocationCode { get; set; }
 
-        [JsonPropertyName("orderDate")]
-        public string? OrderDate { get; set; }
-
-        [JsonPropertyName("dueDate")]
-        public string? DueDate { get; set; }
+        /// <summary>Date de saisie — remplie automatiquement par BC à la création, non modifiable.</summary>
+        [JsonPropertyName("dateSaisie")]
+        public DateTime? DateSaisie { get; set; }
 
         [JsonPropertyName("statut")]
         public string? Statut { get; set; }
 
-        /// <summary>Montant total — calcul BC ; nullable si absent dans la réponse.</summary>
-        [JsonPropertyName("amount")]
-        public decimal? Amount { get; set; }
-
-        [JsonPropertyName("service")]
-        public string? Service { get; set; }
-
         [JsonPropertyName("purchaseRequestLines")]
         public List<PurchaseRequestLineReadDto>? PurchaseRequestLines { get; set; }
     }
-
 }

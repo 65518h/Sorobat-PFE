@@ -123,7 +123,7 @@ table 50062 "WIP Report Header"
         }
         field(15; "Data Entry Date"; Date)
         {
-            Editable = false;
+            Editable = true;
             Caption = 'Data Entry Date', Comment = 'Date de Saisie';
         }
         field(1000; "Job Task No."; Code[20])
@@ -171,7 +171,7 @@ table 50062 "WIP Report Header"
 
     keys
     {
-        key(STG_Key1; "No.")
+        key(Key1; "No.")
         {
             Clustered = true;
         }

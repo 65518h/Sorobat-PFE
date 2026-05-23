@@ -67,6 +67,7 @@ Table 50046 "Job Report Line"
             begin
                 if Vehicle.Get(Equipment) then begin
                     Description := Vehicle."Désignation";
+                    Statut := Vehicle.Statut;
                     if Vehicle.Volume <> 0 then
                         Volume := Vehicle.Volume
                     else
@@ -363,6 +364,7 @@ Table 50046 "Job Report Line"
         field(50039; "Qty Gasoil"; Decimal)
         {
             Caption = 'Qty Gasoil';
+            Editable = false;
         }
         field(60024; "Resource No."; Code[20])
         {
@@ -380,6 +382,15 @@ Table 50046 "Job Report Line"
         {
             Caption = 'N° Tâche Projet';
             TableRelation = "Job Task"."Job Task No." where("Job No." = field("Job No."));
+            trigger OnValidate()
+            var
+                RecJobTask: Record "Job Task";
+            begin
+                if RecJobTask.Get("Job No.", "Job Task No.") then
+                    "Task Description" := RecJobTask.Description
+                else
+                    "Task Description" := '';
+            end;
 
 
         }
@@ -434,22 +445,78 @@ Table 50046 "Job Report Line"
         {
             DataClassification = ToBeClassified;
         }
+        field(60032; Statut; Option)
+        {
+            OptionMembers = " ",Fonctionnel,Disponible,Panne,"Mauvais Temps",Accident,Réformé;
+
+            trigger OnValidate()
+            var
+                RecVehicule: Record "Véhicule";
+            begin
+                if RecVehicule.Get(Equipment) then begin
+                    // "Cout Horaire" := RecVehicule."Cout Location Horaire";
+                    RecVehicule.Statut := Statut;
+                    // "Index Depart" := RecVehicule."Reste Pour Alerte";
+                    // "Index Depart" := RecVehicule."Compteur Actuel";
+                    // "Grande Famille" := RecVehicule."Grande Famille";
+
+                    RecVehicule.MODIFY;
+                end;
+                /*   if "Cout Journalier" <> 0 then
+                       Validate("Heure Travailler", 10)
+                   else
+                       if Statut = Statut::Disponible then begin
+                           Validate("Heure Travailler", "Heure Travail Theorique");
+                           "Heure Travailler" := 0;
+                       end;*/
+                /*   if (Statut = Statut::Fonctionnel) then begin
+                       "Heure Utilisation" := 10;
+                       "Heure Immobilisation" := 0;
+                       "Cout Heure Reel" := 10 * "Cout Horaire";
+                       "Cout Heure Immobilisation" := 0;
+                       "Cout Total Journee" := "Cout Heure Reel" + "Cout Heure Immobilisation";
+                       Fonctionnel := true;
+                       "Heure Travailler" := 0;
+
+                   end
+                   else
+                       Fonctionnel := false;*/
+                /*  if Statut = Statut::Fonctionnel then begin
+                      "Motif Panne" := '';
+                      "Motif Indispensalité" := 0;
+                  end;
+                  if Statut = Statut::Disponible then "Motif Panne" := '';
+                  if Statut = Statut::Panne then "Motif Indispensalité" := 0;*/
+                //   UpdateFicheVehicule;
+            end;
+        }
+        field(60033; "Qté exécutées"; Decimal)
+        {
+            Caption = 'Qté éxécutées';
+            DataClassification = ToBeClassified;
+        }
+        field(60034; "Executed Unit of Measure Code"; Code[20])
+        {
+            Caption = 'Unité de mesure Exécutées';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Job Task"."Initial Unit Of Measure" where("Job No." = field("Job No."), "Job Task No." = field("Job Task No.")));
+        }
 
     }
 
     keys
     {
-        key(STG_Key1; "Document No.", Line, "WIP Report No.")
+        key(Key1; "Document No.", Line, "WIP Report No.")
         {
             Clustered = true;
         }
-        key(STG_Key2; Date, Job, Equipment)
+        key(Key2; Date, Job, Equipment)
         {
         }
-        key(STG_Key3; Date, Job, Product)
+        key(Key3; Date, Job, Product)
         {
         }
-        key(STG_Key4; Date, Job, Labor)
+        key(Key4; Date, Job, Labor)
         {
         }
     }
@@ -457,6 +524,7 @@ Table 50046 "Job Report Line"
     fieldgroups
     {
     }
+
     procedure CalcVarianceQty(var RecObReportLine: Record "Job Report Line")
     var
         RecWipReportLine: Record "WIP Report Line";
