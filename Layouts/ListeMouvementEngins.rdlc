@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Immatriculation">
+          <DataField>Historique_Transfert_Engin_Immatriculation</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Description_Engin_">
+          <DataField>Historique_Transfert_Engin__Description_Engin_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Code_Engin_">
+          <DataField>Historique_Transfert_Engin__Code_Engin_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Date_Transfert_">
+          <DataField>Historique_Transfert_Engin__Date_Transfert_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Depart">
+          <DataField>Historique_Transfert_Engin_Depart</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Destination">
+          <DataField>Historique_Transfert_Engin_Destination</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Chauffeur">
+          <DataField>Historique_Transfert_Engin_Chauffeur</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Immat_Tracteur_Routier_">
+          <DataField>Historique_Transfert_Engin__Immat_Tracteur_Routier_</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Observation">
+          <DataField>Historique_Transfert_Engin_Observation</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin__Immat_Port_Chart_">
+          <DataField>Historique_Transfert_Engin__Immat_Port_Chart_</DataField>
+        </Field>
+        <Field Name="Liste_Transfert_MatèrielCaption">
+          <DataField>Liste_Transfert_MatèrielCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Liste_Transfert_MatèrielCaption_Control1000000010">
+          <DataField>Liste_Transfert_MatèrielCaption_Control1000000010</DataField>
+        </Field>
+        <Field Name="ChauffeurCaption">
+          <DataField>ChauffeurCaption</DataField>
+        </Field>
+        <Field Name="Description_EnginsCaption">
+          <DataField>Description_EnginsCaption</DataField>
+        </Field>
+        <Field Name="Code_EnginsCaption">
+          <DataField>Code_EnginsCaption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="Immat__EnginsCaption">
+          <DataField>Immat__EnginsCaption</DataField>
+        </Field>
+        <Field Name="DestinationCaption">
+          <DataField>DestinationCaption</DataField>
+        </Field>
+        <Field Name="DepartCaption">
+          <DataField>DepartCaption</DataField>
+        </Field>
+        <Field Name="ObservationCaption">
+          <DataField>ObservationCaption</DataField>
+        </Field>
+        <Field Name="Imm_TractCaption">
+          <DataField>Imm_TractCaption</DataField>
+        </Field>
+        <Field Name="Imm_Port_ChartCaption">
+          <DataField>Imm_Port_ChartCaption</DataField>
+        </Field>
+        <Field Name="Historique_Transfert_Engin_Code_Transfert">
+          <DataField>Historique_Transfert_Engin_Code_Transfert</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

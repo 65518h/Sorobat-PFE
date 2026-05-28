@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="PageConst_________FORMAT_CurrReport_PAGENO_">
+          <DataField>PageConst_________FORMAT_CurrReport_PAGENO_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Deccription_Affectation_">
+          <DataField>BR_Heure_Suplémentaire__Deccription_Affectation_</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_Mois">
+          <DataField>BR_Heure_Suplémentaire_Mois</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_Annee">
+          <DataField>BR_Heure_Suplémentaire_Annee</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_Maticule">
+          <DataField>BR_Heure_Suplémentaire_Maticule</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire_">
+          <DataField>BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire_</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire_Format">
+          <DataField>BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire_Format</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Net_A_Payer_">
+          <DataField>BR_Heure_Suplémentaire__Net_A_Payer_</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Net_A_Payer_Format">
+          <DataField>BR_Heure_Suplémentaire__Net_A_Payer_Format</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_Salarié">
+          <DataField>BR_Heure_Suplémentaire_Salarié</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Description_Qualification_">
+          <DataField>BR_Heure_Suplémentaire__Description_Qualification_</DataField>
+        </Field>
+        <Field Name="Nbre">
+          <DataField>Nbre</DataField>
+        </Field>
+        <Field Name="TotalFor___FIELDCAPTION_Affectation_">
+          <DataField>TotalFor___FIELDCAPTION_Affectation_</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire__Control1000000030">
+          <DataField>BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire__Control1000000030</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire__Control1000000030Format">
+          <DataField>BR_Heure_Suplémentaire__Nombre_Heure_Suplémentaire__Control1000000030Format</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Net_A_Payer__Control1000000031">
+          <DataField>BR_Heure_Suplémentaire__Net_A_Payer__Control1000000031</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Net_A_Payer__Control1000000031Format">
+          <DataField>BR_Heure_Suplémentaire__Net_A_Payer__Control1000000031Format</DataField>
+        </Field>
+        <Field Name="Nbre_Control1000000037">
+          <DataField>Nbre_Control1000000037</DataField>
+        </Field>
+        <Field Name="Heures_Supplémentaires_Mois_de_Caption">
+          <DataField>Heures_Supplémentaires_Mois_de_Caption</DataField>
+        </Field>
+        <Field Name="AffectationCaption">
+          <DataField>AffectationCaption</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_MaticuleCaption">
+          <DataField>BR_Heure_Suplémentaire_MaticuleCaption</DataField>
+        </Field>
+        <Field Name="Nbre_HS_BCaption">
+          <DataField>Nbre_HS_BCaption</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire__Net_A_Payer_Caption">
+          <DataField>BR_Heure_Suplémentaire__Net_A_Payer_Caption</DataField>
+        </Field>
+        <Field Name="Nom_et_PrénomCaption">
+          <DataField>Nom_et_PrénomCaption</DataField>
+        </Field>
+        <Field Name="QualificationCaption">
+          <DataField>QualificationCaption</DataField>
+        </Field>
+        <Field Name="EmargementCaption">
+          <DataField>EmargementCaption</DataField>
+        </Field>
+        <Field Name="SERVICE_GRHCaption">
+          <DataField>SERVICE_GRHCaption</DataField>
+        </Field>
+        <Field Name="Direction_AdministrativeCaption">
+          <DataField>Direction_AdministrativeCaption</DataField>
+        </Field>
+        <Field Name="Direction_GénéraleCaption">
+          <DataField>Direction_GénéraleCaption</DataField>
+        </Field>
+        <Field Name="BR_Heure_Suplémentaire_Affectation">
+          <DataField>BR_Heure_Suplémentaire_Affectation</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

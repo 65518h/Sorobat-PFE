@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Sales_Header__No__">
+          <DataField>Sales_Header__No__</DataField>
+        </Field>
+        <Field Name="Sales_Header__Job_No__">
+          <DataField>Sales_Header__Job_No__</DataField>
+        </Field>
+        <Field Name="Sales_Header__Description_Engin_">
+          <DataField>Sales_Header__Description_Engin_</DataField>
+        </Field>
+        <Field Name="Sales_Header_Engin">
+          <DataField>Sales_Header_Engin</DataField>
+        </Field>
+        <Field Name="Sales_Header__Requester_ID_">
+          <DataField>Sales_Header__Requester_ID_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Order_Date_">
+          <DataField>Sales_Header__Order_Date_</DataField>
+        </Field>
+        <Field Name="DA_NCaption">
+          <DataField>DA_NCaption</DataField>
+        </Field>
+        <Field Name="Sales_Header__Job_No__Caption">
+          <DataField>Sales_Header__Job_No__Caption</DataField>
+        </Field>
+        <Field Name="EnginsCaption">
+          <DataField>EnginsCaption</DataField>
+        </Field>
+        <Field Name="DemandeurCaption">
+          <DataField>DemandeurCaption</DataField>
+        </Field>
+        <Field Name="Sales_Header__Order_Date_Caption">
+          <DataField>Sales_Header__Order_Date_Caption</DataField>
+        </Field>
+        <Field Name="QuantitCaption">
+          <DataField>QuantitCaption</DataField>
+        </Field>
+        <Field Name="Quantit__Re_ueCaption">
+          <DataField>Quantit__Re_ueCaption</DataField>
+        </Field>
+        <Field Name="Quantit__RestanteCaption">
+          <DataField>Quantit__RestanteCaption</DataField>
+        </Field>
+        <Field Name="affaire">
+          <DataField>affaire</DataField>
+        </Field>
+        <Field Name="Sales_Header_Document_Type">
+          <DataField>Sales_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line__No__">
+          <DataField>Sales_Line__No__</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="Sales_Line_Quantity">
+          <DataField>Sales_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Sales_Line_QuantityFormat">
+          <DataField>Sales_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_Type">
+          <DataField>Sales_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Purchase_Header__No__">
+          <DataField>Purchase_Header__No__</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Posting_Date_">
+          <DataField>Purchase_Header__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Purchase_Header__Pay_to_Name_">
+          <DataField>Purchase_Header__Pay_to_Name_</DataField>
+        </Field>
+        <Field Name="Commande_NCaption">
+          <DataField>Commande_NCaption</DataField>
+        </Field>
+        <Field Name="Purchase_Header_Document_Type">
+          <DataField>Purchase_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="N__Demande_d_achat">
+          <DataField>N__Demande_d_achat</DataField>
+        </Field>
+        <Field Name="Purchase_Line__No__">
+          <DataField>Purchase_Line__No__</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Description">
+          <DataField>Purchase_Line_Description</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Location_Code_">
+          <DataField>Purchase_Line__Location_Code_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Quantity">
+          <DataField>Purchase_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Purchase_Line_QuantityFormat">
+          <DataField>Purchase_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Quantity_Received_">
+          <DataField>Purchase_Line__Quantity_Received_</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Quantity_Received_Format">
+          <DataField>Purchase_Line__Quantity_Received_Format</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Outstanding_Quantity_">
+          <DataField>Purchase_Line__Outstanding_Quantity_</DataField>
+        </Field>
+        <Field Name="Purchase_Line__Outstanding_Quantity_Format">
+          <DataField>Purchase_Line__Outstanding_Quantity_Format</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_Type">
+          <DataField>Purchase_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Document_No_">
+          <DataField>Purchase_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Purchase_Line_Line_No_">
+          <DataField>Purchase_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header_No_">
+          <DataField>Purch__Rcpt__Header_No_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Header_Order_No_">
+          <DataField>Purch__Rcpt__Header_Order_No_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line_Quantity">
+          <DataField>Purch__Rcpt__Line_Quantity</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line_QuantityFormat">
+          <DataField>Purch__Rcpt__Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line__Posting_Date_">
+          <DataField>Purch__Rcpt__Line__Posting_Date_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line__No__">
+          <DataField>Purch__Rcpt__Line__No__</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line_Description">
+          <DataField>Purch__Rcpt__Line_Description</DataField>
+        </Field>
+        <Field Name="Deja_Re_uCaption">
+          <DataField>Deja_Re_uCaption</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line_Document_No_">
+          <DataField>Purch__Rcpt__Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Purch__Rcpt__Line_Line_No_">
+          <DataField>Purch__Rcpt__Line_Line_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

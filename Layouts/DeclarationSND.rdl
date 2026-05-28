@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Address">
+          <DataField>CompanyInformation_Address</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformationEntetedepage">
+          <DataField>CompanyInformationEntetedepage</DataField>
+        </Field>
+        <Field Name="Retenue_SNP">
+          <DataField>Retenue_SNP</DataField>
+        </Field>
+        <Field Name="Retenue_SNPFormat">
+          <DataField>Retenue_SNPFormat</DataField>
+        </Field>
+        <Field Name="Retenue_FSP">
+          <DataField>Retenue_FSP</DataField>
+        </Field>
+        <Field Name="Retenue_FSPFormat">
+          <DataField>Retenue_FSPFormat</DataField>
+        </Field>
+        <Field Name="CompanyInformationN_CNSS">
+          <DataField>CompanyInformationN_CNSS</DataField>
+        </Field>
+        <Field Name="Basis_salary">
+          <DataField>Basis_salary</DataField>
+        </Field>
+        <Field Name="Basis_salaryFormat">
+          <DataField>Basis_salaryFormat</DataField>
+        </Field>
+        <Field Name="Month">
+          <DataField>Month</DataField>
+        </Field>
+        <Field Name="Year">
+          <DataField>Year</DataField>
+        </Field>
+        <Field Name="IUTSNet">
+          <DataField>IUTSNet</DataField>
+        </Field>
+        <Field Name="IUTSNetFormat">
+          <DataField>IUTSNetFormat</DataField>
+        </Field>
+        <Field Name="NombreDeCharge">
+          <DataField>NombreDeCharge</DataField>
+        </Field>
+        <Field Name="SalaireNetImposable">
+          <DataField>SalaireNetImposable</DataField>
+        </Field>
+        <Field Name="SalaireNetImposableFormat">
+          <DataField>SalaireNetImposableFormat</DataField>
+        </Field>
+        <Field Name="RecEmployee_FirstName">
+          <DataField>RecEmployee_FirstName</DataField>
+        </Field>
+        <Field Name="RecEmployee_LastName">
+          <DataField>RecEmployee_LastName</DataField>
+        </Field>
+        <Field Name="RecEmployee_Birth">
+          <DataField>RecEmployee_Birth</DataField>
+        </Field>
+        <Field Name="Employee">
+          <DataField>Employee</DataField>
+        </Field>
+        <Field Name="Compteur">
+          <DataField>Compteur</DataField>
+        </Field>
+        <Field Name="TPA">
+          <DataField>TPA</DataField>
+        </Field>
+        <Field Name="TPAFormat">
+          <DataField>TPAFormat</DataField>
+        </Field>
+        <Field Name="Choix">
+          <DataField>Choix</DataField>
+        </Field>
+        <Field Name="GrossSalary">
+          <DataField>GrossSalary</DataField>
+        </Field>
+        <Field Name="GrossSalaryFormat">
+          <DataField>GrossSalaryFormat</DataField>
+        </Field>
+        <Field Name="NbrEmployee">
+          <DataField>NbrEmployee</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

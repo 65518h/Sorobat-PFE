@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Payment_Line__No__">
+          <DataField>Payment_Line__No__</DataField>
+        </Field>
+        <Field Name="Date_Journée______Journecaisse">
+          <DataField>Date_Journée______Journecaisse</DataField>
+        </Field>
+        <Field Name="NumeroSeq">
+          <DataField>NumeroSeq</DataField>
+        </Field>
+        <Field Name="Payment_Line_Libellé">
+          <DataField>Payment_Line_Libellé</DataField>
+        </Field>
+        <Field Name="Benificiaire">
+          <DataField>Benificiaire</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Nom_Benificiaire_">
+          <DataField>Payment_Line__Payment_Line___Nom_Benificiaire_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Debit_Amount_">
+          <DataField>Payment_Line__Payment_Line___Debit_Amount_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Debit_Amount_Format">
+          <DataField>Payment_Line__Payment_Line___Debit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Payment_Line__Due_Date_">
+          <DataField>Payment_Line__Due_Date_</DataField>
+        </Field>
+        <Field Name="Payment_Line_Benificiaire">
+          <DataField>Payment_Line_Benificiaire</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Credit_Amount_">
+          <DataField>Payment_Line__Payment_Line___Credit_Amount_</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Credit_Amount_Format">
+          <DataField>Payment_Line__Payment_Line___Credit_Amount_Format</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Credit_Amount__Control1000000047">
+          <DataField>Payment_Line__Payment_Line___Credit_Amount__Control1000000047</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Credit_Amount__Control1000000047Format">
+          <DataField>Payment_Line__Payment_Line___Credit_Amount__Control1000000047Format</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Debit_Amount__Control1000000048">
+          <DataField>Payment_Line__Payment_Line___Debit_Amount__Control1000000048</DataField>
+        </Field>
+        <Field Name="Payment_Line__Payment_Line___Debit_Amount__Control1000000048Format">
+          <DataField>Payment_Line__Payment_Line___Debit_Amount__Control1000000048Format</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Journée_de_caisse_n_Caption">
+          <DataField>Journée_de_caisse_n_Caption</DataField>
+        </Field>
+        <Field Name="RecetteCaption">
+          <DataField>RecetteCaption</DataField>
+        </Field>
+        <Field Name="Nature_OpérationCaption">
+          <DataField>Nature_OpérationCaption</DataField>
+        </Field>
+        <Field Name="DépenseCaption">
+          <DataField>DépenseCaption</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="MatriculeCaption">
+          <DataField>MatriculeCaption</DataField>
+        </Field>
+        <Field Name="NomCaption">
+          <DataField>NomCaption</DataField>
+        </Field>
+        <Field Name="TOTAL_JOURNEE__Caption">
+          <DataField>TOTAL_JOURNEE__Caption</DataField>
+        </Field>
+        <Field Name="Le_CaissierCaption">
+          <DataField>Le_CaissierCaption</DataField>
+        </Field>
+        <Field Name="Contrôle_de_gestionCaption">
+          <DataField>Contrôle_de_gestionCaption</DataField>
+        </Field>
+        <Field Name="Le_directeur_financierCaption">
+          <DataField>Le_directeur_financierCaption</DataField>
+        </Field>
+        <Field Name="ComptabilitéCaption">
+          <DataField>ComptabilitéCaption</DataField>
+        </Field>
+        <Field Name="Commentaires">
+          <DataField>Commentaires</DataField>
+        </Field>
+        <Field Name="Payment_Line_Line_No_">
+          <DataField>Payment_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Motif_Depense_Ex">
+          <DataField>Motif_Depense_Ex</DataField>
+        </Field>
+        <Field Name="Cumul">
+          <DataField>Cumul</DataField>
+        </Field>
+        <Field Name="CumulFormat">
+          <DataField>CumulFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="RecCompInf_Picture">
+          <DataField>RecCompInf_Picture</DataField>
+        </Field>
+        <Field Name="FORMAT__Sales_Header___Document_Date__0_4_">
+          <DataField>FORMAT__Sales_Header___Document_Date__0_4_</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="N________Sales_Header___No__">
+          <DataField>N________Sales_Header___No__</DataField>
+        </Field>
+        <Field Name="Choix_2_">
+          <DataField>Choix_2_</DataField>
+        </Field>
+        <Field Name="Choix_1_">
+          <DataField>Choix_1_</DataField>
+        </Field>
+        <Field Name="Choix_3_">
+          <DataField>Choix_3_</DataField>
+        </Field>
+        <Field Name="Choix_4_">
+          <DataField>Choix_4_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header___User_ID_">
+          <DataField>Sales_Header__Sales_Header___User_ID_</DataField>
+        </Field>
+        <Field Name="Sales_Header__Sales_Header__Service">
+          <DataField>Sales_Header__Sales_Header__Service</DataField>
+        </Field>
+        <Field Name="RecUser__User_Name_">
+          <DataField>RecUser__User_Name_</DataField>
+        </Field>
+        <Field Name="RecUserSetup_Fonction">
+          <DataField>RecUserSetup_Fonction</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="User_Caption">
+          <DataField>User_Caption</DataField>
+        </Field>
+        <Field Name="DEMANDE_D_APPROVISIONNEMENTCaption">
+          <DataField>DEMANDE_D_APPROVISIONNEMENTCaption</DataField>
+        </Field>
+        <Field Name="PIECE_DE_RACHANGE_Caption">
+          <DataField>PIECE_DE_RACHANGE_Caption</DataField>
+        </Field>
+        <Field Name="MATERIAUXCaption">
+          <DataField>MATERIAUXCaption</DataField>
+        </Field>
+        <Field Name="FOURNITURES_ET_DIVERS_Caption">
+          <DataField>FOURNITURES_ET_DIVERS_Caption</DataField>
+        </Field>
+        <Field Name="PRESTATION_DE_SERVICE_Caption">
+          <DataField>PRESTATION_DE_SERVICE_Caption</DataField>
+        </Field>
+        <Field Name="FONCTIONCaption">
+          <DataField>FONCTIONCaption</DataField>
+        </Field>
+        <Field Name="NOMCaption">
+          <DataField>NOMCaption</DataField>
+        </Field>
+        <Field Name="SERVICECaption">
+          <DataField>SERVICECaption</DataField>
+        </Field>
+        <Field Name="DEMANDEUR_Caption">
+          <DataField>DEMANDEUR_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Header_Document_Type">
+          <DataField>Sales_Header_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Header_No_">
+          <DataField>Sales_Header_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line__Unit_Cost__LCY__">
+          <DataField>Sales_Line__Unit_Cost__LCY__</DataField>
+        </Field>
+        <Field Name="Sales_Line__Unit_Cost__LCY__Format">
+          <DataField>Sales_Line__Unit_Cost__LCY__Format</DataField>
+        </Field>
+        <Field Name="Sales_Line__No__">
+          <DataField>Sales_Line__No__</DataField>
+        </Field>
+        <Field Name="FORMAT__Quantity_____________Unit_of_Measure_">
+          <DataField>FORMAT__Quantity_____________Unit_of_Measure_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="QtCaption">
+          <DataField>QtCaption</DataField>
+        </Field>
+        <Field Name="Observation_Caption">
+          <DataField>Observation_Caption</DataField>
+        </Field>
+        <Field Name="Prix_UnitaireCaption">
+          <DataField>Prix_UnitaireCaption</DataField>
+        </Field>
+        <Field Name="R_f_renceCaption">
+          <DataField>R_f_renceCaption</DataField>
+        </Field>
+        <Field Name="D_signation_Caption">
+          <DataField>D_signation_Caption</DataField>
+        </Field>
+        <Field Name="Code_Caption">
+          <DataField>Code_Caption</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_Type">
+          <DataField>Sales_Line_Document_Type</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line___Total_Cost__LCY__">
+          <DataField>Sales_Line___Total_Cost__LCY__</DataField>
+        </Field>
+        <Field Name="Sales_Line___Total_Cost__LCY__Format">
+          <DataField>Sales_Line___Total_Cost__LCY__Format</DataField>
+        </Field>
+        <Field Name="Sales_Header__Engin">
+          <DataField>Sales_Header__Engin</DataField>
+        </Field>
+        <Field Name="No_Serie">
+          <DataField>No_Serie</DataField>
+        </Field>
+        <Field Name="Sales_Header__Type">
+          <DataField>Sales_Header__Type</DataField>
+        </Field>
+        <Field Name="LE_DEMANDEUR_Caption">
+          <DataField>LE_DEMANDEUR_Caption</DataField>
+        </Field>
+        <Field Name="LE_SERVICE_APPROCaption">
+          <DataField>LE_SERVICE_APPROCaption</DataField>
+        </Field>
+        <Field Name="LE_DIRECTEURCaption">
+          <DataField>LE_DIRECTEURCaption</DataField>
+        </Field>
+        <Field Name="TOTAL_DACaption">
+          <DataField>TOTAL_DACaption</DataField>
+        </Field>
+        <Field Name="SI_DA_De_PDR_Caption">
+          <DataField>SI_DA_De_PDR_Caption</DataField>
+        </Field>
+        <Field Name="Engin__Caption">
+          <DataField>Engin__Caption</DataField>
+        </Field>
+        <Field Name="Type__Caption">
+          <DataField>Type__Caption</DataField>
+        </Field>
+        <Field Name="N__de_s_rie__Caption">
+          <DataField>N__de_s_rie__Caption</DataField>
+        </Field>
+        <Field Name="SAUT_Number">
+          <DataField>SAUT_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

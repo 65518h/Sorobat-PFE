@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Quantity">
+          <DataField>Item_Ledger_Entry_Quantity</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_QuantityFormat">
+          <DataField>Item_Ledger_Entry_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Item__No___________Item_Description">
+          <DataField>Item__No___________Item_Description</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Location_Code_">
+          <DataField>Item_Ledger_Entry__Location_Code_</DataField>
+        </Field>
+        <Field Name="Item__Unit_Cost_">
+          <DataField>Item__Unit_Cost_</DataField>
+        </Field>
+        <Field Name="Item__Unit_Cost_Format">
+          <DataField>Item__Unit_Cost_Format</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Code_Nature_">
+          <DataField>Item_Ledger_Entry__Code_Nature_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry__Affectation_Marche_">
+          <DataField>Item_Ledger_Entry__Affectation_Marche_</DataField>
+        </Field>
+        <Field Name="Quantity_Item__Unit_Cost_">
+          <DataField>Quantity_Item__Unit_Cost_</DataField>
+        </Field>
+        <Field Name="Quantity_Item__Unit_Cost_Format">
+          <DataField>Quantity_Item__Unit_Cost_Format</DataField>
+        </Field>
+        <Field Name="Item_Ledger_EntryCaption">
+          <DataField>Item_Ledger_EntryCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="ArticleCaption">
+          <DataField>ArticleCaption</DataField>
+        </Field>
+        <Field Name="QuantitéCaption">
+          <DataField>QuantitéCaption</DataField>
+        </Field>
+        <Field Name="FamilleCaption">
+          <DataField>FamilleCaption</DataField>
+        </Field>
+        <Field Name="Grp_StockCaption">
+          <DataField>Grp_StockCaption</DataField>
+        </Field>
+        <Field Name="MagasinCaption">
+          <DataField>MagasinCaption</DataField>
+        </Field>
+        <Field Name="Cout_UnitaireCaption">
+          <DataField>Cout_UnitaireCaption</DataField>
+        </Field>
+        <Field Name="Cout_TotalCaption">
+          <DataField>Cout_TotalCaption</DataField>
+        </Field>
+        <Field Name="PageLbl">
+          <DataField>PageLbl</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Entry_No_">
+          <DataField>Item_Ledger_Entry_Entry_No_</DataField>
+        </Field>
+        <Field Name="Item_Ledger_Entry_Item_No_">
+          <DataField>Item_Ledger_Entry_Item_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CurrReport_PAGENO">
+          <DataField>CurrReport_PAGENO</DataField>
+        </Field>
+        <Field Name="LE_DIRECTEUR_GENERALCaption">
+          <DataField>LE_DIRECTEUR_GENERALCaption</DataField>
+        </Field>
+        <Field Name="Sales_Header_No_">
+          <DataField>Sales_Header_No_</DataField>
+        </Field>
+        <Field Name="TextGMnt">
+          <DataField>TextGMnt</DataField>
+        </Field>
+        <Field Name="DecLinAmount">
+          <DataField>DecLinAmount</DataField>
+        </Field>
+        <Field Name="DecLinAmountFormat">
+          <DataField>DecLinAmountFormat</DataField>
+        </Field>
+        <Field Name="DecAmountIncludingVAt_MontantBic">
+          <DataField>DecAmountIncludingVAt_MontantBic</DataField>
+        </Field>
+        <Field Name="DecAmountIncludingVAt_MontantBicFormat">
+          <DataField>DecAmountIncludingVAt_MontantBicFormat</DataField>
+        </Field>
+        <Field Name="DecMontantTVA">
+          <DataField>DecMontantTVA</DataField>
+        </Field>
+        <Field Name="DecMontantTVAFormat">
+          <DataField>DecMontantTVAFormat</DataField>
+        </Field>
+        <Field Name="MontantBic">
+          <DataField>MontantBic</DataField>
+        </Field>
+        <Field Name="MontantBicFormat">
+          <DataField>MontantBicFormat</DataField>
+        </Field>
+        <Field Name="DecAmountIncludingVAt">
+          <DataField>DecAmountIncludingVAt</DataField>
+        </Field>
+        <Field Name="DecAmountIncludingVAtFormat">
+          <DataField>DecAmountIncludingVAtFormat</DataField>
+        </Field>
+        <Field Name="FACTURE_______Sales_Header___No__">
+          <DataField>FACTURE_______Sales_Header___No__</DataField>
+        </Field>
+        <Field Name="Sales_Header___Posting_Date_">
+          <DataField>Sales_Header___Posting_Date_</DataField>
+        </Field>
+        <Field Name="G_RecCustomer_Address">
+          <DataField>G_RecCustomer_Address</DataField>
+        </Field>
+        <Field Name="G_RecCustomer_RCCM">
+          <DataField>G_RecCustomer_RCCM</DataField>
+        </Field>
+        <Field Name="G_RecCustomer_IFU">
+          <DataField>G_RecCustomer_IFU</DataField>
+        </Field>
+        <Field Name="Sales_Header___Bill_to_Name_">
+          <DataField>Sales_Header___Bill_to_Name_</DataField>
+        </Field>
+        <Field Name="DateCaption">
+          <DataField>DateCaption</DataField>
+        </Field>
+        <Field Name="Adresse__Caption">
+          <DataField>Adresse__Caption</DataField>
+        </Field>
+        <Field Name="RCCM__Caption">
+          <DataField>RCCM__Caption</DataField>
+        </Field>
+        <Field Name="N__IFU_Caption">
+          <DataField>N__IFU_Caption</DataField>
+        </Field>
+        <Field Name="Nom_de_la_société__Caption">
+          <DataField>Nom_de_la_société__Caption</DataField>
+        </Field>
+        <Field Name="PageLoop_Number">
+          <DataField>PageLoop_Number</DataField>
+        </Field>
+        <Field Name="Arrêté_la_présente_facture_à_la_somme_Caption">
+          <DataField>Arrêté_la_présente_facture_à_la_somme_Caption</DataField>
+        </Field>
+        <Field Name="MONTANT_HTCaption">
+          <DataField>MONTANT_HTCaption</DataField>
+        </Field>
+        <Field Name="TVA_18_Caption">
+          <DataField>TVA_18_Caption</DataField>
+        </Field>
+        <Field Name="MONTANT_TTCCaption">
+          <DataField>MONTANT_TTCCaption</DataField>
+        </Field>
+        <Field Name="ACOMPTE_BICCaption">
+          <DataField>ACOMPTE_BICCaption</DataField>
+        </Field>
+        <Field Name="NET_A_PAYERCaption">
+          <DataField>NET_A_PAYERCaption</DataField>
+        </Field>
+        <Field Name="Sales_Line_Description">
+          <DataField>Sales_Line_Description</DataField>
+        </Field>
+        <Field Name="Sales_Line_Quantity">
+          <DataField>Sales_Line_Quantity</DataField>
+        </Field>
+        <Field Name="Sales_Line_QuantityFormat">
+          <DataField>Sales_Line_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Sales_Line__Sales_Line___Unit_Cost__LCY__">
+          <DataField>Sales_Line__Sales_Line___Unit_Cost__LCY__</DataField>
+        </Field>
+        <Field Name="Sales_Line__Sales_Line___Unit_Cost__LCY__Format">
+          <DataField>Sales_Line__Sales_Line___Unit_Cost__LCY__Format</DataField>
+        </Field>
+        <Field Name="Sales_Line__Unit_of_Measure_">
+          <DataField>Sales_Line__Unit_of_Measure_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Amount">
+          <DataField>Sales_Line_Amount</DataField>
+        </Field>
+        <Field Name="Sales_Line_AmountFormat">
+          <DataField>Sales_Line_AmountFormat</DataField>
+        </Field>
+        <Field Name="AmountCaption">
+          <DataField>AmountCaption</DataField>
+        </Field>
+        <Field Name="Direct_Unit_CostCaption">
+          <DataField>Direct_Unit_CostCaption</DataField>
+        </Field>
+        <Field Name="QTECaption">
+          <DataField>QTECaption</DataField>
+        </Field>
+        <Field Name="DésignationCaption">
+          <DataField>DésignationCaption</DataField>
+        </Field>
+        <Field Name="UNITECaption">
+          <DataField>UNITECaption</DataField>
+        </Field>
+        <Field Name="Sales_Line_Document_No_">
+          <DataField>Sales_Line_Document_No_</DataField>
+        </Field>
+        <Field Name="Sales_Line_Line_No_">
+          <DataField>Sales_Line_Line_No_</DataField>
+        </Field>
+        <Field Name="Number">
+          <DataField>Number</DataField>
+        </Field>
+        <Field Name="DetailTva_Number">
+          <DataField>DetailTva_Number</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>
