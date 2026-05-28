@@ -10,7 +10,6 @@ page 50123 "JobAPI"
     SourceTable = Job;
     DelayedInsert = true;
     ODataKeyFields = SystemId;
-    // Les projets sont créés et gérés exclusivement dans BC — lecture seule depuis le Web
     InsertAllowed = false;
     ModifyAllowed = false;
     DeleteAllowed = false;
@@ -36,7 +35,7 @@ page 50123 "JobAPI"
                     Caption = 'Description';
                     Editable = false;
                 }
-                field(status; Rec.Status) // planning , devis , ouvert , terminé 
+                field(status; Rec.Status) 
                 {
                     Caption = 'Statut';
                     Editable = false;
@@ -51,7 +50,7 @@ page 50123 "JobAPI"
                     Caption = 'Date de fin';
                     Editable = false;
                 }
-                // magasin principal 
+                // c'est le magasin principal 
                 field(affectationMagasin; Rec."Affectation Magasin")
                 {
                     Caption = 'Affectation Magasin';

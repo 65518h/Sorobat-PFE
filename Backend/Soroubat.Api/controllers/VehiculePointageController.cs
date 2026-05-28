@@ -169,7 +169,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         /// <summary>Met à jour partiellement une ligne de pointage véhicule.</summary>
         [HttpPatch("lines/{id:guid}")]

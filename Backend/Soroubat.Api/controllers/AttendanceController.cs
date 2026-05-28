@@ -22,7 +22,6 @@ namespace Soroubat.Api.Controllers
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         /// <summary>Retourne toutes les fiches de pointage du chantier du chef connecté.</summary>
         [HttpGet]
@@ -97,7 +96,7 @@ namespace Soroubat.Api.Controllers
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("Deja saisie"))
             {
-                return Conflict(new { message = "Un pointage existe déjà pour ce chantier sur cette période." });
+                return Conflict(new { message = "Un pointage existe déjà pour ce chantier sur cette période." }); // retourne le code statut 409
             }
             catch (Exception ex)
             {
@@ -169,7 +168,6 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         /// <summary>Crée les lignes de pointage d'une fiche existante.</summary>
         [HttpPost("lines")]
@@ -260,8 +258,7 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── RECONNAISSANCE FACIALE ────────────────────────────────────────────
-
+// la reconnaissance faciale 
         /// <summary>
         /// Marque la présence d'un salarié après vérification par reconnaissance faciale.
         /// La vérification et le marquage sont effectués en un seul appel.
@@ -281,7 +278,7 @@ namespace Soroubat.Api.Controllers
             if (string.IsNullOrEmpty(request.Matricule))
                 return BadRequest(new { message = "Le matricule est obligatoire." });
 
-            // ÉTAPE 1 : Vérification de l'identité par reconnaissance faciale
+            // vérification de l'identité par reconnaissance faciale
             var faceRequest = new FaceVerificationPostDto
             {
                 Matricule           = request.Matricule,
@@ -293,7 +290,7 @@ namespace Soroubat.Api.Controllers
             if (!isVerified)
                 return Unauthorized(new { message = "Reconnaissance faciale échouée." });
 
-            // ÉTAPE 2 : Marquage de la présence si identité confirmée
+            // marquage de la présence si identité confirmée
             try
             {
                 var success = await _service.MarkPresenceAsync(

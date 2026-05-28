@@ -20,10 +20,6 @@ namespace Soroubat.Api.Controllers
         /// <summary>Numéro de projet extrait du claim JWT — null si le compte n'est pas assigné.</summary>
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
-        // Routes préfixées avec "headers/" pour éviter tout conflit d'ambiguïté
-        // avec les routes de lignes "lines/" au niveau du routage ASP.NET Core.
-        // Pattern : GET/POST api/gasoil/headers — GET/PATCH/DELETE api/gasoil/headers/{id}
 
         /// <summary>Retourne toutes les fiches gasoil du chantier du chef connecté.</summary>
         [HttpGet("headers")]
@@ -204,9 +200,7 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
-        // Routes préfixées avec "lines/" — aucun conflit possible avec "headers/".
-        // Pattern : POST api/gasoil/lines — PATCH/DELETE api/gasoil/lines/{id}
+
 
         /// <summary>Crée une nouvelle ligne de distribution gasoil.</summary>
         [HttpPost("lines")]

@@ -37,7 +37,6 @@ page 50137 "TransferLineAPI"
                 field(qtyToReceive; Rec."Qty. to Receive") 
                 { 
                     Caption = 'Qty. to Receive'; 
-                    // Seul champ modifiable par le chef de chantier pour la réception
                 }
                 field(unitOfMeasure; Rec."Unit of Measure Code") { Caption = 'Unit of Measure'; Editable = false; }
 

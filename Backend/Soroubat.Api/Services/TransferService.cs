@@ -37,8 +37,7 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── Méthodes helper de vérification ──────────────────────────────────
-
+// les helpers 
         /// <summary>
         /// Récupère un en-tête de transfert depuis BC, vérifie qu'il appartient au chantier
         /// du chef connecté et retourne l'ETag pour les opérations PATCH suivantes.
@@ -130,8 +129,7 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── Méthodes métier ───────────────────────────────────────────────────
-
+// métier
         public async Task<IEnumerable<TransferHeaderReadDto>> GetAllTransfersAsync(string projectNo)
         {
             var url = $"transferHeaders?$filter=chantierDestination eq '{projectNo}'";
@@ -150,33 +148,16 @@ namespace Soroubat.Api.Services
 
         public async Task<TransferHeaderReadDto> GetTransferByIdAsync(Guid id, string projectNo)
         {
+            await GetAndVerifyHeaderAsync(id, projectNo);
+
             var url      = $"transferHeaders({id})?$expand=transferLines";
             var response = await _httpClient.GetAsync(url);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException(
-                    $"L'ordre de transfert '{id}' est introuvable dans Business Central.");
 
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            var transfer = await response.Content
-                .ReadFromJsonAsync<TransferHeaderReadDto>(SerializerOptionsRead);
-
-            if (transfer == null)
-                throw new KeyNotFoundException(
-                    $"L'ordre de transfert '{id}' est introuvable dans Business Central.");
-
-            if (!string.Equals(transfer.ChantierDestination, projectNo, StringComparison.OrdinalIgnoreCase))
-            {
-                _logger.LogWarning(
-                    "[Transfer] Accès refusé transfert {Id} : chantierDestination {HeaderProject} ≠ {UserProject}",
-                    id, transfer.ChantierDestination, projectNo);
-                throw new UnauthorizedAccessException(
-                    "Accès refusé : cet ordre de transfert n'appartient pas à votre chantier.");
-            }
-
-            return transfer;
+            return (await response.Content
+                .ReadFromJsonAsync<TransferHeaderReadDto>(SerializerOptionsRead))!;
         }
 
         public async Task<bool> PatchHeaderAsync(Guid id, TransferHeaderPatchDto headerDto, string projectNo)

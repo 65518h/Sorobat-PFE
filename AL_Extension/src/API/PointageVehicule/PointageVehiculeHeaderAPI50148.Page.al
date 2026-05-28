@@ -10,9 +10,9 @@ page 50148 "APIVehiculePointageHeader"
     SourceTable = "Entete Pointage Vehicule";
     DelayedInsert = true;
     ODataKeyFields = SystemId;
-    InsertAllowed = true;  // Création par le chef de chantier via le backend
-    ModifyAllowed = true;  // PATCH date (étape 2 création) et validation du statut
-    DeleteAllowed = true;  // Suppression autorisée uniquement si statut "Ouvert"
+    InsertAllowed = true;  
+    ModifyAllowed = true;  
+    DeleteAllowed = true;  
 
     layout
     {
@@ -28,25 +28,22 @@ page 50148 "APIVehiculePointageHeader"
                 field(documentNo; Rec."N° Document")
                 {
                     Caption = 'Document No';
-                    Editable = false; // Auto-incrémenté par BC
+                    Editable = false; 
                 }
-                // jobNo forcé par le backend (JWT) — non modifiable directement
-                // pour empêcher un chef de lier un pointage à un autre chantier
+
                 field(jobNo; Rec.Marche)
                 {
                     Caption = 'Job No';
-                    Editable = true; // Doit rester Editable pour que le backend puisse le forcer à l'insertion
+                    Editable = true; 
                 }
                 field(date; Rec.Journee)
                 {
                     Caption = 'Date';
-                    // Editable = true (défaut) — envoyé dans le PATCH étape 2 pour déclencher
-                    // le trigger OnValidate qui génère les lignes véhicule
+
                 }
                 field(status; Rec.Statut)
                 {
                     Caption = 'Status';
-                    // Editable = true (défaut) — modifié par le backend pour la validation
                 }
             }
             part(vehiculePointageLines; "APIVehiculePointageLines")

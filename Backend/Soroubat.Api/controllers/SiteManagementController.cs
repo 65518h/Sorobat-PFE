@@ -89,7 +89,7 @@ namespace Soroubat.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateProgress(Guid id, [FromBody] JobTaskProgressPatchDto dto)
         {
-            if (!ModelState.IsValid) // validation automatique du DTO (ex : range 0-100 pour Progress)
+            if (!ModelState.IsValid) 
                 return ValidationProblem(ModelState);
 
             var projectNo = UserProjectNo;
@@ -103,7 +103,6 @@ namespace Soroubat.Api.Controllers
                 if (success)
                     return Ok(new { message = "Avancement mis à jour avec succès." });
 
-                // Ce cas ne devrait pas se produire (le service lève une exception en cas d'échec)
                 return StatusCode(500, new { message = "Erreur lors de la mise à jour dans Business Central." });
             }
             catch (KeyNotFoundException ex)
@@ -112,7 +111,7 @@ namespace Soroubat.Api.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                // 403 : le chef tente de modifier une tâche d'un autre chantier
+                // 403 : le chef essaye de modifier une tâche d'un autre chantier
                 return StatusCode(StatusCodes.Status403Forbidden, new { message = ex.Message });
             }
             catch (Exception ex)

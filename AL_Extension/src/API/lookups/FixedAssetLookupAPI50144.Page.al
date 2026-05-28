@@ -30,7 +30,6 @@ page 50144 "FixedAssetLookupAPI"
                     Caption = 'Description';
                 }
 
-                // faClassCode et faSubclassCode ne sont pas nécessairs mais peuvent étre utilisés pour la filtration coté client pour réduire le nombre de résultat retourné
                 field(faClassCode; Rec."FA Class Code") 
                 { 
                     Caption = 'FA Class Code';

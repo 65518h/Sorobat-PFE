@@ -36,7 +36,6 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── Méthodes helper de sérialisation ─────────────────────────────────
 
         /// <summary>
         /// Sérialise un DTO en JsonObject pour permettre l'injection de champs supplémentaires
@@ -71,7 +70,6 @@ namespace Soroubat.Api.Services
             return root.ToJsonString();
         }
 
-        // ── Méthodes helper de vérification ──────────────────────────────────
 
         /// <summary>
         /// Récupère un en-tête de fiche gasoil depuis BC, vérifie qu'il appartient au projet
@@ -190,8 +188,7 @@ namespace Soroubat.Api.Services
             return 0;
         }
 
-        // ── Méthodes métier — En-têtes ────────────────────────────────────────
-
+//métier
         public async Task<IEnumerable<GasoilHeaderReadDto>> GetAllHeadersAsync(string projectNo)
         {
             var url = $"gasoilHeaders?$filter=jobNo eq '{projectNo}'";
@@ -210,10 +207,8 @@ namespace Soroubat.Api.Services
 
         public async Task<GasoilHeaderReadDto> GetHeaderByIdAsync(Guid id, string projectNo)
         {
-            // Vérification de sécurité sur l'en-tête seul (sans lignes)
             await GetAndVerifyHeaderAsync(id, projectNo);
 
-            // Appel ciblé avec $expand pour retourner les lignes au client
             var url      = $"gasoilHeaders({id})?$expand=gasoilLines";
             var response = await _httpClient.GetAsync(url);
 
@@ -289,7 +284,6 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     $"Statut actuel '{existing.Status}' — seule une fiche 'En Cours' peut être validée.");
 
-            // On ne modifie que le statut — les autres champs ne sont pas envoyés
             var json    = """{"status": "Valider"}""";
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"gasoilHeaders({id})")
             {
@@ -306,7 +300,6 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── Méthodes métier — Lignes ──────────────────────────────────────────
 
         public async Task<GasoilLineReadDto> CreateLineAsync(GasoilLineCreateDto lineDto, string projectNo)
         {
@@ -314,7 +307,6 @@ namespace Soroubat.Api.Services
                 throw new ArgumentException(
                     "Le numéro de document (documentNo) est obligatoire pour créer une ligne gasoil.");
 
-            // Vérification de sécurité : le document parent doit appartenir au projet du chef connecté
             var headerUrl      = $"gasoilHeaders?$filter=documentNo eq '{lineDto.DocumentNo}'";
             var headerResponse = await _httpClient.GetAsync(headerUrl);
 
@@ -361,7 +353,6 @@ namespace Soroubat.Api.Services
         {
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            // projectNo n'est pas envoyé dans le PATCH ligne : BC interdit sa modification
             var json = JsonSerializer.Serialize(lineDto, SerializerOptionsWrite);
             _logger.LogInformation("[Gasoil] PATCH ligne {LineId}", lineId);
 
@@ -399,8 +390,7 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── Usage interne (AlertService) ──────────────────────────────────────
-
+// utilisée pour la partie alertes
         public async Task<IEnumerable<GasoilHeaderReadDto>> GetAllHeadersWithLinesAsync(string projectNo)
         {
             var url = $"gasoilHeaders?$filter=jobNo eq '{projectNo}'&$expand=gasoilLines";

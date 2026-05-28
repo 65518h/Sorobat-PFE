@@ -9,7 +9,6 @@ namespace Soroubat.Api.Interfaces
     /// </summary>
     public interface IGasoilService
     {
-        // ── En-têtes (Headers) ───────────────────────────────────────────────
 
         /// <summary>
         /// Retourne toutes les fiches gasoil du projet du chef connecté.
@@ -51,7 +50,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> ValiderFicheAsync(Guid id, string projectNo);
 
-        // ── Lignes ───────────────────────────────────────────────────────────
 
         /// <summary>
         /// Crée une nouvelle ligne de distribution gasoil.
@@ -75,7 +73,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> DeleteLineAsync(Guid lineId, string projectNo);
 
-        // ── Usage interne (AlertService) ─────────────────────────────────────
 
         /// <summary>
         /// Retourne toutes les fiches gasoil avec leurs lignes ($expand=gasoilLines).

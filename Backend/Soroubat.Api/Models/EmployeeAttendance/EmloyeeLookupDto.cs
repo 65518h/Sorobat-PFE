@@ -42,9 +42,6 @@ namespace Soroubat.Api.Models
         public string CapturedImageBase64 { get; set; } = string.Empty;
     }
 
-    /// <summary>
-    /// Corps de la requête POST pour marquer la présence d'un salarié après reconnaissance faciale.
-    /// Combine la vérification d'identité et le marquage de présence en un seul appel.
-    /// </summary>
+
 
 }

@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ── 1. CONFIGURATION BUSINESS CENTRAL ────────────────────────────────────────
 
 var bcConfig = builder.Configuration.GetSection("BusinessCentral");
 
@@ -23,7 +22,6 @@ string siteManagementUri = $"{baseUrl}/api/soroubat/siteManagement/v1.0/companie
 
 string lookupsUri = $"{baseUrl}/api/soroubat/lookups/v1.0/companies(name='{Uri.EscapeDataString(companyName)}')/";
 
-// ── 2. AUTHENTIFICATION JWT ───────────────────────────────────────────────────
 
 var jwtKey = builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException("La clé JWT 'Jwt:Key' est absente de appsettings.json.");
@@ -47,7 +45,6 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
-// ── 3. BASE DE DONNÉES SQLITE (credentials locaux) ────────────────────────────
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseSqlite(
@@ -55,14 +52,12 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
         ?? "Data Source=auth.db"));
 
 
-// ── 4. CONTROLLERS + JSON ─────────────────────────────────────────────────────
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 });
 
-// ── 5. SWAGGER ────────────────────────────────────────────────────────────────
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -100,7 +95,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ── 6. INJECTION DE DÉPENDANCES — CLIENTS HTTP BC ────────────────────────────
 
 static HttpClientHandler WindowsAuthHandler() =>
     new HttpClientHandler { UseDefaultCredentials = true };
@@ -123,7 +117,6 @@ void ConfigureLookupClient(HttpClient client)
         new MediaTypeWithQualityHeaderValue("application/json"));
 }
 
-// ── Services siteManagement ───────────────────────────────────────────────────
 
 builder.Services
     .AddHttpClient<ISiteManagementService, SiteManagementService>(ConfigureSiteManagementClient)
@@ -157,7 +150,6 @@ builder.Services
     .AddHttpClient<IEmpAttendanceService, AttendanceService>(ConfigureSiteManagementClient)
     .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
 
-// ── Services lookups ──────────────────────────────────────────────────────────
 
 builder.Services
     .AddHttpClient<ILookupService, LookupService>(ConfigureLookupClient)
@@ -167,12 +159,10 @@ builder.Services
     .AddHttpClient<IEmployeeService, EmployeeService>(ConfigureLookupClient)
     .ConfigurePrimaryHttpMessageHandler(WindowsAuthHandler);
 
-// ── Services scoped (pas de HttpClient dédié) ─────────────────────────────────
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAlertService, AlertService>();
 
-// ── 7. CORS ───────────────────────────────────────────────────────────────────
 
 builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", p =>
     p.WithOrigins("http://localhost:4200", "http://localhost:4201", "http://127.0.0.1:4201")
@@ -180,7 +170,6 @@ builder.Services.AddCors(opt => opt.AddPolicy("AllowAngular", p =>
      .AllowAnyHeader()
      .AllowCredentials()));
 
-// ── 8. PIPELINE HTTP ──────────────────────────────────────────────────────────
 
 var app = builder.Build();
 

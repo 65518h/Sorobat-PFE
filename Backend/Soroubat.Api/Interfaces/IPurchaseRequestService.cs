@@ -7,7 +7,6 @@ namespace Soroubat.Api.Interfaces
     /// </summary>
     public interface IPurchaseRequestService
     {
-        // ── En-tête (Header) ─────────────────────────────────────────────────
 
         /// <summary>
         /// Retourne toutes les demandes d'achat du projet du chef connecté.
@@ -56,7 +55,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> DeleteRequestAsync(Guid id, string projectNo);
 
-        // ── Lignes ───────────────────────────────────────────────────────────
 
         /// <summary>
         /// Met à jour partiellement une ligne de demande d'achat.

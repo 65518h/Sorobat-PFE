@@ -5,7 +5,6 @@ namespace Soroubat.Api.Models
 {
 public class BCResponse<T>
 {
-    /// <remarks>Newtonsoft (JsonProperty) + System.Text.Json (JsonPropertyName) pour les deux stacks.</remarks>
     [JsonProperty("@odata.context")]
     [JsonPropertyName("@odata.context")]
     public string Context { get; set; } = string.Empty;

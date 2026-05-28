@@ -10,10 +10,8 @@ page 50120 "JobTaskAPI"
     SourceTable = "Job Task";
     DelayedInsert = true;
     ODataKeyFields = SystemId;
-    InsertAllowed = false; // Les tâches sont créées exclusivement dans BC
-    ModifyAllowed = true;  // Le chef de chantier peut mettre à jour l'avancement
-    DeleteAllowed = false; // La suppression est interdite depuis le Web
-
+    InsertAllowed = false; 
+    DeleteAllowed = false; 
     layout
     {
         area(Content)
@@ -40,13 +38,10 @@ page 50120 "JobTaskAPI"
                     Caption = 'Description';
                     Editable = false;
                 }
-
-
-                // avancement manuel par le chef de chantier
                 field(progressPct; Rec."Progress %")
                 {
                     Caption = 'Progress %';
-
+                    // on a déja fait cette vérification coté backend mais c'est une bonne pratique de le répéter ici ( défense en profondeur )
                     trigger OnValidate()
                     begin
 

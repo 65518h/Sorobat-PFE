@@ -35,7 +35,6 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── HELPERS PRIVÉS ────────────────────────────────────────────────────
 
         /// <summary>
         /// Récupère un en-tête et vérifie qu'il appartient au projet du chef connecté.
@@ -128,7 +127,6 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── EN-TÊTES ──────────────────────────────────────────────────────────
 
         public async Task<IEnumerable<EmpAttendanceReadDto>> GetAllHeadersAsync(string projectNo)
         {
@@ -148,18 +146,15 @@ namespace Soroubat.Api.Services
 
         public async Task<EmpAttendanceReadDto?> GetHeaderByIdAsync(Guid id, string projectNo)
         {
-            var url = $"employeeAttendanceHeaders({id})?$expand=employeeAttendanceLines";
-            _logger.LogInformation("[Attendance] GetById {Id} pour projet {ProjectNo}", id, projectNo);
+            var getResponse = await _httpClient.GetAsync($"employeeAttendanceHeaders({id})");
 
-            var response = await _httpClient.GetAsync(url);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            if (getResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
                 return null;
 
-            if (!response.IsSuccessStatusCode)
-                await HandleErrorResponseAsync(response);
+            if (!getResponse.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(getResponse);
 
-            var header = await response.Content
+            var header = await getResponse.Content
                 .ReadFromJsonAsync<EmpAttendanceReadDto>(SerializerOptionsRead);
 
             if (header == null)
@@ -174,13 +169,20 @@ namespace Soroubat.Api.Services
                     "Accès refusé : cette fiche de pointage n'appartient pas à votre projet.");
             }
 
-            return header;
+            // Appel ciblé avec $expand pour retourner les lignes au client
+            var url      = $"employeeAttendanceHeaders({id})?$expand=employeeAttendanceLines";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
+
+            return await response.Content
+                .ReadFromJsonAsync<EmpAttendanceReadDto>(SerializerOptionsRead);
         }
 
         public async Task<EmpAttendanceReadDto> CreateHeaderAsync(EmpAttendanceHeaderCreateDto dto, string projectNo)
         {
-            // Construire le payload en forçant jobNo depuis le JWT (ignore toute valeur cliente)
-            // On utilise un JsonObject pour injecter jobNo sans l'exposer dans le DTO client
+
             var node = System.Text.Json.JsonSerializer.SerializeToNode(dto, SerializerOptionsWrite)                as System.Text.Json.Nodes.JsonObject
                 ?? new System.Text.Json.Nodes.JsonObject();
 
@@ -197,7 +199,6 @@ namespace Soroubat.Api.Services
                 var errorDetail = await response.Content.ReadAsStringAsync();
                 _logger.LogError("[Attendance] Erreur POST BC — Code : {StatusCode}", (int)response.StatusCode);
 
-                // Détecter le doublon BC et lever une exception métier explicite
                 if (errorDetail.Contains("Deja saisie") || errorDetail.Contains("DialogException"))
                     throw new InvalidOperationException(errorDetail);
 
@@ -248,7 +249,6 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── LIGNES ────────────────────────────────────────────────────────────
 
         public async Task<bool> CreateLinesAsync(List<EmpAttendanceLineCreateDto> lines, string projectNo)
         {
@@ -308,8 +308,7 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── USAGE INTERNE (AlertService) ──────────────────────────────────────
-
+// pour alertes
         public async Task<IEnumerable<EmpAttendanceReadDto>> GetAllHeadersWithLinesAsync(string projectNo)
         {
             var url = $"employeeAttendanceHeaders?$filter=jobNo eq '{projectNo}'&$expand=employeeAttendanceLines";
@@ -326,15 +325,13 @@ namespace Soroubat.Api.Services
             return result?.Value ?? Enumerable.Empty<EmpAttendanceReadDto>();
         }
 
-        // ── RECONNAISSANCE FACIALE ────────────────────────────────────────────
-
+// partie reconnissance faciale
         public async Task<bool> MarkPresenceAsync(Guid headerId, string employeeNo, int day, string projectNo)
         {
             if (day < 1 || day > 31)
                 throw new ArgumentException(
                     $"Numéro de jour invalide : {day}. Doit être compris entre 1 et 31.");
 
-            // Récupérer la fiche avec ses lignes (vérifie également l'appartenance au projet)
             var header = await GetHeaderByIdAsync(headerId, projectNo);
 
             if (header == null)
@@ -351,7 +348,6 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     "La ligne de pointage ne possède pas d'identifiant valide.");
 
-            // Construire un DTO de PATCH avec uniquement le jour à marquer ("P" = Présent)
             var patchDto = BuildDayPatch(day, "P");
 
             return await PatchLineAsync(line.Id.Value, patchDto, projectNo);

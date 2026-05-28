@@ -21,17 +21,17 @@ namespace Soroubat.Api.Services
         /// </summary>
         private static readonly HashSet<string> AllowedEntitySets = new(StringComparer.OrdinalIgnoreCase)
         {
-            "projects",       // page 50124 — ProjectLookupAPI
-            "projectTasks",   // page 50125 — ProjectTaskLookupAPI
-            "locations",      // page 50126 — LocationLookupAPI
-            "items",          // page 50133 — ItemLookupAPI
-            "vehicules",      // page 50134 — VehiculeLookupAPI
-            "requesters",     // page 50140 — RequesterLookupAPI
-            "fixedAssets",    // page 50144 — FixedAssetLookupAPI
-            "employees",      // page 50154 — EmployeeLookupAPI
-            "chefsChantier",  // page 50155 — ChefChantierLookup
-            "shippingAgents", // page 50181 — ShippingAgentAPI  (chauffeurs pour lignes gasoil)
-            "postCodes",      // page 50182 — PostCodeAPI       (destinations pour lignes gasoil)
+            "projects",       // page 50124 
+            "projectTasks",   // page 50125 
+            "locations",      // page 50126 
+            "items",          // page 50133 
+            "vehicules",      // page 50134 
+            "requesters",     // page 50140 
+            "fixedAssets",    // page 50144 
+            "employees",      // page 50154 
+            "chefsChantier",  // page 50155 
+            "shippingAgents", // page 50181 
+            "postCodes",      // page 50182 
         };
 
         public LookupService(HttpClient httpClient, ILogger<LookupService> logger)
@@ -50,8 +50,7 @@ namespace Soroubat.Api.Services
                     $"Entité de lookup inconnue : '{entitySetName}'. " +
                     $"Valeurs autorisées : {string.Join(", ", AllowedEntitySets)}.");
 
-            // Filtre automatique par projet pour les entités qui y sont liées.
-            // Toutes les autres entités sont globales — pas de filtre projet appliqué.
+
             string? projectFilter = entitySetName switch
             {
                 "projects"     => $"code eq '{projectNo}'",

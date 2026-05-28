@@ -19,7 +19,7 @@ page 50121 "PurchaseRequestAPI"
         {
             repeater(GroupName)
             {
-                field(id; Rec.SystemId) // rec est la ligne courante, xRec est la valeur avant modification
+                field(id; Rec.SystemId) 
                 {
                     Caption = 'Id';
                     Editable = false;
@@ -27,15 +27,14 @@ page 50121 "PurchaseRequestAPI"
                 field(no; Rec."No.")
                 {
                     Caption = 'N° Demande';
-                    Editable = false; // Auto-incrémenté par BC
+                    Editable = false; 
                 }
 
                 field(observation; Rec.Observation)
                 {
                     Caption = 'Observation';
                 }
-                // jobNo est forcé par le backend (JWT) — non modifiable directement
-                // pour empêcher un chef de lier une demande à un autre projet
+
                 field(jobNo; Rec."Job No.")
                 {
                     Caption = 'N° Projet';
@@ -67,7 +66,7 @@ page 50121 "PurchaseRequestAPI"
 
                 field( "DateSaisie";Rec."Date saisie")
                 { 
-                    caption = 'Date de saisie'; // auto remplis par bc lors de la création, non modifiable
+                    caption = 'Date de saisie'; 
                 }
 
 
@@ -93,7 +92,6 @@ page 50121 "PurchaseRequestAPI"
     var
         CannotChangeProjectErr: Label 'Vous ne pouvez pas modifier le numéro de projet d''une demande existante.';
     begin
-        // xRec contient la valeur avant modification, Rec contient la nouvelle valeur.
         if Rec."Job No." <> xRec."Job No." then
             Error(CannotChangeProjectErr);
             

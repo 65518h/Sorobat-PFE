@@ -28,7 +28,6 @@ page 50153 "EmpAttendanceLineAPI"
                 field(assignment; Rec.Affectation) { Caption = 'Assignment'; }
                 field(assignmentDescription; Rec."Description affectation") { Caption = 'assignmentDescription'; }
                 
-                // Pointage journalier 1 à 31
                 field(day1; Rec."1") { Caption = 'Day 1'; }
                 field(day2; Rec."2") { Caption = 'Day 2'; }
                 field(day3; Rec."3") { Caption = 'Day 3'; }

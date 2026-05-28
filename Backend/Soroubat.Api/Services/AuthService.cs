@@ -21,10 +21,10 @@ namespace Soroubat.Api.Services
         private readonly ILogger<AuthService> _logger;
 
         public AuthService(
-            IConfiguration config,
+            IConfiguration config, // pour accéder aux paramètres de configuration dans appsettings.json (ex: clé secrète pour JWT)
             AuthDbContext context,
-            IChefChantierService chefChantierService,
-            ILogger<AuthService> logger)
+            IChefChantierService chefChantierService, // permet de vérifier le statut et le projet du chef de chantier dans BC
+            ILogger<AuthService> logger) // permet d'écrire des logs
         {
             _config = config;
             _context = context;
@@ -40,22 +40,18 @@ namespace Soroubat.Api.Services
         {
             _logger.LogInformation("[Auth] Tentative de connexion pour {Email}", email);
 
-            // ÉTAPE 1 : Vérifier les credentials dans la base SQLite locale
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == email);
+            // on commence par sqlite 
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email); // on récupére l'utilisateur à partir de l'email saisie 
 
-            // Temps de traitement constant même si l'utilisateur est introuvable
-            // (protection contre les attaques de timing)
-            bool isPasswordValid = user != null
-                && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+            bool isPasswordValid = user != null && BCrypt.Net.BCrypt.Verify(password, user.PasswordHash); // on vérifie le mot de passe saisi
 
-            if (user == null || !isPasswordValid)
+            if (user == null || !isPasswordValid) // pour ne pas imaginer que le compte existe mais que le mot de passe est incorrect ( le compte peut étre inexistant ou le mot de passe peut être incorrect)
             {
                 _logger.LogWarning("[Auth] Credentials invalides pour {Email}", email);
                 return AuthResult.Fail("INVALID_CREDENTIALS");
             }
 
-            // ÉTAPE 2 : Vérifier le statut et le projet dans BC — un seul appel HTTP
+            // le statut du chef ( actif ou non ) et y'a t'il un projet assigné ou non 
             var bcCheck = await _chefChantierService.CheckChefAsync(email);
 
             if (bcCheck.Status == ChefChantierStatus.Inactive)

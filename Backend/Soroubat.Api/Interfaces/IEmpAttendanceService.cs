@@ -9,7 +9,6 @@ namespace Soroubat.Api.Interfaces
     /// </summary>
     public interface IEmpAttendanceService
     {
-        // ── En-têtes (Headers) ───────────────────────────────────────────────
 
         /// <summary>
         /// Retourne toutes les fiches de pointage du projet du chef connecté.
@@ -43,7 +42,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> DeleteHeaderAsync(Guid id, string projectNo);
 
-        // ── Lignes ───────────────────────────────────────────────────────────
 
         /// <summary>
         /// Crée les lignes de pointage d'une fiche existante.
@@ -65,7 +63,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> DeleteLineAsync(Guid lineId, string projectNo);
 
-        // ── Usage interne (AlertService) ─────────────────────────────────────
 
         /// <summary>
         /// Retourne toutes les fiches de pointage avec leurs lignes ($expand=employeeAttendanceLines).
@@ -74,7 +71,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<IEnumerable<EmpAttendanceReadDto>> GetAllHeadersWithLinesAsync(string projectNo);
 
-        // ── Reconnaissance faciale ────────────────────────────────────────────
 
         /// <summary>
         /// Marque la présence d'un salarié pour un jour donné sur une fiche de pointage,

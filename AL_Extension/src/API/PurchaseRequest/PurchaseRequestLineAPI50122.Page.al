@@ -20,7 +20,6 @@ page 50122 "PurchaseRequestLineAPI"
         {
             repeater(Control1)
             {
-                // ── Identifiants techniques ───────────────────────────────────
                 field(id; Rec.SystemId)
                 {
                     Caption = 'Id';
@@ -29,14 +28,10 @@ page 50122 "PurchaseRequestLineAPI"
                 field(documentNo; Rec."Document No.")
                 {
                     Caption = 'N° Document';
-                    // Editable à l'insertion pour lier la ligne à son en-tête.
-                    // BC refusera un documentNo qui ne correspond pas à une demande existante.
+
                     Editable = true;
                 }
-                // lineNo doit être Editable = true pour que le backend puisse
-                // envoyer la valeur calculée (Max + 10 000) lors de la création.
-                // Si Editable = false, BC ignore la valeur et génère son propre numéro,
-                // ce qui peut créer des doublons ou des incohérences avec le GetLastLineNo.
+
                 field(lineNo; Rec."Line No.")
                 {
                     Caption = 'N° Ligne';
@@ -73,11 +68,10 @@ page 50122 "PurchaseRequestLineAPI"
                     Caption = 'Code Magasin';
                 }
 
-                // jobNo forcé par le backend (JWT) — non modifiable directement
                 field(jobNo; Rec."Job No.")
                 {
                     Caption = 'N° Projet';
-                    Editable = true; // Doit rester Editable pour que le backend puisse le forcer à l'insertion
+                    Editable = true; 
                 }
                 field(jobTaskNo; Rec."Job Task No.")
                 {

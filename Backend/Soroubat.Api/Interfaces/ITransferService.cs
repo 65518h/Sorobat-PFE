@@ -10,7 +10,6 @@ namespace Soroubat.Api.Interfaces
     /// </summary>
     public interface ITransferService
     {
-        // ── En-têtes (Headers) ───────────────────────────────────────────────
 
         /// <summary>
         /// Retourne tous les ordres de transfert dont le chantier de destination
@@ -32,7 +31,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> PatchHeaderAsync(Guid id, TransferHeaderPatchDto headerDto, string projectNo);
 
-        // ── Lignes ───────────────────────────────────────────────────────────
 
         /// <summary>
         /// Met à jour les champs de réception d'une ligne de transfert
@@ -42,7 +40,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> PatchLineAsync(Guid lineId, TransferLinePatchDto lineDto, string projectNo);
 
-        // ── Usage interne (AlertService) ─────────────────────────────────────
 
         /// <summary>
         /// Retourne tous les ordres de transfert avec leurs lignes ($expand=transferLines).

@@ -24,14 +24,12 @@ namespace Soroubat.Api.Services
         {
             _logger.LogInformation("[Stock] Récupération du stock pour le projet {ProjectNo}", projectNo);
 
-            // Les deux appels BC sont indépendants — on les lance en parallèle
             var locationsTask = FetchLocationsByProjectAsync(projectNo);
             var entriesTask   = FetchItemLedgerEntriesByProjectAsync(projectNo);
 
             await Task.WhenAll(locationsTask, entriesTask);
 
-            var locations = locationsTask.Result;
-            var entries   = entriesTask.Result;
+            var entries = entriesTask.Result;
 
             if (entries.Count == 0)
             {
@@ -39,13 +37,18 @@ namespace Soroubat.Api.Services
                 return new List<StockChantierReadDto>();
             }
 
+            var stock = AggregateStock(entries, projectNo);
+
+            _logger.LogInformation("[Stock] {Count} article(s) en stock pour le projet {ProjectNo}",
+                stock.Count, projectNo);
+
+            return stock;
+        }
 
 
-            // AGRÉGATION : groupement par article et emplacement pour obtenir le stock réel.
-            // La somme des quantités (entrées positives + sorties négatives) donne le stock courant.
-            // Les articles avec un stock nul (mouvements équilibrés) sont exclus du résultat.
-            // Les articles avec un stock négatif sont conservés : AlertService les détecte comme anomalie.
-            var stockAgrege = entries
+        private static List<StockChantierReadDto> AggregateStock(List<ItemLedgerEntryReadDto> entries, string projectNo)
+        {
+            return entries
                 .GroupBy(entry => new
                 {
                     entry.ItemNo,
@@ -65,14 +68,8 @@ namespace Soroubat.Api.Services
                 .OrderBy(stock => stock.LocationCode)
                 .ThenBy(stock => stock.ItemDescription)
                 .ToList();
-
-            _logger.LogInformation("[Stock] {Count} article(s) en stock pour le projet {ProjectNo}",
-                stockAgrege.Count, projectNo);
-
-            return stockAgrege;
         }
 
-        // ─── MÉTHODES PRIVÉES ─────────────────────────────────────────────────
 
         /// <summary>
         /// Récupère les magasins BC rattachés à un projet (Affaire = projectNo).

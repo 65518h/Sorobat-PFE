@@ -9,7 +9,6 @@ namespace Soroubat.Api.Interfaces
     /// </summary>
     public interface IVehiculeService
     {
-        // ── En-têtes (Headers) ───────────────────────────────────────────────
 
         /// <summary>
         /// Retourne tous les pointages véhicule du projet du chef connecté.
@@ -44,7 +43,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<bool> ValiderPointageAsync(Guid id, string projectNo);
 
-        // ── Lignes ───────────────────────────────────────────────────────────
 
         /// <summary>
         /// Met à jour partiellement une ligne de pointage véhicule.
@@ -53,7 +51,6 @@ namespace Soroubat.Api.Interfaces
         /// </summary>
         Task<VehiculePointageLineReadDto> PatchLineAsync(Guid lineId, VehiculePointageLinePatchDto lineDto, string projectNo);
 
-        // ── Usage interne (AlertService) ─────────────────────────────────────
 
         /// <summary>
         /// Retourne tous les pointages avec leurs lignes ($expand=vehiculePointageLines).

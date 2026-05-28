@@ -20,7 +20,7 @@ namespace Soroubat.Api.Services
         private readonly IEmpAttendanceService   _attendanceService;
         private readonly ILogger<AlertService>   _logger;
 
-        // ── Seuils SiteManagement ─────────────────────────────────────────────
+// les seuils utilisés 
         /// <summary>Nombre de jours de retard avant alerte Warning sur une tâche.</summary>
         private const int TaskDelayWarningDays  = 3;
         /// <summary>Nombre de jours de retard avant alerte Critical sur une tâche.</summary>
@@ -28,13 +28,13 @@ namespace Soroubat.Api.Services
         /// <summary>Avancement minimal attendu (%) pour une tâche dont la date de fin est dépassée.</summary>
         private const decimal TaskMinProgressPct = 100m;
 
-        // ── Seuils PurchaseRequest ────────────────────────────────────────────
+        //Seuils PurchaseRequest
         /// <summary>Nombre de jours maximum autorisé en attente d'approbation avant Warning.</summary>
         private const int PendingApprovalWarningDays  = 5;
         /// <summary>Nombre de jours maximum autorisé en attente d'approbation avant Critical.</summary>
         private const int PendingApprovalCriticalDays = 10;
 
-        // ── Seuils Transfer ───────────────────────────────────────────────────
+        //Seuils Transfer
         /// <summary>Nombre de jours maximum en transit avant Warning.</summary>
         private const int InTransitWarningDays  = 3;
         /// <summary>Nombre de jours maximum en transit avant Critical.</summary>
@@ -44,13 +44,13 @@ namespace Soroubat.Api.Services
         /// <summary>Pourcentage minimal de réception pour ne pas déclencher une alerte réception partielle.</summary>
         private const decimal PartialReceiptMinPct = 80m;
 
-        // ── Seuils Stock ──────────────────────────────────────────────────────
+        //Seuils Stock
         /// <summary>Quantité en dessous de laquelle le stock est considéré critique.</summary>
         private const decimal StockCritiqueMin  = 5m;
         /// <summary>Nombre de jours sans mouvement avant alerte stock dormant.</summary>
         private const int     StockDormantJours = 30;
 
-        // ── Seuils Pointage Véhicule ──────────────────────────────────────────
+        //Seuils Pointage Véhicule
         /// <summary>Nombre d'heures journalières maximum avant alerte surutilisation.</summary>
         private const decimal HeuresMaxJournee      = 12m;
         /// <summary>Nombre de jours sans validation avant alerte pointage non validé.</summary>
@@ -58,7 +58,7 @@ namespace Soroubat.Api.Services
         /// <summary>Ratio carburant (L/h) maximum avant alerte consommation anormale.</summary>
         private const decimal CarburantMaxParHeure  = 15m;
 
-        // ── Seuils Gasoil ─────────────────────────────────────────────────────
+        //Seuils Gasoil
         /// <summary>Nombre de jours sans validation avant alerte fiche non validée.</summary>
         private const int     FicheEnCoursMaxJours     = 2;
         /// <summary>Consommation totale journalière (L) au-delà de laquelle une alerte est déclenchée.</summary>
@@ -86,7 +86,6 @@ namespace Soroubat.Api.Services
             _logger            = logger;
         }
 
-        // ── Méthode utilitaire de tri ─────────────────────────────────────────
 
         /// <summary>
         /// Trie les alertes par sévérité décroissante (Critical → Warning → Info),
@@ -100,90 +99,7 @@ namespace Soroubat.Api.Services
                 .ToList();
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 1 — SiteManagement (Tâches Projet)
-        // ────────────────────────────────────────────────────────────────────────
-
-        /// <summary>
-        /// Alertes sur les tâches du projet :
-        ///   - Tâche en retard : date de fin dépassée et avancement inférieur à 100 %.
-        ///   - Tâche non démarrée : date de fin dans moins de X jours et avancement à 0 %.
-        /// </summary>
-        // public async Task<List<AlertDto>> GetSiteManagementAlertsAsync(string projectNo)
-        // {
-        //     var alerts = new List<AlertDto>();
-        //     List<JobTaskReadDto> tasks;
-
-        //     try
-        //     {
-        //         tasks = await _siteService.GetMyTasksAsync(projectNo);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         _logger.LogWarning(ex, "[AlertService] Impossible de récupérer les tâches pour {ProjectNo}", projectNo);
-        //         return alerts;
-        //     }
-
-        //     var today = DateTime.Today;
-
-        //     foreach (var task in tasks)
-        //     {
-        //         // ── ALERTE 1 : Tâche en retard ──────────────────────────────────────
-        //         // La date de fin est dépassée et la tâche n'est pas à 100 %.
-        //         if (task.DateFin.HasValue
-        //             && task.DateFin.Value.Date < today
-        //             && task.ProgressPct < TaskMinProgressPct)
-        //         {
-        //             int joursRetard = (today - task.DateFin.Value.Date).Days;
-        //             string severity = joursRetard >= TaskDelayCriticalDays ? "Critical" : "Warning";
-
-        //             alerts.Add(new AlertDto
-        //             {
-        //                 Type            = "TaskDelay",
-        //                 Severity        = severity,
-        //                 Title           = $"Tâche en retard — {task.TaskNo}",
-        //                 Message         = $"La tâche \"{task.Description}\" (N° {task.TaskNo}) "
-        //                                 + $"devait être terminée le {task.DateFin.Value:dd/MM/yyyy}. "
-        //                                 + $"Retard : {joursRetard} jour(s). "
-        //                                 + $"Avancement actuel : {task.ProgressPct:F0} %.",
-        //                 RelatedEntityNo = task.TaskNo,
-        //                 RelatedEntityId = task.Id
-        //             });
-        //         }
-
-        //         // ── ALERTE 2 : Tâche non démarrée — échéance proche ─────────────────
-        //         // La date de fin arrive dans moins de TaskDelayWarningDays jours
-        //         // mais l'avancement est encore à 0 %.
-        //         if (task.DateFin.HasValue
-        //             && task.DateFin.Value.Date >= today
-        //             && task.ProgressPct == 0m)
-        //         {
-        //             int joursRestants = (task.DateFin.Value.Date - today).Days;
-
-        //             if (joursRestants <= TaskDelayWarningDays)
-        //             {
-        //                 alerts.Add(new AlertDto
-        //                 {
-        //                     Type            = "TaskNotStarted",
-        //                     Severity        = "Warning",
-        //                     Title           = $"Tâche non démarrée — {task.TaskNo}",
-        //                     Message         = $"La tâche \"{task.Description}\" (N° {task.TaskNo}) "
-        //                                     + $"n'a pas encore démarré (avancement : 0 %) "
-        //                                     + $"alors que la date de fin est dans {joursRestants} jour(s) "
-        //                                     + $"(le {task.DateFin.Value:dd/MM/yyyy}).",
-        //                     RelatedEntityNo = task.TaskNo,
-        //                     RelatedEntityId = task.Id
-        //                 });
-        //             }
-        //         }
-        //     }
-
-        //     return SortAlerts(alerts);
-        // }
-
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 2 — PurchaseRequest (Demandes d'Achat)
-        // ────────────────────────────────────────────────────────────────────────
+// les purchase Request
 
         /// <summary>
         /// Alertes sur les demandes d'achat :
@@ -211,7 +127,7 @@ namespace Soroubat.Api.Services
 
             foreach (var req in requests)
             {
-                // ── ALERTE 1 : Demande rejetée non traitée ──────────────────────────
+                //alerte 1: demande rejetée non traitée
                 if (string.Equals(req.Statut, "Rejected", StringComparison.OrdinalIgnoreCase))
                 {
                     alerts.Add(new AlertDto
@@ -227,8 +143,7 @@ namespace Soroubat.Api.Services
                     continue;
                 }
 
-                // ── ALERTE 2 : En attente d'approbation trop longtemps ──────────────
-                // DateSaisie est la seule date disponible dans PurchaseRequestReadDto.
+                // alerte2 : en attente d'approbation trop longtemps
                 if (string.Equals(req.Statut, "To Approve", StringComparison.OrdinalIgnoreCase)
                     && req.DateSaisie.HasValue)
                 {
@@ -253,8 +168,7 @@ namespace Soroubat.Api.Services
                     }
                 }
 
-                // ── ALERTE 3 : Demande ouverte sans lignes ───────────────────────────
-                // PurchaseRequestLines null ou vide = aucun article saisi.
+                // alerte3 : demande ouverte sans lignes
                 if (string.Equals(req.Statut, "Open", StringComparison.OrdinalIgnoreCase)
                     && (req.PurchaseRequestLines == null || !req.PurchaseRequestLines.Any()))
                 {
@@ -275,10 +189,7 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 3 — Transfer (Ordres de Transfert)
-        // ────────────────────────────────────────────────────────────────────────
-
+// les ordres de transfert
         /// <summary>
         /// Alertes sur les ordres de transfert :
         ///   - Transfert bloqué en transit trop longtemps.
@@ -305,10 +216,9 @@ namespace Soroubat.Api.Services
 
             foreach (var transfer in transfers)
             {
-                // PostingDate est un DateTime? dans TransferHeaderReadDto — pas de parsing nécessaire.
                 DateTime? postingDate = transfer.PostingDate;
 
-                // ── ALERTE 1 : Transfert bloqué en transit trop longtemps ────────────
+                //alerte 1 : transfert bloqué en transit trop longtemps 
                 if (string.Equals(transfer.Status, "In Transit", StringComparison.OrdinalIgnoreCase)
                     && postingDate.HasValue)
                 {
@@ -334,7 +244,7 @@ namespace Soroubat.Api.Services
                     }
                 }
 
-                // ── ALERTE 2 : Transfert ouvert sans expédition ──────────────────────
+                // alerte2 : transfert ouvert sans expédition 
                 if (string.Equals(transfer.Status, "Open", StringComparison.OrdinalIgnoreCase)
                     && postingDate.HasValue)
                 {
@@ -361,7 +271,7 @@ namespace Soroubat.Api.Services
 
                 foreach (var line in transfer.TransferLines)
                 {
-                    // ── ALERTE 3 : Réception partielle ──────────────────────────────────
+                    //alerte 3 : réception partielle 
                     if (line.QuantityShipped.HasValue
                         && line.QuantityShipped > 0
                         && line.QuantityReceived.HasValue)
@@ -389,8 +299,7 @@ namespace Soroubat.Api.Services
                         }
                     }
 
-                    // ── ALERTE 4 : Véhicule non assigné sur une ligne active ─────────────
-                    // Pertinent uniquement pour les transferts en cours (Open ou In Transit).
+                    // alerte 4 : véhicule non assigné sur une ligne active 
                     bool transferActif = string.Equals(transfer.Status, "Open", StringComparison.OrdinalIgnoreCase)
                                      || string.Equals(transfer.Status, "In Transit", StringComparison.OrdinalIgnoreCase);
 
@@ -414,9 +323,7 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 4 — Stock Magasin
-        // ────────────────────────────────────────────────────────────────────────
+// partie stock
 
         /// <summary>
         /// Alertes sur le stock du chantier :
@@ -445,7 +352,7 @@ namespace Soroubat.Api.Services
             {
                 string label = $"{stock.ItemNo} — {stock.ItemDescription} ({stock.LocationCode})";
 
-                // ── ALERTE 1 : Stock négatif ─────────────────────────────────────────
+                // alerte 1: stock négatif 
                 if (stock.Quantity < 0)
                 {
                     alerts.Add(new AlertDto
@@ -461,8 +368,7 @@ namespace Soroubat.Api.Services
                     continue;
                 }
 
-                // ── ALERTE 2 : Stock critique ─────────────────────────────────────────
-                // Quantité positive mais très faible — risque de rupture.
+                // alerte stock critique
                 if (stock.Quantity > 0 && stock.Quantity <= StockCritiqueMin)
                 {
                     string severity = stock.Quantity <= StockCritiqueMin / 2m ? "Critical" : "Warning";
@@ -479,8 +385,7 @@ namespace Soroubat.Api.Services
                     });
                 }
 
-                // ── ALERTE 3 : Stock dormant ──────────────────────────────────────────
-                // Aucun mouvement depuis X jours — article potentiellement inutile.
+                // alerte 3 : stock dormant
                 if (stock.LastPostingDate.HasValue)
                 {
                     int joursDepuisDernierMvt = (today - stock.LastPostingDate.Value.Date).Days;
@@ -505,9 +410,7 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 5 — Pointage Véhicule
-        // ────────────────────────────────────────────────────────────────────────
+// les pointages véhicule 
 
         /// <summary>
         /// Alertes sur les pointages véhicule :
@@ -535,7 +438,6 @@ namespace Soroubat.Api.Services
 
             foreach (var header in headers)
             {
-                // Le champ date est une string dans VehiculePointageHeaderReadDto (Journee dans BC).
                 DateTime? pointageDate = null;
                 if (!string.IsNullOrEmpty(header.Date)
                     && DateTime.TryParse(header.Date, out var parsedDate))
@@ -543,7 +445,7 @@ namespace Soroubat.Api.Services
                     pointageDate = parsedDate;
                 }
 
-                // ── ALERTE 1 : Pointage ouvert non validé depuis trop longtemps ─────────
+                // 1: pointage ouvert non validé depuis trop longtemps
                 if (string.Equals(header.Status, "Ouvert", StringComparison.OrdinalIgnoreCase)
                     && pointageDate.HasValue)
                 {
@@ -576,7 +478,7 @@ namespace Soroubat.Api.Services
                     string labelVehicule = $"Véhicule {line.VehiculeNo} ({line.Description}) "
                                         + $"— pointage {header.DocumentNo}";
 
-                    // ── ALERTE 2 : Véhicule surutilisé ──────────────────────────────────
+                    // alerte 2: véhicule surutilisé 
                     if (line.HoursWorked.HasValue && line.HoursWorked > HeuresMaxJournee)
                     {
                         string severity = line.HoursWorked > HeuresMaxJournee * 1.5m ? "Critical" : "Warning";
@@ -594,8 +496,7 @@ namespace Soroubat.Api.Services
                         });
                     }
 
-                    // ── ALERTE 3 : Index incohérent ───────────────────────────────────────
-                    // EndIndex < StartIndex = saisie erronée du kilométrage ou de l'horamètre.
+                    // Alerte 3: index incohérent 
                     if (line.EndIndex.HasValue
                         && line.StartIndex.HasValue
                         && line.EndIndex > 0
@@ -615,9 +516,7 @@ namespace Soroubat.Api.Services
                         });
                     }
 
-                    // ── ALERTE 4 : Consommation carburant anormale ───────────────────────
-                    // FuelConsumed et HoursWorked sont les seuls champs disponibles
-                    // dans VehiculePointageLineReadDto pour évaluer la consommation.
+                    // alert44  : consommation carburant anormale 
                     if (line.FuelConsumed.HasValue
                         && line.FuelConsumed > 0
                         && line.HoursWorked.HasValue
@@ -649,9 +548,7 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 6 — Gasoil (Fiches de Distribution)
-        // ────────────────────────────────────────────────────────────────────────
+// partie gasoil
 
         /// <summary>
         /// Alertes sur les fiches gasoil :
@@ -682,7 +579,6 @@ namespace Soroubat.Api.Services
 
             foreach (var header in headers)
             {
-                // Le champ date est une string dans GasoilHeaderReadDto (Journee dans BC).
                 DateTime? ficheDate = null;
                 if (!string.IsNullOrEmpty(header.Date)
                     && DateTime.TryParse(header.Date, out var parsedDate))
@@ -692,7 +588,7 @@ namespace Soroubat.Api.Services
 
                 string labelFiche = $"Fiche n° {header.DocumentNo}";
 
-                // ── ALERTE 1 : Fiche non validée depuis trop longtemps ───────────────────
+                // alerte1:fiche non validée depuis trop longtemps 
                 if (string.Equals(header.Status, "En Cours", StringComparison.OrdinalIgnoreCase)
                     && ficheDate.HasValue)
                 {
@@ -719,7 +615,7 @@ namespace Soroubat.Api.Services
                 if (header.Lines == null || !header.Lines.Any())
                     continue;
 
-                // ── ALERTE 2 : Consommation totale journalière anormale ──────────────────
+                // alerte 2: consommation totale journalière anormale
                 decimal totalConsommation = header.Lines
                     .Where(l => l.Quantity.HasValue && l.Quantity > 0)
                     .Sum(l => l.Quantity!.Value);
@@ -744,7 +640,7 @@ namespace Soroubat.Api.Services
 
                 foreach (var line in header.Lines)
                 {
-                    // ── ALERTE 3 : Ligne sans véhicule assigné ───────────────────────────
+                    // alerte3: ligne sans véhicule assigné
                     if (string.IsNullOrWhiteSpace(line.VehicleNo))
                     {
                         alerts.Add(new AlertDto
@@ -760,7 +656,7 @@ namespace Soroubat.Api.Services
                         });
                     }
 
-                    // ── ALERTE 4 : Quantité par ligne anormalement élevée ────────────────
+                    // alerte 4: quantité par ligne anormalement élevée
                     if (line.Quantity.HasValue && line.Quantity > ConsommationLigneMax)
                     {
                         string severity = line.Quantity > ConsommationLigneMax * 1.5m ? "Critical" : "Warning";
@@ -784,9 +680,7 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ────────────────────────────────────────────────────────────────────────
-        // PARTIE 7 — Pointage Salarié (Attendance)
-        // ────────────────────────────────────────────────────────────────────────
+// partie pointage salarié
 
         /// <summary>
         /// Alertes sur les fiches de pointage salarié :
@@ -815,7 +709,7 @@ namespace Soroubat.Api.Services
             {
                 string labelFiche = $"Fiche n° {header.No} ({header.Month} {header.Year})";
 
-                // ── ALERTE 1 : Fiche sans lignes ─────────────────────────────────────────
+                // alerte 1: fiche sans lignes
                 if (header.Lines == null || !header.Lines.Any())
                 {
                     alerts.Add(new AlertDto
@@ -833,9 +727,8 @@ namespace Soroubat.Api.Services
 
                 foreach (var line in header.Lines)
                 {
-                    // ── ALERTE 2 : Salarié sans aucun jour saisi ─────────────────────────
-                    // On considère qu'un salarié n'a aucun pointage si tous ses champs
-                    // Day1..Day31 sont null ou vides ET que totalPresentDays est 0 ou null.
+                    // alerte 2: salarié sans aucun jour saisi
+
                     bool aucunJourSaisi = IsAllDaysEmpty(line);
                     bool totalPresentNul = !line.TotalPresentDays.HasValue
                                         || line.TotalPresentDays.Value == 0;
@@ -864,7 +757,6 @@ namespace Soroubat.Api.Services
             return SortAlerts(alerts);
         }
 
-        // ── Helper Attendance ─────────────────────────────────────────────────
 
         /// <summary>
         /// Vérifie si tous les champs Day1..Day31 d'une ligne de pointage sont null ou vides.

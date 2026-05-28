@@ -40,18 +40,15 @@ layout
         InStream: InStream;
         Base64Convert: Codeunit "Base64 Convert";
     begin
-        // Vérifie si l'employé a une image (champ 140)
         if Rec.Image.HasValue then begin
-            // On récupère le contenu binaire dans la table système Tenant Media
             if TenantMedia.Get(Rec.Image.MediaId) then begin
                 TenantMedia.CalcFields(Content);
                 if TenantMedia.Content.HasValue then begin
                     TenantMedia.Content.CreateInStream(InStream);
-                    // On convertit le flux binaire en texte Base64
                     exit(Base64Convert.ToBase64(InStream));
                 end;
             end;
         end;
-        exit(''); // Retourne vide si pas d'image
+        exit(''); 
     end;
 }

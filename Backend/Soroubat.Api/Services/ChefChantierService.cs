@@ -21,7 +21,7 @@ namespace Soroubat.Api.Services
 
         public async Task<ChefChantierCheckResult> CheckChefAsync(string email)
         {
-            var encodedEmail = Uri.EscapeDataString(email);
+            var encodedEmail = Uri.EscapeDataString(email); // on utilise escapeDataString pour encoder l'email afin d'éviter les problèmes avec les caractères spéciaux dans l'URL. 
             var url = $"chefsChantier?$filter=email eq '{encodedEmail}'";
 
             _logger.LogInformation("[ChefChantier] Vérification BC pour : {Email}", email);
@@ -35,8 +35,7 @@ namespace Soroubat.Api.Services
                 return ChefChantierCheckResult.Fail(ChefChantierStatus.NotFound);
             }
 
-            var result = await response.Content
-                .ReadFromJsonAsync<BCResponse<ChefChantierReadDto>>();
+            var result = await response.Content.ReadFromJsonAsync<BCResponse<ChefChantierReadDto>>();
 
             var chef = result?.Value?.FirstOrDefault();
 

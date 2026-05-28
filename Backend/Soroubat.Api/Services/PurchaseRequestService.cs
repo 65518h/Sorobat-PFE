@@ -16,8 +16,7 @@ namespace Soroubat.Api.Services
         private readonly HttpClient _httpClient;
         private readonly ILogger<PurchaseRequestService> _logger;
 
-        // ── Options de sérialisation ──────────────────────────────────────────
-
+        // les régels de sérialisation
         /// <summary>Sérialisation en écriture : ignore les propriétés null pour ne pas écraser les valeurs BC.</summary>
         private static readonly JsonSerializerOptions SerializerOptionsWrite = new()
         {
@@ -37,43 +36,8 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── Méthodes helper de sérialisation ─────────────────────────────────
-
-        /// <summary>
-        /// Sérialise un DTO en JsonObject pour permettre l'injection de champs supplémentaires
-        /// avant la sérialisation finale (ex : jobNo forcé depuis le JWT).
-        /// </summary>
-        private static JsonObject ToJsonObject<T>(T dto)
-        {
-            var node = JsonSerializer.SerializeToNode(dto, SerializerOptionsWrite);
-            return (node as JsonObject) ?? new JsonObject();
-        }
-
-        /// <summary>
-        /// Ajoute jobNo au DTO sérialisé et retourne le JSON final prêt à envoyer à BC.
-        /// Utilisé pour la création et la modification d'en-têtes et de lignes.
-        /// </summary>
-        private static string MergeJobNoAndSerialize<T>(T dto, string projectNo)
-        {
-            var root = ToJsonObject(dto);
-            root["jobNo"] = projectNo;
-            return root.ToJsonString();
-        }
-
-        /// <summary>
-        /// Ajoute jobNo et lineNo au DTO de ligne et retourne le JSON final.
-        /// Un type non générique est nécessaire ici car lineNo n'existe pas dans PatchDto.
-        /// </summary>
-        private static string MergeJobNoLineNoAndSerialize(PurchaseRequestLineCreateDto dto, string projectNo, int lineNo)
-        {
-            var root = ToJsonObject(dto);
-            root["jobNo"]  = projectNo;
-            root["lineNo"] = lineNo;
-            return root.ToJsonString();
-        }
-
-        // ── Méthodes helper de vérification ──────────────────────────────────
-
+        
+        // helpers
         /// <summary>
         /// Récupère un en-tête de demande d'achat depuis BC, vérifie qu'il appartient au projet
         /// du chef connecté et retourne l'ETag pour les opérations PATCH / DELETE suivantes.
@@ -108,8 +72,6 @@ namespace Soroubat.Api.Services
                     "Accès refusé : cette demande n'appartient pas à votre projet.");
             }
 
-            // L'ETag contient la version de la ressource — obligatoire pour PATCH et DELETE
-            // afin d'éviter les conflits de concurrence (optimistic concurrency).
             var etag = response.Headers.ETag?.ToString();
             return (header, etag);
         }
@@ -178,8 +140,7 @@ namespace Soroubat.Api.Services
             return 0;
         }
 
-        // ── Méthodes métier ───────────────────────────────────────────────────
-
+        // métier
         public async Task<IEnumerable<PurchaseRequestReadDto>> GetAllRequestsAsync(string projectNo)
         {
             var url = $"purchaseRequests?$filter=jobNo eq '{projectNo}'";
@@ -198,7 +159,6 @@ namespace Soroubat.Api.Services
 
         public async Task<PurchaseRequestReadDto?> GetRequestByIdAsync(Guid id, string projectNo)
         {
-            // $expand inclut les lignes directement dans la réponse de l'en-tête
             var url      = $"purchaseRequests({id})?$expand=purchaseRequestLines";
             var response = await _httpClient.GetAsync(url);
 
@@ -227,7 +187,11 @@ namespace Soroubat.Api.Services
         public async Task<PurchaseRequestReadDto> CreateHeaderAsync(
             PurchaseRequestCreateDto header, string projectNo)
         {
-            var json    = MergeJobNoAndSerialize(header, projectNo);
+            var node = JsonSerializer.SerializeToNode(header, SerializerOptionsWrite)
+                as JsonObject ?? new JsonObject();
+            node["jobNo"] = projectNo;
+
+            var json    = node.ToJsonString();
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             _logger.LogInformation("[PR] Création en-tête pour projet {ProjectNo}", projectNo);
@@ -237,7 +201,6 @@ namespace Soroubat.Api.Services
             if (!response.IsSuccessStatusCode)
                 await HandleErrorResponseAsync(response);
 
-            // Le ! indique au compilateur que la réponse ne sera jamais null après un succès BC
             return (await response.Content
                 .ReadFromJsonAsync<PurchaseRequestReadDto>(SerializerOptionsRead))!;
         }
@@ -260,7 +223,12 @@ namespace Soroubat.Api.Services
             {
                 currentMaxLineNo += 10000;
 
-                var json    = MergeJobNoLineNoAndSerialize(line, projectNo, currentMaxLineNo);
+                var node = JsonSerializer.SerializeToNode(line, SerializerOptionsWrite)
+                    as JsonObject ?? new JsonObject();
+                node["jobNo"]  = projectNo;
+                node["lineNo"] = currentMaxLineNo;
+
+                var json    = node.ToJsonString();
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 _logger.LogInformation("[PR] Création ligne {DocNo} / LineNo {LineNo}",
@@ -309,7 +277,6 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     $"Statut actuel '{currentStatut}' — seule une demande 'Open' peut être soumise.");
 
-            // On ne modifie que le statut — les autres champs ne sont pas envoyés
             var json    = """{"statut": "To Approve"}""";
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequests({id})")
             {
@@ -328,7 +295,7 @@ namespace Soroubat.Api.Services
 
         public async Task<bool> DeleteRequestAsync(Guid id, string projectNo)
         {
-            // La suppression des lignes en cascade est gérée par le trigger OnDelete dans BC
+            // ici la suppression en cascade est gérée par BC
             var (_, etag) = await GetAndVerifyHeaderAsync(id, projectNo);
 
             var request = new HttpRequestMessage(HttpMethod.Delete, $"purchaseRequests({id})");
@@ -348,7 +315,6 @@ namespace Soroubat.Api.Services
         {
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            // jobNo n'est pas envoyé dans le PATCH ligne : BC interdit sa modification via OnModifyRecord
             var json    = JsonSerializer.Serialize(lineDto, SerializerOptionsWrite);
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"purchaseRequestLines({lineId})")
             {

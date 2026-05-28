@@ -38,7 +38,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("assignmentDescription")]
         public string? AssignmentDescription { get; set; }
 
-        // ── Pointage journalier 1 à 31 ────────────────────────────────────────
         [JsonPropertyName("day1")]  public string? Day1  { get; set; }
         [JsonPropertyName("day2")]  public string? Day2  { get; set; }
         [JsonPropertyName("day3")]  public string? Day3  { get; set; }

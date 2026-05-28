@@ -21,7 +21,6 @@ namespace Soroubat.Api.Services
             _logger = logger;
         }
 
-        // ─── PROJET ───────────────────────────────────────────────────────────
 
         public async Task<JobReadDto> GetAssignedJobAsync(string projectNo)
         {
@@ -46,7 +45,6 @@ namespace Soroubat.Api.Services
         }
 
 
-        // ─── TÂCHES ───────────────────────────────────────────────────────────
 
         public async Task<List<JobTaskReadDto>> GetMyTasksAsync(string projectNo)
         {
@@ -65,58 +63,62 @@ namespace Soroubat.Api.Services
 
         public async Task<bool> UpdateTaskProgressAsync(Guid taskId, decimal progress, string authorizedProjectNo)
         {
-            // 1. SÉCURITÉ : récupérer la tâche et vérifier son appartenance au projet
-            _logger.LogInformation("[SiteManagement] Vérification tâche {TaskId} pour projet {ProjectNo}",
-                taskId, authorizedProjectNo);
+            var (_, etag) = await GetAndVerifyTaskAsync(taskId, authorizedProjectNo);
 
-            var getResponse = await _httpClient.GetAsync($"jobTasks({taskId})");
-
-            if (getResponse.StatusCode == System.Net.HttpStatusCode.NotFound)
-                throw new KeyNotFoundException($"La tâche '{taskId}' est introuvable dans Business Central.");
-
-            if (!getResponse.IsSuccessStatusCode)
-                await HandleErrorResponseAsync(getResponse);
-
-            var task = await getResponse.Content.ReadFromJsonAsync<JobTaskReadDto>();
-
-            if (task == null)
-                throw new KeyNotFoundException($"La tâche '{taskId}' est introuvable dans Business Central.");
-
-            // Vérification que la tâche appartient bien au projet du chef connecté
-            if (!task.JobNo.Equals(authorizedProjectNo, StringComparison.OrdinalIgnoreCase))
-            {
-                _logger.LogWarning("[SiteManagement] Accès refusé : tâche {TaskId} appartient au projet {TaskProject}, " +
-                    "chef connecté au projet {UserProject}",
-                    taskId, task.JobNo, authorizedProjectNo);
-                throw new UnauthorizedAccessException(
-                    "Vous n'avez pas le droit de modifier une tâche d'un autre chantier.");
-            }
-
-            // 2. EXÉCUTION : envoi du PATCH avec l'avancement
             var patchData = new { progressPct = progress };
-            var json = JsonSerializer.Serialize(patchData); // sérialise l'objet anonyme en JSON
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var request = new HttpRequestMessage(HttpMethod.Patch, $"jobTasks({taskId})")
+            var json      = JsonSerializer.Serialize(patchData);
+            var request   = new HttpRequestMessage(HttpMethod.Patch, $"jobTasks({taskId})")
             {
-                Content = content
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
             };
-            // If-Match: * — désactive la vérification de concurrence optimiste (ETag) côté BC
-            request.Headers.TryAddWithoutValidation("If-Match", "*");
+            request.Headers.TryAddWithoutValidation("If-Match", etag ?? "*");
 
-            var patchResponse = await _httpClient.SendAsync(request);
+            var response = await _httpClient.SendAsync(request);
 
-            if (!patchResponse.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
                 _logger.LogError("[SiteManagement] Échec PATCH avancement tâche {TaskId} : {StatusCode}",
-                    taskId, (int)patchResponse.StatusCode);
-                await HandleErrorResponseAsync(patchResponse);
+                    taskId, (int)response.StatusCode);
+                await HandleErrorResponseAsync(response);
             }
 
             _logger.LogInformation("[SiteManagement] Avancement tâche {TaskId} mis à jour à {Progress}%",
                 taskId, progress);
 
             return true;
+        }
+        
+
+        // helpers 
+        private async Task<(JobTaskReadDto Task, string? ETag)> GetAndVerifyTaskAsync(Guid taskId, string projectNo)
+        {
+            var response = await _httpClient.GetAsync($"jobTasks({taskId})");
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                throw new KeyNotFoundException(
+                    $"La tâche '{taskId}' est introuvable dans Business Central.");
+
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
+
+            var task = await response.Content.ReadFromJsonAsync<JobTaskReadDto>();
+
+            if (task == null)
+                throw new KeyNotFoundException(
+                    $"La tâche '{taskId}' est introuvable dans Business Central.");
+
+            if (!task.JobNo.Equals(projectNo, StringComparison.OrdinalIgnoreCase))
+            {
+                _logger.LogWarning(
+                    "[SiteManagement] Accès refusé : tâche {TaskId} appartient au projet {TaskProject}, " +
+                    "chef connecté au projet {UserProject}",
+                    taskId, task.JobNo, projectNo);
+                throw new UnauthorizedAccessException(
+                    "Vous n'avez pas le droit de modifier une tâche d'un autre chantier.");
+            }
+
+            var etag = response.Headers.ETag?.ToString();
+            return (task, etag);
         }
     }
 }

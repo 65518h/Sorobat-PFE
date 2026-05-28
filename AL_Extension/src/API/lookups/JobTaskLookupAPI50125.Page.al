@@ -24,7 +24,7 @@ page 50125 "ProjectTaskLookupAPI"
                 field(projectNo; Rec."Job No.") { }
                 field(taskNo; Rec."Job Task No.") { }
                 field(description; Rec.Description) { }
-                field(type; Rec."Job Task Type") { } // Utile pour filtrer uniquement les lignes de type "Posting" (il existe aussi des lignes de type "Non-Posting" qui sont utilisées pour structurer les tâches dans le projet mais qui ne doivent pas être sélectionnées dans le cadre de la PR)
+                field(type; Rec."Job Task Type") { } 
             }
         }
     }

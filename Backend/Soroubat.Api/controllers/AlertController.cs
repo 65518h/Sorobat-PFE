@@ -21,30 +21,7 @@ namespace Soroubat.Api.Controllers
         private string? UserProjectNo => User.FindFirst("projectNo")?.Value;
 
 
-        // /// <summary>
-        // /// Retourne les alertes liées aux tâches du projet
-        // /// (retards, tâches non démarrées à l'approche de leur échéance).
-        // /// </summary>
-        // [HttpGet("site-management")]
-        // [ProducesResponseType(typeof(List<AlertDto>), StatusCodes.Status200OK)]
-        // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        // public async Task<ActionResult<List<AlertDto>>> GetSiteManagementAlerts()
-        // {
-        //     var projectNo = UserProjectNo;
-        //     if (string.IsNullOrEmpty(projectNo))
-        //         return BadRequest(new { message = "Aucun projet n'est assigné à votre compte." });
 
-        //     try
-        //     {
-        //         var alerts = await _alertService.GetSiteManagementAlertsAsync(projectNo);
-        //         return Ok(alerts);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, new { message = ex.Message });
-        //     }
-        // }
 
         /// <summary>
         /// Retourne les alertes liées aux demandes d'achat du projet
@@ -196,8 +173,7 @@ namespace Soroubat.Api.Controllers
             }
         }
 
-        // ── AGRÉGATEUR GLOBAL ─────────────────────────────────────────────────
-
+        
         /// <summary>
         /// Retourne toutes les alertes du projet, toutes catégories confondues.
         /// Les 7 catégories sont interrogées en parallèle pour minimiser la latence.
@@ -217,10 +193,8 @@ namespace Soroubat.Api.Controllers
 
             try
             {
-                // Exécution en parallèle des 7 catégories.
-                // Chaque méthode de service gère ses propres erreurs BC en retournant
-                // une liste vide — Task.WhenAll ne peut donc pas échouer partiellement.
-                var results = await Task.WhenAll(
+
+                var results = await Task.WhenAll( // whenAll utilisé pour une exécution paralléle
                     // _alertService.GetSiteManagementAlertsAsync(projectNo),
                     _alertService.GetPurchaseRequestAlertsAsync(projectNo),
                     _alertService.GetTransferAlertsAsync(projectNo),

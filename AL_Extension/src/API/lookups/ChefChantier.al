@@ -9,8 +9,7 @@ page 50155 "ChefChantierLookup"
     EntitySetName = 'chefsChantier';
     SourceTable = "Chef Chantier";
     DelayedInsert = true;
-    // SystemId est la clé OData standard — garantit des URLs stables et cohérentes
-    // avec les autres pages API du projet (jobTasks, purchaseRequests, etc.)
+
     ODataKeyFields = SystemId;
     InsertAllowed = true;
     ModifyAllowed = true;

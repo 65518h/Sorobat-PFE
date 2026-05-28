@@ -36,7 +36,6 @@ namespace Soroubat.Api.Services
             _logger     = logger;
         }
 
-        // ── Méthodes helper de vérification ──────────────────────────────────
 
         /// <summary>
         /// Récupère un en-tête de pointage depuis BC, vérifie qu'il appartient au projet
@@ -101,7 +100,6 @@ namespace Soroubat.Api.Services
                 throw new KeyNotFoundException(
                     $"La ligne de pointage '{lineId}' est introuvable dans Business Central.");
 
-            // Vérification de sécurité via l'en-tête parent
             var headerUrl      = $"vehiculePointageHeaders?$filter=documentNo eq '{line.DocumentNo}'";
             var headerResponse = await _httpClient.GetAsync(headerUrl);
 
@@ -130,8 +128,7 @@ namespace Soroubat.Api.Services
             return (line, etag);
         }
 
-        // ── Méthodes métier ───────────────────────────────────────────────────
-
+// métier
         public async Task<IEnumerable<VehiculePointageHeaderReadDto>> GetAllHeadersAsync(string projectNo)
         {
             var url = $"vehiculePointageHeaders?$filter=jobNo eq '{projectNo}'";
@@ -150,10 +147,8 @@ namespace Soroubat.Api.Services
 
         public async Task<VehiculePointageHeaderReadDto> GetHeaderByIdWithLinesAsync(Guid id, string projectNo)
         {
-            // Vérification de sécurité sur l'en-tête seul (sans lignes)
             await GetAndVerifyHeaderAsync(id, projectNo);
 
-            // Appel ciblé avec $expand pour retourner les lignes au client
             var url      = $"vehiculePointageHeaders({id})?$expand=vehiculePointageLines";
             var response = await _httpClient.GetAsync(url);
 
@@ -167,55 +162,60 @@ namespace Soroubat.Api.Services
         public async Task<VehiculePointageHeaderReadDto> CreateHeaderAsync(
             VehiculePointageHeaderCreateDto headerDto, string projectNo)
         {
-            // ── ÉTAPE 1 : POST avec jobNo uniquement ─────────────────────────
-            // La date est envoyée séparément dans un second PATCH car le trigger OnValidate
-            // de Journee côté AL génère les lignes véhicule — ce trigger ne se déclenche
-            // pas lors de l'insertion initiale.
+            var (created, etag) = await PostHeaderAsync(projectNo);
+
+            await PatchHeaderDateAsync(created.Id!.Value, headerDto.Date!, etag);
+
+            return await GetHeaderByIdWithLinesAsync(created.Id.Value, projectNo);
+        }
+
+        private async Task<(VehiculePointageHeaderReadDto Header, string? ETag)> PostHeaderAsync(
+            string projectNo)
+        {
             var jsonPost    = new JsonObject { ["jobNo"] = projectNo }.ToJsonString();
             var contentPost = new StringContent(jsonPost, Encoding.UTF8, "application/json");
 
             _logger.LogInformation(
                 "[Vehicule] Création en-tête (étape 1/2 — sans date) pour projet {ProjectNo}", projectNo);
 
-            var postResponse = await _httpClient.PostAsync("vehiculePointageHeaders", contentPost);
+            var response = await _httpClient.PostAsync("vehiculePointageHeaders", contentPost);
 
-            if (!postResponse.IsSuccessStatusCode)
-                await HandleErrorResponseAsync(postResponse);
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
 
-            var createdHeader = await postResponse.Content
+            var created = await response.Content
                 .ReadFromJsonAsync<VehiculePointageHeaderReadDto>(SerializerOptionsRead);
 
-            if (createdHeader?.Id == null)
+            if (created?.Id == null)
                 throw new InvalidOperationException(
                     "Business Central n'a pas retourné l'identifiant du pointage créé.");
 
-            // ── ÉTAPE 2 : PATCH avec la date ─────────────────────────────────
-            // Ce PATCH déclenche le trigger OnValidate de Journee côté AL,
-            // qui efface les éventuelles lignes existantes puis génère une ligne
-            // par véhicule actif (Bloquer = false) affecté au chantier.
-            var etag         = postResponse.Headers.ETag?.ToString();
-            var patchPayload = new JsonObject { ["date"] = headerDto.Date };
+            var etag = response.Headers.ETag?.ToString();
+            return (created, etag);
+        }
+
+        private async Task PatchHeaderDateAsync(Guid id, string date, string? etag)
+        {
+            var patchPayload = new JsonObject { ["date"] = date };
             var jsonPatch    = patchPayload.ToJsonString();
 
-            var patchRequest = new HttpRequestMessage(
-                new HttpMethod("PATCH"), $"vehiculePointageHeaders({createdHeader.Id})")
+            var request = new HttpRequestMessage(
+                new HttpMethod("PATCH"), $"vehiculePointageHeaders({id})")
             {
                 Content = new StringContent(jsonPatch, Encoding.UTF8, "application/json")
             };
-            patchRequest.Headers.TryAddWithoutValidation("If-Match", etag ?? "*");
+            request.Headers.TryAddWithoutValidation("If-Match", etag ?? "*");
 
             _logger.LogInformation(
-                "[Vehicule] Création en-tête (étape 2/2 — PATCH date {Date}) pour document {DocumentNo}",
-                headerDto.Date, createdHeader.DocumentNo);
+                "[Vehicule] Création en-tête (étape 2/2 — PATCH date {Date}) pour id {Id}", date, id);
 
-            var patchResponse = await _httpClient.SendAsync(patchRequest);
+            var response = await _httpClient.SendAsync(request);
 
-            if (!patchResponse.IsSuccessStatusCode)
-                await HandleErrorResponseAsync(patchResponse);
-
-            // Retourner l'en-tête complet avec les lignes générées par BC
-            return await GetHeaderByIdWithLinesAsync(createdHeader.Id.Value, projectNo);
+            if (!response.IsSuccessStatusCode)
+                await HandleErrorResponseAsync(response);
         }
+
+
 
         public async Task<bool> DeleteHeaderAsync(Guid id, string projectNo)
         {
@@ -241,7 +241,6 @@ namespace Soroubat.Api.Services
                 throw new InvalidOperationException(
                     $"Statut actuel '{existing.Status}' — seul un pointage 'Ouvert' peut être validé.");
 
-            // On ne modifie que le statut — les autres champs ne sont pas envoyés
             var json    = """{"status": "Validé"}""";
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"vehiculePointageHeaders({id})")
             {
@@ -258,15 +257,13 @@ namespace Soroubat.Api.Services
             return true;
         }
 
-        // ── Lignes ────────────────────────────────────────────────────────────
 
         public async Task<VehiculePointageLineReadDto> PatchLineAsync(
             Guid lineId, VehiculePointageLinePatchDto lineDto, string projectNo)
         {
             var (_, etag) = await GetAndVerifyLineAsync(lineId, projectNo);
 
-            // marche (jobNo de la ligne) est forcé côté AL — non envoyé dans le PATCH.
-            // Seuls les champs du PatchDto (saisie chef) sont transmis à BC.
+
             var json    = JsonSerializer.Serialize(lineDto, SerializerOptionsWrite);
             var request = new HttpRequestMessage(new HttpMethod("PATCH"), $"vehiculePointageLines({lineId})")
             {
@@ -288,7 +285,7 @@ namespace Soroubat.Api.Services
                 .ReadFromJsonAsync<VehiculePointageLineReadDto>(SerializerOptionsRead))!;
         }
 
-        // ── Usage interne (AlertService) ──────────────────────────────────────
+// utilisé pour la partie alertes
 
         public async Task<IEnumerable<VehiculePointageHeaderReadDto>> GetAllHeadersWithLinesAsync(string projectNo)
         {

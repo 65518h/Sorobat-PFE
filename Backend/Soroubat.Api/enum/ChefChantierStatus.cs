@@ -26,16 +26,12 @@ namespace Soroubat.Api.Models
 
     public enum ChefChantierStatus
     {
-        /// <summary>Chef actif avec un projet assigné — connexion autorisée.</summary>
         Active,
 
-        /// <summary>Email introuvable dans la table BC.</summary>
         NotFound,
 
-        /// <summary>Chef trouvé dans BC mais marqué inactif (Actif = false).</summary>
         Inactive,
 
-        /// <summary>Chef actif mais sans numéro de projet assigné.</summary>
         NoProject
     }
 }

@@ -17,7 +17,7 @@ namespace Soroubat.Api.Services
         {
             var errorContent = await response.Content.ReadAsStringAsync();
 
-            // Corps vide → message générique selon le code HTTP
+            // si le Corps vide alors on génére des messages générique selon le code HTTP
             if (string.IsNullOrWhiteSpace(errorContent))
             {
                 throw new HttpRequestException(response.StatusCode switch
@@ -35,7 +35,7 @@ namespace Soroubat.Api.Services
                 });
             }
 
-            // Corps présent → on tente d'extraire le message d'erreur BC (format OData standard)
+            // si Corps présent alros on tente d'extraire le message d'erreur BC (format OData standard)
             try
             {
                 var bcError = JsonSerializer.Deserialize<BCResponseError>(errorContent);
@@ -46,7 +46,7 @@ namespace Soroubat.Api.Services
             }
             catch (JsonException)
             {
-                // Le corps n'est pas du JSON valide (ex : page HTML d'erreur IIS)
+                // Le corps n'est pas du JSON valide 
                 throw new HttpRequestException(
                     $"Réponse de Business Central illisible (JSON invalide). " +
                     $"Code HTTP {(int)response.StatusCode}. Contenu : {errorContent}");
