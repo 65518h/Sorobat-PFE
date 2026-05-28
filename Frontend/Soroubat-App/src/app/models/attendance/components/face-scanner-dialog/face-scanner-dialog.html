@@ -1,0 +1,126 @@
+<!-- src/app/modules/attendance/components/face-scanner-dialog/face-scanner-dialog.html -->
+
+<div class="face-scanner-container" [class.success]="isSuccess" [class.error]="isError">
+  
+  <!-- Header -->
+  <div class="scanner-header">
+    <h2>
+      <mat-icon>face</mat-icon>
+      Scanner le visage
+    </h2>
+    <button class="close-btn" (click)="cancel()" matTooltip="Fermer">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <!-- Informations employé -->
+  <div class="employee-info" [class.scanning]="isProcessing">
+    <div class="employee-avatar-large">
+      <span>{{ (data.employeeName | slice:0:2).toUpperCase() }}</span>
+    </div>
+    <div class="employee-details">
+      <strong>{{ data.employeeName }}</strong>
+      <span>Matricule: {{ data.employeeMatricule }}</span>
+      <span>Jour: {{ data.day }}</span>
+    </div>
+  </div>
+  
+  <!-- Zone caméra -->
+  <div class="camera-container" *ngIf="!isProcessing && !result">
+    <!-- Message d'erreur caméra -->
+    <div class="camera-error-message" *ngIf="cameraError; else cameraWorking">
+      <mat-icon>videocam_off</mat-icon>
+      <p>Impossible d'accéder à la caméra</p>
+      <p class="error-hint">Vérifiez que vous avez autorisé l'accès à la caméra</p>
+      <button class="btn-retry-camera" (click)="startCamera()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+    </div>
+    
+    <!-- Caméra fonctionnelle -->
+    <ng-template #cameraWorking>
+      <div class="video-wrapper" [class.scanning]="isProcessing">
+        <!--  SUPPRIMER LA CLASSE hidden -->
+        <video #videoElement 
+               autoplay 
+               muted 
+               playsinline 
+               class="camera-preview"
+               [class.blur]="isProcessing">
+        </video>
+        
+        <!-- Message chargement caméra -->
+        <div class="camera-loading" *ngIf="!isCameraReady && !cameraError">
+          <div class="loading-spinner-small"></div>
+          <p>Initialisation de la caméra...</p>
+        </div>
+        
+        <!-- Guide visage avec animation -->
+        <div class="face-guide" *ngIf="showGuide && isCameraReady">
+          <div class="face-circle">
+            <mat-icon>face</mat-icon>
+            <div class="guide-text">
+              <span>Placez votre visage dans le cercle</span>
+              <div class="guide-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Effet de scan lumineux -->
+        <div class="scan-effect" *ngIf="!showGuide && isProcessing"></div>
+      </div>
+      
+      <button class="capture-btn" (click)="captureAndVerify()" [disabled]="!isCameraReady || cameraError">
+        <mat-icon>camera</mat-icon>
+        Scanner maintenant
+      </button>
+    </ng-template>
+  </div>
+  
+  <!-- Traitement en cours avec animation -->
+  <div class="processing-container" *ngIf="isProcessing">
+    <div class="scanning-animation">
+      <div class="scanning-wave"></div>
+      <div class="scanning-wave delay-1"></div>
+      <div class="scanning-wave delay-2"></div>
+    </div>
+    <div class="processing-text">
+      <p>{{ processingMessage }}</p>
+      <div class="processing-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Résultat avec animation -->
+  <div class="result-container" *ngIf="result">
+    <div class="result-card" [class.success]="result.success" [class.animate]="result">
+      <div class="result-icon">
+        <mat-icon>{{ result.success ? 'check_circle' : 'error' }}</mat-icon>
+      </div>
+      <div class="result-content">
+        <h3>{{ result.success ? '✓ Présence marquée !' : '✗ Échec du scan' }}</h3>
+        <p>{{ result.message }}</p>
+      </div>
+    </div>
+    <div class="result-actions" *ngIf="!result.success">
+      <button class="btn-retry" (click)="retry()">
+        <mat-icon>refresh</mat-icon>
+        Réessayer
+      </button>
+      <button class="btn-close-result" (click)="cancel()">
+        Annuler
+      </button>
+    </div>
+    <div class="result-actions" *ngIf="result.success">
+      <button class="btn-close-success" (click)="close(true)">
+        <mat-icon>done</mat-icon>
+        Terminer
+      </button>
+    </div>
+  </div>
+  
+</div>

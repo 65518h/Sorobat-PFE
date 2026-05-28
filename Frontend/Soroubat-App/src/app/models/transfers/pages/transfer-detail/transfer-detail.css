@@ -1,0 +1,1181 @@
+/* src/app/models/transfers/pages/transfer-detail/transfer-detail.css */
+
+/* ==================== VARIABLES ==================== */
+:host {
+  --primary: #4361ee;
+  --primary-dark: #3a56d4;
+  --primary-light: #7b9eff;
+  --success: #10b981;
+  --success-dark: #059669;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --cyan: #06b6d4;
+  --cyan-dark: #0891b2;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transfer-detail-container {
+  padding: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--gray-50) 0%, #ffffff 100%);
+}
+
+/* ==================== HEADER ==================== */
+.page-header-modern {
+  position: relative;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--cyan-dark) 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.header-gradient-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-content-modern {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.header-left-modern {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translateX(-4px);
+}
+
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.title-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.title-icon mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.title-text h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Badge statut */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+}
+
+/* ==================== LOADING & ERROR ==================== */
+.loading-state {
+  text-align: center;
+  padding: 80px;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-state {
+  text-align: center;
+  padding: 80px;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.error-state mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--danger);
+  margin-bottom: 16px;
+}
+
+.btn-retry {
+  margin-top: 20px;
+  padding: 10px 24px;
+  background: var(--cyan);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+/* ==================== MAIN CONTENT ==================== */
+.main-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  padding: 24px;
+}
+
+/* ==================== INFO CARDS ==================== */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.info-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.info-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon.primary { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); color: #4f46e5; }
+.info-icon.success { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #059669; }
+.info-icon.info { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: #2563eb; }
+.info-icon.warning { background: linear-gradient(135deg, #fed7aa, #fde68a); color: #d97706; }
+.info-icon.cyan { background: linear-gradient(135deg, #cffafe, #a5f3fc); color: #0891b2; }
+
+.info-icon mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content .label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.info-content .value {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+/* ==================== ALERTS ==================== */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+}
+
+.alert mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-content strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.alert-content p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  border-left: 4px solid #10b981;
+}
+.alert-success mat-icon { color: #059669; }
+
+.alert-warning {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+}
+.alert-warning mat-icon { color: #d97706; }
+
+.alert-danger {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border-left: 4px solid #ef4444;
+}
+.alert-danger mat-icon { color: #dc2626; }
+
+/* ==================== ARTICLES SECTION ==================== */
+.articles-section {
+  margin-top: 8px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left mat-icon {
+  color: var(--cyan);
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.header-left h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.reception-summary {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+  padding: 8px 20px;
+  border-radius: 40px;
+  color: white;
+}
+
+.summary-label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.summary-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ==================== TABLE ==================== */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 24px;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-table th {
+  padding: 14px 16px;
+  background: var(--gray-50);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modern-table td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: middle;
+}
+
+.modern-table tr:hover td {
+  background: var(--gray-50);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Badges */
+.item-badge {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4f46e5;
+  background: #e0e7ff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.quantity-badge {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.received-badge {
+  font-weight: 600;
+  color: var(--success-dark);
+}
+
+.remaining-badge {
+  font-weight: 700;
+  color: var(--warning-dark);
+  background: #fef3c7;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Champ quantité */
+.quantity-field {
+  width: 100px;
+}
+
+.quantity-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+/* Action button */
+.action-btn {
+  background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Empty lines */
+.empty-lines {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--gray-200);
+}
+
+.empty-lines mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--gray-400);
+  margin-bottom: 16px;
+}
+
+.empty-lines p {
+  color: var(--gray-500);
+  font-size: 14px;
+}
+
+/* Reception actions */
+.reception-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.btn-receive-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, var(--success), var(--success-dark));
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-receive-all:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-receive-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Admin actions */
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--info), var(--info-dark));
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--danger), #dc2626);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .transfer-detail-container {
+    padding: 16px;
+  }
+  
+  .header-content-modern {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-left-modern {
+    flex-direction: column;
+  }
+  
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .reception-summary {
+    align-self: center;
+  }
+  
+  .reception-actions, .admin-actions {
+    justify-content: center;
+  }
+  
+  .modern-table {
+    min-width: 650px;
+  }
+  
+  .alert {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .alert mat-icon {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-badge {
+    align-self: center;
+  }
+  
+  .quantity-field {
+    width: 70px;
+  }
+  
+  .btn-receive-all, .btn-edit, .btn-delete {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+
+/* Dans transfer-detail.css */
+
+.quantity-input {
+  width: 100px;
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.quantity-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+}
+
+.quantity-input-wrapper {
+  display: inline-block;
+}
+
+
+
+
+
+/* Dans transfer-detail.css */
+
+/* Badge pour la quantité expédiée */
+.shipped-badge {
+  font-weight: 600;
+  color: #3b82f6;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Badge pour le statut de transfert */
+.transfer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.transfer-badge.transferred {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.transfer-badge mat-icon {
+  font-size: 14px;
+  width: 20px;
+  height: 14px;
+}
+
+/* Largeurs des colonnes mises à jour */
+.col-item { width: 12%; }
+.col-desc { width: 25%; }
+.col-qty { width: 8%; }
+.col-shipped { width: 8%; }
+.col-received { width: 8%; }
+.col-remaining { width: 8%; }
+.col-unit { width: 7%; }
+.col-transfer { width: 10%; }
+.col-to-receive { width: 10%; }
+.col-action { width: 8%; }
+
+
+
+/* Dans transfer-detail.css */
+
+/* Description Soroubat */
+.desc-soroubat {
+  font-size: 12px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Badge stock */
+.stock-badge {
+  font-weight: 600;
+  color: #8b5cf6;
+  background: #f5f3ff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Badge véhicule */
+.vehicule-badge {
+  font-weight: 500;
+  color: #0891b2;
+  background: #ecfeff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/* Badge affaire */
+.affaire-badge {
+  font-weight: 500;
+  color: #059669;
+  background: #d1fae5;
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 12px;
+}
+
+/* Largeurs des colonnes mises à jour */
+.col-item { width: 10%; }
+.col-desc { width: 15%; }
+.col-desc-soroubat { width: 12%; }
+.col-qty { width: 6%; }
+.col-shipped { width: 6%; }
+.col-received { width: 6%; }
+.col-remaining { width: 6%; }
+.col-stock { width: 6%; }
+.col-unit { width: 6%; }
+.col-vehicule { width: 8%; }
+.col-affaire { width: 8%; }
+.col-transfer { width: 8%; }
+.col-to-receive { width: 8%; }
+.col-action { width: 6%; }
+
+
+
+
+
+
+
+
+
+/* Ajouter dans transfer-list.css et transfer-detail.css */
+
+.offline-readonly-banner {
+  background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+.badge-readonly {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.offline-data-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 12px;
+  margin-top: 20px;
+  color: #ff9800;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+/* ==================== STYLES POUR LA DATE DE RÉCEPTION MODIFIABLE ==================== */
+
+.receipt-date-card {
+  position: relative;
+}
+
+.receipt-date-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.receipt-date-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-input {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: white;
+  transition: var(--transition);
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+}
+
+.date-input:disabled {
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+.edit-date-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.edit-date-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--gray-500);
+}
+
+.edit-date-btn:hover {
+  background: var(--gray-100);
+}
+
+.edit-date-btn:hover mat-icon {
+  color: var(--cyan);
+}
+
+.edit-cancel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.edit-cancel-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--danger);
+}
+
+.edit-cancel-btn:hover {
+  background: #fee2e2;
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+  color: var(--cyan);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive pour la date */
+@media (max-width: 768px) {
+  .receipt-date-display {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .receipt-date-edit {
+    flex-wrap: wrap;
+  }
+  
+  .date-input {
+    width: 100%;
+  }
+}
+
+
+/* Styles pour la date de réception modifiable */
+.receipt-date-card {
+  position: relative;
+}
+
+.receipt-date-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.receipt-date-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-input {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: white;
+  transition: var(--transition);
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+}
+
+.date-input:disabled {
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+.edit-date-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.edit-date-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--cyan);
+}
+
+.edit-date-btn:hover {
+  background: var(--gray-100);
+}
+
+.edit-date-btn:hover mat-icon {
+  color: var(--cyan-dark);
+}
+
+.edit-cancel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.edit-cancel-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--danger);
+}
+
+.edit-cancel-btn:hover {
+  background: #fee2e2;
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+  color: var(--cyan);
+}
+
+.info-tooltip {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--gray-400);
+  cursor: help;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+/* Styles pour les boutons d'édition de date */
+.receipt-date-edit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-input {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: white;
+  transition: var(--transition);
+  flex: 1;
+  min-width: 140px;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+}
+
+.date-input:disabled {
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+/* Bouton Valider */
+.edit-validate-btn {
+  background: linear-gradient(135deg, var(--success), var(--success-dark));
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  width: 32px;
+  height: 32px;
+}
+
+.edit-validate-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.edit-validate-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-validate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Bouton Annuler */
+.edit-cancel-btn {
+  background: linear-gradient(135deg, var(--danger), #dc2626);
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  width: 32px;
+  height: 32px;
+}
+
+.edit-cancel-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.edit-cancel-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-cancel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner-icon {
+  animation: spin 1s linear infinite;
+  color: var(--cyan);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .receipt-date-edit {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-input {
+    width: 100%;
+  }
+  
+  .edit-validate-btn,
+  .edit-cancel-btn {
+    align-self: center;
+  }
+}

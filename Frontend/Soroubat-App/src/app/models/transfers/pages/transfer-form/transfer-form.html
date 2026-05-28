@@ -1,0 +1,223 @@
+<!-- src/app/models/transfers/pages/transfer-reception/transfer-reception.html -->
+
+<div class="transfer-reception-container">
+  
+  <!-- ==================== HEADER ==================== -->
+  <div class="page-header-modern">
+    <div class="header-gradient-bg"></div>
+    <div class="header-content-modern">
+      <div class="header-left-modern">
+        <button class="back-button" mat-icon-button (click)="goBack()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title-section">
+          <div class="title-icon">
+            <mat-icon>inventory_2</mat-icon>
+          </div>
+          <div class="title-text">
+            <h1>Réception de transfert</h1>
+            <p class="subtitle">N° {{ transfer?.no || '—' }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge" [class]="getStatusClass(transfer?.status)">
+        <mat-icon>{{ getStatusIcon(transfer?.status) }}</mat-icon>
+        <span>{{ getStatusLabel(transfer?.status) }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Chargement du transfert...</p>
+  </div>
+  
+  <!-- ==================== ERROR ==================== -->
+  <div *ngIf="error && !loading" class="error-state">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Une erreur est survenue</h3>
+    <p>{{ error }}</p>
+    <button class="btn-retry" (click)="loadTransfer()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+  
+  <!-- ==================== CONTENU ==================== -->
+  <div *ngIf="!loading && !error && transfer" class="main-content">
+    
+    <!-- Cartes d'informations -->
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-icon primary">
+          <mat-icon>warehouse</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Magasin origine</span>
+          <span class="value">{{ transfer.transferFromCode || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon success">
+          <mat-icon>warehouse</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Magasin destination</span>
+          <span class="value">{{ transfer.transferToCode || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon info">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Chantier origine</span>
+          <span class="value">{{ transfer.chantierOrigine || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon info">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Chantier destination</span>
+          <span class="value">{{ transfer.chantierDestination || '—' }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon warning">
+          <mat-icon>calendar_today</mat-icon>
+        </div>
+        <div class="info-content">
+          <span class="label">Date de transfert</span>
+          <span class="value">{{ formatDate(transfer.postingDate) }}</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon purple">
+          <mat-icon>receipt</mat-icon>
+        </div>
+       
+      </div>
+    </div>
+    
+    <!-- Message si transfert déjà réceptionné -->
+    <div *ngIf="transfer.status === 'Received'" class="alert alert-success">
+      <mat-icon>check_circle</mat-icon>
+      <div class="alert-content">
+        <strong>Transfert réceptionné</strong>
+        <p>Ce transfert a déjà été complètement réceptionné.</p>
+      </div>
+    </div>
+    
+    <!-- Message si transfert non expédié -->
+    <div *ngIf="transfer.status !== 'Released' && transfer.status !== 'Received'" class="alert alert-warning">
+      <mat-icon>info</mat-icon>
+      <div class="alert-content">
+        <strong>Transfert non expédié</strong>
+        <p>Ce transfert n'a pas encore été expédié. Veuillez attendre la confirmation d'expédition.</p>
+      </div>
+    </div>
+    
+    <!-- Message si transfert annulé -->
+    <div *ngIf="transfer.status === 'Cancelled'" class="alert alert-danger">
+      <mat-icon>cancel</mat-icon>
+      <div class="alert-content">
+        <strong>Transfert annulé</strong>
+        <p>Ce transfert a été annulé. Aucune réception possible.</p>
+      </div>
+    </div>
+    
+    <!-- Tableau des articles (uniquement si expédié) -->
+    <div class="articles-section" *ngIf="transfer.status === 'Released'">
+      <div class="section-header">
+        <div class="header-left">
+          <mat-icon>shopping_cart</mat-icon>
+          <h3>Articles à réceptionner</h3>
+        </div>
+        <div class="reception-summary">
+          <span class="summary-label">Total à réceptionner :</span>
+          <span class="summary-value">{{ getTotalToReceive() }}</span>
+        </div>
+      </div>
+      
+      <div class="table-wrapper">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th class="col-item">Article</th>
+              <th class="col-desc">Description</th>
+              <th class="col-qty text-right">Quantité</th>
+              <th class="col-received text-right">Déjà reçu</th>
+              <th class="col-remaining text-right">Restant</th>
+              <th class="col-unit">Unité</th>
+              <th class="col-to-receive text-center">À réceptionner</th>
+              <th class="col-action text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let line of transfer.transferLines; let i = index">
+              <td class="col-item">
+                <span class="item-badge">{{ line.itemNo || '—' }}</span>
+              </td>
+              <td class="col-desc">
+                <span class="item-desc">{{ line.description || '—' }}</span>
+              </td>
+              <td class="col-qty text-right">
+                <span class="quantity-badge">{{ line.quantity || 0 }}</span>
+              </td>
+              <td class="col-received text-right">
+                <span class="received-badge">{{ line.quantityReceived || 0 }}</span>
+              </td>
+              <td class="col-remaining text-right">
+                <span class="remaining-badge">{{ getRemainingForLine(i) }}</span>
+              </td>
+              <td class="col-unit">
+                {{ line.unitOfMeasure || '—' }}
+              </td>
+              <td class="col-to-receive text-center">
+                <mat-form-field appearance="outline" class="quantity-field">
+                  <input matInput 
+                         type="number" 
+                         [formControl]="$any(linesArray.at(i).get('quantityToReceive'))"
+                         (change)="updateQuantity(i)"
+                         min="0"
+                         [max]="getRemainingForLine(i)"
+                         step="1"
+                         placeholder="0">
+                </mat-form-field>
+              </td>
+              <td class="col-action text-center">
+                <button class="action-btn receive" 
+                        (click)="receiveLine(i)"
+                        [disabled]="linesArray.at(i).get('quantityToReceive')?.value <= 0 || submitting"
+                        matTooltip="Réceptionner cette ligne">
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Message si aucune ligne -->
+      <div *ngIf="transfer.transferLines?.length === 0" class="empty-lines">
+        <mat-icon>inbox</mat-icon>
+        <p>Aucun article dans ce transfert</p>
+      </div>
+      
+      <!-- Actions de réception -->
+      <div class="reception-actions">
+        <button class="btn-receive-all" 
+                (click)="receiveAll()" 
+                [disabled]="getTotalToReceive() === 0 || submitting">
+          <mat-icon>check_circle</mat-icon>
+          <span>Valider la réception complète</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>

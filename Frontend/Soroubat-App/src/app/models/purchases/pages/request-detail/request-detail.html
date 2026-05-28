@@ -1,0 +1,279 @@
+<!-- src/app/modules/purchases/pages/request-detail/request-detail.html -->
+
+<!--  BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="request-detail-container">
+  
+  <!-- ==================== HEADER ==================== -->
+  <div class="hero-header">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <button class="btn-back" mat-icon-button (click)="goBack()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <div class="hero-center">
+        <h1 class="hero-title">{{ request?.no || 'Nouvelle demande' }}</h1>
+        <p class="hero-subtitle">{{ request?.jobDescription || 'Demande d\'achat' }}</p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-badge" [attr.data-status]="getStatusClassForBadge(request?.statut || '')">
+          <mat-icon>{{ getStatusIcon(request?.statut || '') }}</mat-icon>
+          <span>{{ getStatusLabel(request?.statut || '') }}</span>
+        </div>
+
+        <!--  Bouton Modifier - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-edit" mat-icon-button 
+                  *ngIf="canEdit()" 
+                  (click)="editRequest()" 
+                  matTooltip="Modifier la demande">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== ACTIONS RAPIDES ==================== -->
+  <div class="actions-bar" *ngIf="request">
+    <div class="actions-container">
+      <!--  TOUS LES BOUTONS D'ACTION - CACHÉS OFFLINE -->
+      <div *appOfflineHideActions>
+        <button class="btn-submit-approve" mat-raised-button 
+                *ngIf="canSubmitToApprove()" 
+                (click)="submitToApprove()"
+                color="primary">
+          <mat-icon>send</mat-icon>
+          Soumettre à approbation
+        </button>
+
+        <button class="btn-approve" mat-raised-button 
+                *ngIf="canApprove()" 
+                (click)="approveRequest()"
+                color="accent">
+          <mat-icon>check_circle</mat-icon>
+          Approuver
+        </button>
+
+        <button class="btn-reject" mat-raised-button 
+                *ngIf="canApprove()" 
+                (click)="rejectRequest()"
+                color="warn">
+          <mat-icon>cancel</mat-icon>
+          Refuser
+        </button>
+
+        <button class="btn-generate-order" mat-raised-button 
+                *ngIf="canGenerateOrder()" 
+                (click)="generatePurchaseOrder()"
+                color="success">
+          <mat-icon>receipt</mat-icon>
+          Générer commande
+        </button>
+
+        <button class="btn-delete" mat-raised-button 
+                *ngIf="canDelete()" 
+                (click)="deleteRequest()"
+                color="warn">
+          <mat-icon>delete</mat-icon>
+          Supprimer
+        </button>
+      </div>
+      
+      <!--  Message offline si en mode lecture seule -->
+      <div *ngIf="isReadOnly" class="offline-readonly-message">
+        <mat-icon>visibility</mat-icon>
+        <span>Mode hors ligne - Consultation uniquement</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== LOADING ==================== -->
+  <div *ngIf="loading" class="loading-wrapper">
+    <div class="loading-card">
+      <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+      </div>
+      <p>Chargement de la demande...</p>
+    </div>
+  </div>
+  
+  <!-- ==================== ERROR ==================== -->
+  <div *ngIf="error && !loading" class="error-wrapper">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Une erreur est survenue</h3>
+      <p>{{ error }}</p>
+      <div class="error-actions">
+        <button class="btn-retry" (click)="loadRequest(requestId!)" *ngIf="requestId">
+          <mat-icon>refresh</mat-icon>
+          Réessayer
+        </button>
+        <button class="btn-back-home" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Retour
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ==================== CONTENU PRINCIPAL ==================== -->
+  <div *ngIf="!loading && !error && request" class="main-content">
+    
+    <!-- Cartes de statistiques -->
+    <div class="stats-cards">
+      <div class="stat-card">
+        <div class="stat-icon primary">
+          <mat-icon>folder</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Projet</span>
+          <span class="stat-value" [class.empty-value]="!request.jobNo">{{ request.jobNo || 'Non renseigné' }}</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon warning">
+          <mat-icon>category</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Type</span>
+          <span class="stat-value" [class.empty-value]="!request.requestType">{{ request.requestType || 'Non renseigné' }}</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon info">
+          <mat-icon>calendar_today</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-label">Date de saisie</span>
+          <span class="stat-value" [class.empty-value]="!request.dateSaisie">{{ formatDate(request.dateSaisie) }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Section Code Magasin -->
+    <div class="detail-card" *ngIf="request.locationCode">
+      <div class="card-header">
+        <mat-icon>store</mat-icon>
+        <h3>Magasin</h3>
+      </div>
+      <div class="card-content">
+        <div class="location-info">
+          <span class="location-code">{{ request.locationCode }}</span>
+          <span class="location-name" *ngIf="getLocationName(request.locationCode)"> - {{ getLocationName(request.locationCode) }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Section engin -->
+    <div class="detail-card" *ngIf="request.engin">
+      <div class="card-header">
+        <mat-icon>construction</mat-icon>
+        <h3>Équipement</h3>
+      </div>
+      <div class="card-content">
+        <div class="engin-info">
+          <span class="engin-code">{{ request.engin }}</span>
+          <span class="engin-desc" *ngIf="enginDescription"> - {{ enginDescription }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Section observation -->
+    <div class="detail-card" *ngIf="request.observation">
+      <div class="card-header">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <h3>Observation</h3>
+      </div>
+      <div class="card-content">
+        <p class="observation-text">{{ request.observation }}</p>
+      </div>
+    </div>
+    
+    <!-- Section articles -->
+    <div class="detail-card">
+      <div class="card-header">
+        <mat-icon>shopping_cart</mat-icon>
+        <h3>Articles demandés</h3>
+        <span class="badge-count" *ngIf="lines.length">{{ lines.length }}</span>
+      </div>
+      <div class="card-content p-0">
+        
+        <div class="table-wrapper" *ngIf="lines.length > 0">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th>N° Ligne</th>
+                <th>Type</th>
+                <th>Référence</th>
+                <th>Description</th>
+                <th class="text-right">Qté</th>
+                <th>Unité</th>
+                <th>Magasin</th>
+                <th>Tâche</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let line of lines">
+                <td class="line-number">{{ line.lineNo || '-' }}</td>
+                <td>
+                  <span class="type-badge">
+                    <mat-icon>{{ getTypeIcon(line.type) }}</mat-icon>
+                    <span>{{ getTypeLabel(line.type) }}</span>
+                  </span>
+                </td>
+                <td><span class="ref-code">{{ line.no || '—' }}</span></td>
+                <td>
+                  <div class="desc-cell">
+                    <span class="desc-main">{{ line.description || '—' }}</span>
+                    <span class="desc-sub" *ngIf="line.observation">{{ line.observation }}</span>
+                  </div>
+                </td>
+                <td class="text-right">{{ line.quantity || 0 }}</td>
+                <td>{{ line.unitOfMeasureCode || '—' }}</td>
+                <td><span class="location-badge">{{ line.locationCode || '—' }}</span></td>
+                <td>
+                  <span class="task-badge">
+                    <span>{{ getTaskDisplay(line.jobTaskNo) }}</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="empty-articles" *ngIf="lines.length === 0">
+          <div class="empty-icon">
+            <mat-icon>inbox</mat-icon>
+          </div>
+          <h4>Aucun article</h4>
+          <p>Cette demande ne contient aucun article</p>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+
+<!--  INDICATEUR MODE OFFLINE -->
+<div class="offline-data-indicator" *ngIf="isReadOnly && request">
+  <mat-icon>cloud_off</mat-icon>
+  <span> Mode hors ligne - Consultation uniquement</span>
+</div>

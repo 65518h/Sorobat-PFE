@@ -1,0 +1,297 @@
+<!-- src/app/modules/attendance/pages/attendance-detail/attendance-detail.html -->
+
+<!--  BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="detail-container">
+  
+  <!-- Hero Section Gradient Moderne -->
+  <div class="hero-section-gradient">
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="hero-content-gradient">
+      <div class="hero-left-gradient">
+        <button class="back-btn-gradient" (click)="goBack()" matTooltip="Retour">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="hero-text-gradient">
+          <h1>Pointage détaillé</h1>
+          <p *ngIf="attendance">{{ attendance.month }} {{ attendance.year }} - {{ attendance.jobNo }}</p>
+        </div>
+      </div>
+      <div class="hero-actions-gradient">
+        <div class="stats-badge" *ngIf="attendance">
+          <mat-icon>groups</mat-icon>
+          <span>{{ filteredLines.length }} / {{ attendance.lines?.length || 0 }} employés</span>
+        </div>
+        
+        <!--  MODIFIER - CACHÉ EN MODE OFFLINE -->
+        <div *appOfflineHideActions>
+          <button *ngIf="!isReadOnly" class="btn-edit" (click)="goToEdit()" matTooltip="Modifier les présences">
+            <mat-icon>edit</mat-icon>
+            Modifier
+          </button>
+        </div>
+        
+        <!--  Bouton Supprimer - CACHÉ UNIQUEMENT EN MODE OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-delete-header" (click)="deleteAttendance()" matTooltip="Supprimer le pointage">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <div class="loading-text">
+        <p>Chargement des détails...</p>
+        <div class="loading-bar">
+          <div class="loading-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-card">
+      <div class="error-illustration">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h3>Oups ! Une erreur s'est produite</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn-retry" (click)="retry()">
+        <mat-icon>refresh</mat-icon> Réessayer
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenu -->
+  <div *ngIf="!loading && !errorMessage && attendance">
+    
+    <!-- Cartes de statistiques -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon present">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateStats().totalPresent }}</span>
+          <span class="stat-label">Jours présents</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon absent">
+          <mat-icon>block</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateStats().totalAbsent }}</span>
+          <span class="stat-label">Jours absents</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon employees">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ attendance.lines?.length || 0 }}</span>
+          <span class="stat-label">Employés</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartes supplémentaires pour les totaux -->
+    <div class="stats-grid secondary-stats">
+      <div class="stat-card">
+        <div class="stat-icon hours">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateTotalHours() }}</span>
+          <span class="stat-label">Heures totales</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon cong">
+          <mat-icon>beach_access</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateTotalCong() }}</span>
+          <span class="stat-label">Congés</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon congexp">
+          <mat-icon>event_busy</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateTotalCongExp() }}</span>
+          <span class="stat-label">Congés exceptionnels</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon ferier">
+          <mat-icon>star</mat-icon>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">{{ calculateTotalFerier() }}</span>
+          <span class="stat-label">Jours fériés</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barre de recherche -->
+    <div class="search-bar-container">
+      <div class="search-input-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" 
+               [(ngModel)]="searchTerm" 
+               (input)="filterEmployees()"
+               placeholder="Rechercher par matricule, nom, prénom ou affectation..."
+               class="search-input"
+               autocomplete="off">
+        <button *ngIf="searchTerm" class="clear-search" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="search-results-info" *ngIf="searchTerm">
+        {{ filteredLines.length }} résultat(s) trouvé(s)
+      </div>
+    </div>
+
+    <!-- Légende des statuts -->
+    <div class="legend-container">
+      <div class="legend-title">Légende :</div>
+      <div class="legend-item present"><span class="legend-dot"></span>Présent (P, AU, P-R)</div>
+      <div class="legend-item leave"><span class="legend-dot"></span>Congé (C, C1/2, CEXP)</div>
+      <div class="legend-item holiday"><span class="legend-dot"></span>Férié (F)</div>
+      <div class="legend-item absent"><span class="legend-dot"></span>Absent (A)</div>
+      <div class="legend-item empty"><span class="legend-dot"></span>Non renseigné</div>
+    </div>
+
+    <!-- Tableau des employés -->
+    <div class="table-container">
+      <div class="table-wrapper">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th class="col-employee">Employé</th>
+              <th class="col-assignment">Affectation</th>
+              <th class="col-total-pres">Prés.</th>
+              <th class="col-total-abs">Abs.</th>
+              <th class="col-total-hours">Heures</th>
+              <th class="col-total-cong">Congé</th>
+              <th class="col-total-congexp">CEXP</th>
+              <th class="col-total-ferier">Férié</th>
+              <th *ngFor="let day of daysInMonth" class="col-day" [class.weekend]="isWeekend(day)">
+                {{ day }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let line of filteredLines">
+              <td class="col-employee">
+                <div class="employee-info">
+                  <div class="employee-avatar">
+                    <span>{{ (line.employeeName | slice:0:2).toUpperCase() }}</span>
+                  </div>
+                  <div class="employee-details">
+                    <span class="employee-name">{{ line.employeeName }}</span>
+                    <span class="employee-no">Mat. {{ line.employeeNo }}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="col-assignment">
+                <div class="assignment-info">
+                  <span class="assignment-text">{{ line.assignment || '—' }}</span>
+                  <span class="assignment-desc" *ngIf="line.assignmentDescription">({{ line.assignmentDescription }})</span>
+                </div>
+              </td>
+              <td class="col-total-pres">
+                <div class="total-badge" [class]="getTotalPresentClass(line.totalPresentDays ?? 0)">
+                  {{ line.totalPresentDays ?? 0 }}
+                </div>
+              </td>
+              <td class="col-total-abs">
+                <div class="total-badge-abs">
+                  {{ line.totalAbsentDays ?? 0 }}
+                </div>
+              </td>
+              <td class="col-total-hours">
+                <div class="hours-badge">
+                  <mat-icon>schedule</mat-icon>
+                  <span>{{ line.totalHours ?? 0 }}</span>
+                </div>
+              </td>
+              <td class="col-total-cong">
+                <div class="cong-badge">
+                  {{ line.totalCong ?? 0 }}
+                </div>
+              </td>
+              <td class="col-total-congexp">
+                <div class="congexp-badge">
+                  {{ line.totalCongExp ?? 0 }}
+                </div>
+              </td>
+              <td class="col-total-ferier">
+                <div class="ferier-badge">
+                  {{ line.totalFerier ?? 0 }}
+                </div>
+              </td>
+              <td *ngFor="let day of daysInMonth" class="col-day">
+                <div class="status-cell" 
+                     [class]="getStatusInfo(getDayValue(line, day)).type"
+                     [matTooltip]="getDetailedTooltip(line, day)"
+                     matTooltipPosition="above">
+                  {{ getDayValue(line, day) || '—' }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="detail-footer">
+      <button class="btn-back-footer" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Retour à la liste
+      </button>
+    </div>
+
+    <!--  INDICATEUR MODE OFFLINE -->
+    <div class="offline-data-indicator" *ngIf="isReadOnly && attendance">
+      <mat-icon>cloud_off</mat-icon>
+      <span> Données en cache (mode hors ligne)</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,409 @@
+<!-- src/app/modules/inventory/pages/stock-list/stock-list.html -->
+
+<!--  BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="stock-container">
+  
+  <!-- ==================== HEADER ==================== -->
+  <div class="stock-header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="icon-wrapper">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <div class="header-text">
+          <h1>Gestion de stock</h1>
+          <p>Suivez l'ensemble de vos articles et leurs disponibilités</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- BOUTON ALERTES - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="alerts-btn" [class.has-alerts]="alertCount > 0" (click)="navigateToAlerts()" matTooltip="Voir les alertes stock">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Alertes</span>
+          </button>
+        </div>
+        
+        <!--  BOUTON SCANNER - TOUJOURS VISIBLE -->
+        <button class="btn-scanner" (click)="openBarcodeScanner()" matTooltip="Scanner un code-barres">
+          <mat-icon>qr_code_scanner</mat-icon>
+          <span>Scanner</span>
+        </button>
+        
+        <!-- BOUTON RAFRAÎCHIR - CACHÉ OFFLINE -->
+        <div *appOfflineHideActions>
+          <button class="btn-refresh" (click)="refresh()" matTooltip="Actualiser">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTEXTE PROJET / MAGASIN ==================== -->
+  <div class="context-info" *ngIf="currentJobNo || currentLocationCode">
+    <div class="context-card">
+      <div class="context-icon">
+        <mat-icon>business_center</mat-icon>
+      </div>
+      <div class="context-details">
+        <span class="context-label">Projet / Chantier</span>
+        <span class="context-value">{{ currentJobNo || 'Non défini' }}</span>
+        <span class="context-desc" *ngIf="currentJobDescription">{{ currentJobDescription }}</span>
+      </div>
+    </div>
+    <div class="context-card">
+      <div class="context-icon">
+        <mat-icon>store</mat-icon>
+      </div>
+      <div class="context-details">
+        <span class="context-label">Magasin associé</span>
+        <span class="context-value">{{ currentLocationCode || 'Non défini' }}</span>
+        <span class="context-desc" *ngIf="currentLocationCode">Stock disponible pour ce magasin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== STATISTIQUES ==================== -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon total">
+        <mat-icon>inventory</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.totalItems }}</span>
+        <span class="stat-label">Articles distincts</span>
+      </div>
+    </div>
+    
+    <div class="stat-card" 
+         matTooltip="{{ stats.totalQuantity.toLocaleString('fr-FR') }} unités" 
+         matTooltipPosition="above">
+      <div class="stat-icon quantity">
+        <mat-icon>production_quantity_limits</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ formatLargeNumber(stats.totalQuantity) }}</span>
+        <span class="stat-label">Quantité totale</span>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon locations">
+        <mat-icon>store</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.uniqueLocations }}</span>
+        <span class="stat-label">Magasins</span>
+      </div>
+    </div>
+    
+    <div class="stat-card warning" *ngIf="stats.lowStockCount > 0">
+      <div class="stat-icon low-stock">
+        <mat-icon>warning</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.lowStockCount }}</span>
+        <span class="stat-label">Stock faible</span>
+      </div>
+    </div>
+    
+    <div class="stat-card danger" *ngIf="stats.outOfStockCount > 0">
+      <div class="stat-icon out-stock">
+        <mat-icon>error</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-value">{{ stats.outOfStockCount }}</span>
+        <span class="stat-label">Rupture</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FILTRES ==================== -->
+  <div class="filters-card">
+    <div class="filters-header" (click)="toggleFilters()">
+      <div class="filters-title">
+        <mat-icon>filter_alt</mat-icon>
+        <span>Filtres</span>
+        <span class="active-badge" *ngIf="hasActiveFilters()">Actifs</span>
+        <span class="active-count" *ngIf="hasActiveFilters()">
+          {{ getActiveFiltersCount() }}
+        </span>
+      </div>
+      <mat-icon class="chevron">{{ filtersExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </div>
+    
+    <div class="filters-body" [class.expanded]="filtersExpanded">
+      <div class="filters-content">
+        <form [formGroup]="filterForm">
+          <!-- Recherche -->
+          <div class="filters-row">
+            <div class="filter-field full-width">
+              <div class="simple-search-field">
+                <mat-icon class="search-icon">search</mat-icon>
+                <input 
+                  type="text" 
+                  class="simple-input" 
+                  formControlName="searchTerm" 
+                  placeholder="Rechercher un article (code ou description)..."
+                  autocomplete="off"
+                >
+                <button 
+                  *ngIf="filterForm.get('searchTerm')?.value" 
+                  class="clear-btn" 
+                  (click)="filterForm.get('searchTerm')?.setValue('')"
+                  type="button"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Filtres Magasin et Statut -->
+          <div class="filters-row">
+            <!-- Filtre Magasin -->
+            <div class="filter-field">
+              <div class="simple-select">
+                <mat-icon>store</mat-icon>
+                <select formControlName="locationCode" class="simple-select-input">
+                  <option value="all"> Tous les magasins</option>
+                  <option *ngFor="let location of uniqueLocations" [value]="location">
+                     {{ location }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Filtre Statut -->
+            <div class="filter-field">
+              <div class="simple-select">
+                <mat-icon>warning</mat-icon>
+                <select formControlName="stockStatus" class="simple-select-input">
+                  <option value="all"> Tous les statuts</option>
+                  <option value="low"> Stock faible (≤ 10)</option>
+                  <option value="out"> Rupture de stock (≤ 0)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        <div class="filters-actions">
+          <button class="btn-outline" (click)="resetFilters()">
+            <mat-icon>clear_all</mat-icon>
+            Réinitialiser
+          </button>
+          <button class="btn-primary" (click)="loadStock()">
+            <mat-icon>search</mat-icon>
+            Appliquer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LOADING ==================== -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p>Chargement des données de stock...</p>
+    </div>
+  </div>
+
+  <!-- ==================== ERROR ==================== -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <div class="error-icon-wrapper">
+      <mat-icon>error_outline</mat-icon>
+    </div>
+    <h3>Erreur de chargement</h3>
+    <p>{{ errorMessage }}</p>
+    <button class="btn-primary" (click)="loadStock()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+
+  <!-- ==================== AUCUN MAGASIN ASSOCIÉ ==================== -->
+  <div class="error-state" *ngIf="!currentLocationCode && !loading && !errorMessage && (!stockItems || stockItems.length === 0)">
+    <div class="error-icon-wrapper">
+      <mat-icon>store_off</mat-icon>
+    </div>
+    <h3>Aucun magasin associé</h3>
+    <p>Aucun magasin n'est associé à votre projet. Veuillez contacter l'administrateur.</p>
+  </div>
+
+  <!-- ==================== TABLEAU ==================== -->
+  <div class="table-container" *ngIf="!loading && !errorMessage && (filteredStockItems && filteredStockItems.length > 0)">
+    <div class="table-header-actions">
+      <div class="results-info">
+        <mat-icon>format_list_bulleted</mat-icon>
+        <span>{{ totalItems }} article(s) trouvé(s)</span>
+      </div>
+      <div class="export-actions">
+        <!--  BOUTON SCANNER UNIQUEMENT -->
+        <button class="btn-icon scanner-btn" (click)="openBarcodeScanner()" matTooltip="Scanner un code-barres">
+          <mat-icon>qr_code_scanner</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="stock-table">
+        <thead>
+          <tr>
+            <th class="col-code">
+              <div class="th-content">
+                <mat-icon>qr_code</mat-icon>
+                <span>Code article</span>
+              </div>
+            </th>
+            <th class="col-description">
+              <div class="th-content">
+                <mat-icon>description</mat-icon>
+                <span>Description</span>
+              </div>
+            </th>
+            <th class="col-location">
+              <div class="th-content">
+                <mat-icon>store</mat-icon>
+                <span>Magasin</span>
+              </div>
+            </th>
+            <th class="col-quantity">
+              <div class="th-content">
+                <mat-icon>production_quantity_limits</mat-icon>
+                <span>Quantité</span>
+              </div>
+            </th>
+            <th class="col-job">
+              <div class="th-content">
+                <mat-icon>business</mat-icon>
+                <span>Chantier</span>
+              </div>
+            </th>
+            <th class="col-actions">
+              <div class="th-content">
+                <mat-icon>settings</mat-icon>
+                <span>Actions</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedItems" class="stock-row">
+            <!-- CODE ARTICLE -->
+            <td class="col-code">
+              <div class="cell-content">
+                <span class="code-badge">{{ item.itemNo }}</span>
+              </div>
+            </td>
+            
+            <!-- DESCRIPTION -->
+            <td class="col-description">
+              <div class="cell-content">
+                <span class="description-text">{{ item.itemDescription }}</span>
+              </div>
+            
+            
+            <!-- MAGASIN -->
+            <td class="col-location">
+              <div class="cell-content">
+                <span class="location-badge">{{ item.locationCode }}</span>
+              </div>
+            
+            
+            <!-- QUANTITÉ -->
+            <td class="col-quantity">
+              <div class="quantity-cell" [ngClass]="getQuantityClass(item.quantity)">
+                <span class="quantity-value">{{ formatQuantity(item.quantity) }}</span>
+                <span class="quantity-unit">u</span>
+                <mat-icon *ngIf="item.quantity <= 10 && item.quantity > 0" class="warning-icon">warning</mat-icon>
+                <mat-icon *ngIf="item.quantity <= 0" class="danger-icon">error</mat-icon>
+              </div>
+            
+            
+            <!-- CHANTIER -->
+            <td class="col-job">
+              <div class="cell-content">
+                <span class="job-badge">{{ item.jobNo || '—' }}</span>
+              </div>
+              
+            
+            <!-- ACTIONS -->
+            <td class="col-actions">
+              <div class="action-buttons">
+                <button class="action-btn view" matTooltip="Voir détails" (click)="viewItem(item)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </div>
+              
+            
+          
+          <tr *ngIf="paginatedItems.length === 0">
+            <td colspan="6" class="empty-table-cell">
+              <div class="empty-table-content">
+                <mat-icon>inventory</mat-icon>
+                <p>Aucun article trouvé</p>
+                <p class="empty-hint" *ngIf="hasActiveFilters()">Essayez de modifier vos filtres de recherche</p>
+                <button class="btn-outline" (click)="resetFilters()" *ngIf="hasActiveFilters()">
+                  <mat-icon>clear_all</mat-icon>
+                  Réinitialiser les filtres
+                </button>
+              </div>
+            
+          
+        </tbody>
+      
+      </table>
+    </div>
+
+    <mat-paginator 
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 20, 50, 100]"
+      [pageIndex]="pageIndex"
+      (page)="onPageChange($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+
+  <!--  INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredStockItems.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+  </div>
+
+</div>
+
+<!-- ==================== DIALOGUE SCANNEUR CODE-BARRES ==================== -->
+<ng-template #barcodeScannerDialog>
+  <div class="barcode-scanner-dialog">
+    <div class="dialog-header">
+      <h2>Scanner un code-barres</h2>
+      <button class="close-btn" (click)="closeBarcodeScanner()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="scanner-container">
+      <div id="scanner-reader-stock" class="scanner-viewport"></div>
+      <div class="scanner-loading" *ngIf="scannerLoading">
+        <div class="loading-spinner"></div>
+        <p>Recherche de l'article...</p>
+      </div>
+    </div>
+    <div class="scanner-info">
+      <mat-icon>qr_code</mat-icon>
+      <p>Placez le code-barres devant la caméra</p>
+    </div>
+  </div>
+</ng-template>

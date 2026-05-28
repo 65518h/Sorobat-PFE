@@ -1,0 +1,280 @@
+<!-- src/app/models/transfers/pages/transfer-list/transfer-list.html -->
+
+<!--  BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="transfer-list-container">
+  
+  <!-- Header -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <mat-icon>local_shipping</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Ordres de transfert</h1>
+          <p>Gérez les transferts de stock entre magasins et chantiers</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <!-- Bouton Alertes -->
+        <div *appOfflineHideActions>
+          <button class="alerts-btn" [class.has-alerts]="alertCount > 0" (click)="navigateToAlerts()" matTooltip="Voir les alertes ordres de transfert">
+            <mat-icon>notifications_active</mat-icon>
+            <span>Alertes</span>
+         
+          </button>
+        </div>
+        
+        <!-- Bouton Filtres -->
+        <div *appOfflineHideActions>
+          <button class="btn-filter" (click)="toggleFilters()" [class.active]="showFilters" matTooltip="Filtres">
+            <mat-icon>filter_list</mat-icon>
+          
+          </button>
+        </div>
+        
+        <!-- Bouton Nouveau transfert -->
+        <div *appOfflineHideActions>
+          <button class="btn-primary" (click)="createTransfer()" *ngIf="isAdmin">
+            <mat-icon>add</mat-icon>
+            <span>Nouveau transfert</span>
+          </button>
+        </div>
+        
+        <!-- Bouton Actualiser -->
+        <div *appOfflineHideActions>
+          <button class="btn-icon" (click)="refresh()" matTooltip="Actualiser">
+            <mat-icon>sync</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Panneau de filtres -->
+  <div class="filters-panel" [class.open]="showFilters">
+    <div class="filters-header">
+      <h3><mat-icon>filter_list</mat-icon> Filtres avancés</h3>
+      <button class="close-filters" (click)="toggleFilters()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <form [formGroup]="filterForm">
+      <div class="filters-body">
+        <div class="filter-group">
+          <label>Statut</label>
+          <mat-select formControlName="status" placeholder="Tous les statuts">
+            <mat-option value="">Tous</mat-option>
+            <mat-option value="Open">Ouvert</mat-option>
+            <mat-option value="Released">Expédié</mat-option>
+            <mat-option value="Received">Réceptionné</mat-option>
+            <mat-option value="Cancelled">Annulé</mat-option>
+          </mat-select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Recherche</label>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput formControlName="searchTerm" placeholder="N° transfert, article...">
+          </mat-form-field>
+        </div>
+        
+        
+        <div class="filter-group date-group">
+          <label>Période</label>
+          <div class="date-range">
+            <mat-form-field appearance="outline">
+              <mat-label>Du</mat-label>
+              <input matInput [matDatepicker]="fromPicker" formControlName="fromDate" placeholder="jj/mm/aaaa">
+              <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+              <mat-datepicker #fromPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Au</mat-label>
+              <input matInput [matDatepicker]="toPicker" formControlName="toDate" placeholder="jj/mm/aaaa">
+              <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+              <mat-datepicker #toPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      
+      <div class="filters-footer">
+        <button type="button" class="btn-reset" (click)="resetFilters()">
+          <mat-icon>refresh</mat-icon>
+          Réinitialiser
+        </button>
+        <div class="results-count" *ngIf="activeFilterCount > 0">
+          {{ filteredTransfers.length }} résultat(s)
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Statistiques cliquables -->
+  <div class="stats-row">
+    <div class="stat-item" *ngFor="let stat of statsData" (click)="filterByStatus(stat.status)" [class.active]="filterForm.value.status === stat.status && stat.status !== null">
+      <div class="stat-icon" [style.background]="stat.color">
+        <mat-icon>{{ stat.icon }}</mat-icon>
+      </div>
+      <div class="stat-info">
+        <span class="stat-number">{{ stat.value }}</span>
+        <span class="stat-label">{{ stat.label }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Tags de filtres actifs -->
+  <div class="active-filters" *ngIf="hasActiveFilters()">
+    <span class="filter-tag" *ngIf="filterForm.value.status">
+      Statut: {{ getStatusLabel(filterForm.value.status) }}
+      <mat-icon (click)="filterForm.patchValue({ status: '' })">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterForm.value.searchTerm">
+      Recherche: {{ filterForm.value.searchTerm }}
+      <mat-icon (click)="filterForm.patchValue({ searchTerm: '' })">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterForm.value.chantier">
+      Chantier: {{ filterForm.value.chantier }}
+      <mat-icon (click)="filterForm.patchValue({ chantier: '' })">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterForm.value.fromDate">
+      Du: {{ filterForm.value.fromDate | date:'dd/MM/yyyy' }}
+      <mat-icon (click)="filterForm.patchValue({ fromDate: null })">close</mat-icon>
+    </span>
+    <span class="filter-tag" *ngIf="filterForm.value.toDate">
+      Au: {{ filterForm.value.toDate | date:'dd/MM/yyyy' }}
+      <mat-icon (click)="filterForm.patchValue({ toDate: null })">close</mat-icon>
+    </span>
+    <button class="clear-all-filters" (click)="resetFilters()">
+      <mat-icon>clear_all</mat-icon>
+      Tout effacer
+    </button>
+  </div>
+  
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement des transferts...</p>
+  </div>
+  
+  <!-- Error -->
+  <div class="error-state" *ngIf="error && !loading">
+    <mat-icon>error</mat-icon>
+    <h3>Une erreur est survenue</h3>
+    <p>{{ error }}</p>
+    <button class="btn-primary" (click)="loadTransfers()">Réessayer</button>
+  </div>
+  
+  <!-- Liste -->
+  <div class="transfers-list" *ngIf="!loading && !error">
+    
+    <div class="cards-grid" *ngIf="filteredTransfers.length > 0">
+      <div class="transfer-card" 
+           *ngFor="let transfer of paginatedTransfers"
+           [class.card-open]="transfer.status === 'Open'"
+           [class.card-released]="transfer.status === 'Released'"
+           [class.card-received]="transfer.status === 'Received'">
+        
+        <div class="card-header">
+          <div class="transfer-number" (click)="viewTransfer(transfer)">
+            <span class="number">N° {{ transfer.no }}</span>
+            <mat-icon class="arrow">arrow_forward</mat-icon>
+          </div>
+          <div class="status-badge" [class]="getStatusClass(transfer.status)">
+            <span class="dot"></span>
+            <span>{{ getStatusLabel(transfer.status) }}</span>
+          </div>
+        </div>
+        
+        <div class="card-body" (click)="viewTransfer(transfer)">
+          <div class="info-row">
+            <div class="info-item">
+              <mat-icon>business</mat-icon>
+              <div class="info-content">
+                <span class="label">Origine</span>
+                <span class="value">{{ transfer.chantierOrigine || transfer.transferFromCode || '—' }}</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <mat-icon>business</mat-icon>
+              <div class="info-content">
+                <span class="label">Destination</span>
+                <span class="value">{{ transfer.chantierDestination || transfer.transferToCode || '—' }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-item">
+              <mat-icon>calendar_today</mat-icon>
+              <div class="info-content">
+                <span class="label">Date</span>
+                <span class="value">{{ formatDate(transfer.postingDate) }}</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <mat-icon>inventory_2</mat-icon>
+              <div class="info-content">
+                <span class="label">Articles</span>
+                <span class="value">{{ transfer.transferLines?.length || 0 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <button class="action-btn view" (click)="viewTransfer(transfer)" matTooltip="Voir détails">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="empty-state" *ngIf="filteredTransfers.length === 0">
+      <div class="empty-icon">
+        <mat-icon>inbox</mat-icon>
+      </div>
+      <h3>Aucun ordre de transfert</h3>
+      <p *ngIf="!hasActiveFilters()">Commencez par créer votre premier ordre de transfert</p>
+      <p *ngIf="hasActiveFilters()">Aucun transfert ne correspond à vos critères</p>
+      <div *appOfflineHideActions>
+        <button class="btn-primary" (click)="createTransfer()" *ngIf="isAdmin">
+          Créer un transfert
+        </button>
+      </div>
+    </div>
+    
+    <div class="pagination-wrapper" *ngIf="filteredTransfers.length > 0">
+      <mat-paginator 
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[10, 25, 50]"
+        [pageIndex]="currentPage - 1"
+        (page)="onPageChange($event.pageIndex + 1, $event.pageSize)">
+      </mat-paginator>
+    </div>
+    
+  </div>
+  
+  <!-- INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && filteredTransfers.length > 0">
+    <mat-icon>cloud_off</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+  </div>
+  
+</div>

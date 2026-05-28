@@ -1,0 +1,642 @@
+<!-- src/app/modules/alerts/pages/alerts-page/alerts-page.html -->
+
+<div class="alerts-page-container">
+  
+  <!-- BANNIÈRE MODE HORS LIGNE -->
+  <ng-template #offlineBanner>
+    <div class="offline-readonly-banner">
+      <mat-icon>visibility</mat-icon>
+      <span> Mode hors ligne - Consultation uniquement</span>
+      <span class="badge-readonly">Lecture seule</span>
+    </div>
+  </ng-template>
+  <div *appShowOfflineMessage="offlineBanner"></div>
+  
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="gradient-orb orb-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <div class="icon-pulse"></div>
+          <mat-icon>notifications_active</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>
+            Centre d'alertes
+            <span class="active-filters-indicator" *ngIf="hasActiveFilters()">
+              <mat-icon>filter_list</mat-icon>
+              Filtres actifs
+            </span>
+          </h1>
+          <p>Visualisez et gérez toutes les alertes de votre projet</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <div *appOfflineHideActions>
+          <button class="btn-primary-glass" (click)="refreshAll()" matTooltip="Rafraîchir">
+            <mat-icon>refresh</mat-icon>
+            <span>Rafraîchir</span>
+            <div class="btn-glow"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Résumé -->
+  <div class="stats-grid">
+    <div class="stat-card premium" (click)="filterBySeverity('all')" [class.active]="selectedSeverity === 'all'">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper total">
+          <mat-icon>notifications</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ totalAlerts }}</span>
+          <span class="stat-title">Total alertes</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    <div class="stat-card premium" (click)="filterBySeverity('Critical')" [class.active]="selectedSeverity === 'Critical'">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper critical">
+          <mat-icon>error</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ criticalCount }}</span>
+          <span class="stat-title">Critiques</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    <div class="stat-card premium" (click)="filterBySeverity('Warning')" [class.active]="selectedSeverity === 'Warning'">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper warning">
+          <mat-icon>warning</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ warningCount }}</span>
+          <span class="stat-title">Avertissements</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+    <div class="stat-card premium" (click)="filterBySeverity('Info')" [class.active]="selectedSeverity === 'Info'">
+      <div class="stat-card-inner">
+        <div class="stat-icon-wrapper info">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="stat-details">
+          <span class="stat-number">{{ infoCount }}</span>
+          <span class="stat-title">Informations</span>
+        </div>
+      </div>
+      <div class="stat-progress"></div>
+    </div>
+  </div>
+
+  <!-- Filtres Améliorés -->
+  <div class="filters-card">
+    <div class="search-section">
+      <div class="search-container">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input type="text" class="search-input" 
+               placeholder="Rechercher par titre, message, entité ou type d'alerte..." 
+               [(ngModel)]="searchTerm" 
+               (input)="onSearchChange()"
+               [class.has-value]="searchTerm">
+        <button class="clear-search" *ngIf="searchTerm" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Filtres par domaine avec bouton "Tous" -->
+    <div class="domain-filters">
+      <div class="domain-filter all-filter" 
+           [class.active]="selectedDomain === 'all'"
+           (click)="filterByDomain('all')">
+        <div class="domain-icon all">
+          <mat-icon>apps</mat-icon>
+        </div>
+        <span class="domain-name">Tous les domaines</span>
+        <span class="domain-count all">{{ totalAlerts }}</span>
+      </div>
+      
+      <div class="domain-filter" 
+           *ngFor="let domain of domains" 
+           [class.active]="selectedDomain === domain.key"
+           (click)="filterByDomain(domain.key)">
+        <div class="domain-icon" [class]="domain.color">
+          <mat-icon>{{ domain.icon }}</mat-icon>
+        </div>
+        <span class="domain-name">{{ domain.name }}</span>
+        <span class="domain-count" [class]="domain.color">{{ getDomainCount(domain.key) }}</span>
+      </div>
+    </div>
+
+    <!-- Filtres supplémentaires avancés -->
+    <div class="advanced-filters" *ngIf="showAdvancedFilters">
+      <div class="filter-group">
+        <span class="filter-label">Période :</span>
+        <div class="period-filters">
+          <button class="period-btn" [class.active]="selectedPeriod === 'today'" (click)="filterByPeriod('today')">
+            Aujourd'hui
+          </button>
+          <button class="period-btn" [class.active]="selectedPeriod === 'week'" (click)="filterByPeriod('week')">
+            Cette semaine
+          </button>
+          <button class="period-btn" [class.active]="selectedPeriod === 'month'" (click)="filterByPeriod('month')">
+            Ce mois
+          </button>
+          <button class="period-btn" [class.active]="selectedPeriod === 'all'" (click)="filterByPeriod('all')">
+            Toute période
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Statut lecture :</span>
+        <div class="read-status-filters">
+          <button class="status-btn" [class.active]="selectedReadStatus === 'all'" (click)="filterByReadStatus('all')">
+            Tous
+          </button>
+          <button class="status-btn" [class.active]="selectedReadStatus === 'unread'" (click)="filterByReadStatus('unread')">
+            Non lus ({{ unreadCount }})
+          </button>
+          <button class="status-btn" [class.active]="selectedReadStatus === 'read'" (click)="filterByReadStatus('read')">
+            Lus
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Tri :</span>
+        <div class="sort-filters">
+          <button class="sort-btn" [class.active]="sortBy === 'date_desc'" (click)="sortByDate('desc')">
+            <mat-icon>arrow_downward</mat-icon> Plus récent
+          </button>
+          <button class="sort-btn" [class.active]="sortBy === 'date_asc'" (click)="sortByDate('asc')">
+            <mat-icon>arrow_upward</mat-icon> Plus ancien
+          </button>
+          <button class="sort-btn" [class.active]="sortBy === 'severity'" (click)="sortBySeverity()">
+            <mat-icon>warning</mat-icon> Par sévérité
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boutons d'action des filtres -->
+    <div class="filters-actions">
+      <button class="toggle-filters-btn" (click)="toggleAdvancedFilters()">
+        <mat-icon>{{ showAdvancedFilters ? 'expand_less' : 'expand_more' }}</mat-icon>
+        <span>{{ showAdvancedFilters ? 'Masquer' : 'Afficher' }} les filtres avancés</span>
+      </button>
+      
+      <button class="clear-filters-btn" *ngIf="hasActiveFilters()" (click)="clearAllFilters()">
+        <mat-icon>filter_alt_off</mat-icon>
+        <span>Effacer tous les filtres</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-card">
+      <div class="loading-animation">
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+        <div class="loading-ring"></div>
+      </div>
+      <p>Chargement des alertes...</p>
+    </div>
+  </div>
+
+  <!-- Alertes par Domaine avec Pagination -->
+  <div class="alerts-sections" *ngIf="!loading">
+    
+    <!-- Demandes d'achat -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'purchaseRequests') && hasDomainAlerts('purchaseRequests')">
+      <div class="section-header">
+        <div class="section-icon amber">
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
+        <h2>Demandes d'achat</h2>
+        <span class="section-count amber">{{ getFilteredDomainAlerts('purchaseRequests').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('purchaseRequests')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('purchaseRequests').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('purchaseRequests', 'prev')" [disabled]="currentPage['purchaseRequests'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['purchaseRequests'] }} / {{ getTotalPages('purchaseRequests') }}</span>
+        <button class="page-btn" (click)="changePage('purchaseRequests', 'next')" [disabled]="currentPage['purchaseRequests'] === getTotalPages('purchaseRequests')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Ordres de transfert -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'transfers') && hasDomainAlerts('transfers')">
+      <div class="section-header">
+        <div class="section-icon cyan">
+          <mat-icon>local_shipping</mat-icon>
+        </div>
+        <h2>Ordres de transfert</h2>
+        <span class="section-count cyan">{{ getFilteredDomainAlerts('transfers').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('transfers')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('transfers').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('transfers', 'prev')" [disabled]="currentPage['transfers'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['transfers'] }} / {{ getTotalPages('transfers') }}</span>
+        <button class="page-btn" (click)="changePage('transfers', 'next')" [disabled]="currentPage['transfers'] === getTotalPages('transfers')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stock -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'stock') && hasDomainAlerts('stock')">
+      <div class="section-header">
+        <div class="section-icon teal">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <h2>Stock</h2>
+        <span class="section-count teal">{{ getFilteredDomainAlerts('stock').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('stock')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('stock').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('stock', 'prev')" [disabled]="currentPage['stock'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['stock'] }} / {{ getTotalPages('stock') }}</span>
+        <button class="page-btn" (click)="changePage('stock', 'next')" [disabled]="currentPage['stock'] === getTotalPages('stock')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Engins -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'vehicules') && hasDomainAlerts('vehicules')">
+      <div class="section-header">
+        <div class="section-icon orange">
+          <mat-icon>construction</mat-icon>
+        </div>
+        <h2>Engins</h2>
+        <span class="section-count orange">{{ getFilteredDomainAlerts('vehicules').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('vehicules')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('vehicules').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('vehicules', 'prev')" [disabled]="currentPage['vehicules'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['vehicules'] }} / {{ getTotalPages('vehicules') }}</span>
+        <button class="page-btn" (click)="changePage('vehicules', 'next')" [disabled]="currentPage['vehicules'] === getTotalPages('vehicules')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Gasoil -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'gasoil') && hasDomainAlerts('gasoil')">
+      <div class="section-header">
+        <div class="section-icon green">
+          <mat-icon>local_gas_station</mat-icon>
+        </div>
+        <h2>Gasoil</h2>
+        <span class="section-count green">{{ getFilteredDomainAlerts('gasoil').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('gasoil')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('gasoil').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('gasoil', 'prev')" [disabled]="currentPage['gasoil'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['gasoil'] }} / {{ getTotalPages('gasoil') }}</span>
+        <button class="page-btn" (click)="changePage('gasoil', 'next')" [disabled]="currentPage['gasoil'] === getTotalPages('gasoil')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Pointage (Attendance) -->
+    <div class="alert-section" *ngIf="(selectedDomain === 'all' || selectedDomain === 'attendance') && hasDomainAlerts('attendance')">
+      <div class="section-header">
+        <div class="section-icon purple">
+          <mat-icon>event_available</mat-icon>
+        </div>
+        <h2>Pointage employés</h2>
+        <span class="section-count purple">{{ getFilteredDomainAlerts('attendance').length }}</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="alerts-list">
+        <div *ngFor="let alert of getPaginatedAlerts('attendance')" 
+             class="alert-card" 
+             [class.critical]="alert.severity === 'Critical'"
+             [class.warning]="alert.severity === 'Warning'"
+             [class.info]="alert.severity === 'Info'"
+             [class.read]="isRead(alert.id)"
+             (click)="onAlertClick(alert)">
+          <div class="alert-status">
+            <div class="alert-icon">
+              <mat-icon>{{ getSeverityIcon(alert.severity) }}</mat-icon>
+            </div>
+          </div>
+          <div class="alert-content">
+            <div class="alert-header">
+              <span class="alert-title">{{ alert.title }}</span>
+              <span class="alert-date">{{ alert.detectedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <div class="alert-message">{{ alert.message }}</div>
+            <div class="alert-footer">
+              <span class="alert-type">
+                <mat-icon>label</mat-icon>
+                {{ alert.type }}
+              </span>
+              <span class="alert-entity">
+                <mat-icon>link</mat-icon>
+                {{ alert.relatedEntityNo }}
+              </span>
+              <span class="alert-severity" [class]="getSeverityClass(alert.severity)">
+                {{ alert.severity }}
+              </span>
+            </div>
+          </div>
+          <div class="alert-actions">
+            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
+              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+            <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-pagination" *ngIf="getFilteredDomainAlerts('attendance').length > pageSizePerSection">
+        <button class="page-btn" (click)="changePage('attendance', 'prev')" [disabled]="currentPage['attendance'] === 1">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="page-info">Page {{ currentPage['attendance'] }} / {{ getTotalPages('attendance') }}</span>
+        <button class="page-btn" (click)="changePage('attendance', 'next')" [disabled]="currentPage['attendance'] === getTotalPages('attendance')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Aucune alerte -->
+    <div class="empty-state" *ngIf="!loading && getTotalAlertsCount() === 0 && !hasActiveFilters()">
+      <div class="empty-card">
+        <div class="empty-illustration">
+          <mat-icon>notifications_off</mat-icon>
+        </div>
+        <h3>Aucune alerte</h3>
+        <p>Vous n'avez aucune alerte pour le moment</p>
+        <p class="empty-subtitle">Tout est sous contrôle !</p>
+      </div>
+    </div>
+
+    <!-- Aucun résultat après filtres -->
+    <div class="empty-state" *ngIf="!loading && getTotalAlertsCount() > 0 && getFilteredDomainsCount() === 0">
+      <div class="empty-card">
+        <div class="empty-illustration">
+          <mat-icon>filter_alt_off</mat-icon>
+        </div>
+        <h3>Aucun résultat</h3>
+        <p>Aucune alerte ne correspond à vos critères de filtrage</p>
+        <button class="btn-reset" (click)="clearAllFilters()">
+          <mat-icon>refresh</mat-icon>
+          <span>Réinitialiser les filtres</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- INDICATEUR MODE OFFLINE -->
+    <div class="offline-data-indicator" *ngIf="isReadOnly && getTotalAlertsCount() > 0">
+      <mat-icon>cloud_off</mat-icon>
+      <span> Données en cache (mode hors ligne)</span>
+    </div>
+    
+  </div>
+</div>

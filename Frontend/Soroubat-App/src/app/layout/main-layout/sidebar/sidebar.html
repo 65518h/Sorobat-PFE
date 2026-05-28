@@ -1,0 +1,177 @@
+<!-- sidebar.html — Style sobre & professionnel avec section Alertes -->
+
+<mat-nav-list class="sidebar">
+
+  <!-- En-tête du sidebar -->
+  <div class="sidebar-header">
+    <div class="header-content">
+      <div class="logo-wrapper">
+        <!-- Remplacement du placeholder texte par une image -->
+        <img src="chantier.jpg" alt="SOROUBAT" class="logo-image">
+      </div>
+      <div class="header-text">
+        <span class="brand-version">Consultez vos chantiers en temps réel</span>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ALERTES (NOUVEAU - PRIORITAIRE) ── -->
+  <div class="menu-section">
+    <div class="menu-label">ALERTES</div>
+
+    <div class="menu-items">
+      <a mat-list-item routerLink="/alerts"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-red">
+            <mat-icon class="item-icon">notifications_active</mat-icon>
+          </div>
+          <span class="item-title">Centre d'alertes</span>
+          
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── PRINCIPAL ── -->
+  <div class="menu-section">
+    <div class="menu-label">PRINCIPAL</div>
+
+    <div class="menu-items">
+
+      <a mat-list-item routerLink="/dashboard"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-blue">
+            <mat-icon class="item-icon">dashboard</mat-icon>
+          </div>
+          <span class="item-title">Tableau de bord</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/projects"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-indigo">
+            <mat-icon class="item-icon">folder_open</mat-icon>
+          </div>
+          <span class="item-title">Projets</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/tasks"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-violet">
+            <mat-icon class="item-icon">assignment</mat-icon>
+          </div>
+          <span class="item-title">Tâches</span>
+        </div>
+      </a>
+
+
+       <!--  NOUVEAU : Pointage des employés -->
+    <a mat-list-item routerLink="/attendance"
+       routerLinkActive="active-link" class="menu-item">
+      <div class="item-content">
+        <div class="icon-container icon-green">
+          <mat-icon class="item-icon">groups</mat-icon>
+        </div>
+        <span class="item-title">Employés</span>
+      </div>
+    </a>
+
+      <a mat-list-item routerLink="/purchases"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-amber">
+            <mat-icon class="item-icon">shopping_cart</mat-icon>
+          </div>
+          <span class="item-title">Demandes d'achat</span>
+        </div>
+      </a>
+
+      <!-- Gestion gasoil -->
+      <a mat-list-item routerLink="/gasoil/list"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-green">
+            <mat-icon class="item-icon">local_gas_station</mat-icon>
+          </div>
+          <span class="item-title">Gasoil</span>
+        </div>
+      </a>
+
+      <!-- Ordres de transfert -->
+      <a mat-list-item routerLink="/transfers"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-cyan">
+            <mat-icon class="item-icon">local_shipping</mat-icon>
+          </div>
+          <span class="item-title">Ordres de transfert</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/inventory"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-teal">
+            <mat-icon class="item-icon">inventory_2</mat-icon>
+          </div>
+          <span class="item-title">Stock</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/equipment"
+         routerLinkActive="active-link" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-orange">
+            <mat-icon class="item-icon">construction</mat-icon>
+          </div>
+          <span class="item-title">Engins</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Séparateur visuel entre PRINCIPAL et SYSTÈME -->
+  <div class="section-divider"></div>
+
+  <!-- ── SYSTÈME ── -->
+  <div class="menu-section">
+    <div class="menu-label">SYSTÈME</div>
+
+    <div class="menu-items">
+
+      <a mat-list-item routerLink="/settings" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-gray">
+            <mat-icon class="item-icon">settings</mat-icon>
+          </div>
+          <span class="item-title">Paramètres</span>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/help" class="menu-item">
+        <div class="item-content">
+          <div class="icon-container icon-gray">
+            <mat-icon class="item-icon">help_outline</mat-icon>
+          </div>
+          <span class="item-title">Aide</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="sidebar-footer">
+    <span>© 2026 SOROUBAT</span>
+  </div>
+
+</mat-nav-list>

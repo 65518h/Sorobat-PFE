@@ -1,0 +1,56 @@
+<!-- modules/projects/components/task-list/task-list.component.html -->
+<table mat-table [dataSource]="tasks" class="tasks-table">
+  
+  <!-- Colonne taskNo -->
+  <ng-container matColumnDef="taskNo">
+    <th mat-header-cell *matHeaderCellDef> N° Tâche </th>
+    <td mat-cell *matCellDef="let task"> {{ task.taskNo }} </td>
+  </ng-container>
+
+  <!-- Colonne description -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let task"> {{ task.description }} </td>
+  </ng-container>
+
+  <!-- Colonne responsable -->
+  <ng-container matColumnDef="responsible">
+    <th mat-header-cell *matHeaderCellDef> Responsable </th>
+    <td mat-cell *matCellDef="let task"> {{ task.responsible || 'Non assigné' }} </td>
+  </ng-container>
+
+  <!-- Colonne dates -->
+  <ng-container matColumnDef="dates">
+    <th mat-header-cell *matHeaderCellDef> Dates </th>
+    <td mat-cell *matCellDef="let task">
+      {{ task.dateDebut | date:'dd/MM' }} → {{ task.dateFin | date:'dd/MM' }}
+    </td>
+  </ng-container>
+
+  <!-- Colonne progression -->
+  <ng-container matColumnDef="progress">
+    <th mat-header-cell *matHeaderCellDef> Avancement </th>
+    <td mat-cell *matCellDef="let task">
+      <div class="progress-container">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="task.progressPct">
+        </mat-progress-bar>
+        <span>{{ task.progressPct }}%</span>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Colonne statut -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Statut </th>
+    <td mat-cell *matCellDef="let task">
+      <span class="status-badge" [ngClass]="getStatusClass(task)">
+        {{ getStatusText(task) }}
+      </span>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,0 +1,230 @@
+<!-- src/app/modules/projects/pages/project-list/project-list.component.html -->
+
+<div class="project-container">
+  
+  <!-- BANNIÈRE MODE HORS LIGNE -->
+  <ng-template #offlineBanner>
+    <div class="offline-readonly-banner">
+      <mat-icon>visibility</mat-icon>
+      <span> Mode hors ligne - Consultation uniquement</span>
+      <span class="badge-readonly">Lecture seule</span>
+    </div>
+  </ng-template>
+  <div *appShowOfflineMessage="offlineBanner"></div>
+  
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <div class="icon-pulse"></div>
+          <mat-icon>folder</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>Mon projet</h1>
+          <p>Suivez l'avancement de votre chantier</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <div *appOfflineHideActions>
+          <button class="btn-glass" (click)="refresh()" matTooltip="Rafraîchir">
+            <mat-icon>refresh</mat-icon>
+            <span>Rafraîchir</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement de votre projet...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Erreur</h3>
+    <p>{{ errorMessage }}</p>
+    <button class="btn-retry" (click)="loadMyProject()" *appOfflineHideActions>
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+
+  <!-- Contenu du projet -->
+  <div class="project-content" *ngIf="!loading && !errorMessage && project">
+    
+    <!-- Carte principale du projet -->
+    <div class="project-card">
+      <div class="card-header">
+        <div class="header-left">
+          <div class="project-icon">
+            <mat-icon>folder_special</mat-icon>
+          </div>
+          <div class="project-title">
+            <h2>{{ project.no || 'Projet' }}</h2>
+            <p class="project-desc">{{ project.description || 'Aucune description' }}</p>
+          </div>
+        </div>
+        <div class="status-chip" [ngClass]="getStatusClass(project.status)">
+          <mat-icon>{{ getStatusIcon(project.status) }}</mat-icon>
+          <span>{{ getStatusLabel(project.status) }}</span>
+        </div>
+      </div>
+      
+      <mat-divider></mat-divider>
+      
+      <div class="card-body">
+        <!-- Informations - Version corrigée sans champs invalides -->
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>store</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Magasin</span>
+              <span class="info-value">{{ project.affectationMagasin || 'Non affecté' }}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>event</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Date de début</span>
+              <span class="info-value">{{ formatDate(project.startingDate) }}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>event_busy</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Date de fin</span>
+              <span class="info-value">{{ formatDate(project.endingDate) }}</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <mat-icon>inventory_2</mat-icon>
+            <div class="info-content">
+              <span class="info-label">Tâches</span>
+              <span class="info-value">{{ stats.totalTasks }} tâches</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Avancement -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-label">Avancement global</span>
+            <span class="progress-percent">{{ project.progress || 0 }}%</span>
+          </div>
+          <div class="progress-bar-container">
+            <mat-progress-bar
+              class="custom-progress-bar"
+              mode="determinate"
+              [value]="project.progress || 0"
+              [color]="getProgressColor(project.progress || 0)">
+            </mat-progress-bar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- src/app/modules/projects/pages/project-list/project-list.component.html -->
+
+<!-- src/app/modules/projects/pages/project-list/project-list.component.html -->
+
+<!-- Cartes de statistiques -->
+<div class="stats-grid">
+  <div class="stat-card tasks" (click)="navigateToTasksWithFilter('all')">
+    <div class="stat-icon">
+      <mat-icon>assignment</mat-icon>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ stats.totalTasks }}</span>
+      <span class="stat-label">Tâches totales</span>
+    </div>
+    <div class="stat-trend neutral">
+      <mat-icon>list</mat-icon>
+      <span>Total</span>
+    </div>
+  </div>
+  
+  <div class="stat-card completed" (click)="navigateToTasksWithFilter('completed')">
+    <div class="stat-icon">
+      <mat-icon>check_circle</mat-icon>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ stats.completedTasks }}</span>
+      <span class="stat-label">Terminées</span>
+    </div>
+    <div class="stat-trend positive">
+      <span>{{ stats.completionRate }}%</span>
+    </div>
+  </div>
+  
+  <div class="stat-card in-progress" (click)="navigateToTasksWithFilter('in-progress')">
+    <div class="stat-icon">
+      <mat-icon>pending</mat-icon>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ stats.inProgressTasks }}</span>
+      <span class="stat-label">En cours</span>
+    </div>
+    <div class="stat-trend">
+      <mat-icon>trending_up</mat-icon>
+    </div>
+  </div>
+  
+  
+</div>
+
+    <!-- Actions rapides -->
+    <div class="quick-actions">
+      <h3>Actions rapides</h3>
+      <div class="actions-grid">
+        <button class="action-card" (click)="navigateToTasks()">
+          <div class="action-icon tasks-icon">
+            <mat-icon>assignment</mat-icon>
+          </div>
+          <div class="action-info">
+            <span class="action-title">Gérer les tâches</span>
+            <span class="action-desc">Consultez et suivez vos tâches</span>
+          </div>
+          <mat-icon class="action-arrow">arrow_forward</mat-icon>
+        </button>
+        
+        <button class="action-card" (click)="navigateToStock()">
+          <div class="action-icon stock-icon">
+            <mat-icon>inventory_2</mat-icon>
+          </div>
+          <div class="action-info">
+            <span class="action-title">Gérer le stock</span>
+            <span class="action-desc">Consultez les disponibilités</span>
+          </div>
+          <mat-icon class="action-arrow">arrow_forward</mat-icon>
+        </button>
+        
+        <button class="action-card" (click)="navigateToPointage()">
+          <div class="action-icon pointage-icon">
+            <mat-icon>construction</mat-icon>
+          </div>
+          <div class="action-info">
+            <span class="action-title">Pointage véhicules</span>
+            <span class="action-desc">Enregistrez l'utilisation des engins</span>
+          </div>
+          <mat-icon class="action-arrow">arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- INDICATEUR MODE OFFLINE -->
+    <div class="offline-data-indicator" *ngIf="isReadOnly && project">
+      <mat-icon>cloud_off</mat-icon>
+      <span> Données en cache (mode hors ligne)</span>
+    </div>
+
+  </div>
+</div>

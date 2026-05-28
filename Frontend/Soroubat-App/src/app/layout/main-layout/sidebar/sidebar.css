@@ -1,0 +1,1005 @@
+/* =====================================================
+   SIDEBAR — STYLE SOBRE & PROFESSIONNEL
+   Inspiré Microsoft Dynamics 365
+===================================================== */
+
+:host {
+  display: block;
+  height: 100%;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── En-tête ── */
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafbfc;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-wrapper {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.sidebar-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+/*  Nom de marque grand et lisible */
+.brand-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.brand-version {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 2px;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* ── Sections ── */
+.menu-section {
+  padding: 8px 0;
+}
+
+/*  Label de section bien visible */
+.menu-label {
+  padding: 12px 20px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 10px;
+}
+
+/* ── Items de menu ── */
+.menu-item {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px;
+  padding: 0 12px !important;
+  border-radius: 8px;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.menu-item:hover {
+  background: #f1f5f9;
+  color: #1e40af;
+  border-color: transparent;
+  transform: none; /* ✅ suppression translateX agité */
+}
+
+.item-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  flex: 1 !important;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/*  Icônes colorées et distinctives par section */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+/* Couleurs distinctives par module */
+.icon-blue   { background: #eff6ff; }
+.icon-blue   .item-icon { color: #2563eb; }
+
+.icon-indigo { background: #eef2ff; }
+.icon-indigo .item-icon { color: #4f46e5; }
+
+.icon-violet { background: #f5f3ff; }
+.icon-violet .item-icon { color: #7c3aed; }
+
+.icon-amber  { background: #fffbeb; }
+.icon-amber  .item-icon { color: #d97706; }
+
+.icon-teal   { background: #f0fdfa; }
+.icon-teal   .item-icon { color: #0d9488; }
+
+.icon-orange { background: #fff7ed; }
+.icon-orange .item-icon { color: #ea580c; }
+
+.icon-gray   { background: #f8fafc; }
+.icon-gray   .item-icon { color: #64748b; }
+
+.item-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  transition: none;
+}
+
+/*  Titre — taille réduite pour affichage complet */
+.item-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  transition: color 0.15s ease;
+}
+
+.menu-item:hover .item-title {
+  color: #1e40af;
+  transform: none;
+}
+
+.menu-item:hover .icon-container {
+  transform: scale(1.05);
+}
+
+/*  État actif — visible et propre */
+.active-link {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border-color: #bfdbfe !important;
+  font-weight: 600;
+}
+
+.active-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: #2563eb;
+  border-radius: 0 3px 3px 0;
+}
+
+.active-link .item-title {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.active-link .icon-container {
+  transform: scale(1.05);
+}
+
+/*  Séparateur visuel fort entre PRINCIPAL et SYSTÈME */
+.section-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 16px;
+}
+
+/* ── Footer ── */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-align: center;
+  background: #fafbfc;
+}
+
+/* ── Animations d'entrée (gardées mais allégées) ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.menu-item {
+  animation: fadeSlideIn 0.2s ease forwards;
+  opacity: 0;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.03s; }
+.menu-item:nth-child(2) { animation-delay: 0.06s; }
+.menu-item:nth-child(3) { animation-delay: 0.09s; }
+.menu-item:nth-child(4) { animation-delay: 0.12s; }  /* Pointage */
+.menu-item:nth-child(5) { animation-delay: 0.15s; }
+.menu-item:nth-child(6) { animation-delay: 0.18s; }
+.menu-item:nth-child(7) { animation-delay: 0.21s; }
+.menu-item:nth-child(8) { animation-delay: 0.24s; }
+.menu-item:nth-child(9) { animation-delay: 0.27s; }
+.menu-item:nth-child(10) { animation-delay: 0.30s; }
+
+/* ── Scrollbar ── */
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar-header { padding: 16px 14px; }
+  .brand-name     { font-size: 1.1rem; }
+  .menu-items     { padding: 0 8px; }
+  .menu-item      { height: 46px; }
+  .menu-label     { padding: 10px 16px 4px; }
+}
+
+
+
+
+
+/* =====================================================
+   SIDEBAR — STYLE SOBRE & PROFESSIONNEL
+   Inspiré Microsoft Dynamics 365
+===================================================== */
+
+:host {
+  display: block;
+  height: 100%;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── En-tête ── */
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafbfc;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-wrapper {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.logo-placeholder {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.sidebar-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.brand-version {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 2px;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* ── Sections ── */
+.menu-section {
+  padding: 8px 0;
+}
+
+.menu-label {
+  padding: 12px 20px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 10px;
+}
+
+/* ── Items de menu ── */
+.menu-item {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px;
+  padding: 0 12px !important;
+  border-radius: 8px;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.menu-item:hover {
+  background: #f1f5f9;
+  color: #1e40af;
+  border-color: transparent;
+  transform: none;
+}
+
+.item-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  flex: 1 !important;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Icônes colorées et distinctives par section */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+/* Couleurs distinctives par module */
+.icon-blue   { background: #eff6ff; }
+.icon-blue   .item-icon { color: #2563eb; }
+
+.icon-indigo { background: #eef2ff; }
+.icon-indigo .item-icon { color: #4f46e5; }
+
+.icon-violet { background: #f5f3ff; }
+.icon-violet .item-icon { color: #7c3aed; }
+
+.icon-amber  { background: #fffbeb; }
+.icon-amber  .item-icon { color: #d97706; }
+
+/*  Nouvelle couleur pour les transferts */
+.icon-cyan   { background: #ecfeff; }
+.icon-cyan   .item-icon { color: #0891b2; }
+
+.icon-teal   { background: #f0fdfa; }
+.icon-teal   .item-icon { color: #0d9488; }
+
+.icon-orange { background: #fff7ed; }
+.icon-orange .item-icon { color: #ea580c; }
+
+.icon-gray   { background: #f8fafc; }
+.icon-gray   .item-icon { color: #64748b; }
+
+.item-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  transition: none;
+}
+
+.item-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  transition: color 0.15s ease;
+}
+
+.menu-item:hover .item-title {
+  color: #1e40af;
+  transform: none;
+}
+
+.menu-item:hover .icon-container {
+  transform: scale(1.05);
+}
+
+/* État actif — visible et propre */
+.active-link {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border-color: #bfdbfe !important;
+  font-weight: 600;
+}
+
+.active-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: #2563eb;
+  border-radius: 0 3px 3px 0;
+}
+
+.active-link .item-title {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.active-link .icon-container {
+  transform: scale(1.05);
+}
+
+/* Séparateur visuel fort entre PRINCIPAL et SYSTÈME */
+.section-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 16px;
+}
+
+/* ── Footer ── */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-align: center;
+  background: #fafbfc;
+}
+
+/* ── Animations d'entrée ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.menu-item {
+  animation: fadeSlideIn 0.2s ease forwards;
+  opacity: 0;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.03s; }
+.menu-item:nth-child(2) { animation-delay: 0.06s; }
+.menu-item:nth-child(3) { animation-delay: 0.09s; }
+.menu-item:nth-child(4) { animation-delay: 0.12s; }
+.menu-item:nth-child(5) { animation-delay: 0.15s; }
+.menu-item:nth-child(6) { animation-delay: 0.18s; }
+.menu-item:nth-child(7) { animation-delay: 0.21s; } /*  Pour le nouvel item */
+
+/* ── Scrollbar ── */
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar-header { padding: 16px 14px; }
+  .brand-name     { font-size: 1.1rem; }
+  .menu-items     { padding: 0 8px; }
+  .menu-item      { height: 46px; }
+  .menu-label     { padding: 10px 16px 4px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+:host {
+  display: block;
+  height: 100%;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── En-tête ── */
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafbfc;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-wrapper {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.logo-placeholder {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.sidebar-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-name {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.brand-version {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 2px;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* ── Sections ── */
+.menu-section {
+  padding: 8px 0;
+}
+
+.menu-label {
+  padding: 12px 20px 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 10px;
+}
+
+/* ── Items de menu ── */
+.menu-item {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px;
+  padding: 0 12px !important;
+  border-radius: 8px;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.menu-item:hover {
+  background: #f1f5f9;
+  color: #1e40af;
+  border-color: transparent;
+  transform: none;
+}
+
+.item-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  flex: 1 !important;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Icônes colorées et distinctives par section */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+/* Couleurs distinctives par module */
+.icon-blue   { background: #eff6ff; }
+.icon-blue   .item-icon { color: #2563eb; }
+
+.icon-indigo { background: #eef2ff; }
+.icon-indigo .item-icon { color: #4f46e5; }
+
+.icon-violet { background: #f5f3ff; }
+.icon-violet .item-icon { color: #7c3aed; }
+
+.icon-amber  { background: #fffbeb; }
+.icon-amber  .item-icon { color: #d97706; }
+
+/*  Nouvelle couleur pour Gasoil (vert émeraude) */
+.icon-green  { background: #ecfdf5; }
+.icon-green  .item-icon { color: #059669; }
+
+/* Couleur pour les transferts */
+.icon-cyan   { background: #ecfeff; }
+.icon-cyan   .item-icon { color: #0891b2; }
+
+.icon-teal   { background: #f0fdfa; }
+.icon-teal   .item-icon { color: #0d9488; }
+
+.icon-orange { background: #fff7ed; }
+.icon-orange .item-icon { color: #ea580c; }
+
+.icon-gray   { background: #f8fafc; }
+.icon-gray   .item-icon { color: #64748b; }
+
+.item-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  transition: none;
+}
+
+.item-title {
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  transition: color 0.15s ease;
+}
+
+.menu-item:hover .item-title {
+  color: #1e40af;
+  transform: none;
+}
+
+.menu-item:hover .icon-container {
+  transform: scale(1.05);
+}
+
+/* État actif — visible et propre */
+.active-link {
+  background: #eff6ff !important;
+  color: #1e40af !important;
+  border-color: #bfdbfe !important;
+  font-weight: 600;
+}
+
+.active-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: #2563eb;
+  border-radius: 0 3px 3px 0;
+}
+
+.active-link .item-title {
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.active-link .icon-container {
+  transform: scale(1.05);
+}
+
+/* Séparateur visuel fort entre PRINCIPAL et SYSTÈME */
+.section-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 8px 16px;
+}
+
+/* ── Footer ── */
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-align: center;
+  background: #fafbfc;
+}
+
+/* ── Animations d'entrée ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.menu-item {
+  animation: fadeSlideIn 0.2s ease forwards;
+  opacity: 0;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.03s; }
+.menu-item:nth-child(2) { animation-delay: 0.06s; }
+.menu-item:nth-child(3) { animation-delay: 0.09s; }
+.menu-item:nth-child(4) { animation-delay: 0.12s; }
+.menu-item:nth-child(5) { animation-delay: 0.15s; }
+.menu-item:nth-child(6) { animation-delay: 0.18s; }
+.menu-item:nth-child(7) { animation-delay: 0.21s; }
+.menu-item:nth-child(8) { animation-delay: 0.24s; }
+.menu-item:nth-child(9) { animation-delay: 0.27s; }
+
+/* ── Scrollbar ── */
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar-header { padding: 16px 14px; }
+  .brand-name     { font-size: 1.1rem; }
+  .menu-items     { padding: 0 8px; }
+  .menu-item      { height: 46px; }
+  .menu-label     { padding: 10px 16px 4px; }
+}
+
+
+
+
+/* ==================== STYLES POUR LA SECTION ALERTES ==================== */
+
+/* Icône rouge pour les alertes */
+.icon-red {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+}
+
+.icon-red .item-icon {
+  color: #dc2626;
+}
+
+/* Badge de compteur d'alertes critiques */
+.badge-alert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 30px;
+  margin-left: auto;
+  animation: badgePulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 2px white;
+}
+
+/* Animation de pulsation pour le badge */
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+  }
+}
+
+/* Effet de brillance sur l'icône des alertes */
+.icon-red {
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-red::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.menu-item:hover .icon-red::after {
+  opacity: 1;
+}
+
+/* Animation d'entrée pour le nouveau menu */
+.menu-item:nth-child(1) {
+  animation-delay: 0.01s;
+}
+
+/* Style du badge sur l'élément actif */
+.active-link .badge-alert {
+  background: white;
+  color: #dc2626;
+  box-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* sidebar.css — Styles pour l'image du logo */
+
+.logo-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  overflow: hidden;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.logo-wrapper:hover .logo-image {
+  transform: scale(1.05);
+}
+
+/* Alternative si l'image ne charge pas */
+.logo-image {
+  background-color: #1e1b4b;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .logo-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+}
+
+
+
+
+/* sidebar.css — Ajouter dans la section des couleurs */
+
+/* Couleur pour le Pointage (vert émeraude) */
+.icon-green  { background: #ecfdf5; }
+.icon-green  .item-icon { color: #059669; }

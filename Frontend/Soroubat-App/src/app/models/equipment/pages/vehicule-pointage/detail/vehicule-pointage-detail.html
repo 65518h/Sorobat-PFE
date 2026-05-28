@@ -1,0 +1,234 @@
+<!-- src/app/modules/equipment/pages/vehicule-pointage/detail/vehicule-pointage-detail.html -->
+
+<!--  BANNIÈRE MODE HORS LIGNE -->
+<ng-template #offlineBanner>
+  <div class="offline-readonly-banner">
+    <mat-icon>visibility</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+    <span class="badge-readonly">Lecture seule</span>
+  </div>
+</ng-template>
+<div *appShowOfflineMessage="offlineBanner"></div>
+
+<div class="pointage-detail-container">
+  
+  <!-- Header -->
+  <div class="detail-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="back-btn" (click)="goBack()" matTooltip="Retour à la liste">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-title">
+          <h1>Détail du pointage</h1>
+          <p *ngIf="pointage">Document N° {{ pointage.documentNo || '—' }}</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div *appOfflineHideActions>
+          <button *ngIf="canEdit()" class="btn-edit" (click)="editPointage()" matTooltip="Modifier">
+            <mat-icon>edit</mat-icon>
+            <span>Modifier</span>
+          </button>
+        </div>
+        <div *appOfflineHideActions>
+          <button *ngIf="canValidate()" class="btn-validate" (click)="validatePointage()" matTooltip="Valider">
+            <mat-icon>check_circle</mat-icon>
+            <span>Valider</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loading-spinner"></div>
+    <p>Chargement des détails...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="errorMessage && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <h3>Erreur de chargement</h3>
+    <p>{{ errorMessage }}</p>
+    <button class="btn-retry" (click)="loadPointage()">
+      <mat-icon>refresh</mat-icon>
+      Réessayer
+    </button>
+  </div>
+
+  <!-- Contenu -->
+  <div class="detail-content" *ngIf="!loading && !errorMessage && pointage">
+    
+    <!-- En-tête du pointage -->
+    <div class="info-card">
+      <div class="card-header">
+        <div class="card-title">
+          <mat-icon>info</mat-icon>
+          <h2>Informations générales</h2>
+        </div>
+        <div class="status-badge" [ngClass]="getStatusClass(pointage.status)">
+          <mat-icon>{{ getStatusIcon(pointage.status) }}</mat-icon>
+          <span>{{ pointage.status || '—' }}</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">N° document</span>
+            <span class="info-value">{{ pointage.documentNo || '—' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Projet / Chantier</span>
+            <span class="info-value">{{ pointage.jobNo || '—' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Date</span>
+            <span class="info-value">{{ formatDate(pointage.date) }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Observations</span>
+            <span class="info-value">{{ pointage.observation || '—' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résumé simplifié -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="summary-icon">
+          <mat-icon>directions_car</mat-icon>
+        </div>
+        <div class="summary-info">
+          <span class="summary-value">{{ summary.totalVehicules }}</span>
+          <span class="summary-label">Véhicules</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="summary-info">
+          <span class="summary-value">{{ summary.totalHours }}</span>
+          <span class="summary-label">Heures</span>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon">
+          <mat-icon>straighten</mat-icon>
+        </div>
+        <div class="summary-info">
+          <span class="summary-value">{{ formatNumber(summary.totalDistance) }} km</span>
+          <span class="summary-label">Distance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste des véhicules avec filtre -->
+    <div class="lines-card">
+      <div class="card-header">
+        <div class="card-title">
+          <mat-icon>list_alt</mat-icon>
+          <h2>Véhicules pointés</h2>
+          <span class="badge">{{ filteredLines.length }} véhicule(s)</span>
+        </div>
+        
+        <!-- Filtre par statut des véhicules -->
+        <div class="filter-status">
+          <mat-icon>filter_alt</mat-icon>
+          <select [(ngModel)]="vehiculeStatusFilter" (change)="applyVehiculeFilter()" class="status-filter-select">
+            <option value="all">Tous les statuts</option>
+            <option value="Fonctionnel"> Fonctionnel</option>
+            <option value="Disponible"> Disponible</option>
+            <option value="Panne"> En panne</option>
+            <option value="Accident"> Accident</option>
+            <option value="Mauvais Temps"> Mauvais Temps</option>
+            <option value="Réformé"> Réformé</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="card-body">
+        <!-- Afficher les badges des filtres actifs -->
+        <div class="active-filters" *ngIf="vehiculeStatusFilter !== 'all'">
+          <div class="filter-chip">
+            <mat-icon>filter_alt</mat-icon>
+            <span>Statut: {{ getVehiculeStatusLabel(vehiculeStatusFilter) }}</span>
+            <button class="chip-remove" (click)="clearVehiculeFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>Véhicule</th>
+                <th>Description</th>
+                <th>Heures</th>
+                <th>Index départ</th>
+                <th>Index fin</th>
+                <th>Distance (km)</th>
+                <th>Carburant (L)</th>
+                <th>Statut</th>
+                <th *ngIf="canEditLines()">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let line of filteredLines; let i = index">
+                <td class="vehicule-cell">
+                  <span class="vehicule-code">{{ line.vehiculeNo }}</span>
+                </td>
+                <td class="desc-cell">{{ line.description || '—' }}</td>
+                <td class="hours-cell">{{ line.hoursWorked }} h</td>
+                <td class="index-cell">{{ formatNumber(line.startIndex) }}</td>
+                <td class="index-cell">{{ formatNumber(line.endIndex) }}</td>
+                <td class="distance-cell">{{ formatNumber(calculateDistance(line)) }} km</td>
+                <td class="fuel-cell">{{ line.fuelConsumed || 0 }} L</td>
+                <td class="status-cell">
+                  <div class="vehicule-status" [ngClass]="getVehiculeStatusClass(line.status)">
+                    <mat-icon>{{ getVehiculeStatusIcon(line.status) }}</mat-icon>
+                    <span>{{ line.status || '—' }}</span>
+                  </div>
+                </td>
+                <td class="actions-cell" *ngIf="canEditLines()">
+                  <div class="action-buttons">
+                    <div *appOfflineHideActions>
+                      <button class="action-btn edit" (click)="editLine(line, i)" matTooltip="Modifier ce véhicule">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="filteredLines.length === 0">
+                <td colspan="9" class="empty-cell">
+                  <div class="empty-lines">
+                    <mat-icon>inbox</mat-icon>
+                    <p *ngIf="vehiculeStatusFilter !== 'all'">Aucun véhicule avec le statut sélectionné</p>
+                    <p *ngIf="vehiculeStatusFilter === 'all'">Aucun véhicule pointé</p>
+                    <button class="btn-clear-filter" (click)="clearVehiculeFilter()" *ngIf="vehiculeStatusFilter !== 'all'">
+                      <mat-icon>clear_all</mat-icon>
+                      Effacer le filtre
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INDICATEUR MODE OFFLINE -->
+  <div class="offline-data-indicator" *ngIf="isReadOnly && pointage">
+    <mat-icon>cloud_off</mat-icon>
+    <span> Mode hors ligne - Consultation uniquement</span>
+  </div>
+
+</div>

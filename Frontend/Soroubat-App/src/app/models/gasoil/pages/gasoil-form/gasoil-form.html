@@ -1,0 +1,463 @@
+<!-- src/app/modules/gasoil/pages/gasoil-form/gasoil-form.html -->
+
+<div class="gasoil-form-container">
+  
+  <!-- Hero Section Premium -->
+  <div class="hero-section">
+    <div class="hero-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+      <div class="gradient-orb orb-4"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="icon-container">
+          <div class="icon-pulse"></div>
+          <mat-icon>local_gas_station</mat-icon>
+        </div>
+        <div class="hero-text">
+          <h1>{{ isEditMode ? 'Modifier la fiche gasoil' : 'Nouvelle fiche gasoil' }}</h1>
+          <p>{{ isEditMode ? 'Modifiez les informations de la fiche existante' : 'Créez une nouvelle fiche de consommation de carburant' }}</p>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-secondary-glass" (click)="cancel()" type="button">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-primary-glass" (click)="onSubmit()" [disabled]="loading">
+          <mat-icon *ngIf="!loading">save</mat-icon>
+          <div class="spinner-small" *ngIf="loading"></div>
+          <span>{{ loading ? 'Enregistrement...' : (isEditMode ? 'Mettre à jour' : 'Créer') }}</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire -->
+  <form [formGroup]="headerForm" (ngSubmit)="onSubmit()" class="form-card">
+    
+    <!-- Section Informations générales -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>info_outline</mat-icon>
+        </div>
+        <h2>Informations générales</h2>
+        <div class="section-line"></div>
+      </div>
+      
+      <div class="info-banner" *ngIf="currentProjectNo">
+        <div class="banner-icon">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="banner-content">
+          <span class="banner-label">Projet associé</span>
+          <span class="banner-value">{{ currentProjectNo }}</span>
+        </div>
+        <div class="banner-badge">Automatique</div>
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-field">
+          <label>
+            <mat-icon>calendar_today</mat-icon>
+            <span class="label-text">Date</span>
+            <span class="required">*</span>
+          </label>
+          <div class="input-wrapper" [class.error]="isFieldInvalid('date')">
+            <input type="date" formControlName="date">
+          </div>
+          <span class="error-message" *ngIf="isFieldInvalid('date')">La date est requise</span>
+        </div>
+        
+        <div class="form-field">
+          <label>
+            <mat-icon>store</mat-icon>
+            <span class="label-text">Magasin / Site</span>
+            <span class="required">*</span>
+          </label>
+          <div class="custom-select" (click)="openMagasinDialog()">
+            <div class="custom-select-display" [class.empty]="!selectedMagasin">
+              <mat-icon>storefront</mat-icon>
+              <span *ngIf="selectedMagasin">{{ selectedMagasin.name }}</span>
+              <span *ngIf="!selectedMagasin" class="placeholder">Sélectionner un magasin</span>
+            </div>
+            <mat-icon class="select-chevron">expand_more</mat-icon>
+          </div>
+          <input type="hidden" formControlName="locationCode">
+          <span class="error-message" *ngIf="isFieldInvalid('locationCode')">Sélectionnez un magasin</span>
+        </div>
+        
+        <div class="form-field">
+          <label>
+            <mat-icon>folder</mat-icon>
+            <span class="label-text">Dossier / Référence</span>
+          </label>
+          <div class="input-wrapper">
+            <input type="text" formControlName="fileNo" placeholder="Numéro de dossier (optionnel)">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-separator">
+      <div class="separator-line"></div>
+      <mat-icon>local_gas_station</mat-icon>
+      <div class="separator-line"></div>
+    </div>
+    
+    <!-- Section Lignes -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-icon">
+          <mat-icon>list_alt</mat-icon>
+        </div>
+        <h2>Consommations par véhicule/engin</h2>
+        <div class="section-line"></div>
+        <button type="button" class="btn-add-line" (click)="addLine()">
+          <mat-icon>add</mat-icon>
+          <span>Ajouter une ligne</span>
+        </button>
+      </div>
+      
+      <div class="lines-container" formArrayName="gasoilLines">
+        <div *ngFor="let line of getLinesControls(); let i = index" class="line-card" [formGroupName]="i">
+          <div class="line-header">
+            <div class="line-number">
+              <div class="line-number-icon">
+                <mat-icon>local_shipping</mat-icon>
+              </div>
+              <span>Ligne {{ i + 1 }}</span>
+              <div class="line-status"></div>
+            </div>
+            <button type="button" class="btn-remove-line" (click)="removeLine(i)" matTooltip="Supprimer la ligne">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </div>
+          
+          <div class="line-grid">
+            <!-- Véhicule / Engin -->
+            <div class="form-field">
+              <label>
+                <mat-icon>directions_car</mat-icon>
+                <span class="label-text">Véhicule / Engin</span>
+                <span class="required">*</span>
+              </label>
+              <div class="custom-select" (click)="openVehiculeDialog(i)">
+                <div class="custom-select-display" [class.empty]="!line.get('vehicleNo')?.value">
+                  <mat-icon>directions_car</mat-icon>
+                  <span *ngIf="line.get('vehicleNo')?.value">
+                    {{ getVehiculeDisplay(line.get('vehicleNo')?.value) }}
+                  </span>
+                  <span *ngIf="!line.get('vehicleNo')?.value" class="placeholder">
+                    Sélectionner un véhicule/engin
+                  </span>
+                </div>
+                <mat-icon class="select-chevron">expand_more</mat-icon>
+              </div>
+              <input type="hidden" formControlName="vehicleNo">
+              <span class="error-message" *ngIf="isLineFieldInvalid(i, 'vehicleNo')">
+                Le véhicule/engin est requis
+              </span>
+            </div>
+            
+            <!-- Type d'index -->
+            <div class="form-field">
+              <label>
+                <mat-icon>speed</mat-icon>
+                <span class="label-text">Type d'index</span>
+              </label>
+              <div class="input-wrapper">
+                <select formControlName="indexType">
+                  <option *ngFor="let opt of indexTypeOptions" [value]="opt.value">{{ opt.label }}</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Quantité -->
+            <div class="form-field">
+              <label>
+                <mat-icon>local_gas_station</mat-icon>
+                <span class="label-text">Quantité</span>
+                <span class="required">*</span>
+              </label>
+              <div class="input-wrapper" [class.error]="isLineFieldInvalid(i, 'quantity')">
+                <input type="number" step="0.01" formControlName="quantity" placeholder="0.00">
+                <span class="input-unit">L</span>
+              </div>
+              <span class="error-message" *ngIf="isLineFieldInvalid(i, 'quantity')">La quantité est requise</span>
+            </div>
+            
+            <!-- Valeur compteur (unifié) -->
+            <div class="form-field">
+              <label>
+                <mat-icon>speed</mat-icon>
+                <span class="label-text">Valeur compteur</span>
+              </label>
+              <div class="input-wrapper">
+                <input type="number" step="0.1" formControlName="valeurCompteur" placeholder="0">
+                <span class="input-unit">{{ line.get('indexType')?.value === 'Horaire' ? 'h' : 'km' }}</span>
+              </div>
+              <small class="field-hint">Dernier index: <strong>{{ getLastIndexDisplay(line.get('vehicleNo')?.value, line.get('indexType')?.value) }}</strong></small>
+            </div>
+            
+            <!-- ✅ Chauffeur (Driver) -->
+            <div class="form-field">
+              <label>
+                <mat-icon>person</mat-icon>
+                <span class="label-text">Chauffeur</span>
+              </label>
+              <div class="custom-select" (click)="openDriverDialog(i)">
+                <div class="custom-select-display" [class.empty]="!line.get('driver')?.value">
+                  <mat-icon>badge</mat-icon>
+                  <span *ngIf="line.get('driver')?.value">
+                    {{ getDriverDisplay(line.get('driver')?.value) }}
+                  </span>
+                  <span *ngIf="!line.get('driver')?.value" class="placeholder">
+                    Sélectionner un chauffeur
+                  </span>
+                </div>
+                <mat-icon class="select-chevron">expand_more</mat-icon>
+              </div>
+              <input type="hidden" formControlName="driver">
+            </div>
+            
+            <!--  Destination -->
+            <div class="form-field">
+              <label>
+                <mat-icon>flag</mat-icon>
+                <span class="label-text">Destination</span>
+              </label>
+              <div class="custom-select" (click)="openDestinationDialog(i)">
+                <div class="custom-select-display" [class.empty]="!line.get('destination')?.value">
+                  <mat-icon>location_on</mat-icon>
+                  <span *ngIf="line.get('destination')?.value">
+                    {{ getDestinationDisplay(line.get('destination')?.value) }}
+                  </span>
+                  <span *ngIf="!line.get('destination')?.value" class="placeholder">
+                    Sélectionner une destination
+                  </span>
+                </div>
+                <mat-icon class="select-chevron">expand_more</mat-icon>
+              </div>
+              <input type="hidden" formControlName="destination">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Résumé -->
+      <div class="summary-card">
+        <div class="summary-item">
+          <div class="summary-icon">
+            <mat-icon>format_list_bulleted</mat-icon>
+          </div>
+          <div class="summary-info">
+            <span class="summary-label">Nombre de lignes</span>
+            <span class="summary-value">{{ gasoilLines.length }}</span>
+          </div>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item">
+          <div class="summary-icon">
+            <mat-icon>local_gas_station</mat-icon>
+          </div>
+          <div class="summary-info">
+            <span class="summary-label">Quantité totale</span>
+            <span class="summary-value highlight">{{ getTotalQuantity() | number:'1.2-2' }}</span>
+            <span class="summary-unit">Litres</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </form>
+
+  <!-- Modal Magasin -->
+  <div class="modal-overlay" *ngIf="showMagasinModal" (click)="closeMagasinDialog()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="header-icon"><mat-icon>store</mat-icon></div>
+        <h2>Sélectionner un magasin</h2>
+        <button class="close-btn" (click)="closeMagasinDialog()"><mat-icon>close</mat-icon></button>
+      </div>
+      
+      <div class="modal-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="magasinSearchTerm" (input)="filterMagasins()" placeholder="Rechercher un magasin...">
+      </div>
+      
+      <div class="modal-content-list">
+        <div *ngFor="let magasin of filteredMagasins" class="modal-item" [class.selected]="tempSelectedMagasin?.code === magasin.code" (click)="selectTempMagasin(magasin)">
+          <div class="item-avatar"><mat-icon>storefront</mat-icon></div>
+          <div class="item-info">
+            <div class="item-title">{{ magasin.name }}</div>
+            <div class="item-subtitle">Code: {{ magasin.code }}</div>
+          </div>
+          <div class="item-check" *ngIf="tempSelectedMagasin?.code === magasin.code"><mat-icon>check_circle</mat-icon></div>
+        </div>
+        <div class="no-results" *ngIf="filteredMagasins.length === 0">
+          <mat-icon>store_off</mat-icon>
+          <p>Aucun magasin trouvé</p>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-modal-secondary" (click)="closeMagasinDialog()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-modal-primary" (click)="confirmMagasinSelection()" [disabled]="!tempSelectedMagasin">
+          <mat-icon>check</mat-icon>
+          <span>Valider</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Véhicule -->
+  <div class="modal-overlay" *ngIf="showVehiculeModal" (click)="closeVehiculeDialog()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="header-icon"><mat-icon>directions_car</mat-icon></div>
+        <h2>Sélectionner un véhicule/engin</h2>
+        <button class="close-btn" (click)="closeVehiculeDialog()"><mat-icon>close</mat-icon></button>
+      </div>
+      
+      <div class="modal-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="vehiculeSearchTerm" (input)="filterVehicules()" placeholder="Rechercher par code ou désignation...">
+      </div>
+      
+      <div class="modal-content-list">
+        <div class="loading-spinner-container" *ngIf="isLoadingVehicules">
+          <div class="spinner"></div>
+          <p>Chargement des véhicules...</p>
+        </div>
+        <div *ngFor="let vehicule of filteredVehicules" class="modal-item" [class.selected]="tempSelectedVehicule?.code === vehicule.code" (click)="selectTempVehicule(vehicule)">
+          <div class="item-avatar"><mat-icon>directions_car</mat-icon></div>
+          <div class="item-info">
+            <div class="item-title">{{ vehicule.code }}</div>
+            <div class="item-subtitle">{{ vehicule.designation }}</div>
+            <div class="item-status" [class]="getVehiculeStatusClass(vehicule.statut)" *ngIf="vehicule.statut && vehicule.statut.trim() !== ''">
+              <span class="status-dot"></span>
+              <span>{{ vehicule.statut }}</span>
+            </div>
+          </div>
+          <div class="item-check" *ngIf="tempSelectedVehicule?.code === vehicule.code"><mat-icon>check_circle</mat-icon></div>
+        </div>
+        <div class="no-results" *ngIf="!isLoadingVehicules && filteredVehicules.length === 0">
+          <mat-icon>directions_car_off</mat-icon>
+          <p>Aucun véhicule trouvé</p>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-modal-secondary" (click)="closeVehiculeDialog()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-modal-primary" (click)="confirmVehiculeSelection()" [disabled]="!tempSelectedVehicule">
+          <mat-icon>check</mat-icon>
+          <span>Valider</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--  Modal Chauffeur (Driver) -->
+  <div class="modal-overlay" *ngIf="showDriverModal" (click)="closeDriverDialog()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="header-icon"><mat-icon>badge</mat-icon></div>
+        <h2>Sélectionner un chauffeur</h2>
+        <button class="close-btn" (click)="closeDriverDialog()"><mat-icon>close</mat-icon></button>
+      </div>
+      
+      <div class="modal-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="driverSearchTerm" (input)="filterDrivers()" placeholder="Rechercher par nom ou code...">
+      </div>
+      
+      <div class="modal-content-list">
+        <div class="loading-spinner-container" *ngIf="isLoadingDrivers">
+          <div class="spinner"></div>
+          <p>Chargement des chauffeurs...</p>
+        </div>
+        <div *ngFor="let driver of filteredDrivers" class="modal-item" [class.selected]="tempSelectedDriver?.code === driver.code" (click)="selectTempDriver(driver)">
+          <div class="item-avatar"><mat-icon>person</mat-icon></div>
+          <div class="item-info">
+            <div class="item-title">{{ driver.name || driver.code }}</div>
+            <div class="item-subtitle">Code: {{ driver.code }}</div>
+          </div>
+          <div class="item-check" *ngIf="tempSelectedDriver?.code === driver.code"><mat-icon>check_circle</mat-icon></div>
+        </div>
+        <div class="no-results" *ngIf="!isLoadingDrivers && filteredDrivers.length === 0">
+          <mat-icon>person_off</mat-icon>
+          <p>Aucun chauffeur trouvé</p>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-modal-secondary" (click)="closeDriverDialog()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-modal-primary" (click)="confirmDriverSelection()" [disabled]="!tempSelectedDriver">
+          <mat-icon>check</mat-icon>
+          <span>Valider</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--  Modal Destination -->
+  <div class="modal-overlay" *ngIf="showDestinationModal" (click)="closeDestinationDialog()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="header-icon"><mat-icon>location_on</mat-icon></div>
+        <h2>Sélectionner une destination</h2>
+        <button class="close-btn" (click)="closeDestinationDialog()"><mat-icon>close</mat-icon></button>
+      </div>
+      
+      <div class="modal-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" [(ngModel)]="destinationSearchTerm" (input)="filterDestinations()" placeholder="Rechercher par code ou ville...">
+      </div>
+      
+      <div class="modal-content-list">
+        <div class="loading-spinner-container" *ngIf="isLoadingDestinations">
+          <div class="spinner"></div>
+          <p>Chargement des destinations...</p>
+        </div>
+        <div *ngFor="let destination of filteredDestinations" class="modal-item" [class.selected]="tempSelectedDestination?.code === destination.code" (click)="selectTempDestination(destination)">
+          <div class="item-avatar"><mat-icon>location_on</mat-icon></div>
+          <div class="item-info">
+            <div class="item-title">{{ destination.code }}</div>
+            <div class="item-subtitle">{{ destination.city || '—' }}</div>
+          </div>
+          <div class="item-check" *ngIf="tempSelectedDestination?.code === destination.code"><mat-icon>check_circle</mat-icon></div>
+        </div>
+        <div class="no-results" *ngIf="!isLoadingDestinations && filteredDestinations.length === 0">
+          <mat-icon>location_off</mat-icon>
+          <p>Aucune destination trouvée</p>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-modal-secondary" (click)="closeDestinationDialog()">
+          <mat-icon>close</mat-icon>
+          <span>Annuler</span>
+        </button>
+        <button class="btn-modal-primary" (click)="confirmDestinationSelection()" [disabled]="!tempSelectedDestination">
+          <mat-icon>check</mat-icon>
+          <span>Valider</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+</div>
