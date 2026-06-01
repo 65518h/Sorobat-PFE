@@ -210,7 +210,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy, AfterViewInit 
       .pipe(takeUntil(this.destroy$))
       .subscribe(async online => {
         this.isOnline = online;
-        console.log('📡 Dashboard - Connectivité:', online ? 'En ligne' : 'Hors ligne');
+        console.log(' Dashboard - Connectivité:', online ? 'En ligne' : 'Hors ligne');
         if (online) {
           this.loadDashboard(true);
         } else {
