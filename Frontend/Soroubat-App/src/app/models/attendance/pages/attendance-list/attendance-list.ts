@@ -142,9 +142,7 @@ export class AttendanceListComponent implements OnInit, OnDestroy {
           
           const offlineCount = this.attendanceHeaders.filter(h => h.isOffline === true).length;
           if (offlineCount > 0 && this.isReadOnly) {
-            this.toastr.info(` ${offlineCount} pointage(s) créé(s) localement`, 'Mode hors ligne', {
-              timeOut: 4000
-            });
+           
           }
         },
         error: (error) => {

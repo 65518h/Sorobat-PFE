@@ -131,7 +131,7 @@ export class ProjectListComponent implements OnInit, OnDestroy {
           
           // Afficher un message en mode offline
           if (this.isReadOnly) {
-            this.notificationService.showInfo('📱 Mode hors ligne - Affichage des données en cache');
+            this.notificationService.showInfo(' Mode hors ligne - Affichage des données en cache');
           }
         } else {
           this.errorMessage = 'Aucun projet associé à votre compte.';

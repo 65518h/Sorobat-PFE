@@ -47,7 +47,7 @@ import { ShowOfflineMessageDirective } from '../../../../core/directives/show-of
 })
 export class AlertsPageComponent implements OnInit, OnDestroy {
   
-  // Alertes par domaine (corrigé selon les endpoints disponibles)
+  // Alertes par domaine
   purchaseAlerts: Alert[] = [];
   transferAlerts: Alert[] = [];
   stockAlerts: Alert[] = [];
@@ -109,7 +109,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(mode => {
         this.isReadOnly = mode === 'offline-readonly';
-        console.log(' Mode alertes:', this.isReadOnly ? 'offline-readonly' : 'online');
+        console.log('Mode alertes:', this.isReadOnly ? 'offline-readonly' : 'online');
         this.cdr.detectChanges();
       });
     
@@ -144,7 +144,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     // TOUJOURS charger le cache d'abord pour l'affichage immédiat
     this.cacheService.getFromCache(cacheKey).then(cachedData => {
       if (cachedData) {
-        console.log(' Alertes: Chargement depuis le cache');
+        console.log('Alertes: Chargement depuis le cache');
         this.applyAlertsData(cachedData);
         this.loading = false;
         this.cdr.detectChanges();
@@ -155,24 +155,24 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
         }
       } else if (!this.isReadOnly) {
         // Cache vide ET en ligne → initialiser le cache
-        console.log(' Cache vide, initialisation...');
+        console.log('Cache vide, initialisation...');
         this.initializeCacheFromApi(cacheKey, limitPerDomain);
       } else {
         // Cache vide et hors ligne → message d'erreur
-        console.log(' Aucune donnée en cache et mode offline');
+        console.log('Aucune donnée en cache et mode offline');
         this.loading = false;
         this.notificationService.showWarning(
-          ' Aucune donnée disponible hors ligne. Veuillez vous connecter une première fois pour mettre en cache les alertes.'
+          'Aucune donnée disponible hors ligne. Veuillez vous connecter une première fois pour mettre en cache les alertes.'
         );
         this.cdr.detectChanges();
       }
     }).catch(error => {
-      console.error(' Erreur accès cache:', error);
+      console.error('Erreur accès cache:', error);
       if (!this.isReadOnly) {
         this.initializeCacheFromApi(cacheKey, limitPerDomain);
       } else {
         this.loading = false;
-        this.notificationService.showError('Impossible d\'accéder au cache local');
+        this.notificationService.showError('Impossible d\'acceder au cache local');
         this.cdr.detectChanges();
       }
     });
@@ -182,7 +182,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     this.alertsService.getAllAlertsByDomain(limitPerDomain).pipe(
       takeUntil(this.destroy$),
       catchError(error => {
-        console.error(' Erreur initialisation cache:', error);
+        console.error('Erreur initialisation cache:', error);
         this.loading = false;
         this.notificationService.showError('Erreur lors du chargement initial des alertes');
         this.cdr.detectChanges();
@@ -193,8 +193,8 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
         if (alerts) {
           this.applyAlertsData(alerts);
           this.cacheService.saveToCache(cacheKey, alerts);
-          console.log(' Cache initialisé avec succès');
-          this.notificationService.showSuccess('Alertes chargées et mises en cache');
+          console.log('Cache initialise avec succes');
+          this.notificationService.showSuccess('Alertes chargees et mises en cache');
         } else {
           // Même si alerts est null, on initialise avec des tableaux vides
           const emptyData = {
@@ -207,7 +207,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
           };
           this.applyAlertsData(emptyData);
           this.cacheService.saveToCache(cacheKey, emptyData);
-          console.log(' Cache initialisé (vide)');
+          console.log('Cache initialise (vide)');
         }
         this.loading = false;
         this.cdr.detectChanges();
@@ -223,7 +223,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     this.alertsService.getAllAlertsByDomain(limitPerDomain).pipe(
       takeUntil(this.destroy$),
       catchError(error => {
-        console.error(' Erreur rafraîchissement alertes:', error);
+        console.error('Erreur rafraichissement alertes:', error);
         return of(null);
       })
     ).subscribe({
@@ -233,7 +233,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
           this.applyAlertsData(alerts);
           this.cacheService.saveToCache(cacheKey, alerts);
           if (hasChanges) {
-            console.log(' Alertes mises à jour en cache');
+            console.log('Alertes mises a jour en cache');
             this.notificationService.showInfo('Nouvelles alertes disponibles');
           }
           this.cdr.detectChanges();
@@ -264,7 +264,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     this.calculateStats();
     this.applyFilters();
     
-    console.log(' Alertes chargées:', {
+    console.log('Alertes chargees:', {
       purchase: this.purchaseAlerts.length,
       transfer: this.transferAlerts.length,
       stock: this.stockAlerts.length,
@@ -431,6 +431,13 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     this.warningCount = allAlerts.filter(a => a.severity === 'Warning').length;
     this.infoCount = allAlerts.filter(a => a.severity === 'Info').length;
     this.unreadCount = allAlerts.filter(a => !this.isRead(a.id)).length;
+    
+    console.log('Stats mises a jour:', {
+      critical: this.criticalCount,
+      warning: this.warningCount,
+      unread: this.unreadCount,
+      total: allAlerts.length
+    });
   }
   
   private getAllAlertsForCurrentDomain(): Alert[] {
@@ -600,7 +607,7 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
     this.resetAllPages();
     this.calculateStats();
     this.applyFilters();
-    this.notificationService.showInfo('Tous les filtres ont été réinitialisés');
+    this.notificationService.showInfo('Tous les filtres ont ete reinitialises');
   }
   
   toggleAdvancedFilters(): void {
@@ -609,20 +616,29 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
   
   refreshAll(): void {
     if (this.isReadOnly) {
-      this.notificationService.showWarning('Mode hors ligne - Rafraîchissement non disponible');
+      this.notificationService.showWarning('Mode hors ligne - Rafraichissement non disponible');
       return;
     }
     this.alertsService.clearCache();
     this.loadAllAlerts();
-    this.notificationService.showInfo('Rafraîchissement des alertes...');
+    this.notificationService.showInfo('Rafraichissement des alertes...');
   }
   
   markAsRead(alertId: string): void {
+    // Mettre à jour dans le service
     this.alertsService.markAsRead(alertId);
+    
+    // Mettre à jour l'alerte dans toutes les listes
     this.updateAlertInLists(alertId);
+    
+    // Recalculer tous les compteurs
     this.calculateStats();
     this.applyFilters();
+    
+    // Forcer la détection des changements
     this.cdr.detectChanges();
+    
+    console.log('Alerte marquee comme lue:', alertId);
   }
   
   markAllAsRead(): void {
@@ -639,9 +655,17 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
       this.alertsService.markAsRead(alert.id);
     });
     
+    // Mettre à jour toutes les listes avec des nouvelles références
+    this.purchaseAlerts = this.purchaseAlerts.map(a => ({ ...a, read: true }));
+    this.transferAlerts = this.transferAlerts.map(a => ({ ...a, read: true }));
+    this.stockAlerts = this.stockAlerts.map(a => ({ ...a, read: true }));
+    this.vehiculeAlerts = this.vehiculeAlerts.map(a => ({ ...a, read: true }));
+    this.gasoilAlerts = this.gasoilAlerts.map(a => ({ ...a, read: true }));
+    this.attendanceAlerts = this.attendanceAlerts.map(a => ({ ...a, read: true }));
+    
     this.calculateStats();
     this.applyFilters();
-    this.notificationService.showSuccess('Toutes les alertes ont été marquées comme lues');
+    this.notificationService.showSuccess('Toutes les alertes ont ete marquees comme lues');
     this.cdr.detectChanges();
   }
   
@@ -657,9 +681,12 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
   private updateSingleAlert(alerts: Alert[], alertId: string): Alert[] {
     const index = alerts.findIndex(a => a.id === alertId);
     if (index !== -1) {
-      alerts[index] = { ...alerts[index], read: true };
+      // Créer un nouveau tableau avec une copie de l'alerte modifiée
+      const newAlerts = [...alerts];
+      newAlerts[index] = { ...newAlerts[index], read: true };
+      return newAlerts;
     }
-    return [...alerts];
+    return [...alerts]; // Retourner une copie même si pas de changement
   }
   
   isRead(alertId: string): boolean {
@@ -667,7 +694,8 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
   }
   
   onAlertClick(alert: Alert): void {
-    this.alertsService.markAsRead(alert.id);
+    // Mettre à jour localement d'abord pour une réactivité instantanée
+    this.markAsRead(alert.id);
     this.navigateToAlert(alert);
   }
   
@@ -729,3 +757,6 @@ export class AlertsPageComponent implements OnInit, OnDestroy {
            this.gasoilAlerts.length + this.attendanceAlerts.length;
   }
 }
+
+
+export { AlertsPageComponent as ezd};

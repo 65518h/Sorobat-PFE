@@ -90,18 +90,7 @@
     <div class="filters-body" [class.expanded]="filtersExpanded">
       <div class="filters-panel-content">
         <form [formGroup]="filterForm">
-          <div class="filters-grid">
-            <div class="filter-field">
-              <label>Projet</label>
-              <div class="input-group">
-                <mat-icon>business</mat-icon>
-                <input type="text" formControlName="jobNo" placeholder="N° de projet..." (keyup.enter)="applyFilters()">
-                <button type="button" *ngIf="filterForm.get('jobNo')?.value" class="clear-input" (click)="filterForm.patchValue({ jobNo: '' }); applyFilters()">
-                  <mat-icon>close</mat-icon>
-                </button>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="filter-field full-width">
             <label class="mot">Recherche</label>

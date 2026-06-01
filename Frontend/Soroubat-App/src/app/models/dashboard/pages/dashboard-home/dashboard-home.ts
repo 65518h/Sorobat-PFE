@@ -158,6 +158,7 @@ export class DashboardHomeComponent implements OnInit, OnDestroy, AfterViewInit 
     totalQuantity: 0
   };
   totalStores: number = 0;
+  projectName: string = '';
 
   // ── Alertes (corrigé - sans siteManagement, avec attendance) ──
   alertDomains = ALERT_DOMAINS;
@@ -609,60 +610,95 @@ private async loadAllVehicleData(forceRefresh: boolean = false): Promise<void> {
   // MAGASIN PRINCIPAL
   // ══════════════════════════════════════════════════════════
 
-  private async loadMainStoreData(forceRefresh: boolean = false): Promise<void> {
-    if (!forceRefresh && this.mainStore.itemCount > 0) {
-      console.log(' Utilisation des données existantes pour le magasin');
-      return;
-    }
+  // Modifiez la méthode loadMainStoreData
+
+// src/app/modules/dashboard/pages/dashboard-home/dashboard-home.ts
+
+private async loadMainStoreData(forceRefresh: boolean = false): Promise<void> {
+  if (!forceRefresh && this.mainStore.itemCount > 0) {
+    console.log('Utilisation des données existantes pour le magasin');
+    return;
+  }
+  
+  try {
+    console.log('Chargement magasin principal en arrière-plan...');
     
-    try {
-      console.log(' Chargement magasin principal en arrière-plan...');
+    const stock = await firstValueFrom(this.stockService.getAllStock(true).pipe(timeout(45000)));
+    const totalArticlesDistincts = stock.length;
+    
+    console.log(`API retourne: ${totalArticlesDistincts} articles distincts`);
+    
+    const storeMap = new Map<string, { 
+      code: string;
+      name: string;
+      distinctItems: Set<string>;
+      totalQuantity: number;
+    }>();
+    
+    stock.forEach(item => {
+      const locationCode = item.locationCode || 'Magasin Principal';
       
-      const stock = await firstValueFrom(this.stockService.getAllStock(true).pipe(timeout(45000)));
-      const totalArticlesDistincts = stock.length;
+      //  Récupérer le NOM COMPLET du magasin depuis différentes sources
+      let locationName = '';
       
-      console.log(` API retourne: ${totalArticlesDistincts} articles distincts`);
+      // Vérifier d'abord si locationDescription existe
+      if ((item as any).locationDescription && (item as any).locationDescription !== '') {
+        locationName = (item as any).locationDescription;
+        console.log(`Nom trouvé dans locationDescription: ${locationName}`);
+      }
+      // Sinon vérifier locationName
+      else if ((item as any).locationName && (item as any).locationName !== '') {
+        locationName = (item as any).locationName;
+        console.log(`Nom trouvé dans locationName: ${locationName}`);
+      }
+      // Sinon vérifier storeName
+      else if ((item as any).storeName && (item as any).storeName !== '') {
+        locationName = (item as any).storeName;
+        console.log(`Nom trouvé dans storeName: ${locationName}`);
+      }
+      // Sinon vérifier name
+      else if ((item as any).name && (item as any).name !== '') {
+        locationName = (item as any).name;
+        console.log(`Nom trouvé dans name: ${locationName}`);
+      }
+      // Sinon utiliser le code
+      else {
+        locationName = locationCode;
+        console.log(`Nom par défaut (code): ${locationName}`);
+      }
       
-      const storeMap = new Map<string, { 
-        code: string;
-        name: string;
-        distinctItems: Set<string>;
-        totalQuantity: number;
-      }>();
+      const itemNo = item.itemNo;
+      const quantity = item.quantity || 0;
       
-      stock.forEach(item => {
-        const locationCode = item.locationCode || 'Magasin Principal';
-        const locationName = (item as any).locationName || locationCode;
-        const itemNo = item.itemNo;
-        const quantity = item.quantity || 0;
-        
-        if (!storeMap.has(locationCode)) {
-          storeMap.set(locationCode, {
-            code: locationCode,
-            name: locationName,
-            distinctItems: new Set<string>(),
-            totalQuantity: 0
-          });
-        }
-        
-        const store = storeMap.get(locationCode)!;
-        store.distinctItems.add(itemNo);
-        store.totalQuantity += quantity;
-      });
-      
-      const storeList: { code: string; name: string; distinctCount: number; quantity: number }[] = [];
-      storeMap.forEach((value, key) => {
-        storeList.push({
-          code: key,
-          name: value.name,
-          distinctCount: value.distinctItems.size,
-          quantity: value.totalQuantity
+      if (!storeMap.has(locationCode)) {
+        console.log(`Nouveau magasin ajouté: ${locationCode} -> ${locationName}`);
+        storeMap.set(locationCode, {
+          code: locationCode,
+          name: locationName,
+          distinctItems: new Set<string>(),
+          totalQuantity: 0
         });
+      }
+      
+      const store = storeMap.get(locationCode)!;
+      store.distinctItems.add(itemNo);
+      store.totalQuantity += quantity;
+    });
+    
+    const storeList: { code: string; name: string; distinctCount: number; quantity: number }[] = [];
+    storeMap.forEach((value, key) => {
+      storeList.push({
+        code: key,
+        name: value.name,
+        distinctCount: value.distinctItems.size,
+        quantity: value.totalQuantity
       });
-      
-      storeList.sort((a, b) => b.distinctCount - a.distinctCount);
-      const mainStore = storeList[0];
-      
+    });
+    
+    storeList.sort((a, b) => b.distinctCount - a.distinctCount);
+    const mainStore = storeList[0];
+    
+    if (mainStore) {
       this.mainStore = {
         name: mainStore.name,
         code: mainStore.code,
@@ -672,25 +708,43 @@ private async loadAllVehicleData(forceRefresh: boolean = false): Promise<void> {
       this.totalStores = storeList.length;
       this.totalUniqueArticlesAllStores = totalArticlesDistincts;
       
-      console.log(` Magasin principal: ${this.mainStore.itemCount} articles`);
-      console.log(` Total ARTICLES UNIQUES (API): ${this.totalUniqueArticlesAllStores}`);
-      console.log(` Total magasins: ${this.totalStores}`);
+      console.log(`   Magasin principal: "${this.mainStore.name}" (${this.mainStore.code})`);
+      console.log(`   - ${this.mainStore.itemCount} articles distincts`);
+      console.log(`   - ${this.mainStore.totalQuantity} unités totales`);
+      console.log(`   Total magasins: ${this.totalStores}`);
       
-      this.cdr.detectChanges();
+      //  Afficher tous les magasins trouvés pour déboguer
+      console.log(' Liste de tous les magasins:');
+      storeList.forEach(store => {
+        console.log(`   - ${store.name} (${store.code}): ${store.distinctCount} articles`);
+      });
       
-    } catch (error) {
-      console.error(' Erreur chargement magasin:', error);
-      if (this.mainStore.itemCount === 0) {
-        this.mainStore = {
-          name: 'Magasin Principal',
-          code: 'MAIN',
-          itemCount: 0,
-          totalQuantity: 0
-        };
-        this.totalStores = 1;
-      }
+    } else {
+      console.warn(' Aucun magasin trouvé');
+      this.mainStore = {
+        name: 'Aucun magasin',
+        code: '',
+        itemCount: 0,
+        totalQuantity: 0
+      };
+      this.totalStores = 0;
+    }
+    
+    this.cdr.detectChanges();
+    
+  } catch (error) {
+    console.error('Erreur chargement magasin:', error);
+    if (this.mainStore.itemCount === 0) {
+      this.mainStore = {
+        name: 'Magasin Principal',
+        code: 'MAIN',
+        itemCount: 0,
+        totalQuantity: 0
+      };
+      this.totalStores = 1;
     }
   }
+}
 
   // ══════════════════════════════════════════════════════════
   // STOCK

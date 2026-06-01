@@ -80,7 +80,7 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
     this.lineForm = this.fb.group({
       vehiculeNo: [{ value: '', disabled: true }],
       description: [{ value: '', disabled: true }],
-      hoursWorked: [0, [Validators.required, Validators.min(0)]],
+      hoursWorked: [0, [Validators.required, Validators.min(0), Validators.max(10)]],
       startIndex: [0, [Validators.required, Validators.min(0)]],
       endIndex: [0, [Validators.required, Validators.min(0)]],
       fuelConsumed: [{ value: 0, disabled: true }],
@@ -96,11 +96,16 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
       
       const vehiculeNo = queryParams['vehiculeNo'] || '';
       const description = queryParams['description'] || '';
-      const hoursWorked = Number(queryParams['hoursWorked']) || 0;
+      let hoursWorked = Number(queryParams['hoursWorked']) || 0;
       const startIndex = Number(queryParams['startIndex']) || 0;
       const endIndex = Number(queryParams['endIndex']) || 0;
       const fuelConsumed = Number(queryParams['fuelConsumed']) || 0;
       const status = queryParams['status'] || 'Fonctionnel';
+      
+      // S'assurer que hoursWorked est soit 0 soit 10
+      if (hoursWorked !== 0 && hoursWorked !== 10) {
+        hoursWorked = hoursWorked > 5 ? 10 : 0;
+      }
       
       console.log('Donnees parsees:', {
         vehiculeNo,
@@ -200,7 +205,6 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
     const start = this.lineForm.get('startIndex')?.value || 0;
     const end = this.lineForm.get('endIndex')?.value || 0;
     
-    // Ne pas verifier les index si le vehicule est reforme
     if (this.isReformed()) {
       this.indexError = false;
       return;
@@ -235,27 +239,45 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
   
-  /**
-   * Verifie si le formulaire est valide
-   */
   isFormValid(): boolean {
-    // Verifier l'erreur d'index
     if (this.indexError) return false;
-    
-    // Verifier la validite du formulaire
     if (this.lineForm.invalid) return false;
-    
     return true;
   }
   
   onSubmit(): void {
-    console.log('Etat du formulaire:', {
-      valid: this.lineForm.valid,
-      indexError: this.indexError,
-      status: this.lineForm.get('status')?.value,
-      formValue: this.lineForm.getRawValue()
+    // Récupérer les valeurs brutes
+    const rawFormValue = this.lineForm.getRawValue();
+    
+    // S'assurer que les valeurs sont des nombres valides
+    let hoursWorked = parseFloat(rawFormValue.hoursWorked);
+    let startIndex = parseFloat(rawFormValue.startIndex);
+    let endIndex = parseFloat(rawFormValue.endIndex);
+    
+    // Vérifier si les valeurs sont NaN
+    if (isNaN(hoursWorked)) hoursWorked = 0;
+    if (isNaN(startIndex)) startIndex = 0;
+    if (isNaN(endIndex)) endIndex = 0;
+    
+    // Forcer hoursWorked à être 0 ou 10
+    if (hoursWorked !== 0 && hoursWorked !== 10) {
+      hoursWorked = hoursWorked > 5 ? 10 : 0;
+      this.lineForm.get('hoursWorked')?.setValue(hoursWorked);
+    }
+    
+    const status = rawFormValue.status;
+    
+    console.log('Valeurs traitees:', {
+      hoursWorkedRaw: rawFormValue.hoursWorked,
+      hoursWorkedParsed: hoursWorked,
+      startIndexRaw: rawFormValue.startIndex,
+      startIndexParsed: startIndex,
+      endIndexRaw: rawFormValue.endIndex,
+      endIndexParsed: endIndex,
+      status: status
     });
     
+    // Validation
     if (!this.isFormValid()) {
       if (this.indexError) {
         this.notificationService.showWarning('L\'index fin doit etre superieur ou egal a l\'index depart');
@@ -268,24 +290,28 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
     
     this.submitting = true;
     
-    const formValue = this.lineForm.getRawValue();
-    
+    // Construire l'objet de mise à jour
     const updateData: any = {
-      status: formValue.status
+      status: status
     };
     
-    // Ajouter les heures uniquement si le vehicule n'est pas reforme
-    if (!this.isReformed() && formValue.status !== 'Panne' && formValue.status !== 'Accident' && formValue.status !== 'Mauvais Temps') {
-      updateData.hoursWorked = formValue.hoursWorked;
+    // Ajouter les heures si le véhicule n'est pas réformé et pas en panne
+    const shouldAddHours = !this.isReformed() && 
+                           status !== 'Panne' && 
+                           status !== 'Accident' && 
+                           status !== 'Mauvais Temps';
+    
+    if (shouldAddHours) {
+      updateData.hoursWorked = hoursWorked;
     }
     
-    // Ajouter les index si le vehicule n'est pas reforme
+    // Ajouter les index si le véhicule n'est pas réformé
     if (!this.isReformed()) {
-      updateData.startIndex = formValue.startIndex;
-      updateData.endIndex = formValue.endIndex;
+      updateData.startIndex = startIndex;
+      updateData.endIndex = endIndex;
     }
     
-    console.log('Envoi des modifications:', updateData);
+    console.log('Donnees envoyees a l\'API:', updateData);
     
     this.vehiculePointageService.updateLine(this.lineId!, updateData).pipe(
       takeUntil(this.destroy$),
@@ -294,7 +320,8 @@ export class VehiculePointageLineEditComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       })
     ).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log('Reponse API:', response);
         this.notificationService.showSuccess('Vehicule modifie avec succes');
         this.router.navigate(['/equipment/pointage', this.pointageId]);
       },

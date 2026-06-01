@@ -69,61 +69,64 @@
   </div>
   <div class="kpi-grid">
     <!-- Magasin principal -->
-    <div class="kpi-card" [routerLink]="['/inventory']">
-      <div class="kpi-icon-wrapper purple"><mat-icon>store</mat-icon></div>
-      <div class="kpi-content">
-        <div class="kpi-value" 
-             [matTooltip]="mainStore.name" 
-             matTooltipPosition="above">
-          <ng-container *ngIf="mainStore.name; else loadingName">
-            {{ mainStore.name | slice:0:20 }}{{ mainStore.name.length > 20 ? '…' : '' }}
-          </ng-container>
-          <ng-template #loadingName>
-            <span class="loading-text">Chargement...</span>
-          </ng-template>
-        </div>    
-        <div class="kpi-label">Magasin principal</div>
-        <div class="kpi-trend">
-          <span class="trend-value">
-            <ng-container *ngIf="totalStores > 0; else loadingStores">
-              {{ totalStores }} magasin(s) au total
-            </ng-container>
-            <ng-template #loadingStores>
-              <span class="loading-text">---</span>
-            </ng-template>
-          </span>
-        </div>
-      </div>
-      <div class="kpi-stats">
-        <div class="kpi-stat-item">
-          <span class="stat-label">Articles distincts</span>
-          <span class="stat-value">
-            <ng-container *ngIf="totalUniqueArticlesAllStores > 0; else loadingItems">
-              {{ totalUniqueArticlesAllStores | number }}
-            </ng-container>
-            <ng-template #loadingItems>
-              <span class="loading-text">---</span>
-            </ng-template>
-          </span>
-        </div>
-        <div class="kpi-stat-item">
-          <span class="stat-label">Quantité</span>
-          <span class="stat-value">
-            <ng-container *ngIf="mainStore.totalQuantity > 0; else loadingQty">
-              {{ mainStore.totalQuantity | number }}
-            </ng-container>
-            <ng-template #loadingQty>
-              <span class="loading-text">---</span>
-            </ng-template>
-          </span>
-        </div>
-      </div>
-      <!-- Indicateur de mise à jour en arrière-plan -->
-      <div class="kpi-update-indicator" *ngIf="isOnline && mainStore.itemCount === 0 && !isLoading">
-        <mat-icon>sync</mat-icon>
-        <span>Chargement...</span>
-      </div>
+    <!-- Magasin principal - Modifier la partie d'affichage -->
+
+<div class="kpi-card" [routerLink]="['/inventory']">
+  <div class="kpi-icon-wrapper purple"><mat-icon>store</mat-icon></div>
+  <div class="kpi-content">
+    <!-- ✅ Supprimer la limite de 20 caractères pour afficher le nom complet -->
+    <div class="kpi-value" 
+         [matTooltip]="mainStore.name" 
+         matTooltipPosition="above">
+      <ng-container *ngIf="mainStore.name; else loadingName">
+        {{ mainStore.name }}
+      </ng-container>
+      <ng-template #loadingName>
+        <span class="loading-text">Chargement...</span>
+      </ng-template>
+    </div>    
+    <div class="kpi-label">Magasin principal</div>
+    <div class="kpi-trend">
+      <span class="trend-value">
+        <ng-container *ngIf="totalStores > 0; else loadingStores">
+          {{ totalStores }} magasin(s) au total
+        </ng-container>
+        <ng-template #loadingStores>
+          <span class="loading-text">---</span>
+        </ng-template>
+      </span>
     </div>
+  </div>
+  <div class="kpi-stats">
+    <div class="kpi-stat-item">
+      <span class="stat-label">Total Articles</span>
+      <span class="stat-value">
+        <ng-container *ngIf="totalUniqueArticlesAllStores > 0; else loadingItems">
+          {{ totalUniqueArticlesAllStores | number }}
+        </ng-container>
+        <ng-template #loadingItems>
+          <span class="loading-text">---</span>
+        </ng-template>
+      </span>
+    </div>
+    <div class="kpi-stat-item">
+      <span class="stat-label">Quantité</span>
+      <span class="stat-value">
+        <ng-container *ngIf="mainStore.totalQuantity > 0; else loadingQty">
+          {{ mainStore.totalQuantity | number }}
+        </ng-container>
+        <ng-template #loadingQty>
+          <span class="loading-text">---</span>
+        </ng-template>
+      </span>
+    </div>
+  </div>
+  <!-- Indicateur de mise à jour en arrière-plan -->
+  <div class="kpi-update-indicator" *ngIf="isOnline && mainStore.itemCount === 0 && !isLoading">
+    <mat-icon>sync</mat-icon>
+    <span>Chargement...</span>
+  </div>
+</div>
 
     <!-- Tâches en cours -->
     <div class="kpi-card" [routerLink]="['/tasks']">

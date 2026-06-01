@@ -34,7 +34,6 @@ namespace Soroubat.Api.Models
         [JsonPropertyName("endIndex")]
         public decimal? EndIndex { get; set; }
 
-        [JsonPropertyName("fuelConsumed")]
-        public decimal? FuelConsumed { get; set; }
+        
     }
 }

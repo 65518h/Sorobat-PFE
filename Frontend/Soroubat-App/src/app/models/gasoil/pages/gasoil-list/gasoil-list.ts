@@ -278,46 +278,55 @@ export class GasoilListComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
   
-  applyFilters(): void {
-    let filtered = [...this.headers];
-    
-    if (this.searchTerm && this.searchTerm.trim()) {
-      const term = this.searchTerm.toLowerCase().trim();
+  // gasoil-list.ts - Modifier la méthode applyFilters()
+applyFilters(): void {
+  let filtered = [...this.headers];
+  
+  if (this.searchTerm && this.searchTerm.trim()) {
+    const term = this.searchTerm.toLowerCase().trim();
+    filtered = filtered.filter(h => 
+      h.documentNo?.toLowerCase().includes(term) ||
+      h.fileNo?.toLowerCase().includes(term) ||
+      h.locationCode?.toLowerCase().includes(term)
+    );
+  }
+  
+  //  Correction du filtre de statut
+  if (this.statusFilter && this.statusFilter !== 'all') {
+    if (this.statusFilter === 'En cours') {
+      // Pour "En cours", inclure les statuts non validés (Brouillon, Ouvert)
       filtered = filtered.filter(h => 
-        h.documentNo?.toLowerCase().includes(term) ||
-        h.fileNo?.toLowerCase().includes(term) ||
-        h.locationCode?.toLowerCase().includes(term)
+        h.status !== 'Valider' && h.status !== 'Validé'
       );
-    }
-    
-    if (this.statusFilter && this.statusFilter !== 'all') {
+    } else {
       filtered = filtered.filter(h => h.status === this.statusFilter);
     }
-    
-    if (this.dateFrom) {
-      const fromDate = new Date(this.dateFrom);
-      fromDate.setHours(0, 0, 0, 0);
-      filtered = filtered.filter(h => {
-        if (!h.date) return false;
-        return new Date(h.date) >= fromDate;
-      });
-    }
-    
-    if (this.dateTo) {
-      const toDate = new Date(this.dateTo);
-      toDate.setHours(23, 59, 59, 999);
-      filtered = filtered.filter(h => {
-        if (!h.date) return false;
-        return new Date(h.date) <= toDate;
-      });
-    }
-    
-    this.filteredHeaders = filtered;
-    this.totalItems = filtered.length;
-    this.pageIndex = 0;
-    this.updatePagination();
-    this.calculateStats();
   }
+  
+  if (this.dateFrom) {
+    const fromDate = new Date(this.dateFrom);
+    fromDate.setHours(0, 0, 0, 0);
+    filtered = filtered.filter(h => {
+      if (!h.date) return false;
+      return new Date(h.date) >= fromDate;
+    });
+  }
+  
+  if (this.dateTo) {
+    const toDate = new Date(this.dateTo);
+    toDate.setHours(23, 59, 59, 999);
+    filtered = filtered.filter(h => {
+      if (!h.date) return false;
+      return new Date(h.date) <= toDate;
+    });
+  }
+  
+  this.filteredHeaders = filtered;
+  this.totalItems = filtered.length;
+  this.pageIndex = 0;
+  this.updatePagination();
+  this.calculateStats();
+}
   
   resetFilters(): void {
     this.searchTerm = '';
@@ -539,7 +548,7 @@ export class GasoilListComponent implements OnInit, OnDestroy {
         })
       ).subscribe({
         next: () => {
-          this.notificationService.showSuccess('Fiche validée avec succès');
+     
           this.toastr.success(` Fiche ${header.documentNo} validée avec succès !`, 'Validation réussie');
           this.soundService.playNotificationSound();
           this.loadGasoil();

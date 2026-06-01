@@ -280,9 +280,7 @@
           <div class="notif-title">{{ notif.event.title }}</div>
           <div class="notif-date">{{ getRelativeDate(notif.event.date) }}</div>
         </div>
-        <button class="notif-action" (click)="goToEvent(notif.event)">
-          Voir
-        </button>
+        
       </div>
       <div class="no-notif" *ngIf="pendingNotifications.length === 0">
         <mat-icon>notifications_off</mat-icon>

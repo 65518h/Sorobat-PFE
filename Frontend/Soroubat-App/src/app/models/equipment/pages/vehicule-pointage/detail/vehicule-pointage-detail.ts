@@ -52,8 +52,7 @@ import {
     MatDividerModule,
     OfflineHideActionsDirective,
     ShowOfflineMessageDirective,
-    
-],
+  ],
   templateUrl: './vehicule-pointage-detail.html',
   styleUrls: ['./vehicule-pointage-detail.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -68,10 +67,16 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
   
   // Filtre des véhicules
   vehiculeStatusFilter: string = 'all';
+  vehicleSearchTerm: string = '';
   filteredLines: VehiculePointageLine[] = [];
   
+  // Pagination
+  pageSize: number = 10;
+  currentPage: number = 1;
+  totalPages: number = 1;
+  
   // Colonnes du tableau
-  displayedColumns: string[] = ['vehiculeNo', 'description', 'hoursWorked', 'startIndex', 'endIndex', 'distance', 'fuelConsumed', 'status'];
+  displayedColumns: string[] = ['vehiculeNo', 'description', 'hoursWorked', 'startIndex', 'endIndex', 'distance', 'status'];
   
   // Données du tableau
   dataSource = new MatTableDataSource<VehiculePointageLine>([]);
@@ -102,22 +107,21 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
   ) {}
   
   ngOnInit(): void {
-    //  S'abonner au mode offline
     this.appMode.mode$
       .pipe(takeUntil(this.destroy$))
       .subscribe(mode => {
         this.isReadOnly = mode === 'offline-readonly';
-        console.log(' Mode vehicule-pointage-detail:', this.isReadOnly ? 'offline-readonly' : 'online');
+        console.log('Mode vehicule-pointage-detail:', this.isReadOnly ? 'offline-readonly' : 'online');
         this.cdr.detectChanges();
       });
     
     this.pointageId = this.route.snapshot.paramMap.get('id');
-    console.log(' ID du pointage:', this.pointageId);
+    console.log('ID du pointage:', this.pointageId);
     
     if (this.pointageId) {
       this.loadPointage();
     } else {
-      this.errorMessage = 'ID du pointage non trouvé';
+      this.errorMessage = 'ID du pointage non trouve';
     }
   }
   
@@ -137,18 +141,19 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     ).subscribe({
       next: (data) => {
-        console.log(' Pointage chargé:', data);
+        console.log('Pointage charge:', data);
         this.pointage = data;
         this.dataSource.data = data.lines || [];
         this.filteredLines = data.lines || [];
         this.calculateSummary();
+        this.resetPagination();
         this.loading = false;
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error(' Erreur chargement pointage', error);
+        console.error('Erreur chargement pointage', error);
         if (!this.isReadOnly) {
-          this.errorMessage = 'Impossible de charger les détails du pointage';
+          this.errorMessage = 'Impossible de charger les details du pointage';
         } else {
           this.toastr.warning('Pointage non disponible hors ligne', 'Mode lecture seule');
         }
@@ -173,31 +178,104 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
     }
     
     this.summary = calculateVehiculePointageSummary(this.pointage.lines);
-    console.log(' Résumé calculé:', this.summary);
+    console.log('Resume calcule:', this.summary);
   }
   
-  // ==================== MÉTHODES DE FILTRE ====================
+  // ==================== METHODES DE RECHERCHE ET FILTRE ====================
   
   applyVehiculeFilter(): void {
     if (!this.pointage?.lines) {
       this.filteredLines = [];
+      this.resetPagination();
       return;
     }
     
-    if (this.vehiculeStatusFilter === 'all') {
-      this.filteredLines = [...this.pointage.lines];
-    } else {
-      this.filteredLines = this.pointage.lines.filter(line => 
-        line.status === this.vehiculeStatusFilter
+    let filtered = [...this.pointage.lines];
+    
+    // Filtre par statut
+    if (this.vehiculeStatusFilter !== 'all') {
+      filtered = filtered.filter(line => line.status === this.vehiculeStatusFilter);
+    }
+    
+    // Filtre par recherche (code ou description)
+    if (this.vehicleSearchTerm && this.vehicleSearchTerm.trim() !== '') {
+      const search = this.vehicleSearchTerm.toLowerCase().trim();
+      filtered = filtered.filter(line => 
+        line.vehiculeNo?.toLowerCase().includes(search) ||
+        line.description?.toLowerCase().includes(search)
       );
     }
     
+    this.filteredLines = filtered;
+    this.resetPagination();
     this.cdr.detectChanges();
+  }
+  
+  clearVehicleSearch(): void {
+    this.vehicleSearchTerm = '';
+    this.applyVehiculeFilter();
   }
   
   clearVehiculeFilter(): void {
     this.vehiculeStatusFilter = 'all';
     this.applyVehiculeFilter();
+  }
+  
+  clearAllFilters(): void {
+    this.vehiculeStatusFilter = 'all';
+    this.vehicleSearchTerm = '';
+    this.applyVehiculeFilter();
+  }
+  
+  // ==================== METHODES DE PAGINATION ====================
+  
+  get paginatedLines(): VehiculePointageLine[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.filteredLines.slice(startIndex, startIndex + this.pageSize);
+  }
+  
+  resetPagination(): void {
+    this.currentPage = 1;
+    this.totalPages = Math.max(1, Math.ceil(this.filteredLines.length / this.pageSize));
+  }
+  
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+  
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+    }
+  }
+  
+  goToPage(page: number): void {
+    this.currentPage = page;
+  }
+  
+  onPageSizeChange(): void {
+    this.resetPagination();
+  }
+  
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    
+    if (this.totalPages <= maxVisible) {
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      const start = Math.max(1, this.currentPage - 2);
+      const end = Math.min(this.totalPages, start + maxVisible - 1);
+      
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+    }
+    return pages;
   }
   
   // ==================== STATUS HELPERS ====================
@@ -212,9 +290,9 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
         return 'status-draft';
       case 'ouvert':
         return 'status-open';
-      case 'validé':
+      case 'valide':
         return 'status-validated';
-      case 'clôturé':
+      case 'cloture':
         return 'status-closed';
       default:
         return '';
@@ -231,9 +309,9 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
         return 'edit_note';
       case 'ouvert':
         return 'radio_button_unchecked';
-      case 'validé':
+      case 'valide':
         return 'check_circle';
-      case 'clôturé':
+      case 'cloture':
         return 'lock';
       default:
         return 'help_outline';
@@ -262,7 +340,7 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
       case 'Panne': return 'error';
       case 'Accident': return 'warning';              
       case 'Mauvais Temps': return 'thunderstorm';    
-      case 'Réformé': return 'delete_forever';
+      case 'Reforme': return 'delete_forever';
       case 'Disponible': return 'radio_button_checked';
       default: return 'help_outline';
     }
@@ -275,12 +353,12 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
       case 'Accident': return 'Accident';
       case 'Mauvais Temps': return 'Mauvais Temps';
       case 'Disponible': return 'Disponible';
-      case 'Réformé': return 'Réformé';
+      case 'Reforme': return 'Reforme';
       default: return status;
     }
   }
   
-  // ==================== MÉTHODES UTILITAIRES ====================
+  // ==================== METHODES UTILITAIRES ====================
   
   calculateDistance(line: VehiculePointageLine): number {
     return Math.max(0, (line.endIndex || 0) - (line.startIndex || 0));
@@ -297,33 +375,15 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
     });
   }
   
-  formatDateTime(date: string | Date | undefined): string {
-    if (!date) return '';
-    const d = new Date(date);
-    if (isNaN(d.getTime())) return '';
-    return d.toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  }
-  
   formatNumber(value: number): string {
     return new Intl.NumberFormat('fr-FR').format(value);
   }
   
-  // ==================== PERMISSIONS (avec offline) ====================
+  // ==================== PERMISSIONS ====================
   
   canValidate(): boolean {
     if (this.isReadOnly) return false;
     return this.pointage?.status === 'Brouillon';
-  }
-  
-  canClose(): boolean {
-    if (this.isReadOnly) return false;
-    return this.pointage?.status === 'Validé';
   }
   
   canEdit(): boolean {
@@ -347,37 +407,15 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
     
     if (!this.pointage?.id) return;
     
-    if (confirm('Valider ce pointage ? Il ne pourra plus être modifié par la suite.')) {
+    if (confirm('Valider ce pointage ? Il ne pourra plus etre modifie par la suite.')) {
       this.vehiculePointageService.validatePointage(this.pointage.id).subscribe({
         next: () => {
-          this.notificationService.showSuccess('Pointage validé avec succès');
+          this.notificationService.showSuccess('Pointage valide avec succes');
           this.loadPointage();
         },
         error: (error) => {
           console.error('Erreur validation', error);
           this.notificationService.showError('Erreur lors de la validation');
-        }
-      });
-    }
-  }
-  
-  closePointage(): void {
-    if (this.isReadOnly) {
-      this.toastr.warning('Clôture indisponible en mode hors ligne', 'Action indisponible');
-      return;
-    }
-    
-    if (!this.pointage?.id) return;
-    
-    if (confirm('Clôturer ce pointage ? Il sera définitivement verrouillé.')) {
-      this.vehiculePointageService.closePointage(this.pointage.id).subscribe({
-        next: () => {
-          this.notificationService.showSuccess('Pointage clôturé avec succès');
-          this.loadPointage();
-        },
-        error: (error) => {
-          console.error('Erreur clôture', error);
-          this.notificationService.showError('Erreur lors de la clôture');
         }
       });
     }
@@ -401,11 +439,11 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
     }
     
     if (!this.canEditLines()) {
-      this.notificationService.showWarning('Ce pointage ne peut plus être modifié');
+      this.notificationService.showWarning('Ce pointage ne peut plus etre modifie');
       return;
     }
     
-    console.log(' Passage des données de la ligne:', {
+    console.log('Passage des donnees de la ligne:', {
       vehiculeNo: line.vehiculeNo,
       description: line.description,
       hoursWorked: line.hoursWorked,
@@ -429,27 +467,9 @@ export class VehiculePointageDetailComponent implements OnInit, OnDestroy {
     });
   }
   
-  deleteLine(line: VehiculePointageLine, index: number): void {
-    if (this.isReadOnly) {
-      this.toastr.warning('Suppression indisponible en mode hors ligne', 'Action indisponible');
-      return;
-    }
-    
-    if (!this.canEditLines()) {
-      this.notificationService.showWarning('Ce pointage ne peut plus être modifié');
-      return;
-    }
-    
-   
-  }
-  
   goBack(): void {
     this.router.navigate(['/equipment/pointages']);
   }
-  
-  printPointage(): void {
-    window.print();
-  }
 }
 
-
+export { VehiculePointageDetailComponent as fg};

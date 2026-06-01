@@ -87,18 +87,7 @@
       </div>
       <div class="stat-progress"></div>
     </div>
-    <div class="stat-card premium" (click)="filterBySeverity('Info')" [class.active]="selectedSeverity === 'Info'">
-      <div class="stat-card-inner">
-        <div class="stat-icon-wrapper info">
-          <mat-icon>info</mat-icon>
-        </div>
-        <div class="stat-details">
-          <span class="stat-number">{{ infoCount }}</span>
-          <span class="stat-title">Informations</span>
-        </div>
-      </div>
-      <div class="stat-progress"></div>
-    </div>
+    
   </div>
 
   <!-- Filtres Améliorés -->
@@ -265,9 +254,7 @@
             </div>
           </div>
           <div class="alert-actions">
-            <button class="mark-read-btn" (click)="$event.stopPropagation(); markAsRead(alert.id)" matTooltip="Marquer comme lu">
-              <mat-icon>{{ isRead(alert.id) ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
-            </button>
+            
             <button class="navigate-btn" (click)="$event.stopPropagation(); onAlertClick(alert)" matTooltip="Voir le détail">
               <mat-icon>chevron_right</mat-icon>
             </button>

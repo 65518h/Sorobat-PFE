@@ -79,14 +79,14 @@
           <div class="form-field">
             <label>Heures travaillées *</label>
             <mat-form-field appearance="outline">
-              <input matInput type="number" formControlName="hoursWorked" step="0.5" 
-                     [disabled]="!isOperational()"
-                     (change)="updateDistance()">
+              <mat-select formControlName="hoursWorked" 
+                          [disabled]="!isOperational()"
+                          (selectionChange)="updateDistance()">
+                <mat-option [value]="0">0 heure</mat-option>
+                <mat-option [value]="10">10 heures</mat-option>
+              </mat-select>
               <mat-error *ngIf="lineForm.get('hoursWorked')?.hasError('required')">
                 Heures travaillées requises
-              </mat-error>
-              <mat-error *ngIf="lineForm.get('hoursWorked')?.hasError('min')">
-                Les heures ne peuvent pas être négatives
               </mat-error>
             </mat-form-field>
           </div>

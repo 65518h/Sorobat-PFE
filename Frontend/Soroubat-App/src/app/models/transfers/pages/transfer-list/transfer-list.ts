@@ -3,7 +3,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { Subject, takeUntil, finalize, catchError, of, interval } from 'rxjs';
+import { Subject, takeUntil, finalize, catchError, of, interval, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -31,14 +31,6 @@ import { SoundService } from '../../../../core/services/sound.service';
 import { OfflineHideActionsDirective } from '../../../../core/directives/offline-hide-actions.directive';
 import { ShowOfflineMessageDirective } from '../../../../core/directives/show-offline-message.directive';
 import { TransferHeader, getTransferStatusClass, getTransferStatusLabel } from '../../models/transfer.model';
-
-interface FilterOptions {
-  status: string;
-  searchTerm: string;
-  fromDate: Date | null;
-  toDate: Date | null;
-  chantier: string;
-}
 
 @Component({
   selector: 'app-transfer-list',
@@ -95,7 +87,7 @@ export class TransferListComponent implements OnInit, OnDestroy {
   statsData = [
     { icon: 'local_shipping', value: 0, label: 'Total', color: '#6366f1', status: null },
     { icon: 'radio_button_unchecked', value: 0, label: 'Ouvert', color: '#f59e0b', status: 'Open' },
-    { icon: 'local_shipping', value: 0, label: 'Expedie', color: '#3b82f6', status: 'Released' },
+    { icon: 'local_shipping', value: 0, label: 'Lancé', color: '#3b82f6', status: 'Released' },
     { icon: 'check_circle', value: 0, label: 'Receptionne', color: '#10b981', status: 'Received' }
   ];
   
@@ -143,10 +135,17 @@ export class TransferListComponent implements OnInit, OnDestroy {
   }
   
   private setupFilterSubscription(): void {
+    // ✅ Ajouter debounceTime pour éviter trop d'appels
     this.filterForm.valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
+        this.currentPage = 1; // Reset à la première page quand les filtres changent
         this.applyFilters();
+        this.cdr.detectChanges();
       });
   }
   
@@ -263,58 +262,92 @@ export class TransferListComponent implements OnInit, OnDestroy {
   }
   
   applyFilters(): void {
-    const filters = this.filterForm.value;
-    let filtered = [...this.transfers];
-    
-    if (filters.status) {
-      filtered = filtered.filter(t => t.status === filters.status);
-    }
-    
-    if (filters.searchTerm && filters.searchTerm.trim()) {
-      const search = filters.searchTerm.toLowerCase().trim();
-      filtered = filtered.filter(t => 
-        t.no?.toLowerCase().includes(search) ||
-        t.transferLines?.some(line => line.itemNo?.toLowerCase().includes(search)) ||
-        t.transferLines?.some(line => line.description?.toLowerCase().includes(search))
-      );
-    }
-    
-    if (filters.fromDate) {
-      const fromDate = new Date(filters.fromDate);
-      fromDate.setHours(0, 0, 0, 0);
-      filtered = filtered.filter(t => {
-        if (!t.postingDate) return false;
-        const postingDate = new Date(t.postingDate);
-        postingDate.setHours(0, 0, 0, 0);
-        return postingDate >= fromDate;
-      });
-    }
-    
-    if (filters.toDate) {
-      const toDate = new Date(filters.toDate);
-      toDate.setHours(23, 59, 59, 999);
-      filtered = filtered.filter(t => {
-        if (!t.postingDate) return false;
-        const postingDate = new Date(t.postingDate);
-        postingDate.setHours(0, 0, 0, 0);
-        return postingDate <= toDate;
-      });
-    }
-    
-    if (filters.chantier) {
-      filtered = filtered.filter(t => 
-        t.chantierDestination === filters.chantier || 
-        t.chantierOrigine === filters.chantier
-      );
-    }
-    
-    this.filteredTransfers = filtered;
-    this.totalItems = this.filteredTransfers.length;
-    this.currentPage = 1;
-    this.updateActiveFilterCount();
-    this.updateStats();
-    this.cdr.detectChanges();
+  const filters = this.filterForm.value;
+  let filtered = [...this.transfers];
+  
+  console.log('Application des filtres:', filters);
+  
+  // Filtre par statut
+  if (filters.status && filters.status !== '') {
+    filtered = filtered.filter(t => t.status === filters.status);
+    console.log(`Filtre statut: ${filters.status} -> ${filtered.length} resultats`);
   }
+  
+  //  Filtre par recherche unique (inclut magasin origine)
+  if (filters.searchTerm && filters.searchTerm.trim() !== '') {
+    const search = filters.searchTerm.toLowerCase().trim();
+    const beforeCount = filtered.length;
+    filtered = filtered.filter(t => {
+      // Recherche par numéro de transfert
+      if (t.no?.toLowerCase().includes(search)) return true;
+      
+      // Recherche par magasin origine
+      if (t.transferFromCode?.toLowerCase().includes(search)) return true;
+      
+      // Recherche par chantier origine
+      if (t.chantierOrigine?.toLowerCase().includes(search)) return true;
+      
+      // Recherche par magasin destination
+      if (t.transferToCode?.toLowerCase().includes(search)) return true;
+      
+      // Recherche par chantier destination
+      if (t.chantierDestination?.toLowerCase().includes(search)) return true;
+      
+      // Recherche par code article dans les lignes
+      if (t.transferLines?.some(line => line.itemNo?.toLowerCase().includes(search))) return true;
+      
+      // Recherche par description dans les lignes
+      if (t.transferLines?.some(line => line.description?.toLowerCase().includes(search))) return true;
+      
+      return false;
+    });
+    console.log(`Filtre recherche: "${search}" -> ${filtered.length} resultats (avant: ${beforeCount})`);
+  }
+  
+  // Filtre par date de début
+  if (filters.fromDate) {
+    const fromDate = new Date(filters.fromDate);
+    fromDate.setHours(0, 0, 0, 0);
+    const beforeCount = filtered.length;
+    filtered = filtered.filter(t => {
+      if (!t.postingDate) return false;
+      const postingDate = new Date(t.postingDate);
+      postingDate.setHours(0, 0, 0, 0);
+      return postingDate >= fromDate;
+    });
+    console.log(`Filtre date debut: ${filters.fromDate} -> ${filtered.length} resultats (avant: ${beforeCount})`);
+  }
+  
+  // Filtre par date de fin
+  if (filters.toDate) {
+    const toDate = new Date(filters.toDate);
+    toDate.setHours(23, 59, 59, 999);
+    const beforeCount = filtered.length;
+    filtered = filtered.filter(t => {
+      if (!t.postingDate) return false;
+      const postingDate = new Date(t.postingDate);
+      postingDate.setHours(0, 0, 0, 0);
+      return postingDate <= toDate;
+    });
+    console.log(`Filtre date fin: ${filters.toDate} -> ${filtered.length} resultats (avant: ${beforeCount})`);
+  }
+  
+  // Filtre par chantier (si utilisé)
+  if (filters.chantier && filters.chantier !== '') {
+    const beforeCount = filtered.length;
+    filtered = filtered.filter(t => 
+      t.chantierDestination === filters.chantier || 
+      t.chantierOrigine === filters.chantier
+    );
+    console.log(`Filtre chantier: ${filters.chantier} -> ${filtered.length} resultats (avant: ${beforeCount})`);
+  }
+  
+  this.filteredTransfers = filtered;
+  this.totalItems = this.filteredTransfers.length;
+  this.updateActiveFilterCount();
+  this.updateStats();
+  this.cdr.detectChanges();
+}
   
   filterByStatus(status: string | null): void {
     if (status === null) {
@@ -334,17 +367,19 @@ export class TransferListComponent implements OnInit, OnDestroy {
       chantier: ''
     });
     this.showFilters = false;
+    this.currentPage = 1;
+    this.applyFilters();
     this.toastr.info('Filtres reinitialises', 'Filtres');
   }
   
   private updateActiveFilterCount(): void {
     const filters = this.filterForm.value;
     let count = 0;
-    if (filters.status) count++;
-    if (filters.searchTerm && filters.searchTerm.trim()) count++;
+    if (filters.status && filters.status !== '') count++;
+    if (filters.searchTerm && filters.searchTerm.trim() !== '') count++;
     if (filters.fromDate) count++;
     if (filters.toDate) count++;
-    if (filters.chantier) count++;
+    if (filters.chantier && filters.chantier !== '') count++;
     this.activeFilterCount = count;
   }
   
@@ -392,6 +427,7 @@ export class TransferListComponent implements OnInit, OnDestroy {
   formatDate(date: string | Date | undefined): string {
     if (!date) return '';
     const d = new Date(date);
+    if (isNaN(d.getTime())) return '';
     return d.toLocaleDateString('fr-FR');
   }
   

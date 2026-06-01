@@ -1,6 +1,6 @@
 <!-- src/app/modules/equipment/pages/vehicule-pointage/detail/vehicule-pointage-detail.html -->
 
-<!--  BANNIÈRE MODE HORS LIGNE -->
+<!-- BANNIÈRE MODE HORS LIGNE -->
 <ng-template #offlineBanner>
   <div class="offline-readonly-banner">
     <mat-icon>visibility</mat-icon>
@@ -87,15 +87,11 @@
             <span class="info-label">Date</span>
             <span class="info-value">{{ formatDate(pointage.date) }}</span>
           </div>
-          <div class="info-item">
-            <span class="info-label">Observations</span>
-            <span class="info-value">{{ pointage.observation || '—' }}</span>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- Résumé simplifié -->
+    <!-- Résumé simplifié (sans carte distance) -->
     <div class="summary-cards">
       <div class="summary-card">
         <div class="summary-icon">
@@ -115,18 +111,9 @@
           <span class="summary-label">Heures</span>
         </div>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon">
-          <mat-icon>straighten</mat-icon>
-        </div>
-        <div class="summary-info">
-          <span class="summary-value">{{ formatNumber(summary.totalDistance) }} km</span>
-          <span class="summary-label">Distance</span>
-        </div>
-      </div>
     </div>
 
-    <!-- Liste des véhicules avec filtre -->
+    <!-- Liste des véhicules avec filtre et recherche -->
     <div class="lines-card">
       <div class="card-header">
         <div class="card-title">
@@ -135,31 +122,55 @@
           <span class="badge">{{ filteredLines.length }} véhicule(s)</span>
         </div>
         
-        <!-- Filtre par statut des véhicules -->
+        <!-- Barre de recherche -->
+        <div class="search-vehicle">
+          <mat-icon>search</mat-icon>
+          <input type="text" 
+                 [(ngModel)]="vehicleSearchTerm" 
+                 (input)="applyVehiculeFilter()"
+                 placeholder="Rechercher par code ou description..."
+                 class="search-input">
+          <button *ngIf="vehicleSearchTerm" class="clear-search" (click)="clearVehicleSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        
+        <!-- Filtre par statut -->
         <div class="filter-status">
           <mat-icon>filter_alt</mat-icon>
           <select [(ngModel)]="vehiculeStatusFilter" (change)="applyVehiculeFilter()" class="status-filter-select">
             <option value="all">Tous les statuts</option>
-            <option value="Fonctionnel"> Fonctionnel</option>
-            <option value="Disponible"> Disponible</option>
-            <option value="Panne"> En panne</option>
-            <option value="Accident"> Accident</option>
-            <option value="Mauvais Temps"> Mauvais Temps</option>
-            <option value="Réformé"> Réformé</option>
+            <option value="Fonctionnel">Fonctionnel</option>
+            <option value="Disponible">Disponible</option>
+            <option value="Panne">En panne</option>
+            <option value="Accident">Accident</option>
+            <option value="Mauvais Temps">Mauvais Temps</option>
+            <option value="Réformé">Réformé</option>
           </select>
         </div>
       </div>
       
       <div class="card-body">
         <!-- Afficher les badges des filtres actifs -->
-        <div class="active-filters" *ngIf="vehiculeStatusFilter !== 'all'">
-          <div class="filter-chip">
+        <div class="active-filters" *ngIf="vehiculeStatusFilter !== 'all' || vehicleSearchTerm">
+          <div class="filter-chip" *ngIf="vehiculeStatusFilter !== 'all'">
             <mat-icon>filter_alt</mat-icon>
             <span>Statut: {{ getVehiculeStatusLabel(vehiculeStatusFilter) }}</span>
             <button class="chip-remove" (click)="clearVehiculeFilter()">
               <mat-icon>close</mat-icon>
             </button>
           </div>
+          <div class="filter-chip" *ngIf="vehicleSearchTerm">
+            <mat-icon>search</mat-icon>
+            <span>Recherche: {{ vehicleSearchTerm }}</span>
+            <button class="chip-remove" (click)="clearVehicleSearch()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <button class="clear-all-filters" (click)="clearAllFilters()">
+            <mat-icon>clear_all</mat-icon>
+            Tout effacer
+          </button>
         </div>
 
         <div class="table-wrapper">
@@ -172,13 +183,12 @@
                 <th>Index départ</th>
                 <th>Index fin</th>
                 <th>Distance (km)</th>
-                <th>Carburant (L)</th>
                 <th>Statut</th>
                 <th *ngIf="canEditLines()">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let line of filteredLines; let i = index">
+              <tr *ngFor="let line of paginatedLines; let i = index">
                 <td class="vehicule-cell">
                   <span class="vehicule-code">{{ line.vehiculeNo }}</span>
                 </td>
@@ -187,7 +197,6 @@
                 <td class="index-cell">{{ formatNumber(line.startIndex) }}</td>
                 <td class="index-cell">{{ formatNumber(line.endIndex) }}</td>
                 <td class="distance-cell">{{ formatNumber(calculateDistance(line)) }} km</td>
-                <td class="fuel-cell">{{ line.fuelConsumed || 0 }} L</td>
                 <td class="status-cell">
                   <div class="vehicule-status" [ngClass]="getVehiculeStatusClass(line.status)">
                     <mat-icon>{{ getVehiculeStatusIcon(line.status) }}</mat-icon>
@@ -205,20 +214,53 @@
                 </td>
               </tr>
               <tr *ngIf="filteredLines.length === 0">
-                <td colspan="9" class="empty-cell">
+                <td colspan="8" class="empty-cell">
                   <div class="empty-lines">
                     <mat-icon>inbox</mat-icon>
-                    <p *ngIf="vehiculeStatusFilter !== 'all'">Aucun véhicule avec le statut sélectionné</p>
-                    <p *ngIf="vehiculeStatusFilter === 'all'">Aucun véhicule pointé</p>
-                    <button class="btn-clear-filter" (click)="clearVehiculeFilter()" *ngIf="vehiculeStatusFilter !== 'all'">
+                    <p *ngIf="vehiculeStatusFilter !== 'all' || vehicleSearchTerm">Aucun véhicule ne correspond aux critères</p>
+                    <p *ngIf="vehiculeStatusFilter === 'all' && !vehicleSearchTerm">Aucun véhicule pointé</p>
+                    <button class="btn-clear-filter" (click)="clearAllFilters()" *ngIf="vehiculeStatusFilter !== 'all' || vehicleSearchTerm">
                       <mat-icon>clear_all</mat-icon>
-                      Effacer le filtre
+                      Effacer tous les filtres
                     </button>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination-container" *ngIf="filteredLines.length > 0">
+          <div class="pagination-info">
+            Affichage de {{ (currentPage - 1) * pageSize + 1 }} à {{ (currentPage - 1) * pageSize + paginatedLines.length }} sur {{ filteredLines.length }} véhicules
+          </div>
+          <div class="pagination-controls">
+            <button class="page-btn" (click)="previousPage()" [disabled]="currentPage === 1">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <div class="page-numbers">
+              <button *ngFor="let page of getPageNumbers()" 
+                      class="page-num" 
+                      [class.active]="page === currentPage"
+                      (click)="goToPage(page)">
+                {{ page }}
+              </button>
+            </div>
+            <button class="page-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+          <div class="page-size-selector">
+            <span>Afficher</span>
+            <select [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+              <option [value]="10">10</option>
+              <option [value]="25">25</option>
+              <option [value]="50">50</option>
+              <option [value]="100">100</option>
+            </select>
+            <span>par page</span>
+          </div>
         </div>
       </div>
     </div>

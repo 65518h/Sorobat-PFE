@@ -517,31 +517,7 @@ namespace Soroubat.Api.Services
                     }
 
                     // alert44  : consommation carburant anormale 
-                    if (line.FuelConsumed.HasValue
-                        && line.FuelConsumed > 0
-                        && line.HoursWorked.HasValue
-                        && line.HoursWorked > 0)
-                    {
-                        decimal ratioLParH = line.FuelConsumed.Value / line.HoursWorked.Value;
-
-                        if (ratioLParH > CarburantMaxParHeure)
-                        {
-                            string severity = ratioLParH > CarburantMaxParHeure * 1.5m ? "Critical" : "Warning";
-
-                            alerts.Add(new AlertDto
-                            {
-                                Type            = "ConsommationAnormale",
-                                Severity        = severity,
-                                Title           = $"Consommation anormale — {line.VehiculeNo}",
-                                Message         = $"{labelVehicule} : consommation de {line.FuelConsumed:F1} L "
-                                                + $"pour {line.HoursWorked:F1}h de travail "
-                                                + $"= {ratioLParH:F1} L/h (seuil : {CarburantMaxParHeure} L/h). "
-                                                + "Vérifiez l'état du véhicule ou la saisie carburant.",
-                                RelatedEntityNo = header.DocumentNo ?? string.Empty,
-                                RelatedEntityId = line.Id
-                            });
-                        }
-                    }
+                    
                 }
             }
 

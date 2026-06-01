@@ -1365,3 +1365,591 @@
   width: 16px;
   height: 16px;
 }
+
+
+
+
+
+/* ==================== BARRE DE RECHERCHE ==================== */
+
+.search-vehicle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gray-100);
+  padding: 4px 12px;
+  border-radius: 40px;
+  transition: var(--transition);
+  min-width: 250px;
+}
+
+.search-vehicle mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 13px;
+  outline: none;
+  color: var(--gray-700);
+}
+
+.search-input::placeholder {
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+.clear-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--gray-300);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.clear-search:hover {
+  background: var(--danger);
+  transform: scale(1.1);
+}
+
+.clear-search:hover mat-icon {
+  color: white;
+}
+
+.clear-search mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--gray-600);
+}
+
+/* ==================== FILTRES ACTIFS COMPLETS ==================== */
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--gray-50), white);
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 16px;
+  background: white;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-700);
+  border: 1px solid var(--gray-200);
+  transition: var(--transition);
+  box-shadow: var(--shadow-xs);
+}
+
+.filter-chip mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--secondary);
+}
+
+.chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--gray-200);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.chip-remove:hover {
+  background: var(--danger);
+  transform: scale(1.1);
+}
+
+.chip-remove:hover mat-icon {
+  color: white;
+}
+
+.chip-remove mat-icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  color: var(--gray-600);
+}
+
+.clear-all-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-left: auto;
+}
+
+.clear-all-filters:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.clear-all-filters mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+/* ==================== PAGINATION PREMIUM ==================== */
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--gray-50), white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--gray-200);
+}
+
+.pagination-info {
+  font-size: 13px;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--gray-600);
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 4px;
+}
+
+.page-num {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.page-num:hover {
+  background: var(--gray-100);
+  transform: translateY(-2px);
+}
+
+.page-num.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.page-size-selector select {
+  padding: 6px 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+
+.page-size-selector select:hover {
+  border-color: var(--primary);
+}
+
+/* ==================== STATUT RÉFORMÉ (RESTAURÉ) ==================== */
+
+/* Statut véhicule réformé */
+.vehicule-status.status-reformed {
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.vehicule-status.status-reformed mat-icon {
+  color: #64748b;
+}
+
+/* Statut réformé dans le filtre */
+.vehicule-status.status-reformed::before {
+  content: '🚫';
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+/* Option réformé dans le select */
+option[value="Réformé"] {
+  color: #64748b;
+  text-decoration: line-through;
+}
+
+/* ==================== STATUT ACCIDENT ET MAUVAIS TEMPS ==================== */
+
+/* Statut Accident - Rouge foncé */
+.vehicule-status.status-accident {
+  background: linear-gradient(135deg, #fecaca, #fee2e2);
+  color: #991b1b;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.vehicule-status.status-accident mat-icon {
+  color: #dc2626;
+}
+
+/* Statut Mauvais Temps - Bleu foncé */
+.vehicule-status.status-bad-weather {
+  background: linear-gradient(135deg, #c7d2fe, #e0e7ff);
+  color: #1e3a8a;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.vehicule-status.status-bad-weather mat-icon {
+  color: #3b82f6;
+}
+
+/* ==================== RESPONSIVE PAGINATION ==================== */
+
+@media (max-width: 768px) {
+  .search-vehicle {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .filter-status {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pagination-controls {
+    order: 2;
+  }
+  
+  .pagination-info {
+    order: 1;
+  }
+  
+  .page-size-selector {
+    order: 3;
+  }
+  
+  .page-num {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  
+  .page-btn {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .active-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .clear-all-filters {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-numbers {
+    max-width: 200px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  
+  .page-num {
+    min-width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  
+  .page-btn {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .page-btn mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ==================== BOUTON RETRY ==================== */
+
+.btn-clear-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-clear-filter:hover {
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-chip, .pagination-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ==================== OFFLINE INDICATOR ==================== */
+
+.offline-readonly-banner {
+  background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+.badge-readonly {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.offline-data-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(255, 152, 0, 0.1);
+  border-radius: 12px;
+  margin-top: 20px;
+  color: #ff9800;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==================== STATUT RÉFORMÉ - CORRIGÉ ==================== */
+
+/* Statut véhicule réformé - Version avec barre transversale */
+.vehicule-status.status-reformed {
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  opacity: 0.8;
+  position: relative;
+}
+
+/* Barre transversale pour le statut réformé */
+.vehicule-status.status-reformed::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: #64748b;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.vehicule-status.status-reformed mat-icon {
+  color: #64748b;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.vehicule-status.status-reformed span {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+/* Variante sans barre transversale (si préféré) */
+.vehicule-status.status-reformed.line-through {
+  text-decoration: line-through;
+}
+
+/* Statut réformé dans le select */
+select option[value="Réformé"] {
+  color: #64748b;
+  text-decoration: line-through;
+}
+
+/* ==================== STATUT RÉFORMÉ - VERSION SIMPLE ==================== */
+
+/* Version simple sans barre absolue */
+.vehicule-status.status-reformed-simple {
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+  color: #006aff;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  text-decoration: line-through;
+}
+
+.vehicule-status.status-reformed-simple mat-icon {
+  color: #64748b;
+}
+
+.vehicule-status.status-reformed-simple span {
+  text-decoration: line-through;
+}
+

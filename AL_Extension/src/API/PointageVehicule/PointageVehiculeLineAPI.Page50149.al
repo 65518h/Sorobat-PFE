@@ -54,10 +54,7 @@ page 50149 "APIVehiculePointageLines"
                 {
                     Caption = 'End Index';
                 }
-                field(fuelConsumed; Rec.Gasoil)
-                {
-                    Caption = 'Fuel Consumed';
-                }
+                
 
                 field(marche; Rec.Marche)
                 {

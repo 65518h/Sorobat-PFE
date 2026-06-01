@@ -56,7 +56,7 @@ export function getTransferStatusClass(status: string): string {
 export function getTransferStatusLabel(status: string): string {
   const labelMap: Record<string, string> = {
     'Open': 'Ouvert',
-    'Released': 'Expédié',
+    'Released': 'Lancé',
     'Received': 'Réceptionné',
     'Cancelled': 'Annulé'
   };

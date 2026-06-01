@@ -158,7 +158,7 @@ export class AttendanceService {
       this.saveOfflineHeader(tempHeader);
       console.log(' Mode offline - Pointage créé localement', tempHeader);
       
-      this.toastr.success(`Pointage "${tempNo}" créé localement`, '📱 Mode hors ligne', {
+      this.toastr.success(`Pointage "${tempNo}" créé localement`, ' Mode hors ligne', {
         timeOut: 3000
       });
       
